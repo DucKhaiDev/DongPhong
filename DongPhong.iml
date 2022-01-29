@@ -28,6 +28,9 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="mssql-jdbc-9.4.1.jre8" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Tomcat 10.0.13" level="application_server_libraries" />
+    <orderEntry type="library" name="commons.fileupload" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.junit.jupiter:junit-jupiter-api:5.8.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.opentest4j:opentest4j:1.2.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.junit.platform:junit-platform-commons:1.8.1" level="project" />
@@ -40,8 +43,5 @@
     <orderEntry type="library" name="Maven: jakarta.el:jakarta.el-api:4.0.0" level="project" />
     <orderEntry type="library" name="Maven: jakarta.xml.bind:jakarta.xml.bind-api:3.0.0" level="project" />
     <orderEntry type="library" name="Maven: com.sun.activation:jakarta.activation:2.0.0" level="project" />
-    <orderEntry type="library" name="mssql-jdbc-9.4.1.jre8" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Tomcat 10.0.13" level="application_server_libraries" />
-    <orderEntry type="library" name="commons.fileupload" level="project" />
   </component>
 </module>

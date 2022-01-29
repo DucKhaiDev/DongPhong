@@ -38,7 +38,7 @@ public class ChangePasswordController extends HttpServlet {
         if (oldPassword.equals(user.getPASSWORD())) {
             if (newPassword.equals(repeatNewPassword)) {
                 user.setPASSWORD(newPassword);
-                userService.edit(user);
+                userService.editKeepAvatar(user);
                 response.sendRedirect("./logout");
             } else  {
                 String cpw_notmatch = "Không trùng khớp!";
