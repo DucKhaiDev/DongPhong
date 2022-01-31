@@ -29,10 +29,12 @@ public class UserServiceImpl implements UserServiceIntf {
         oldUser.setROLE_ID(newUser.getROLE_ID());
         if (newUser.getAVATAR() != null) {
             //Xóa ảnh cũ
-            String fileName = oldUser.getAVATAR();
-            File file = new File(Constant.Path.AVATARS + File.separator + fileName);
-            if (file.exists()) {
-                file.delete();
+            if (!oldUser.getAVATAR().equals("default.png")) {
+                String fileName = oldUser.getAVATAR();
+                File file = new File(Constant.Path.AVATARS + File.separator + fileName);
+                if (file.exists()) {
+                    file.delete();
+                }
             }
             //Thêm ảnh mới
             oldUser.setAVATAR(newUser.getAVATAR());

@@ -20,6 +20,8 @@ public class User implements Serializable {
         this.USERNAME = USERNAME;
         this.PASSWORD = PASSWORD;
         this.EMAIL = EMAIL;
+        this.AVATAR = "default.png";
+        this.ROLE_ID = true;
     }
 
     public User(String FIRSTNAME, String LASTNAME, String USERNAME, String PASSWORD, String EMAIL, String ADDRESS, String PHONE, String AVATAR, boolean ROLE_ID) {

@@ -71,7 +71,7 @@ public class MyAccountController extends HttpServlet {
 
         userService.edit(user);
         session.setAttribute("account", user);
-        response.sendRedirect(request.getContextPath() + "/member/myaccount");
+        response.sendRedirect(request.getContextPath() + "/member/my-account");
     }
 
     private String extractFileName(Part part) {

@@ -1,7 +1,7 @@
 <%--
   User: duckhaidev
-  Date: 1/23/2022
-  Time: 10:57 AM
+  Date: 1/30/2022
+  Time: 9:32 AM
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Login</title>
+    <title>Đăng ký</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--===============================================================================================-->
@@ -38,8 +38,7 @@
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="${url}/css/login-stylesheet.css">
 </head>
-<body class="animsition">
-
+<body>
 <!-- Header -->
 <jsp:include page="header-v4.jsp"></jsp:include>
 
@@ -57,31 +56,31 @@
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="mb-5">
-                                        <h3 class="h4 font-weight-bold text-theme">ĐĂNG NHẬP</h3>
+                                        <h3 class="h4 font-weight-bold text-theme">ĐĂNG KÝ</h3>
                                     </div>
-                                    <h6 class="h5 mb-0">Chào mừng bạn quay trở lại!</h6>
                                     <p class="text-muted mt-2 mb-5" style="color: #FF0000 !important;">${requestScope.loginMsg}</p>
-                                    <form id="form-login" action="login" method="post">
+                                    <form id="form-login" action="register" method="post">
                                         <div class="form-group">
-                                            <label for="username_or_email">Tên đăng nhập hoặc Email</label>
-                                            <input type="text" class="form-control" id="username_or_email" name="username_or_email">
+                                            <label for="username">Tên đăng nhập</label>
+                                            <input type="text" class="form-control" id="username" name="username">
+                                            <p class="text-muted" style="color: #FF0000 !important;">${requestScope.usnMsg}</p>
                                         </div>
                                         <div class="form-group">
                                             <label for="password">Mật khẩu</label>
                                             <input type="password" class="form-control" id="password" name="password">
+                                            <p class="text-muted" style="color: #FF0000 !important;">${requestScope.pswMsg}</p>
                                         </div>
-                                        <div class="form-group row mb-5">
-                                            <div class="col-6">
-                                                <label class="checkbox">
-                                                    <input class="d-inline-block mr-2" type="checkbox" id="rememberMe" name="rememberMe">
-                                                    <label class="d-inline-block" for="rememberMe">Nhớ mật khẩu</label>
-                                                </label>
-                                            </div>
-                                            <div class="col-6">
-                                                <a href="#" class="forgot-link float-right text-primary">Quên mật khẩu?</a>
-                                            </div>
+                                        <div class="form-group">
+                                            <label for="repeat_password">Nhập lại mật khẩu</label>
+                                            <input type="password" class="form-control" id="repeat_password" name="repeat_password">
+                                            <p class="text-muted" style="color: #FF0000 !important;">${requestScope.rpswMsg}</p>
                                         </div>
-                                        <button type="submit" class="btn btn-theme">Đăng nhập</button>
+                                        <div class="form-group mb-5">
+                                            <label for="email">Email</label>
+                                            <input type="email" class="form-control" id="email" name="email">
+                                            <p class="text-muted" style="color: #FF0000 !important;">${requestScope.emailMsg}</p>
+                                        </div>
+                                        <button type="submit" class="btn btn-theme float-r">Đăng ký</button>
                                     </form>
                                 </div>
                             </div>
@@ -102,11 +101,7 @@
                     <!-- end card-body -->
                 </div>
                 <!-- end card -->
-
-                <p class="text-muted text-center mt-4 mb-0">Chưa có tài khoản? <a href="${pageContext.request.contextPath}/register" class="text-primary ml-1">Đăng ký ngay</a></p>
-
                 <!-- end row -->
-
             </div>
             <!-- end col -->
         </div>
@@ -155,6 +150,5 @@
 </script>
 <!--===============================================================================================-->
 <script src="${url}/js/main.js"></script>
-
 </body>
 </html>

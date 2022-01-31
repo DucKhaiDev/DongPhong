@@ -70,14 +70,14 @@
                         <h4 class="text-right">Thông tin cá nhân</h4>
                     </div>
                     <div class="row mt-2">
-                        <div class="col-md-6"><label class="labels">Họ</label><input type="text" class="form-control" name="update_lastname" placeholder="${sessionScope.account.LASTNAME}"></div>
-                        <div class="col-md-6"><label class="labels">Tên</label><input type="text" class="form-control" name="update_firstname" placeholder="${sessionScope.account.FIRSTNAME}"></div>
+                        <div class="col-md-6"><label class="labels">Họ</label><input type="text" class="form-control" name="update_lastname" maxlength="255" placeholder="${sessionScope.account.LASTNAME}"></div>
+                        <div class="col-md-6"><label class="labels">Tên</label><input type="text" class="form-control" name="update_firstname" maxlength="255" placeholder="${sessionScope.account.FIRSTNAME}"></div>
                     </div>
                     <div class="row mt-3">
                         <div class="col-md-12 mb-3"><label class="labels">Tên đăng nhập</label><input type="text" class="form-control" placeholder="${sessionScope.account.USERNAME}" readonly></div>
-                        <div class="col-md-12 mb-3"><label class="labels">Email</label><input type="text" class="form-control" name="update_email" placeholder="${sessionScope.account.EMAIL}"></div>
-                        <div class="col-md-12 mb-3"><label class="labels">Địa chỉ</label><input type="text" class="form-control" name="update_address" placeholder="${sessionScope.account.ADDRESS}"></div>
-                        <div class="col-md-12"><label class="labels">Số điện thoại</label><input type="text" class="form-control" name="update_phone" placeholder="${sessionScope.account.PHONE}"></div>
+                        <div class="col-md-12 mb-3"><label class="labels">Email</label><input type="text" class="form-control" name="update_email" maxlength="255" placeholder="${sessionScope.account.EMAIL}"></div>
+                        <div class="col-md-12 mb-3"><label class="labels">Địa chỉ</label><input type="text" class="form-control" name="update_address" maxlength="2000" placeholder="${sessionScope.account.ADDRESS}"></div>
+                        <div class="col-md-12"><label class="labels">Số điện thoại</label><input type="text" class="form-control" name="update_phone" maxlength="12" placeholder="${sessionScope.account.PHONE}"></div>
                     </div>
                 </div>
             </div>

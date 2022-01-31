@@ -103,7 +103,7 @@
                 </div>
                 <!-- end card -->
 
-                <p class="text-muted text-center mt-4 mb-0">Chưa có tài khoản? <a href="register.html" class="text-primary ml-1">Đăng ký ngay</a></p>
+                <p class="text-muted text-center mt-4 mb-0">Chưa có tài khoản? <a href="${pageContext.request.contextPath}/register" class="text-primary ml-1">Đăng ký ngay</a></p>
 
                 <!-- end row -->
 
