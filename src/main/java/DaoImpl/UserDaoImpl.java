@@ -42,7 +42,7 @@ public class UserDaoImpl implements UserDaoIntf {
         conn = DBConnect.getConnection();
 
         try {
-            ps = conn.prepareStatement("INSERT INTO [USER](FIRSTNAME, LASTNAME, USERNAME, PASSWORD, EMAIL, ADDRESS, PHONE, AVATAR, ROLE_ID) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            ps = conn.prepareStatement("INSERT INTO [USER](FIRSTNAME, LASTNAME, USERNAME, PASSWORD, EMAIL, ADDRESS, PHONE, AVATAR, ROLE) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)");
             ps.setString(1, user.getFIRSTNAME());
             ps.setString(2, user.getLASTNAME());
             ps.setString(3, user.getUSERNAME());
@@ -51,7 +51,7 @@ public class UserDaoImpl implements UserDaoIntf {
             ps.setString(6, user.getADDRESS());
             ps.setString(7, user.getPHONE());
             ps.setString(8, user.getAVATAR());
-            ps.setBoolean(9, user.getROLE_ID());
+            ps.setBoolean(9, user.getROLE());
             ps.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -66,7 +66,7 @@ public class UserDaoImpl implements UserDaoIntf {
         conn = DBConnect.getConnection();
 
         try {
-             ps = conn.prepareStatement("UPDATE [USER] SET FIRSTNAME = ?, LASTNAME = ?, USERNAME = ?, PASSWORD = ?, EMAIL = ?, ADDRESS = ?, PHONE = ?, AVATAR = ?, ROLE_ID = ? WHERE USER_ID = ?");
+             ps = conn.prepareStatement("UPDATE [USER] SET FIRSTNAME = ?, LASTNAME = ?, USERNAME = ?, PASSWORD = ?, EMAIL = ?, ADDRESS = ?, PHONE = ?, AVATAR = ?, ROLE = ? WHERE USER_ID = ?");
              ps.setString(1, user.getFIRSTNAME());
              ps.setString(2, user.getLASTNAME());
              ps.setString(3, user.getUSERNAME());
@@ -75,7 +75,7 @@ public class UserDaoImpl implements UserDaoIntf {
              ps.setString(6, user.getADDRESS());
              ps.setString(7, user.getPHONE());
              ps.setString(8, user.getAVATAR());
-             ps.setBoolean(9, user.getROLE_ID());
+             ps.setBoolean(9, user.getROLE());
              ps.setInt(10, user.getUSER_ID());
              ps.executeUpdate();
          } catch (SQLException ex) {
@@ -139,7 +139,7 @@ public class UserDaoImpl implements UserDaoIntf {
             user.setADDRESS(rs.getString("ADDRESS"));
             user.setPHONE(rs.getString("PHONE"));
             user.setAVATAR(rs.getString("AVATAR"));
-            user.setROLE_ID(rs.getBoolean("ROLE_ID"));
+            user.setROLE(rs.getBoolean("ROLE"));
         } catch (SQLException ex) {
             ex.printStackTrace();
         } finally {
@@ -172,7 +172,7 @@ public class UserDaoImpl implements UserDaoIntf {
             user.setADDRESS(rs.getString("ADDRESS"));
             user.setPHONE(rs.getString("PHONE"));
             user.setAVATAR(rs.getString("AVATAR"));
-            user.setROLE_ID(rs.getBoolean("ROLE_ID"));
+            user.setROLE(rs.getBoolean("ROLE"));
         } catch (SQLException ex) {
             ex.printStackTrace();
         } finally {
@@ -204,7 +204,7 @@ public class UserDaoImpl implements UserDaoIntf {
                 user.setADDRESS(rs.getString("ADDRESS"));
                 user.setPHONE(rs.getString("PHONE"));
                 user.setAVATAR(rs.getString("AVATAR"));
-                user.setROLE_ID(rs.getBoolean("ROLE_ID"));
+                user.setROLE(rs.getBoolean("ROLE"));
 
                 userList.add(user);
             }
@@ -240,7 +240,7 @@ public class UserDaoImpl implements UserDaoIntf {
                 user.setADDRESS(rs.getString("ADDRESS"));
                 user.setPHONE(rs.getString("PHONE"));
                 user.setAVATAR(rs.getString("AVATAR"));
-                user.setROLE_ID(rs.getBoolean("ROLE_ID"));
+                user.setROLE(rs.getBoolean("ROLE"));
 
                 userList.add(user);
             }

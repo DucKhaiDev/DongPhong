@@ -12,7 +12,7 @@ public class User implements Serializable {
     private String ADDRESS;
     private String PHONE;
     private String AVATAR;
-    private boolean ROLE_ID;
+    private boolean ROLE;
 
     public User() {}
 
@@ -21,10 +21,10 @@ public class User implements Serializable {
         this.PASSWORD = PASSWORD;
         this.EMAIL = EMAIL;
         this.AVATAR = "default.png";
-        this.ROLE_ID = true;
+        this.ROLE = true;
     }
 
-    public User(String FIRSTNAME, String LASTNAME, String USERNAME, String PASSWORD, String EMAIL, String ADDRESS, String PHONE, String AVATAR, boolean ROLE_ID) {
+    public User(String FIRSTNAME, String LASTNAME, String USERNAME, String PASSWORD, String EMAIL, String ADDRESS, String PHONE, String AVATAR, boolean ROLE) {
         this.FIRSTNAME = FIRSTNAME;
         this.LASTNAME = LASTNAME;
         this.USERNAME = USERNAME;
@@ -33,7 +33,7 @@ public class User implements Serializable {
         this.ADDRESS = ADDRESS;
         this.PHONE = PHONE;
         this.AVATAR = AVATAR;
-        this.ROLE_ID = ROLE_ID;
+        this.ROLE = ROLE;
     }
 
     public int getUSER_ID() {
@@ -108,11 +108,11 @@ public class User implements Serializable {
         this.AVATAR = AVATAR;
     }
 
-    public boolean getROLE_ID() {
-        return ROLE_ID;
+    public boolean getROLE() {
+        return ROLE;
     }
 
-    public void setROLE_ID(boolean ROLE_ID) {
-        this.ROLE_ID = ROLE_ID;
+    public void setROLE(boolean ROLE) {
+        this.ROLE = ROLE;
     }
 }

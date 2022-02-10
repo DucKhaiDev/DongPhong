@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserServiceIntf {
         oldUser.setEMAIL(newUser.getEMAIL());
         oldUser.setADDRESS(newUser.getADDRESS());
         oldUser.setPHONE(newUser.getPHONE());
-        oldUser.setROLE_ID(newUser.getROLE_ID());
+        oldUser.setROLE(newUser.getROLE());
         if (newUser.getAVATAR() != null) {
             //Xóa ảnh cũ
             if (!oldUser.getAVATAR().equals("default.png")) {
