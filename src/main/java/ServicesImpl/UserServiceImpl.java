@@ -44,11 +44,6 @@ public class UserServiceImpl implements UserServiceIntf {
     }
 
     @Override
-    public void editKeepAvatar(User user) {
-        userDao.edit(user);
-    }
-
-    @Override
     public void delete(int USER_ID) {
         userDao.delete(USER_ID);
     }
