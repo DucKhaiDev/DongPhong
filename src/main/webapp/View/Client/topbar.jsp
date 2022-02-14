@@ -1,4 +1,4 @@
-<%--
+<%@ page import="Entity.User" %><%--
   User: is2vi
   Date: 1/23/2022
   Time: 8:50 AM
@@ -35,19 +35,46 @@
                 </div>
             </c:when>
             <c:otherwise>
+                <%
+                    User account = (User) session.getAttribute("account");
+                    String displayName = account.getUSERNAME();
+                    String firstName = account.getFIRSTNAME();
+                    String lastName = account.getLASTNAME();
+
+                    if (lastName != null && !lastName.trim().equals("")) {
+                        displayName = lastName;
+
+                        if (firstName != null && !firstName.trim().equals("")) {
+                            displayName += " " + firstName;
+                        }
+                    }
+                %>
+
                 <div class="right-top-bar flex-w h-full">
-                    <a href="${pageContext.request.contextPath }/member/my-account" class="flex-c-m trans-04 p-lr-25" style="border-left: none">
-                <span>
-                    ${sessionScope.account.USERNAME}
-                    <i class="fa fa-user"></i>
-                </span>
-                    </a>
+                    <c:choose>
+                        <c:when test="${!sessionScope.account.ROLE}">
+                            <a href="${pageContext.request.contextPath }/admin" class="flex-c-m trans-04 p-lr-25" style="border-left: none">
+                        <span>
+                            <% out.print(displayName); %>
+                            <i class="fa fa-user"></i>
+                        </span>
+                            </a>
+                        </c:when>
+                        <c:otherwise>
+                            <a href="${pageContext.request.contextPath }/member/my-account" class="flex-c-m trans-04 p-lr-25" style="border-left: none">
+                        <span>
+                            <% out.print(displayName); %>
+                            <i class="fa fa-user"></i>
+                        </span>
+                            </a>
+                        </c:otherwise>
+                    </c:choose>
 
                     <a href="${pageContext.request.contextPath }/logout" class="flex-c-m trans-04 p-lr-25" style="border-right: none">
-                <span>
-                    Đăng Xuất
-                    <i class="fa fa-sign-out-alt"></i>
-                </span>
+                        <span>
+                            Đăng Xuất
+                            <i class="fa fa-sign-out-alt"></i>
+                        </span>
                     </a>
                 </div>
             </c:otherwise>

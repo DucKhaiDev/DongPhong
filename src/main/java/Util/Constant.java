@@ -9,7 +9,7 @@ public class Constant {
         public static final String LOGIN = "/View/Client/login.jsp";
         public static final String REGISTER = "/View/Client/register.jsp";
         public static final String HOME = "/View/Client/index.jsp";
-        public static final String DASHBOARD = "";
+        public static final String DASHBOARD = "/View/Admin/index.jsp";
         public static final String MYACCOUNT = "/View/Client/my-account.jsp";
         public static final String USERHOME = System.getProperty("user.home");
         public static final String UPLOADS = USERHOME + File.separator + "Uploads";

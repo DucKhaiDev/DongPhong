@@ -1,4 +1,4 @@
-package Controller.Client;
+package Controller;
 
 import Entity.User;
 import jakarta.servlet.*;
@@ -18,7 +18,7 @@ public class WaitingController extends HttpServlet {
             if (user.getROLE()) {
                 response.sendRedirect(request.getContextPath() + "/welcome");
             } else {
-//                response.sendRedirect(request.getContextPath() + "/admin");
+                response.sendRedirect(request.getContextPath() + "/admin");
             }
         } else {
             response.sendRedirect(request.getContextPath() + "/login");
