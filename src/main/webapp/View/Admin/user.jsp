@@ -16,12 +16,14 @@
     <link href="${url}/css/bootstrap.css" rel="stylesheet" />
     <!-- FONTAWESOME STYLES-->
     <link href="${url}/fonts/fontawesome-free-5.15.4-web/css/all.min.css" rel="stylesheet" />
+    <!-- MORRIS CHART STYLES-->
+
     <!-- CUSTOM STYLES-->
     <link href="${url}/css/custom.css" rel="stylesheet" />
     <!-- GOOGLE FONTS-->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
-    <%--DATA TABLE CSS--%>
-    <link rel="stylesheet" type="text/css" href="${url}/js/dataTables/dataTables.bootstrap.css">
+    <!-- TABLE STYLES-->
+    <link href="${url}/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
 </head>
 <body>
 <div id="wrapper">
@@ -104,16 +106,17 @@
 <script src="${url}/vendor/bootstrap/js/bootstrap.min.js"></script>
 <!-- METISMENU SCRIPTS -->
 <script src="${url}/js/jquery.metisMenu.js"></script>
-<!-- CUSTOM SCRIPTS -->
-<script src="${url}/js/custom.js"></script>
-<%--DATA TABLE SCRIPT--%>
-<script src="${url}/js/dataTables/dataTables.bootstrap.js"></script>
+<!-- DATA TABLE SCRIPTS -->
 <script src="${url}/js/dataTables/jquery.dataTables.js"></script>
+<script src="${url}/js/dataTables/dataTables.bootstrap.js"></script>
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('#dataTables-example').dataTable();
     });
 </script>
+<!-- CUSTOM SCRIPTS -->
+<script src="${url}/js/custom.js"></script>
+
 
 </body>
 </html>
