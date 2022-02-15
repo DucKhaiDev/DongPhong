@@ -15,5 +15,6 @@ public class Constant {
         public static final String UPLOADS = USERHOME + File.separator + "Uploads";
         public static final String AVATARS = UPLOADS + File.separator + "Avatars";
         public static final String CHANGE_PASSWORD = "/View/Client/change-password.jsp";
+        public static final String ADMIN_USER = "/View/Admin/user.jsp";
     }
 }

@@ -14,10 +14,10 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="${pageContext.request.contextPath}">Dong Phong</a>
+        <a class="navbar-brand" href="${pageContext.request.contextPath}">Đông Phong</a>
     </div>
     <div style="color: white;
 padding: 15px 50px 5px 50px;
 float: right;
-font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="${pageContext.request.contextPath}/logout" class="btn btn-danger square-btn-adjust">Logout</a> </div>
+font-size: 16px;"> Truy cập lần cuối : 30 May 2014 &nbsp; <a href="${pageContext.request.contextPath}/logout" class="btn btn-danger square-btn-adjust">Đăng Xuất</a> </div>
 </nav>

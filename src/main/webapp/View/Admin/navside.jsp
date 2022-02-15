@@ -11,7 +11,7 @@
         <ul class="nav" id="main-menu">
             <li class="text-center">
                 <c:url value="/image?fname=${sessionScope.account.AVATAR}" var="avatarUrl"></c:url>
-                <img src="${avatarUrl}" class="user-image img-responsive"/>
+                <img src="${avatarUrl}" class="user-image img-responsive" alt="Ảnh đại diện"/>
             </li>
             <li>
                 <a class="active-menu text-center" href="${pageContext.request.contextPath}/member/my-account">
@@ -30,6 +30,12 @@
                         }
                         out.print(displayName);
                     %>
+                </a>
+            </li>
+            <li>
+                <a href="${pageContext.request.contextPath}/admin/user">
+                    <i class="fa fa-users fa-3x"></i>
+                    QL Tài Khoản
                 </a>
             </li>
             <li>
