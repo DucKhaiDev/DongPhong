@@ -1,10 +1,10 @@
-package ServicesIntf;
+package Services;
 
 import Entity.User;
 
 import java.util.List;
 
-public interface UserServiceIntf {
+public interface UserService {
     void insert(User user);
     void edit(User user);
     void delete(int USER_ID);

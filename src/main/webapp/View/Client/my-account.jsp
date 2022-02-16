@@ -58,8 +58,8 @@
             <div class="col-md-3 border-right">
                 <div class="d-flex flex-column align-items-center text-center p-3 py-5">
                     <c:url value="/image?fname=${sessionScope.account.AVATAR}" var="avatarUrl"></c:url>
-                    <img class="rounded-circle mt-5 mb-1" width="150px" height="150px" src="${avatarUrl}" alt="Ảnh đại diện">
-                    <input class="text-center mb-3" type="file" name="update_avatar" />
+                    <img class="avatar rounded-circle mt-5 mb-1" width="150px" height="150px" src="${avatarUrl}" alt="Ảnh đại diện">
+                    <input class="text-center mb-3 file-upload" type="file" name="update_avatar" />
                     <span class="font-weight-bold mb-2">${sessionScope.account.LASTNAME} ${sessionScope.account.FIRSTNAME}</span>
                     <span class="text-black-50">ID:&nbsp;${sessionScope.account.USER_ID}</span>
                 </div>
@@ -138,6 +138,24 @@
 </script>
 <!--===============================================================================================-->
 <script src="${url}/js/main.js"></script>
+<!--===============================================================================================-->
+<script type="text/javascript">
+    $(document).ready(function () {
+        var readURL = function (input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('.avatar').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $(".file-upload").on('change', function () {
+            readURL(this);
+        });
+    });
+</script>
 
 </body>
 </html>

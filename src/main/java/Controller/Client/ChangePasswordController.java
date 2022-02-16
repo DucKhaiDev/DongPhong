@@ -1,7 +1,7 @@
 package Controller.Client;
 
 import Entity.User;
-import ServicesImpl.UserServiceImpl;
+import Services.deploy.UserService;
 import Util.Constant;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -11,7 +11,7 @@ import java.io.IOException;
 
 @WebServlet(name = "ChangePasswordController", value = "/change-password")
 public class ChangePasswordController extends HttpServlet {
-    private UserServiceImpl userService = new UserServiceImpl();
+    private UserService userService = new UserService();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

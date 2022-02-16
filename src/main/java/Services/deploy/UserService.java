@@ -1,15 +1,14 @@
-package ServicesImpl;
+package Services.deploy;
 
-import DaoImpl.UserDaoImpl;
+import Dao.deploy.UserDao;
 import Entity.User;
-import ServicesIntf.UserServiceIntf;
 import Util.Constant;
 
 import java.io.File;
 import java.util.List;
 
-public class UserServiceImpl implements UserServiceIntf {
-    UserDaoImpl userDao = new UserDaoImpl();
+public class UserService implements Services.UserService {
+    UserDao userDao = new UserDao();
 
     @Override
     public void insert(User user) {

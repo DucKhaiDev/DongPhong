@@ -1,7 +1,6 @@
-package DaoImpl;
+package Dao.deploy;
 
 import Connect.DBConnect;
-import DaoIntf.UserDaoIntf;
 import Entity.User;
 
 import java.sql.Connection;
@@ -11,7 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDaoImpl implements UserDaoIntf {
+public class UserDao implements Dao.UserDao {
     private Connection conn = null;
     private PreparedStatement ps = null;
     private ResultSet rs = null;
@@ -305,7 +304,7 @@ public class UserDaoImpl implements UserDaoIntf {
 
     //Test
     public static void main(String[] args) {
-        UserDaoImpl obj = new UserDaoImpl();
+        UserDao obj = new UserDao();
 
 //        User user = new User("user_test", "user_test", "user_test@email.com", "9999999999", null, true);
 //        obj.insert(user);

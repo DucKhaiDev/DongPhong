@@ -1,10 +1,10 @@
-package DaoIntf;
+package Dao;
 
 import Entity.User;
 
 import java.util.List;
 
-public interface UserDaoIntf {
+public interface UserDao {
     int getUSER_ID(String USERNAME_OR_EMAIL);
     void insert(User user);
     void edit(User user);

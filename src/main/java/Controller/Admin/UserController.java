@@ -1,7 +1,7 @@
 package Controller.Admin;
 
 import Entity.User;
-import ServicesImpl.UserServiceImpl;
+import Services.deploy.UserService;
 import Util.Constant;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -12,7 +12,7 @@ import java.util.List;
 
 @WebServlet(name = "UserController", urlPatterns = "/admin/user")
 public class UserController extends HttpServlet {
-    UserServiceImpl userService = new UserServiceImpl();
+    UserService userService = new UserService();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

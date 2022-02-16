@@ -1,7 +1,7 @@
 package Controller.Client;
 
 import Entity.User;
-import ServicesImpl.UserServiceImpl;
+import Services.deploy.UserService;
 import Util.Constant;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -52,7 +52,7 @@ public class LoginController extends HttpServlet {
             return;
         }
 
-        UserServiceImpl service = new UserServiceImpl();
+        UserService service = new UserService();
 
         User user = service.login(username_or_email, password);
 

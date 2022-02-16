@@ -1,6 +1,6 @@
 package Controller.Client;
 
-import ServicesImpl.UserServiceImpl;
+import Services.deploy.UserService;
 import Tools.SendEmail;
 import Util.Constant;
 import jakarta.servlet.*;
@@ -11,7 +11,7 @@ import java.io.IOException;
 
 @WebServlet(name = "RegisterController", value = "/register")
 public class RegisterController extends HttpServlet {
-    private UserServiceImpl userService = new UserServiceImpl();
+    private UserService userService = new UserService();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
