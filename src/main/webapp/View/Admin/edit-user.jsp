@@ -12,10 +12,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dong Phong</title>
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${url}/vendor/bootstrap/css/bootstrap.min.css">
     <!-- BOOTSTRAP STYLES-->
-    <link href="${url}/css/bootstrap.css" rel="stylesheet" />
+    <link href="${url}/css/bootstrap.css" rel="stylesheet"/>
     <!-- FONTAWESOME STYLES-->
     <link href="${url}/fonts/fontawesome-free-5.15.4-web/css/all.min.css" rel="stylesheet" />
     <!-- CUSTOM STYLES-->
@@ -72,7 +70,26 @@
                                                     <div class="col-md-12 mb-3"><label class="labels">Mật khẩu</label><input type="text" class="form-control" name="update_password" placeholder="${user.PASSWORD}"></div>
                                                     <div class="col-md-12 mb-3"><label class="labels">Email</label><input type="text" class="form-control" name="update_email" maxlength="255" placeholder="${user.EMAIL}"></div>
                                                     <div class="col-md-12 mb-3"><label class="labels">Địa chỉ</label><input type="text" class="form-control" name="update_address" maxlength="2000" placeholder="${user.ADDRESS}"></div>
-                                                    <div class="col-md-12"><label class="labels">Số điện thoại</label><input type="text" class="form-control" name="update_phone" maxlength="12" placeholder="${user.PHONE}"></div>
+                                                    <div class="col-md-12 mb-3"><label class="labels">Số điện thoại</label><input type="text" class="form-control" name="update_phone" maxlength="12" placeholder="${user.PHONE}"></div>
+                                                    <div class="col-md-12">
+                                                        <label class="labels">Quyền truy cập</label>
+                                                        <div class="checkbox mt-0">
+                                                            <div class="row">
+                                                                <div class="col-md-3"></div>
+                                                                <c:choose>
+                                                                    <c:when test="${user.ROLE}">
+                                                                        <div class="col-md-3"><input type="radio" value="false" name="update_role"> Quản trị viên</div>
+                                                                        <div class="col-md-3"><input type="radio" value="true" name="update_role" checked="checked"> Thành viên</div>
+                                                                    </c:when>
+                                                                    <c:otherwise>
+                                                                        <div class="col-md-3"><input type="radio" value="false" name="update_role" checked="checked"> Quản trị viên</div>
+                                                                        <div class="col-md-3"><input type="radio" value="true" name="update_role"> Thành viên</div>
+                                                                    </c:otherwise>
+                                                                </c:choose>
+                                                                <div class="col-md-3"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

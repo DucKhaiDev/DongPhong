@@ -10603,7 +10603,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sInfo": "Hiển thị _START_ đến _END_ của _TOTAL_ mục",
+			"sInfo": "Hiển thị _START_ đến _END_ của _TOTAL_ bản ghi",
 	
 	
 			/**
@@ -10624,7 +10624,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sInfoEmpty": "Không có mục nào",
+			"sInfoEmpty": "Không có bản ghi nào",
 	
 	
 			/**
@@ -10646,7 +10646,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sInfoFiltered": "(Được lọc từ _MAX_ - tổng số mục)",
+			"sInfoFiltered": "(Được lọc từ _MAX_ - tổng số bản ghi)",
 	
 	
 			/**
@@ -10733,7 +10733,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sLengthMenu": "Hiển thị _MENU_ mục",
+			"sLengthMenu": "Hiển thị _MENU_ bản ghi",
 	
 	
 			/**

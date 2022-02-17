@@ -58,6 +58,8 @@ public class EditUserController extends HttpServlet {
             user.setPHONE(update_phone);
         }
 
+        user.setROLE(Boolean.parseBoolean(request.getParameter("update_role")));
+
         String savePath = Constant.Path.AVATARS;
 
         File fileSaveDir = new File(savePath);
