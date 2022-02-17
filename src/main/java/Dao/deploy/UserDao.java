@@ -52,8 +52,8 @@ public class UserDao implements Dao.UserDao {
             ps.setString(8, user.getAVATAR());
             ps.setBoolean(9, user.getROLE());
             ps.executeUpdate();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         } finally {
             DBConnect.closePreparedStatement(ps);
             DBConnect.closeConnection(conn);
@@ -77,8 +77,8 @@ public class UserDao implements Dao.UserDao {
              ps.setBoolean(9, user.getROLE());
              ps.setInt(10, user.getUSER_ID());
              ps.executeUpdate();
-         } catch (SQLException ex) {
-             ex.printStackTrace();
+         } catch (SQLException e) {
+             e.printStackTrace();
          } finally {
              DBConnect.closePreparedStatement(ps);
              DBConnect.closeConnection(conn);
@@ -93,8 +93,8 @@ public class UserDao implements Dao.UserDao {
             ps = conn.prepareStatement("DELETE FROM [USER] WHERE USER_ID = ?");
             ps.setInt(1, USER_ID);
             ps.executeUpdate();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         } finally {
             DBConnect.closePreparedStatement(ps);
             DBConnect.closeConnection(conn);
@@ -139,8 +139,8 @@ public class UserDao implements Dao.UserDao {
             user.setPHONE(rs.getString("PHONE"));
             user.setAVATAR(rs.getString("AVATAR"));
             user.setROLE(rs.getBoolean("ROLE"));
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         } finally {
             DBConnect.closeResultSet(rs);
             DBConnect.closePreparedStatement(ps);
@@ -172,8 +172,8 @@ public class UserDao implements Dao.UserDao {
             user.setPHONE(rs.getString("PHONE"));
             user.setAVATAR(rs.getString("AVATAR"));
             user.setROLE(rs.getBoolean("ROLE"));
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         } finally {
             DBConnect.closeResultSet(rs);
             DBConnect.closePreparedStatement(ps);
@@ -207,8 +207,8 @@ public class UserDao implements Dao.UserDao {
 
                 userList.add(user);
             }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         } finally {
             DBConnect.closeResultSet(rs);
             DBConnect.closePreparedStatement(ps);
@@ -243,8 +243,8 @@ public class UserDao implements Dao.UserDao {
 
                 userList.add(user);
             }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         } finally {
             DBConnect.closeResultSet(rs);
             DBConnect.closePreparedStatement(ps);
@@ -267,8 +267,8 @@ public class UserDao implements Dao.UserDao {
             if (rs.next()) {
                 exist = true;
             }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         } finally {
             DBConnect.closeResultSet(rs);
             DBConnect.closePreparedStatement(ps);
@@ -291,8 +291,8 @@ public class UserDao implements Dao.UserDao {
             if (rs.next()) {
                 exist = true;
             }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         } finally {
             DBConnect.closeResultSet(rs);
             DBConnect.closePreparedStatement(ps);
@@ -300,38 +300,5 @@ public class UserDao implements Dao.UserDao {
         }
 
         return exist;
-    }
-
-    //Test
-    public static void main(String[] args) {
-        UserDao obj = new UserDao();
-
-//        User user = new User("user_test", "user_test", "user_test@email.com", "9999999999", null, true);
-//        obj.insert(user);
-
-//        user.setUSER_ID(obj.getUSER_ID(user.getUSERNAME()));
-//        System.out.println(user.getUSER_ID());
-
-//        user.setPHONE("8888888888");
-//        user.setEMAIL("user_test_edit@email.com");
-//        obj.edit(user);
-
-//        obj.delete(user.getUSER_ID());
-
-//        User user1 = obj.getUser(10000000);
-//        System.out.println(user1.getUSERNAME());
-//        User user2 = obj.getUser("user");
-//        System.out.println(user2.getUSER_ID());
-
-//        List<User> userList = obj.getAll();
-//        System.out.println(userList.size());
-
-//        List<User> userList = obj.search("user");
-//        System.out.println(userList.size());
-
-//        System.out.println(obj.checkExistUSERNAME("user"));
-//        System.out.println(obj.checkExistUSERNAME("user2"));
-//        System.out.println(obj.checkExistEMAIL("user@email.com"));
-//        System.out.println(obj.checkExistEMAIL("email@email.com"));
     }
 }
