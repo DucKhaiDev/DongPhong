@@ -15,7 +15,7 @@
     <!-- BOOTSTRAP STYLES-->
     <link href="${url}/css/bootstrap.css" rel="stylesheet"/>
     <!-- FONTAWESOME STYLES-->
-    <link href="${url}/fonts/fontawesome-free-5.15.4-web/css/all.min.css" rel="stylesheet" />
+    <link href="${url}/fonts/fontawesome-pro-5.15.4-web/css/all.min.css" rel="stylesheet" />
     <!-- CUSTOM STYLES-->
     <link href="${url}/css/custom.css" rel="stylesheet" />
     <!-- GOOGLE FONTS-->

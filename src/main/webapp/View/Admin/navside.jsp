@@ -39,6 +39,20 @@
                 </a>
             </li>
             <li>
+                <a href="#"><i class="fa fa-hand-holding-box fa-3x"></i> QL Sản phẩm<span class="fa arrow fa-2x"></span></a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a href="#">Danh mục Sản phẩm</a>
+                    </li>
+                    <li>
+                        <a href="#">Danh mục Loại sản phẩm</a>
+                    </li>
+                    <li>
+                        <a href="#">Danh mục Thương hiệu</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
                 <a  href="ui.html"><i class="fa fa-desktop fa-3x"></i> UI Elements</a>
             </li>
             <li>
