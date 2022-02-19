@@ -66,7 +66,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <c:forEach items="${userList}" var="user">
+                                        <c:forEach items="${users}" var="user">
                                             <tr class="odd">
                                                 <td>${user.USER_ID}</td>
                                                 <c:url value="/images/avatar?fname=${user.AVATAR}" var="avatarUrl"></c:url>

@@ -94,7 +94,7 @@ public class CategoryDao implements Dao.CategoryDao {
 
     @Override
     public List<Category> getAll() {
-        List<Category> categoryList = new ArrayList<>();
+        List<Category> categories = new ArrayList<>();
         conn = DBConnect.getConnection();
 
         try {
@@ -107,7 +107,7 @@ public class CategoryDao implements Dao.CategoryDao {
                 category.setCAT_NAME(rs.getString("CAT_NAME"));
                 category.setCAT_DES(rs.getString("CAT_DES"));
 
-                categoryList.add(category);
+                categories.add(category);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -117,12 +117,12 @@ public class CategoryDao implements Dao.CategoryDao {
             DBConnect.closeConnection(conn);
         }
 
-        return categoryList;
+        return categories;
     }
 
     @Override
     public List<Category> searchByName(String NAME) {
-        List<Category> categoryList = new ArrayList<>();
+        List<Category> categories = new ArrayList<>();
         conn = DBConnect.getConnection();
 
         try {
@@ -136,7 +136,7 @@ public class CategoryDao implements Dao.CategoryDao {
                 category.setCAT_NAME(rs.getString("CAT_NAME"));
                 category.setCAT_DES(rs.getString("CAT_DES"));
 
-                categoryList.add(category);
+                categories.add(category);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -146,7 +146,7 @@ public class CategoryDao implements Dao.CategoryDao {
             DBConnect.closeConnection(conn);
         }
 
-        return categoryList;
+        return categories;
     }
 
     @Override

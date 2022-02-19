@@ -94,7 +94,7 @@ public class BrandDao implements Dao.BrandDao {
 
     @Override
     public List<Brand> getAll() {
-        List<Brand> brandList = new ArrayList<>();
+        List<Brand> brands = new ArrayList<>();
         conn = DBConnect.getConnection();
 
         try {
@@ -107,7 +107,7 @@ public class BrandDao implements Dao.BrandDao {
                 brand.setBRA_NAME(rs.getString("BRA_NAME"));
                 brand.setBRA_DES(rs.getString("BRA_DES"));
 
-                brandList.add(brand);
+                brands.add(brand);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -117,12 +117,12 @@ public class BrandDao implements Dao.BrandDao {
             DBConnect.closeConnection(conn);
         }
 
-        return brandList;
+        return brands;
     }
 
     @Override
     public List<Brand> searchByName(String NAME) {
-        List<Brand> brandList = new ArrayList<>();
+        List<Brand> brands = new ArrayList<>();
         conn = DBConnect.getConnection();
 
         try {
@@ -136,7 +136,7 @@ public class BrandDao implements Dao.BrandDao {
                 brand.setBRA_NAME(rs.getString("BRA_NAME"));
                 brand.setBRA_DES(rs.getString("BRA_DES"));
 
-                brandList.add(brand);
+                brands.add(brand);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -146,7 +146,7 @@ public class BrandDao implements Dao.BrandDao {
             DBConnect.closeConnection(conn);
         }
 
-        return brandList;
+        return brands;
     }
 
     @Override

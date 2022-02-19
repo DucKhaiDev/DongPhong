@@ -19,5 +19,7 @@ public class Constant {
         public static final String ADMIN_USER = "/View/Admin/user.jsp";
         public static final String ADMIN_EDIT_USER = "/View/Admin/edit-user.jsp";
         public static final String ADMIN_PRODUCT = "/View/Admin/product.jsp";
+        public static final String ADMIN_ADD_PRODUCT = "/View/Admin/add-product.jsp";
+        public static final String ADMIN_EDIT_PRODUCT = "/View/Admin/edit-product.jsp";
     }
 }

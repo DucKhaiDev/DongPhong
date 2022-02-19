@@ -20,8 +20,6 @@
     <link href="${url}/css/custom.css" rel="stylesheet" />
     <!-- GOOGLE FONTS-->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${url}/css/my-account-stylesheet.css">
 </head>
 <body>
 <div id="wrapper">
@@ -37,7 +35,6 @@
                 <div class="col-md-12">
                     <h2>Quản Lý Tài Khoản</h2>
                     <h5>Welcome Jhon Deo , Love to see you back. </h5>
-
                 </div>
             </div>
             <!-- /. ROW  -->
@@ -45,7 +42,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="panel panel-default">
-                        <div class="panel-heading">Cập Nhật Thông Tin</div>
+                        <div class="panel-heading">Cập nhật thông tin</div>
                         <div class="panel-body">
                             <div class="row">
                                 <form action="<c:url value="/admin/user/edit"/>" method="post" enctype="multipart/form-data">
@@ -61,7 +58,7 @@
                                         </div>
                                         <div class="col-md-7 border-right">
                                             <div class="p-3 py-5">
-                                                <div class="row mt-2">
+                                                <div class="row mt-2 mb-3">
                                                     <div class="col-md-6"><label class="labels">Họ</label><input type="text" class="form-control" name="update_lastname" maxlength="255" placeholder="${user.LASTNAME}"></div>
                                                     <div class="col-md-6"><label class="labels">Tên</label><input type="text" class="form-control" name="update_firstname" maxlength="255" placeholder="${user.FIRSTNAME}"></div>
                                                 </div>
@@ -95,11 +92,11 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="mt-5 text-center col-md-6"><button class="btn btn-primary profile-button float-right mr-5" type="submit"><i class="fa fa-user-edit"></i>&nbsp;Cập nhật</button></div>
+                                        <div class="mt-5 text-center col-md-6"><button class="btn btn-primary ct-button float-right mr-5" type="submit"><i class="fa fa-check"></i>&nbsp;Đồng ý</button></div>
                                         <div class="mt-5 text-center col-md-6">
-                                            <button class="btn btn-primary profile-button float-left ml-5" type="reset"><i class="fa fa-undo-alt"></i>&nbsp;Nhập lại</button>
+                                            <button class="btn btn-primary ct-button float-left ml-5" type="reset"><i class="fa fa-undo-alt"></i>&nbsp;Nhập lại</button>
                                             <div class="float-right pr-3">
-                                                <a href="${pageContext.request.contextPath}/admin/user" class="btn btn-primary profile-button">
+                                                <a href="${pageContext.request.contextPath}/admin/user" class="btn btn-primary ct-button">
                                                     <i class="fa fa-angle-left"></i>&nbsp;Quay lại
                                                 </a>
                                             </div>

@@ -1,7 +1,6 @@
 package Entity;
 
 import Services.deploy.ProImageService;
-import Services.deploy.ProductService;
 
 import java.io.Serializable;
 import java.util.List;
@@ -14,25 +13,17 @@ public class Product implements Serializable {
     private String PRO_NAME;
     private double PRO_RATE;
     private String PRO_DES;
-    private double PRO_PRICE;
-    private double PRO_COST;
+    private String PRO_PRICE;
+    private String PRO_COST;
     private int PRO_QUANT;
     private Category CAT;
     private Brand BRA;
 
     public Product() {}
 
-    public Product(String PRO_ID, String PRO_NAME, Category CAT, Brand BRA) {
+    public Product(String PRO_ID, String PRO_NAME, String PRO_DES, String PRO_PRICE, String PRO_COST, int PRO_QUANT, Category CAT, Brand BRA) {
         this.PRO_ID = PRO_ID;
         this.PRO_NAME = PRO_NAME;
-        this.CAT = CAT;
-        this.BRA = BRA;
-    }
-
-    public Product(String PRO_ID, String PRO_NAME, double PRO_RATE, String PRO_DES, double PRO_PRICE, double PRO_COST, int PRO_QUANT, Category CAT, Brand BRA) {
-        this.PRO_ID = PRO_ID;
-        this.PRO_NAME = PRO_NAME;
-        this.PRO_RATE = PRO_RATE;
         this.PRO_DES = PRO_DES;
         this.PRO_PRICE = PRO_PRICE;
         this.PRO_COST = PRO_COST;
@@ -73,19 +64,19 @@ public class Product implements Serializable {
         this.PRO_DES = PRO_DES;
     }
 
-    public double getPRO_PRICE() {
+    public String getPRO_PRICE() {
         return PRO_PRICE;
     }
 
-    public void setPRO_PRICE(double PRO_PRICE) {
+    public void setPRO_PRICE(String PRO_PRICE) {
         this.PRO_PRICE = PRO_PRICE;
     }
 
-    public double getPRO_COST() {
+    public String getPRO_COST() {
         return PRO_COST;
     }
 
-    public void setPRO_COST(double PRO_COST) {
+    public void setPRO_COST(String PRO_COST) {
         this.PRO_COST = PRO_COST;
     }
 

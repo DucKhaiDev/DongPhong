@@ -95,7 +95,7 @@ public class ProImageDao implements Dao.ProImageDao {
 
     @Override
     public List<String> getProImage(String PRO_ID) {
-        List<String> imageList = new ArrayList<>();
+        List<String> images = new ArrayList<>();
         conn = DBConnect.getConnection();
 
         try {
@@ -104,7 +104,7 @@ public class ProImageDao implements Dao.ProImageDao {
             rs = ps.executeQuery();
 
             while (rs.next()) {
-                imageList.add(rs.getString("IMG_NAME"));
+                images.add(rs.getString("IMG_NAME"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -114,6 +114,6 @@ public class ProImageDao implements Dao.ProImageDao {
             DBConnect.closeConnection(conn);
         }
 
-        return imageList;
+        return images;
     }
 }

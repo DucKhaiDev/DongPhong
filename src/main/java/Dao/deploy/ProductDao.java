@@ -25,17 +25,16 @@ public class ProductDao implements Dao.ProductDao {
         conn = DBConnect.getConnection();
 
         try {
-            ps = conn.prepareStatement("INSERT INTO [PRODUCT](PRO_ID, PRO_NAME, PRO_RATE, PRO_DES, PRO_PRICE, PRO_COST, PRO_QUANT, CAT_ID, BRA_ID)" +
-                                            "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            ps = conn.prepareStatement("INSERT INTO [PRODUCT](PRO_ID, PRO_NAME, PRO_DES, PRO_PRICE, PRO_COST, PRO_QUANT, CAT_ID, BRA_ID)" +
+                                            "VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
             ps.setString(1, product.getPRO_ID());
             ps.setString(2, product.getPRO_NAME());
-            ps.setDouble(3, product.getPRO_RATE());
-            ps.setString(4, product.getPRO_DES());
-            ps.setDouble(5, product.getPRO_PRICE());
-            ps.setDouble(6, product.getPRO_COST());
-            ps.setInt(7, product.getPRO_QUANT());
-            ps.setString(8, product.getCAT().getCAT_ID());
-            ps.setString(9, product.getBRA().getBRA_ID());
+            ps.setString(3, product.getPRO_DES());
+            ps.setString(4, product.getPRO_PRICE());
+            ps.setString(5, product.getPRO_COST());
+            ps.setInt(6, product.getPRO_QUANT());
+            ps.setString(7, product.getCAT().getCAT_ID());
+            ps.setString(8, product.getBRA().getBRA_ID());
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -54,8 +53,8 @@ public class ProductDao implements Dao.ProductDao {
             ps.setString(1, product.getPRO_NAME());
             ps.setDouble(2, product.getPRO_RATE());
             ps.setString(3, product.getPRO_DES());
-            ps.setDouble(4, product.getPRO_PRICE());
-            ps.setDouble(5, product.getPRO_COST());
+            ps.setString(4, product.getPRO_PRICE());
+            ps.setString(5, product.getPRO_COST());
             ps.setInt(6, product.getPRO_QUANT());
             ps.setString(7, product.getCAT().getCAT_ID());
             ps.setString(8, product.getBRA().getBRA_ID());
@@ -100,8 +99,8 @@ public class ProductDao implements Dao.ProductDao {
             product.setPRO_NAME(rs.getString("PRO_NAME"));
             product.setPRO_RATE(rs.getDouble("PRO_RATE"));
             product.setPRO_DES(rs.getString("PRO_DES"));
-            product.setPRO_PRICE(rs.getDouble("PRO_PRICE"));
-            product.setPRO_COST(rs.getDouble("PRO_COST"));
+            product.setPRO_PRICE(rs.getString("PRO_PRICE"));
+            product.setPRO_COST(rs.getString("PRO_COST"));
             product.setPRO_QUANT(rs.getInt("PRO_QUANT"));
             product.setCAT(categoryService.getCategory(rs.getString("CAT_ID")));
             product.setBRA(brandService.getBrand(rs.getString("BRA_ID")));
@@ -118,7 +117,7 @@ public class ProductDao implements Dao.ProductDao {
 
     @Override
     public List<Product> getAll() {
-        List<Product> productList = new ArrayList<>();
+        List<Product> products = new ArrayList<>();
         conn = DBConnect.getConnection();
 
         try {
@@ -131,13 +130,13 @@ public class ProductDao implements Dao.ProductDao {
                 product.setPRO_NAME(rs.getString("PRO_NAME"));
                 product.setPRO_RATE(rs.getDouble("PRO_RATE"));
                 product.setPRO_DES(rs.getString("PRO_DES"));
-                product.setPRO_PRICE(rs.getDouble("PRO_PRICE"));
-                product.setPRO_COST(rs.getDouble("PRO_COST"));
+                product.setPRO_PRICE(rs.getString("PRO_PRICE"));
+                product.setPRO_COST(rs.getString("PRO_COST"));
                 product.setPRO_QUANT(rs.getInt("PRO_QUANT"));
                 product.setCAT(categoryService.getCategory(rs.getString("CAT_ID")));
                 product.setBRA(brandService.getBrand(rs.getString("BRA_ID")));
 
-                productList.add(product);
+                products.add(product);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -147,12 +146,12 @@ public class ProductDao implements Dao.ProductDao {
             DBConnect.closeConnection(conn);
         }
 
-        return productList;
+        return products;
     }
 
     @Override
     public List<Product> searchByName(String NAME) {
-        List<Product> productList = new ArrayList<>();
+        List<Product> products = new ArrayList<>();
         conn = DBConnect.getConnection();
 
         try {
@@ -166,13 +165,13 @@ public class ProductDao implements Dao.ProductDao {
                 product.setPRO_NAME(rs.getString("PRO_NAME"));
                 product.setPRO_RATE(rs.getDouble("PRO_RATE"));
                 product.setPRO_DES(rs.getString("PRO_DES"));
-                product.setPRO_PRICE(rs.getDouble("PRO_PRICE"));
-                product.setPRO_COST(rs.getDouble("PRO_COST"));
+                product.setPRO_PRICE(rs.getString("PRO_PRICE"));
+                product.setPRO_COST(rs.getString("PRO_COST"));
                 product.setPRO_QUANT(rs.getInt("PRO_QUANT"));
                 product.setCAT(categoryService.getCategory(rs.getString("CAT_ID")));
                 product.setBRA(brandService.getBrand(rs.getString("BRA_ID")));
 
-                productList.add(product);
+                products.add(product);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -182,13 +181,13 @@ public class ProductDao implements Dao.ProductDao {
             DBConnect.closeConnection(conn);
         }
 
-        return productList;
+        return products;
     }
 
     @Override
     public List<Product> searchByCategory(String CAT) {
         List<String> CAT_ID_List = new ArrayList<>();
-        List<Product> productList = new ArrayList<>();
+        List<Product> products = new ArrayList<>();
 
         conn = DBConnect.getConnection();
 
@@ -212,13 +211,13 @@ public class ProductDao implements Dao.ProductDao {
                     product.setPRO_NAME(rs.getString("PRO_NAME"));
                     product.setPRO_RATE(rs.getDouble("PRO_RATE"));
                     product.setPRO_DES(rs.getString("PRO_DES"));
-                    product.setPRO_PRICE(rs.getDouble("PRO_PRICE"));
-                    product.setPRO_COST(rs.getDouble("PRO_COST"));
+                    product.setPRO_PRICE(rs.getString("PRO_PRICE"));
+                    product.setPRO_COST(rs.getString("PRO_COST"));
                     product.setPRO_QUANT(rs.getInt("PRO_QUANT"));
                     product.setCAT(categoryService.getCategory(rs.getString("CAT_ID")));
                     product.setBRA(brandService.getBrand(rs.getString("BRA_ID")));
 
-                    productList.add(product);
+                    products.add(product);
                 }
             }
         } catch (SQLException e) {
@@ -229,13 +228,13 @@ public class ProductDao implements Dao.ProductDao {
             DBConnect.closeConnection(conn);
         }
 
-        return productList;
+        return products;
     }
 
     @Override
     public List<Product> searchByBrand(String BRA) {
         List<String> BRA_ID_List = new ArrayList<>();
-        List<Product> productList = new ArrayList<>();
+        List<Product> products = new ArrayList<>();
 
         conn = DBConnect.getConnection();
 
@@ -259,13 +258,13 @@ public class ProductDao implements Dao.ProductDao {
                     product.setPRO_NAME(rs.getString("PRO_NAME"));
                     product.setPRO_RATE(rs.getDouble("PRO_RATE"));
                     product.setPRO_DES(rs.getString("PRO_DES"));
-                    product.setPRO_PRICE(rs.getDouble("PRO_PRICE"));
-                    product.setPRO_COST(rs.getDouble("PRO_COST"));
+                    product.setPRO_PRICE(rs.getString("PRO_PRICE"));
+                    product.setPRO_COST(rs.getString("PRO_COST"));
                     product.setPRO_QUANT(rs.getInt("PRO_QUANT"));
                     product.setCAT(categoryService.getCategory(rs.getString("CAT_ID")));
                     product.setBRA(brandService.getBrand(rs.getString("CAT_ID")));
 
-                    productList.add(product);
+                    products.add(product);
                 }
             }
         } catch (SQLException e) {
@@ -276,7 +275,7 @@ public class ProductDao implements Dao.ProductDao {
             DBConnect.closeConnection(conn);
         }
 
-        return productList;
+        return products;
     }
 
     @Override

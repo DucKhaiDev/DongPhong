@@ -53,8 +53,7 @@
 <div class="container rounded bg-white mt-5 mb-5">
     <c:url value="/member/my-account" var="myaccount"></c:url>
     <form action="${myaccount}" method="post" enctype="multipart/form-data">
-        <div class="row">
-            <div class="col-md-1"></div>
+        <div class="row justify-content-center">
             <div class="col-md-3 border-right">
                 <div class="d-flex flex-column align-items-center text-center p-3 py-5">
                     <c:url value="/images/avatar?fname=${sessionScope.account.AVATAR}" var="avatarUrl"></c:url>
@@ -69,7 +68,7 @@
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <h4 class="text-right">Thông tin cá nhân</h4>
                     </div>
-                    <div class="row mt-2">
+                    <div class="row mt-2 mb-3">
                         <div class="col-md-6"><label class="labels">Họ</label><input type="text" class="form-control" name="update_lastname" maxlength="255" placeholder="${sessionScope.account.LASTNAME}"></div>
                         <div class="col-md-6"><label class="labels">Tên</label><input type="text" class="form-control" name="update_firstname" maxlength="255" placeholder="${sessionScope.account.FIRSTNAME}"></div>
                     </div>
@@ -81,18 +80,15 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-1"></div>
         </div>
-        <div class="row">
-            <div class="col-md-1"></div>
+        <div class="row justify-content-center">
             <div class="col-md-3 border-right pb-5">
                 <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button" onclick="window.location.href='${pageContext.request.contextPath}/change-password'"><i class="fa fa-redo-alt"></i>&nbsp;Mật khẩu</button></div>
             </div>
             <div class="col-md-7 border-right pb-5 row">
-                <div class="mt-5 text-center col-md-6"><button class="btn btn-primary profile-button float-r" type="submit"><i class="fa fa-user-edit"></i>&nbsp;Cập nhật</button></div>
-                <div class="mt-5 text-center col-md-6"><button class="btn btn-primary profile-button float-l" type="reset"><i class="fa fa-backspace"></i>&nbsp;Hủy bỏ</button></div>
+                <div class="mt-5 text-center col-md-6"><button class="btn btn-primary profile-button float-r" type="submit"><i class="fa fa-check"></i>&nbsp;Đồng ý</button></div>
+                <div class="mt-5 text-center col-md-6"><button class="btn btn-primary profile-button float-l" type="reset"><i class="fa fa-undo-alt"></i>&nbsp;Nhập lại</button></div>
             </div>
-            <div class="col-md-1"></div>
         </div>
     </form>
 </div>

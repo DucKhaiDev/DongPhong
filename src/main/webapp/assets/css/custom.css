@@ -120,6 +120,26 @@ p {
     margin-left: 3rem !important;
 }
 
+.ml-2 {
+    margin-left: 0.5rem !important;
+}
+
+.mr-2 {
+    margin-right: 0.5rem !important;
+}
+
+.ml-3 {
+    margin-left: 1rem !important;
+}
+
+.ml-1 {
+    margin-left: 0.25rem !important;
+}
+
+.mr-1 {
+    margin-right: 0.25rem !important;
+}
+
 .pr-3 {
     padding-right: 1rem !important;
 }
@@ -130,6 +150,27 @@ p {
 
 .float-left {
     float: left !important;
+}
+
+.pl-0 {
+    padding-left: 0 !important;
+}
+
+.w-50 {
+    width: 50% !important;
+}
+
+.justify-content-center {
+    -ms-flex-pack: center !important;
+    justify-content: center !important;
+}
+
+.mr-3 {
+    margin-right: 1rem !important;
+}
+
+.mt-6 {
+    margin-top: 5rem !important;
 }
 /*==============================================
    DASHBOARD STYLES    
@@ -422,6 +463,38 @@ border-radius: 25px;
 text-align: center;
 font-size: 12px;
 line-height: 1.428571429;
+}
+
+/*==============================================
+    UI ELEMENTS STYLES
+    =============================================*/
+.form-control:focus {
+    box-shadow: none;
+    border-color: #333333
+}
+
+.ct-button {
+    background: #333333;
+    box-shadow: none;
+    border: none
+}
+
+.ct-button:hover {
+    background: #6c7ae0
+}
+
+.ct-button:focus {
+    background: #6c7ae0;
+    box-shadow: none
+}
+
+.ct-button:active {
+    background-color: #6c7ae0;
+    box-shadow: none
+}
+
+.labels {
+    font-size: 13px
 }
 
 /*==============================================

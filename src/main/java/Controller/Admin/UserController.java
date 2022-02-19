@@ -16,8 +16,8 @@ public class UserController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<User> userList = userService.getAll();
-        request.setAttribute("userList", userList);
+        List<User> users = userService.getAll();
+        request.setAttribute("users", users);
         request.getRequestDispatcher(Constant.Path.ADMIN_USER).forward(request, response);
     }
 }

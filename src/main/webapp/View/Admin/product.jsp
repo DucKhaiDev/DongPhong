@@ -1,5 +1,4 @@
-<%@ page import="Services.deploy.ProImageService" %>
-<%@ page import="java.util.List" %><%--
+<%--
   User: duckhaidev
   Date: 2/17/2022
   Time: 9:37 PM
@@ -39,7 +38,14 @@
             <div class="row">
                 <div class="col-md-12">
                     <h2>Quản Lý Sản Phẩm</h2>
-                    <h5>Welcome Jhon Deo , Love to see you back. </h5>
+                    <div class="row">
+                        <div class="col-md-10"><h5>Welcome Jhon Deo , Love to see you back. </h5></div>
+                        <div class="col-md-2">
+                            <a href="${pageContext.request.contextPath}/admin/product/add" class="btn btn-primary ct-button float-right">
+                                <i class="fa fa-plus"></i>&nbsp;Thêm sản phẩm
+                            </a>
+                        </div>
+                    </div>
 
                 </div>
             </div>
@@ -68,7 +74,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                        <c:forEach items="${productList}" var="product">
+                                        <c:forEach items="${products}" var="product">
                                             <tr class="odd">
                                                 <td>${product.PRO_ID}</td>
                                                 <c:url value="/images/product-images?fname=${product.getProReIMG()}" var="imageUrl"></c:url>

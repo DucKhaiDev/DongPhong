@@ -185,7 +185,7 @@ public class UserDao implements Dao.UserDao {
 
     @Override
     public List<User> getAll() {
-        List<User> userList = new ArrayList<>();
+        List<User> users = new ArrayList<>();
         conn = DBConnect.getConnection();
 
         try {
@@ -205,7 +205,7 @@ public class UserDao implements Dao.UserDao {
                 user.setAVATAR(rs.getString("AVATAR"));
                 user.setROLE(rs.getBoolean("ROLE"));
 
-                userList.add(user);
+                users.add(user);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -215,12 +215,12 @@ public class UserDao implements Dao.UserDao {
             DBConnect.closeConnection(conn);
         }
 
-        return userList;
+        return users;
     }
 
     @Override
     public List<User> search(String keyword) {
-        List<User> userList = new ArrayList<>();
+        List<User> users = new ArrayList<>();
         conn = DBConnect.getConnection();
 
         try {
@@ -241,7 +241,7 @@ public class UserDao implements Dao.UserDao {
                 user.setAVATAR(rs.getString("AVATAR"));
                 user.setROLE(rs.getBoolean("ROLE"));
 
-                userList.add(user);
+                users.add(user);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -251,7 +251,7 @@ public class UserDao implements Dao.UserDao {
             DBConnect.closeConnection(conn);
         }
 
-        return userList;
+        return users;
     }
 
     @Override
