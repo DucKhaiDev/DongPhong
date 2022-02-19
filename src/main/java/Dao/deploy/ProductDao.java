@@ -2,6 +2,8 @@ package Dao.deploy;
 
 import Connect.DBConnect;
 import Entity.Product;
+import Services.deploy.BrandService;
+import Services.deploy.CategoryService;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,24 +17,25 @@ public class ProductDao implements Dao.ProductDao {
     private PreparedStatement ps = null;
     private ResultSet rs = null;
 
+    CategoryService categoryService = new CategoryService();
+    BrandService brandService = new BrandService();
+
     @Override
     public void insert(Product product) {
         conn = DBConnect.getConnection();
 
         try {
-            ps = conn.prepareStatement("INSERT INTO [PRODUCT](PRO_ID, PRO_NAME, PRO_IMAGE, PRO_RATE, PRO_DES, PRO_PRICE, PRO_COST, PRO_STATUS, PRO_QUANT, CAT_ID, BRA_ID)" +
+            ps = conn.prepareStatement("INSERT INTO [PRODUCT](PRO_ID, PRO_NAME, PRO_RATE, PRO_DES, PRO_PRICE, PRO_COST, PRO_QUANT, CAT_ID, BRA_ID)" +
                                             "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
             ps.setString(1, product.getPRO_ID());
             ps.setString(2, product.getPRO_NAME());
-            ps.setString(3, product.getPRO_IMAGE());
-            ps.setDouble(4, product.getPRO_RATE());
-            ps.setString(5, product.getPRO_DES());
-            ps.setDouble(6, product.getPRO_PRICE());
-            ps.setDouble(7, product.getPRO_COST());
-            ps.setString(8, product.getPRO_STATUS());
-            ps.setInt(9, product.getPRO_QUANT());
-            ps.setString(10, product.getCAT_ID());
-            ps.setString(11, product.getBRA_ID());
+            ps.setDouble(3, product.getPRO_RATE());
+            ps.setString(4, product.getPRO_DES());
+            ps.setDouble(5, product.getPRO_PRICE());
+            ps.setDouble(6, product.getPRO_COST());
+            ps.setInt(7, product.getPRO_QUANT());
+            ps.setString(8, product.getCAT().getCAT_ID());
+            ps.setString(9, product.getBRA().getBRA_ID());
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -47,18 +50,16 @@ public class ProductDao implements Dao.ProductDao {
         conn = DBConnect.getConnection();
 
         try {
-            ps = conn.prepareStatement("UPDATE [PRODUCT] SET PRO_NAME = ?, PRO_IMAGE = ?, PRO_RATE = ?, PRO_DES = ?, PRO_PRICE = ?, PRO_COST = ?, PRO_STATUS = ?, PRO_QUANT = ?, CAT_ID = ?, BRA_ID = ? WHERE PRO_ID = ?");
+            ps = conn.prepareStatement("UPDATE [PRODUCT] SET PRO_NAME = ?, PRO_RATE = ?, PRO_DES = ?, PRO_PRICE = ?, PRO_COST = ?, PRO_QUANT = ?, CAT_ID = ?, BRA_ID = ? WHERE PRO_ID = ?");
             ps.setString(1, product.getPRO_NAME());
-            ps.setString(2, product.getPRO_IMAGE());
-            ps.setDouble(3, product.getPRO_RATE());
-            ps.setString(4, product.getPRO_DES());
-            ps.setDouble(5, product.getPRO_PRICE());
-            ps.setDouble(6, product.getPRO_COST());
-            ps.setString(7, product.getPRO_STATUS());
-            ps.setInt(8, product.getPRO_QUANT());
-            ps.setString(9, product.getCAT_ID());
-            ps.setString(10, product.getBRA_ID());
-            ps.setString(11, product.getPRO_ID());
+            ps.setDouble(2, product.getPRO_RATE());
+            ps.setString(3, product.getPRO_DES());
+            ps.setDouble(4, product.getPRO_PRICE());
+            ps.setDouble(5, product.getPRO_COST());
+            ps.setInt(6, product.getPRO_QUANT());
+            ps.setString(7, product.getCAT().getCAT_ID());
+            ps.setString(8, product.getBRA().getBRA_ID());
+            ps.setString(9, product.getPRO_ID());
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -97,15 +98,13 @@ public class ProductDao implements Dao.ProductDao {
             rs.next();
             product.setPRO_ID(rs.getString("PRO_ID"));
             product.setPRO_NAME(rs.getString("PRO_NAME"));
-            product.setPRO_IMAGE(rs.getString("PRO_IMAGE"));
             product.setPRO_RATE(rs.getDouble("PRO_RATE"));
             product.setPRO_DES(rs.getString("PRO_DES"));
             product.setPRO_PRICE(rs.getDouble("PRO_PRICE"));
             product.setPRO_COST(rs.getDouble("PRO_COST"));
-            product.setPRO_STATUS(rs.getString("PRO_STATUS"));
             product.setPRO_QUANT(rs.getInt("PRO_QUANT"));
-            product.setCAT_ID(rs.getString("CAT_ID"));
-            product.setBRA_ID(rs.getString("BRA_ID"));
+            product.setCAT(categoryService.getCategory(rs.getString("CAT_ID")));
+            product.setBRA(brandService.getBrand(rs.getString("BRA_ID")));
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -130,15 +129,13 @@ public class ProductDao implements Dao.ProductDao {
                 Product product = new Product();
                 product.setPRO_ID(rs.getString("PRO_ID"));
                 product.setPRO_NAME(rs.getString("PRO_NAME"));
-                product.setPRO_IMAGE(rs.getString("PRO_IMAGE"));
                 product.setPRO_RATE(rs.getDouble("PRO_RATE"));
                 product.setPRO_DES(rs.getString("PRO_DES"));
                 product.setPRO_PRICE(rs.getDouble("PRO_PRICE"));
                 product.setPRO_COST(rs.getDouble("PRO_COST"));
-                product.setPRO_STATUS(rs.getString("PRO_STATUS"));
                 product.setPRO_QUANT(rs.getInt("PRO_QUANT"));
-                product.setCAT_ID(rs.getString("CAT_ID"));
-                product.setBRA_ID(rs.getString("BRA_ID"));
+                product.setCAT(categoryService.getCategory(rs.getString("CAT_ID")));
+                product.setBRA(brandService.getBrand(rs.getString("BRA_ID")));
 
                 productList.add(product);
             }
@@ -167,15 +164,13 @@ public class ProductDao implements Dao.ProductDao {
                 Product product = new Product();
                 product.setPRO_ID(rs.getString("PRO_ID"));
                 product.setPRO_NAME(rs.getString("PRO_NAME"));
-                product.setPRO_IMAGE(rs.getString("PRO_IMAGE"));
                 product.setPRO_RATE(rs.getDouble("PRO_RATE"));
                 product.setPRO_DES(rs.getString("PRO_DES"));
                 product.setPRO_PRICE(rs.getDouble("PRO_PRICE"));
                 product.setPRO_COST(rs.getDouble("PRO_COST"));
-                product.setPRO_STATUS(rs.getString("PRO_STATUS"));
                 product.setPRO_QUANT(rs.getInt("PRO_QUANT"));
-                product.setCAT_ID(rs.getString("CAT_ID"));
-                product.setBRA_ID(rs.getString("BRA_ID"));
+                product.setCAT(categoryService.getCategory(rs.getString("CAT_ID")));
+                product.setBRA(brandService.getBrand(rs.getString("BRA_ID")));
 
                 productList.add(product);
             }
@@ -215,15 +210,13 @@ public class ProductDao implements Dao.ProductDao {
                     Product product = new Product();
                     product.setPRO_ID(rs.getString("PRO_ID"));
                     product.setPRO_NAME(rs.getString("PRO_NAME"));
-                    product.setPRO_IMAGE(rs.getString("PRO_IMAGE"));
                     product.setPRO_RATE(rs.getDouble("PRO_RATE"));
                     product.setPRO_DES(rs.getString("PRO_DES"));
                     product.setPRO_PRICE(rs.getDouble("PRO_PRICE"));
                     product.setPRO_COST(rs.getDouble("PRO_COST"));
-                    product.setPRO_STATUS(rs.getString("PRO_STATUS"));
                     product.setPRO_QUANT(rs.getInt("PRO_QUANT"));
-                    product.setCAT_ID(rs.getString("CAT_ID"));
-                    product.setBRA_ID(rs.getString("BRA_ID"));
+                    product.setCAT(categoryService.getCategory(rs.getString("CAT_ID")));
+                    product.setBRA(brandService.getBrand(rs.getString("BRA_ID")));
 
                     productList.add(product);
                 }
@@ -264,15 +257,13 @@ public class ProductDao implements Dao.ProductDao {
                     Product product = new Product();
                     product.setPRO_ID(rs.getString("PRO_ID"));
                     product.setPRO_NAME(rs.getString("PRO_NAME"));
-                    product.setPRO_IMAGE(rs.getString("PRO_IMAGE"));
                     product.setPRO_RATE(rs.getDouble("PRO_RATE"));
                     product.setPRO_DES(rs.getString("PRO_DES"));
                     product.setPRO_PRICE(rs.getDouble("PRO_PRICE"));
                     product.setPRO_COST(rs.getDouble("PRO_COST"));
-                    product.setPRO_STATUS(rs.getString("PRO_STATUS"));
                     product.setPRO_QUANT(rs.getInt("PRO_QUANT"));
-                    product.setCAT_ID(rs.getString("CAT_ID"));
-                    product.setBRA_ID(rs.getString("BRA_ID"));
+                    product.setCAT(categoryService.getCategory(rs.getString("CAT_ID")));
+                    product.setBRA(brandService.getBrand(rs.getString("CAT_ID")));
 
                     productList.add(product);
                 }
@@ -289,13 +280,13 @@ public class ProductDao implements Dao.ProductDao {
     }
 
     @Override
-    public boolean checkExistPRO_ID(String PRO_ID) {
+    public boolean checkExistID(String ID) {
         boolean exist = false;
         conn = DBConnect.getConnection();
 
         try {
             ps = conn.prepareStatement("SELECT * FROM [PRODUCT] WHERE PRO_ID = ?");
-            ps.setString(1, PRO_ID);
+            ps.setString(1, ID);
 
             rs = ps.executeQuery();
             if (rs.next()) {

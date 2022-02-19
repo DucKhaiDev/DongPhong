@@ -1,36 +1,44 @@
 package Entity;
 
+import Services.deploy.ProImageService;
+import Services.deploy.ProductService;
+
 import java.io.Serializable;
+import java.util.List;
 
 public class Product implements Serializable {
     private static final long serialVersionUID = 1L;
+    ProImageService imageService = new ProImageService();
 
     private String PRO_ID;
     private String PRO_NAME;
-    private String PRO_IMAGE;
     private double PRO_RATE;
     private String PRO_DES;
     private double PRO_PRICE;
     private double PRO_COST;
-    private String PRO_STATUS;
     private int PRO_QUANT;
-    private String CAT_ID;
-    private String BRA_ID;
+    private Category CAT;
+    private Brand BRA;
 
     public Product() {}
 
-    public Product(String PRO_ID, String PRO_NAME, String PRO_IMAGE, double PRO_RATE, String PRO_DES, double PRO_PRICE, double PRO_COST, String PRO_STATUS, int PRO_QUANT, String CAT_ID, String BRA_ID) {
+    public Product(String PRO_ID, String PRO_NAME, Category CAT, Brand BRA) {
         this.PRO_ID = PRO_ID;
         this.PRO_NAME = PRO_NAME;
-        this.PRO_IMAGE = PRO_IMAGE;
+        this.CAT = CAT;
+        this.BRA = BRA;
+    }
+
+    public Product(String PRO_ID, String PRO_NAME, double PRO_RATE, String PRO_DES, double PRO_PRICE, double PRO_COST, int PRO_QUANT, Category CAT, Brand BRA) {
+        this.PRO_ID = PRO_ID;
+        this.PRO_NAME = PRO_NAME;
         this.PRO_RATE = PRO_RATE;
         this.PRO_DES = PRO_DES;
         this.PRO_PRICE = PRO_PRICE;
         this.PRO_COST = PRO_COST;
-        this.PRO_STATUS = PRO_STATUS;
         this.PRO_QUANT = PRO_QUANT;
-        this.CAT_ID = CAT_ID;
-        this.BRA_ID = BRA_ID;
+        this.CAT = CAT;
+        this.BRA = BRA;
     }
 
     public String getPRO_ID() {
@@ -47,14 +55,6 @@ public class Product implements Serializable {
 
     public void setPRO_NAME(String PRO_NAME) {
         this.PRO_NAME = PRO_NAME;
-    }
-
-    public String getPRO_IMAGE() {
-        return PRO_IMAGE;
-    }
-
-    public void setPRO_IMAGE(String PRO_IMAGE) {
-        this.PRO_IMAGE = PRO_IMAGE;
     }
 
     public double getPRO_RATE() {
@@ -89,14 +89,6 @@ public class Product implements Serializable {
         this.PRO_COST = PRO_COST;
     }
 
-    public String getPRO_STATUS() {
-        return PRO_STATUS;
-    }
-
-    public void setPRO_STATUS(String PRO_STATUS) {
-        this.PRO_STATUS = PRO_STATUS;
-    }
-
     public int getPRO_QUANT() {
         return PRO_QUANT;
     }
@@ -105,19 +97,32 @@ public class Product implements Serializable {
         this.PRO_QUANT = PRO_QUANT;
     }
 
-    public String getCAT_ID() {
-        return CAT_ID;
+    public Category getCAT() {
+        return CAT;
     }
 
-    public void setCAT_ID(String CAT_ID) {
-        this.CAT_ID = CAT_ID;
+    public void setCAT(Category CAT) {
+        this.CAT = CAT;
     }
 
-    public String getBRA_ID() {
-        return BRA_ID;
+    public Brand getBRA() {
+        return BRA;
     }
 
-    public void setBRA_ID(String BRA_ID) {
-        this.BRA_ID = BRA_ID;
+    public void setBRA(Brand BRA) {
+        this.BRA = BRA;
+    }
+
+    public String getProReIMG() {
+        List<String> proImages = imageService.getProImage(PRO_ID);
+        if (!proImages.isEmpty()) {
+            return proImages.get(0);
+        }
+
+        return null;
+    }
+
+    public List<String> getProImage() {
+        return imageService.getProImage(PRO_ID);
     }
 }

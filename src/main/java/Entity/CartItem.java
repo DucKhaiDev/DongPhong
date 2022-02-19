@@ -8,17 +8,17 @@ public class CartItem implements Serializable {
     private String CITEM_ID;
     private int QUANT;
     private double VALUE;
-    private String PRO_ID;
-    private String CART_ID;
+    private Product PRO;
+    private Cart CAT;
 
     public CartItem() {}
 
-    public CartItem(String CITEM_ID, int QUANT, double VALUE, String PRO_ID, String CART_ID) {
+    public CartItem(String CITEM_ID, int QUANT, double VALUE, Product PRO, Cart CAT) {
         this.CITEM_ID = CITEM_ID;
         this.QUANT = QUANT;
         this.VALUE = VALUE;
-        this.PRO_ID = PRO_ID;
-        this.CART_ID = CART_ID;
+        this.PRO = PRO;
+        this.CAT = CAT;
     }
 
     public String getCITEM_ID() {
@@ -45,19 +45,19 @@ public class CartItem implements Serializable {
         this.VALUE = VALUE;
     }
 
-    public String getPRO_ID() {
-        return PRO_ID;
+    public Product getPRO() {
+        return PRO;
     }
 
-    public void setPRO_ID(String PRO_ID) {
-        this.PRO_ID = PRO_ID;
+    public void setPRO(Product PRO) {
+        this.PRO = PRO;
     }
 
-    public String getCART_ID() {
-        return CART_ID;
+    public Cart getCAT() {
+        return CAT;
     }
 
-    public void setCART_ID(String CART_ID) {
-        this.CART_ID = CART_ID;
+    public void setCAT(Cart CAT) {
+        this.CAT = CAT;
     }
 }

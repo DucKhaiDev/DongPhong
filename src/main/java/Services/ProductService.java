@@ -1,12 +1,12 @@
-package Dao;
+package Services;
 
 import Entity.Product;
 
 import java.util.List;
 
-public interface ProductDao {
+public interface ProductService {
     void insert(Product product);
-    void edit(Product product);
+    void edit(Product newPro);
     void delete(String PRO_ID);
     Product getProduct(String PRO_ID);
     List<Product> getAll();

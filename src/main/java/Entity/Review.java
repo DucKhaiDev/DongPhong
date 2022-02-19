@@ -7,17 +7,18 @@ public class Review implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private int REV_ID;
-    private String CUS_ID;
-    private String PRO_ID;
+    private Customer CUS;
+    private Product PRO;
     private String REV_CONTENT;
     private Timestamp REV_DATE;
     private String REV_IMG;
 
     public Review() {}
 
-    public Review(String CUS_ID, String PRO_ID, String REV_CONTENT, Timestamp REV_DATE, String REV_IMG) {
-        this.CUS_ID = CUS_ID;
-        this.PRO_ID = PRO_ID;
+    public Review(int REV_ID, Customer CUS, Product PRO, String REV_CONTENT, Timestamp REV_DATE, String REV_IMG) {
+        this.REV_ID = REV_ID;
+        this.CUS = CUS;
+        this.PRO = PRO;
         this.REV_CONTENT = REV_CONTENT;
         this.REV_DATE = REV_DATE;
         this.REV_IMG = REV_IMG;
@@ -31,20 +32,20 @@ public class Review implements Serializable {
         this.REV_ID = REV_ID;
     }
 
-    public String getCUS_ID() {
-        return CUS_ID;
+    public Customer getCUS() {
+        return CUS;
     }
 
-    public void setCUS_ID(String CUS_ID) {
-        this.CUS_ID = CUS_ID;
+    public void setCUS(Customer CUS) {
+        this.CUS = CUS;
     }
 
-    public String getPRO_ID() {
-        return PRO_ID;
+    public Product getPRO() {
+        return PRO;
     }
 
-    public void setPRO_ID(String PRO_ID) {
-        this.PRO_ID = PRO_ID;
+    public void setPRO(Product PRO) {
+        this.PRO = PRO;
     }
 
     public String getREV_CONTENT() {

@@ -6,15 +6,15 @@ public class WLItem implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private String WLITEM_ID;
-    private String PRO_ID;
-    private String WL_ID;
+    private Product PRO;
+    private Wishlist WL;
 
     public WLItem() {}
 
-    public WLItem(String WLITEM_ID, String PRO_ID, String WL_ID) {
+    public WLItem(String WLITEM_ID, Product PRO, Wishlist WL) {
         this.WLITEM_ID = WLITEM_ID;
-        this.PRO_ID = PRO_ID;
-        this.WL_ID = WL_ID;
+        this.PRO = PRO;
+        this.WL = WL;
     }
 
     public String getWLITEM_ID() {
@@ -25,19 +25,19 @@ public class WLItem implements Serializable {
         this.WLITEM_ID = WLITEM_ID;
     }
 
-    public String getPRO_ID() {
-        return PRO_ID;
+    public Product getPRO() {
+        return PRO;
     }
 
-    public void setPRO_ID(String PRO_ID) {
-        this.PRO_ID = PRO_ID;
+    public void setPRO(Product PRO) {
+        this.PRO = PRO;
     }
 
-    public String getWL_ID() {
-        return WL_ID;
+    public Wishlist getWL() {
+        return WL;
     }
 
-    public void setWL_ID(String WL_ID) {
-        this.WL_ID = WL_ID;
+    public void setWL(Wishlist WL) {
+        this.WL = WL;
     }
 }

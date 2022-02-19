@@ -8,7 +8,7 @@ public class Order implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private String ORD_ID;
-    private String CUS_ID;
+    private Customer CUS;
     private String REC_NAME;
     private String REC_ADDRESS;
     private String REC_PHONE;
@@ -17,14 +17,14 @@ public class Order implements Serializable {
     private String ORD_STATUS;
     private int ORD_TOTALPRO;
     private double ORD_TOTALPAY;
-    private String CART_ID;
-    private String PAY_ID;
+    private Cart CAT;
+    private Payment PAY;
 
     public Order() {}
 
-    public Order(String ORD_ID, String CUS_ID, String REC_NAME, String REC_ADDRESS, String REC_PHONE, Timestamp ORD_DATE, Date REC_DATE, String ORD_STATUS, int ORD_TOTALPRO, double ORD_TOTALPAY, String CART_ID, String PAY_ID) {
+    public Order(String ORD_ID, Customer CUS, String REC_NAME, String REC_ADDRESS, String REC_PHONE, Timestamp ORD_DATE, Date REC_DATE, String ORD_STATUS, int ORD_TOTALPRO, double ORD_TOTALPAY, Cart CAT, Payment PAY) {
         this.ORD_ID = ORD_ID;
-        this.CUS_ID = CUS_ID;
+        this.CUS = CUS;
         this.REC_NAME = REC_NAME;
         this.REC_ADDRESS = REC_ADDRESS;
         this.REC_PHONE = REC_PHONE;
@@ -33,8 +33,8 @@ public class Order implements Serializable {
         this.ORD_STATUS = ORD_STATUS;
         this.ORD_TOTALPRO = ORD_TOTALPRO;
         this.ORD_TOTALPAY = ORD_TOTALPAY;
-        this.CART_ID = CART_ID;
-        this.PAY_ID = PAY_ID;
+        this.CAT = CAT;
+        this.PAY = PAY;
     }
 
     public String getORD_ID() {
@@ -45,12 +45,12 @@ public class Order implements Serializable {
         this.ORD_ID = ORD_ID;
     }
 
-    public String getCUS_ID() {
-        return CUS_ID;
+    public Customer getCUS() {
+        return CUS;
     }
 
-    public void setCUS_ID(String CUS_ID) {
-        this.CUS_ID = CUS_ID;
+    public void setCUS(Customer CUS) {
+        this.CUS = CUS;
     }
 
     public String getREC_NAME() {
@@ -117,19 +117,19 @@ public class Order implements Serializable {
         this.ORD_TOTALPAY = ORD_TOTALPAY;
     }
 
-    public String getCART_ID() {
-        return CART_ID;
+    public Cart getCAT() {
+        return CAT;
     }
 
-    public void setCART_ID(String CART_ID) {
-        this.CART_ID = CART_ID;
+    public void setCAT(Cart CAT) {
+        this.CAT = CAT;
     }
 
-    public String getPAY_ID() {
-        return PAY_ID;
+    public Payment getPAY() {
+        return PAY;
     }
 
-    public void setPAY_ID(String PAY_ID) {
-        this.PAY_ID = PAY_ID;
+    public void setPAY(Payment PAY) {
+        this.PAY = PAY;
     }
 }

@@ -6,13 +6,13 @@ public class Cart implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private String CART_ID;
-    private String CUS_ID;
+    private Customer CUS;
 
     public Cart() {}
 
-    public Cart(String CART_ID, String CUS_ID) {
+    public Cart(String CART_ID, Customer CUS) {
         this.CART_ID = CART_ID;
-        this.CUS_ID = CUS_ID;
+        this.CUS = CUS;
     }
 
     public String getCART_ID() {
@@ -23,11 +23,11 @@ public class Cart implements Serializable {
         this.CART_ID = CART_ID;
     }
 
-    public String getCUS_ID() {
-        return CUS_ID;
+    public Customer getCUS() {
+        return CUS;
     }
 
-    public void setCUS_ID(String CUS_ID) {
-        this.CUS_ID = CUS_ID;
+    public void setCUS(Customer CUS) {
+        this.CUS = CUS;
     }
 }

@@ -26,8 +26,8 @@ public class UserDao implements Dao.UserDao {
             rs = ps.executeQuery();
             rs.next();
             return rs.getInt("USER_ID");
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         } finally {
             DBConnect.closeResultSet(rs);
             DBConnect.closePreparedStatement(ps);

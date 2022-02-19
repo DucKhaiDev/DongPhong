@@ -1,7 +1,8 @@
-<%--
+<%@ page import="Services.deploy.ProImageService" %>
+<%@ page import="java.util.List" %><%--
   User: duckhaidev
-  Date: 2/15/2022
-  Time: 5:22 PM
+  Date: 2/17/2022
+  Time: 9:37 PM
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -37,7 +38,7 @@
         <div id="page-inner">
             <div class="row">
                 <div class="col-md-12">
-                    <h2>Quản Lý Tài Khoản</h2>
+                    <h2>Quản Lý Sản Phẩm</h2>
                     <h5>Welcome Jhon Deo , Love to see you back. </h5>
 
                 </div>
@@ -49,56 +50,63 @@
                 <div class="col-md-12">
                     <!-- Advanced Tables -->
                     <div class="panel panel-default">
-                        <div class="panel-heading">Danh sách người dùng</div>
+                        <div class="panel-heading">
+                            Danh mục sản phẩm
+                        </div>
                         <div class="panel-body">
                             <div class="table-responsive">
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                     <thead>
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>Avatar</th>
-                                            <th>Tên đăng nhập</th>
-                                            <th>Mật khẩu</th>
-                                            <th>Email</th>
-                                            <th>Trạng thái</th>
-                                            <th>Quyền truy cập</th>
-                                            <th>Tác vụ</th>
-                                        </tr>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Hình ảnh</th>
+                                        <th>Tên sản phẩm</th>
+                                        <th>Giá bán</th>
+                                        <th>Loại sản phẩm</th>
+                                        <th>Thương hiệu</th>
+                                        <th>Tác vụ</th>
+                                    </tr>
                                     </thead>
                                     <tbody>
-                                        <c:forEach items="${userList}" var="user">
+                                        <c:forEach items="${productList}" var="product">
                                             <tr class="odd">
-                                                <td>${user.USER_ID}</td>
-                                                <c:url value="/images/avatar?fname=${user.AVATAR}" var="avatarUrl"></c:url>
-                                                <td><img width="50" height="50" src="${avatarUrl}" style="object-fit: cover;" alt="Ảnh đại diện"></td>
-                                                <td>${user.USERNAME}</td>
-                                                <td>${user.PASSWORD}</td>
-                                                <td>${user.EMAIL}</td>
-                                                <td>Đang hoạt động</td>
+                                                <td>${product.PRO_ID}</td>
+                                                <c:url value="/images/product-images?fname=${product.getProReIMG()}" var="imageUrl"></c:url>
+                                                <c:choose>
+                                                    <c:when test="${product.getProReIMG() == null}">
+                                                        <td><i>NULL</i></td>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <td><img width="50" height="50" src="${imageUrl}" style="object-fit: cover;" alt="Hình ảnh"></td>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                                <td>${product.PRO_NAME}</td>
+                                                <td>${product.PRO_PRICE}</td>
+                                                <td>${product.CAT.CAT_NAME}</td>
+                                                <td>${product.BRA.BRA_NAME}</td>
                                                 <td>
-                                                    <c:choose>
-                                                        <c:when test="${!user.ROLE}">Quản trị viên</c:when>
-                                                        <c:otherwise>Thành viên</c:otherwise>
-                                                    </c:choose>
-                                                </td>
-                                                <td>
-                                                    <a href="<c:url value="/admin/user/edit?id=${user.USER_ID}"/>" class="text-center">Sửa</a>&nbsp;|&nbsp;
-                                                    <a href="<c:url value="/admin/user/delete?id=${user.USER_ID}"/>" class="text-center">Xóa</a>
+                                                    <a href="<c:url value="#"/>" class="text-center">Chi tiết</a>&nbsp;|&nbsp;
+                                                    <a href="<c:url value="#"/>" class="text-center">Sửa</a>&nbsp;|&nbsp;
+                                                    <a href="<c:url value="#"/>" class="text-center">Xóa</a>
                                                 </td>
                                             </tr>
                                         </c:forEach>
                                     </tbody>
                                 </table>
                             </div>
+
                         </div>
                     </div>
+                    <!--End Advanced Tables -->
                 </div>
             </div>
+            <!-- /. ROW  -->
         </div>
-        <!-- /. PAGE INNER  -->
+
     </div>
-    <!-- /. PAGE WRAPPER  -->
+    <!-- /. PAGE INNER  -->
 </div>
+<!-- /. PAGE WRAPPER  -->
 <!-- /. WRAPPER  -->
 <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
 <!-- JQUERY SCRIPTS -->

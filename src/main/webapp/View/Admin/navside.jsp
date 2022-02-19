@@ -10,7 +10,7 @@
     <div class="sidebar-collapse">
         <ul class="nav" id="main-menu">
             <li class="text-center">
-                <c:url value="/image?fname=${sessionScope.account.AVATAR}" var="avatarUrl"></c:url>
+                <c:url value="/images/avatar?fname=${sessionScope.account.AVATAR}" var="avatarUrl"></c:url>
                 <img src="${avatarUrl}" class="user-image img-responsive" alt="Ảnh đại diện"/>
             </li>
             <li>
@@ -39,10 +39,10 @@
                 </a>
             </li>
             <li>
-                <a href="#"><i class="fa fa-hand-holding-box fa-3x"></i> QL Sản phẩm<span class="fa arrow fa-2x"></span></a>
+                <a href="#"><i class="fa fa-boxes fa-3x"></i> QL Sản phẩm<span class="fa arrow fa-2x"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
-                        <a href="#">Danh mục Sản phẩm</a>
+                        <a href="${pageContext.request.contextPath}/admin/product">Danh mục Sản phẩm</a>
                     </li>
                     <li>
                         <a href="#">Danh mục Loại sản phẩm</a>

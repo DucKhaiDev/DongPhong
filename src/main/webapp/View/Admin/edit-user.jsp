@@ -52,8 +52,8 @@
                                     <div class="row">
                                         <div class="col-md-5 border-right">
                                             <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                                                <c:url value="/image?fname=${user.AVATAR}" var="avatarUrl"></c:url>
-                                                <img class="avatar rounded-circle mt-5 mb-1" width="150px" height="150px" src="${avatarUrl}" alt="Ảnh đại diện">
+                                                <c:url value="/images/avatar?fname=${user.AVATAR}" var="avatarUrl"></c:url>
+                                                <img class="avatar rounded-circle mt-5 mb-1" width="150px" height="150px" style="object-fit: cover;" src="${avatarUrl}" alt="Ảnh đại diện">
                                                 <input class="text-center mb-3 file-upload" type="file" name="update_avatar" />
                                                 <span class="font-weight-bold mb-2">${user.LASTNAME} ${user.FIRSTNAME}</span>
                                                 <span class="text-black-50">ID:&nbsp;${user.USER_ID}</span>
