@@ -37,6 +37,25 @@ public class ProImageDao implements Dao.ProImageDao {
     }
 
     @Override
+    public void edit(ProImage image) {
+        conn = DBConnect.getConnection();
+
+        try {
+            ps = conn.prepareStatement("UPDATE [PROIMAGE] SET IMG_NAME = ?, PRO_ID = ? WHERE IMG_ID = ?");
+            ps.setString(1, image.getIMG_NAME());
+            ps.setString(2, image.getPRO().getPRO_ID());
+            ps.setInt(3, image.getIMG_ID());
+
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnect.closePreparedStatement(ps);
+            DBConnect.closeConnection(conn);
+        }
+    }
+
+    @Override
     public void delete(int IMG_ID) {
         conn = DBConnect.getConnection();
 
@@ -94,17 +113,22 @@ public class ProImageDao implements Dao.ProImageDao {
     }
 
     @Override
-    public List<String> getProImage(String PRO_ID) {
-        List<String> images = new ArrayList<>();
+    public List<ProImage> getProImage(String PRO_ID) {
+        List<ProImage> images = new ArrayList<>();
         conn = DBConnect.getConnection();
 
         try {
-            ps = conn.prepareStatement("SELECT IMG_NAME FROM [PROIMAGE] WHERE PRO_ID = ? ORDER BY IMG_ID ASC");
+            ps = conn.prepareStatement("SELECT * FROM [PROIMAGE] WHERE PRO_ID = ? ORDER BY IMG_ID ASC");
             ps.setString(1, PRO_ID);
             rs = ps.executeQuery();
 
             while (rs.next()) {
-                images.add(rs.getString("IMG_NAME"));
+                ProImage image = new ProImage();
+                image.setIMG_ID(Integer.parseInt(rs.getString("IMG_ID")));
+                image.setIMG_NAME(rs.getString("IMG_NAME"));
+                image.setPRO(productService.getProduct(rs.getString("PRO_ID")));
+
+                images.add(image);
             }
         } catch (SQLException e) {
             e.printStackTrace();

@@ -41,14 +41,14 @@
 <body class="animation">
 
 <!-- Header -->
-<jsp:include page="header-v4.jsp"></jsp:include>
+<jsp:include page="header-v4.jsp"/>
 
 <!-- Cart -->
-<jsp:include page="cart.jsp"></jsp:include>
+<jsp:include page="cart.jsp"/>
 
 <!-- Content page -->
 <div class="container rounded bg-white mt-5 mb-5" style="width: 480px">
-    <c:url value="/change-password" var="changePassword"></c:url>
+    <c:url value="/change-password" var="changePassword"/>
     <form action="${changePassword}" method="post">
         <div class="p-3 py-5">
             <div class="d-flex flex-column justify-content-between mb-3">
@@ -68,7 +68,7 @@
 </div>
 
 <!-- Footer -->
-<jsp:include page="footer.jsp"></jsp:include>
+<jsp:include page="footer.jsp"/>
 
 <!--===============================================================================================-->
 <script src="${url}/vendor/jquery/jquery-3.2.1.min.js"></script>

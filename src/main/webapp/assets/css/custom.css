@@ -140,6 +140,10 @@ p {
     margin-right: 0.25rem !important;
 }
 
+.mr-5 {
+    margin-right: 3rem !important;
+}
+
 .pr-3 {
     padding-right: 1rem !important;
 }
@@ -171,6 +175,14 @@ p {
 
 .mt-6 {
     margin-top: 5rem !important;
+}
+
+.mb-6 {
+    margin-bottom: 5rem !important;
+}
+
+.bsz-content-box {
+    box-sizing: content-box !important;
 }
 /*==============================================
    DASHBOARD STYLES    
@@ -317,6 +329,13 @@ color: #8d8888;
     height:170px;
     width:170px;
     object-fit: cover;
+}
+
+.user-img-empty {
+    background-image: url("../images/default-user-image.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
 }
 
 .navbar-cls-top .navbar-brand {
@@ -497,6 +516,18 @@ line-height: 1.428571429;
     font-size: 13px
 }
 
+.ct-border {
+    border: 1.5px solid #ccc;
+}
+
+.bg-img-empty {
+    width: 150px;
+    height: 150px;
+    background-image: url("../images/empty.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
 /*==============================================
     MEDIA QUERIES     
     =============================================*/

@@ -2,9 +2,7 @@ package Services.deploy;
 
 import Dao.deploy.UserDao;
 import Entity.User;
-import Util.Constant;
 
-import java.io.File;
 import java.util.List;
 
 public class UserService implements Services.UserService {
@@ -16,30 +14,8 @@ public class UserService implements Services.UserService {
     }
 
     @Override
-    public void edit(User newUser) {
-        User oldUser = userDao.getUser(newUser.getUSER_ID());
-        oldUser.setFIRSTNAME(newUser.getFIRSTNAME());
-        oldUser.setLASTNAME(newUser.getLASTNAME());
-        oldUser.setUSERNAME(newUser.getUSERNAME());
-        oldUser.setPASSWORD(newUser.getPASSWORD());
-        oldUser.setEMAIL(newUser.getEMAIL());
-        oldUser.setADDRESS(newUser.getADDRESS());
-        oldUser.setPHONE(newUser.getPHONE());
-        oldUser.setROLE(newUser.getROLE());
-        if (newUser.getAVATAR() != null) {
-            //Xóa ảnh cũ
-            if (!oldUser.getAVATAR().equals("default.png")) {
-                String fileName = oldUser.getAVATAR();
-                File file = new File(Constant.Path.AVATARS + File.separator + fileName);
-                if (file.exists()) {
-                    file.delete();
-                }
-            }
-            //Thêm ảnh mới
-            oldUser.setAVATAR(newUser.getAVATAR());
-        }
-
-        userDao.edit(oldUser);
+    public void edit(User user) {
+        userDao.edit(user);
     }
 
     @Override
@@ -83,8 +59,8 @@ public class UserService implements Services.UserService {
     }
 
     @Override
-    public List<User> search(String keyword) {
-        return userDao.search(keyword);
+    public List<User> search(String NAME) {
+        return userDao.search(NAME);
     }
 
     @Override

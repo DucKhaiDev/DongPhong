@@ -219,13 +219,13 @@ public class UserDao implements Dao.UserDao {
     }
 
     @Override
-    public List<User> search(String keyword) {
+    public List<User> search(String NAME) {
         List<User> users = new ArrayList<>();
         conn = DBConnect.getConnection();
 
         try {
             ps = conn.prepareStatement("SELECT * FROM [USER] WHERE USERNAME LIKE ?");
-            ps.setString(1, "%" + keyword + "%");
+            ps.setString(1, "%" + NAME + "%");
 
             rs = ps.executeQuery();
             while (rs.next()) {

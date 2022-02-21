@@ -27,10 +27,10 @@
 </head>
 <body>
 <div id="wrapper">
-    <jsp:include page="navtop.jsp"></jsp:include>
+    <jsp:include page="navtop.jsp"/>
     <!-- /. NAV TOP  -->
 
-    <jsp:include page="navside.jsp"></jsp:include>
+    <jsp:include page="navside.jsp"/>
     <!-- /. NAV SIDE  -->
 
     <div id="page-wrapper" >
@@ -69,8 +69,8 @@
                                         <c:forEach items="${users}" var="user">
                                             <tr class="odd">
                                                 <td>${user.USER_ID}</td>
-                                                <c:url value="/images/avatar?fname=${user.AVATAR}" var="avatarUrl"></c:url>
-                                                <td><img width="50" height="50" src="${avatarUrl}" style="object-fit: cover;" alt="Ảnh đại diện"></td>
+                                                <c:url value="/images/avatar?fname=${user.AVATAR}" var="avatarUrl"/>
+                                                <td><img class="user-img-empty" width="50" height="50" <c:if test="${not empty user.AVATAR}">src="${avatarUrl}"</c:if> style="object-fit: cover;"></td>
                                                 <td>${user.USERNAME}</td>
                                                 <td>${user.PASSWORD}</td>
                                                 <td>${user.EMAIL}</td>

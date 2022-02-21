@@ -44,20 +44,20 @@
 <body class="animsition">
 
 <!-- Header -->
-<jsp:include page="header-v4.jsp"></jsp:include>
+<jsp:include page="header-v4.jsp"/>
 
 <!-- Cart -->
-<jsp:include page="cart.jsp"></jsp:include>
+<jsp:include page="cart.jsp"/>
 
 <!-- Content page -->
 <div class="container rounded bg-white mt-5 mb-5">
-    <c:url value="/member/my-account" var="myaccount"></c:url>
+    <c:url value="/member/my-account" var="myaccount"/>
     <form action="${myaccount}" method="post" enctype="multipart/form-data">
         <div class="row justify-content-center">
             <div class="col-md-3 border-right">
                 <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                    <c:url value="/images/avatar?fname=${sessionScope.account.AVATAR}" var="avatarUrl"></c:url>
-                    <img class="avatar rounded-circle mt-5 mb-1" width="150px" height="150px" style="object-fit: cover;" src="${avatarUrl}" alt="Ảnh đại diện">
+                    <c:url value="/images/avatar?fname=${sessionScope.account.AVATAR}" var="avatarUrl"/>
+                    <img class="avatar user-img-empty rounded-circle mt-5 mb-1" width="150px" height="150px" style="object-fit: cover;" <c:if test="${not empty sessionScope.account.AVATAR}">src="${avatarUrl}"</c:if>>
                     <input class="text-center mb-3 file-upload" type="file" name="update_avatar" />
                     <span class="font-weight-bold mb-2">${sessionScope.account.LASTNAME} ${sessionScope.account.FIRSTNAME}</span>
                     <span class="text-black-50">ID:&nbsp;${sessionScope.account.USER_ID}</span>
@@ -94,7 +94,7 @@
 </div>
 
 <!-- Footer -->
-<jsp:include page="footer.jsp"></jsp:include>
+<jsp:include page="footer.jsp"/>
 
 <!--===============================================================================================-->
 <script src="${url}/vendor/jquery/jquery-3.2.1.min.js"></script>

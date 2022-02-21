@@ -40,10 +40,10 @@
 </head>
 <body>
 <!-- Header -->
-<jsp:include page="header-v4.jsp"></jsp:include>
+<jsp:include page="header-v4.jsp"/>
 
 <!-- Cart -->
-<jsp:include page="cart.jsp"></jsp:include>
+<jsp:include page="cart.jsp"/>
 
 <!-- Content page -->
 <section class="bg0 p-t-62 p-b-60">
@@ -62,22 +62,22 @@
                                     <form id="form-login" action="register" method="post">
                                         <div class="form-group">
                                             <label for="username">Tên đăng nhập</label>
-                                            <input type="text" class="form-control" id="username" name="username">
+                                            <input type="text" class="form-control" id="username" name="username" required="required">
                                             <p class="text-muted" style="color: #FF0000 !important;">${requestScope.usnMsg}</p>
                                         </div>
                                         <div class="form-group">
                                             <label for="password">Mật khẩu</label>
-                                            <input type="password" class="form-control" id="password" name="password">
+                                            <input type="password" class="form-control" id="password" name="password" required="required">
                                             <p class="text-muted" style="color: #FF0000 !important;">${requestScope.pswMsg}</p>
                                         </div>
                                         <div class="form-group">
                                             <label for="repeat_password">Nhập lại mật khẩu</label>
-                                            <input type="password" class="form-control" id="repeat_password" name="repeat_password">
+                                            <input type="password" class="form-control" id="repeat_password" name="repeat_password" required="required">
                                             <p class="text-muted" style="color: #FF0000 !important;">${requestScope.rpswMsg}</p>
                                         </div>
                                         <div class="form-group mb-5">
                                             <label for="email">Email</label>
-                                            <input type="email" class="form-control" id="email" name="email">
+                                            <input type="email" class="form-control" id="email" name="email" required="required">
                                             <p class="text-muted" style="color: #FF0000 !important;">${requestScope.emailMsg}</p>
                                         </div>
                                         <button type="submit" class="btn btn-theme float-r">Đăng ký</button>
@@ -110,7 +110,7 @@
 </section>
 
 <!-- Footer -->
-<jsp:include page="footer.jsp"></jsp:include>
+<jsp:include page="footer.jsp"/>
 
 <!--===============================================================================================-->
 <script src="${url}/vendor/jquery/jquery-3.2.1.min.js"></script>

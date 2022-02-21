@@ -6,14 +6,18 @@ import Util.Constant;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import org.apache.commons.io.FilenameUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @WebServlet(name = "MyAccountController", urlPatterns = "/member/my-account")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, maxFileSize = 1024 * 1024 * 10, maxRequestSize = 1024 * 1024 * 50)
 public class MyAccountController extends HttpServlet {
-    private UserService userService = new UserService();
+    private final UserService userService = new UserService();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -57,7 +61,7 @@ public class MyAccountController extends HttpServlet {
             fileSaveDir.mkdir();
         }
 
-        String fileName = "";
+        String fileName;
 
         for (Part part : request.getParts()) {
             fileName = extractFileName(part);
@@ -65,7 +69,19 @@ public class MyAccountController extends HttpServlet {
 
             if (fileName.length() > 0) {
                 part.write(savePath + File.separator + fileName);
-                user.setAVATAR(fileName);
+
+                //Xóa ảnh cũ
+                if (user.getAVATAR() != null || !user.getAVATAR().trim().isEmpty()) {
+                    File file = new File(Constant.Path.AVATARS + File.separator + user.getAVATAR());
+                    if (file.exists()) {
+                        file.delete();
+                    }
+                }
+
+                String AVATAR = user.getUSERNAME() + "_" + "profile_picture" + "." + FilenameUtils.getExtension(fileName);
+                renameFile(fileName, AVATAR);
+
+                user.setAVATAR(AVATAR);
             }
         }
 
@@ -83,5 +99,14 @@ public class MyAccountController extends HttpServlet {
             }
         }
         return "";
+    }
+
+    private void renameFile(String oldFile, String newFile) {
+        Path file = Paths.get(Constant.Path.AVATARS + File.separator + oldFile);
+        try {
+            Files.move(file, file.resolveSibling(newFile));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

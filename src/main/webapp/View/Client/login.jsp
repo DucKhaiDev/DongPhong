@@ -41,10 +41,10 @@
 <body class="animsition">
 
 <!-- Header -->
-<jsp:include page="header-v4.jsp"></jsp:include>
+<jsp:include page="header-v4.jsp"/>
 
 <!-- Cart -->
-<jsp:include page="cart.jsp"></jsp:include>
+<jsp:include page="cart.jsp"/>
 
 <!-- Content page -->
 <section class="bg0 p-t-62 p-b-60">
@@ -64,11 +64,11 @@
                                     <form id="form-login" action="login" method="post">
                                         <div class="form-group">
                                             <label for="username_or_email">Tên đăng nhập hoặc Email</label>
-                                            <input type="text" class="form-control" id="username_or_email" name="username_or_email">
+                                            <input type="text" class="form-control" id="username_or_email" name="username_or_email" required="required">
                                         </div>
                                         <div class="form-group">
                                             <label for="password">Mật khẩu</label>
-                                            <input type="password" class="form-control" id="password" name="password">
+                                            <input type="password" class="form-control" id="password" name="password" required="required">
                                         </div>
                                         <div class="form-group row mb-5">
                                             <div class="col-6">
@@ -115,7 +115,7 @@
 </section>
 
 <!-- Footer -->
-<jsp:include page="footer.jsp"></jsp:include>
+<jsp:include page="footer.jsp"/>
 
 <!--===============================================================================================-->
 <script src="${url}/vendor/jquery/jquery-3.2.1.min.js"></script>

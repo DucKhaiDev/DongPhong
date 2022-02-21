@@ -23,10 +23,10 @@
 </head>
 <body>
 <div id="wrapper">
-    <jsp:include page="navtop.jsp"></jsp:include>
+    <jsp:include page="navtop.jsp"/>
     <!-- /. NAV TOP  -->
 
-    <jsp:include page="navside.jsp"></jsp:include>
+    <jsp:include page="navside.jsp"/>
     <!-- /. NAV SIDE  -->
 
     <div id="page-wrapper" >
@@ -49,8 +49,8 @@
                                     <div class="row">
                                         <div class="col-md-5 border-right">
                                             <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                                                <c:url value="/images/avatar?fname=${user.AVATAR}" var="avatarUrl"></c:url>
-                                                <img class="avatar rounded-circle mt-5 mb-1" width="150px" height="150px" style="object-fit: cover;" src="${avatarUrl}" alt="Ảnh đại diện">
+                                                <c:url value="/images/avatar?fname=${user.AVATAR}" var="avatarUrl"/>
+                                                <img class="avatar user-img-empty rounded-circle mt-5 mb-1" width="150px" height="150px" style="object-fit: cover;" <c:if test="${not empty user.AVATAR}">src="${avatarUrl}"</c:if>>
                                                 <input class="text-center mb-3 file-upload" type="file" name="update_avatar" />
                                                 <span class="font-weight-bold mb-2">${user.LASTNAME} ${user.FIRSTNAME}</span>
                                                 <span class="text-black-50">ID:&nbsp;${user.USER_ID}</span>

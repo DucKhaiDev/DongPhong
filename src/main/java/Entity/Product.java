@@ -105,15 +105,15 @@ public class Product implements Serializable {
     }
 
     public String getProReIMG() {
-        List<String> proImages = imageService.getProImage(PRO_ID);
-        if (!proImages.isEmpty()) {
-            return proImages.get(0);
+        List<ProImage> images = imageService.getProImage(PRO_ID);
+        if (!images.isEmpty()) {
+            return images.get(0).getIMG_NAME();
         }
 
         return null;
     }
 
-    public List<String> getProImage() {
+    public List<ProImage> getProImage() {
         return imageService.getProImage(PRO_ID);
     }
 }

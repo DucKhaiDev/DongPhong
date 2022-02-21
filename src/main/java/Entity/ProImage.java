@@ -11,8 +11,7 @@ public class ProImage implements Serializable {
 
     public ProImage() {}
 
-    public ProImage(int IMG_ID, String IMG_NAME, Product PRO) {
-        this.IMG_ID = IMG_ID;
+    public ProImage(String IMG_NAME, Product PRO) {
         this.IMG_NAME = IMG_NAME;
         this.PRO = PRO;
     }

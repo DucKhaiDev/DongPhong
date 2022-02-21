@@ -25,10 +25,10 @@
 </head>
 <body>
 <div id="wrapper">
-    <jsp:include page="navtop.jsp"></jsp:include>
+    <jsp:include page="navtop.jsp"/>
     <!-- /. NAV TOP  -->
 
-    <jsp:include page="navside.jsp"></jsp:include>
+    <jsp:include page="navside.jsp"/>
     <!-- /. NAV SIDE  -->
 
     <div id="page-wrapper" >

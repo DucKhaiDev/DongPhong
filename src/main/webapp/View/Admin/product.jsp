@@ -27,10 +27,10 @@
 </head>
 <body>
 <div id="wrapper">
-    <jsp:include page="navtop.jsp"></jsp:include>
+    <jsp:include page="navtop.jsp"/>
     <!-- /. NAV TOP  -->
 
-    <jsp:include page="navside.jsp"></jsp:include>
+    <jsp:include page="navside.jsp"/>
     <!-- /. NAV SIDE  -->
 
     <div id="page-wrapper" >
@@ -39,19 +39,20 @@
                 <div class="col-md-12">
                     <h2>Quản Lý Sản Phẩm</h2>
                     <div class="row">
-                        <div class="col-md-10"><h5>Welcome Jhon Deo , Love to see you back. </h5></div>
-                        <div class="col-md-2">
-                            <a href="${pageContext.request.contextPath}/admin/product/add" class="btn btn-primary ct-button float-right">
-                                <i class="fa fa-plus"></i>&nbsp;Thêm sản phẩm
-                            </a>
-                        </div>
+                        <div class="col-md-12"><h5>Welcome Jhon Deo , Love to see you back. </h5></div>
                     </div>
 
                 </div>
             </div>
             <!-- /. ROW  -->
             <hr />
-
+            <div class="row">
+                <div class="col-md-12 mb-3">
+                    <a href="${pageContext.request.contextPath}/admin/product/add" class="btn btn-primary ct-button float-right">
+                        <i class="fa fa-plus"></i>&nbsp;Thêm sản phẩm
+                    </a>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-md-12">
                     <!-- Advanced Tables -->
@@ -77,7 +78,7 @@
                                         <c:forEach items="${products}" var="product">
                                             <tr class="odd">
                                                 <td>${product.PRO_ID}</td>
-                                                <c:url value="/images/product-images?fname=${product.getProReIMG()}" var="imageUrl"></c:url>
+                                                <c:url value="/images/product-images?fname=${product.getProReIMG()}" var="imageUrl"/>
                                                 <c:choose>
                                                     <c:when test="${product.getProReIMG() == null}">
                                                         <td><i>NULL</i></td>
@@ -92,8 +93,8 @@
                                                 <td>${product.BRA.BRA_NAME}</td>
                                                 <td>
                                                     <a href="<c:url value="#"/>" class="text-center">Chi tiết</a>&nbsp;|&nbsp;
-                                                    <a href="<c:url value="#"/>" class="text-center">Sửa</a>&nbsp;|&nbsp;
-                                                    <a href="<c:url value="#"/>" class="text-center">Xóa</a>
+                                                    <a href="<c:url value="/admin/product/edit?id=${product.PRO_ID}"/>" class="text-center">Sửa</a>&nbsp;|&nbsp;
+                                                    <a href="<c:url value="/admin/product/delete?id=${product.PRO_ID}"/>" class="text-center">Xóa</a>
                                                 </td>
                                             </tr>
                                         </c:forEach>

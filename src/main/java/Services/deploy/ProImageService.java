@@ -14,6 +14,11 @@ public class ProImageService implements Services.ProImageService {
     }
 
     @Override
+    public void edit(ProImage image) {
+        imageDao.edit(image);
+    }
+
+    @Override
     public void delete(int IMG_ID) {
         imageDao.delete(IMG_ID);
     }
@@ -29,7 +34,7 @@ public class ProImageService implements Services.ProImageService {
     }
 
     @Override
-    public List<String> getProImage(String PRO_ID) {
+    public List<ProImage> getProImage(String PRO_ID) {
         return imageDao.getProImage(PRO_ID);
     }
 }

@@ -40,7 +40,7 @@ public class RegisterController extends HttpServlet {
          */
         //Kiểm tra độ dài tên đăng nhập
         if (username.length() < 6 || username.length() > 15) {
-            usnMsg = "Tên đăng nhập phải có 6-15 ký tự";
+            usnMsg = "Tên đăng nhập phải có độ dài 6-15 ký tự";
             request.setAttribute("usnMsg", usnMsg);
             request.getRequestDispatcher(Constant.Path.REGISTER).forward(request, response);
             return;
@@ -74,7 +74,7 @@ public class RegisterController extends HttpServlet {
          */
         //Kiểm tra độ dài mật khẩu
         if (password.length() < 8 || password.length() > 32 || password.equals(username)) {
-            pswMsg = "Mật khẩu phải có 8-32 ký tự và không được trùng với tên đăng nhập";
+            pswMsg = "Mật khẩu phải có độ dài 8-32 ký tự và không được trùng với tên đăng nhập";
             request.setAttribute("pswMsg", pswMsg);
             request.getRequestDispatcher(Constant.Path.REGISTER).forward(request, response);
             return;

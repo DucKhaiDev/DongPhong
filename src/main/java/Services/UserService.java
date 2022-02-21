@@ -13,7 +13,7 @@ public interface UserService {
     User login(String USERNAME, String PASSWORD);
     boolean register(String USERNAME, String PASSWORD, String EMAIL);
     List<User> getAll();
-    List<User> search(String keyword);
+    List<User> search(String NAME);
     boolean checkExistUSERNAME(String USERNAME);
     boolean checkExistEMAIL(String EMAIL);
 }

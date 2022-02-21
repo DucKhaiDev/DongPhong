@@ -20,9 +20,4 @@ public class ProductController extends HttpServlet {
         request.setAttribute("products", products);
         request.getRequestDispatcher(Constant.Path.ADMIN_PRODUCT).forward(request, response);
     }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
 }

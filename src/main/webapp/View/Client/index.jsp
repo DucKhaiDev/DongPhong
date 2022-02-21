@@ -46,10 +46,10 @@
 <body class="animsition">
 
 <!-- Header -->
-<jsp:include page="header.jsp"></jsp:include>
+<jsp:include page="header.jsp"/>
 
 <!-- Cart -->
-<jsp:include page="cart.jsp"></jsp:include>
+<jsp:include page="cart.jsp"/>
 
 <!-- Slider -->
 <section class="section-slide">
@@ -990,7 +990,7 @@
 
 
 <!-- Footer -->
-<jsp:include page="footer.jsp"></jsp:include>
+<jsp:include page="footer.jsp"/>
 
 <!-- Modal1 -->
 <div class="wrap-modal1 js-modal1 p-t-60 p-b-20">

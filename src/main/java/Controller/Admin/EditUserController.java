@@ -6,14 +6,18 @@ import Util.Constant;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import org.apache.commons.io.FilenameUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @WebServlet(name = "EditUserController", urlPatterns = "/admin/user/edit")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, maxFileSize = 1024 * 1024 * 10, maxRequestSize = 1024 * 1024 * 50)
 public class EditUserController extends HttpServlet {
-    UserService userService = new UserService();
+    private final UserService userService = new UserService();
     private int USER_ID;
 
     @Override
@@ -67,7 +71,7 @@ public class EditUserController extends HttpServlet {
             fileSaveDir.mkdir();
         }
 
-        String fileName = "";
+        String fileName;
 
         for (Part part : request.getParts()) {
             fileName = extractFileName(part);
@@ -75,11 +79,23 @@ public class EditUserController extends HttpServlet {
 
             if (fileName.length() > 0) {
                 part.write(savePath + File.separator + fileName);
-                user.setAVATAR(fileName);
+
+                //Xóa ảnh cũ
+                if (user.getAVATAR() != null && !user.getAVATAR().trim().isEmpty()) {
+                    File file = new File(Constant.Path.AVATARS + File.separator + user.getAVATAR());
+                    if (file.exists()) {
+                        file.delete();
+                    }
+                }
+
+                String AVATAR = user.getUSERNAME() + "_" + "profile_picture" + "." + FilenameUtils.getExtension(fileName);
+                renameFile(fileName, AVATAR);
+
+                user.setAVATAR(AVATAR);
+                userService.edit(user);
             }
         }
 
-        userService.edit(user);
         response.sendRedirect(request.getContextPath() + "/admin/user/edit?id=" + USER_ID);
     }
 
@@ -92,5 +108,14 @@ public class EditUserController extends HttpServlet {
             }
         }
         return "";
+    }
+
+    private void renameFile(String oldName, String newName) {
+        Path file = Paths.get(Constant.Path.AVATARS + File.separator + oldName);
+        try {
+            Files.move(file, file.resolveSibling(newName));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

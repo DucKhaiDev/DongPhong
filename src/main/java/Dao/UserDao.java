@@ -13,7 +13,7 @@ public interface UserDao {
     User getUser(int USER_ID);
     User getUser(String USERNAME_or_EMAIL);
     List<User> getAll();
-    List<User> search(String keyword);
+    List<User> search(String NAME);
     boolean checkExistUSERNAME(String USERNAME);
     boolean checkExistEMAIL(String EMAIL);
 }

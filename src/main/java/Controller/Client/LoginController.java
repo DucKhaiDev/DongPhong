@@ -44,14 +44,6 @@ public class LoginController extends HttpServlet {
 
         String loginMsg = "";
 
-        if (username_or_email.isEmpty() || password.isEmpty()) {
-            loginMsg = "Email/Tên đăng nhập và mật khẩu không được để trống!";
-            request.setAttribute("loginMsg", loginMsg);
-            RequestDispatcher rd = request.getRequestDispatcher(Constant.Path.LOGIN);
-            rd.include(request, response);
-            return;
-        }
-
         UserService service = new UserService();
 
         User user = service.login(username_or_email, password);

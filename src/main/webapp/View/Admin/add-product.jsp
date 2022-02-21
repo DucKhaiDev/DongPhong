@@ -23,10 +23,10 @@
 </head>
 <body>
 <div id="wrapper">
-    <jsp:include page="navtop.jsp"></jsp:include>
+    <jsp:include page="navtop.jsp"/>
     <!-- /. NAV TOP  -->
 
-    <jsp:include page="navside.jsp"></jsp:include>
+    <jsp:include page="navside.jsp"/>
     <!-- /. NAV SIDE  -->
 
     <div id="page-wrapper" >
@@ -49,8 +49,8 @@
                                     <div class="row ml-2 mr-2">
                                         <div class="col-md-6">
                                             <div class="row mt-2">
-                                                <div class="col-md-6 mb-3"><label class="labels">ID</label><input type="text" class="form-control" name="pro_id" maxlength="10"></div>
-                                                <div class="col-md-12 mb-3"><label class="labels">Tên sản phẩm</label><input type="text" class="form-control" name="pro_name" maxlength="255"></div>
+                                                <div class="col-md-6 mb-3"><label class="labels">ID</label><input type="text" class="form-control" name="pro_id" maxlength="10" required="required"></div>
+                                                <div class="col-md-12 mb-3"><label class="labels">Tên sản phẩm</label><input type="text" class="form-control" name="pro_name" maxlength="255" required="required"></div>
                                                 <div class="col-md-12 mb-3">
                                                     <label class="labels">Mô tả sản phẩm</label>
                                                     <br>
@@ -64,7 +64,7 @@
                                                 <div class="col-md-6 mb-3">
                                                     <label class="labels">Loại sản phẩm</label>
                                                     <div class="checkbox pl-0">
-                                                        <select name="category" class="w-50">
+                                                        <select name="cat" class="w-50">
                                                             <c:forEach items="${categories}" var="category">
                                                                 <option value="${category.CAT_ID}">${category.CAT_NAME}</option>
                                                             </c:forEach>
@@ -74,7 +74,7 @@
                                                 <div class="col-md-6 mb-3">
                                                     <label class="labels">Thương hiệu</label>
                                                     <div class="checkbox pl-0">
-                                                        <select name="brand" class="w-50">
+                                                        <select name="bra" class="w-50">
                                                             <c:forEach items="${brands}" var="brand">
                                                                 <option value="${brand.BRA_ID}">${brand.BRA_NAME}</option>
                                                             </c:forEach>
@@ -86,42 +86,23 @@
                                         <div class="col-md-6">
                                             <div class="row mt-2">
                                                 <div class="row">
-                                                    <div class="col-md-12"><label class="labels">Hình ảnh sản phẩm</label></div>
+                                                    <div class="col-md-12"><label class="labels">Hình ảnh sản phẩm (Tối đa 6 ảnh)</label></div>
                                                 </div>
                                                 <div class="row mt-5">
-                                                    <div class="col-md-6">
-                                                        <img class="image-1 mb-1" width="150px" height="150px" style="object-fit: cover;" src="#" alt="Hình ảnh sản phẩm">
-                                                        <input type="file" class="text-center mb-3 file-upload-1" name="pro_image_1">
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <img class="image-2 mb-1" width="150px" height="150px" style="object-fit: cover;" src="#" alt="Hình ảnh sản phẩm">
-                                                        <input type="file" class="text-center mb-3 file-upload-2" name="pro_image_2">
-                                                    </div>
+                                                    <c:forEach begin="1" end="6" varStatus="loop">
+                                                        <div class="col-md-6 mb-6">
+                                                            <div class="mb-1" style="width: 150px; height: 150px">
+                                                                <img class="bg-img-empty image-<c:out value="${loop.index}"/> mb-1" width="150px" height="150px" style="object-fit: cover;">
+                                                            </div>
+                                                            <input type="file" class="text-center mb-3 file-upload-<c:out value="${loop.index}"/>" name="pro_image_<c:out value="${loop.index}"/>">
+                                                        </div>
+                                                    </c:forEach>
                                                 </div>
-                                                <div class="row mt-6">
-                                                    <div class="col-md-6">
-                                                        <img class="image-3 mb-1" width="150px" height="150px" style="object-fit: cover;" src="#" alt="Hình ảnh sản phẩm">
-                                                        <input type="file" class="text-center mb-3 file-upload-3" name="pro_image_3">
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <img class="image-4 mb-1" width="150px" height="150px" style="object-fit: cover;" src="#" alt="Hình ảnh sản phẩm">
-                                                        <input type="file" class="text-center mb-3 file-upload-4" name="pro_image_4">
-                                                    </div>
-                                                </div>
-                                                <div class="row mt-6">
-                                                    <div class="col-md-6">
-                                                        <img class="image-5 mb-1" width="150px" height="150px" style="object-fit: cover;" src="#" alt="Hình ảnh sản phẩm">
-                                                        <input type="file" class="text-center mb-3 file-upload-5" name="pro_image_5">
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <img class="image-6 mb-1" width="150px" height="150px" style="object-fit: cover;" src="#" alt="Hình ảnh sản phẩm">
-                                                        <input type="file" class="text-center mb-3 file-upload-6" name="pro_image_6">
-                                                    </div>
-                                                </div>
+
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row ml-2 mr-2">
+                                    <div class="row mt-5 ml-2 mr-2">
                                         <div class="mt-5 text-center col-md-6"><button class="btn btn-primary ct-button float-right mr-5" type="submit"><i class="fa fa-check"></i>&nbsp;Đồng ý</button></div>
                                         <div class="mt-5 text-center col-md-6">
                                             <button class="btn btn-primary ct-button float-left ml-5" type="reset"><i class="fa fa-undo-alt"></i>&nbsp;Nhập lại</button>

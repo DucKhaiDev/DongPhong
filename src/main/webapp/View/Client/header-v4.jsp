@@ -10,7 +10,7 @@
     <!-- Header desktop -->
     <div class="container-menu-desktop">
         <!-- Topbar -->
-        <jsp:include page="topbar.jsp"></jsp:include>
+        <jsp:include page="topbar.jsp"/>
 
         <div class="wrap-menu-desktop how-shadow1">
             <nav class="limiter-menu-desktop container">

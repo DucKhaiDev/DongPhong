@@ -10,8 +10,8 @@
     <div class="sidebar-collapse">
         <ul class="nav" id="main-menu">
             <li class="text-center">
-                <c:url value="/images/avatar?fname=${sessionScope.account.AVATAR}" var="avatarUrl"></c:url>
-                <img src="${avatarUrl}" class="user-image img-responsive" alt="Ảnh đại diện"/>
+                <c:url value="/images/avatar?fname=${sessionScope.account.AVATAR}" var="avatarUrl"/>
+                <img class="user-image user-img-empty img-responsive" <c:if test="${not empty sessionScope.account.AVATAR}">src="${avatarUrl}"</c:if>>
             </li>
             <li>
                 <a class="active-menu text-center" href="${pageContext.request.contextPath}/member/my-account">

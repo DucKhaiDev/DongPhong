@@ -46,3 +46,10 @@ body {
     cursor: pointer;
     border: solid 1px #6c7ae0
 }
+
+.user-img-empty {
+    background-image: url("../images/default-user-image.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+}

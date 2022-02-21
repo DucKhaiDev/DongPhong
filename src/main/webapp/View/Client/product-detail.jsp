@@ -40,10 +40,10 @@
 <body class="animsition">
 
 <!-- Header -->
-<jsp:include page="header-v4.jsp"></jsp:include>
+<jsp:include page="header-v4.jsp"/>
 
 <!-- Cart -->
-<jsp:include page="cart.jsp"></jsp:include>
+<jsp:include page="cart.jsp"/>
 
 <!-- breadcrumb -->
 <div class="container">
@@ -233,7 +233,7 @@
 
 
 <!-- Footer -->
-<jsp:include page="footer.jsp"></jsp:include>
+<jsp:include page="footer.jsp"/>
 
 <!--===============================================================================================-->
 <script src="${url}/vendor/jquery/jquery-3.2.1.min.js"></script>

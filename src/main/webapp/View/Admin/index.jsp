@@ -26,10 +26,10 @@
 <body>
 <div id="wrapper">
     <%--NAV TOP--%>
-    <jsp:include page="navtop.jsp"></jsp:include>
+    <jsp:include page="navtop.jsp"/>
 
     <%--NAV SIDE--%>
-    <jsp:include page="navside.jsp"></jsp:include>
+    <jsp:include page="navside.jsp"/>
 
     <div id="page-wrapper" >
         <div id="page-inner">
