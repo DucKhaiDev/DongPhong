@@ -37,4 +37,9 @@ public class ProImageService implements Services.ProImageService {
     public List<ProImage> getProImage(String PRO_ID) {
         return imageDao.getProImage(PRO_ID);
     }
+
+    @Override
+    public List<ProImage> getAll() {
+        return imageDao.getAll();
+    }
 }

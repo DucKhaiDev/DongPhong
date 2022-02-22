@@ -13,6 +13,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.UUID;
 
 @WebServlet(name = "MyAccountController", urlPatterns = "/member/my-account")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, maxFileSize = 1024 * 1024 * 10, maxRequestSize = 1024 * 1024 * 50)
@@ -61,7 +64,7 @@ public class MyAccountController extends HttpServlet {
             fileSaveDir.mkdir();
         }
 
-        String fileName;
+        String fileName, newName;
 
         for (Part part : request.getParts()) {
             fileName = extractFileName(part);
@@ -69,19 +72,9 @@ public class MyAccountController extends HttpServlet {
 
             if (fileName.length() > 0) {
                 part.write(savePath + File.separator + fileName);
-
-                //Xóa ảnh cũ
-                if (user.getAVATAR() != null || !user.getAVATAR().trim().isEmpty()) {
-                    File file = new File(Constant.Path.AVATARS + File.separator + user.getAVATAR());
-                    if (file.exists()) {
-                        file.delete();
-                    }
-                }
-
-                String AVATAR = user.getUSERNAME() + "_" + "profile_picture" + "." + FilenameUtils.getExtension(fileName);
-                renameFile(fileName, AVATAR);
-
-                user.setAVATAR(AVATAR);
+                newName = UUID.randomUUID() + "." + FilenameUtils.getExtension(fileName);
+                renameFile(fileName, newName);
+                user.setAVATAR(newName);
             }
         }
 

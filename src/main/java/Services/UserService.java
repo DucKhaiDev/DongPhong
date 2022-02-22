@@ -16,4 +16,5 @@ public interface UserService {
     List<User> search(String NAME);
     boolean checkExistUSERNAME(String USERNAME);
     boolean checkExistEMAIL(String EMAIL);
+    int countAdmin();
 }

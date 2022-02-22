@@ -14,7 +14,7 @@
                 <img class="user-image user-img-empty img-responsive" <c:if test="${not empty sessionScope.account.AVATAR}">src="${avatarUrl}"</c:if>>
             </li>
             <li>
-                <a class="active-menu text-center" href="${pageContext.request.contextPath}/member/my-account">
+                <a class="active-menu text-center" href="${pageContext.request.contextPath}/admin/user/edit?id=${sessionScope.account.USER_ID}">
                     <%
                         User account = (User) session.getAttribute("account");
                         String displayName = account.getUSERNAME();

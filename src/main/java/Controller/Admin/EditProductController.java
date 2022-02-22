@@ -20,9 +20,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @WebServlet(name = "EditProductController", value = "/admin/product/edit")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, maxFileSize = 1024 * 1024 * 10, maxRequestSize = 1024 * 1024 * 50)
@@ -88,9 +87,7 @@ public class EditProductController extends HttpServlet {
             fileSaveDir.mkdir();
         }
 
-        String fileName;
-        int count = images.size() + 1;
-        Map<Integer, Pair<String, String>> map = new HashMap<>();
+        String fileName, newName;
 
         for (Part part : request.getParts()) {
             fileName = extractFileName(part);
@@ -98,50 +95,22 @@ public class EditProductController extends HttpServlet {
 
             if (fileName.length() > 0) {
                 part.write(savePath + File.separator + fileName);
+                newName = UUID.randomUUID() + "." + FilenameUtils.getExtension(fileName);
+                renameFile(fileName, newName);
 
                 int index = Integer.parseInt(part.getName());
                 if (index < images.size() + 1) {
                     ProImage image = images.get(index - 1);
-
-                    Pair<String, String> pair = new Pair<>(image.getIMG_NAME(), fileName);
-                    map.put(image.getIMG_ID(), pair);
-
-                    image.setIMG_NAME(fileName);
+                    image.setIMG_NAME(newName);
                     imageService.edit(image);
                 } else {
-                    String IMG_NAME = PRO_ID + "_" + count + "." + FilenameUtils.getExtension(fileName);
-                    renameFile(fileName, IMG_NAME);
-
-                    ProImage image = new ProImage(IMG_NAME, product);
+                    ProImage image = new ProImage(newName, product);
                     imageService.insert(image);
-                    count++;
                 }
             }
         }
 
         response.sendRedirect(request.getContextPath() + "/admin/product/edit?id=" + PRO_ID);
-        for (Integer IMG_ID : map.keySet()) {
-            Pair<String, String> files = map.get(IMG_ID);
-            String newName = files.getKey();
-            String oldName = files.getValue();
-
-            //Xóa ảnh cũ
-            File file = new File(Constant.Path.PRODUCT_IMAGES + File.separator + newName);
-            if (file.exists()) {
-                file.delete();
-            }
-
-            //Tên ảnh mới
-            newName = FilenameUtils.removeExtension(newName) + "." + FilenameUtils.getExtension(oldName);
-
-            //Đổi tên file
-            renameFile(oldName, newName);
-
-            //Edit ảnh sản phẩm
-            ProImage image = imageService.getImage(IMG_ID);
-            image.setIMG_NAME(newName);
-            imageService.edit(image);
-        }
     }
 
     private String extractFileName(Part part) {

@@ -301,4 +301,25 @@ public class UserDao implements Dao.UserDao {
 
         return exist;
     }
+
+    @Override
+    public int countAdmin() {
+        conn = DBConnect.getConnection();
+        int count = 0;
+
+        try {
+            ps = conn.prepareStatement("SELECT COUNT(*) FROM [USER] WHERE ROLE = 'False'");
+            rs = ps.executeQuery();
+            rs.next();
+            count = rs.getInt(1);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnect.closeResultSet(rs);
+            DBConnect.closePreparedStatement(ps);
+            DBConnect.closeConnection(conn);
+        }
+
+        return count;
+    }
 }

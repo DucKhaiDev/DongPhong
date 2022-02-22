@@ -5,6 +5,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:url value="/assets" var="url" />
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -165,89 +166,19 @@
 <!--===============================================================================================-->
 <script type="text/javascript">
     $(document).ready(function () {
-        var readURL_1 = function (input) {
-            if (input.files && input.files[0]) {
+        <c:forEach begin="1" end="6" varStatus="loop">
+            var readURL_<c:out value="${loop.index}"/> = function (input) {
                 var reader = new FileReader();
                 reader.onload = function (e) {
-                    $('.image-1').attr('src', e.target.result);
+                    $(<% out.print("\'.image-"); %>${loop.index}<% out.print("\'"); %>).attr('src', e.target.result);
                 }
                 reader.readAsDataURL(input.files[0]);
             }
-        }
 
-        $(".file-upload-1").on('change', function () {
-            readURL_1(this);
-        });
-
-        var readURL_2 = function (input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    $('.image-2').attr('src', e.target.result);
-                }
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-
-        $(".file-upload-2").on('change', function () {
-            readURL_2(this);
-        });
-
-        var readURL_3 = function (input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    $('.image-3').attr('src', e.target.result);
-                }
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-
-        $(".file-upload-3").on('change', function () {
-            readURL_3(this);
-        });
-
-        var readURL_4 = function (input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    $('.image-4').attr('src', e.target.result);
-                }
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-
-        $(".file-upload-4").on('change', function () {
-            readURL_4(this);
-        });
-
-        var readURL_5 = function (input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    $('.image-5').attr('src', e.target.result);
-                }
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-
-        $(".file-upload-5").on('change', function () {
-            readURL_5(this);
-        });
-
-        var readURL_6 = function (input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    $('.image-6').attr('src', e.target.result);
-                }
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-
-        $(".file-upload-6").on('change', function () {
-            readURL_6(this);
-        });
+            $(<% out.print("\'.file-upload-"); %>${loop.index}<% out.print("\'"); %>).on('change', function () {
+                readURL_<c:out value="${loop.index}"/>(this);
+            });
+        </c:forEach>
     });
 </script>
 <!-- CK EDITOR -->

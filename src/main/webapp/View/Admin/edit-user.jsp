@@ -1,4 +1,4 @@
-<%--
+<%@ page import="Services.deploy.UserService" %><%--
   User: duckhaidev
   Date: 2/16/2022
   Time: 10:54 AM
@@ -80,7 +80,8 @@
                                                                     </c:when>
                                                                     <c:otherwise>
                                                                         <div class="col-md-3"><input type="radio" value="false" name="update_role" checked="checked"> Quản trị viên</div>
-                                                                        <div class="col-md-3"><input type="radio" value="true" name="update_role"> Thành viên</div>
+                                                                        <% int count = new UserService().countAdmin(); %>
+                                                                        <div class="col-md-3"><input type="radio" value="true" name="update_role" <% if (count <= 1) out.print("disabled"); %>> Thành viên</div>
                                                                     </c:otherwise>
                                                                 </c:choose>
                                                                 <div class="col-md-3"></div>

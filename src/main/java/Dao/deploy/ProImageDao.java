@@ -124,7 +124,35 @@ public class ProImageDao implements Dao.ProImageDao {
 
             while (rs.next()) {
                 ProImage image = new ProImage();
-                image.setIMG_ID(Integer.parseInt(rs.getString("IMG_ID")));
+                image.setIMG_ID(rs.getInt("IMG_ID"));
+                image.setIMG_NAME(rs.getString("IMG_NAME"));
+                image.setPRO(productService.getProduct(rs.getString("PRO_ID")));
+
+                images.add(image);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnect.closeResultSet(rs);
+            DBConnect.closePreparedStatement(ps);
+            DBConnect.closeConnection(conn);
+        }
+
+        return images;
+    }
+
+    @Override
+    public List<ProImage> getAll() {
+        conn = DBConnect.getConnection();
+        List<ProImage> images = new ArrayList<>();
+
+        try {
+            ps = conn.prepareStatement("SELECT * FROM [PROIMAGE]");
+
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                ProImage image = new ProImage();
+                image.setIMG_ID(rs.getInt("IMG_ID"));
                 image.setIMG_NAME(rs.getString("IMG_NAME"));
                 image.setPRO(productService.getProduct(rs.getString("PRO_ID")));
 

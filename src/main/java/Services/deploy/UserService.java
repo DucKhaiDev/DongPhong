@@ -72,4 +72,9 @@ public class UserService implements Services.UserService {
     public boolean checkExistEMAIL(String EMAIL) {
         return userDao.checkExistEMAIL(EMAIL);
     }
+
+    @Override
+    public int countAdmin() {
+        return userDao.countAdmin();
+    }
 }

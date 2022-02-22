@@ -19,7 +19,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @WebServlet(name = "AddProductController", value = "/admin/product/add")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, maxFileSize = 1024 * 1024 * 10, maxRequestSize = 1024 * 1024 * 50)
@@ -77,8 +80,7 @@ public class AddProductController extends HttpServlet {
             fileSaveDir.mkdir();
         }
 
-        String fileName = "";
-        int count = 1;
+        String fileName, newName;
 
         for (Part part : request.getParts()) {
             fileName = extractFileName(part);
@@ -86,13 +88,10 @@ public class AddProductController extends HttpServlet {
 
             if (fileName.length() > 0) {
                 part.write(savePath + File.separator + fileName);
-
-                String IMG_NAME = PRO_ID + "_" + count + "." + FilenameUtils.getExtension(fileName);
-                renameFile(fileName, IMG_NAME);
-
-                ProImage image = new ProImage(IMG_NAME, product);
+                newName = UUID.randomUUID() + "." + FilenameUtils.getExtension(fileName);
+                renameFile(fileName, newName);
+                ProImage image = new ProImage(newName, product);
                 imageService.insert(image);
-                count++;
             }
         }
 
