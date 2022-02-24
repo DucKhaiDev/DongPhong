@@ -55,6 +55,7 @@
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                     <thead>
                                         <tr>
+                                            <th>STT</th>
                                             <th>ID</th>
                                             <th>Avatar</th>
                                             <th>Tên đăng nhập</th>
@@ -66,8 +67,10 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <c:set var="number" value="0"/>
                                         <c:forEach items="${users}" var="user">
                                             <tr class="odd">
+                                                <td>${number = number + 1}</td>
                                                 <td>${user.USER_ID}</td>
                                                 <c:url value="/images/avatar?fname=${user.AVATAR}" var="avatarUrl"/>
                                                 <td><img class="user-img-empty" width="50" height="50" <c:if test="${not empty user.AVATAR}">src="${avatarUrl}"</c:if> style="object-fit: cover;"></td>

@@ -1,4 +1,7 @@
-<%--
+<%@ page import="java.math.BigDecimal" %>
+<%@ page import="Entity.Product" %>
+<%@ page import="java.util.Locale" %>
+<%@ page import="java.text.NumberFormat" %><%--
   User: duckhaidev
   Date: 2/19/2022
   Time: 11:16 AM
@@ -60,13 +63,23 @@
                                                 <div class="col-md-6 mb-3"><label class="labels">Số lượng tồn kho</label><input type="number" class="form-control" name="pro_quant" min="0" max="<% out.print(Integer.MAX_VALUE); %>" step="1" placeholder="${product.PRO_QUANT}"></div>
                                             </div>
                                             <div class="row">
+                                                <%
+                                                    BigDecimal price = new BigDecimal(((Product) request.getAttribute("product")).getPRO_PRICE());
+                                                    BigDecimal cost = new BigDecimal(((Product) request.getAttribute("product")).getPRO_COST());
+                                                    Locale vie = new Locale("vi", "VN");
+                                                    NumberFormat dongFormat = NumberFormat.getCurrencyInstance(vie);
+                                                    String showPrice = dongFormat.format(price);
+                                                    request.setAttribute("showPrice", showPrice);
+                                                    String showCost = dongFormat.format(cost);
+                                                    request.setAttribute("showCost", showCost);
+                                                %>
                                                 <div class="col-md-6 mb-3">
-                                                    <label class="labels">Giá bán (VNĐ)</label>
-                                                    <input type="number" class="form-control" name="pro_price" min="0" max="999999999999" step="0.01" <c:if test="${empty product.PRO_PRICE}">placeholder="0"</c:if> placeholder="${product.PRO_PRICE}">
+                                                    <label class="labels">Giá bán</label>
+                                                    <input type="number" class="form-control" name="pro_price" min="0" max="999999999999" step="0.01" <c:if test="${empty product.PRO_PRICE}">placeholder="0"</c:if> placeholder="${showPrice}">
                                                 </div>
                                                 <div class="col-md-6 mb-3">
-                                                    <label class="labels">Giá gốc (VNĐ)</label>
-                                                    <input type="number" class="form-control" name="pro_cost" min="0" max="999999999999" step="0.01" <c:if test="${empty product.PRO_COST}">placeholder="0"</c:if> placeholder="${product.PRO_COST}">
+                                                    <label class="labels">Giá gốc</label>
+                                                    <input type="number" class="form-control" name="pro_cost" min="0" max="999999999999" step="0.01" <c:if test="${empty product.PRO_COST}">placeholder="0"</c:if> placeholder="${showCost}">
                                                 </div>
                                                 <div class="col-md-6 mb-3">
                                                     <label class="labels">Loại sản phẩm</label>

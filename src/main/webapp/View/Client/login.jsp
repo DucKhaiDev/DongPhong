@@ -87,14 +87,7 @@
                             </div>
 
                             <div class="col-lg-6 d-none d-lg-inline-block">
-                                <div class="account-block rounded-right">
-                                    <div class="rounded-right"></div>
-                                    <div class="account-testimonial">
-                                        <h4 class="text-white mb-4">This  beautiful theme yours!</h4>
-                                        <p class="lead text-white">"Best investment i made for a long time. Can only recommend it for other users."</p>
-                                        <p>- Admin User</p>
-                                    </div>
-                                </div>
+                                <div class="account-block rounded-right"></div>
                             </div>
                         </div>
 

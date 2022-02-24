@@ -75,6 +75,7 @@
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                     <thead>
                                     <tr>
+                                        <th>STT</th>
                                         <th>ID</th>
                                         <th>Thương hiệu</th>
                                         <th>Mô tả</th>
@@ -82,8 +83,10 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <c:forEach items="${brands}" var="brand">
+                                        <c:set var="number" value="0"/>
+                                        <c:forEach items="${brands}" var="brand">
                                         <tr class="odd">
+                                            <td>${number = number + 1}</td>
                                             <td>${brand.BRA_ID}</td>
                                             <td>${brand.BRA_NAME}</td>
                                             <td>${brand.BRA_DES}</td>
@@ -143,10 +146,11 @@
                             data;
                     }
                 },
-                {"width": "10%", "targets": 0},
-                {"width": "20%", "targets": 1},
-                {"width": "50%", "targets": 2},
-                {"width": "20%", "targets": 3}
+                {"width": "5%", "targets": 0},
+                {"width": "10%", "targets": 1},
+                {"width": "20%", "targets": 2},
+                {"width": "45%", "targets": 3},
+                {"width": "20%", "targets": 4}
             ]
         });
     });

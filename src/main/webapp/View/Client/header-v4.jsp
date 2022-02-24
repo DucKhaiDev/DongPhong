@@ -24,27 +24,50 @@
                 <div class="menu-desktop">
                     <ul class="main-menu">
                         <li>
-                            <a href="${pageContext.request.contextPath}">Home</a>
+                            <a href="${pageContext.request.contextPath}">Trang Chủ</a>
                         </li>
 
-                        <li>
-                            <a href="product.jsp">Shop</a>
+                        <li class="dropdown show">
+                            <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="">Phòng Khách</a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <li class="dropdown-item"><a href="#">Bộ salon gỗ</a></li>
+                                <li class="dropdown-item"><a href="#">Kệ tivi</a></li>
+                                <li class="dropdown-item"><a href="#">Đồ mỹ nghệ</a></li>
+                            </ul>
                         </li>
 
-                        <li class="label1" data-label1="hot">
-                            <a href="shoping-cart.jsp">Features</a>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown" data-delay="dropdown" href="">Phòng Bếp</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Bộ bàn ăn</a></li>
+                                <li><a href="#">Tủ kệ bếp</a></li>
+                            </ul>
                         </li>
 
-                        <li class="active-menu">
-                            <a href="blog.jsp">Blog</a>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown" data-delay="dropdown" href="">Phòng Ngủ</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Bộ giường ngủ</a></li>
+                                <li><a href="#">Tủ quần áo</a></li>
+                                <li><a href="#">Đồ mỹ nghệ</a></li>
+                            </ul>
                         </li>
 
-                        <li>
-                            <a href="about.html">About</a>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown" data-delay="dropdown" href="">Văn Phòng</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Kệ giày dép</a></li>
+                                <li><a href="#">Bàn làm việc</a></li>
+                                <li><a href="#">Ghế văn phòng</a></li>
+                            </ul>
                         </li>
 
-                        <li>
-                            <a href="contact.jsp">Contact</a>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown" data-delay="dropdown" href="">Phòng Thờ</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Bàn thờ gỗ</a></li>
+                                <li><a href="#">Bàn thờ Ông Địa</a></li>
+                            </ul>
                         </li>
                     </ul>
                 </div>

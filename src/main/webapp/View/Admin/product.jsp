@@ -1,3 +1,7 @@
+<%@ page import="Entity.Product" %>
+<%@ page import="java.math.BigDecimal" %>
+<%@ page import="java.util.Locale" %>
+<%@ page import="java.text.NumberFormat" %>
 <%--
   User: duckhaidev
   Date: 2/17/2022
@@ -65,6 +69,7 @@
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                     <thead>
                                     <tr>
+                                        <th>STT</th>
                                         <th>ID</th>
                                         <th>Hình ảnh</th>
                                         <th>Tên sản phẩm</th>
@@ -75,8 +80,10 @@
                                     </tr>
                                     </thead>
                                     <tbody>
+                                        <c:set var="number" value="0"/>
                                         <c:forEach items="${products}" var="product">
                                             <tr class="odd">
+                                                <td>${number = number + 1}</td>
                                                 <td>${product.PRO_ID}</td>
                                                 <c:url value="/images/product-images?fname=${product.getProReIMG()}" var="imageUrl"/>
                                                 <c:choose>
@@ -88,7 +95,13 @@
                                                     </c:otherwise>
                                                 </c:choose>
                                                 <td>${product.PRO_NAME}</td>
-                                                <td>${product.PRO_PRICE}</td>
+                                                <%
+                                                    BigDecimal price = new BigDecimal(((Product) pageContext.getAttribute("product")).getPRO_PRICE());
+                                                    Locale vie = new Locale("vi", "VN");
+                                                    NumberFormat dongFormat = NumberFormat.getCurrencyInstance(vie);
+                                                    String showPrice = dongFormat.format(price);
+                                                    out.print("<td>" + showPrice + "</td>");
+                                                %>
                                                 <td>${product.CAT.CAT_NAME}</td>
                                                 <td>${product.BRA.BRA_NAME}</td>
                                                 <td>
