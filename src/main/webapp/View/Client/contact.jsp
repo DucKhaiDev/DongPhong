@@ -13,7 +13,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--===============================================================================================-->
-    <link rel="icon" type="image/png" href="${url}/images/icons/favicon.png"/>
+    <link rel="icon" type="image/png" href="${url}/images/icons/icon-logo.png"/>
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="${url}/vendor/bootstrap/css/bootstrap.min.css">
     <!--===============================================================================================-->
@@ -75,7 +75,7 @@
 
                 <!-- Logo desktop -->
                 <a href="#" class="logo">
-                    <img src="${url}/images/icons/logo-01.png" alt="IMG-LOGO">
+                    <img src="${url}/images/icons/logo.png" alt="IMG-LOGO">
                 </a>
 
                 <!-- Menu desktop -->
@@ -132,7 +132,7 @@
     <div class="wrap-header-mobile">
         <!-- Logo moblie -->
         <div class="logo-mobile">
-            <a href="index.jsp"><img src="${url}/images/icons/logo-01.png" alt="IMG-LOGO"></a>
+            <a href="index.jsp"><img src="${url}/images/icons/logo.png" alt="IMG-LOGO"></a>
         </div>
 
         <!-- Icon header -->
@@ -616,4 +616,3 @@
 
 </body>
 </html>
-
