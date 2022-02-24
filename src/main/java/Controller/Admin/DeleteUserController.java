@@ -7,7 +7,7 @@ import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 
-@WebServlet(name = "DeleteUserController", urlPatterns = "/admin/user/delete")
+@WebServlet(name = "DeleteUserController", value = "/admin/user/delete")
 public class DeleteUserController extends HttpServlet {
     UserService userService = new UserService();
 

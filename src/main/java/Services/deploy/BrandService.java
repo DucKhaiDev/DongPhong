@@ -43,4 +43,9 @@ public class BrandService implements Services.BrandService {
     public boolean checkExistID(String ID) {
         return brandDao.checkExistID(ID);
     }
+
+    @Override
+    public boolean isUnusedBrand(String BRA_ID) {
+        return brandDao.isUnusedBrand(BRA_ID);
+    }
 }

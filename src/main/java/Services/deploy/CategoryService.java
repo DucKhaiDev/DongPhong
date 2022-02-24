@@ -42,4 +42,9 @@ public class CategoryService implements Services.CategoryService {
     public boolean checkExistID(String ID) {
         return categoryDao.checkExistID(ID);
     }
+
+    @Override
+    public boolean isUnusedCategory(String CAT_ID) {
+        return categoryDao.isUnusedCategory(CAT_ID);
+    }
 }

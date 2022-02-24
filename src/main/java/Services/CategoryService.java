@@ -12,4 +12,5 @@ public interface CategoryService {
     List<Category> getAll();
     List<Category> searchByName(String NAME);
     boolean checkExistID(String ID);
+    boolean isUnusedCategory(String CAT_ID);
 }

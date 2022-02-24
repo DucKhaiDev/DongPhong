@@ -13,4 +13,5 @@ public interface BrandService {
     List<Brand> getAll();
     List<Brand> searchByName(String NAME);
     boolean checkExistID(String ID);
+    boolean isUnusedBrand(String BRA_ID);
 }

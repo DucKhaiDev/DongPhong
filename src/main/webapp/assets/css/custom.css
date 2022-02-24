@@ -184,6 +184,11 @@ p {
 .bsz-content-box {
     box-sizing: content-box !important;
 }
+
+.justify-content-end {
+    -ms-flex-pack: end !important;
+    justify-content: flex-end !important;
+}
 /*==============================================
    DASHBOARD STYLES    
     =============================================*/
@@ -527,6 +532,13 @@ line-height: 1.428571429;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
+}
+
+.isDisabled {
+    color: currentColor;
+    cursor: not-allowed;
+    opacity: 0.5;
+    text-decoration: none;
 }
 /*==============================================
     MEDIA QUERIES     

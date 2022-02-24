@@ -20,7 +20,7 @@ public class BrandDao implements Dao.BrandDao {
         conn = DBConnect.getConnection();
 
         try {
-            ps = conn.prepareStatement("INSERT INTO [CATEGORY](CAT_ID, CAT_NAME, CAT_DES) VALUES(?, ?, ?)");
+            ps = conn.prepareStatement("INSERT INTO [BRAND](BRA_ID, BRA_NAME, BRA_DES) VALUES(?, ?, ?)");
             ps.setString(1, brand.getBRA_ID());
             ps.setString(2, brand.getBRA_NAME());
             ps.setString(3, brand.getBRA_DES());
@@ -151,7 +151,6 @@ public class BrandDao implements Dao.BrandDao {
 
     @Override
     public boolean checkExistID(String ID) {
-        boolean exist = false;
         conn = DBConnect.getConnection();
 
         try {
@@ -160,7 +159,7 @@ public class BrandDao implements Dao.BrandDao {
 
             rs = ps.executeQuery();
             if (rs.next()) {
-                exist = true;
+                return true;
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -170,6 +169,29 @@ public class BrandDao implements Dao.BrandDao {
             DBConnect.closeConnection(conn);
         }
 
-        return exist;
+        return false;
+    }
+
+    @Override
+    public boolean isUnusedBrand(String BRA_ID) {
+        conn = DBConnect.getConnection();
+
+        try {
+            ps = conn.prepareStatement("SELECT * FROM [PRODUCT] WHERE BRA_ID = ?");
+            ps.setString(1, BRA_ID);
+
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnect.closeResultSet(rs);
+            DBConnect.closePreparedStatement(ps);
+            DBConnect.closeConnection(conn);
+        }
+
+        return true;
     }
 }

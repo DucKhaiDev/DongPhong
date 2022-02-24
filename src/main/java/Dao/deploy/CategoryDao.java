@@ -172,4 +172,27 @@ public class CategoryDao implements Dao.CategoryDao {
 
         return exist;
     }
+
+    @Override
+    public boolean isUnusedCategory(String CAT_ID) {
+        conn = DBConnect.getConnection();
+
+        try {
+            ps = conn.prepareStatement("SELECT * FROM [PRODUCT] WHERE CAT_ID = ?");
+            ps.setString(1, CAT_ID);
+
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnect.closeResultSet(rs);
+            DBConnect.closePreparedStatement(ps);
+            DBConnect.closeConnection(conn);
+        }
+
+        return true;
+    }
 }

@@ -10,7 +10,7 @@ import jakarta.servlet.annotation.*;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "UserController", urlPatterns = "/admin/user")
+@WebServlet(name = "UserController", value = "/admin/user")
 public class UserController extends HttpServlet {
     UserService userService = new UserService();
 

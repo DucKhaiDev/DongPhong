@@ -45,10 +45,10 @@
                         <a href="${pageContext.request.contextPath}/admin/product">Danh mục Sản phẩm</a>
                     </li>
                     <li>
-                        <a href="#">Danh mục Loại sản phẩm</a>
+                        <a href="${pageContext.request.contextPath}/admin/category">Danh mục Loại sản phẩm</a>
                     </li>
                     <li>
-                        <a href="#">Danh mục Thương hiệu</a>
+                        <a href="${pageContext.request.contextPath}/admin/brand">Danh mục Thương hiệu</a>
                     </li>
                 </ul>
             </li>

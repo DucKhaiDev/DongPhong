@@ -21,5 +21,11 @@ public class Constant {
         public static final String ADMIN_PRODUCT = "/View/Admin/product.jsp";
         public static final String ADMIN_ADD_PRODUCT = "/View/Admin/add-product.jsp";
         public static final String ADMIN_EDIT_PRODUCT = "/View/Admin/edit-product.jsp";
+        public static final String ADMIN_CATEGORY = "/View/Admin/category.jsp";
+        public static final String ADMIN_ADD_CATEGORY = "/View/Admin/add-category.jsp";
+        public static final String ADMIN_EDIT_CATEGORY = "/View/Admin/edit-category.jsp";
+        public static final String ADMIN_BRAND = "/View/Admin/brand.jsp";
+        public static final String ADMIN_ADD_BRAND = "/View/Admin/add-brand.jsp";
+        public static final String ADMIN_EDIT_BRAND = "/View/Admin/edit-brand.jsp";
     }
 }

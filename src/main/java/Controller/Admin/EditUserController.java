@@ -13,11 +13,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.UUID;
 
-@WebServlet(name = "EditUserController", urlPatterns = "/admin/user/edit")
+@WebServlet(name = "EditUserController", value = "/admin/user/edit")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, maxFileSize = 1024 * 1024 * 10, maxRequestSize = 1024 * 1024 * 50)
 public class EditUserController extends HttpServlet {
     private final UserService userService = new UserService();

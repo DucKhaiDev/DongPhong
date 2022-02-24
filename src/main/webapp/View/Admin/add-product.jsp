@@ -20,6 +20,15 @@
     <link href="${url}/css/custom.css" rel="stylesheet" />
     <!-- GOOGLE FONTS-->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+    <%---------------------------------------------------------------------------------------------%>
+    <style>
+        p.exist-id {
+            font-size: 14px;
+            line-height: 20px;
+            padding-top: 14px;
+            color: #FF0000;
+        }
+    </style>
 </head>
 <body>
 <div id="wrapper">
@@ -50,17 +59,18 @@
                                         <div class="col-md-6">
                                             <div class="row mt-2">
                                                 <div class="col-md-6 mb-3"><label class="labels">ID</label><input type="text" class="form-control" name="pro_id" maxlength="10" required="required"></div>
+                                                <div class="col-md-6 mb-3"><label class="labels"></label><p class="exist-id">${requestScope.existID}</p></div>
                                                 <div class="col-md-12 mb-3"><label class="labels">Tên sản phẩm</label><input type="text" class="form-control" name="pro_name" maxlength="255" required="required"></div>
                                                 <div class="col-md-12 mb-3">
                                                     <label class="labels">Mô tả sản phẩm</label>
                                                     <br>
                                                     <textarea name="pro_des" id="description" class="form-control" cols="50" rows="5" maxlength="2000"></textarea>
                                                 </div>
-                                                <div class="col-md-6 mb-3"><label class="labels">Số lượng tồn kho</label><input type="number" class="form-control" name="pro_quant" min="0" max="<% out.print(Integer.MAX_VALUE); %>" step="1"></div>
+                                                <div class="col-md-6 mb-3"><label class="labels">Số lượng tồn kho</label><input type="number" class="form-control" name="pro_quant" min="0" max="<% out.print(Integer.MAX_VALUE); %>" step="1" placeholder="0"></div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-md-6 mb-3"><label class="labels">Giá bán (VNĐ)</label><input type="number" class="form-control" name="pro_price" min="0" max="999999999999" step="0.01"></div>
-                                                <div class="col-md-6 mb-3"><label class="labels">Giá gốc (VNĐ)</label><input type="number" class="form-control" name="pro_cost" min="0" max="999999999999" step="0.01"></div>
+                                                <div class="col-md-6 mb-3"><label class="labels">Giá bán (VNĐ)</label><input type="number" class="form-control" name="pro_price" min="0" max="999999999999" step="0.01" placeholder="0"></div>
+                                                <div class="col-md-6 mb-3"><label class="labels">Giá gốc (VNĐ)</label><input type="number" class="form-control" name="pro_cost" min="0" max="999999999999" step="0.01" placeholder="0"></div>
                                                 <div class="col-md-6 mb-3">
                                                     <label class="labels">Loại sản phẩm</label>
                                                     <div class="checkbox pl-0">

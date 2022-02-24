@@ -19,8 +19,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -44,31 +42,22 @@ public class AddProductController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //Thêm sản phẩm
-        Product product = new Product();
-
         String PRO_ID = request.getParameter("pro_id");
-        product.setPRO_ID(PRO_ID);
+        if (productService.checkExistID(PRO_ID)) {
+            String existID = "Mã sản phẩm đã tồn tại!";
+            request.setAttribute("existID", existID);
+            request.getRequestDispatcher(Constant.Path.ADMIN_ADD_PRODUCT).forward(request, response);
+            return;
+        }
 
         String PRO_NAME = request.getParameter("pro_name");
-        product.setPRO_NAME(PRO_NAME);
-
         String PRO_DES = request.getParameter("pro_des");
-        product.setPRO_DES(PRO_DES);
-
         int PRO_QUANT = request.getParameter("pro_quant").isEmpty() ? 0 : Integer.parseInt(request.getParameter("pro_quant"));
-        product.setPRO_QUANT(PRO_QUANT);
-
         String PRO_PRICE = request.getParameter("pro_price");
-        product.setPRO_PRICE(PRO_PRICE);
-
         String PRO_COST = request.getParameter("pro_cost");
-        product.setPRO_COST(PRO_COST);
-
         Category category = categoryService.getCategory(request.getParameter("cat"));
-        product.setCAT(category);
-
         Brand brand = brandService.getBrand(request.getParameter("bra"));
-        product.setBRA(brand);
+        Product product = new Product(PRO_ID, PRO_NAME, PRO_DES, PRO_PRICE, PRO_COST, PRO_QUANT, category, brand);
 
         productService.insert(product);
 
