@@ -11,7 +11,8 @@ public interface ProductDao {
     Product getProduct(String PRO_ID);
     List<Product> getAll();
     List<Product> searchByName(String NAME);
-    List<Product> searchByCategory(String CAT);
-    List<Product> searchByBrand(String BRA);
+    List<Product> getProductByCategory(String CAT_ID);
+    List<Product> getProductByBrand(String BRA_ID);
     boolean checkExistID(String ID);
+    int countProduct(String CAT_ID, String BRA_ID);
 }

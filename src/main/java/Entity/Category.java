@@ -7,13 +7,15 @@ public class Category implements Serializable {
 
     private String CAT_ID;
     private String CAT_NAME;
+    private Room ROOM;
     private String CAT_DES;
 
     public Category() {}
 
-    public Category(String CAT_ID, String CAT_NAME, String CAT_DES) {
+    public Category(String CAT_ID, String CAT_NAME, Room ROOM, String CAT_DES) {
         this.CAT_ID = CAT_ID;
         this.CAT_NAME = CAT_NAME;
+        this.ROOM = ROOM;
         this.CAT_DES = CAT_DES;
     }
 
@@ -31,6 +33,14 @@ public class Category implements Serializable {
 
     public void setCAT_NAME(String CAT_NAME) {
         this.CAT_NAME = CAT_NAME;
+    }
+
+    public Room getROOM() {
+        return ROOM;
+    }
+
+    public void setROOM(Room ROOM) {
+        this.ROOM = ROOM;
     }
 
     public String getCAT_DES() {

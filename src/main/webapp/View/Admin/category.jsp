@@ -78,6 +78,7 @@
                                         <th>STT</th>
                                         <th>ID</th>
                                         <th>Loại sản phẩm</th>
+                                        <th>Danh mục</th>
                                         <th>Mô tả</th>
                                         <th>Tác vụ</th>
                                     </tr>
@@ -89,6 +90,7 @@
                                             <td>${number = number + 1}</td>
                                             <td>${category.CAT_ID}</td>
                                             <td>${category.CAT_NAME}</td>
+                                            <td>${category.ROOM.ROOM_NAME}</td>
                                             <td>${category.CAT_DES}</td>
                                             <td>
                                                 <a href="<c:url value="/admin/category/edit?id=${category.CAT_ID}"/>" class="text-center">Sửa</a>&nbsp;|&nbsp;
@@ -137,6 +139,9 @@
 <script>
     $(document).ready(function () {
         $('#dataTables-example').dataTable({
+                "pagingType": "full_numbers"
+        },
+            {
             columnDefs: [
                 {
                     targets: 2,
@@ -149,8 +154,9 @@
                 {"width": "5%", "targets": 0},
                 {"width": "10%", "targets": 1},
                 {"width": "20%", "targets": 2},
-                {"width": "45%", "targets": 3},
-                {"width": "20%", "targets": 4}
+                {"width": "10%", "targets": 3},
+                {"width": "35%", "targets": 4},
+                {"width": "20%", "targets": 5}
             ]
         });
     });

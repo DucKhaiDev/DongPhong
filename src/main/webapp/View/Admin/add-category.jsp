@@ -59,6 +59,16 @@
                                         <div class="col-md-6 mb-3"><label for="cat_id" class="labels">ID</label><input id="cat_id" type="text" class="form-control" name="cat_id" maxlength="10" required="required"></div>
                                         <div class="col-md-6 mb-3"><label class="labels"></label><p class="exist-id">${requestScope.existID}</p></div>
                                         <div class="col-md-12 mb-3"><label for="cat_name" class="labels">Loại sản phẩm</label><input id="cat_name" type="text" class="form-control" name="cat_name" maxlength="255" required="required"></div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="labels">Danh mục</label>
+                                            <div class="checkbox pl-0">
+                                                <select name="room" class="w-50">
+                                                    <c:forEach items="${rooms}" var="room">
+                                                        <option value="${room.ROOM_ID}">${room.ROOM_NAME}</option>
+                                                    </c:forEach>
+                                                </select>
+                                            </div>
+                                        </div>
                                         <div class="col-md-12">
                                             <label for="description" class="labels">Mô tả</label>
                                             <br>

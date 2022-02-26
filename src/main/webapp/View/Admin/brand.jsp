@@ -137,6 +137,9 @@
 <script>
     $(document).ready(function () {
         $('#dataTables-example').dataTable({
+                "pagingType": "full_numbers"
+        },
+            {
             columnDefs: [
                 {
                     targets: 2,

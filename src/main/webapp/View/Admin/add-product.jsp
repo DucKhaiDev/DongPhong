@@ -69,8 +69,8 @@
                                                 <div class="col-md-6 mb-3"><label class="labels">Số lượng tồn kho</label><input type="number" class="form-control" name="pro_quant" min="0" max="<% out.print(Integer.MAX_VALUE); %>" step="1" placeholder="0"></div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-md-6 mb-3"><label class="labels">Giá bán (VNĐ)</label><input type="number" class="form-control" name="pro_price" min="0" max="999999999999" step="0.01" placeholder="0"></div>
-                                                <div class="col-md-6 mb-3"><label class="labels">Giá gốc (VNĐ)</label><input type="number" class="form-control" name="pro_cost" min="0" max="999999999999" step="0.01" placeholder="0"></div>
+                                                <div class="col-md-6 mb-3"><label class="labels">Giá bán (VNĐ)</label><input type="number" class="form-control" name="pro_price" min="0" max="9999999999" step="0.01" placeholder="0"></div>
+                                                <div class="col-md-6 mb-3"><label class="labels">Giá gốc (VNĐ)</label><input type="number" class="form-control" name="pro_cost" min="0" max="9999999999" step="0.01" placeholder="0"></div>
                                                 <div class="col-md-6 mb-3">
                                                     <label class="labels">Loại sản phẩm</label>
                                                     <div class="checkbox pl-0">

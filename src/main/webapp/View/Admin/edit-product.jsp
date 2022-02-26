@@ -75,11 +75,11 @@
                                                 %>
                                                 <div class="col-md-6 mb-3">
                                                     <label class="labels">Giá bán</label>
-                                                    <input type="number" class="form-control" name="pro_price" min="0" max="999999999999" step="0.01" <c:if test="${empty product.PRO_PRICE}">placeholder="0"</c:if> placeholder="${showPrice}">
+                                                    <input type="number" class="form-control" name="pro_price" min="0" max="9999999999" step="0.01" <c:if test="${empty product.PRO_PRICE}">placeholder="0"</c:if> placeholder="${showPrice}">
                                                 </div>
                                                 <div class="col-md-6 mb-3">
                                                     <label class="labels">Giá gốc</label>
-                                                    <input type="number" class="form-control" name="pro_cost" min="0" max="999999999999" step="0.01" <c:if test="${empty product.PRO_COST}">placeholder="0"</c:if> placeholder="${showCost}">
+                                                    <input type="number" class="form-control" name="pro_cost" min="0" max="9999999999" step="0.01" <c:if test="${empty product.PRO_COST}">placeholder="0"</c:if> placeholder="${showCost}">
                                                 </div>
                                                 <div class="col-md-6 mb-3">
                                                     <label class="labels">Loại sản phẩm</label>

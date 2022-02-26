@@ -140,7 +140,9 @@
 <script src="${url}/js/dataTables/dataTables.bootstrap.js"></script>
 <script>
     $(document).ready(function () {
-        $('#dataTables-example').dataTable();
+        $('#dataTables-example').dataTable({
+            "pagingType": "full_numbers"
+        });
     });
 </script>
 <!-- CUSTOM SCRIPTS -->

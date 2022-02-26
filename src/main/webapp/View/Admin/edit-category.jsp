@@ -49,6 +49,23 @@
                                     <div class="row ml-1 mr-1">
                                         <div class="col-md-6 mb-3"><label class="labels">ID</label><input type="text" class="form-control" placeholder="${category.CAT_ID}" readonly></div>
                                         <div class="col-md-12 mb-3"><label class="labels">Loại sản phẩm</label><input type="text" class="form-control" name="cat_name" maxlength="255" placeholder="${category.CAT_NAME}"></div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="labels">Danh mục</label>
+                                            <div class="checkbox pl-0">
+                                                <select name="room" class="w-50">
+                                                    <c:forEach items="${rooms}" var="room">
+                                                        <c:choose>
+                                                            <c:when test="${category.ROOM.ROOM_ID == room.ROOM_ID}">
+                                                                <option value="${room.ROOM_ID}" selected="selected">${room.ROOM_NAME}</option>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <option value="${room.ROOM_ID}">${room.ROOM_NAME}</option>
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                    </c:forEach>
+                                                </select>
+                                            </div>
+                                        </div>
                                         <div class="col-md-12">
                                             <label class="labels">Mô tả</label>
                                             <br>

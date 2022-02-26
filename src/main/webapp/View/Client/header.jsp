@@ -30,43 +30,45 @@
                         <li class="dropdown show">
                             <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="">Phòng Khách</a>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                <li class="dropdown-item"><a href="#">Bộ salon gỗ</a></li>
-                                <li class="dropdown-item"><a href="#">Kệ tivi</a></li>
-                                <li class="dropdown-item"><a href="#">Đồ mỹ nghệ</a></li>
+                                <c:forEach items="${sessionScope.lvrCategories}" var="lvrCategory">
+                                    <li class="dropdown-item"><a href="${pageContext.request.contextPath}/products/category?id=${lvrCategory.CAT_ID}">${lvrCategory.CAT_NAME}</a></li>
+                                </c:forEach>
                             </ul>
                         </li>
 
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown" data-delay="dropdown" href="">Phòng Bếp</a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Bộ bàn ăn</a></li>
-                                <li><a href="#">Tủ kệ bếp</a></li>
+                        <li class="dropdown show">
+                            <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="">Phòng Bếp</a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <c:forEach items="${sessionScope.kitCategories}" var="kitCategory">
+                                    <li class="dropdown-item"><a href="${pageContext.request.contextPath}/products/category?id=${kitCategory.CAT_ID}">${kitCategory.CAT_NAME}</a></li>
+                                </c:forEach>
                             </ul>
                         </li>
 
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown" data-delay="dropdown" href="">Phòng Ngủ</a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Bộ giường ngủ</a></li>
-                                <li><a href="#">Tủ quần áo</a></li>
-                                <li><a href="#">Đồ mỹ nghệ</a></li>
+                        <li class="dropdown show">
+                            <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="">Phòng Ngủ</a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <c:forEach items="${sessionScope.bedCategories}" var="bedCategory">
+                                    <li class="dropdown-item"><a href="${pageContext.request.contextPath}/products/category?id=${bedCategory.CAT_ID}">${bedCategory.CAT_NAME}</a></li>
+                                </c:forEach>
                             </ul>
                         </li>
 
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown" data-delay="dropdown" href="">Văn Phòng</a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Kệ giày dép</a></li>
-                                <li><a href="#">Bàn làm việc</a></li>
-                                <li><a href="#">Ghế văn phòng</a></li>
+                        <li class="dropdown show">
+                            <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="">Văn Phòng</a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <c:forEach items="${sessionScope.offCategories}" var="offCategory">
+                                    <li class="dropdown-item"><a href="${pageContext.request.contextPath}/products/category?id=${offCategory.CAT_ID}">${offCategory.CAT_NAME}</a></li>
+                                </c:forEach>
                             </ul>
                         </li>
 
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown" data-delay="dropdown" href="">Phòng Thờ</a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Bàn thờ gỗ</a></li>
-                                <li><a href="#">Bàn thờ Ông Địa</a></li>
+                        <li class="dropdown show">
+                            <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="">Phòng Thờ</a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <c:forEach items="${sessionScope.altCategories}" var="altCategory">
+                                    <li class="dropdown-item"><a href="${pageContext.request.contextPath}/products/category?id=${altCategory.CAT_ID}">${altCategory.CAT_NAME}</a></li>
+                                </c:forEach>
                             </ul>
                         </li>
                     </ul>

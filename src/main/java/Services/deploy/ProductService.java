@@ -39,17 +39,22 @@ public class ProductService implements Services.ProductService {
     }
 
     @Override
-    public List<Product> searchByCategory(String CAT) {
-        return productDao.searchByCategory(CAT);
+    public List<Product> getProductByCategory(String CAT_ID) {
+        return productDao.getProductByCategory(CAT_ID);
     }
 
     @Override
-    public List<Product> searchByBrand(String BRA) {
-        return productDao.searchByBrand(BRA);
+    public List<Product> getProductByBrand(String BRA_ID) {
+        return productDao.getProductByBrand(BRA_ID);
     }
 
     @Override
     public boolean checkExistID(String PRO_ID) {
         return productDao.checkExistID(PRO_ID);
+    }
+
+    @Override
+    public int countProduct(String CAT_ID, String BRA_ID) {
+        return productDao.countProduct(CAT_ID, BRA_ID);
     }
 }

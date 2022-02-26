@@ -34,6 +34,11 @@ public class CategoryService implements Services.CategoryService {
     }
 
     @Override
+    public List<Category> getCategoryByRoom(String ROOM_ID) {
+        return categoryDao.getCategoryByRoom(ROOM_ID);
+    }
+
+    @Override
     public List<Category> searchByName(String NAME) {
         return categoryDao.searchByName(NAME);
     }
