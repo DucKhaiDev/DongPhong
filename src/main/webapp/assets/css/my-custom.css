@@ -235,6 +235,11 @@ input[type="checkbox"] {
     object-fit: cover;
 }
 
+img.modal-product-image {
+    height: 520px;
+    object-fit: cover;
+}
+
 .product-name {
     overflow: hidden;
     text-overflow: ellipsis;

@@ -14,8 +14,8 @@ import java.util.List;
 
 @WebServlet(name = "ProductListByCategory", value = "/products/category")
 public class ProductListByCategory extends HttpServlet {
-    private ProductService productService = new ProductService();
-    private CategoryService categoryService = new CategoryService();
+    private final ProductService productService = new ProductService();
+    private final CategoryService categoryService = new CategoryService();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -23,6 +23,25 @@ public class ProductListByCategory extends HttpServlet {
         Category category = categoryService.getCategory(CAT_ID);
         request.setAttribute("category", category);
         List<Product> products = productService.getProductByCategory(CAT_ID);
+
+        //Lọc thương hiệu
+        String brands = request.getParameter("brand");
+        if (brands != null && !brands.trim().isEmpty()) {
+            products = productService.filterProductByBrand(products, brands);
+        }
+
+        //Lọc giá
+        String price = request.getParameter("price");
+        if (price != null && !price.trim().isEmpty()) {
+            products = productService.filterProductByPrice(products, price);
+        }
+
+        //Lọc số sao đánh giá
+        String stars = request.getParameter("stars-rating");
+        if (stars != null && !stars.trim().isEmpty()) {
+            products = productService.filterProductByStars(products, stars);
+        }
+
         request.setAttribute("products", products);
         request.getRequestDispatcher(Constant.Path.PRODUCT_LIST_BY_CATEGORY).forward(request, response);
     }

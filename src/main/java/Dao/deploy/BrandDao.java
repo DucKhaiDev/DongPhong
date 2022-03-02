@@ -98,7 +98,7 @@ public class BrandDao implements Dao.BrandDao {
         conn = DBConnect.getConnection();
 
         try {
-            ps = conn.prepareStatement("SELECT * FROM [BRAND]");
+            ps = conn.prepareStatement("SELECT * FROM [BRAND] ORDER BY BRA_ID");
 
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -126,7 +126,7 @@ public class BrandDao implements Dao.BrandDao {
         conn = DBConnect.getConnection();
 
         try {
-            ps = conn.prepareStatement("SELECT * FROM [BRAND] WHERE BRA_NAME LIKE ?");
+            ps = conn.prepareStatement("SELECT * FROM [BRAND] WHERE BRA_NAME LIKE ? ORDER BY BRA_NAME ASC");
             ps.setString(1, "%" + NAME + "%");
 
             rs = ps.executeQuery();

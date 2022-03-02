@@ -300,7 +300,7 @@
                                                             <c:url var="imageUrl" value="/images/product-images?fname=${image.IMG_NAME}"/>
                                                             <div class="item-slick3" data-thumb="${imageUrl}">
                                                                 <div class="wrap-pic-w pos-relative">
-                                                                    <img src="${imageUrl}" alt="Hình ảnh sản phẩm">
+                                                                    <img class="modal-product-image" src="${imageUrl}" alt="Hình ảnh sản phẩm">
                                                                     <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="${imageUrl}">
                                                                         <i class="fa fa-expand"></i>
                                                                     </a>
@@ -506,10 +506,34 @@
 <!--===============================================================================================-->
 <script>
     $(function () {
+        var url = new URL(location.href);
+        var params = url.searchParams;
+
+        if (!params.has('brand')) {
+            $('input[name="brand"]').prop('checked', false).each(function () {
+                sessionStorage.removeItem(this.id);
+            });
+        }
+
+        if (!params.has('price')) {
+            $('input[name="price"]').prop('checked', false).each(function () {
+                sessionStorage.removeItem(this.id);
+            });
+        }
+
+        if (!params.has('stars-rating')) {
+            $('input[name="stars-rating"]').prop('checked', false).each(function () {
+                sessionStorage.removeItem(this.id);
+            });
+        }
+
         $('#filter-reset').on('click', function () {
             $('.filter-input').prop('checked', false);
             sessionStorage.clear();
-            window.location = location.href.split('&')[0];
+            params.delete('brand');
+            params.delete('price');
+            params.delete('stars-rating');
+            window.location = url.href;
         });
     });
 </script>
@@ -542,7 +566,12 @@
                tempArray = [];
            }
 
-           window.location = location.href.split('&')[0] + seasoning;
+            var url = new URL(location.href);
+            var params = url.searchParams;
+            params.delete('brand');
+            params.delete('price');
+            params.delete('stars-rating');
+            window.location = url.href + seasoning;
        });
     });
 </script>
@@ -552,9 +581,9 @@
         const inputs = $('input[type="checkbox"], input[type="radio"]');
         inputs.each(function () {
             $(this)
-                .prop('checked', sessionStorage.getItem('${category.CAT_ID}-' + this.id) === 'true')
+                .prop('checked', sessionStorage.getItem(this.id) === 'true')
                 .on('change', function () {
-                    sessionStorage.setItem('${category.CAT_ID}-' + this.id, this.checked)
+                    sessionStorage.setItem(this.id, this.checked)
                 })
                 .trigger('change');
         });

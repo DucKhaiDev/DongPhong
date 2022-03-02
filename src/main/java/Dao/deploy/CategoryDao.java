@@ -104,7 +104,7 @@ public class CategoryDao implements Dao.CategoryDao {
         conn = DBConnect.getConnection();
 
         try {
-            ps = conn.prepareStatement("SELECT * FROM [CATEGORY]");
+            ps = conn.prepareStatement("SELECT * FROM [CATEGORY] ORDER BY CAT_ID ASC");
 
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -133,7 +133,7 @@ public class CategoryDao implements Dao.CategoryDao {
         conn = DBConnect.getConnection();
 
         try {
-            ps = conn.prepareStatement("SELECT * FROM [CATEGORY] WHERE ROOM_ID = ? ORDER BY CAT_NAME ASC");
+            ps = conn.prepareStatement("SELECT * FROM [CATEGORY] WHERE ROOM_ID = ? ORDER BY CAT_ID ASC");
             ps.setString(1, ROOM_ID);
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -162,7 +162,7 @@ public class CategoryDao implements Dao.CategoryDao {
         conn = DBConnect.getConnection();
 
         try {
-            ps = conn.prepareStatement("SELECT * FROM [CATEGORY] WHERE CAT_NAME LIKE ?");
+            ps = conn.prepareStatement("SELECT * FROM [CATEGORY] WHERE CAT_NAME LIKE ? ORDER BY CAT_ID ASC");
             ps.setString(1, "%" + NAME + "%");
 
             rs = ps.executeQuery();

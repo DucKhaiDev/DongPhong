@@ -44,7 +44,7 @@ public class RoomDao implements Dao.RoomDao {
         conn = DBConnect.getConnection();
 
         try {
-            ps = conn.prepareStatement("SELECT * FROM [ROOM]");
+            ps = conn.prepareStatement("SELECT * FROM [ROOM] ORDER BY ROOM_ID ASC");
             rs = ps.executeQuery();
             while (rs.next()) {
                 Room room = new Room();

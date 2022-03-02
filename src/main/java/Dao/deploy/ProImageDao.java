@@ -147,7 +147,7 @@ public class ProImageDao implements Dao.ProImageDao {
         List<ProImage> images = new ArrayList<>();
 
         try {
-            ps = conn.prepareStatement("SELECT * FROM [PROIMAGE]");
+            ps = conn.prepareStatement("SELECT * FROM [PROIMAGE] ORDER BY IMG_ID ASC");
 
             rs = ps.executeQuery();
             while (rs.next()) {

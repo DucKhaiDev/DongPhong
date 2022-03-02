@@ -189,7 +189,7 @@ public class UserDao implements Dao.UserDao {
         conn = DBConnect.getConnection();
 
         try {
-            ps = conn.prepareStatement("SELECT * FROM [USER]");
+            ps = conn.prepareStatement("SELECT * FROM [USER] ORDER BY USER_ID ASC");
 
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -224,7 +224,7 @@ public class UserDao implements Dao.UserDao {
         conn = DBConnect.getConnection();
 
         try {
-            ps = conn.prepareStatement("SELECT * FROM [USER] WHERE USERNAME LIKE ?");
+            ps = conn.prepareStatement("SELECT * FROM [USER] WHERE USERNAME LIKE ? ORDER BY USER_ID ASC");
             ps.setString(1, "%" + NAME + "%");
 
             rs = ps.executeQuery();

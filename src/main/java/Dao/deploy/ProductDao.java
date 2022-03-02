@@ -121,7 +121,7 @@ public class ProductDao implements Dao.ProductDao {
         conn = DBConnect.getConnection();
 
         try {
-            ps = conn.prepareStatement("SELECT * FROM [PRODUCT]");
+            ps = conn.prepareStatement("SELECT * FROM [PRODUCT] ORDER BY PRO_ID ASC");
 
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -155,7 +155,7 @@ public class ProductDao implements Dao.ProductDao {
         conn = DBConnect.getConnection();
 
         try {
-            ps = conn.prepareStatement("SELECT * FROM [PRODUCT] WHERE PRO_NAME LIKE ?");
+            ps = conn.prepareStatement("SELECT * FROM [PRODUCT] WHERE PRO_NAME LIKE ? ORDER BY PRO_ID ASC");
             ps.setString(1, "%" + NAME + "%");
 
             rs = ps.executeQuery();
@@ -190,7 +190,7 @@ public class ProductDao implements Dao.ProductDao {
         conn = DBConnect.getConnection();
 
         try {
-            ps = conn.prepareStatement("SELECT * FROM [PRODUCT] WHERE CAT_ID = ?");
+            ps = conn.prepareStatement("SELECT * FROM [PRODUCT] WHERE CAT_ID = ? ORDER BY PRO_ID ASC");
             ps.setString(1, CAT_ID);
 
             rs = ps.executeQuery();
@@ -225,7 +225,7 @@ public class ProductDao implements Dao.ProductDao {
         conn = DBConnect.getConnection();
 
         try {
-            ps = conn.prepareStatement("SELECT * FROM [PRODUCT] WHERE BRA_ID = ?");
+            ps = conn.prepareStatement("SELECT * FROM [PRODUCT] WHERE BRA_ID = ? ORDER BY PRO_ID ASC");
             ps.setString(1, BRA_ID);
 
             rs = ps.executeQuery();
