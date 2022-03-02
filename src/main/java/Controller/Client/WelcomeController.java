@@ -20,24 +20,35 @@ public class WelcomeController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ReleaseMemory.deleteUnusedImg();
+        ResponsiveToInterruption deleteUnusedImg = new ResponsiveToInterruption();
+        deleteUnusedImg.start();
+        deleteUnusedImg.interrupt();
 
-        HttpSession session = request.getSession();
+        ServletContext context = request.getServletContext();
 
         List<Category> lvrCategories = categoryService.getCategoryByRoom("LVR");
-        session.setAttribute("lvrCategories", lvrCategories);
+        context.setAttribute("lvrCategories", lvrCategories);
         List<Category> kitCategories = categoryService.getCategoryByRoom("KIT");
-        session.setAttribute("kitCategories", kitCategories);
+        context.setAttribute("kitCategories", kitCategories);
         List<Category> bedCategories = categoryService.getCategoryByRoom("BED");
-        session.setAttribute("bedCategories", bedCategories);
+        context.setAttribute("bedCategories", bedCategories);
         List<Category> offCategories = categoryService.getCategoryByRoom("OFF");
-        session.setAttribute("offCategories", offCategories);
+        context.setAttribute("offCategories", offCategories);
         List<Category> altCategories = categoryService.getCategoryByRoom("ALT");
-        session.setAttribute("altCategories", altCategories);
+        context.setAttribute("altCategories", altCategories);
 
         List<Brand> brands = brandService.getAll();
-        session.setAttribute("brands", brands);
+        context.setAttribute("brands", brands);
 
         request.getRequestDispatcher(Constant.Path.HOME).forward(request, response);
+    }
+
+    static class ResponsiveToInterruption extends Thread {
+        @Override
+        public void run() {
+            while (!Thread.currentThread().isInterrupted()) {
+                ReleaseMemory.deleteUnusedImg();
+            }
+        }
     }
 }

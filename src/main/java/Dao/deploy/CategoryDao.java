@@ -83,9 +83,9 @@ public class CategoryDao implements Dao.CategoryDao {
             rs = ps.executeQuery();
 
             rs.next();
-            category.setCAT_ID(rs.getString("CAT_ID"));
+            category.setCAT_ID(rs.getString("CAT_ID").trim());
             category.setCAT_NAME(rs.getString("CAT_NAME"));
-            category.setROOM(roomService.getRoom(rs.getString("ROOM_ID")));
+            category.setROOM(roomService.getRoom(rs.getString("ROOM_ID").trim()));
             category.setCAT_DES(rs.getString("CAT_DES"));
         } catch (SQLException e) {
             e.printStackTrace();
@@ -109,9 +109,9 @@ public class CategoryDao implements Dao.CategoryDao {
             rs = ps.executeQuery();
             while (rs.next()) {
                 Category category = new Category();
-                category.setCAT_ID(rs.getString("CAT_ID"));
+                category.setCAT_ID(rs.getString("CAT_ID").trim());
                 category.setCAT_NAME(rs.getString("CAT_NAME"));
-                category.setROOM(roomService.getRoom(rs.getString("ROOM_ID")));
+                category.setROOM(roomService.getRoom(rs.getString("ROOM_ID").trim()));
                 category.setCAT_DES(rs.getString("CAT_DES"));
 
                 categories.add(category);
@@ -138,9 +138,9 @@ public class CategoryDao implements Dao.CategoryDao {
             rs = ps.executeQuery();
             while (rs.next()) {
                 Category category = new Category();
-                category.setCAT_ID(rs.getString("CAT_ID"));
+                category.setCAT_ID(rs.getString("CAT_ID").trim());
                 category.setCAT_NAME(rs.getString("CAT_NAME"));
-                category.setROOM(roomService.getRoom(rs.getString("ROOM_ID")));
+                category.setROOM(roomService.getRoom(rs.getString("ROOM_ID").trim()));
                 category.setCAT_DES(rs.getString("CAT_DES"));
 
                 categories.add(category);
@@ -168,9 +168,9 @@ public class CategoryDao implements Dao.CategoryDao {
             rs = ps.executeQuery();
             while (rs.next()) {
                 Category category = new Category();
-                category.setCAT_ID(rs.getString("CAT_ID"));
+                category.setCAT_ID(rs.getString("CAT_ID").trim());
                 category.setCAT_NAME(rs.getString("CAT_NAME"));
-                category.setROOM(roomService.getRoom(rs.getString("ROOM_ID")));
+                category.setROOM(roomService.getRoom(rs.getString("ROOM_ID").trim()));
                 category.setCAT_DES(rs.getString("CAT_DES"));
 
                 categories.add(category);

@@ -486,22 +486,23 @@ line-height: 1.428571429;
 }
 
 .ct-button {
-    background: #333333;
+    background: #2b1f18;
     box-shadow: none;
     border: none
 }
 
 .ct-button:hover {
-    background: #6c7ae0
+    color: #695444;
+    background: #cfcecc;
 }
 
 .ct-button:focus {
-    background: #6c7ae0;
     box-shadow: none
 }
 
 .ct-button:active {
-    background-color: #6c7ae0;
+    color: #695444;
+    background-color: #cfcecc;
     box-shadow: none
 }
 

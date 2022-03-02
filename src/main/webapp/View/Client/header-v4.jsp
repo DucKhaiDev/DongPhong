@@ -30,7 +30,7 @@
                         <li class="dropdown show">
                             <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="">Phòng Khách</a>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                <c:forEach items="${sessionScope.lvrCategories}" var="lvrCategory">
+                                <c:forEach items="${applicationScope.lvrCategories}" var="lvrCategory">
                                     <li class="dropdown-item"><a href="${pageContext.request.contextPath}/products/category?id=${lvrCategory.CAT_ID}">${lvrCategory.CAT_NAME}</a></li>
                                 </c:forEach>
                             </ul>
@@ -39,7 +39,7 @@
                         <li class="dropdown show">
                             <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="">Phòng Bếp</a>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                <c:forEach items="${sessionScope.kitCategories}" var="kitCategory">
+                                <c:forEach items="${applicationScope.kitCategories}" var="kitCategory">
                                     <li class="dropdown-item"><a href="${pageContext.request.contextPath}/products/category?id=${kitCategory.CAT_ID}">${kitCategory.CAT_NAME}</a></li>
                                 </c:forEach>
                             </ul>
@@ -48,7 +48,7 @@
                         <li class="dropdown show">
                             <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="">Phòng Ngủ</a>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                <c:forEach items="${sessionScope.bedCategories}" var="bedCategory">
+                                <c:forEach items="${applicationScope.bedCategories}" var="bedCategory">
                                     <li class="dropdown-item"><a href="${pageContext.request.contextPath}/products/category?id=${bedCategory.CAT_ID}">${bedCategory.CAT_NAME}</a></li>
                                 </c:forEach>
                             </ul>
@@ -57,7 +57,7 @@
                         <li class="dropdown show">
                             <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="">Văn Phòng</a>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                <c:forEach items="${sessionScope.offCategories}" var="offCategory">
+                                <c:forEach items="${applicationScope.offCategories}" var="offCategory">
                                     <li class="dropdown-item"><a href="${pageContext.request.contextPath}/products/category?id=${offCategory.CAT_ID}">${offCategory.CAT_NAME}</a></li>
                                 </c:forEach>
                             </ul>
@@ -66,7 +66,7 @@
                         <li class="dropdown show">
                             <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="">Phòng Thờ</a>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                <c:forEach items="${sessionScope.altCategories}" var="altCategory">
+                                <c:forEach items="${applicationScope.altCategories}" var="altCategory">
                                     <li class="dropdown-item"><a href="${pageContext.request.contextPath}/products/category?id=${altCategory.CAT_ID}">${altCategory.CAT_NAME}</a></li>
                                 </c:forEach>
                             </ul>

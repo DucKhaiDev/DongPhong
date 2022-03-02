@@ -78,7 +78,7 @@ public class BrandDao implements Dao.BrandDao {
             rs = ps.executeQuery();
 
             rs.next();
-            brand.setBRA_ID(rs.getString("BRA_ID"));
+            brand.setBRA_ID(rs.getString("BRA_ID").trim());
             brand.setBRA_NAME(rs.getString("BRA_NAME"));
             brand.setBRA_DES(rs.getString("BRA_DES"));
         } catch (SQLException e) {
@@ -103,7 +103,7 @@ public class BrandDao implements Dao.BrandDao {
             rs = ps.executeQuery();
             while (rs.next()) {
                 Brand brand = new Brand();
-                brand.setBRA_ID(rs.getString("BRA_ID"));
+                brand.setBRA_ID(rs.getString("BRA_ID").trim());
                 brand.setBRA_NAME(rs.getString("BRA_NAME"));
                 brand.setBRA_DES(rs.getString("BRA_DES"));
 
@@ -132,7 +132,7 @@ public class BrandDao implements Dao.BrandDao {
             rs = ps.executeQuery();
             while (rs.next()) {
                 Brand brand = new Brand();
-                brand.setBRA_ID(rs.getString("BRA_ID"));
+                brand.setBRA_ID(rs.getString("BRA_ID").trim());
                 brand.setBRA_NAME(rs.getString("BRA_NAME"));
                 brand.setBRA_DES(rs.getString("BRA_DES"));
 

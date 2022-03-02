@@ -6,6 +6,9 @@
 <%@ page import="Entity.Product" %>
 <%@ page import="java.text.NumberFormat" %>
 <%@ page import="java.math.RoundingMode" %>
+<%@ page import="Services.deploy.ProImageService" %>
+<%@ page import="java.util.List" %>
+<%@ page import="Entity.ProImage" %>
 <%--
   User: duckhaidev
   Date: 2/25/2022
@@ -68,7 +71,7 @@
                 <ul class="breadcrumb">
                     <li><a href="${pageContext.request.contextPath}">Trang chủ</a></li>
                     <li><a href="#">${category.ROOM.ROOM_NAME}</a></li>
-                    <li><a href="${pageContext.request.contextPath}/product?category=${category.CAT_ID}">${category.CAT_NAME}</a></li>
+                    <li><a href="${pageContext.request.contextPath}/products/category?id=${category.CAT_ID}">${category.CAT_NAME}</a></li>
                 </ul>
             </div>
 
@@ -115,18 +118,19 @@
                         <div id="collapse-1" class="panel-collapse collapse in show">
                             <div class="panel-body">
                                 <ul class="list-unstyled checkbox-list">
-                                    <c:forEach items="${sessionScope.brands}" var="brand">
+                                    <c:forEach items="${applicationScope.brands}" var="brand" varStatus="loop">
                                         <li><label class="checkbox">
-                                            <input type="checkbox" name="brandCheckbox"><i></i>${brand.BRA_NAME}
-                                                <small>
-                                                    <a>
-                                                        (<%
-                                                            String CAT_ID = ((Category) request.getAttribute("category")).getCAT_ID();
-                                                            String BRA_ID = ((Brand) pageContext.getAttribute("brand")).getBRA_ID();
-                                                            out.print(new ProductService().countProduct(CAT_ID, BRA_ID));
-                                                        %>)
-                                                    </a>
-                                                </small>
+                                            <c:set var="index" value="${loop.index + 1}"/>
+                                            <input id="brand-${index}" class="filter-input" type="checkbox" name="brand" value="${brand.BRA_ID}"><i></i>${brand.BRA_NAME}
+                                            <small>
+                                                <a>
+                                                    (<%
+                                                    String CAT_ID = ((Category) request.getAttribute("category")).getCAT_ID();
+                                                    String BRA_ID = ((Brand) pageContext.getAttribute("brand")).getBRA_ID();
+                                                    out.print(new ProductService().countProduct(CAT_ID, BRA_ID));
+                                                %>)
+                                                </a>
+                                            </small>
                                         </label></li>
                                     </c:forEach>
                                 </ul>
@@ -149,22 +153,22 @@
                             <div class="panel-body">
                                 <ul class="list-unstyled checkbox-list">
                                     <li><label class="checkbox">
-                                        <input type="checkbox" name="priceCheckbox"><i></i>< 10,000,000
+                                        <input id="price-1" class="filter-input" type="checkbox" name="price" value="lt10"><i></i>< 10,000,000
                                     </label></li>
                                     <li><label class="checkbox">
-                                        <input type="checkbox" name="priceCheckbox"><i></i>10,000,000 - 20,000,000
+                                        <input id="price-2" class="filter-input" type="checkbox" name="price" value="10t50"><i></i>10,000,000 - 50,000,000
                                     </label></li>
                                     <li><label class="checkbox">
-                                        <input type="checkbox" name="priceCheckbox"><i></i>20,000,000 - 50,000,000
+                                        <input id="price-3" class="filter-input" type="checkbox" name="price" value="50t100"><i></i>50,000,000 - 100,000,000
                                     </label></li>
                                     <li><label class="checkbox">
-                                        <input type="checkbox" name="priceCheckbox"><i></i>50,000,000 - 100,000,000
+                                        <input id="price-4" class="filter-input" type="checkbox" name="price" value="100t200"><i></i>100,000,000 - 200,000,000
                                     </label></li>
                                     <li><label class="checkbox">
-                                        <input type="checkbox" name="priceCheckbox"><i></i>100,000,000 - 500,000,000
+                                        <input id="price-5" class="filter-input" type="checkbox" name="price" value="200t500"><i></i>200,000,000 - 500,000,000
                                     </label></li>
                                     <li><label class="checkbox">
-                                        <input type="checkbox" name="priceCheckbox"><i></i>> 500,000,000
+                                        <input id="price-6" class="filter-input" type="checkbox" name="price" value="mt500"><i></i>> 500,000,000
                                     </label></li>
                                 </ul>
                             </div>
@@ -185,15 +189,15 @@
                         <div id="collapse-3" class="panel-collapse collapse in show">
                             <div class="panel-body d-flex justify-content-center">
                                 <div class="stars-ratings stars-ratings-label">
-                                    <input type="radio" name="stars-rating" id="stars-rating-5">
+                                    <input class="filter-input" type="radio" name="stars-rating" id="stars-rating-5" value="5">
                                     <label for="stars-rating-5"><i class="fa fa-star"></i></label>
-                                    <input type="radio" name="stars-rating" id="stars-rating-4">
+                                    <input class="filter-input" type="radio" name="stars-rating" id="stars-rating-4" value="4">
                                     <label for="stars-rating-4"><i class="fa fa-star"></i></label>
-                                    <input type="radio" name="stars-rating" id="stars-rating-3">
+                                    <input class="filter-input" type="radio" name="stars-rating" id="stars-rating-3" value="3">
                                     <label for="stars-rating-3"><i class="fa fa-star"></i></label>
-                                    <input type="radio" name="stars-rating" id="stars-rating-2">
+                                    <input class="filter-input" type="radio" name="stars-rating" id="stars-rating-2" value="2">
                                     <label for="stars-rating-2"><i class="fa fa-star"></i></label>
-                                    <input type="radio" name="stars-rating" id="stars-rating-1">
+                                    <input class="filter-input" type="radio" name="stars-rating" id="stars-rating-1" value="1">
                                     <label for="stars-rating-1"><i class="fa fa-star"></i></label>
                                 </div>
                                 <div class="clearfix"></div>
@@ -201,17 +205,20 @@
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-12"><button id="filter-reset" class="btn btn-primary filter-button w-full" type="reset">ĐẶT LẠI</button></div>
+                </div>
             </div>
 
             <div class="col-md-9">
                 <div class="row">
-                    <c:forEach items="${products}" var="product">
+                    <c:forEach items="${products}" var="product" varStatus="loop">
                         <div class="col-sm-6 col-md-4 col-lg-4 p-b-35 women">
                             <div class="block2">
                                 <div class="block2-pic hov-img0">
                                     <c:url value="/images/product-images?fname=${product.getProReIMG()}" var="productImg"/>
                                     <img class="product-img" src="${productImg}" alt="Hình ảnh">
-                                    <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">Xem</a>
+                                    <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal${loop.index + 1}">Xem</a>
                                 </div>
                                 <div class="block2-txt flex-w flex-t p-t-14">
                                     <div class="block2-txt-child1 flex-col-l ">
@@ -228,14 +235,14 @@
                                     <div class="block2-txt-child1 flex-col-l ">
                                         <div class="d-flex">
                                             <span class="stext-105 cl3 product-price m-r-12">
-                                            <%
-                                                BigDecimal price = new BigDecimal(((Product) pageContext.getAttribute("product")).getPRO_PRICE());
-                                                Locale vie = new Locale("vi", "VN");
-                                                NumberFormat dongFormat = NumberFormat.getCurrencyInstance(vie);
-                                                String showPrice = dongFormat.format(price);
-                                                out.print("<td>" + showPrice + "</td>");
-                                            %>
-                                        </span>
+                                                <%
+                                                    BigDecimal price = new BigDecimal(((Product) pageContext.getAttribute("product")).getPRO_PRICE());
+                                                    Locale vie = new Locale("vi", "VN");
+                                                    NumberFormat dongFormat = NumberFormat.getCurrencyInstance(vie);
+                                                    String showPrice = dongFormat.format(price);
+                                                    out.print("<td>" + showPrice + "</td>");
+                                                %>
+                                            </span>
                                             <%
                                                 BigDecimal cost = new BigDecimal(((Product) pageContext.getAttribute("product")).getPRO_COST());
                                                 String showCost = dongFormat.format(cost);
@@ -250,17 +257,114 @@
                                     <%
                                         boolean b = price.compareTo(cost) < 0;
                                         request.setAttribute("b", b);
+
+                                        BigDecimal percentage = new BigDecimal(0);
                                     %>
                                     <c:if test="${b}">
                                         <div class="block2-txt-child2 flex-r p-t-3">
                                         <span class="stext-105 cl3 product-sale-off">
                                             <%
-                                                BigDecimal percentage = ((cost.subtract(price)).divide(cost, 2, RoundingMode.HALF_UP)).multiply(new BigDecimal("100")).setScale(0, RoundingMode.UP);
+                                                percentage = ((cost.subtract(price)).divide(cost, 2, RoundingMode.HALF_UP)).multiply(new BigDecimal("100")).setScale(0, RoundingMode.UP);
                                                 out.print("(-" + percentage + "%)");
                                             %>
                                         </span>
                                         </div>
                                     </c:if>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Modal${loop.index + 1} -->
+                        <div class="wrap-modal1 js-modal${loop.index + 1} p-t-60 p-b-20">
+                            <div class="overlay-modal1 js-hide-modal${loop.index + 1}"></div>
+
+                            <div class="container">
+                                <div class="bg0 p-t-60 p-b-30 p-lr-15-lg how-pos3-parent">
+                                    <button class="how-pos3 hov3 trans-04 js-hide-modal${loop.index + 1}">
+                                        <img src="${url}/images/icons/icon-close.png" alt="CLOSE">
+                                    </button>
+
+                                    <div class="row">
+                                        <div class="col-md-6 col-lg-7 p-b-30">
+                                            <div class="p-l-25 p-r-30 p-lr-0-lg">
+                                                <div class="wrap-slick3 flex-sb flex-w">
+                                                    <div class="wrap-slick3-dots"></div>
+                                                    <div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
+
+                                                    <div class="slick3 gallery-lb">
+                                                        <%
+                                                            ProImageService imageService = new ProImageService();
+                                                            List<ProImage> images = imageService.getProImage(((Product) pageContext.getAttribute("product")).getPRO_ID());
+                                                            request.setAttribute("images", images);
+                                                        %>
+                                                        <c:forEach items="${images}" var="image">
+                                                            <c:url var="imageUrl" value="/images/product-images?fname=${image.IMG_NAME}"/>
+                                                            <div class="item-slick3" data-thumb="${imageUrl}">
+                                                                <div class="wrap-pic-w pos-relative">
+                                                                    <img src="${imageUrl}" alt="Hình ảnh sản phẩm">
+                                                                    <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="${imageUrl}">
+                                                                        <i class="fa fa-expand"></i>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </c:forEach>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6 col-lg-5 p-b-30">
+                                            <div class="p-r-50 p-t-5 p-lr-0-lg">
+                                                <h4 class="mtext-105 cl2 js-name-detail p-b-14">${product.PRO_NAME}</h4>
+                                                <span class="product-price mtext-106 cl2 m-r-16"><% out.print(showPrice); %></span>
+                                                <span class="product-cost mtext-106 cl2 m-r-16"><% out.print(showCost); %></span>
+                                                <span class="product-sale-off mtext-106 cl2"><% out.print("(-" + percentage + "%)"); %></span>
+                                                <p class="stext-102 cl3 p-t-23">${product.PRO_DES}</p>
+                                                <!--  -->
+                                                <div class="p-t-33">
+                                                    <div class="flex-w flex-r-m p-b-10">
+                                                        <div class="size-204 flex-w flex-m respon6-next">
+                                                            <div class="wrap-num-product flex-w m-r-20 m-tb-10">
+                                                                <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
+                                                                    <i class="fs-16 zmdi zmdi-minus"></i>
+                                                                </div>
+
+                                                                <input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product" value="1">
+
+                                                                <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
+                                                                    <i class="fs-16 zmdi zmdi-plus"></i>
+                                                                </div>
+                                                            </div>
+
+                                                            <button class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+                                                                Thêm vào giỏ hàng
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!--  -->
+                                                <div class="flex-w flex-m p-l-100 p-t-40 respon7">
+                                                    <div class="flex-m bor9 p-r-10 m-r-11">
+                                                        <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100" data-tooltip="Add to Wishlist">
+                                                            <i class="zmdi zmdi-favorite"></i>
+                                                        </a>
+                                                    </div>
+
+                                                    <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Facebook">
+                                                        <i class="fab fa-facebook"></i>
+                                                    </a>
+
+                                                    <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Twitter">
+                                                        <i class="fab fa-twitter"></i>
+                                                    </a>
+
+                                                    <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Google Plus">
+                                                        <i class="fab fa-google-plus"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -279,163 +383,8 @@
     </div>
 </div>
 
-
 <!-- Footer -->
 <jsp:include page="footer.jsp"/>
-
-<!-- Modal1 -->
-<div class="wrap-modal1 js-modal1 p-t-60 p-b-20">
-    <div class="overlay-modal1 js-hide-modal1"></div>
-
-    <div class="container">
-        <div class="bg0 p-t-60 p-b-30 p-lr-15-lg how-pos3-parent">
-            <button class="how-pos3 hov3 trans-04 js-hide-modal1">
-                <img src="${url}/images/icons/icon-close.png" alt="CLOSE">
-            </button>
-
-            <div class="row">
-                <div class="col-md-6 col-lg-7 p-b-30">
-                    <div class="p-l-25 p-r-30 p-lr-0-lg">
-                        <div class="wrap-slick3 flex-sb flex-w">
-                            <div class="wrap-slick3-dots"></div>
-                            <div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
-
-                            <div class="slick3 gallery-lb">
-                                <div class="item-slick3" data-thumb="images/product-detail-01.jpg">
-                                    <div class="wrap-pic-w pos-relative">
-                                        <img src="${url}/images/product-detail-01.jpg" alt="IMG-PRODUCT">
-
-                                        <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="${url}/images/product-detail-01.jpg">
-                                            <i class="fa fa-expand"></i>
-                                        </a>
-                                    </div>
-                                </div>
-
-                                <div class="item-slick3" data-thumb="images/product-detail-02.jpg">
-                                    <div class="wrap-pic-w pos-relative">
-                                        <img src="${url}/images/product-detail-02.jpg" alt="IMG-PRODUCT">
-
-                                        <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="${url}/images/product-detail-02.jpg">
-                                            <i class="fa fa-expand"></i>
-                                        </a>
-                                    </div>
-                                </div>
-
-                                <div class="item-slick3" data-thumb="images/product-detail-03.jpg">
-                                    <div class="wrap-pic-w pos-relative">
-                                        <img src="${url}/images/product-detail-03.jpg" alt="IMG-PRODUCT">
-
-                                        <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="${url}/images/product-detail-03.jpg">
-                                            <i class="fa fa-expand"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6 col-lg-5 p-b-30">
-                    <div class="p-r-50 p-t-5 p-lr-0-lg">
-                        <h4 class="mtext-105 cl2 js-name-detail p-b-14">
-                            Lightweight Jacket
-                        </h4>
-
-                        <span class="mtext-106 cl2">
-								$58.79
-							</span>
-
-                        <p class="stext-102 cl3 p-t-23">
-                            Nulla eget sem vitae eros pharetra viverra. Nam vitae luctus ligula. Mauris consequat ornare feugiat.
-                        </p>
-
-                        <!--  -->
-                        <div class="p-t-33">
-                            <div class="flex-w flex-r-m p-b-10">
-                                <div class="size-203 flex-c-m respon6">
-                                    Size
-                                </div>
-
-                                <div class="size-204 respon6-next">
-                                    <div class="rs1-select2 bor8 bg0">
-                                        <select class="js-select2" name="time">
-                                            <option>Choose an option</option>
-                                            <option>Size S</option>
-                                            <option>Size M</option>
-                                            <option>Size L</option>
-                                            <option>Size XL</option>
-                                        </select>
-                                        <div class="dropDownSelect2"></div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="flex-w flex-r-m p-b-10">
-                                <div class="size-203 flex-c-m respon6">
-                                    Color
-                                </div>
-
-                                <div class="size-204 respon6-next">
-                                    <div class="rs1-select2 bor8 bg0">
-                                        <select class="js-select2" name="time">
-                                            <option>Choose an option</option>
-                                            <option>Red</option>
-                                            <option>Blue</option>
-                                            <option>White</option>
-                                            <option>Grey</option>
-                                        </select>
-                                        <div class="dropDownSelect2"></div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="flex-w flex-r-m p-b-10">
-                                <div class="size-204 flex-w flex-m respon6-next">
-                                    <div class="wrap-num-product flex-w m-r-20 m-tb-10">
-                                        <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
-                                            <i class="fs-16 zmdi zmdi-minus"></i>
-                                        </div>
-
-                                        <input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product" value="1">
-
-                                        <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
-                                            <i class="fs-16 zmdi zmdi-plus"></i>
-                                        </div>
-                                    </div>
-
-                                    <button class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
-                                        Add to cart
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!--  -->
-                        <div class="flex-w flex-m p-l-100 p-t-40 respon7">
-                            <div class="flex-m bor9 p-r-10 m-r-11">
-                                <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100" data-tooltip="Add to Wishlist">
-                                    <i class="zmdi zmdi-favorite"></i>
-                                </a>
-                            </div>
-
-                            <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Facebook">
-                                <i class="fa fa-facebook"></i>
-                            </a>
-
-                            <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Twitter">
-                                <i class="fa fa-twitter"></i>
-                            </a>
-
-                            <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Google Plus">
-                                <i class="fa fa-google-plus"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 <!--===============================================================================================-->
 <script src="${url}/vendor/jquery/jquery-3.2.1.min.js"></script>
@@ -489,9 +438,9 @@
     });
 
     $('.js-addwish-b2').each(function(){
-        var nameProduct = $(this).parent().parent().find('.js-name-b2').jsp();
+        var nameProduct = $(this).parent().parent().find('.js-name-b2').html();
         $(this).on('click', function(){
-            swal(nameProduct, "is added to wishlist !", "success");
+            swal(nameProduct, "đã được thêm vào danh sách yêu thích!", "success");
 
             $(this).addClass('js-addedwish-b2');
             $(this).off('click');
@@ -499,10 +448,10 @@
     });
 
     $('.js-addwish-detail').each(function(){
-        var nameProduct = $(this).parent().parent().parent().find('.js-name-detail').jsp();
+        var nameProduct = $(this).parent().parent().parent().find('.js-name-detail').html();
 
         $(this).on('click', function(){
-            swal(nameProduct, "is added to wishlist !", "success");
+            swal(nameProduct, "đã được thêm vào danh sách yêu thích!", "success");
 
             $(this).addClass('js-addedwish-detail');
             $(this).off('click');
@@ -512,9 +461,9 @@
     /*---------------------------------------------*/
 
     $('.js-addcart-detail').each(function(){
-        var nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').jsp();
+        var nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();
         $(this).on('click', function(){
-            swal(nameProduct, "is added to cart !", "success");
+            swal(nameProduct, "đã được thêm vào giỏ hàng!", "success");
         });
     });
 
@@ -538,6 +487,79 @@
 </script>
 <!--===============================================================================================-->
 <script src="${url}/js/main.js"></script>
+<!--===============================================================================================-->
+<script>
+    $(function () {
+        <c:forEach items="${products}" varStatus="loop">
+            <!--show-modal${loop.index + 1}-->
+            $('.js-show-modal${loop.index + 1}').on('click',function(e){
+                e.preventDefault();
+                $('.js-modal${loop.index + 1}').addClass('show-modal');
+            });
+
+            $('.js-hide-modal${loop.index + 1}').on('click',function(){
+                $('.js-modal${loop.index + 1}').removeClass('show-modal');
+            });
+        </c:forEach>
+    });
+</script>
+<!--===============================================================================================-->
+<script>
+    $(function () {
+        $('#filter-reset').on('click', function () {
+            $('.filter-input').prop('checked', false);
+            sessionStorage.clear();
+            window.location = location.href.split('&')[0];
+        });
+    });
+</script>
+<!--===============================================================================================-->
+<script>
+    $(document).ready(function () {
+        $('input[type="checkbox"], input[type="radio"]').click(function (e) {
+            var seasoning = '', tempArray = [];
+            $('input[name="brand"]:checked').each(function () {
+               tempArray.push($(this).val());
+            });
+            if (tempArray.length !== 0) {
+                seasoning += '&brand=' + tempArray.toString();
+                tempArray = [];
+            }
+
+           $('input[name="price"]:checked').each(function () {
+               tempArray.push($(this).val());
+           });
+           if (tempArray.length !== 0) {
+               seasoning += '&price=' + tempArray.toString();
+               tempArray = [];
+           }
+
+           $('input[name="stars-rating"]:checked').each(function () {
+               tempArray.push($(this).val());
+           });
+           if (tempArray.length !== 0) {
+               seasoning += '&stars-rating=' + tempArray.toString();
+               tempArray = [];
+           }
+
+           window.location = location.href.split('&')[0] + seasoning;
+       });
+    });
+</script>
+<!--===============================================================================================-->
+<script>
+    $(function () {
+        const inputs = $('input[type="checkbox"], input[type="radio"]');
+        inputs.each(function () {
+            $(this)
+                .prop('checked', sessionStorage.getItem('${category.CAT_ID}-' + this.id) === 'true')
+                .on('change', function () {
+                    sessionStorage.setItem('${category.CAT_ID}-' + this.id, this.checked)
+                })
+                .trigger('change');
+        });
+    });
+</script>
 
 </body>
 </html>
