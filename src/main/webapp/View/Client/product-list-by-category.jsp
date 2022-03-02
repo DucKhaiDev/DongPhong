@@ -578,8 +578,7 @@
 <!--===============================================================================================-->
 <script>
     $(function () {
-        const inputs = $('input[type="checkbox"], input[type="radio"]');
-        inputs.each(function () {
+        $('input[type="checkbox"]').each(function () {
             $(this)
                 .prop('checked', sessionStorage.getItem(this.id) === 'true')
                 .on('change', function () {
@@ -587,6 +586,16 @@
                 })
                 .trigger('change');
         });
+
+        $('input[type="radio"]')
+            .each(function () {
+                $(this).prop('checked', sessionStorage.getItem(this.id) === 'true').trigger('change');
+            })
+            .on('click', function () {
+                $('input[type="radio"]').each(function () {
+                    sessionStorage.setItem(this.id, this.checked);
+                });
+            });
     });
 </script>
 
