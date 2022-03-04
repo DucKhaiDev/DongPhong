@@ -22,33 +22,21 @@ public class DBConnect {
         return conn;
     }
 
-    public static void closeResultSet(ResultSet rs) {
-        if (rs != null) {
-            try {
+    public static void closeAll(ResultSet rs, PreparedStatement ps, Connection conn) {
+        try {
+            if (rs != null) {
                 rs.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
             }
-        }
-    }
 
-    public static void closePreparedStatement(PreparedStatement ps) {
-        if (ps != null) {
-            try {
+            if (ps != null) {
                 ps.close();
-            } catch (SQLException ex) {
-                ex.printStackTrace();
             }
-        }
-    }
 
-    public static void closeConnection(Connection conn) {
-        if (conn != null) {
-            try {
+            if (conn != null) {
                 conn.close();
-            } catch (SQLException ex) {
-                ex.printStackTrace();
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 

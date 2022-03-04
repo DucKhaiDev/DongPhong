@@ -24,6 +24,26 @@ public class ProductListByCategory extends HttpServlet {
         request.setAttribute("category", category);
         List<Product> products = productService.getProductByCategory(CAT_ID);
 
+        //Tìm kiếm sản phẩm
+        String keyword = request.getParameter("search");
+        if (keyword != null && !keyword.trim().isEmpty()) {
+            products = productService.searchByNameInCategory(CAT_ID, keyword);
+        }
+
+        //Phân trang
+        int totalNumber = products.size();
+        request.setAttribute("totalNumber", totalNumber);
+        int pageSize = 12;
+        request.setAttribute("pageSize", pageSize);
+        String page = request.getParameter("page");
+        int pageNumber = 1;
+        if (page != null) {
+            pageNumber = Integer.parseInt(page);
+        }
+        int fromIndex = (pageNumber - 1) * pageSize;
+        int toIndex = fromIndex + pageSize;
+        products = products.subList(fromIndex, Math.min(toIndex, totalNumber));
+
         //Lọc thương hiệu
         String brands = request.getParameter("brand");
         if (brands != null && !brands.trim().isEmpty()) {

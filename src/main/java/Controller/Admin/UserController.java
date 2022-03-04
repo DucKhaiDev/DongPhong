@@ -12,12 +12,14 @@ import java.util.List;
 
 @WebServlet(name = "UserController", value = "/admin/user")
 public class UserController extends HttpServlet {
-    UserService userService = new UserService();
+    private final UserService userService = new UserService();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<User> users = userService.getAll();
         request.setAttribute("users", users);
+        int countAdmin = userService.countAdmin();
+        request.setAttribute("countAdmin", countAdmin);
         request.getRequestDispatcher(Constant.Path.ADMIN_USER).forward(request, response);
     }
 }

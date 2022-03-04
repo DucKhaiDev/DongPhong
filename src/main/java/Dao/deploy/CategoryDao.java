@@ -32,8 +32,7 @@ public class CategoryDao implements Dao.CategoryDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBConnect.closePreparedStatement(ps);
-            DBConnect.closeConnection(conn);
+            DBConnect.closeAll(rs, ps, conn);
         }
     }
 
@@ -51,8 +50,7 @@ public class CategoryDao implements Dao.CategoryDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBConnect.closePreparedStatement(ps);
-            DBConnect.closeConnection(conn);
+            DBConnect.closeAll(rs, ps, conn);
         }
     }
 
@@ -67,8 +65,7 @@ public class CategoryDao implements Dao.CategoryDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBConnect.closePreparedStatement(ps);
-            DBConnect.closeConnection(conn);
+            DBConnect.closeAll(rs, ps, conn);
         }
     }
 
@@ -90,9 +87,7 @@ public class CategoryDao implements Dao.CategoryDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBConnect.closeResultSet(rs);
-            DBConnect.closePreparedStatement(ps);
-            DBConnect.closeConnection(conn);
+            DBConnect.closeAll(rs, ps, conn);
         }
 
         return category;
@@ -119,9 +114,7 @@ public class CategoryDao implements Dao.CategoryDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBConnect.closeResultSet(rs);
-            DBConnect.closePreparedStatement(ps);
-            DBConnect.closeConnection(conn);
+            DBConnect.closeAll(rs, ps, conn);
         }
 
         return categories;
@@ -148,9 +141,7 @@ public class CategoryDao implements Dao.CategoryDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBConnect.closeResultSet(rs);
-            DBConnect.closePreparedStatement(ps);
-            DBConnect.closeConnection(conn);
+            DBConnect.closeAll(rs, ps, conn);
         }
 
         return categories;
@@ -178,9 +169,7 @@ public class CategoryDao implements Dao.CategoryDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBConnect.closeResultSet(rs);
-            DBConnect.closePreparedStatement(ps);
-            DBConnect.closeConnection(conn);
+            DBConnect.closeAll(rs, ps, conn);
         }
 
         return categories;
@@ -202,9 +191,7 @@ public class CategoryDao implements Dao.CategoryDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBConnect.closeResultSet(rs);
-            DBConnect.closePreparedStatement(ps);
-            DBConnect.closeConnection(conn);
+            DBConnect.closeAll(rs, ps, conn);
         }
 
         return exist;
@@ -225,9 +212,7 @@ public class CategoryDao implements Dao.CategoryDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBConnect.closeResultSet(rs);
-            DBConnect.closePreparedStatement(ps);
-            DBConnect.closeConnection(conn);
+            DBConnect.closeAll(rs, ps, conn);
         }
 
         return true;

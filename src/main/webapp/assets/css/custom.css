@@ -157,6 +157,11 @@ p {
     justify-content: center !important;
 }
 
+.justify-content-end {
+    -ms-flex-pack: end !important;
+    justify-content: end !important;
+}
+
 .mr-3 {
     margin-right: 1rem !important;
 }
@@ -176,6 +181,10 @@ p {
 .justify-content-end {
     -ms-flex-pack: end !important;
     justify-content: flex-end !important;
+}
+
+.w-fit-content {
+    width: fit-content !important;
 }
 /*==============================================
    DASHBOARD STYLES    

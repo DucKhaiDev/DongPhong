@@ -29,9 +29,7 @@ public class UserDao implements Dao.UserDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBConnect.closeResultSet(rs);
-            DBConnect.closePreparedStatement(ps);
-            DBConnect.closeConnection(conn);
+            DBConnect.closeAll(rs, ps, conn);
         }
         return 0;
     }
@@ -55,8 +53,7 @@ public class UserDao implements Dao.UserDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBConnect.closePreparedStatement(ps);
-            DBConnect.closeConnection(conn);
+            DBConnect.closeAll(rs, ps, conn);
         }
     }
 
@@ -80,8 +77,7 @@ public class UserDao implements Dao.UserDao {
          } catch (SQLException e) {
              e.printStackTrace();
          } finally {
-             DBConnect.closePreparedStatement(ps);
-             DBConnect.closeConnection(conn);
+             DBConnect.closeAll(rs, ps, conn);
          }
     }
 
@@ -96,8 +92,7 @@ public class UserDao implements Dao.UserDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBConnect.closePreparedStatement(ps);
-            DBConnect.closeConnection(conn);
+            DBConnect.closeAll(rs, ps, conn);
         }
     }
 
@@ -113,8 +108,7 @@ public class UserDao implements Dao.UserDao {
         } catch (SQLException ex) {
             ex.printStackTrace();
         } finally {
-            DBConnect.closePreparedStatement(ps);
-            DBConnect.closeConnection(conn);
+            DBConnect.closeAll(rs, ps, conn);
         }
     }
 
@@ -142,9 +136,7 @@ public class UserDao implements Dao.UserDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBConnect.closeResultSet(rs);
-            DBConnect.closePreparedStatement(ps);
-            DBConnect.closeConnection(conn);
+            DBConnect.closeAll(rs, ps, conn);
         }
 
         return user;
@@ -175,9 +167,7 @@ public class UserDao implements Dao.UserDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBConnect.closeResultSet(rs);
-            DBConnect.closePreparedStatement(ps);
-            DBConnect.closeConnection(conn);
+            DBConnect.closeAll(rs, ps, conn);
         }
 
         return user;
@@ -210,9 +200,7 @@ public class UserDao implements Dao.UserDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBConnect.closeResultSet(rs);
-            DBConnect.closePreparedStatement(ps);
-            DBConnect.closeConnection(conn);
+            DBConnect.closeAll(rs, ps, conn);
         }
 
         return users;
@@ -246,9 +234,7 @@ public class UserDao implements Dao.UserDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBConnect.closeResultSet(rs);
-            DBConnect.closePreparedStatement(ps);
-            DBConnect.closeConnection(conn);
+            DBConnect.closeAll(rs, ps, conn);
         }
 
         return users;
@@ -270,9 +256,7 @@ public class UserDao implements Dao.UserDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBConnect.closeResultSet(rs);
-            DBConnect.closePreparedStatement(ps);
-            DBConnect.closeConnection(conn);
+            DBConnect.closeAll(rs, ps, conn);
         }
 
         return exist;
@@ -294,9 +278,7 @@ public class UserDao implements Dao.UserDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBConnect.closeResultSet(rs);
-            DBConnect.closePreparedStatement(ps);
-            DBConnect.closeConnection(conn);
+            DBConnect.closeAll(rs, ps, conn);
         }
 
         return exist;
@@ -315,9 +297,7 @@ public class UserDao implements Dao.UserDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBConnect.closeResultSet(rs);
-            DBConnect.closePreparedStatement(ps);
-            DBConnect.closeConnection(conn);
+            DBConnect.closeAll(rs, ps, conn);
         }
 
         return count;

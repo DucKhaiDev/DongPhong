@@ -86,7 +86,14 @@
                                                 </td>
                                                 <td>
                                                     <a href="<c:url value="/admin/user/edit?id=${user.USER_ID}"/>" class="text-center">Sửa</a>&nbsp;|&nbsp;
-                                                    <a href="<c:url value="/admin/user/delete?id=${user.USER_ID}"/>" class="text-center">Xóa</a>
+                                                    <c:choose>
+                                                        <c:when test="${countAdmin < 2}">
+                                                            <a class="text-center isDisabled">Xóa</a>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <a href="<c:url value="/admin/user/delete?id=${user.USER_ID}"/>" class="text-center">Xóa</a>
+                                                        </c:otherwise>
+                                                    </c:choose>
                                                 </td>
                                             </tr>
                                         </c:forEach>

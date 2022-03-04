@@ -31,8 +31,7 @@ public class ProImageDao implements Dao.ProImageDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBConnect.closePreparedStatement(ps);
-            DBConnect.closeConnection(conn);
+            DBConnect.closeAll(rs, ps, conn);
         }
     }
 
@@ -50,8 +49,7 @@ public class ProImageDao implements Dao.ProImageDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBConnect.closePreparedStatement(ps);
-            DBConnect.closeConnection(conn);
+            DBConnect.closeAll(rs, ps, conn);
         }
     }
 
@@ -66,8 +64,7 @@ public class ProImageDao implements Dao.ProImageDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBConnect.closePreparedStatement(ps);
-            DBConnect.closeConnection(conn);
+            DBConnect.closeAll(rs, ps, conn);
         }
     }
 
@@ -82,8 +79,7 @@ public class ProImageDao implements Dao.ProImageDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBConnect.closePreparedStatement(ps);
-            DBConnect.closeConnection(conn);
+            DBConnect.closeAll(rs, ps, conn);
         }
     }
 
@@ -104,9 +100,7 @@ public class ProImageDao implements Dao.ProImageDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBConnect.closeResultSet(rs);
-            DBConnect.closePreparedStatement(ps);
-            DBConnect.closeConnection(conn);
+            DBConnect.closeAll(rs, ps, conn);
         }
 
         return image;
@@ -133,9 +127,7 @@ public class ProImageDao implements Dao.ProImageDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBConnect.closeResultSet(rs);
-            DBConnect.closePreparedStatement(ps);
-            DBConnect.closeConnection(conn);
+            DBConnect.closeAll(rs, ps, conn);
         }
 
         return images;
@@ -161,9 +153,7 @@ public class ProImageDao implements Dao.ProImageDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBConnect.closeResultSet(rs);
-            DBConnect.closePreparedStatement(ps);
-            DBConnect.closeConnection(conn);
+            DBConnect.closeAll(rs, ps, conn);
         }
 
         return images;

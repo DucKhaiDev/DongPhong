@@ -28,8 +28,7 @@ public class BrandDao implements Dao.BrandDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBConnect.closePreparedStatement(ps);
-            DBConnect.closeConnection(conn);
+            DBConnect.closeAll(rs, ps, conn);
         }
     }
 
@@ -46,8 +45,7 @@ public class BrandDao implements Dao.BrandDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBConnect.closePreparedStatement(ps);
-            DBConnect.closeConnection(conn);
+            DBConnect.closeAll(rs, ps, conn);
         }
     }
 
@@ -62,8 +60,7 @@ public class BrandDao implements Dao.BrandDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBConnect.closePreparedStatement(ps);
-            DBConnect.closeConnection(conn);
+            DBConnect.closeAll(rs, ps, conn);
         }
     }
 
@@ -84,9 +81,7 @@ public class BrandDao implements Dao.BrandDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBConnect.closeResultSet(rs);
-            DBConnect.closePreparedStatement(ps);
-            DBConnect.closeConnection(conn);
+            DBConnect.closeAll(rs, ps, conn);
         }
 
         return brand;
@@ -112,9 +107,7 @@ public class BrandDao implements Dao.BrandDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBConnect.closeResultSet(rs);
-            DBConnect.closePreparedStatement(ps);
-            DBConnect.closeConnection(conn);
+            DBConnect.closeAll(rs, ps, conn);
         }
 
         return brands;
@@ -141,9 +134,7 @@ public class BrandDao implements Dao.BrandDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBConnect.closeResultSet(rs);
-            DBConnect.closePreparedStatement(ps);
-            DBConnect.closeConnection(conn);
+            DBConnect.closeAll(rs, ps, conn);
         }
 
         return brands;
@@ -164,9 +155,7 @@ public class BrandDao implements Dao.BrandDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBConnect.closeResultSet(rs);
-            DBConnect.closePreparedStatement(ps);
-            DBConnect.closeConnection(conn);
+            DBConnect.closeAll(rs, ps, conn);
         }
 
         return false;
@@ -187,9 +176,7 @@ public class BrandDao implements Dao.BrandDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBConnect.closeResultSet(rs);
-            DBConnect.closePreparedStatement(ps);
-            DBConnect.closeConnection(conn);
+            DBConnect.closeAll(rs, ps, conn);
         }
 
         return true;

@@ -39,8 +39,7 @@ public class ProductDao implements Dao.ProductDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBConnect.closePreparedStatement(ps);
-            DBConnect.closeConnection(conn);
+            DBConnect.closeAll(rs, ps, conn);
         }
     }
 
@@ -63,8 +62,7 @@ public class ProductDao implements Dao.ProductDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBConnect.closePreparedStatement(ps);
-            DBConnect.closeConnection(conn);
+            DBConnect.closeAll(rs, ps, conn);
         }
     }
 
@@ -79,8 +77,7 @@ public class ProductDao implements Dao.ProductDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBConnect.closePreparedStatement(ps);
-            DBConnect.closeConnection(conn);
+            DBConnect.closeAll(rs, ps, conn);
         }
     }
 
@@ -107,9 +104,7 @@ public class ProductDao implements Dao.ProductDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBConnect.closeResultSet(rs);
-            DBConnect.closePreparedStatement(ps);
-            DBConnect.closeConnection(conn);
+            DBConnect.closeAll(rs, ps, conn);
         }
 
         return product;
@@ -141,9 +136,7 @@ public class ProductDao implements Dao.ProductDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBConnect.closeResultSet(rs);
-            DBConnect.closePreparedStatement(ps);
-            DBConnect.closeConnection(conn);
+            DBConnect.closeAll(rs, ps, conn);
         }
 
         return products;
@@ -176,9 +169,41 @@ public class ProductDao implements Dao.ProductDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBConnect.closeResultSet(rs);
-            DBConnect.closePreparedStatement(ps);
-            DBConnect.closeConnection(conn);
+            DBConnect.closeAll(rs, ps, conn);
+        }
+
+        return products;
+    }
+
+    @Override
+    public List<Product> searchByNameInCategory(String CAT_ID, String NAME) {
+        List<Product> products = new ArrayList<>();
+        conn = DBConnect.getConnection();
+
+        try {
+            ps = conn.prepareStatement("SELECT * FROM [PRODUCT] WHERE CAT_ID = ? AND PRO_NAME LIKE ? ORDER BY PRO_ID ASC");
+            ps.setString(1, CAT_ID);
+            ps.setString(2, "%" + NAME + "%");
+
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Product product = new Product();
+                product.setPRO_ID(rs.getString("PRO_ID"));
+                product.setPRO_NAME(rs.getString("PRO_NAME"));
+                product.setPRO_RATE(rs.getDouble("PRO_RATE"));
+                product.setPRO_DES(rs.getString("PRO_DES"));
+                product.setPRO_PRICE(rs.getString("PRO_PRICE"));
+                product.setPRO_COST(rs.getString("PRO_COST"));
+                product.setPRO_QUANT(rs.getInt("PRO_QUANT"));
+                product.setCAT(categoryService.getCategory(rs.getString("CAT_ID")));
+                product.setBRA(brandService.getBrand(rs.getString("BRA_ID")));
+
+                products.add(product);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnect.closeAll(rs, ps, conn);
         }
 
         return products;
@@ -211,9 +236,7 @@ public class ProductDao implements Dao.ProductDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBConnect.closeResultSet(rs);
-            DBConnect.closePreparedStatement(ps);
-            DBConnect.closeConnection(conn);
+            DBConnect.closeAll(rs, ps, conn);
         }
 
         return products;
@@ -246,9 +269,7 @@ public class ProductDao implements Dao.ProductDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBConnect.closeResultSet(rs);
-            DBConnect.closePreparedStatement(ps);
-            DBConnect.closeConnection(conn);
+            DBConnect.closeAll(rs, ps, conn);
         }
 
         return products;
@@ -270,9 +291,7 @@ public class ProductDao implements Dao.ProductDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBConnect.closeResultSet(rs);
-            DBConnect.closePreparedStatement(ps);
-            DBConnect.closeConnection(conn);
+            DBConnect.closeAll(rs, ps, conn);
         }
 
         return exist;
@@ -292,9 +311,7 @@ public class ProductDao implements Dao.ProductDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBConnect.closeResultSet(rs);
-            DBConnect.closePreparedStatement(ps);
-            DBConnect.closeConnection(conn);
+            DBConnect.closeAll(rs, ps, conn);
         }
 
         return 0;

@@ -8,7 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public class ProductService implements Services.ProductService {
-    ProductDao productDao = new ProductDao();
+    private final ProductDao productDao = new ProductDao();
 
     @Override
     public void insert(Product product) {
@@ -38,6 +38,11 @@ public class ProductService implements Services.ProductService {
     @Override
     public List<Product> searchByName(String NAME) {
         return productDao.searchByName(NAME);
+    }
+
+    @Override
+    public List<Product> searchByNameInCategory(String CAT_ID, String NAME) {
+        return productDao.searchByNameInCategory(CAT_ID, NAME);
     }
 
     @Override

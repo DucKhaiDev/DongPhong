@@ -50,10 +50,13 @@
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="${url}/vendor/perfect-scrollbar/perfect-scrollbar.css">
     <!--===============================================================================================-->
+    <link rel="stylesheet" href="${url}/css/pagination.css">
+    <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="${url}/css/util.css">
     <link rel="stylesheet" type="text/css" href="${url}/css/main.css">
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="${url}/css/custom.css">
+
 </head>
 <body class="animsition">
 
@@ -82,6 +85,16 @@
                     Sắp xếp
                 </div>
 
+                <%--<div class="dropdown flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Sắp xếp
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a href="" class="dropdown-item">Giá từ cao xuống thấp</a>
+                        <a href="" class="dropdown-item">Giá từ thấp lên cao</a>
+                    </div>
+                </div>--%>
+
                 <div class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4 js-show-search">
                     <i class="icon-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-search"></i>
                     <i class="icon-close-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
@@ -89,14 +102,39 @@
                 </div>
             </div>
 
+            <!-- Filter -->
+            <div class="dis-none panel-filter w-full p-t-10">
+                <div class="wrap-filter flex-w bg6 p-lr-40 p-t-27 p-lr-15-sm w-fit-content float-right m-r-60">
+                    <ul>
+                        <li class="p-b-6">
+                            <a href="#" class="filter-link stext-106 trans-04">
+                                Giá: Thấp đến Cao
+                            </a>
+                        </li>
+
+                        <li class="p-b-6">
+                            <a href="#" class="filter-link stext-106 trans-04">
+                                Giá: Cao đến Thấp
+                            </a>
+                        </li>
+
+                        <li class="p-b-6">
+                            <a href="#" class="filter-link stext-106 trans-04 filter-link-active">
+                                Newness
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
             <!-- Search product -->
             <div class="dis-none panel-search w-full p-t-10 p-b-15">
                 <div class="bor8 dis-flex p-l-15">
-                    <button class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04">
+                    <button id="search-product-button" class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04">
                         <i class="zmdi zmdi-search"></i>
                     </button>
 
-                    <input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="search-product" placeholder="Search">
+                    <input id="search-product" class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="search-product" placeholder="Tìm kiếm">
                 </div>
             </div>
         </div>
@@ -211,7 +249,7 @@
             </div>
 
             <div class="col-md-9">
-                <div class="row">
+                <div class="row content">
                     <c:forEach items="${products}" var="product" varStatus="loop">
                         <div class="col-sm-6 col-md-4 col-lg-4 p-b-35 women">
                             <div class="block2">
@@ -370,12 +408,10 @@
                         </div>
                     </c:forEach>
                 </div>
-                <div class="row">
-                    <!-- Load more -->
-                    <div class="flex-c-m flex-w w-full p-t-45">
-                        <a href="#" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">
-                            TẢI THÊM
-                        </a>
+                <div class="row d-flex justify-content-end">
+                    <div class="col">
+                        <!-- Pagination -->
+                        <div id="pagination" class="float-right"></div>
                     </div>
                 </div>
             </div>
@@ -506,6 +542,7 @@
 <!--===============================================================================================-->
 <script>
     $(function () {
+        //Nếu URL không chứa parameter thì xóa hết parameter trong sessionScope
         var url = new URL(location.href);
         var params = url.searchParams;
 
@@ -527,6 +564,11 @@
             });
         }
 
+        if (!params.has('page')) {
+            sessionStorage.removeItem('currPage');
+        }
+
+        //Đặt lại bộ lọc tìm kiếm
         $('#filter-reset').on('click', function () {
             $('.filter-input').prop('checked', false);
             sessionStorage.clear();
@@ -540,6 +582,7 @@
 <!--===============================================================================================-->
 <script>
     $(document).ready(function () {
+        //append parameter vào url
         $('input[type="checkbox"], input[type="radio"]').click(function (e) {
             var seasoning = '', tempArray = [];
             $('input[name="brand"]:checked').each(function () {
@@ -550,22 +593,23 @@
                 tempArray = [];
             }
 
-           $('input[name="price"]:checked').each(function () {
-               tempArray.push($(this).val());
-           });
-           if (tempArray.length !== 0) {
-               seasoning += '&price=' + tempArray.toString();
-               tempArray = [];
-           }
+            $('input[name="price"]:checked').each(function () {
+                tempArray.push($(this).val());
+            });
+            if (tempArray.length !== 0) {
+                seasoning += '&price=' + tempArray.toString();
+                tempArray = [];
+            }
 
-           $('input[name="stars-rating"]:checked').each(function () {
+            $('input[name="stars-rating"]:checked').each(function () {
                tempArray.push($(this).val());
-           });
-           if (tempArray.length !== 0) {
+            });
+            if (tempArray.length !== 0) {
                seasoning += '&stars-rating=' + tempArray.toString();
                tempArray = [];
-           }
+            }
 
+            //Xóa parameter cũ
             var url = new URL(location.href);
             var params = url.searchParams;
             params.delete('brand');
@@ -578,6 +622,7 @@
 <!--===============================================================================================-->
 <script>
     $(function () {
+        //Lưu giá trị lọc thương hiệu, giá bán vào sessionScope
         $('input[type="checkbox"]').each(function () {
             $(this)
                 .prop('checked', sessionStorage.getItem(this.id) === 'true')
@@ -587,6 +632,7 @@
                 .trigger('change');
         });
 
+        //Lưu giá trị lọc đánh giá
         $('input[type="radio"]')
             .each(function () {
                 $(this).prop('checked', sessionStorage.getItem(this.id) === 'true').trigger('change');
@@ -596,6 +642,70 @@
                     sessionStorage.setItem(this.id, this.checked);
                 });
             });
+    });
+</script>
+<!--===============================================================================================-->
+<script src="${url}/js/pagination.min.js"></script>
+<script>
+    $(function () {
+        //Phân trang
+        var p = $('#pagination');
+        p.pagination({
+            dataSource: function (done) {
+                var result = [];
+                for (var i = 0; i < ${totalNumber}; i++) {
+                    result.push(i);
+                }
+                done(result);
+            },
+            pageSize: ${pageSize},
+            className: 'paginationjs-big',
+            afterInit: function () {
+                //Sau khi load trang mới thì đặt trang hiện tại = trang đã lưu trong sessionScope (nếu trang đã lưu != 1)
+                var currPage = sessionStorage.getItem('currPage');
+                if (currPage !== null) {
+                    p.pagination('go', currPage);
+                }
+            },
+            afterPageOnClick: function () {
+                //Chuyển đến trang mới
+                var currPage =  p.pagination('getSelectedPageNum');
+                sessionStorage.setItem('currPage', currPage);
+                var url = new URL(location.href);
+                var params = url.searchParams;
+                params.delete('page');
+                if (currPage > 1) {
+                    params.append('page', sessionStorage.getItem('currPage'));
+                }
+
+                location.href = url.href;
+            }
+        });
+    });
+</script>
+<!--===============================================================================================-->
+<script>
+    //Tìm kiếm sản phẩm
+    $(function () {
+        var searchProduct = $('#search-product');
+        searchProduct.on('keyup', function (e) {
+            if (e.key === 'Enter' || e.keyCode === 13) {
+                appendParameterSearch(searchProduct);
+            }
+        });
+
+        $('#search-product-button').click(function () {
+            appendParameterSearch(searchProduct);
+        });
+        
+        function appendParameterSearch(searchProduct) {
+            var keyword = searchProduct.val();
+            keyword = keyword.trim().replace(/\s\s+/g, ' ');
+            var url = new URL(location.href);
+            url.searchParams.delete('search');
+            url.searchParams.append('search', keyword);
+            location.href = url.href;
+        }
     });
 </script>
 
