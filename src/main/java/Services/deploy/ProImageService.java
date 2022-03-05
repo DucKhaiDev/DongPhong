@@ -6,7 +6,7 @@ import Entity.ProImage;
 import java.util.List;
 
 public class ProImageService implements Services.ProImageService {
-    ProImageDao imageDao = new ProImageDao();
+    private final ProImageDao imageDao = new ProImageDao();
 
     @Override
     public void insert(ProImage image) {
@@ -34,6 +34,16 @@ public class ProImageService implements Services.ProImageService {
     }
 
     @Override
+    public String getProReImage(String PRO_ID) {
+        List<ProImage> images = getProImage(PRO_ID);
+        if (!images.isEmpty()) {
+            return images.get(0).getIMG_NAME();
+        }
+
+        return null;
+    }
+
+    @Override
     public List<ProImage> getProImage(String PRO_ID) {
         return imageDao.getProImage(PRO_ID);
     }
@@ -41,5 +51,11 @@ public class ProImageService implements Services.ProImageService {
     @Override
     public List<ProImage> getAll() {
         return imageDao.getAll();
+    }
+
+    public static void main(String[] args) {
+        ProImageService imageService = new ProImageService();
+        String reImage = imageService.getProReImage("SLG01");
+        System.out.println(reImage);
     }
 }

@@ -2,6 +2,8 @@
 <%@ page import="java.math.BigDecimal" %>
 <%@ page import="java.util.Locale" %>
 <%@ page import="java.text.NumberFormat" %>
+<%@ page import="Services.deploy.ProductService" %>
+<%@ page import="Services.deploy.ProImageService" %>
 <%--
   User: duckhaidev
   Date: 2/17/2022
@@ -85,9 +87,14 @@
                                             <tr class="odd">
                                                 <td>${number = number + 1}</td>
                                                 <td>${product.PRO_ID}</td>
-                                                <c:url value="/images/product-images?fname=${product.getProReIMG()}" var="imageUrl"/>
+                                                <%
+                                                    ProImageService imageService = new ProImageService();
+                                                    String reImage = imageService.getProReImage(((Product) pageContext.getAttribute("product")).getPRO_ID());
+                                                    request.setAttribute("reImage", reImage);
+                                                %>
+                                                <c:url value="/images/product-images?fname=${reImage}" var="imageUrl"/>
                                                 <c:choose>
-                                                    <c:when test="${product.getProReIMG() == null}">
+                                                    <c:when test="${reImage == null}">
                                                         <td><i>NULL</i></td>
                                                     </c:when>
                                                     <c:otherwise>

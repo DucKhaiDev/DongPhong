@@ -103,17 +103,4 @@ public class Product implements Serializable {
     public void setBRA(Brand BRA) {
         this.BRA = BRA;
     }
-
-    public String getProReIMG() {
-        List<ProImage> images = imageService.getProImage(PRO_ID);
-        if (!images.isEmpty()) {
-            return images.get(0).getIMG_NAME();
-        }
-
-        return null;
-    }
-
-    public List<ProImage> getProImage() {
-        return imageService.getProImage(PRO_ID);
-    }
 }

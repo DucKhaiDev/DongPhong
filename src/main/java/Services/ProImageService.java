@@ -10,6 +10,7 @@ public interface ProImageService {
     void delete(int IMG_ID);
     void delete(String PRO_ID);
     ProImage getImage(int IMG_ID);
+    String getProReImage(String PRO_ID);
     List<ProImage> getProImage(String PRO_ID);
     List<ProImage> getAll();
 }

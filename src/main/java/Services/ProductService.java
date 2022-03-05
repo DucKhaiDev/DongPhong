@@ -1,5 +1,6 @@
 package Services;
 
+import Entity.ProImage;
 import Entity.Product;
 
 import java.util.List;

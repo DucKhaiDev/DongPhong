@@ -16,7 +16,7 @@ public class ProImageDao implements Dao.ProImageDao {
     private PreparedStatement ps = null;
     private ResultSet rs = null;
     
-    ProductService productService = new ProductService();
+    private final ProductService productService = new ProductService();
 
     @Override
     public void insert(ProImage image) {
@@ -114,8 +114,8 @@ public class ProImageDao implements Dao.ProImageDao {
         try {
             ps = conn.prepareStatement("SELECT * FROM [PROIMAGE] WHERE PRO_ID = ? ORDER BY IMG_ID ASC");
             ps.setString(1, PRO_ID);
-            rs = ps.executeQuery();
 
+            rs = ps.executeQuery();
             while (rs.next()) {
                 ProImage image = new ProImage();
                 image.setIMG_ID(rs.getInt("IMG_ID"));

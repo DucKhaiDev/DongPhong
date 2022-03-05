@@ -16,13 +16,13 @@ public class Order implements Serializable {
     private Date REC_DATE;
     private String ORD_STATUS;
     private int ORD_TOTALPRO;
-    private double ORD_TOTALPAY;
-    private Cart CAT;
+    private String ORD_TOTALPAY;
+    private Cart CART;
     private Payment PAY;
 
     public Order() {}
 
-    public Order(String ORD_ID, Customer CUS, String REC_NAME, String REC_ADDRESS, String REC_PHONE, Timestamp ORD_DATE, Date REC_DATE, String ORD_STATUS, int ORD_TOTALPRO, double ORD_TOTALPAY, Cart CAT, Payment PAY) {
+    public Order(String ORD_ID, Customer CUS, String REC_NAME, String REC_ADDRESS, String REC_PHONE, Timestamp ORD_DATE, Date REC_DATE, String ORD_STATUS, int ORD_TOTALPRO, String ORD_TOTALPAY, Cart CART, Payment PAY) {
         this.ORD_ID = ORD_ID;
         this.CUS = CUS;
         this.REC_NAME = REC_NAME;
@@ -33,7 +33,7 @@ public class Order implements Serializable {
         this.ORD_STATUS = ORD_STATUS;
         this.ORD_TOTALPRO = ORD_TOTALPRO;
         this.ORD_TOTALPAY = ORD_TOTALPAY;
-        this.CAT = CAT;
+        this.CART = CART;
         this.PAY = PAY;
     }
 
@@ -109,20 +109,20 @@ public class Order implements Serializable {
         this.ORD_TOTALPRO = ORD_TOTALPRO;
     }
 
-    public double getORD_TOTALPAY() {
+    public String getORD_TOTALPAY() {
         return ORD_TOTALPAY;
     }
 
-    public void setORD_TOTALPAY(double ORD_TOTALPAY) {
+    public void setORD_TOTALPAY(String ORD_TOTALPAY) {
         this.ORD_TOTALPAY = ORD_TOTALPAY;
     }
 
-    public Cart getCAT() {
-        return CAT;
+    public Cart getCART() {
+        return CART;
     }
 
-    public void setCAT(Cart CAT) {
-        this.CAT = CAT;
+    public void setCART(Cart CART) {
+        this.CART = CART;
     }
 
     public Payment getPAY() {

@@ -254,7 +254,12 @@
                         <div class="col-sm-6 col-md-4 col-lg-4 p-b-35 women">
                             <div class="block2">
                                 <div class="block2-pic hov-img0">
-                                    <c:url value="/images/product-images?fname=${product.getProReIMG()}" var="productImg"/>
+                                    <%
+                                        ProImageService imageService = new ProImageService();
+                                        String reImage = imageService.getProReImage(((Product) pageContext.getAttribute("product")).getPRO_ID());
+                                        request.setAttribute("reImage", reImage);
+                                    %>
+                                    <c:url value="/images/product-images?fname=${reImage}" var="productImg"/>
                                     <img class="product-img" src="${productImg}" alt="Hình ảnh">
                                     <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal${loop.index + 1}">Xem</a>
                                 </div>
@@ -330,7 +335,6 @@
 
                                                     <div class="slick3 gallery-lb">
                                                         <%
-                                                            ProImageService imageService = new ProImageService();
                                                             List<ProImage> images = imageService.getProImage(((Product) pageContext.getAttribute("product")).getPRO_ID());
                                                             request.setAttribute("images", images);
                                                         %>
