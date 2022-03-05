@@ -21,11 +21,20 @@ public class LoginController extends HttpServlet {
 
         //Check cookie
         Cookie[] cookies = request.getCookies();
+        String username = "", password = "";
         if (cookies != null) {
             for (Cookie cookie: cookies) {
-                if (cookie.getName().equals("username_or_email")) {
+                if (cookie.getName().equals("username")) {
+                    username = cookie.getValue();
                     session = request.getSession(true);
-                    session.setAttribute("username_or_email", cookie.getValue());
+                    session.setAttribute("username", cookie.getValue());
+                } else if (cookie.getName().equals("password")) {
+                    password = cookie.getValue();
+                    session = request.getSession(true);
+                    session.setAttribute("password", cookie.getValue());
+                }
+
+                if (!username.isEmpty() && !password.isEmpty()) {
                     response.sendRedirect(request.getContextPath() + "/waiting");
                     return;
                 }
@@ -37,7 +46,7 @@ public class LoginController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String username_or_email = request.getParameter("username_or_email").trim();
+        String username = request.getParameter("username_or_email").trim();
         String password = request.getParameter("password").trim();
         String rememberMe = request.getParameter("rememberMe");
         boolean isRememberMe = rememberMe != null;
@@ -46,14 +55,14 @@ public class LoginController extends HttpServlet {
 
         UserService service = new UserService();
 
-        User user = service.login(username_or_email, password);
+        User user = service.login(username, password);
 
         if (user != null) {
             HttpSession session = request.getSession(true);
             session.setAttribute("account", user);
 
             if (isRememberMe) {
-                saveRememberMe(response, username_or_email, password);
+                saveRememberMe(response, username, password);
             }
 
             response.sendRedirect(request.getContextPath() + "/waiting");
@@ -64,9 +73,14 @@ public class LoginController extends HttpServlet {
         }
     }
 
-    private void saveRememberMe(HttpServletResponse response, String username_or_email, String password) {
-        Cookie cookie = new Cookie(Constant.COOKIE_REMEMBER, username_or_email);
-        cookie.setMaxAge(24*60*60);
-        response.addCookie(cookie);
+    private void saveRememberMe(HttpServletResponse response, String username, String password) {
+        //Ghi nhớ đăng nhập trong thời gian: 3 ngày
+        Cookie ckUsername = new Cookie(Constant.COOKIE_USERNAME, username);
+        ckUsername.setMaxAge(3 * 24 * 60 * 60);
+        response.addCookie(ckUsername);
+
+        Cookie ckPassword = new Cookie(Constant.COOKIE_PASSWORD, password);
+        ckPassword.setMaxAge(3 * 24 * 60 * 60);
+        response.addCookie(ckPassword);
     }
 }

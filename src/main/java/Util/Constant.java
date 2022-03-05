@@ -3,7 +3,8 @@ package Util;
 import java.io.File;
 
 public class Constant {
-    public static final String COOKIE_REMEMBER = "username_or_email";
+    public static final String COOKIE_USERNAME = "username";
+    public static final String COOKIE_PASSWORD = "password";
 
     public static class Path {
         //General constants
