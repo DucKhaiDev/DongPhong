@@ -107,20 +107,20 @@
                 <div class="wrap-filter flex-w bg6 p-lr-40 p-t-27 p-lr-15-sm w-fit-content float-right m-r-60">
                     <ul>
                         <li class="p-b-6">
-                            <a href="#" class="filter-link stext-106 trans-04">
+                            <a id="filter-link-default" href="#" class="filter-link stext-106 trans-04 filter-link-active">
+                                Mặc định
+                            </a>
+                        </li>
+
+                        <li class="p-b-6">
+                            <a id="filter-link-priceAsc" href="#" class="filter-link stext-106 trans-04">
                                 Giá: Thấp đến Cao
                             </a>
                         </li>
 
                         <li class="p-b-6">
-                            <a href="#" class="filter-link stext-106 trans-04">
+                            <a id="filter-link-priceDesc" href="#" class="filter-link stext-106 trans-04">
                                 Giá: Cao đến Thấp
-                            </a>
-                        </li>
-
-                        <li class="p-b-6">
-                            <a href="#" class="filter-link stext-106 trans-04 filter-link-active">
-                                Newness
                             </a>
                         </li>
                     </ul>
@@ -707,6 +707,41 @@
             location.href = url.href;
         }
     });
+</script>
+<!--===============================================================================================-->
+<script>
+    //Sắp xếp sản phẩm
+    $('.filter-link').removeClass('filter-link-active');
+    var pVal = (new URL(location.href)).searchParams.get('sortBy');
+
+    if (pVal === null) {
+        $('#filter-link-default').addClass('filter-link-active');
+    } else if (pVal === 'priceAsc') {
+        $('#filter-link-priceAsc').addClass('filter-link-active');
+    } else if (pVal === 'priceDesc') {
+        $('#filter-link-priceDesc').addClass('filter-link-active');
+    }
+    
+    $('#filter-link-default').on('click', function () {
+        appendParameterSort('default');
+    });
+    
+    $('#filter-link-priceAsc').on('click', function () {
+        appendParameterSort('priceAsc');
+    });
+    
+    $('#filter-link-priceDesc').on('click', function () {
+        appendParameterSort('priceDesc');
+    });
+    
+    function appendParameterSort(parameter) {
+        var url = new URL(location.href);
+        url.searchParams.delete('sortBy');
+        if (parameter !== 'default') {
+            url.searchParams.append('sortBy', parameter);
+        }
+        location.href = url.href;
+    }
 </script>
 
 </body>

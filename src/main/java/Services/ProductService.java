@@ -16,6 +16,8 @@ public interface ProductService {
     List<Product> getProductByBrand(String BRA_ID);
     boolean checkExistID(String ID);
     int countProduct(String CAT_ID, String BRA_ID);
+    void sortByPriceAsc(List<Product> products);
+    void sortByPriceDesc(List<Product> products);
     List<Product> filterProductByBrand(List<Product> products, String brands);
     List<Product> filterProductByPrice(List<Product> products, String price);
     List<Product> filterProductByStars(List<Product> products, String stars);

@@ -30,6 +30,18 @@ public class ProductListByCategory extends HttpServlet {
             products = productService.searchByNameInCategory(CAT_ID, keyword);
         }
 
+        //Sắp xếp sản phẩm
+        String sortBy = request.getParameter("sortBy");
+        if (sortBy != null) {
+            if (sortBy.equals("priceAsc")) {
+                productService.sortByPriceAsc(products);
+            }
+
+            if (sortBy.equals("priceDesc")) {
+                productService.sortByPriceDesc(products);
+            }
+        }
+
         //Phân trang
         int totalNumber = products.size();
         request.setAttribute("totalNumber", totalNumber);
@@ -46,28 +58,23 @@ public class ProductListByCategory extends HttpServlet {
 
         //Lọc thương hiệu
         String brands = request.getParameter("brand");
-        if (brands != null && !brands.trim().isEmpty()) {
+        if (brands != null) {
             products = productService.filterProductByBrand(products, brands);
         }
 
         //Lọc giá
         String price = request.getParameter("price");
-        if (price != null && !price.trim().isEmpty()) {
+        if (price != null) {
             products = productService.filterProductByPrice(products, price);
         }
 
         //Lọc số sao đánh giá
         String stars = request.getParameter("stars-rating");
-        if (stars != null && !stars.trim().isEmpty()) {
+        if (stars != null) {
             products = productService.filterProductByStars(products, stars);
         }
 
         request.setAttribute("products", products);
         request.getRequestDispatcher(Constant.Path.PRODUCT_LIST_BY_CATEGORY).forward(request, response);
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
     }
 }

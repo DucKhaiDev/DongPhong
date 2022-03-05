@@ -4,8 +4,7 @@ import Dao.deploy.ProductDao;
 import Entity.Product;
 
 import java.math.BigDecimal;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public class ProductService implements Services.ProductService {
     private final ProductDao productDao = new ProductDao();
@@ -63,6 +62,30 @@ public class ProductService implements Services.ProductService {
     @Override
     public int countProduct(String CAT_ID, String BRA_ID) {
         return productDao.countProduct(CAT_ID, BRA_ID);
+    }
+
+    @Override
+    public void sortByPriceAsc(List<Product> products) {
+        products.sort(new Comparator<Product>() {
+            @Override
+            public int compare(Product o1, Product o2) {
+                BigDecimal o1price = new BigDecimal(o1.getPRO_PRICE());
+                BigDecimal o2price = new BigDecimal(o2.getPRO_PRICE());
+                return o1price.compareTo(o2price);
+            }
+        });
+    }
+
+    @Override
+    public void sortByPriceDesc(List<Product> products) {
+        products.sort(Collections.reverseOrder(new Comparator<Product>() {
+            @Override
+            public int compare(Product o1, Product o2) {
+                BigDecimal o1price = new BigDecimal(o1.getPRO_PRICE());
+                BigDecimal o2price = new BigDecimal(o2.getPRO_PRICE());
+                return o1price.compareTo(o2price);
+            }
+        }));
     }
 
     @Override
