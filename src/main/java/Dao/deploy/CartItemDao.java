@@ -88,8 +88,8 @@ public class CartItemDao implements Dao.CartItemDao {
             item.setCITEM_ID(CITEM_ID);
             item.setQUANT(rs.getInt("QUANT"));
             item.setVALUE(rs.getString("VALUE"));
-            item.setPRO(productService.getProduct(rs.getString("PRO_ID")));
-            item.setCART(cartService.getCart(rs.getString("CART_ID")));
+            item.setPRO(productService.getProduct(rs.getString("PRO_ID").trim()));
+            item.setCART(cartService.getCart(rs.getString("CART_ID").trim()));
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -109,11 +109,11 @@ public class CartItemDao implements Dao.CartItemDao {
             rs = ps.executeQuery();
             while (rs.next()) {
                 CartItem item = new CartItem();
-                item.setCITEM_ID(rs.getString("CITEM_ID"));
+                item.setCITEM_ID(rs.getString("CITEM_ID").trim());
                 item.setQUANT(rs.getInt("QUANT"));
                 item.setVALUE(rs.getString("VALUE"));
-                item.setPRO(productService.getProduct(rs.getString("PRO_ID")));
-                item.setCART(cartService.getCart(rs.getString("CART_ID")));
+                item.setPRO(productService.getProduct(rs.getString("PRO_ID").trim()));
+                item.setCART(cartService.getCart(rs.getString("CART_ID").trim()));
 
                 items.add(item);
             }

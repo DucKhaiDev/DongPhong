@@ -10,4 +10,5 @@ public interface CustomerDao {
     void delete(String CUS_ID);
     Customer getCustomer(String CUS_ID);
     List<Customer> getAll();
+    boolean checkExistID(String ID);
 }

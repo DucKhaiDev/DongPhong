@@ -83,8 +83,8 @@ public class WLItemDao implements Dao.WLItemDao {
             rs = ps.executeQuery();
             rs.next();
             item.setWLITEM_ID(WLITEM_ID);
-            item.setPRO(productService.getProduct(rs.getString("PRO_ID")));
-            item.setWL(wishlistService.getWishlist(rs.getString("WL_ID")));
+            item.setPRO(productService.getProduct(rs.getString("PRO_ID").trim()));
+            item.setWL(wishlistService.getWishlist(rs.getString("WL_ID").trim()));
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -104,9 +104,9 @@ public class WLItemDao implements Dao.WLItemDao {
             rs = ps.executeQuery();
             while (rs.next()) {
                 WLItem item = new WLItem();
-                item.setWLITEM_ID(rs.getString("WLITEM_ID"));
-                item.setPRO(productService.getProduct(rs.getString("PRO_ID")));
-                item.setWL(wishlistService.getWishlist(rs.getString("WL_ID")));
+                item.setWLITEM_ID(rs.getString("WLITEM_ID").trim());
+                item.setPRO(productService.getProduct(rs.getString("PRO_ID").trim()));
+                item.setWL(wishlistService.getWishlist(rs.getString("WL_ID").trim()));
 
                 items.add(item);
             }

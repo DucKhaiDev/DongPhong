@@ -104,7 +104,7 @@ public class OrderDao implements Dao.OrderDao {
             rs = ps.executeQuery();
             rs.next();
             order.setORD_ID(ORD_ID);
-            order.setCUS(customerService.getCustomer(rs.getString("CUS_ID")));
+            order.setCUS(customerService.getCustomer(rs.getString("CUS_ID").trim()));
             order.setREC_NAME(rs.getString("REC_NAME"));
             order.setREC_ADDRESS(rs.getString("REC_ADDRESS"));
             order.setREC_PHONE(rs.getString("REC_PHONE"));
@@ -113,8 +113,8 @@ public class OrderDao implements Dao.OrderDao {
             order.setORD_STATUS(rs.getString("ORD_STATUS"));
             order.setORD_TOTALPRO(rs.getInt("ORD_TOTALPRO"));
             order.setORD_TOTALPAY(rs.getString("ORD_TOTALPAY"));
-            order.setCART(cartService.getCart(rs.getString("CART_ID")));
-            order.setPAY(paymentService.getPayment(rs.getString("PAY_ID")));
+            order.setCART(cartService.getCart(rs.getString("CART_ID").trim()));
+            order.setPAY(paymentService.getPayment(rs.getString("PAY_ID").trim()));
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -134,8 +134,8 @@ public class OrderDao implements Dao.OrderDao {
             rs = ps.executeQuery();
             while (rs.next()) {
                 Order order = new Order();
-                order.setORD_ID(rs.getString("ORD_ID"));
-                order.setCUS(customerService.getCustomer(rs.getString("CUS_ID")));
+                order.setORD_ID(rs.getString("ORD_ID").trim());
+                order.setCUS(customerService.getCustomer(rs.getString("CUS_ID").trim()));
                 order.setREC_NAME(rs.getString("REC_NAME"));
                 order.setREC_ADDRESS(rs.getString("REC_ADDRESS"));
                 order.setREC_PHONE(rs.getString("REC_PHONE"));
@@ -144,8 +144,8 @@ public class OrderDao implements Dao.OrderDao {
                 order.setORD_STATUS(rs.getString("ORD_STATUS"));
                 order.setORD_TOTALPRO(rs.getInt("ORD_TOTALPRO"));
                 order.setORD_TOTALPAY(rs.getString("ORD_TOTALPAY"));
-                order.setCART(cartService.getCart(rs.getString("CART_ID")));
-                order.setPAY(paymentService.getPayment(rs.getString("PAY_ID")));
+                order.setCART(cartService.getCart(rs.getString("CART_ID").trim()));
+                order.setPAY(paymentService.getPayment(rs.getString("PAY_ID").trim()));
 
                 orders.add(order);
             }

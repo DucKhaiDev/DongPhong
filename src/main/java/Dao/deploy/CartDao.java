@@ -79,8 +79,8 @@ public class CartDao implements Dao.CartDao {
 
             rs = ps.executeQuery();
             rs.next();
-            cart.setCART_ID(rs.getString("WL_ID"));
-            cart.setCUS(customerService.getCustomer(rs.getString("CUS_ID")));
+            cart.setCART_ID(rs.getString("WL_ID").trim());
+            cart.setCUS(customerService.getCustomer(rs.getString("CUS_ID").trim()));
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -100,8 +100,8 @@ public class CartDao implements Dao.CartDao {
             rs = ps.executeQuery();
             while (rs.next()) {
                 Cart cart = new Cart();
-                cart.setCART_ID(rs.getString("CART_ID"));
-                cart.setCUS(customerService.getCustomer(rs.getString("CUS_ID")));
+                cart.setCART_ID(rs.getString("CART_ID").trim());
+                cart.setCUS(customerService.getCustomer(rs.getString("CUS_ID").trim()));
 
                 carts.add(cart);
             }

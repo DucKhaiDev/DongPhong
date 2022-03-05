@@ -120,7 +120,7 @@ public class ProImageDao implements Dao.ProImageDao {
                 ProImage image = new ProImage();
                 image.setIMG_ID(rs.getInt("IMG_ID"));
                 image.setIMG_NAME(rs.getString("IMG_NAME"));
-                image.setPRO(productService.getProduct(rs.getString("PRO_ID")));
+                image.setPRO(productService.getProduct(rs.getString("PRO_ID").trim()));
 
                 images.add(image);
             }
@@ -146,7 +146,7 @@ public class ProImageDao implements Dao.ProImageDao {
                 ProImage image = new ProImage();
                 image.setIMG_ID(rs.getInt("IMG_ID"));
                 image.setIMG_NAME(rs.getString("IMG_NAME"));
-                image.setPRO(productService.getProduct(rs.getString("PRO_ID")));
+                image.setPRO(productService.getProduct(rs.getString("PRO_ID").trim()));
 
                 images.add(image);
             }

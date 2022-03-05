@@ -25,7 +25,7 @@ public class RoomDao implements Dao.RoomDao {
             ps.setString(1, ROOM_ID);
             rs = ps.executeQuery();
             rs.next();
-            room.setROOM_ID(rs.getString("ROOM_ID"));
+            room.setROOM_ID(rs.getString("ROOM_ID").trim());
             room.setROOM_NAME(rs.getString("ROOM_NAME"));
         } catch (SQLException e) {
             e.printStackTrace();
@@ -46,7 +46,7 @@ public class RoomDao implements Dao.RoomDao {
             rs = ps.executeQuery();
             while (rs.next()) {
                 Room room = new Room();
-                room.setROOM_ID(rs.getString("ROOM_ID"));
+                room.setROOM_ID(rs.getString("ROOM_ID").trim());
                 room.setROOM_NAME(rs.getString("ROOM_NAME"));
                 rooms.add(room);
             }

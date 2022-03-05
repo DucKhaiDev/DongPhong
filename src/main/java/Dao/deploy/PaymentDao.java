@@ -96,7 +96,7 @@ public class PaymentDao implements Dao.PaymentDao {
             rs = ps.executeQuery();
             while (rs.next()) {
                 Payment payment = new Payment();
-                payment.setPAY_ID(rs.getString("PAY_ID"));
+                payment.setPAY_ID(rs.getString("PAY_ID").trim());
                 payment.setPAY_METHOD(rs.getString("PAY_METHOD"));
 
                 payments.add(payment);

@@ -80,8 +80,8 @@ public class WishlistDao implements Dao.WishlistDao {
 
             rs = ps.executeQuery();
             rs.next();
-            wishlist.setWL_ID(rs.getString("WL_ID"));
-            wishlist.setCUS(customerService.getCustomer(rs.getString("CUS_ID")));
+            wishlist.setWL_ID(rs.getString("WL_ID").trim());
+            wishlist.setCUS(customerService.getCustomer(rs.getString("CUS_ID").trim()));
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -101,8 +101,8 @@ public class WishlistDao implements Dao.WishlistDao {
             rs = ps.executeQuery();
             while (rs.next()) {
                 Wishlist wishlist = new Wishlist();
-                wishlist.setWL_ID(rs.getString("WL_ID"));
-                wishlist.setCUS(customerService.getCustomer(rs.getString("CUS_ID")));
+                wishlist.setWL_ID(rs.getString("WL_ID").trim());
+                wishlist.setCUS(customerService.getCustomer(rs.getString("CUS_ID").trim()));
 
                 wishlists.add(wishlist);
             }

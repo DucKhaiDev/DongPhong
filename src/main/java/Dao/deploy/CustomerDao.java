@@ -109,7 +109,7 @@ public class CustomerDao implements Dao.CustomerDao {
             rs = ps.executeQuery();
             while (rs.next()) {
                 Customer customer = new Customer();
-                customer.setCUS_ID(rs.getString("CUS_ID"));
+                customer.setCUS_ID(rs.getString("CUS_ID").trim());
                 customer.setCUS_FNAME(rs.getString("CUS_FNAME"));
                 customer.setCUS_LNAME(rs.getString("CUS_LNAME"));
                 customer.setCUS_EMAIL(rs.getString("CUS_EMAIL"));
@@ -125,5 +125,25 @@ public class CustomerDao implements Dao.CustomerDao {
         }
 
         return customers;
+    }
+
+    @Override
+    public boolean checkExistID(String ID) {
+        conn = DBConnect.getConnection();
+
+        try {
+            ps = conn.prepareStatement("SELECT * FROM [CUSTOMER] WHERE CUS_ID = ?");
+            ps.setString(1, ID);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnect.closeAll(rs, ps, conn);
+        }
+
+        return false;
     }
 }

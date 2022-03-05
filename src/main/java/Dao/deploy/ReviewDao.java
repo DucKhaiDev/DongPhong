@@ -88,8 +88,8 @@ public class ReviewDao implements Dao.ReviewDao {
             rs = ps.executeQuery();
             rs.next();
             review.setREV_ID(rs.getInt("REV_ID"));
-            review.setCUS(customerService.getCustomer(rs.getString("CUS_ID")));
-            review.setPRO(productService.getProduct(rs.getString("PRO_ID")));
+            review.setCUS(customerService.getCustomer(rs.getString("CUS_ID").trim()));
+            review.setPRO(productService.getProduct(rs.getString("PRO_ID").trim()));
             review.setREV_CONTENT(rs.getString("REV_CONTENT"));
             review.setREV_DATE(rs.getTimestamp("REV_DATE"));
             review.setREV_IMG(rs.getString("REV_IMG"));
@@ -113,8 +113,8 @@ public class ReviewDao implements Dao.ReviewDao {
             while (rs.next()) {
                 Review review = new Review();
                 review.setREV_ID(rs.getInt("REV_ID"));
-                review.setCUS(customerService.getCustomer(rs.getString("CUS_ID")));
-                review.setPRO(productService.getProduct(rs.getString("PRO_ID")));
+                review.setCUS(customerService.getCustomer(rs.getString("CUS_ID").trim()));
+                review.setPRO(productService.getProduct(rs.getString("PRO_ID").trim()));
                 review.setREV_CONTENT(rs.getString("REV_CONTENT"));
                 review.setREV_DATE(rs.getTimestamp("REV_DATE"));
                 review.setREV_IMG(rs.getString("REV_IMG"));
