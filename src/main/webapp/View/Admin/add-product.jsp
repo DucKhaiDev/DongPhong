@@ -3,9 +3,8 @@
   Date: 2/19/2022
   Time: 11:21 AM
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:url value="/assets" var="url" />
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -13,13 +12,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dong Phong</title>
     <!-- BOOTSTRAP STYLES-->
-    <link href="${url}/css/bootstrap.css" rel="stylesheet"/>
+    <link href="${pageContext.request.contextPath}/assets/css/bootstrap.css" rel="stylesheet"/>
     <!-- FONTAWESOME STYLES-->
-    <link href="${url}/fonts/fontawesome-pro-5.15.4-web/css/all.min.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/fonts/fontawesome-pro-5.15.4-web/css/all.min.css" rel="stylesheet" />
     <!-- CUSTOM STYLES-->
-    <link href="${url}/css/custom.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/css/custom.css" rel="stylesheet" />
     <!-- GOOGLE FONTS-->
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
     <%---------------------------------------------------------------------------------------------%>
     <style>
         p.exist-id {
@@ -75,6 +74,7 @@
                                                     <label for="category" class="labels">Loại sản phẩm</label>
                                                     <div class="checkbox pl-0">
                                                         <select id="category" name="category" class="w-50">
+                                                            <jsp:useBean id="categories" scope="request" type="java.util.List"/>
                                                             <c:forEach items="${categories}" var="category">
                                                                 <option value="${category.categoryId}">${category.categoryName}</option>
                                                             </c:forEach>
@@ -85,6 +85,7 @@
                                                     <label for="brand" class="labels">Thương hiệu</label>
                                                     <div class="checkbox pl-0">
                                                         <select id="brand" name="brand" class="w-50">
+                                                            <jsp:useBean id="brands" scope="request" type="java.util.List"/>
                                                             <c:forEach items="${brands}" var="brand">
                                                                 <option value="${brand.brandId}">${brand.brandName}</option>
                                                             </c:forEach>
@@ -101,8 +102,8 @@
                                                 <div class="row mt-5">
                                                     <c:forEach begin="1" end="6" varStatus="loop">
                                                         <div class="col-md-6 mb-6">
-                                                            <div class="mb-1" style="width: 150px; height: 150px">
-                                                                <img class="bg-img-empty image-<c:out value="${loop.index}"/> mb-1" width="150px" height="150px" style="object-fit: cover;">
+                                                            <div class="bg-img-empty mb-1" style="width: 150px; height: 150px">
+                                                                <img class="product-images image-<c:out value="${loop.index}"/> mb-1" width="150px" height="150px" style="object-fit: cover; display: none" alt="Trống" src="#">
                                                             </div>
                                                             <input type="file" class="text-center mb-3 file-upload-<c:out value="${loop.index}"/>" name="image_<c:out value="${loop.index}"/>">
                                                         </div>
@@ -137,35 +138,45 @@
 <!-- /. WRAPPER  -->
 <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
 <!-- JQUERY SCRIPTS -->
-<script src="${url}/vendor/jquery/jquery-3.2.1.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/jquery/jquery-3.2.1.min.js"></script>
 <!-- BOOTSTRAP SCRIPTS -->
-<script src="${url}/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
 <!-- METISMENU SCRIPTS -->
-<script src="${url}/js/jquery.metisMenu.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/jquery.metisMenu.js"></script>
 <!-- CUSTOM SCRIPTS -->
-<script src="${url}/js/custom.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/custom.js"></script>
 <!--===============================================================================================-->
 <script type="text/javascript">
     $(document).ready(function () {
         <c:forEach begin="1" end="6" varStatus="loop">
-        var readURL_<c:out value="${loop.index}"/> = function (input) {
-            var reader = new FileReader();
+        const readURL_<c:out value="${loop.index}"/> = function (input) {
+            const reader = new FileReader();
             reader.onload = function (e) {
-                $(<% out.print("\'.image-"); %>${loop.index}<% out.print("\'"); %>).attr('src', e.target.result);
+                $(<% out.print("'.image-"); %>${loop.index}<% out.print("'"); %>).attr('src', e.target.result);
             }
             reader.readAsDataURL(input.files[0]);
-        }
+        };
 
-        $(<% out.print("\'.file-upload-"); %>${loop.index}<% out.print("\'"); %>).on('change', function () {
+        $(<% out.print("'.file-upload-"); %>${loop.index}<% out.print("'"); %>).on('change', function () {
             readURL_<c:out value="${loop.index}"/>(this);
         });
         </c:forEach>
     });
 </script>
 <!-- CK EDITOR -->
-<script src="${url}/js/ckeditor/ckeditor.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/ckeditor/ckeditor.js"></script>
 <script type="text/javascript">
     CKEDITOR.replace('productDescription');
+</script>
+<!--===============================================================================================-->
+<script>
+    $(function () {
+       $('.product-images').each(function () {
+           $(this).on('load', function () {
+               $(this).show();
+           });
+       });
+    });
 </script>
 
 </body>

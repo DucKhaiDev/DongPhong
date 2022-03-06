@@ -3,9 +3,9 @@
   Date: 2/23/2022
   Time: 6:57 PM
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:url value="/assets" var="url" />
+<jsp:useBean id="category" scope="request" type="Entity.Category"/>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -13,13 +13,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dong Phong</title>
     <!-- BOOTSTRAP STYLES-->
-    <link href="${url}/css/bootstrap.css" rel="stylesheet"/>
+    <link href="${pageContext.request.contextPath}/assets/css/bootstrap.css" rel="stylesheet"/>
     <!-- FONTAWESOME STYLES-->
-    <link href="${url}/fonts/fontawesome-pro-5.15.4-web/css/all.min.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/fonts/fontawesome-pro-5.15.4-web/css/all.min.css" rel="stylesheet" />
     <!-- CUSTOM STYLES-->
-    <link href="${url}/css/custom.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/css/custom.css" rel="stylesheet" />
     <!-- GOOGLE FONTS-->
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
 </head>
 <body>
 <div id="wrapper">
@@ -47,19 +47,20 @@
                             <div class="row">
                                 <form action="<c:url value="/admin/category/edit"/>" method="post">
                                     <div class="row ml-1 mr-1">
-                                        <div class="col-md-6 mb-3"><label class="labels">ID</label><input type="text" class="form-control" placeholder="${category.categoryId}" readonly></div>
-                                        <div class="col-md-12 mb-3"><label class="labels">Loại sản phẩm</label><input type="text" class="form-control" name="categoryName" maxlength="255" placeholder="${category.categoryName}"></div>
+                                        <div class="col-md-6 mb-3"><label for="categoryId" class="labels">ID</label><input id="categoryId" type="text" class="form-control" placeholder="${category.categoryId}" readonly></div>
+                                        <div class="col-md-12 mb-3"><label for="categoryName" class="labels">Loại sản phẩm</label><input id="categoryName" type="text" class="form-control" name="categoryName" maxlength="255" placeholder="${category.categoryName}"></div>
                                         <div class="col-md-6 mb-3">
-                                            <label class="labels">Danh mục</label>
+                                            <label for="room" class="labels">Danh mục</label>
                                             <div class="checkbox pl-0">
-                                                <select name="room" class="w-50">
+                                                <select id="room" name="room" class="w-50">
+                                                    <jsp:useBean id="rooms" scope="request" type="java.util.List"/>
                                                     <c:forEach items="${rooms}" var="room">
                                                         <c:choose>
-                                                            <c:when test="${category.ROOM.ROOM_ID == room.ROOM_ID}">
-                                                                <option value="${room.ROOM_ID}" selected="selected">${room.ROOM_NAME}</option>
+                                                            <c:when test="${category.room.roomId == room.roomId}">
+                                                                <option value="${room.roomId}" selected="selected">${room.roomName}</option>
                                                             </c:when>
                                                             <c:otherwise>
-                                                                <option value="${room.ROOM_ID}">${room.ROOM_NAME}</option>
+                                                                <option value="${room.roomId}">${room.roomName}</option>
                                                             </c:otherwise>
                                                         </c:choose>
                                                     </c:forEach>
@@ -67,9 +68,9 @@
                                             </div>
                                         </div>
                                         <div class="col-md-12">
-                                            <label class="labels">Mô tả</label>
+                                            <label for="categoryDescription" class="labels">Mô tả</label>
                                             <br>
-                                            <textarea name="categoryDescription" id="description" class="form-control" cols="50" rows="5" maxlength="2000">${category.categoryDescription}</textarea>
+                                            <textarea name="categoryDescription" id="categoryDescription" class="form-control" cols="50" rows="5" maxlength="2000">${category.categoryDescription}</textarea>
                                         </div>
                                     </div>
                                     <div class="row ml-1 mr-1">
@@ -93,18 +94,18 @@
 <!-- /. WRAPPER  -->
 <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
 <!-- JQUERY SCRIPTS -->
-<script src="${url}/vendor/jquery/jquery-3.2.1.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/jquery/jquery-3.2.1.min.js"></script>
 <!-- BOOTSTRAP SCRIPTS -->
-<script src="${url}/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
 <!-- METISMENU SCRIPTS -->
-<script src="${url}/js/jquery.metisMenu.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/jquery.metisMenu.js"></script>
 <!-- CUSTOM SCRIPTS -->
-<script src="${url}/js/custom.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/custom.js"></script>
 <!--===============================================================================================-->
 <!-- CK EDITOR -->
-<script src="${url}/js/ckeditor/ckeditor.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/ckeditor/ckeditor.js"></script>
 <script type="text/javascript">
-    CKEDITOR.replace('description');
+    CKEDITOR.replace('categoryDescription');
 </script>
 
 </body>

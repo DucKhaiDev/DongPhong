@@ -5,11 +5,10 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:url value="/assets" var="url" />
 <section class="section-slide">
     <div class="wrap-slick1">
         <div class="slick1">
-            <div class="item-slick1" style="background-image: url(${url}/images/slide-01.jpg);">
+            <div class="item-slick1" style="background-image: url(${pageContext.request.contextPath}/assets/images/slide-01.jpg);">
                 <div class="container h-full">
                     <div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
                         <div class="layer-slick1 animated visible-false" data-appear="fadeInDown" data-delay="0">
@@ -33,7 +32,7 @@
                 </div>
             </div>
 
-            <div class="item-slick1" style="background-image: url(${url}/images/slide-02.jpg);">
+            <div class="item-slick1" style="background-image: url(${pageContext.request.contextPath}/assets/images/slide-02.jpg);">
                 <div class="container h-full">
                     <div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
                         <div class="layer-slick1 animated visible-false" data-appear="rollIn" data-delay="0">
@@ -57,7 +56,7 @@
                 </div>
             </div>
 
-            <div class="item-slick1" style="background-image: url(${url}/images/slide-03.png);">
+            <div class="item-slick1" style="background-image: url(${pageContext.request.contextPath}/assets/images/slide-03.png);">
                 <div class="container h-full">
                     <div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
                         <div class="layer-slick1 animated visible-false" data-appear="rotateInDownLeft" data-delay="0">

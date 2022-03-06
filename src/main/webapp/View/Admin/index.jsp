@@ -3,9 +3,8 @@
   Date: 2/14/2022
   Time: 10:34 AM
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:url value="/assets" var="url" />
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -13,15 +12,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dong Phong</title>
     <!-- BOOTSTRAP STYLES-->
-    <link href="${url}/css/bootstrap.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/css/bootstrap.css" rel="stylesheet" />
     <!-- FONTAWESOME STYLES-->
-    <link href="${url}/fonts/fontawesome-pro-5.15.4-web/css/all.min.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/fonts/fontawesome-pro-5.15.4-web/css/all.min.css" rel="stylesheet" />
     <!-- MORRIS CHART STYLES-->
-    <link href="${url}/js/morris/morris-0.4.3.min.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/js/morris/morris-0.4.3.min.css" rel="stylesheet" />
     <!-- CUSTOM STYLES-->
-    <link href="${url}/css/custom.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/css/custom.css" rel="stylesheet" />
     <!-- GOOGLE FONTS-->
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
 </head>
 <body>
 <div id="wrapper">
@@ -316,7 +315,7 @@
                             <ul class="chat-box">
                                 <li class="left clearfix">
                                     <span class="chat-img pull-left">
-                                        <img src="${url}/images/1.png" alt="User" class="img-circle" />
+                                        <img src="${pageContext.request.contextPath}/assets/images/1.png" alt="User" class="img-circle" />
                                     </span>
                                     <div class="chat-body">
                                         <strong >Jack Sparrow</strong>
@@ -331,7 +330,7 @@
                                 <li class="right clearfix">
                                     <span class="chat-img pull-right">
 
-                                        <img src="${url}/images/2.png" alt="User" class="img-circle" />
+                                        <img src="${pageContext.request.contextPath}/assets/images/2.png" alt="User" class="img-circle" />
                                     </span>
                                     <div class="chat-body clearfix">
 
@@ -346,7 +345,7 @@
                                 </li>
                                 <li class="left clearfix">
                                     <span class="chat-img pull-left">
-                                         <img src="${url}/images/3.png" alt="User" class="img-circle" />
+                                         <img src="${pageContext.request.contextPath}/assets/images/3.png" alt="User" class="img-circle" />
                                     </span>
                                     <div class="chat-body clearfix">
 
@@ -361,7 +360,7 @@
                                 </li>
                                 <li class="right clearfix">
                                     <span class="chat-img pull-right">
-                                         <img src="${url}/images/4.png" alt="User" class="img-circle" />
+                                         <img src="${pageContext.request.contextPath}/assets/images/4.png" alt="User" class="img-circle" />
                                     </span>
                                     <div class="chat-body clearfix">
 
@@ -376,7 +375,7 @@
                                 </li>
                                 <li class="left clearfix">
                                     <span class="chat-img pull-left">
-                                        <img src="${url}/images/1.png" alt="User" class="img-circle" />
+                                        <img src="${pageContext.request.contextPath}/assets/images/1.png" alt="User" class="img-circle" />
                                     </span>
                                     <div class="chat-body">
                                         <strong >Jack Sparrow</strong>
@@ -390,7 +389,7 @@
                                 </li>
                                 <li class="right clearfix">
                                     <span class="chat-img pull-right">
-                                       <img src="${url}/images/2.png" alt="User" class="img-circle" />
+                                       <img src="${pageContext.request.contextPath}/assets/images/2.png" alt="User" class="img-circle" />
                                     </span>
                                     <div class="chat-body clearfix">
 
@@ -408,7 +407,7 @@
 
                         <div class="panel-footer">
                             <div class="input-group">
-                                <input id="btn-input" type="text" class="form-control input-sm" placeholder="Type your message to send..." />
+                                <label for="btn-input"></label><input id="btn-input" type="text" class="form-control input-sm" placeholder="Type your message to send..." />
                                 <span class="input-group-btn">
                                     <button class="btn btn-warning btn-sm" id="btn-chat">
                                         Send
@@ -455,16 +454,16 @@
 <!-- /. WRAPPER  -->
 <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
 <!-- JQUERY SCRIPTS -->
-<script src="${url}/vendor/jquery/jquery-3.2.1.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/jquery/jquery-3.2.1.min.js"></script>
 <!-- BOOTSTRAP SCRIPTS -->
-<script src="${url}/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
 <!-- METISMENU SCRIPTS -->
-<script src="${url}/js/jquery.metisMenu.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/jquery.metisMenu.js"></script>
 <!-- MORRIS CHART SCRIPTS -->
-<script src="${url}/js/morris/raphael-2.1.0.min.js"></script>
-<script src="${url}/js/morris/morris.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/morris/raphael-2.1.0.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/morris/morris.js"></script>
 <!-- CUSTOM SCRIPTS -->
-<script src="${url}/js/custom.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/custom.js"></script>
 
 
 </body>

@@ -14,9 +14,11 @@
   Date: 2/25/2022
   Time: 8:55 PM
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:url value="/assets" var="url" />
+<jsp:useBean id="category" scope="request" type="Entity.Category"/>
+<jsp:useBean id="totalNumber" scope="request" type="java.lang.Integer"/>
+<jsp:useBean id="pageSize" scope="request" type="java.lang.Integer"/>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,38 +26,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--===============================================================================================-->
-    <link rel="icon" type="image/png" href="${url}/images/icons/icon-logo.png"/>
+    <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/assets/images/icons/icon-logo.png"/>
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${url}/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/bootstrap/css/bootstrap.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${url}/fonts/fontawesome-pro-5.15.4-web/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/fonts/fontawesome-pro-5.15.4-web/css/all.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${url}/fonts/iconic/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/fonts/iconic/css/material-design-iconic-font.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${url}/fonts/linearicons-v1.0.0/icon-font.min.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/fonts/linearicons-v1.0.0/icon-font.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${url}/vendor/animate/animate.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/animate/animate.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${url}/vendor/css-hamburgers/hamburgers.min.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/css-hamburgers/hamburgers.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${url}/vendor/animsition/css/animsition.min.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/animsition/css/animsition.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${url}/vendor/select2/select2.min.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/select2/select2.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${url}/vendor/daterangepicker/daterangepicker.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/daterangepicker/daterangepicker.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${url}/vendor/slick/slick.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/slick/slick.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${url}/vendor/MagnificPopup/magnific-popup.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/MagnificPopup/magnific-popup.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${url}/vendor/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/perfect-scrollbar/perfect-scrollbar.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" href="${url}/css/pagination.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/pagination.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${url}/css/util.css">
-    <link rel="stylesheet" type="text/css" href="${url}/css/main.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/util.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/main.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${url}/css/custom.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/custom.css">
 
 </head>
 <body class="animsition">
@@ -124,7 +126,7 @@
                         <i class="zmdi zmdi-search"></i>
                     </button>
 
-                    <input id="search-product" class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="search-product" placeholder="Tìm kiếm">
+                    <label for="search-product"></label><input id="search-product" class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="search-product" placeholder="Tìm kiếm">
                 </div>
             </div>
         </div>
@@ -240,6 +242,7 @@
 
             <div class="col-md-9">
                 <div class="row content">
+                    <jsp:useBean id="products" scope="request" type="java.util.List"/>
                     <c:forEach items="${products}" var="product" varStatus="loop">
                         <div class="col-sm-6 col-md-4 col-lg-4 p-b-35 women">
                             <div class="block2">
@@ -259,8 +262,8 @@
                                     </div>
                                     <div class="block2-txt-child2 flex-r p-t-3">
                                         <a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-                                            <img class="icon-heart1 dis-block trans-04" src="${url}/images/icons/icon-heart-01.png" alt="ICON">
-                                            <img class="icon-heart2 dis-block trans-04 ab-t-l" src="${url}/images/icons/icon-heart-02.png" alt="ICON">
+                                            <img class="icon-heart1 dis-block trans-04" src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-01.png" alt="ICON">
+                                            <img class="icon-heart2 dis-block trans-04 ab-t-l" src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-02.png" alt="ICON">
                                         </a>
                                     </div>
                                 </div>
@@ -313,7 +316,7 @@
                             <div class="container">
                                 <div class="bg0 p-t-60 p-b-30 p-lr-15-lg how-pos3-parent">
                                     <button class="how-pos3 hov3 trans-04 js-hide-modal${loop.index + 1}">
-                                        <img src="${url}/images/icons/icon-close.png" alt="CLOSE">
+                                        <img src="${pageContext.request.contextPath}/assets/images/icons/icon-close.png" alt="CLOSE">
                                     </button>
 
                                     <div class="row">
@@ -356,12 +359,11 @@
                                                     <div class="flex-w flex-r-m p-b-10">
                                                         <div class="size-204 flex-w flex-m respon6-next">
                                                             <div class="wrap-num-product flex-w m-r-20 m-tb-10">
+                                                                <label for="num-product" style="display: none"></label>
                                                                 <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
                                                                     <i class="fs-16 zmdi zmdi-minus"></i>
                                                                 </div>
-
-                                                                <input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product" value="1">
-
+                                                                <input id="num-product" class="mtext-104 cl3 txt-center num-product" type="number" name="num-product" value="1">
                                                                 <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
                                                                     <i class="fs-16 zmdi zmdi-plus"></i>
                                                                 </div>
@@ -417,14 +419,14 @@
 <jsp:include page="footer.jsp"/>
 
 <!--===============================================================================================-->
-<script src="${url}/vendor/jquery/jquery-3.2.1.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/jquery/jquery-3.2.1.min.js"></script>
 <!--===============================================================================================-->
-<script src="${url}/vendor/animsition/js/animsition.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/animsition/js/animsition.min.js"></script>
 <!--===============================================================================================-->
-<script src="${url}/vendor/bootstrap/js/popper.js"></script>
-<script src="${url}/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/bootstrap/js/popper.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
 <!--===============================================================================================-->
-<script src="${url}/vendor/select2/select2.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/select2/select2.min.js"></script>
 <script>
     $(".js-select2").each(function(){
         $(this).select2({
@@ -434,18 +436,18 @@
     })
 </script>
 <!--===============================================================================================-->
-<script src="${url}/vendor/daterangepicker/moment.min.js"></script>
-<script src="${url}/vendor/daterangepicker/daterangepicker.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/daterangepicker/moment.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/daterangepicker/daterangepicker.js"></script>
 <!--===============================================================================================-->
-<script src="${url}/vendor/slick/slick.min.js"></script>
-<script src="${url}/js/slick-custom.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/slick/slick.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/slick-custom.js"></script>
 <!--===============================================================================================-->
-<script src="${url}/vendor/parallax100/parallax100.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/parallax100/parallax100.js"></script>
 <script>
     $('.parallax100').parallax100();
 </script>
 <!--===============================================================================================-->
-<script src="${url}/vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
 <script>
     $('.gallery-lb').each(function() { // the containers for all your galleries
         $(this).magnificPopup({
@@ -459,16 +461,16 @@
     });
 </script>
 <!--===============================================================================================-->
-<script src="${url}/vendor/isotope/isotope.pkgd.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/isotope/isotope.pkgd.min.js"></script>
 <!--===============================================================================================-->
-<script src="${url}/vendor/sweetalert/sweetalert.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/sweetalert/sweetalert.min.js"></script>
 <script>
     $('.js-addwish-b2, .js-addwish-detail').on('click', function(e){
         e.preventDefault();
     });
 
     $('.js-addwish-b2').each(function(){
-        var nameProduct = $(this).parent().parent().find('.js-name-b2').html();
+        const nameProduct = $(this).parent().parent().find('.js-name-b2').html();
         $(this).on('click', function(){
             swal(nameProduct, "đã được thêm vào danh sách yêu thích!", "success");
 
@@ -478,7 +480,7 @@
     });
 
     $('.js-addwish-detail').each(function(){
-        var nameProduct = $(this).parent().parent().parent().find('.js-name-detail').html();
+        const nameProduct = $(this).parent().parent().parent().find('.js-name-detail').html();
 
         $(this).on('click', function(){
             swal(nameProduct, "đã được thêm vào danh sách yêu thích!", "success");
@@ -491,7 +493,7 @@
     /*---------------------------------------------*/
 
     $('.js-addcart-detail').each(function(){
-        var nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();
+        const nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();
         $(this).on('click', function(){
             swal(nameProduct, "đã được thêm vào giỏ hàng!", "success");
         });
@@ -499,12 +501,12 @@
 
 </script>
 <!--===============================================================================================-->
-<script src="${url}/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 <script>
     $('.js-pscroll').each(function(){
         $(this).css('position','relative');
         $(this).css('overflow','hidden');
-        var ps = new PerfectScrollbar(this, {
+        const ps = new PerfectScrollbar(this, {
             wheelSpeed: 1,
             scrollingThreshold: 1000,
             wheelPropagation: false,
@@ -516,7 +518,7 @@
     });
 </script>
 <!--===============================================================================================-->
-<script src="${url}/js/main.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
 <!--===============================================================================================-->
 <script>
     $(function () {
@@ -537,8 +539,8 @@
 <script>
     $(function () {
         //Nếu URL không chứa parameter thì xóa hết parameter trong sessionScope
-        var url = new URL(location.href);
-        var params = url.searchParams;
+        const url = new URL(location.href);
+        const params = url.searchParams;
 
         if (!params.has('brand')) {
             $('input[name="brand"]').prop('checked', false).each(function () {
@@ -577,8 +579,8 @@
 <script>
     $(document).ready(function () {
         //append parameter vào url
-        $('input[type="checkbox"], input[type="radio"]').click(function (e) {
-            var seasoning = '', tempArray = [];
+        $('input[type="checkbox"], input[type="radio"]').click(function () {
+            let seasoning = '', tempArray = [];
             $('input[name="brand"]:checked').each(function () {
                tempArray.push($(this).val());
             });
@@ -604,8 +606,8 @@
             }
 
             //Xóa parameter cũ
-            var url = new URL(location.href);
-            var params = url.searchParams;
+            const url = new URL(location.href);
+            const params = url.searchParams;
             params.delete('brand');
             params.delete('price');
             params.delete('stars-rating');
@@ -621,7 +623,7 @@
             $(this)
                 .prop('checked', sessionStorage.getItem(this.id) === 'true')
                 .on('change', function () {
-                    sessionStorage.setItem(this.id, this.checked)
+                    sessionStorage.setItem($(this).prop('id'), this.checked)
                 })
                 .trigger('change');
         });
@@ -639,15 +641,15 @@
     });
 </script>
 <!--===============================================================================================-->
-<script src="${url}/js/pagination.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/pagination.min.js"></script>
 <script>
     $(function () {
         //Phân trang
-        var p = $('#pagination');
+        const p = $('#pagination');
         p.pagination({
             dataSource: function (done) {
-                var result = [];
-                for (var i = 0; i < ${totalNumber}; i++) {
+                let result = [];
+                for (let i = 0; i < ${totalNumber}; i++) {
                     result.push(i);
                 }
                 done(result);
@@ -656,17 +658,17 @@
             className: 'paginationjs-big',
             afterInit: function () {
                 //Sau khi load trang mới thì đặt trang hiện tại = trang đã lưu trong sessionScope (nếu trang đã lưu != 1)
-                var currPage = sessionStorage.getItem('currPage');
+                const currPage = sessionStorage.getItem('currPage');
                 if (currPage !== null) {
                     p.pagination('go', currPage);
                 }
             },
             afterPageOnClick: function () {
                 //Chuyển đến trang mới
-                var currPage =  p.pagination('getSelectedPageNum');
+                const currPage = p.pagination('getSelectedPageNum');
                 sessionStorage.setItem('currPage', currPage);
-                var url = new URL(location.href);
-                var params = url.searchParams;
+                const url = new URL(location.href);
+                const params = url.searchParams;
                 params.delete('page');
                 if (currPage > 1) {
                     params.append('page', sessionStorage.getItem('currPage'));
@@ -681,7 +683,7 @@
 <script>
     //Tìm kiếm sản phẩm
     $(function () {
-        var searchProduct = $('#search-product');
+        const searchProduct = $('#search-product');
         searchProduct.on('keyup', function (e) {
             if (e.key === 'Enter' || e.keyCode === 13) {
                 appendParameterSearch(searchProduct);
@@ -693,9 +695,9 @@
         });
         
         function appendParameterSearch(searchProduct) {
-            var keyword = searchProduct.val();
+            let keyword = searchProduct.val();
             keyword = keyword.trim().replace(/\s\s+/g, ' ');
-            var url = new URL(location.href);
+            const url = new URL(location.href);
             url.searchParams.delete('search');
             url.searchParams.append('search', keyword);
             location.href = url.href;
@@ -706,30 +708,33 @@
 <script>
     //Sắp xếp sản phẩm
     $('.filter-link').removeClass('filter-link-active');
-    var pVal = (new URL(location.href)).searchParams.get('sortBy');
+    const pVal = (new URL(location.href)).searchParams.get('sortBy');
+    const filter_link_default = $('#filter-link-default');
+    const filter_link_priceAsc = $('#filter-link-priceAsc');
+    const filter_link_priceDesc = $('#filter-link-priceDesc');
 
     if (pVal === null) {
-        $('#filter-link-default').addClass('filter-link-active');
+        filter_link_default.addClass('filter-link-active');
     } else if (pVal === 'priceAsc') {
-        $('#filter-link-priceAsc').addClass('filter-link-active');
+        filter_link_priceAsc.addClass('filter-link-active');
     } else if (pVal === 'priceDesc') {
-        $('#filter-link-priceDesc').addClass('filter-link-active');
+        filter_link_priceDesc.addClass('filter-link-active');
     }
-    
-    $('#filter-link-default').on('click', function () {
+
+    filter_link_default.on('click', function () {
         appendParameterSort('default');
     });
-    
-    $('#filter-link-priceAsc').on('click', function () {
+
+    filter_link_priceAsc.on('click', function () {
         appendParameterSort('priceAsc');
     });
-    
-    $('#filter-link-priceDesc').on('click', function () {
+
+    filter_link_priceDesc.on('click', function () {
         appendParameterSort('priceDesc');
     });
     
     function appendParameterSort(parameter) {
-        var url = new URL(location.href);
+        const url = new URL(location.href);
         url.searchParams.delete('sortBy');
         if (parameter !== 'default') {
             url.searchParams.append('sortBy', parameter);

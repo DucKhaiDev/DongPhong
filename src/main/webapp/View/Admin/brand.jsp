@@ -5,9 +5,8 @@
   Date: 2/24/2022
   Time: 12:53 AM
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:url value="/assets" var="url" />
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -15,17 +14,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dong Phong</title>
     <!-- BOOTSTRAP STYLES-->
-    <link href="${url}/css/bootstrap.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/css/bootstrap.css" rel="stylesheet" />
     <!-- FONTAWESOME STYLES-->
-    <link href="${url}/fonts/fontawesome-pro-5.15.4-web/css/all.min.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/fonts/fontawesome-pro-5.15.4-web/css/all.min.css" rel="stylesheet" />
     <!-- MORRIS CHART STYLES-->
 
     <!-- CUSTOM STYLES-->
-    <link href="${url}/css/custom.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/css/custom.css" rel="stylesheet" />
     <!-- GOOGLE FONTS-->
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
     <!-- TABLE STYLES-->
-    <link href="${url}/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
     <%---------------------------------------------------------------------------------------------%>
     <style>
         .table > tbody > tr > td > p {
@@ -85,6 +84,7 @@
                                     </thead>
                                     <tbody>
                                         <c:set var="number" value="0"/>
+                                        <jsp:useBean id="brands" scope="request" type="java.util.List"/>
                                         <c:forEach items="${brands}" var="brand">
                                         <tr class="odd">
                                             <td>${number = number + 1}</td>
@@ -127,14 +127,14 @@
 <!-- /. WRAPPER  -->
 <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
 <!-- JQUERY SCRIPTS -->
-<script src="${url}/vendor/jquery/jquery-3.2.1.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/jquery/jquery-3.2.1.min.js"></script>
 <!-- BOOTSTRAP SCRIPTS -->
-<script src="${url}/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
 <!-- METISMENU SCRIPTS -->
-<script src="${url}/js/jquery.metisMenu.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/jquery.metisMenu.js"></script>
 <!-- DATA TABLE SCRIPTS -->
-<script src="${url}/js/dataTables/jquery.dataTables.js"></script>
-<script src="${url}/js/dataTables/dataTables.bootstrap.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/dataTables/jquery.dataTables.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/dataTables/dataTables.bootstrap.js"></script>
 <script>
     $(document).ready(function () {
         $('#dataTables-example').dataTable({
@@ -144,7 +144,7 @@
             columnDefs: [
                 {
                     targets: 2,
-                    render: function ( data, type, row ) {
+                    render: function (data, type) {
                         return type === 'display' && data.length > 111 ?
                             data.substr(0, 111) + ' (Còn nữa...)' :
                             data;
@@ -160,7 +160,7 @@
     });
 </script>
 <!-- CUSTOM SCRIPTS -->
-<script src="${url}/js/custom.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/custom.js"></script>
 
 </body>
 </html>

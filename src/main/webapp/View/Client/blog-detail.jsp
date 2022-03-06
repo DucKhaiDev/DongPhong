@@ -3,9 +3,8 @@
   Date: 1/20/2022
   Time: 4:35 PM
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:url value="/assets" var="url" />
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,28 +12,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--===============================================================================================-->
-    <link rel="icon" type="image/png" href="${url}/images/icons/icon-logo.png"/>
+    <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/assets/images/icons/icon-logo.png"/>
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${url}/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/bootstrap/css/bootstrap.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${url}/fonts/fontawesome-pro-5.15.4-web/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/fonts/fontawesome-pro-5.15.4-web/css/all.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${url}/fonts/iconic/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/fonts/iconic/css/material-design-iconic-font.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${url}/fonts/linearicons-v1.0.0/icon-font.min.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/fonts/linearicons-v1.0.0/icon-font.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${url}/vendor/animate/animate.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/animate/animate.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${url}/vendor/css-hamburgers/hamburgers.min.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/css-hamburgers/hamburgers.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${url}/vendor/animsition/css/animsition.min.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/animsition/css/animsition.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${url}/vendor/select2/select2.min.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/select2/select2.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${url}/vendor/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/perfect-scrollbar/perfect-scrollbar.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${url}/css/util.css">
-    <link rel="stylesheet" type="text/css" href="${url}/css/main.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/util.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/main.css">
     <!--===============================================================================================-->
 </head>
 <body class="animsition">
@@ -75,7 +74,7 @@
 
                 <!-- Logo desktop -->
                 <a href="#" class="logo">
-                    <img src="${url}/images/icons/logo.png" alt="IMG-LOGO">
+                    <img src="${pageContext.request.contextPath}/assets/images/icons/logo.png" alt="IMG-LOGO">
                 </a>
 
                 <!-- Menu desktop -->
@@ -132,7 +131,7 @@
     <div class="wrap-header-mobile">
         <!-- Logo moblie -->
         <div class="logo-mobile">
-            <a href="index.jsp"><img src="${url}/images/icons/logo.png" alt="IMG-LOGO"></a>
+            <a href="index.jsp"><img src="${pageContext.request.contextPath}/assets/images/icons/logo.png" alt="IMG-LOGO"></a>
         </div>
 
         <!-- Icon header -->
@@ -226,14 +225,16 @@
     <div class="modal-search-header flex-c-m trans-04 js-hide-modal-search">
         <div class="container-search-header">
             <button class="flex-c-m btn-hide-modal-search trans-04 js-hide-modal-search">
-                <img src="${url}/images/icons/icon-close2.png" alt="CLOSE">
+                <img src="${pageContext.request.contextPath}/assets/images/icons/icon-close2.png" alt="CLOSE">
             </button>
 
             <form class="wrap-search-header flex-w p-l-15">
                 <button class="flex-c-m trans-04">
                     <i class="zmdi zmdi-search"></i>
                 </button>
-                <input class="plh3" type="text" name="search" placeholder="Search...">
+                <label>
+                    <input class="plh3" type="text" name="search" placeholder="Search...">
+                </label>
             </form>
         </div>
     </div>
@@ -258,7 +259,7 @@
             <ul class="header-cart-wrapitem w-full">
                 <li class="header-cart-item flex-w flex-t m-b-12">
                     <div class="header-cart-item-img">
-                        <img src="${url}/images/item-cart-01.jpg" alt="IMG">
+                        <img src="${pageContext.request.contextPath}/assets/images/item-cart-01.jpg" alt="IMG">
                     </div>
 
                     <div class="header-cart-item-txt p-t-8">
@@ -274,7 +275,7 @@
 
                 <li class="header-cart-item flex-w flex-t m-b-12">
                     <div class="header-cart-item-img">
-                        <img src="${url}/images/item-cart-02.jpg" alt="IMG">
+                        <img src="${pageContext.request.contextPath}/assets/images/item-cart-02.jpg" alt="IMG">
                     </div>
 
                     <div class="header-cart-item-txt p-t-8">
@@ -290,7 +291,7 @@
 
                 <li class="header-cart-item flex-w flex-t m-b-12">
                     <div class="header-cart-item-img">
-                        <img src="${url}/images/item-cart-03.jpg" alt="IMG">
+                        <img src="${pageContext.request.contextPath}/assets/images/item-cart-03.jpg" alt="IMG">
                     </div>
 
                     <div class="header-cart-item-txt p-t-8">
@@ -353,7 +354,7 @@
                 <div class="p-r-45 p-r-0-lg">
                     <!--  -->
                     <div class="wrap-pic-w how-pos5-parent">
-                        <img src="${url}/images/blog-04.jpg" alt="IMG-BLOG">
+                        <img src="${pageContext.request.contextPath}/assets/images/blog-04.jpg" alt="IMG-BLOG">
 
                         <div class="flex-col-c-m size-123 bg9 how-pos5">
 								<span class="ltext-107 cl2 txt-center">
@@ -429,19 +430,27 @@
 
                         <form>
                             <div class="bor19 m-b-20">
-                                <textarea class="stext-111 cl2 plh3 size-124 p-lr-18 p-tb-15" name="cmt" placeholder="Comment..."></textarea>
+                                <label>
+                                    <textarea class="stext-111 cl2 plh3 size-124 p-lr-18 p-tb-15" name="cmt" placeholder="Comment..."></textarea>
+                                </label>
                             </div>
 
                             <div class="bor19 size-218 m-b-20">
-                                <input class="stext-111 cl2 plh3 size-116 p-lr-18" type="text" name="name" placeholder="Name *">
+                                <label>
+                                    <input class="stext-111 cl2 plh3 size-116 p-lr-18" type="text" name="name" placeholder="Name *">
+                                </label>
                             </div>
 
                             <div class="bor19 size-218 m-b-20">
-                                <input class="stext-111 cl2 plh3 size-116 p-lr-18" type="text" name="email" placeholder="Email *">
+                                <label>
+                                    <input class="stext-111 cl2 plh3 size-116 p-lr-18" type="text" name="email" placeholder="Email *">
+                                </label>
                             </div>
 
                             <div class="bor19 size-218 m-b-30">
-                                <input class="stext-111 cl2 plh3 size-116 p-lr-18" type="text" name="web" placeholder="Website">
+                                <label>
+                                    <input class="stext-111 cl2 plh3 size-116 p-lr-18" type="text" name="web" placeholder="Website">
+                                </label>
                             </div>
 
                             <button class="flex-c-m stext-101 cl0 size-125 bg3 bor2 hov-btn3 p-lr-15 trans-04">
@@ -455,7 +464,9 @@
             <div class="col-md-4 col-lg-3 p-b-80">
                 <div class="side-menu">
                     <div class="bor17 of-hidden pos-relative">
-                        <input class="stext-103 cl2 plh4 size-116 p-l-28 p-r-55" type="text" name="search" placeholder="Search">
+                        <label>
+                            <input class="stext-103 cl2 plh4 size-116 p-l-28 p-r-55" type="text" name="search" placeholder="Search">
+                        </label>
 
                         <button class="flex-c-m size-122 ab-t-r fs-18 cl4 hov-cl1 trans-04">
                             <i class="zmdi zmdi-search"></i>
@@ -508,7 +519,7 @@
                         <ul>
                             <li class="flex-w flex-t p-b-30">
                                 <a href="#" class="wrao-pic-w size-214 hov-ovelay1 m-r-20">
-                                    <img src="${url}/images/product-min-01.jpg" alt="PRODUCT">
+                                    <img src="${pageContext.request.contextPath}/assets/images/product-min-01.jpg" alt="PRODUCT">
                                 </a>
 
                                 <div class="size-215 flex-col-t p-t-8">
@@ -524,7 +535,7 @@
 
                             <li class="flex-w flex-t p-b-30">
                                 <a href="#" class="wrao-pic-w size-214 hov-ovelay1 m-r-20">
-                                    <img src="${url}/images/product-min-02.jpg" alt="PRODUCT">
+                                    <img src="${pageContext.request.contextPath}/assets/images/product-min-02.jpg" alt="PRODUCT">
                                 </a>
 
                                 <div class="size-215 flex-col-t p-t-8">
@@ -540,7 +551,7 @@
 
                             <li class="flex-w flex-t p-b-30">
                                 <a href="#" class="wrao-pic-w size-214 hov-ovelay1 m-r-20">
-                                    <img src="${url}/images/product-min-03.jpg" alt="PRODUCT">
+                                    <img src="${pageContext.request.contextPath}/assets/images/product-min-03.jpg" alt="PRODUCT">
                                 </a>
 
                                 <div class="size-215 flex-col-t p-t-8">
@@ -794,7 +805,9 @@
 
                 <form>
                     <div class="wrap-input1 w-full p-b-4">
-                        <input class="input1 bg-none plh1 stext-107 cl7" type="text" name="email" placeholder="email@example.com">
+                        <label>
+                            <input class="input1 bg-none plh1 stext-107 cl7" type="text" name="email" placeholder="email@example.com">
+                        </label>
                         <div class="focus-input1 trans-04"></div>
                     </div>
 
@@ -810,29 +823,29 @@
         <div class="p-t-40">
             <div class="flex-c-m flex-w p-b-18">
                 <a href="#" class="m-all-1">
-                    <img src="${url}/images/icons/icon-pay-01.png" alt="ICON-PAY">
+                    <img src="${pageContext.request.contextPath}/assets/images/icons/icon-pay-01.png" alt="ICON-PAY">
                 </a>
 
                 <a href="#" class="m-all-1">
-                    <img src="${url}/images/icons/icon-pay-02.png" alt="ICON-PAY">
+                    <img src="${pageContext.request.contextPath}/assets/images/icons/icon-pay-02.png" alt="ICON-PAY">
                 </a>
 
                 <a href="#" class="m-all-1">
-                    <img src="${url}/images/icons/icon-pay-03.png" alt="ICON-PAY">
+                    <img src="${pageContext.request.contextPath}/assets/images/icons/icon-pay-03.png" alt="ICON-PAY">
                 </a>
 
                 <a href="#" class="m-all-1">
-                    <img src="${url}/images/icons/icon-pay-04.png" alt="ICON-PAY">
+                    <img src="${pageContext.request.contextPath}/assets/images/icons/icon-pay-04.png" alt="ICON-PAY">
                 </a>
 
                 <a href="#" class="m-all-1">
-                    <img src="${url}/images/icons/icon-pay-05.png" alt="ICON-PAY">
+                    <img src="${pageContext.request.contextPath}/assets/images/icons/icon-pay-05.png" alt="ICON-PAY">
                 </a>
             </div>
 
             <p class="stext-107 cl6 txt-center">
                 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | Made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a> &amp; distributed by <a href="https://themewagon.com" target="_blank">ThemeWagon</a>
+                Copyright &copy;<script>document.write(new Date().getFullYear().toString());</script> All rights reserved | Made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a> &amp; distributed by <a href="https://themewagon.com" target="_blank">ThemeWagon</a>
                 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 
             </p>
@@ -849,14 +862,14 @@
 </div>
 
 <!--===============================================================================================-->
-<script src="${url}/vendor/jquery/jquery-3.2.1.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/jquery/jquery-3.2.1.min.js"></script>
 <!--===============================================================================================-->
-<script src="${url}/vendor/animsition/js/animsition.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/animsition/js/animsition.min.js"></script>
 <!--===============================================================================================-->
-<script src="${url}/vendor/bootstrap/js/popper.js"></script>
-<script src="${url}/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/bootstrap/js/popper.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
 <!--===============================================================================================-->
-<script src="${url}/vendor/select2/select2.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/select2/select2.min.js"></script>
 <script>
     $(".js-select2").each(function(){
         $(this).select2({
@@ -866,14 +879,14 @@
     })
 </script>
 <!--===============================================================================================-->
-<script src="${url}/vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
 <!--===============================================================================================-->
-<script src="${url}/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 <script>
     $('.js-pscroll').each(function(){
         $(this).css('position','relative');
         $(this).css('overflow','hidden');
-        var ps = new PerfectScrollbar(this, {
+        const ps = new PerfectScrollbar(this, {
             wheelSpeed: 1,
             scrollingThreshold: 1000,
             wheelPropagation: false,
@@ -885,7 +898,7 @@
     });
 </script>
 <!--===============================================================================================-->
-<script src="${url}/js/main.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
 
 </body>
 </html>

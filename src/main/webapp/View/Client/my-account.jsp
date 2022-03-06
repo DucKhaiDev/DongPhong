@@ -3,9 +3,8 @@
   Date: 1/25/2022
   Time: 2:50 PM
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:url value="/assets" var="url" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,30 +12,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--===============================================================================================-->
-    <link rel="icon" type="image/png" href="${url}/images/icons/icon-logo.png"/>
+    <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/assets/images/icons/icon-logo.png"/>
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${url}/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/bootstrap/css/bootstrap.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${url}/fonts/fontawesome-pro-5.15.4-web/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/fonts/fontawesome-pro-5.15.4-web/css/all.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${url}/fonts/iconic/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/fonts/iconic/css/material-design-iconic-font.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${url}/fonts/linearicons-v1.0.0/icon-font.min.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/fonts/linearicons-v1.0.0/icon-font.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${url}/vendor/animate/animate.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/animate/animate.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${url}/vendor/css-hamburgers/hamburgers.min.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/css-hamburgers/hamburgers.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${url}/vendor/animsition/css/animsition.min.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/animsition/css/animsition.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${url}/vendor/select2/select2.min.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/select2/select2.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${url}/vendor/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/perfect-scrollbar/perfect-scrollbar.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${url}/css/util.css">
-    <link rel="stylesheet" type="text/css" href="${url}/css/main.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/util.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/main.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${url}/css/my-account-stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/my-account-stylesheet.css">
 </head>
 <body class="animsition">
 
@@ -54,7 +53,7 @@
             <div class="col-md-3 border-right">
                 <div class="d-flex flex-column align-items-center text-center p-3 py-5">
                     <c:url value="/images/avatar?fname=${sessionScope.account.avatar}" var="avatarUrl"/>
-                    <img class="avatar user-img-empty rounded-circle mt-5 mb-1" width="150px" height="150px" style="object-fit: cover;" <c:if test="${not empty sessionScope.account.avatar}">src="${avatarUrl}"</c:if>>
+                    <img class="avatar user-img-empty rounded-circle mt-5 mb-1" width="150px" height="150px" style="object-fit: cover;" <c:if test="${not empty sessionScope.account.avatar}">src="${avatarUrl}"</c:if> alt="">
                     <input class="text-center mb-3 file-upload" type="file" name="update_avatar" />
                     <span class="font-weight-bold mb-2">${sessionScope.account.lastName} ${sessionScope.account.firstName}</span>
                     <span class="text-black-50">ID:&nbsp;${sessionScope.account.userId}</span>
@@ -94,14 +93,14 @@
 <jsp:include page="footer.jsp"/>
 
 <!--===============================================================================================-->
-<script src="${url}/vendor/jquery/jquery-3.2.1.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/jquery/jquery-3.2.1.min.js"></script>
 <!--===============================================================================================-->
-<script src="${url}/vendor/animsition/js/animsition.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/animsition/js/animsition.min.js"></script>
 <!--===============================================================================================-->
-<script src="${url}/vendor/bootstrap/js/popper.js"></script>
-<script src="${url}/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/bootstrap/js/popper.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
 <!--===============================================================================================-->
-<script src="${url}/vendor/select2/select2.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/select2/select2.min.js"></script>
 <script>
     $(".js-select2").each(function(){
         $(this).select2({
@@ -111,14 +110,14 @@
     })
 </script>
 <!--===============================================================================================-->
-<script src="${url}/vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
 <!--===============================================================================================-->
-<script src="${url}/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 <script>
     $('.js-pscroll').each(function(){
         $(this).css('position','relative');
         $(this).css('overflow','hidden');
-        var ps = new PerfectScrollbar(this, {
+        const ps = new PerfectScrollbar(this, {
             wheelSpeed: 1,
             scrollingThreshold: 1000,
             wheelPropagation: false,
@@ -130,19 +129,19 @@
     });
 </script>
 <!--===============================================================================================-->
-<script src="${url}/js/main.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
 <!--===============================================================================================-->
 <script type="text/javascript">
     $(document).ready(function () {
-        var readURL = function (input) {
+        const readURL = function (input) {
             if (input.files && input.files[0]) {
-                var reader = new FileReader();
+                const reader = new FileReader();
                 reader.onload = function (e) {
                     $('.avatar').attr('src', e.target.result);
                 }
                 reader.readAsDataURL(input.files[0]);
             }
-        }
+        };
 
         $(".file-upload").on('change', function () {
             readURL(this);

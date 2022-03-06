@@ -3,9 +3,8 @@
   Date: 1/11/2022
   Time: 5:37 PM
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:url value="/assets" var="url" />
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,28 +12,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--===============================================================================================-->
-    <link rel="icon" type="image/png" href="${url}/images/icons/icon-logo.png"/>
+    <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/assets/images/icons/icon-logo.png"/>
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${url}/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/bootstrap/css/bootstrap.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${url}/fonts/fontawesome-pro-5.15.4-web/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/fonts/fontawesome-pro-5.15.4-web/css/all.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${url}/fonts/iconic/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/fonts/iconic/css/material-design-iconic-font.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${url}/fonts/linearicons-v1.0.0/icon-font.min.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/fonts/linearicons-v1.0.0/icon-font.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${url}/vendor/animate/animate.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/animate/animate.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${url}/vendor/css-hamburgers/hamburgers.min.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/css-hamburgers/hamburgers.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${url}/vendor/animsition/css/animsition.min.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/animsition/css/animsition.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${url}/vendor/select2/select2.min.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/select2/select2.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${url}/vendor/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/perfect-scrollbar/perfect-scrollbar.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${url}/css/util.css">
-    <link rel="stylesheet" type="text/css" href="${url}/css/main.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/util.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/main.css">
     <!--===============================================================================================-->
 </head>
 <body class="animsition">
@@ -46,7 +45,7 @@
 <jsp:include page="cart.jsp"/>
 
 <!-- Title page -->
-<section class="bg-img1 txt-center p-lr-15 p-tb-92" style="background-image: url('${url}/images/bg-02.jpg');">
+<section class="bg-img1 txt-center p-lr-15 p-tb-92" style="background-image: url('${pageContext.request.contextPath}/assets/images/bg-02.jpg');">
     <h2 class="ltext-105 cl0 txt-center">
         Blog
     </h2>
@@ -62,7 +61,7 @@
                     <!-- item blog -->
                     <div class="p-b-63">
                         <a href="blog-detail.jsp" class="hov-img0 how-pos5-parent">
-                            <img src="${url}/images/blog-04.jpg" alt="IMG-BLOG">
+                            <img src="${pageContext.request.contextPath}/assets/images/blog-04.jpg" alt="IMG-BLOG">
 
                             <div class="flex-col-c-m size-123 bg9 how-pos5">
 									<span class="ltext-107 cl2 txt-center">
@@ -115,7 +114,7 @@
                     <!-- item blog -->
                     <div class="p-b-63">
                         <a href="blog-detail.jsp" class="hov-img0 how-pos5-parent">
-                            <img src="${url}/images/blog-05.jpg" alt="IMG-BLOG">
+                            <img src="${pageContext.request.contextPath}/assets/images/blog-05.jpg" alt="IMG-BLOG">
 
                             <div class="flex-col-c-m size-123 bg9 how-pos5">
 									<span class="ltext-107 cl2 txt-center">
@@ -168,7 +167,7 @@
                     <!-- item blog -->
                     <div class="p-b-63">
                         <a href="blog-detail.jsp" class="hov-img0 how-pos5-parent">
-                            <img src="${url}/images/blog-06.jpg" alt="IMG-BLOG">
+                            <img src="${pageContext.request.contextPath}/assets/images/blog-06.jpg" alt="IMG-BLOG">
 
                             <div class="flex-col-c-m size-123 bg9 how-pos5">
 									<span class="ltext-107 cl2 txt-center">
@@ -234,7 +233,9 @@
             <div class="col-md-4 col-lg-3 p-b-80">
                 <div class="side-menu">
                     <div class="bor17 of-hidden pos-relative">
-                        <input class="stext-103 cl2 plh4 size-116 p-l-28 p-r-55" type="text" name="search" placeholder="Search">
+                        <label>
+                            <input class="stext-103 cl2 plh4 size-116 p-l-28 p-r-55" type="text" name="search" placeholder="Search">
+                        </label>
 
                         <button class="flex-c-m size-122 ab-t-r fs-18 cl4 hov-cl1 trans-04">
                             <i class="zmdi zmdi-search"></i>
@@ -287,7 +288,7 @@
                         <ul>
                             <li class="flex-w flex-t p-b-30">
                                 <a href="#" class="wrao-pic-w size-214 hov-ovelay1 m-r-20">
-                                    <img src="${url}/images/product-min-01.jpg" alt="PRODUCT">
+                                    <img src="${pageContext.request.contextPath}/assets/images/product-min-01.jpg" alt="PRODUCT">
                                 </a>
 
                                 <div class="size-215 flex-col-t p-t-8">
@@ -303,7 +304,7 @@
 
                             <li class="flex-w flex-t p-b-30">
                                 <a href="#" class="wrao-pic-w size-214 hov-ovelay1 m-r-20">
-                                    <img src="${url}/images/product-min-02.jpg" alt="PRODUCT">
+                                    <img src="${pageContext.request.contextPath}/assets/images/product-min-02.jpg" alt="PRODUCT">
                                 </a>
 
                                 <div class="size-215 flex-col-t p-t-8">
@@ -319,7 +320,7 @@
 
                             <li class="flex-w flex-t p-b-30">
                                 <a href="#" class="wrao-pic-w size-214 hov-ovelay1 m-r-20">
-                                    <img src="${url}/images/product-min-03.jpg" alt="PRODUCT">
+                                    <img src="${pageContext.request.contextPath}/assets/images/product-min-03.jpg" alt="PRODUCT">
                                 </a>
 
                                 <div class="size-215 flex-col-t p-t-8">
@@ -476,14 +477,14 @@
 <jsp:include page="footer.jsp"/>
 
 <!--===============================================================================================-->
-<script src="${url}/vendor/jquery/jquery-3.2.1.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/jquery/jquery-3.2.1.min.js"></script>
 <!--===============================================================================================-->
-<script src="${url}/vendor/animsition/js/animsition.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/animsition/js/animsition.min.js"></script>
 <!--===============================================================================================-->
-<script src="${url}/vendor/bootstrap/js/popper.js"></script>
-<script src="${url}/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/bootstrap/js/popper.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
 <!--===============================================================================================-->
-<script src="${url}/vendor/select2/select2.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/select2/select2.min.js"></script>
 <script>
     $(".js-select2").each(function(){
         $(this).select2({
@@ -493,14 +494,14 @@
     })
 </script>
 <!--===============================================================================================-->
-<script src="${url}/vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
 <!--===============================================================================================-->
-<script src="${url}/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 <script>
     $('.js-pscroll').each(function(){
         $(this).css('position','relative');
         $(this).css('overflow','hidden');
-        var ps = new PerfectScrollbar(this, {
+        const ps = new PerfectScrollbar(this, {
             wheelSpeed: 1,
             scrollingThreshold: 1000,
             wheelPropagation: false,
@@ -512,7 +513,7 @@
     });
 </script>
 <!--===============================================================================================-->
-<script src="${url}/js/main.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
 
 </body>
 </html>

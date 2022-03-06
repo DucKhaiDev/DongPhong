@@ -4,9 +4,8 @@
   Date: 2/16/2022
   Time: 10:54 AM
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:url value="/assets" var="url" />
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -14,13 +13,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dong Phong</title>
     <!-- BOOTSTRAP STYLES-->
-    <link href="${url}/css/bootstrap.css" rel="stylesheet"/>
+    <link href="${pageContext.request.contextPath}/assets/css/bootstrap.css" rel="stylesheet"/>
     <!-- FONTAWESOME STYLES-->
-    <link href="${url}/fonts/fontawesome-pro-5.15.4-web/css/all.min.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/fonts/fontawesome-pro-5.15.4-web/css/all.min.css" rel="stylesheet" />
     <!-- CUSTOM STYLES-->
-    <link href="${url}/css/custom.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/css/custom.css" rel="stylesheet" />
     <!-- GOOGLE FONTS-->
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
 </head>
 <body>
 <div id="wrapper">
@@ -50,8 +49,9 @@
                                     <div class="row">
                                         <div class="col-md-5 border-right">
                                             <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                                                <jsp:useBean id="user" scope="request" type="Entity.User"/>
                                                 <c:url value="/images/avatar?fname=${user.avatar}" var="avatarUrl"/>
-                                                <img class="avatar user-img-empty rounded-circle mt-5 mb-1" width="150px" height="150px" style="object-fit: cover;" <c:if test="${not empty user.avatar}">src="${avatarUrl}"</c:if>>
+                                                <img class="avatar user-img-empty rounded-circle mt-5 mb-1" width="150px" height="150px" style="object-fit: cover;" <c:if test="${not empty user.avatar}">src="${avatarUrl}"</c:if> alt="">
                                                 <input class="text-center mb-3 file-upload" type="file" name="avatar" />
                                                 <span class="font-weight-bold mb-2">${user.lastName} ${user.firstName}</span>
                                                 <span class="text-black-50">ID:&nbsp;${user.userId}</span>
@@ -70,19 +70,27 @@
                                                     <div class="col-md-12 mb-3"><label for="address" class="labels">Địa chỉ</label><input id="address" type="text" class="form-control" name="address" maxlength="2000" placeholder="${user.address}"></div>
                                                     <div class="col-md-12 mb-3"><label for="phone" class="labels">Số điện thoại</label><input id="phone" type="text" class="form-control" name="phone" maxlength="12" placeholder="${user.phone}"></div>
                                                     <div class="col-md-12">
-                                                        <label for="role" class="labels">Quyền truy cập</label>
+                                                        <label class="labels">Quyền truy cập</label>
                                                         <div class="checkbox mt-0">
                                                             <div class="row">
                                                                 <div class="col-md-3"></div>
                                                                 <c:choose>
                                                                     <c:when test="${user.role}">
-                                                                        <div class="col-md-3"><input id="role" type="radio" value="false" name="role"> Quản trị viên</div>
-                                                                        <div class="col-md-3"><input type="radio" value="true" name="role" checked="checked"> Thành viên</div>
+                                                                        <div class="col-md-3"><label>
+                                                                            <input type="radio" value="false" name="role">
+                                                                        </label> Quản trị viên</div>
+                                                                        <div class="col-md-3"><label>
+                                                                            <input type="radio" value="true" name="role" checked="checked">
+                                                                        </label> Thành viên</div>
                                                                     </c:when>
                                                                     <c:otherwise>
-                                                                        <div class="col-md-3"><input type="radio" value="false" name="role" checked="checked"> Quản trị viên</div>
+                                                                        <div class="col-md-3"><label>
+                                                                            <input type="radio" value="false" name="role" checked="checked">
+                                                                        </label> Quản trị viên</div>
                                                                         <% int count = new UserService().countAdmin(); %>
-                                                                        <div class="col-md-3"><input type="radio" value="true" name="role" <% if (count <= 1) out.print("disabled"); %>> Thành viên</div>
+                                                                        <div class="col-md-3"><label>
+                                                                            <input type="radio" value="true" name="role" <% if (count <= 1) out.print("disabled"); %>>
+                                                                        </label> Thành viên</div>
                                                                     </c:otherwise>
                                                                 </c:choose>
                                                                 <div class="col-md-3"></div>
@@ -118,25 +126,25 @@
 <!-- /. WRAPPER  -->
 <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
 <!-- JQUERY SCRIPTS -->
-<script src="${url}/vendor/jquery/jquery-3.2.1.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/jquery/jquery-3.2.1.min.js"></script>
 <!-- BOOTSTRAP SCRIPTS -->
-<script src="${url}/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
 <!-- METISMENU SCRIPTS -->
-<script src="${url}/js/jquery.metisMenu.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/jquery.metisMenu.js"></script>
 <!-- CUSTOM SCRIPTS -->
-<script src="${url}/js/custom.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/custom.js"></script>
 <!--===============================================================================================-->
 <script type="text/javascript">
     $(document).ready(function () {
-        var readURL = function (input) {
+        const readURL = function (input) {
             if (input.files && input.files[0]) {
-                var reader = new FileReader();
+                const reader = new FileReader();
                 reader.onload = function (e) {
                     $('.avatar').attr('src', e.target.result);
                 }
                 reader.readAsDataURL(input.files[0]);
             }
-        }
+        };
 
         $(".file-upload").on('change', function () {
             readURL(this);

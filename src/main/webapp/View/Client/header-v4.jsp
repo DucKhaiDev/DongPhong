@@ -5,7 +5,6 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:url value="/assets" var="url" />
 <header class="header-v4">
     <!-- Header desktop -->
     <div class="container-menu-desktop">
@@ -17,7 +16,7 @@
 
                 <!-- Logo desktop -->
                 <a href="${pageContext.request.contextPath}" class="logo">
-                    <img src="${url}/images/icons/logo.png" alt="IMG-LOGO">
+                    <img src="${pageContext.request.contextPath}/assets/images/icons/logo.png" alt="IMG-LOGO">
                 </a>
 
                 <!-- Menu desktop -->
@@ -96,7 +95,7 @@
     <div class="wrap-header-mobile">
         <!-- Logo moblie -->
         <div class="logo-mobile">
-            <a href="index.jsp"><img src="${url}/images/icons/logo.png" alt="IMG-LOGO"></a>
+            <a href="index.jsp"><img src="${pageContext.request.contextPath}/assets/images/icons/logo.png" alt="IMG-LOGO"></a>
         </div>
 
         <!-- Icon header -->
@@ -190,14 +189,16 @@
     <div class="modal-search-header flex-c-m trans-04 js-hide-modal-search">
         <div class="container-search-header">
             <button class="flex-c-m btn-hide-modal-search trans-04 js-hide-modal-search">
-                <img src="${url}/images/icons/icon-close2.png" alt="CLOSE">
+                <img src="${pageContext.request.contextPath}/assets/images/icons/icon-close2.png" alt="CLOSE">
             </button>
 
             <form class="wrap-search-header flex-w p-l-15">
                 <button class="flex-c-m trans-04">
                     <i class="zmdi zmdi-search"></i>
                 </button>
-                <input class="plh3" type="text" name="search" placeholder="Search...">
+                <label>
+                    <input class="plh3" type="text" name="search" placeholder="Search...">
+                </label>
             </form>
         </div>
     </div>

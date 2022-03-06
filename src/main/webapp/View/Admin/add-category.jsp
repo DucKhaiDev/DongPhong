@@ -3,9 +3,8 @@
   Date: 2/23/2022
   Time: 10:04 PM
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:url value="/assets" var="url" />
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -13,13 +12,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dong Phong</title>
     <!-- BOOTSTRAP STYLES-->
-    <link href="${url}/css/bootstrap.css" rel="stylesheet"/>
+    <link href="${pageContext.request.contextPath}/assets/css/bootstrap.css" rel="stylesheet"/>
     <!-- FONTAWESOME STYLES-->
-    <link href="${url}/fonts/fontawesome-pro-5.15.4-web/css/all.min.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/fonts/fontawesome-pro-5.15.4-web/css/all.min.css" rel="stylesheet" />
     <!-- CUSTOM STYLES-->
-    <link href="${url}/css/custom.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/css/custom.css" rel="stylesheet" />
     <!-- GOOGLE FONTS-->
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
     <%---------------------------------------------------------------------------------------------%>
     <style>
         p.exist-id {
@@ -60,9 +59,10 @@
                                         <div class="col-md-6 mb-3"><label class="labels"></label><p class="exist-id">${requestScope.existId}</p></div>
                                         <div class="col-md-12 mb-3"><label for="categoryName" class="labels">Loại sản phẩm</label><input id="categoryName" type="text" class="form-control" name="categoryName" maxlength="255" required="required"></div>
                                         <div class="col-md-6 mb-3">
-                                            <label class="labels">Danh mục</label>
+                                            <label for="room" class="labels">Danh mục</label>
                                             <div class="checkbox pl-0">
-                                                <select name="room" class="w-50">
+                                                <select id="room" name="room" class="w-50">
+                                                    <jsp:useBean id="rooms" scope="request" type="java.util.List"/>
                                                     <c:forEach items="${rooms}" var="room">
                                                         <option value="${room.roomId}">${room.roomName}</option>
                                                     </c:forEach>
@@ -96,16 +96,16 @@
 <!-- /. WRAPPER  -->
 <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
 <!-- JQUERY SCRIPTS -->
-<script src="${url}/vendor/jquery/jquery-3.2.1.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/jquery/jquery-3.2.1.min.js"></script>
 <!-- BOOTSTRAP SCRIPTS -->
-<script src="${url}/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
 <!-- METISMENU SCRIPTS -->
-<script src="${url}/js/jquery.metisMenu.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/jquery.metisMenu.js"></script>
 <!-- CUSTOM SCRIPTS -->
-<script src="${url}/js/custom.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/custom.js"></script>
 <!--===============================================================================================-->
 <!-- CK EDITOR -->
-<script src="${url}/js/ckeditor/ckeditor.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/ckeditor/ckeditor.js"></script>
 <script type="text/javascript">
     CKEDITOR.replace('categoryDescription');
 </script>
