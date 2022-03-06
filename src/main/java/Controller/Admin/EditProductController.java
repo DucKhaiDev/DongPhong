@@ -8,7 +8,6 @@ import Services.deploy.BrandService;
 import Services.deploy.CategoryService;
 import Services.deploy.ProImageService;
 import Services.deploy.ProductService;
-import Tools.Pair;
 import Util.Constant;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -30,18 +29,18 @@ public class EditProductController extends HttpServlet {
     private final BrandService brandService = new BrandService();
     private final ProImageService imageService = new ProImageService();
 
-    private String PRO_ID;
+    private String productId;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        PRO_ID = request.getParameter("id");
-        Product product = productService.getProduct(PRO_ID);
+        productId = request.getParameter("id");
+        Product product = productService.getProduct(productId);
         request.setAttribute("product", product);
         List<Category> categories = categoryService.getAll();
         request.setAttribute("categories", categories);
         List<Brand> brands = brandService.getAll();
         request.setAttribute("brands", brands);
-        List<ProImage> images = imageService.getProImage(PRO_ID);
+        List<ProImage> images = imageService.getProImage(productId);
         request.setAttribute("images", images);
         request.getRequestDispatcher(Constant.Path.ADMIN_EDIT_PRODUCT).forward(request, response);
     }
@@ -49,41 +48,43 @@ public class EditProductController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //Cập nhật sản phẩm
-        Product product = productService.getProduct(PRO_ID);
+        Product product = productService.getProduct(productId);
 
-        String PRO_NAME = request.getParameter("pro_name");
-        if (PRO_NAME != null && !PRO_NAME.trim().isEmpty()) {
-            product.setPRO_NAME(PRO_NAME);
+        String productName = request.getParameter("productName");
+        if (productName != null && !productName.trim().isEmpty()) {
+            product.setProductName(productName);
         }
 
-        product.setPRO_DES(request.getParameter("pro_des"));
+        product.setProductDescription(request.getParameter("productDescription"));
 
-        int PRO_QUANT = request.getParameter("pro_quant").isEmpty() ? 0 : Integer.parseInt(request.getParameter("pro_quant"));
-        product.setPRO_QUANT(PRO_QUANT);
+        int productQuantity = request.getParameter("productQuantity").isEmpty() ? 0 : Integer.parseInt(request.getParameter("productQuantity"));
+        product.setProductQuantity(productQuantity);
 
-        String PRO_PRICE = request.getParameter("pro_price");
-        if (PRO_PRICE != null && !PRO_PRICE.trim().isEmpty()) {
-            product.setPRO_PRICE(PRO_PRICE);
+        String productPrice = request.getParameter("productPrice");
+        if (productPrice != null && !productPrice.trim().isEmpty()) {
+            product.setProductPrice(productPrice);
         }
 
-        String PRO_COST = request.getParameter("pro_cost");
-        if (PRO_COST != null && !PRO_COST.trim().isEmpty()) {
-            product.setPRO_COST(PRO_COST);
+        String productCost = request.getParameter("productCost");
+        if (productCost != null && !productCost.trim().isEmpty()) {
+            product.setProductCost(productCost);
         }
 
-        product.setCAT(categoryService.getCategory(request.getParameter("cat")));
-        product.setBRA(brandService.getBrand(request.getParameter("bra")));
+        product.setCategory(categoryService.getCategory(request.getParameter("category")));
+        product.setBrand(brandService.getBrand(request.getParameter("brand")));
 
         productService.edit(product);
 
         //Cập nhật hình ảnh sản phẩm
-        List<ProImage> images = imageService.getProImage(PRO_ID);
+        List<ProImage> images = imageService.getProImage(productId);
 
         String savePath = Constant.Path.PRODUCT_IMAGES;
 
         File fileSaveDir = new File(savePath);
-        if (!fileSaveDir .exists()) {
-            fileSaveDir.mkdir();
+        if (!fileSaveDir.exists()) {
+            if (!fileSaveDir.mkdir()) {
+                System.out.println("Directory creation failed.");
+            }
         }
 
         String fileName, newName;
@@ -100,7 +101,7 @@ public class EditProductController extends HttpServlet {
                 int index = Integer.parseInt(part.getName());
                 if (index < images.size() + 1) {
                     ProImage image = images.get(index - 1);
-                    image.setIMG_NAME(newName);
+                    image.setImageName(newName);
                     imageService.edit(image);
                 } else {
                     ProImage image = new ProImage(newName, product);
@@ -109,7 +110,7 @@ public class EditProductController extends HttpServlet {
             }
         }
 
-        response.sendRedirect(request.getContextPath() + "/admin/product/edit?id=" + PRO_ID);
+        response.sendRedirect(request.getContextPath() + "/admin/product/edit?id=" + productId);
     }
 
     private String extractFileName(Part part) {

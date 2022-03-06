@@ -63,8 +63,8 @@
                                     <p class="text-muted mt-2 mb-5" style="color: #FF0000 !important;">${requestScope.loginMsg}</p>
                                     <form id="form-login" action="login" method="post">
                                         <div class="form-group">
-                                            <label for="username_or_email">Tên đăng nhập hoặc Email</label>
-                                            <input type="text" class="form-control" id="username_or_email" name="username_or_email" required="required">
+                                            <label for="username">Tên đăng nhập hoặc Email</label>
+                                            <input type="text" class="form-control" id="username" name="username" required="required">
                                         </div>
                                         <div class="form-group">
                                             <label for="password">Mật khẩu</label>

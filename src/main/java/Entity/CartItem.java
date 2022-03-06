@@ -5,59 +5,51 @@ import java.io.Serializable;
 public class CartItem implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private String CITEM_ID;
-    private int QUANT;
-    private String VALUE;
-    private Product PRO;
-    private Cart CART;
+    private String cartItemId;
+    private int quantity;
+    private String value;
+    private Product product;
+    private Cart cart;
 
     public CartItem() {}
 
-    public CartItem(String CITEM_ID, int QUANT, String VALUE, Product PRO, Cart CART) {
-        this.CITEM_ID = CITEM_ID;
-        this.QUANT = QUANT;
-        this.VALUE = VALUE;
-        this.PRO = PRO;
-        this.CART = CART;
+    public String getCartItemId() {
+        return cartItemId;
     }
 
-    public String getCITEM_ID() {
-        return CITEM_ID;
+    public void setCartItemId(String cartItemId) {
+        this.cartItemId = cartItemId;
     }
 
-    public void setCITEM_ID(String CITEM_ID) {
-        this.CITEM_ID = CITEM_ID;
+    public int getQuantity() {
+        return quantity;
     }
 
-    public int getQUANT() {
-        return QUANT;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
-    public void setQUANT(int QUANT) {
-        this.QUANT = QUANT;
+    public String getValue() {
+        return value;
     }
 
-    public String getVALUE() {
-        return VALUE;
+    public void setValue(String value) {
+        this.value = value;
     }
 
-    public void setVALUE(String VALUE) {
-        this.VALUE = VALUE;
+    public Product getProduct() {
+        return product;
     }
 
-    public Product getPRO() {
-        return PRO;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
-    public void setPRO(Product PRO) {
-        this.PRO = PRO;
+    public Cart getCart() {
+        return cart;
     }
 
-    public Cart getCART() {
-        return CART;
-    }
-
-    public void setCART(Cart CART) {
-        this.CART = CART;
+    public void setCart(Cart cart) {
+        this.cart = cart;
     }
 }

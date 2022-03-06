@@ -56,10 +56,10 @@
                 <p class="text-muted" style="color: #FF0000 !important;">${requestScope.cpwMsg}</p>
             </div>
             <div class="row mt-3 d-flex justify-content-center">
-                <div class="col-md-10 mb-3"><label class="labels" for="old_password">Mật khẩu cũ</label><input id="old_password" type="password" class="form-control" name="old_password" maxlength="32"></div>
+                <div class="col-md-10 mb-3"><label class="labels" for="oldPassword">Mật khẩu cũ</label><input id="oldPassword" type="password" class="form-control" name="oldPassword" maxlength="32"></div>
                 <p class="text-muted" style="color: #FF0000 !important;">${requestScope.cpw_incorrect}</p>
-                <div class="col-md-10 mb-3"><label class="labels" for="new_password">Mật khẩu mới</label><input id="new_password" type="password" class="form-control" name="new_password" maxlength="32"></div>
-                <div class="col-md-10 mb-3"><label class="labels" for="repeat_new_password">Nhập lại mật khẩu mới</label><input id="repeat_new_password" type="password" class="form-control" name="repeat_new_password" maxlength="32"></div>
+                <div class="col-md-10 mb-3"><label class="labels" for="newPassword">Mật khẩu mới</label><input id="newPassword" type="password" class="form-control" name="newPassword" maxlength="32"></div>
+                <div class="col-md-10 mb-3"><label class="labels" for="repeatPassword">Nhập lại mật khẩu mới</label><input id="repeatPassword" type="password" class="form-control" name="repeatPassword" maxlength="32"></div>
                 <p class="text-muted" style="color: #FF0000 !important;">${requestScope.cpw_notmatch}</p>
                 <div class="col-md-12 mt-4 text-center col-md-6"><button class="btn btn-primary profile-button" type="submit"><i class="fa fa-user-edit"></i>&nbsp;Cập nhật</button></div>
             </div>

@@ -1,9 +1,8 @@
 package Dao.deploy;
 
 import Connect.DBConnect;
-import Entity.Customer;
-import Entity.Wishlist;
-import Services.deploy.CustomerService;
+import Entity.WishList;
+import Services.deploy.UserService;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,16 +16,16 @@ public class WishlistDao implements Dao.WishlistDao {
     private PreparedStatement ps = null;
     private ResultSet rs = null;
 
-    CustomerService customerService = new CustomerService();
+    private final UserService userService = new UserService();
 
     @Override
-    public void insert(Wishlist wishlist) {
+    public void insert(WishList wishList) {
         conn = DBConnect.getConnection();
 
         try {
-            ps = conn.prepareStatement("INSERT INTO [WISHLIST](WL_ID, CUS_ID) VALUES(?, ?)");
-            ps.setString(1, wishlist.getWL_ID());
-            ps.setString(2, wishlist.getCUS().getCUS_ID());
+            ps = conn.prepareStatement("INSERT INTO [WISHLIST](WL_ID, USER_ID) VALUES(?, ?)");
+            ps.setString(1, wishList.getWishListId());
+            ps.setString(2, wishList.getUser().getUserId());
 
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -37,13 +36,13 @@ public class WishlistDao implements Dao.WishlistDao {
     }
 
     @Override
-    public void edit(Wishlist wishlist) {
+    public void edit(WishList wishList) {
         conn = DBConnect.getConnection();
 
         try {
-            ps = conn.prepareStatement("UPDATE [WISHLIST] SET CUS_ID = ? WHERE WL_ID = ?");
-            ps.setString(1, wishlist.getCUS().getCUS_ID());
-            ps.setString(2, wishlist.getWL_ID());
+            ps = conn.prepareStatement("UPDATE [WISHLIST] SET USER_ID = ? WHERE WL_ID = ?");
+            ps.setString(1, wishList.getUser().getUserId());
+            ps.setString(2, wishList.getWishListId());
 
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -54,12 +53,12 @@ public class WishlistDao implements Dao.WishlistDao {
     }
 
     @Override
-    public void delete(String WL_ID) {
+    public void delete(String wishListId) {
         conn = DBConnect.getConnection();
 
         try {
             ps = conn.prepareStatement("DELETE FROM [WISHLIST] WHERE WL_ID = ?");
-            ps.setString(1, WL_ID);
+            ps.setString(1, wishListId);
 
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -70,18 +69,18 @@ public class WishlistDao implements Dao.WishlistDao {
     }
 
     @Override
-    public Wishlist getWishlist(String WL_ID) {
+    public WishList getWishlist(String wishListId) {
         conn = DBConnect.getConnection();
-        Wishlist wishlist = new Wishlist();
+        WishList wishlist = new WishList();
 
         try {
             ps = conn.prepareStatement("SELECT * FROM [WISHLIST] WHERE WL_ID = ?");
-            ps.setString(1, WL_ID);
+            ps.setString(1, wishListId);
 
             rs = ps.executeQuery();
             rs.next();
-            wishlist.setWL_ID(rs.getString("WL_ID").trim());
-            wishlist.setCUS(customerService.getCustomer(rs.getString("CUS_ID").trim()));
+            wishlist.setWishListId(wishListId);
+            wishlist.setUser(userService.getUser(rs.getString("USER_ID").trim()));
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -92,19 +91,19 @@ public class WishlistDao implements Dao.WishlistDao {
     }
 
     @Override
-    public List<Wishlist> getAll() {
+    public List<WishList> getAll() {
         conn = DBConnect.getConnection();
-        List<Wishlist> wishlists = new ArrayList<>();
+        List<WishList> wishLists = new ArrayList<>();
 
         try {
             ps = conn.prepareStatement("SELECT * FROM [WISHLIST]");
             rs = ps.executeQuery();
             while (rs.next()) {
-                Wishlist wishlist = new Wishlist();
-                wishlist.setWL_ID(rs.getString("WL_ID").trim());
-                wishlist.setCUS(customerService.getCustomer(rs.getString("CUS_ID").trim()));
+                WishList wishList = new WishList();
+                wishList.setWishListId(rs.getString("WL_ID").trim());
+                wishList.setUser(userService.getUser(rs.getString("USER_ID").trim()));
 
-                wishlists.add(wishlist);
+                wishLists.add(wishList);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -112,6 +111,6 @@ public class WishlistDao implements Dao.WishlistDao {
             DBConnect.closeAll(rs, ps, conn);
         }
 
-        return wishlists;
+        return wishLists;
     }
 }

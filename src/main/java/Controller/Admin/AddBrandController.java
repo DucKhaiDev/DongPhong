@@ -11,7 +11,7 @@ import java.io.IOException;
 
 @WebServlet(name = "AddBrandController", value = "/admin/brand/add")
 public class AddBrandController extends HttpServlet {
-    private BrandService brandService = new BrandService();
+    private final BrandService brandService = new BrandService();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -20,17 +20,17 @@ public class AddBrandController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String BRA_ID = request.getParameter("bra_id");
-        if (brandService.checkExistID(BRA_ID)) {
-            String existID = "Mã thương hiệu đã tồn tại!";
-            request.setAttribute("existID", existID);
+        String brandId = request.getParameter("brandId");
+        if (brandService.checkExistId(brandId)) {
+            String existId = "Mã thương hiệu đã tồn tại!";
+            request.setAttribute("existId", existId);
             request.getRequestDispatcher(Constant.Path.ADMIN_ADD_BRAND).forward(request, response);
             return;
         }
 
-        String BRA_NAME = request.getParameter("bra_name");
-        String BRA_DES = request.getParameter("bra_des");
-        Brand brand = new Brand(BRA_ID, BRA_NAME, BRA_DES);
+        String brandName = request.getParameter("brandName");
+        String brandDes = request.getParameter("brandDescription");
+        Brand brand = new Brand(brandId, brandName, brandDes);
         brandService.insert(brand);
         response.sendRedirect(request.getContextPath() + "/admin/brand");
     }

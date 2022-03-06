@@ -7,129 +7,129 @@ import java.sql.Timestamp;
 public class Order implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private String ORD_ID;
-    private Customer CUS;
-    private String REC_NAME;
-    private String REC_ADDRESS;
-    private String REC_PHONE;
-    private Timestamp ORD_DATE;
-    private Date REC_DATE;
-    private String ORD_STATUS;
-    private int ORD_TOTALPRO;
-    private String ORD_TOTALPAY;
-    private Cart CART;
-    private Payment PAY;
+    private String orderId;
+    private User user;
+    private String recipientName;
+    private String recipientAddress;
+    private String recipientPhone;
+    private Timestamp orderDate;
+    private Date recipientDate;
+    private String orderStatus;
+    private int orderTotalProduct;
+    private String orderTotalPayment;
+    private Cart cart;
+    private Payment payment;
 
     public Order() {}
 
-    public Order(String ORD_ID, Customer CUS, String REC_NAME, String REC_ADDRESS, String REC_PHONE, Timestamp ORD_DATE, Date REC_DATE, String ORD_STATUS, int ORD_TOTALPRO, String ORD_TOTALPAY, Cart CART, Payment PAY) {
-        this.ORD_ID = ORD_ID;
-        this.CUS = CUS;
-        this.REC_NAME = REC_NAME;
-        this.REC_ADDRESS = REC_ADDRESS;
-        this.REC_PHONE = REC_PHONE;
-        this.ORD_DATE = ORD_DATE;
-        this.REC_DATE = REC_DATE;
-        this.ORD_STATUS = ORD_STATUS;
-        this.ORD_TOTALPRO = ORD_TOTALPRO;
-        this.ORD_TOTALPAY = ORD_TOTALPAY;
-        this.CART = CART;
-        this.PAY = PAY;
+    public Order(String orderId, User user, String recipientName, String recipientAddress, String recipientPhone, Timestamp orderDate, Date recipientDate, String orderStatus, int orderTotalProduct, String orderTotalPayment, Cart cart, Payment payment) {
+        this.orderId = orderId;
+        this.user = user;
+        this.recipientName = recipientName;
+        this.recipientAddress = recipientAddress;
+        this.recipientPhone = recipientPhone;
+        this.orderDate = orderDate;
+        this.recipientDate = recipientDate;
+        this.orderStatus = orderStatus;
+        this.orderTotalProduct = orderTotalProduct;
+        this.orderTotalPayment = orderTotalPayment;
+        this.cart = cart;
+        this.payment = payment;
     }
 
-    public String getORD_ID() {
-        return ORD_ID;
+    public String getOrderId() {
+        return orderId;
     }
 
-    public void setORD_ID(String ORD_ID) {
-        this.ORD_ID = ORD_ID;
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
     }
 
-    public Customer getCUS() {
-        return CUS;
+    public User getUser() {
+        return user;
     }
 
-    public void setCUS(Customer CUS) {
-        this.CUS = CUS;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public String getREC_NAME() {
-        return REC_NAME;
+    public String getRecipientName() {
+        return recipientName;
     }
 
-    public void setREC_NAME(String REC_NAME) {
-        this.REC_NAME = REC_NAME;
+    public void setRecipientName(String recipientName) {
+        this.recipientName = recipientName;
     }
 
-    public String getREC_ADDRESS() {
-        return REC_ADDRESS;
+    public String getRecipientAddress() {
+        return recipientAddress;
     }
 
-    public void setREC_ADDRESS(String REC_ADDRESS) {
-        this.REC_ADDRESS = REC_ADDRESS;
+    public void setRecipientAddress(String recipientAddress) {
+        this.recipientAddress = recipientAddress;
     }
 
-    public String getREC_PHONE() {
-        return REC_PHONE;
+    public String getRecipientPhone() {
+        return recipientPhone;
     }
 
-    public void setREC_PHONE(String REC_PHONE) {
-        this.REC_PHONE = REC_PHONE;
+    public void setRecipientPhone(String recipientPhone) {
+        this.recipientPhone = recipientPhone;
     }
 
-    public Timestamp getORD_DATE() {
-        return ORD_DATE;
+    public Timestamp getOrderDate() {
+        return orderDate;
     }
 
-    public void setORD_DATE(Timestamp ORD_DATE) {
-        this.ORD_DATE = ORD_DATE;
+    public void setOrderDate(Timestamp orderDate) {
+        this.orderDate = orderDate;
     }
 
-    public Date getREC_DATE() {
-        return REC_DATE;
+    public Date getRecipientDate() {
+        return recipientDate;
     }
 
-    public void setREC_DATE(Date REC_DATE) {
-        this.REC_DATE = REC_DATE;
+    public void setRecipientDate(Date recipientDate) {
+        this.recipientDate = recipientDate;
     }
 
-    public String getORD_STATUS() {
-        return ORD_STATUS;
+    public String getOrderStatus() {
+        return orderStatus;
     }
 
-    public void setORD_STATUS(String ORD_STATUS) {
-        this.ORD_STATUS = ORD_STATUS;
+    public void setOrderStatus(String orderStatus) {
+        this.orderStatus = orderStatus;
     }
 
-    public int getORD_TOTALPRO() {
-        return ORD_TOTALPRO;
+    public int getOrderTotalProduct() {
+        return orderTotalProduct;
     }
 
-    public void setORD_TOTALPRO(int ORD_TOTALPRO) {
-        this.ORD_TOTALPRO = ORD_TOTALPRO;
+    public void setOrderTotalProduct(int orderTotalProduct) {
+        this.orderTotalProduct = orderTotalProduct;
     }
 
-    public String getORD_TOTALPAY() {
-        return ORD_TOTALPAY;
+    public String getOrderTotalPayment() {
+        return orderTotalPayment;
     }
 
-    public void setORD_TOTALPAY(String ORD_TOTALPAY) {
-        this.ORD_TOTALPAY = ORD_TOTALPAY;
+    public void setOrderTotalPayment(String orderTotalPayment) {
+        this.orderTotalPayment = orderTotalPayment;
     }
 
-    public Cart getCART() {
-        return CART;
+    public Cart getCart() {
+        return cart;
     }
 
-    public void setCART(Cart CART) {
-        this.CART = CART;
+    public void setCart(Cart cart) {
+        this.cart = cart;
     }
 
-    public Payment getPAY() {
-        return PAY;
+    public Payment getPayment() {
+        return payment;
     }
 
-    public void setPAY(Payment PAY) {
-        this.PAY = PAY;
+    public void setPayment(Payment payment) {
+        this.payment = payment;
     }
 }

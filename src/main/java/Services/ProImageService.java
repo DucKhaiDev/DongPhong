@@ -7,10 +7,10 @@ import java.util.List;
 public interface ProImageService {
     void insert(ProImage image);
     void edit(ProImage image);
-    void delete(int IMG_ID);
-    void delete(String PRO_ID);
-    ProImage getImage(int IMG_ID);
-    String getProReImage(String PRO_ID);
-    List<ProImage> getProImage(String PRO_ID);
+    void delete(int imageId);
+    void delete(String productId);
+    ProImage getImage(int imageId);
+    String getProReImage(String productId);
+    List<ProImage> getProImage(String productId);
     List<ProImage> getAll();
 }

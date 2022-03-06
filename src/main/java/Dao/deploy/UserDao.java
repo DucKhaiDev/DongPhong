@@ -2,6 +2,7 @@ package Dao.deploy;
 
 import Connect.DBConnect;
 import Entity.User;
+import Services.deploy.UserService;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,22 +17,22 @@ public class UserDao implements Dao.UserDao {
     private ResultSet rs = null;
 
     @Override
-    public int getUSER_ID(String USERNAME_OR_EMAIL) {
+    public String getUserId(String identify) {
         conn = DBConnect.getConnection();
 
         try {
             ps = conn.prepareStatement("SELECT USER_ID FROM [USER] WHERE USERNAME = ? OR EMAIL = ?");
-            ps.setString(1, USERNAME_OR_EMAIL);
-            ps.setString(2, USERNAME_OR_EMAIL);
+            ps.setString(1, identify);
+            ps.setString(2, identify);
             rs = ps.executeQuery();
             rs.next();
-            return rs.getInt("USER_ID");
+            return rs.getString("USER_ID").trim();
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             DBConnect.closeAll(rs, ps, conn);
         }
-        return 0;
+        return null;
     }
 
     @Override
@@ -39,16 +40,17 @@ public class UserDao implements Dao.UserDao {
         conn = DBConnect.getConnection();
 
         try {
-            ps = conn.prepareStatement("INSERT INTO [USER](FIRSTNAME, LASTNAME, USERNAME, PASSWORD, EMAIL, ADDRESS, PHONE, AVATAR, ROLE) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)");
-            ps.setString(1, user.getFIRSTNAME());
-            ps.setString(2, user.getLASTNAME());
-            ps.setString(3, user.getUSERNAME());
-            ps.setString(4, user.getPASSWORD());
-            ps.setString(5, user.getEMAIL());
-            ps.setString(6, user.getADDRESS());
-            ps.setString(7, user.getPHONE());
-            ps.setString(8, user.getAVATAR());
-            ps.setBoolean(9, user.getROLE());
+            ps = conn.prepareStatement("INSERT INTO [USER](USER_ID, FIRSTNAME, LASTNAME, USERNAME, PASSWORD, EMAIL, ADDRESS, PHONE, AVATAR, [ROLE]) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            ps.setString(1, user.getUserId());
+            ps.setString(2, user.getFirstName());
+            ps.setString(3, user.getLastName());
+            ps.setString(4, user.getUsername());
+            ps.setString(5, user.getPassword());
+            ps.setString(6, user.getEmail());
+            ps.setString(7, user.getAddress());
+            ps.setString(8, user.getPhone());
+            ps.setString(9, user.getAvatar());
+            ps.setBoolean(10, user.getRole());
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -62,17 +64,17 @@ public class UserDao implements Dao.UserDao {
         conn = DBConnect.getConnection();
 
         try {
-             ps = conn.prepareStatement("UPDATE [USER] SET FIRSTNAME = ?, LASTNAME = ?, USERNAME = ?, PASSWORD = ?, EMAIL = ?, ADDRESS = ?, PHONE = ?, AVATAR = ?, ROLE = ? WHERE USER_ID = ?");
-             ps.setString(1, user.getFIRSTNAME());
-             ps.setString(2, user.getLASTNAME());
-             ps.setString(3, user.getUSERNAME());
-             ps.setString(4, user.getPASSWORD());
-             ps.setString(5, user.getEMAIL());
-             ps.setString(6, user.getADDRESS());
-             ps.setString(7, user.getPHONE());
-             ps.setString(8, user.getAVATAR());
-             ps.setBoolean(9, user.getROLE());
-             ps.setInt(10, user.getUSER_ID());
+             ps = conn.prepareStatement("UPDATE [USER] SET FIRSTNAME = ?, LASTNAME = ?, USERNAME = ?, PASSWORD = ?, EMAIL = ?, ADDRESS = ?, PHONE = ?, AVATAR = ?, [ROLE] = ? WHERE USER_ID = ?");
+             ps.setString(1, user.getFirstName());
+             ps.setString(2, user.getLastName());
+             ps.setString(3, user.getUsername());
+             ps.setString(4, user.getPassword());
+             ps.setString(5, user.getEmail());
+             ps.setString(6, user.getAddress());
+             ps.setString(7, user.getPhone());
+             ps.setString(8, user.getAvatar());
+             ps.setBoolean(9, user.getRole());
+             ps.setString(10, user.getUserId());
              ps.executeUpdate();
          } catch (SQLException e) {
              e.printStackTrace();
@@ -82,28 +84,14 @@ public class UserDao implements Dao.UserDao {
     }
 
     @Override
-    public void delete(int USER_ID) {
+    public void delete(String identify) {
         conn = DBConnect.getConnection();
 
         try {
-            ps = conn.prepareStatement("DELETE FROM [USER] WHERE USER_ID = ?");
-            ps.setInt(1, USER_ID);
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            DBConnect.closeAll(rs, ps, conn);
-        }
-    }
-
-    @Override
-    public void delete(String USERNAME_OR_EMAIL) {
-        conn = DBConnect.getConnection();
-
-        try {
-            ps = conn.prepareStatement("DELETE FROM [USER] WHERE USERNAME = ? OR EMAIL = ?");
-            ps.setString(1, USERNAME_OR_EMAIL);
-            ps.setString(2, USERNAME_OR_EMAIL);
+            ps = conn.prepareStatement("DELETE FROM [USER] WHERE USER_ID = ? OR USERNAME = ? OR EMAIL = ?");
+            ps.setString(1, identify);
+            ps.setString(2, identify);
+            ps.setString(3, identify);
             ps.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -113,57 +101,28 @@ public class UserDao implements Dao.UserDao {
     }
 
     @Override
-    public User getUser(int USER_ID) {
+    public User getUser(String identify) {
         User user = new User();
         conn = DBConnect.getConnection();
 
         try {
-            ps = conn.prepareStatement("SELECT * FROM [USER] WHERE USER_ID = ?");
-            ps.setInt(1, USER_ID);
+            ps = conn.prepareStatement("SELECT * FROM [USER] WHERE USER_ID = ? OR USERNAME = ? OR EMAIL = ?");
+            ps.setString(1, identify);
+            ps.setString(2, identify);
+            ps.setString(3, identify);
             rs = ps.executeQuery();
 
             rs.next();
-            user.setFIRSTNAME(rs.getString("FIRSTNAME"));
-            user.setLASTNAME(rs.getString("LASTNAME"));
-            user.setUSER_ID(rs.getInt("USER_ID"));
-            user.setUSERNAME(rs.getString("USERNAME"));
-            user.setPASSWORD(rs.getString("PASSWORD"));
-            user.setEMAIL(rs.getString("EMAIL"));
-            user.setADDRESS(rs.getString("ADDRESS"));
-            user.setPHONE(rs.getString("PHONE"));
-            user.setAVATAR(rs.getString("AVATAR"));
-            user.setROLE(rs.getBoolean("ROLE"));
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            DBConnect.closeAll(rs, ps, conn);
-        }
-
-        return user;
-    }
-
-    @Override
-    public User getUser(String USERNAME_OR_EMAIL) {
-        User user = new User();
-        conn = DBConnect.getConnection();
-
-        try {
-            ps = conn.prepareStatement("SELECT * FROM [USER] WHERE USERNAME = ? OR EMAIL = ?");
-            ps.setString(1, USERNAME_OR_EMAIL);
-            ps.setString(2, USERNAME_OR_EMAIL);
-            rs = ps.executeQuery();
-
-            rs.next();
-            user.setFIRSTNAME(rs.getString("FIRSTNAME"));
-            user.setLASTNAME(rs.getString("LASTNAME"));
-            user.setUSER_ID(rs.getInt("USER_ID"));
-            user.setUSERNAME(rs.getString("USERNAME"));
-            user.setPASSWORD(rs.getString("PASSWORD"));
-            user.setEMAIL(rs.getString("EMAIL"));
-            user.setADDRESS(rs.getString("ADDRESS"));
-            user.setPHONE(rs.getString("PHONE"));
-            user.setAVATAR(rs.getString("AVATAR"));
-            user.setROLE(rs.getBoolean("ROLE"));
+            user.setUserId(rs.getString("USER_ID").trim());
+            user.setFirstName(rs.getString("FIRSTNAME"));
+            user.setLastName(rs.getString("LASTNAME"));
+            user.setUsername(rs.getString("USERNAME"));
+            user.setPassword(rs.getString("PASSWORD"));
+            user.setEmail(rs.getString("EMAIL"));
+            user.setAddress(rs.getString("ADDRESS"));
+            user.setPhone(rs.getString("PHONE"));
+            user.setAvatar(rs.getString("AVATAR"));
+            user.setRole(rs.getBoolean("ROLE"));
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -179,21 +138,21 @@ public class UserDao implements Dao.UserDao {
         conn = DBConnect.getConnection();
 
         try {
-            ps = conn.prepareStatement("SELECT * FROM [USER] ORDER BY USER_ID ASC");
+            ps = conn.prepareStatement("SELECT * FROM [USER] ORDER BY [ROLE] ASC");
 
             rs = ps.executeQuery();
             while (rs.next()) {
                 User user = new User();
-                user.setFIRSTNAME(rs.getString("FIRSTNAME"));
-                user.setLASTNAME(rs.getString("LASTNAME"));
-                user.setUSER_ID(rs.getInt("USER_ID"));
-                user.setUSERNAME(rs.getString("USERNAME"));
-                user.setPASSWORD(rs.getString("PASSWORD"));
-                user.setEMAIL(rs.getString("EMAIL"));
-                user.setADDRESS(rs.getString("ADDRESS"));
-                user.setPHONE(rs.getString("PHONE"));
-                user.setAVATAR(rs.getString("AVATAR"));
-                user.setROLE(rs.getBoolean("ROLE"));
+                user.setUserId(rs.getString("USER_ID").trim());
+                user.setFirstName(rs.getString("FIRSTNAME"));
+                user.setLastName(rs.getString("LASTNAME"));
+                user.setUsername(rs.getString("USERNAME"));
+                user.setPassword(rs.getString("PASSWORD"));
+                user.setEmail(rs.getString("EMAIL"));
+                user.setAddress(rs.getString("ADDRESS"));
+                user.setPhone(rs.getString("PHONE"));
+                user.setAvatar(rs.getString("AVATAR"));
+                user.setRole(rs.getBoolean("ROLE"));
 
                 users.add(user);
             }
@@ -207,27 +166,27 @@ public class UserDao implements Dao.UserDao {
     }
 
     @Override
-    public List<User> search(String NAME) {
+    public List<User> search(String username) {
         List<User> users = new ArrayList<>();
         conn = DBConnect.getConnection();
 
         try {
             ps = conn.prepareStatement("SELECT * FROM [USER] WHERE USERNAME LIKE ? ORDER BY USER_ID ASC");
-            ps.setString(1, "%" + NAME + "%");
+            ps.setString(1, "%" + username + "%");
 
             rs = ps.executeQuery();
             while (rs.next()) {
                 User user = new User();
-                user.setFIRSTNAME(rs.getString("FIRSTNAME"));
-                user.setLASTNAME(rs.getString("LASTNAME"));
-                user.setUSER_ID(rs.getInt("USER_ID"));
-                user.setUSERNAME(rs.getString("USERNAME"));
-                user.setPASSWORD(rs.getString("PASSWORD"));
-                user.setEMAIL(rs.getString("EMAIL"));
-                user.setADDRESS(rs.getString("ADDRESS"));
-                user.setPHONE(rs.getString("PHONE"));
-                user.setAVATAR(rs.getString("AVATAR"));
-                user.setROLE(rs.getBoolean("ROLE"));
+                user.setUserId(rs.getString("USER_ID").trim());
+                user.setFirstName(rs.getString("FIRSTNAME"));
+                user.setLastName(rs.getString("LASTNAME"));
+                user.setUsername(rs.getString("USERNAME"));
+                user.setPassword(rs.getString("PASSWORD"));
+                user.setEmail(rs.getString("EMAIL"));
+                user.setAddress(rs.getString("ADDRESS"));
+                user.setPhone(rs.getString("PHONE"));
+                user.setAvatar(rs.getString("AVATAR"));
+                user.setRole(rs.getBoolean("ROLE"));
 
                 users.add(user);
             }
@@ -241,17 +200,16 @@ public class UserDao implements Dao.UserDao {
     }
 
     @Override
-    public boolean checkExistUSERNAME(String USERNAME) {
-        boolean exist = false;
+    public boolean checkExistUsername(String username) {
         conn = DBConnect.getConnection();
 
         try {
             ps = conn.prepareStatement("SELECT * FROM [USER] WHERE USERNAME = ?");
-            ps.setString(1, USERNAME);
+            ps.setString(1, username);
 
             rs = ps.executeQuery();
             if (rs.next()) {
-                exist = true;
+                return true;
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -259,21 +217,20 @@ public class UserDao implements Dao.UserDao {
             DBConnect.closeAll(rs, ps, conn);
         }
 
-        return exist;
+        return false;
     }
 
     @Override
-    public boolean checkExistEMAIL(String EMAIL) {
-        boolean exist = false;
+    public boolean checkExistEmail(String email) {
         conn = DBConnect.getConnection();
 
         try {
             ps = conn.prepareStatement("SELECT * FROM [USER] WHERE EMAIL = ?");
-            ps.setString(1, EMAIL);
+            ps.setString(1, email);
 
             rs = ps.executeQuery();
             if (rs.next()) {
-                exist = true;
+                return true;
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -281,7 +238,7 @@ public class UserDao implements Dao.UserDao {
             DBConnect.closeAll(rs, ps, conn);
         }
 
-        return exist;
+        return false;
     }
 
     @Override
@@ -290,7 +247,7 @@ public class UserDao implements Dao.UserDao {
         int count = 0;
 
         try {
-            ps = conn.prepareStatement("SELECT COUNT(*) FROM [USER] WHERE ROLE = 'False'");
+            ps = conn.prepareStatement("SELECT COUNT(*) FROM [USER] WHERE [ROLE] = 'False'");
             rs = ps.executeQuery();
             rs.next();
             count = rs.getInt(1);

@@ -5,16 +5,14 @@ import Entity.User;
 import java.util.List;
 
 public interface UserDao {
-    int getUSER_ID(String USERNAME_OR_EMAIL);
+    String getUserId(String identify);
     void insert(User user);
     void edit(User user);
-    void delete(int USER_ID);
-    void delete(String USERNAME_or_EMAIL);
-    User getUser(int USER_ID);
-    User getUser(String USERNAME_or_EMAIL);
+    void delete(String identify);
+    User getUser(String identify);
     List<User> getAll();
-    List<User> search(String NAME);
-    boolean checkExistUSERNAME(String USERNAME);
-    boolean checkExistEMAIL(String EMAIL);
+    List<User> search(String username);
+    boolean checkExistUsername(String username);
+    boolean checkExistEmail(String email);
     int countAdmin();
 }

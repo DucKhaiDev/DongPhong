@@ -22,7 +22,7 @@ public class MyAccountController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher(Constant.Path.MYACCOUNT).forward(request, response);
+        request.getRequestDispatcher(Constant.Path.MY_ACCOUNT).forward(request, response);
     }
 
     @Override
@@ -30,36 +30,38 @@ public class MyAccountController extends HttpServlet {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("account");
 
-        String update_firstname = request.getParameter("update_firstname");
-        if (update_firstname != null && !update_firstname.trim().isEmpty()) {
-            user.setFIRSTNAME(update_firstname);
+        String firstName = request.getParameter("firstName");
+        if (firstName != null && !firstName.trim().isEmpty()) {
+            user.setFirstName(firstName);
         }
 
-        String update_lastname = request.getParameter("update_lastname");
-        if (update_lastname != null && !update_lastname.trim().isEmpty()) {
-            user.setLASTNAME(update_lastname);
+        String lastName = request.getParameter("lastName");
+        if (lastName != null && !lastName.trim().isEmpty()) {
+            user.setLastName(lastName);
         }
 
-        String update_email = request.getParameter("update_email");
-        if (update_email != null && !update_email.trim().isEmpty()) {
-            user.setEMAIL(update_email);
+        String email = request.getParameter("email");
+        if (email != null && !email.trim().isEmpty()) {
+            user.setEmail(email);
         }
 
-        String update_address = request.getParameter("update_address");
-        if (update_address != null && !update_address.trim().isEmpty()) {
-            user.setADDRESS(update_address);
+        String address = request.getParameter("address");
+        if (address != null && !address.trim().isEmpty()) {
+            user.setAddress(address);
         }
 
-        String update_phone = request.getParameter("update_phone");
-        if (update_phone != null && !update_phone.trim().isEmpty()) {
-            user.setPHONE(update_phone);
+        String phone = request.getParameter("phone");
+        if (phone != null && !phone.trim().isEmpty()) {
+            user.setPhone(phone);
         }
 
         String savePath = Constant.Path.AVATARS;
 
         File fileSaveDir = new File(savePath);
         if (!fileSaveDir .exists()) {
-            fileSaveDir.mkdir();
+            if (!fileSaveDir.mkdir()) {
+                System.out.println("Directory creation failed.");
+            }
         }
 
         String fileName, newName;
@@ -72,7 +74,7 @@ public class MyAccountController extends HttpServlet {
                 part.write(savePath + File.separator + fileName);
                 newName = UUID.randomUUID() + "." + FilenameUtils.getExtension(fileName);
                 renameFile(fileName, newName);
-                user.setAVATAR(newName);
+                user.setAvatar(newName);
             }
         }
 

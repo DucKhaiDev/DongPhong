@@ -14,8 +14,8 @@ import java.util.List;
 
 @WebServlet(name = "AddCategoryController", value = "/admin/category/add")
 public class AddCategoryController extends HttpServlet {
-    private CategoryService categoryService = new CategoryService();
-    private RoomService roomService = new RoomService();
+    private final CategoryService categoryService = new CategoryService();
+    private final RoomService roomService = new RoomService();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -26,18 +26,18 @@ public class AddCategoryController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String CAT_ID = request.getParameter("cat_id");
-        if (categoryService.checkExistID(CAT_ID)) {
-            String existID = "Mã loại sản phẩm đã tồn tại!";
-            request.setAttribute("existID", existID);
+        String categoryId = request.getParameter("categoryId");
+        if (categoryService.checkExistId(categoryId)) {
+            String existId = "Mã loại sản phẩm đã tồn tại!";
+            request.setAttribute("existId", existId);
             request.getRequestDispatcher(Constant.Path.ADMIN_ADD_CATEGORY).forward(request, response);
             return;
         }
 
-        String CAT_NAME = request.getParameter("cat_name");
+        String categoryName = request.getParameter("categoryName");
         Room room = roomService.getRoom(request.getParameter("room"));
-        String CAT_DES = request.getParameter("cat_des");
-        Category category = new Category(CAT_ID, CAT_NAME, room, CAT_DES);
+        String categoryDescription = request.getParameter("categoryDescription");
+        Category category = new Category(categoryId, categoryName, room, categoryDescription);
         categoryService.insert(category);
         response.sendRedirect(request.getContextPath() + "/admin/category");
     }

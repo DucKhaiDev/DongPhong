@@ -1,4 +1,5 @@
-<%@ page import="Entity.User" %><%--
+<%@ page import="Entity.User" %>
+<%--
   User: duckhaidev
   Date: 2/14/2022
   Time: 10:53 PM
@@ -10,16 +11,16 @@
     <div class="sidebar-collapse">
         <ul class="nav" id="main-menu">
             <li class="text-center">
-                <c:url value="/images/avatar?fname=${sessionScope.account.AVATAR}" var="avatarUrl"/>
-                <img class="user-image user-img-empty img-responsive" <c:if test="${not empty sessionScope.account.AVATAR}">src="${avatarUrl}"</c:if>>
+                <c:url value="/images/avatar?fname=${sessionScope.account.avatar}" var="avatarUrl"/>
+                <img class="user-image user-img-empty img-responsive" <c:if test="${not empty sessionScope.account.avatar}">src="${avatarUrl}"</c:if>>
             </li>
             <li>
-                <a class="active-menu text-center" href="${pageContext.request.contextPath}/admin/user/edit?id=${sessionScope.account.USER_ID}">
+                <a class="active-menu text-center" href="${pageContext.request.contextPath}/admin/user/edit?id=${sessionScope.account.userId}">
                     <%
                         User account = (User) session.getAttribute("account");
-                        String displayName = account.getUSERNAME();
-                        String firstName = account.getFIRSTNAME();
-                        String lastName = account.getLASTNAME();
+                        String displayName = account.getUsername();
+                        String firstName = account.getFirstName();
+                        String lastName = account.getLastName();
 
                         if (lastName != null && !lastName.trim().equals("")) {
                             displayName = lastName;

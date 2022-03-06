@@ -7,14 +7,13 @@ import java.util.List;
 public interface UserService {
     void insert(User user);
     void edit(User user);
-    void delete(int USER_ID);
-    User getUser(int USER_ID);
-    User getUser(String USERNAME_OR_EMAIL);
-    User login(String USERNAME, String PASSWORD);
-    boolean register(String USERNAME, String PASSWORD, String EMAIL);
+    void delete(String identify);
+    User getUser(String identify);
+    User login(String username, String password);
+    boolean register(String username, String password, String email);
     List<User> getAll();
-    List<User> search(String NAME);
-    boolean checkExistUSERNAME(String USERNAME);
-    boolean checkExistEMAIL(String EMAIL);
+    List<User> search(String username);
+    boolean checkExistUsername(String username);
+    boolean checkExistEmail(String email);
     int countAdmin();
 }

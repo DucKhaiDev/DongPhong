@@ -6,69 +6,69 @@ import java.sql.Timestamp;
 public class Review implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private int REV_ID;
-    private Customer CUS;
-    private Product PRO;
-    private String REV_CONTENT;
-    private Timestamp REV_DATE;
-    private String REV_IMG;
+    private int reviewId;
+    private User user;
+    private Product product;
+    private String reviewContent;
+    private Timestamp reviewDate;
+    private String reviewImage;
 
     public Review() {}
 
-    public Review(int REV_ID, Customer CUS, Product PRO, String REV_CONTENT, Timestamp REV_DATE, String REV_IMG) {
-        this.REV_ID = REV_ID;
-        this.CUS = CUS;
-        this.PRO = PRO;
-        this.REV_CONTENT = REV_CONTENT;
-        this.REV_DATE = REV_DATE;
-        this.REV_IMG = REV_IMG;
+    public Review(int reviewId, User user, Product product, String reviewContent, Timestamp reviewDate, String reviewImage) {
+        this.reviewId = reviewId;
+        this.user = user;
+        this.product = product;
+        this.reviewContent = reviewContent;
+        this.reviewDate = reviewDate;
+        this.reviewImage = reviewImage;
     }
 
-    public int getREV_ID() {
-        return REV_ID;
+    public int getReviewId() {
+        return reviewId;
     }
 
-    public void setREV_ID(int REV_ID) {
-        this.REV_ID = REV_ID;
+    public void setReviewId(int reviewId) {
+        this.reviewId = reviewId;
     }
 
-    public Customer getCUS() {
-        return CUS;
+    public User getUser() {
+        return user;
     }
 
-    public void setCUS(Customer CUS) {
-        this.CUS = CUS;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public Product getPRO() {
-        return PRO;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setPRO(Product PRO) {
-        this.PRO = PRO;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
-    public String getREV_CONTENT() {
-        return REV_CONTENT;
+    public String getReviewContent() {
+        return reviewContent;
     }
 
-    public void setREV_CONTENT(String REV_CONTENT) {
-        this.REV_CONTENT = REV_CONTENT;
+    public void setReviewContent(String reviewContent) {
+        this.reviewContent = reviewContent;
     }
 
-    public Timestamp getREV_DATE() {
-        return REV_DATE;
+    public Timestamp getReviewDate() {
+        return reviewDate;
     }
 
-    public void setREV_DATE(Timestamp REV_DATE) {
-        this.REV_DATE = REV_DATE;
+    public void setReviewDate(Timestamp reviewDate) {
+        this.reviewDate = reviewDate;
     }
 
-    public String getREV_IMG() {
-        return REV_IMG;
+    public String getReviewImage() {
+        return reviewImage;
     }
 
-    public void setREV_IMG(String REV_IMG) {
-        this.REV_IMG = REV_IMG;
+    public void setReviewImage(String reviewImage) {
+        this.reviewImage = reviewImage;
     }
 }

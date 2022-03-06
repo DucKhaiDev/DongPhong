@@ -4,7 +4,6 @@ import Connect.DBConnect;
 import Entity.CartItem;
 import Services.deploy.CartService;
 import Services.deploy.ProductService;
-import com.oracle.wls.shaded.org.apache.regexp.RE;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -27,11 +26,11 @@ public class CartItemDao implements Dao.CartItemDao {
 
         try {
             ps = conn.prepareStatement("INSERT INTO [CARTITEM](CITEM_ID, QUANT, [VALUE], PRO_ID, CART_ID) VALUES(?, ?, ?, ?, ?)");
-            ps.setString(1, item.getCITEM_ID());
-            ps.setInt(2, item.getQUANT());
-            ps.setString(3, item.getVALUE());
-            ps.setString(4, item.getPRO().getPRO_ID());
-            ps.setString(5, item.getCART().getCART_ID());
+            ps.setString(1, item.getCartItemId());
+            ps.setInt(2, item.getQuantity());
+            ps.setString(3, item.getValue());
+            ps.setString(4, item.getProduct().getProductId());
+            ps.setString(5, item.getCart().getCartId());
 
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -47,11 +46,11 @@ public class CartItemDao implements Dao.CartItemDao {
 
         try {
             ps = conn.prepareStatement("UPDATE [CARTITEM] SET QUANT = ?, [VALUE] = ?, PRO_ID = ?, CART_ID = ? WHERE CITEM_ID = ?");
-            ps.setInt(1, item.getQUANT());
-            ps.setString(2, item.getVALUE());
-            ps.setString(3, item.getPRO().getPRO_ID());
-            ps.setString(4, item.getCART().getCART_ID());
-            ps.setString(5, item.getCITEM_ID());
+            ps.setInt(1, item.getQuantity());
+            ps.setString(2, item.getValue());
+            ps.setString(3, item.getProduct().getProductId());
+            ps.setString(4, item.getCart().getCartId());
+            ps.setString(5, item.getCartItemId());
 
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -62,12 +61,12 @@ public class CartItemDao implements Dao.CartItemDao {
     }
 
     @Override
-    public void delete(String CITEM_ID) {
+    public void delete(String cartItemId) {
         conn = DBConnect.getConnection();
 
         try {
             ps = conn.prepareStatement("DELETE FROM [CARTITEM] WHERE CITEM_ID = ?");
-            ps.setString(1, CITEM_ID);
+            ps.setString(1, cartItemId);
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -77,19 +76,19 @@ public class CartItemDao implements Dao.CartItemDao {
     }
 
     @Override
-    public CartItem getCartItem(String CITEM_ID) {
+    public CartItem getCartItem(String cartItemId) {
         conn = DBConnect.getConnection();
         CartItem item = new CartItem();
 
         try {
             ps = conn.prepareStatement("SELECT * FROM [CARTITEM] WHERE CITEM_ID = ?");
-            ps.setString(1, CITEM_ID);
+            ps.setString(1, cartItemId);
             rs = ps.executeQuery();
-            item.setCITEM_ID(CITEM_ID);
-            item.setQUANT(rs.getInt("QUANT"));
-            item.setVALUE(rs.getString("VALUE"));
-            item.setPRO(productService.getProduct(rs.getString("PRO_ID").trim()));
-            item.setCART(cartService.getCart(rs.getString("CART_ID").trim()));
+            item.setCartItemId(cartItemId);
+            item.setQuantity(rs.getInt("QUANT"));
+            item.setValue(rs.getString("VALUE"));
+            item.setProduct(productService.getProduct(rs.getString("PRO_ID").trim()));
+            item.setCart(cartService.getCart(rs.getString("CART_ID").trim()));
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -109,11 +108,11 @@ public class CartItemDao implements Dao.CartItemDao {
             rs = ps.executeQuery();
             while (rs.next()) {
                 CartItem item = new CartItem();
-                item.setCITEM_ID(rs.getString("CITEM_ID").trim());
-                item.setQUANT(rs.getInt("QUANT"));
-                item.setVALUE(rs.getString("VALUE"));
-                item.setPRO(productService.getProduct(rs.getString("PRO_ID").trim()));
-                item.setCART(cartService.getCart(rs.getString("CART_ID").trim()));
+                item.setCartItemId(rs.getString("CITEM_ID").trim());
+                item.setQuantity(rs.getInt("QUANT"));
+                item.setValue(rs.getString("VALUE"));
+                item.setProduct(productService.getProduct(rs.getString("PRO_ID").trim()));
+                item.setCart(cartService.getCart(rs.getString("CART_ID").trim()));
 
                 items.add(item);
             }

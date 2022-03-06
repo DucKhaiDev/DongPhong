@@ -6,9 +6,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:url value="/assets" var="url" />
-
-<%@ page import="Entity.User" %>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -51,16 +48,16 @@
 
 <!-- Content page -->
 <div class="container rounded bg-white mt-5 mb-5">
-    <c:url value="/member/my-account" var="myaccount"/>
-    <form action="${myaccount}" method="post" enctype="multipart/form-data">
+    <c:url value="/member/my-account" var="myAccount"/>
+    <form action="${myAccount}" method="post" enctype="multipart/form-data">
         <div class="row justify-content-center">
             <div class="col-md-3 border-right">
                 <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                    <c:url value="/images/avatar?fname=${sessionScope.account.AVATAR}" var="avatarUrl"/>
-                    <img class="avatar user-img-empty rounded-circle mt-5 mb-1" width="150px" height="150px" style="object-fit: cover;" <c:if test="${not empty sessionScope.account.AVATAR}">src="${avatarUrl}"</c:if>>
+                    <c:url value="/images/avatar?fname=${sessionScope.account.avatar}" var="avatarUrl"/>
+                    <img class="avatar user-img-empty rounded-circle mt-5 mb-1" width="150px" height="150px" style="object-fit: cover;" <c:if test="${not empty sessionScope.account.avatar}">src="${avatarUrl}"</c:if>>
                     <input class="text-center mb-3 file-upload" type="file" name="update_avatar" />
-                    <span class="font-weight-bold mb-2">${sessionScope.account.LASTNAME} ${sessionScope.account.FIRSTNAME}</span>
-                    <span class="text-black-50">ID:&nbsp;${sessionScope.account.USER_ID}</span>
+                    <span class="font-weight-bold mb-2">${sessionScope.account.lastName} ${sessionScope.account.firstName}</span>
+                    <span class="text-black-50">ID:&nbsp;${sessionScope.account.userId}</span>
                 </div>
             </div>
             <div class="col-md-7 border-right">
@@ -69,14 +66,14 @@
                         <h4 class="text-right">Thông tin cá nhân</h4>
                     </div>
                     <div class="row mt-2 mb-3">
-                        <div class="col-md-6"><label class="labels">Họ</label><input type="text" class="form-control" name="update_lastname" maxlength="255" placeholder="${sessionScope.account.LASTNAME}"></div>
-                        <div class="col-md-6"><label class="labels">Tên</label><input type="text" class="form-control" name="update_firstname" maxlength="255" placeholder="${sessionScope.account.FIRSTNAME}"></div>
+                        <div class="col-md-6"><label for="lastName" class="labels">Họ</label><input id="lastName" type="text" class="form-control" name="lastName" maxlength="255" placeholder="${sessionScope.account.lastName}"></div>
+                        <div class="col-md-6"><label for="firstName" class="labels">Tên</label><input id="firstName" type="text" class="form-control" name="firstName" maxlength="255" placeholder="${sessionScope.account.firstName}"></div>
                     </div>
                     <div class="row mt-3">
-                        <div class="col-md-12 mb-3"><label class="labels">Tên đăng nhập</label><input type="text" class="form-control" placeholder="${sessionScope.account.USERNAME}" readonly></div>
-                        <div class="col-md-12 mb-3"><label class="labels">Email</label><input type="text" class="form-control" name="update_email" maxlength="255" placeholder="${sessionScope.account.EMAIL}"></div>
-                        <div class="col-md-12 mb-3"><label class="labels">Địa chỉ</label><input type="text" class="form-control" name="update_address" maxlength="2000" placeholder="${sessionScope.account.ADDRESS}"></div>
-                        <div class="col-md-12"><label class="labels">Số điện thoại</label><input type="text" class="form-control" name="update_phone" maxlength="12" placeholder="${sessionScope.account.PHONE}"></div>
+                        <div class="col-md-12 mb-3"><label for="username" class="labels">Tên đăng nhập</label><input id="username" type="text" class="form-control" placeholder="${sessionScope.account.username}" readonly></div>
+                        <div class="col-md-12 mb-3"><label for="email" class="labels">Email</label><input id="email" type="text" class="form-control" name="email" maxlength="255" placeholder="${sessionScope.account.email}"></div>
+                        <div class="col-md-12 mb-3"><label for="address" class="labels">Địa chỉ</label><input id="address" type="text" class="form-control" name="address" maxlength="2000" placeholder="${sessionScope.account.address}"></div>
+                        <div class="col-md-12"><label for="phone" class="labels">Số điện thoại</label><input id="phone" type="text" class="form-control" name="phone" maxlength="12" placeholder="${sessionScope.account.phone}"></div>
                     </div>
                 </div>
             </div>

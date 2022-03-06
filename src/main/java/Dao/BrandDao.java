@@ -1,17 +1,16 @@
 package Dao;
 
 import Entity.Brand;
-import Entity.Category;
 
 import java.util.List;
 
 public interface BrandDao {
     void insert(Brand brand);
     void edit(Brand brand);
-    void delete(String BRA_ID);
-    Brand getBrand(String BRA_ID);
+    void delete(String brandId);
+    Brand getBrand(String brandId);
     List<Brand> getAll();
-    List<Brand> searchByName(String NAME);
-    boolean checkExistID(String ID);
-    boolean isUnusedBrand(String BRA_ID);
+    List<Brand> searchByName(String brandName);
+    boolean checkExistId(String id);
+    boolean isUnusedBrand(String brandId);
 }

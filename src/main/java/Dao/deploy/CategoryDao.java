@@ -16,7 +16,7 @@ public class CategoryDao implements Dao.CategoryDao {
     private PreparedStatement ps = null;
     private ResultSet rs = null;
 
-    private RoomService roomService = new RoomService();
+    private final RoomService roomService = new RoomService();
 
     @Override
     public void insert(Category category) {
@@ -24,10 +24,10 @@ public class CategoryDao implements Dao.CategoryDao {
 
         try {
             ps = conn.prepareStatement("INSERT INTO [CATEGORY](CAT_ID, CAT_NAME, ROOM_ID, CAT_DES) VALUES(?, ?, ?, ?)");
-            ps.setString(1, category.getCAT_ID());
-            ps.setString(2, category.getCAT_NAME());
-            ps.setString(3, category.getROOM().getROOM_ID());
-            ps.setString(4, category.getCAT_DES());
+            ps.setString(1, category.getCategoryId());
+            ps.setString(2, category.getCategoryName());
+            ps.setString(3, category.getRoom().getRoomId());
+            ps.setString(4, category.getCategoryDescription());
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -42,10 +42,10 @@ public class CategoryDao implements Dao.CategoryDao {
 
         try {
             ps = conn.prepareStatement("UPDATE [CATEGORY] SET CAT_NAME = ?, ROOM_ID = ?, CAT_DES = ? WHERE CAT_ID = ?");
-            ps.setString(1, category.getCAT_NAME());
-            ps.setString(2, category.getROOM().getROOM_ID());
-            ps.setString(3, category.getCAT_DES());
-            ps.setString(4, category.getCAT_ID());
+            ps.setString(1, category.getCategoryName());
+            ps.setString(2, category.getRoom().getRoomId());
+            ps.setString(3, category.getCategoryDescription());
+            ps.setString(4, category.getCategoryId());
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -55,12 +55,12 @@ public class CategoryDao implements Dao.CategoryDao {
     }
 
     @Override
-    public void delete(String CAT_ID) {
+    public void delete(String categoryId) {
         conn = DBConnect.getConnection();
 
         try {
             ps = conn.prepareStatement("DELETE FROM [CATEGORY] WHERE CAT_ID = ?");
-            ps.setString(1, CAT_ID);
+            ps.setString(1, categoryId);
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -70,20 +70,20 @@ public class CategoryDao implements Dao.CategoryDao {
     }
 
     @Override
-    public Category getCategory(String CAT_ID) {
+    public Category getCategory(String categoryId) {
         Category category = new Category();
         conn = DBConnect.getConnection();
 
         try {
             ps = conn.prepareStatement("SELECT * FROM [CATEGORY] WHERE CAT_ID = ?");
-            ps.setString(1, CAT_ID);
+            ps.setString(1, categoryId);
             rs = ps.executeQuery();
 
             rs.next();
-            category.setCAT_ID(rs.getString("CAT_ID").trim());
-            category.setCAT_NAME(rs.getString("CAT_NAME"));
-            category.setROOM(roomService.getRoom(rs.getString("ROOM_ID").trim()));
-            category.setCAT_DES(rs.getString("CAT_DES"));
+            category.setCategoryId(rs.getString("CAT_ID").trim());
+            category.setCategoryName(rs.getString("CAT_NAME"));
+            category.setRoom(roomService.getRoom(rs.getString("ROOM_ID").trim()));
+            category.setCategoryDescription(rs.getString("CAT_DES"));
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -104,10 +104,10 @@ public class CategoryDao implements Dao.CategoryDao {
             rs = ps.executeQuery();
             while (rs.next()) {
                 Category category = new Category();
-                category.setCAT_ID(rs.getString("CAT_ID").trim());
-                category.setCAT_NAME(rs.getString("CAT_NAME"));
-                category.setROOM(roomService.getRoom(rs.getString("ROOM_ID").trim()));
-                category.setCAT_DES(rs.getString("CAT_DES"));
+                category.setCategoryId(rs.getString("CAT_ID").trim());
+                category.setCategoryName(rs.getString("CAT_NAME"));
+                category.setRoom(roomService.getRoom(rs.getString("ROOM_ID").trim()));
+                category.setCategoryDescription(rs.getString("CAT_DES"));
 
                 categories.add(category);
             }
@@ -121,20 +121,20 @@ public class CategoryDao implements Dao.CategoryDao {
     }
 
     @Override
-    public List<Category> getCategoryByRoom(String ROOM_ID) {
+    public List<Category> getCategoryByRoom(String roomId) {
         List<Category> categories = new ArrayList<>();
         conn = DBConnect.getConnection();
 
         try {
             ps = conn.prepareStatement("SELECT * FROM [CATEGORY] WHERE ROOM_ID = ? ORDER BY CAT_ID ASC");
-            ps.setString(1, ROOM_ID);
+            ps.setString(1, roomId);
             rs = ps.executeQuery();
             while (rs.next()) {
                 Category category = new Category();
-                category.setCAT_ID(rs.getString("CAT_ID").trim());
-                category.setCAT_NAME(rs.getString("CAT_NAME"));
-                category.setROOM(roomService.getRoom(rs.getString("ROOM_ID").trim()));
-                category.setCAT_DES(rs.getString("CAT_DES"));
+                category.setCategoryId(rs.getString("CAT_ID").trim());
+                category.setCategoryName(rs.getString("CAT_NAME"));
+                category.setRoom(roomService.getRoom(rs.getString("ROOM_ID").trim()));
+                category.setCategoryDescription(rs.getString("CAT_DES"));
 
                 categories.add(category);
             }
@@ -148,21 +148,21 @@ public class CategoryDao implements Dao.CategoryDao {
     }
 
     @Override
-    public List<Category> searchByName(String NAME) {
+    public List<Category> searchByName(String categoryName) {
         List<Category> categories = new ArrayList<>();
         conn = DBConnect.getConnection();
 
         try {
             ps = conn.prepareStatement("SELECT * FROM [CATEGORY] WHERE CAT_NAME LIKE ? ORDER BY CAT_ID ASC");
-            ps.setString(1, "%" + NAME + "%");
+            ps.setString(1, "%" + categoryName + "%");
 
             rs = ps.executeQuery();
             while (rs.next()) {
                 Category category = new Category();
-                category.setCAT_ID(rs.getString("CAT_ID").trim());
-                category.setCAT_NAME(rs.getString("CAT_NAME"));
-                category.setROOM(roomService.getRoom(rs.getString("ROOM_ID").trim()));
-                category.setCAT_DES(rs.getString("CAT_DES"));
+                category.setCategoryId(rs.getString("CAT_ID").trim());
+                category.setCategoryName(rs.getString("CAT_NAME"));
+                category.setRoom(roomService.getRoom(rs.getString("ROOM_ID").trim()));
+                category.setCategoryDescription(rs.getString("CAT_DES"));
 
                 categories.add(category);
             }
@@ -176,13 +176,13 @@ public class CategoryDao implements Dao.CategoryDao {
     }
 
     @Override
-    public boolean checkExistID(String ID) {
+    public boolean checkExistId(String id) {
         boolean exist = false;
         conn = DBConnect.getConnection();
 
         try {
             ps = conn.prepareStatement("SELECT * FROM [CATEGORY] WHERE CAT_ID = ?");
-            ps.setString(1, ID);
+            ps.setString(1, id);
 
             rs = ps.executeQuery();
             if (rs.next()) {
@@ -198,12 +198,12 @@ public class CategoryDao implements Dao.CategoryDao {
     }
 
     @Override
-    public boolean isUnusedCategory(String CAT_ID) {
+    public boolean isUnusedCategory(String categoryId) {
         conn = DBConnect.getConnection();
 
         try {
             ps = conn.prepareStatement("SELECT * FROM [PRODUCT] WHERE CAT_ID = ?");
-            ps.setString(1, CAT_ID);
+            ps.setString(1, categoryId);
 
             rs = ps.executeQuery();
             if (rs.next()) {

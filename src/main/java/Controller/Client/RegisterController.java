@@ -11,7 +11,7 @@ import java.io.IOException;
 
 @WebServlet(name = "RegisterController", value = "/register")
 public class RegisterController extends HttpServlet {
-    private UserService userService = new UserService();
+    private final UserService userService = new UserService();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -22,14 +22,14 @@ public class RegisterController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        String repeat_password = request.getParameter("repeat_password");
+        String repeatPassword = request.getParameter("repeatPassword");
         String email = request.getParameter("email");
 
-        String rgtMsg = "";
-        String usnMsg = "";
-        String pswMsg = "";
-        String rpswMsg = "";
-        String emailMsg = "";
+        String rgtMsg;
+        String usnMsg;
+        String pswMsg;
+        String rpswMsg;
+        String emailMsg;
 
         String regexUsername = "^[A-Za-z][A-Za-z0-9_.-]{5,14}$";
         /*
@@ -57,7 +57,7 @@ public class RegisterController extends HttpServlet {
         }
 
         //Kiểm tra sự tồn tại tên đăng nhập
-        if (userService.checkExistUSERNAME(username)) {
+        if (userService.checkExistUsername(username)) {
             usnMsg = "Tên đăng nhập đã tồn tại!";
             request.setAttribute("usnMsg", usnMsg);
             request.getRequestDispatcher(Constant.Path.REGISTER).forward(request, response);
@@ -91,7 +91,7 @@ public class RegisterController extends HttpServlet {
         }
 
         //Kiểm tra đối chiếu nhập lại mật khẩu
-        if (!password.equals(repeat_password)) {
+        if (!password.equals(repeatPassword)) {
             rpswMsg = "Mật khẩu không trùng khớp!";
             request.setAttribute("rpswMsg", rpswMsg);
             request.getRequestDispatcher(Constant.Path.REGISTER).forward(request, response);
@@ -99,7 +99,7 @@ public class RegisterController extends HttpServlet {
         }
 
         //Kiểm tra sự tồn tại email
-        if (userService.checkExistEMAIL(email)) {
+        if (userService.checkExistEmail(email)) {
             emailMsg = "Email đã tồn tại!";
             request.setAttribute("emailMsg", emailMsg);
             request.getRequestDispatcher(Constant.Path.REGISTER).forward(request, response);

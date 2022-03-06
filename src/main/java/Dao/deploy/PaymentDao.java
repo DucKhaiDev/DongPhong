@@ -2,7 +2,6 @@ package Dao.deploy;
 
 import Connect.DBConnect;
 import Entity.Payment;
-import com.oracle.wls.shaded.org.apache.regexp.RE;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -22,8 +21,8 @@ public class PaymentDao implements Dao.PaymentDao {
 
         try {
             ps = conn.prepareStatement("INSERT INTO [PAYMENT](PAY_ID, PAY_METHOD) VALUES(?, ?)");
-            ps.setString(1, payment.getPAY_ID());
-            ps.setString(2, payment.getPAY_METHOD());
+            ps.setString(1, payment.getPaymentId());
+            ps.setString(2, payment.getPaymentMethod());
 
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -39,8 +38,8 @@ public class PaymentDao implements Dao.PaymentDao {
 
         try {
             ps = conn.prepareStatement("UPDATE [PAYMENT] SET PAY_METHOD = ? WHERE PAY_ID = ?");
-            ps.setString(1, payment.getPAY_METHOD());
-            ps.setString(2, payment.getPAY_ID());
+            ps.setString(1, payment.getPaymentMethod());
+            ps.setString(2, payment.getPaymentId());
 
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -75,8 +74,8 @@ public class PaymentDao implements Dao.PaymentDao {
             ps.setString(1, PAY_ID);
             rs = ps.executeQuery();
             rs.next();
-            payment.setPAY_ID(PAY_ID);
-            payment.setPAY_METHOD(rs.getString("PAY_METHOD"));
+            payment.setPaymentId(PAY_ID);
+            payment.setPaymentMethod(rs.getString("PAY_METHOD"));
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -96,8 +95,8 @@ public class PaymentDao implements Dao.PaymentDao {
             rs = ps.executeQuery();
             while (rs.next()) {
                 Payment payment = new Payment();
-                payment.setPAY_ID(rs.getString("PAY_ID").trim());
-                payment.setPAY_METHOD(rs.getString("PAY_METHOD"));
+                payment.setPaymentId(rs.getString("PAY_ID").trim());
+                payment.setPaymentMethod(rs.getString("PAY_METHOD"));
 
                 payments.add(payment);
             }

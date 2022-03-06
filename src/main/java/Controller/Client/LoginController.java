@@ -46,12 +46,12 @@ public class LoginController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String username = request.getParameter("username_or_email").trim();
+        String username = request.getParameter("username").trim();
         String password = request.getParameter("password").trim();
         String rememberMe = request.getParameter("rememberMe");
         boolean isRememberMe = rememberMe != null;
 
-        String loginMsg = "";
+        String loginMsg;
 
         UserService service = new UserService();
 

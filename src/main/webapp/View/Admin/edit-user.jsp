@@ -50,39 +50,39 @@
                                     <div class="row">
                                         <div class="col-md-5 border-right">
                                             <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                                                <c:url value="/images/avatar?fname=${user.AVATAR}" var="avatarUrl"/>
-                                                <img class="avatar user-img-empty rounded-circle mt-5 mb-1" width="150px" height="150px" style="object-fit: cover;" <c:if test="${not empty user.AVATAR}">src="${avatarUrl}"</c:if>>
-                                                <input class="text-center mb-3 file-upload" type="file" name="update_avatar" />
-                                                <span class="font-weight-bold mb-2">${user.LASTNAME} ${user.FIRSTNAME}</span>
-                                                <span class="text-black-50">ID:&nbsp;${user.USER_ID}</span>
+                                                <c:url value="/images/avatar?fname=${user.avatar}" var="avatarUrl"/>
+                                                <img class="avatar user-img-empty rounded-circle mt-5 mb-1" width="150px" height="150px" style="object-fit: cover;" <c:if test="${not empty user.avatar}">src="${avatarUrl}"</c:if>>
+                                                <input class="text-center mb-3 file-upload" type="file" name="avatar" />
+                                                <span class="font-weight-bold mb-2">${user.lastName} ${user.firstName}</span>
+                                                <span class="text-black-50">ID:&nbsp;${user.userId}</span>
                                             </div>
                                         </div>
                                         <div class="col-md-7 border-right">
                                             <div class="p-3 py-5">
                                                 <div class="row mt-2 mb-3">
-                                                    <div class="col-md-6"><label class="labels">Họ</label><input type="text" class="form-control" name="update_lastname" maxlength="255" placeholder="${user.LASTNAME}"></div>
-                                                    <div class="col-md-6"><label class="labels">Tên</label><input type="text" class="form-control" name="update_firstname" maxlength="255" placeholder="${user.FIRSTNAME}"></div>
+                                                    <div class="col-md-6"><label for="lastName" class="labels">Họ</label><input id="lastName" type="text" class="form-control" name="lastName" maxlength="255" placeholder="${user.lastName}"></div>
+                                                    <div class="col-md-6"><label for="firstName" class="labels">Tên</label><input id="firstName" type="text" class="form-control" name="firstName" maxlength="255" placeholder="${user.firstName}"></div>
                                                 </div>
                                                 <div class="row mt-3">
-                                                    <div class="col-md-12 mb-3"><label class="labels">Tên đăng nhập</label><input type="text" class="form-control" placeholder="${user.USERNAME}" readonly></div>
-                                                    <div class="col-md-12 mb-3"><label class="labels">Mật khẩu</label><input type="text" class="form-control" name="update_password" placeholder="${user.PASSWORD}"></div>
-                                                    <div class="col-md-12 mb-3"><label class="labels">Email</label><input type="text" class="form-control" name="update_email" maxlength="255" placeholder="${user.EMAIL}"></div>
-                                                    <div class="col-md-12 mb-3"><label class="labels">Địa chỉ</label><input type="text" class="form-control" name="update_address" maxlength="2000" placeholder="${user.ADDRESS}"></div>
-                                                    <div class="col-md-12 mb-3"><label class="labels">Số điện thoại</label><input type="text" class="form-control" name="update_phone" maxlength="12" placeholder="${user.PHONE}"></div>
+                                                    <div class="col-md-12 mb-3"><label for="username" class="labels">Tên đăng nhập</label><input id="username" type="text" class="form-control" placeholder="${user.username}" readonly></div>
+                                                    <div class="col-md-12 mb-3"><label for="password" class="labels">Mật khẩu</label><input id="password" type="text" class="form-control" name="password" placeholder="${user.password}"></div>
+                                                    <div class="col-md-12 mb-3"><label for="email" class="labels">Email</label><input id="email" type="text" class="form-control" name="email" maxlength="255" placeholder="${user.email}"></div>
+                                                    <div class="col-md-12 mb-3"><label for="address" class="labels">Địa chỉ</label><input id="address" type="text" class="form-control" name="address" maxlength="2000" placeholder="${user.address}"></div>
+                                                    <div class="col-md-12 mb-3"><label for="phone" class="labels">Số điện thoại</label><input id="phone" type="text" class="form-control" name="phone" maxlength="12" placeholder="${user.phone}"></div>
                                                     <div class="col-md-12">
-                                                        <label class="labels">Quyền truy cập</label>
+                                                        <label for="role" class="labels">Quyền truy cập</label>
                                                         <div class="checkbox mt-0">
                                                             <div class="row">
                                                                 <div class="col-md-3"></div>
                                                                 <c:choose>
-                                                                    <c:when test="${user.ROLE}">
-                                                                        <div class="col-md-3"><input type="radio" value="false" name="update_role"> Quản trị viên</div>
-                                                                        <div class="col-md-3"><input type="radio" value="true" name="update_role" checked="checked"> Thành viên</div>
+                                                                    <c:when test="${user.role}">
+                                                                        <div class="col-md-3"><input id="role" type="radio" value="false" name="role"> Quản trị viên</div>
+                                                                        <div class="col-md-3"><input type="radio" value="true" name="role" checked="checked"> Thành viên</div>
                                                                     </c:when>
                                                                     <c:otherwise>
-                                                                        <div class="col-md-3"><input type="radio" value="false" name="update_role" checked="checked"> Quản trị viên</div>
+                                                                        <div class="col-md-3"><input type="radio" value="false" name="role" checked="checked"> Quản trị viên</div>
                                                                         <% int count = new UserService().countAdmin(); %>
-                                                                        <div class="col-md-3"><input type="radio" value="true" name="update_role" <% if (count <= 1) out.print("disabled"); %>> Thành viên</div>
+                                                                        <div class="col-md-3"><input type="radio" value="true" name="role" <% if (count <= 1) out.print("disabled"); %>> Thành viên</div>
                                                                     </c:otherwise>
                                                                 </c:choose>
                                                                 <div class="col-md-3"></div>

@@ -18,8 +18,6 @@ public class UserController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<User> users = userService.getAll();
         request.setAttribute("users", users);
-        int countAdmin = userService.countAdmin();
-        request.setAttribute("countAdmin", countAdmin);
         request.getRequestDispatcher(Constant.Path.ADMIN_USER).forward(request, response);
     }
 }

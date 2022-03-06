@@ -6,59 +6,59 @@ import java.sql.Timestamp;
 public class Voucher implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private String VOUCHER;
-    private int MIN_PRO;
-    private double MIN_VAL;
-    private Timestamp FROM_DATE;
-    private Timestamp TO_DATE;
+    private String voucher;
+    private int minProduct;
+    private double minValue;
+    private Timestamp fromDate;
+    private Timestamp toDate;
 
     public Voucher() {}
 
-    public Voucher(String VOUCHER, int MIN_PRO, double MIN_VAL, Timestamp FROM_DATE, Timestamp TO_DATE) {
-        this.VOUCHER = VOUCHER;
-        this.MIN_PRO = MIN_PRO;
-        this.MIN_VAL = MIN_VAL;
-        this.FROM_DATE = FROM_DATE;
-        this.TO_DATE = TO_DATE;
+    public Voucher(String voucher, int minProduct, double minValue, Timestamp fromDate, Timestamp toDate) {
+        this.voucher = voucher;
+        this.minProduct = minProduct;
+        this.minValue = minValue;
+        this.fromDate = fromDate;
+        this.toDate = toDate;
     }
 
-    public String getVOUCHER() {
-        return VOUCHER;
+    public String getVoucher() {
+        return voucher;
     }
 
-    public void setVOUCHER(String VOUCHER) {
-        this.VOUCHER = VOUCHER;
+    public void setVoucher(String voucher) {
+        this.voucher = voucher;
     }
 
-    public int getMIN_PRO() {
-        return MIN_PRO;
+    public int getMinProduct() {
+        return minProduct;
     }
 
-    public void setMIN_PRO(int MIN_PRO) {
-        this.MIN_PRO = MIN_PRO;
+    public void setMinProduct(int minProduct) {
+        this.minProduct = minProduct;
     }
 
-    public double getMIN_VAL() {
-        return MIN_VAL;
+    public double getMinValue() {
+        return minValue;
     }
 
-    public void setMIN_VAL(double MIN_VAL) {
-        this.MIN_VAL = MIN_VAL;
+    public void setMinValue(double minValue) {
+        this.minValue = minValue;
     }
 
-    public Timestamp getFROM_DATE() {
-        return FROM_DATE;
+    public Timestamp getFromDate() {
+        return fromDate;
     }
 
-    public void setFROM_DATE(Timestamp FROM_DATE) {
-        this.FROM_DATE = FROM_DATE;
+    public void setFromDate(Timestamp fromDate) {
+        this.fromDate = fromDate;
     }
 
-    public Timestamp getTO_DATE() {
-        return TO_DATE;
+    public Timestamp getToDate() {
+        return toDate;
     }
 
-    public void setTO_DATE(Timestamp TO_DATE) {
-        this.TO_DATE = TO_DATE;
+    public void setToDate(Timestamp toDate) {
+        this.toDate = toDate;
     }
 }

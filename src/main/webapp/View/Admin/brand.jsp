@@ -1,5 +1,6 @@
 <%@ page import="Services.deploy.BrandService" %>
-<%@ page import="Entity.Brand" %><%--
+<%@ page import="Entity.Brand" %>
+<%--
   User: duckhaidev
   Date: 2/24/2022
   Time: 12:53 AM
@@ -87,18 +88,18 @@
                                         <c:forEach items="${brands}" var="brand">
                                         <tr class="odd">
                                             <td>${number = number + 1}</td>
-                                            <td>${brand.BRA_ID}</td>
-                                            <td>${brand.BRA_NAME}</td>
-                                            <td>${brand.BRA_DES}</td>
+                                            <td>${brand.brandId}</td>
+                                            <td>${brand.brandName}</td>
+                                            <td>${brand.brandDescription}</td>
                                             <td>
-                                                <a href="<c:url value="/admin/brand/edit?id=${brand.BRA_ID}"/>" class="text-center">Sửa</a>&nbsp;|&nbsp;
+                                                <a href="<c:url value="/admin/brand/edit?id=${brand.brandId}"/>" class="text-center">Sửa</a>&nbsp;|&nbsp;
                                                 <%
-                                                    boolean isUnusedBrand = new BrandService().isUnusedBrand(((Brand)pageContext.getAttribute("brand")).getBRA_ID());
+                                                    boolean isUnusedBrand = new BrandService().isUnusedBrand(((Brand)pageContext.getAttribute("brand")).getBrandId());
                                                     request.setAttribute("isUnusedBrand", isUnusedBrand);
                                                 %>
                                                 <c:choose>
                                                     <c:when test="${isUnusedBrand}">
-                                                        <a href="<c:url value="/admin/brand/delete?id=${brand.BRA_ID}"/>" class="text-center">Xóa</a>
+                                                        <a href="<c:url value="/admin/brand/delete?id=${brand.brandId}"/>" class="text-center">Xóa</a>
                                                     </c:when>
                                                     <c:when test="${!isUnusedBrand}">
                                                         <a class="text-center isDisabled">(Đang được sử dụng)</a>
@@ -160,7 +161,6 @@
 </script>
 <!-- CUSTOM SCRIPTS -->
 <script src="${url}/js/custom.js"></script>
-
 
 </body>
 </html>

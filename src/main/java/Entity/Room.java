@@ -5,22 +5,22 @@ import java.io.Serializable;
 public class Room implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private String ROOM_ID;
-    private String ROOM_NAME;
+    private String roomId;
+    private String roomName;
 
-    public String getROOM_ID() {
-        return ROOM_ID;
+    public String getRoomId() {
+        return roomId;
     }
 
-    public void setROOM_ID(String ROOM_ID) {
-        this.ROOM_ID = ROOM_ID;
+    public void setRoomId(String roomId) {
+        this.roomId = roomId;
     }
 
-    public String getROOM_NAME() {
-        return ROOM_NAME;
+    public String getRoomName() {
+        return roomName;
     }
 
-    public void setROOM_NAME(String ROOM_NAME) {
-        this.ROOM_NAME = ROOM_NAME;
+    public void setRoomName(String roomName) {
+        this.roomName = roomName;
     }
 }

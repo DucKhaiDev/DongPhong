@@ -20,7 +20,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>${category.CAT_NAME}</title>
+    <title>${category.categoryName}</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--===============================================================================================-->
@@ -73,8 +73,8 @@
             <div class="flex-w flex-l-m filter-tope-group m-tb-10">
                 <ul class="breadcrumb">
                     <li><a href="${pageContext.request.contextPath}">Trang chủ</a></li>
-                    <li><a href="#">${category.ROOM.ROOM_NAME}</a></li>
-                    <li><a href="${pageContext.request.contextPath}/products/category?id=${category.CAT_ID}">${category.CAT_NAME}</a></li>
+                    <li><a href="#">${category.room.roomName}</a></li>
+                    <li><a href="${pageContext.request.contextPath}/products/category?id=${category.categoryId}">${category.categoryName}</a></li>
                 </ul>
             </div>
 
@@ -84,16 +84,6 @@
                     <i class="icon-close-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
                     Sắp xếp
                 </div>
-
-                <%--<div class="dropdown flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Sắp xếp
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a href="" class="dropdown-item">Giá từ cao xuống thấp</a>
-                        <a href="" class="dropdown-item">Giá từ thấp lên cao</a>
-                    </div>
-                </div>--%>
 
                 <div class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4 js-show-search">
                     <i class="icon-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-search"></i>
@@ -159,13 +149,13 @@
                                     <c:forEach items="${applicationScope.brands}" var="brand" varStatus="loop">
                                         <li><label class="checkbox">
                                             <c:set var="index" value="${loop.index + 1}"/>
-                                            <input id="brand-${index}" class="filter-input" type="checkbox" name="brand" value="${brand.BRA_ID}"><i></i>${brand.BRA_NAME}
+                                            <input id="brand-${index}" class="filter-input" type="checkbox" name="brand" value="${brand.brandId}"><i></i>${brand.brandName}
                                             <small>
                                                 <a>
                                                     (<%
-                                                    String CAT_ID = ((Category) request.getAttribute("category")).getCAT_ID();
-                                                    String BRA_ID = ((Brand) pageContext.getAttribute("brand")).getBRA_ID();
-                                                    out.print(new ProductService().countProduct(CAT_ID, BRA_ID));
+                                                    String categoryId = ((Category) request.getAttribute("category")).getCategoryId();
+                                                    String brandId = ((Brand) pageContext.getAttribute("brand")).getBrandId();
+                                                    out.print(new ProductService().countProduct(categoryId, brandId));
                                                 %>)
                                                 </a>
                                             </small>
@@ -256,7 +246,7 @@
                                 <div class="block2-pic hov-img0">
                                     <%
                                         ProImageService imageService = new ProImageService();
-                                        String reImage = imageService.getProReImage(((Product) pageContext.getAttribute("product")).getPRO_ID());
+                                        String reImage = imageService.getProReImage(((Product) pageContext.getAttribute("product")).getProductId());
                                         request.setAttribute("reImage", reImage);
                                     %>
                                     <c:url value="/images/product-images?fname=${reImage}" var="productImg"/>
@@ -265,7 +255,7 @@
                                 </div>
                                 <div class="block2-txt flex-w flex-t p-t-14">
                                     <div class="block2-txt-child1 flex-col-l ">
-                                        <a href="product-detail.jsp" class="product-name stext-104 cl4 hov-cl1 trans-04 js-name-b2 m-b-6">${product.PRO_NAME}</a>
+                                        <a href="product-detail.jsp" class="product-name stext-104 cl4 hov-cl1 trans-04 js-name-b2 m-b-6">${product.productName}</a>
                                     </div>
                                     <div class="block2-txt-child2 flex-r p-t-3">
                                         <a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
@@ -279,7 +269,7 @@
                                         <div class="d-flex">
                                             <span class="stext-105 cl3 product-price m-r-12">
                                                 <%
-                                                    BigDecimal price = new BigDecimal(((Product) pageContext.getAttribute("product")).getPRO_PRICE());
+                                                    BigDecimal price = new BigDecimal(((Product) pageContext.getAttribute("product")).getProductPrice());
                                                     Locale vie = new Locale("vi", "VN");
                                                     NumberFormat dongFormat = NumberFormat.getCurrencyInstance(vie);
                                                     String showPrice = dongFormat.format(price);
@@ -287,10 +277,10 @@
                                                 %>
                                             </span>
                                             <%
-                                                BigDecimal cost = new BigDecimal(((Product) pageContext.getAttribute("product")).getPRO_COST());
+                                                BigDecimal cost = new BigDecimal(((Product) pageContext.getAttribute("product")).getProductCost());
                                                 String showCost = dongFormat.format(cost);
                                             %>
-                                            <c:if test="${product.PRO_COST != '0' && product.PRO_COST != product.PRO_PRICE}">
+                                            <c:if test="${product.productCost != '0' && product.productCost != product.productPrice}">
                                                 <span class="stext-105 cl3 product-cost">
                                                     <% out.print("<td>" + showCost + "</td>"); %>
                                                 </span>
@@ -335,11 +325,11 @@
 
                                                     <div class="slick3 gallery-lb">
                                                         <%
-                                                            List<ProImage> images = imageService.getProImage(((Product) pageContext.getAttribute("product")).getPRO_ID());
+                                                            List<ProImage> images = imageService.getProImage(((Product) pageContext.getAttribute("product")).getProductId());
                                                             request.setAttribute("images", images);
                                                         %>
                                                         <c:forEach items="${images}" var="image">
-                                                            <c:url var="imageUrl" value="/images/product-images?fname=${image.IMG_NAME}"/>
+                                                            <c:url var="imageUrl" value="/images/product-images?fname=${image.imageName}"/>
                                                             <div class="item-slick3" data-thumb="${imageUrl}">
                                                                 <div class="wrap-pic-w pos-relative">
                                                                     <img class="modal-product-image" src="${imageUrl}" alt="Hình ảnh sản phẩm">
@@ -356,11 +346,11 @@
 
                                         <div class="col-md-6 col-lg-5 p-b-30">
                                             <div class="p-r-50 p-t-5 p-lr-0-lg">
-                                                <h4 class="mtext-105 cl2 js-name-detail p-b-14">${product.PRO_NAME}</h4>
+                                                <h4 class="mtext-105 cl2 js-name-detail p-b-14">${product.productName}</h4>
                                                 <span class="product-price mtext-106 cl2 m-r-16"><% out.print(showPrice); %></span>
                                                 <span class="product-cost mtext-106 cl2 m-r-16"><% out.print(showCost); %></span>
                                                 <span class="product-sale-off mtext-106 cl2"><% out.print("(-" + percentage + "%)"); %></span>
-                                                <p class="stext-102 cl3 p-t-23">${product.PRO_DES}</p>
+                                                <p class="stext-102 cl3 p-t-23">${product.productDescription}</p>
                                                 <!--  -->
                                                 <div class="p-t-33">
                                                     <div class="flex-w flex-r-m p-b-10">

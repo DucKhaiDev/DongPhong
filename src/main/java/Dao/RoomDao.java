@@ -5,6 +5,6 @@ import Entity.Room;
 import java.util.List;
 
 public interface RoomDao {
-    Room getRoom(String ROOM_ID);
+    Room getRoom(String roomId);
     List<Room> getAll();
 }

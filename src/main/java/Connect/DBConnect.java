@@ -3,11 +3,11 @@ package Connect;
 import java.sql.*;
 
 public class DBConnect {
-    private static String dbUrl = "jdbc:sqlserver://localhost:1433;"
+    private static final String dbUrl = "jdbc:sqlserver://localhost:1433;"
                                     + "databaseName=DongPhong;"
                                     + "integratedSecurity=true";
-    private static String username = "sa";
-    private static String password = "123456";
+    private static final String username = "sa";
+    private static final String password = "123456";
 
     //Kết nối với SQLServer sử dụng JDBC
     public static Connection getConnection() {

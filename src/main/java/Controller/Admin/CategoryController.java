@@ -12,7 +12,7 @@ import java.util.List;
 
 @WebServlet(name = "CategoryController", value = "/admin/category")
 public class CategoryController extends HttpServlet {
-    private CategoryService categoryService = new CategoryService();
+    private final CategoryService categoryService = new CategoryService();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -2,12 +2,11 @@ package Services.deploy;
 
 import Dao.deploy.BrandDao;
 import Entity.Brand;
-import Entity.Category;
 
 import java.util.List;
 
 public class BrandService implements Services.BrandService {
-    BrandDao brandDao = new BrandDao();
+    private final BrandDao brandDao = new BrandDao();
 
     @Override
     public void insert(Brand brand) {
@@ -20,13 +19,13 @@ public class BrandService implements Services.BrandService {
     }
 
     @Override
-    public void delete(String BRA_ID) {
-        brandDao.delete(BRA_ID);
+    public void delete(String brandId) {
+        brandDao.delete(brandId);
     }
 
     @Override
-    public Brand getBrand(String BRA_ID) {
-        return brandDao.getBrand(BRA_ID);
+    public Brand getBrand(String brandId) {
+        return brandDao.getBrand(brandId);
     }
 
     @Override
@@ -35,17 +34,17 @@ public class BrandService implements Services.BrandService {
     }
 
     @Override
-    public List<Brand> searchByName(String NAME) {
-        return brandDao.searchByName(NAME);
+    public List<Brand> searchByName(String brandName) {
+        return brandDao.searchByName(brandName);
     }
 
     @Override
-    public boolean checkExistID(String ID) {
-        return brandDao.checkExistID(ID);
+    public boolean checkExistId(String id) {
+        return brandDao.checkExistId(id);
     }
 
     @Override
-    public boolean isUnusedBrand(String BRA_ID) {
-        return brandDao.isUnusedBrand(BRA_ID);
+    public boolean isUnusedBrand(String brandId) {
+        return brandDao.isUnusedBrand(brandId);
     }
 }

@@ -19,13 +19,13 @@ public class CategoryService implements Services.CategoryService {
     }
 
     @Override
-    public void delete(String CAT_ID) {
-        categoryDao.delete(CAT_ID);
+    public void delete(String categoryId) {
+        categoryDao.delete(categoryId);
     }
 
     @Override
-    public Category getCategory(String CAT_ID) {
-        return categoryDao.getCategory(CAT_ID);
+    public Category getCategory(String categoryId) {
+        return categoryDao.getCategory(categoryId);
     }
 
     @Override
@@ -34,22 +34,22 @@ public class CategoryService implements Services.CategoryService {
     }
 
     @Override
-    public List<Category> getCategoryByRoom(String ROOM_ID) {
-        return categoryDao.getCategoryByRoom(ROOM_ID);
+    public List<Category> getCategoryByRoom(String roomId) {
+        return categoryDao.getCategoryByRoom(roomId);
     }
 
     @Override
-    public List<Category> searchByName(String NAME) {
-        return categoryDao.searchByName(NAME);
+    public List<Category> searchByName(String categoryName) {
+        return categoryDao.searchByName(categoryName);
     }
 
     @Override
-    public boolean checkExistID(String ID) {
-        return categoryDao.checkExistID(ID);
+    public boolean checkExistId(String id) {
+        return categoryDao.checkExistId(id);
     }
 
     @Override
-    public boolean isUnusedCategory(String CAT_ID) {
-        return categoryDao.isUnusedCategory(CAT_ID);
+    public boolean isUnusedCategory(String categoryId) {
+        return categoryDao.isUnusedCategory(categoryId);
     }
 }

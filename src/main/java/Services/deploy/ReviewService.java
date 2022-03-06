@@ -19,13 +19,13 @@ public class ReviewService implements Services.ReviewService {
     }
 
     @Override
-    public void delete(String REV_ID) {
-        reviewDao.delete(REV_ID);
+    public void delete(int reviewId) {
+        reviewDao.delete(reviewId);
     }
 
     @Override
-    public Review getReview(String REV_ID) {
-        return reviewDao.getReview(REV_ID);
+    public Review getReview(int reviewId) {
+        return reviewDao.getReview(reviewId);
     }
 
     @Override

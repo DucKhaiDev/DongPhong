@@ -11,7 +11,7 @@ import java.io.IOException;
 
 @WebServlet(name = "ChangePasswordController", value = "/change-password")
 public class ChangePasswordController extends HttpServlet {
-    private UserService userService = new UserService();
+    private final UserService userService = new UserService();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -20,24 +20,24 @@ public class ChangePasswordController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String oldPassword = request.getParameter("old_password");
-        String newPassword = request.getParameter("new_password");
-        String repeatNewPassword = request.getParameter("repeat_new_password");
+        String oldPassword = request.getParameter("oldPassword");
+        String newPassword = request.getParameter("newPassword");
+        String repeatPassword = request.getParameter("repeatPassword");
 
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("account");
-        String cpwMsg = "";
+        String cpwMsg;
 
-        if (oldPassword.isEmpty() || newPassword.isEmpty() || repeatNewPassword.isEmpty()) {
+        if (oldPassword.isEmpty() || newPassword.isEmpty() || repeatPassword.isEmpty()) {
             cpwMsg = "Vui lòng nhập đầy đủ các mục!";
             request.setAttribute("cpwMsg", cpwMsg);
             request.getRequestDispatcher(Constant.Path.CHANGE_PASSWORD).forward(request, response);
             return;
         }
 
-        if (oldPassword.equals(user.getPASSWORD())) {
-            if (newPassword.equals(repeatNewPassword)) {
-                user.setPASSWORD(newPassword);
+        if (oldPassword.equals(user.getPassword())) {
+            if (newPassword.equals(repeatPassword)) {
+                user.setPassword(newPassword);
                 userService.edit(user);
                 response.sendRedirect("./logout");
             } else  {

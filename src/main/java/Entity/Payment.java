@@ -5,29 +5,29 @@ import java.io.Serializable;
 public class Payment implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private String PAY_ID;
-    private String PAY_METHOD;
+    private String paymentId;
+    private String paymentMethod;
 
     public Payment() {}
 
-    public Payment(String PAY_ID, String PAY_METHOD) {
-        this.PAY_ID = PAY_ID;
-        this.PAY_METHOD = PAY_METHOD;
+    public Payment(String paymentId, String paymentMethod) {
+        this.paymentId = paymentId;
+        this.paymentMethod = paymentMethod;
     }
 
-    public String getPAY_ID() {
-        return PAY_ID;
+    public String getPaymentId() {
+        return paymentId;
     }
 
-    public void setPAY_ID(String PAY_ID) {
-        this.PAY_ID = PAY_ID;
+    public void setPaymentId(String paymentId) {
+        this.paymentId = paymentId;
     }
 
-    public String getPAY_METHOD() {
-        return PAY_METHOD;
+    public String getPaymentMethod() {
+        return paymentMethod;
     }
 
-    public void setPAY_METHOD(String PAY_METHOD) {
-        this.PAY_METHOD = PAY_METHOD;
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
     }
 }

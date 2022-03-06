@@ -47,12 +47,12 @@
                             <div class="row">
                                 <form action="<c:url value="/admin/brand/edit"/>" method="post">
                                     <div class="row ml-1 mr-1">
-                                        <div class="col-md-6 mb-3"><label class="labels">ID</label><input type="text" class="form-control" placeholder="${brand.BRA_ID}" readonly></div>
-                                        <div class="col-md-12 mb-3"><label class="labels">Thương hiệu</label><input type="text" class="form-control" name="bra_name" maxlength="255" placeholder="${brand.BRA_NAME}"></div>
+                                        <div class="col-md-6 mb-3"><label class="labels">ID</label><input type="text" class="form-control" placeholder="${brand.brandId}" readonly></div>
+                                        <div class="col-md-12 mb-3"><label class="labels">Thương hiệu</label><input type="text" class="form-control" name="brandName" maxlength="255" placeholder="${brand.brandName}"></div>
                                         <div class="col-md-12">
                                             <label class="labels">Mô tả</label>
                                             <br>
-                                            <textarea name="bra_des" id="description" class="form-control" cols="50" rows="5" maxlength="2000">${brand.BRA_DES}</textarea>
+                                            <textarea name="brandDescription" id="description" class="form-control" cols="50" rows="5" maxlength="2000">${brand.brandDescription}</textarea>
                                         </div>
                                     </div>
                                     <div class="row ml-1 mr-1">

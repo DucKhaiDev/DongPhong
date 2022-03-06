@@ -7,7 +7,7 @@ import java.util.List;
 public interface WLItemDao {
     void insert(WLItem item);
     void edit(WLItem item);
-    void delete(String WLITEM_ID);
-    WLItem getWLItem(String WLITEM_ID);
+    void delete(String wlItemId);
+    WLItem getWLItem(String wlItemId);
     List<WLItem> getAll();
 }

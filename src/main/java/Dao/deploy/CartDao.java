@@ -2,7 +2,7 @@ package Dao.deploy;
 
 import Connect.DBConnect;
 import Entity.Cart;
-import Services.deploy.CustomerService;
+import Services.deploy.UserService;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,16 +16,16 @@ public class CartDao implements Dao.CartDao {
     private PreparedStatement ps = null;
     private ResultSet rs = null;
 
-    CustomerService customerService = new CustomerService();
+    private final UserService userService = new UserService();
 
     @Override
     public void insert(Cart cart) {
         conn = DBConnect.getConnection();
 
         try {
-            ps = conn.prepareStatement("INSERT INTO [CART](CART_ID, CUS_ID) VALUES(?, ?)");
-            ps.setString(1, cart.getCART_ID());
-            ps.setString(2, cart.getCUS().getCUS_ID());
+            ps = conn.prepareStatement("INSERT INTO [CART](CART_ID, USER_ID) VALUES(?, ?)");
+            ps.setString(1, cart.getCartId());
+            ps.setString(2, cart.getUser().getUserId());
 
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -40,9 +40,9 @@ public class CartDao implements Dao.CartDao {
         conn = DBConnect.getConnection();
 
         try {
-            ps = conn.prepareStatement("UPDATE [CART] SET CUS_ID = ? WHERE CART_ID = ?");
-            ps.setString(1, cart.getCUS().getCUS_ID());
-            ps.setString(2, cart.getCART_ID());
+            ps = conn.prepareStatement("UPDATE [CART] SET USER_ID = ? WHERE CART_ID = ?");
+            ps.setString(1, cart.getUser().getUserId());
+            ps.setString(2, cart.getCartId());
 
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -53,12 +53,12 @@ public class CartDao implements Dao.CartDao {
     }
 
     @Override
-    public void delete(String CART_ID) {
+    public void delete(String cartId) {
         conn = DBConnect.getConnection();
 
         try {
             ps = conn.prepareStatement("DELETE FROM [CART] WHERE CART_ID = ?");
-            ps.setString(1, CART_ID);
+            ps.setString(1, cartId);
 
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -69,18 +69,18 @@ public class CartDao implements Dao.CartDao {
     }
 
     @Override
-    public Cart getCart(String CART_ID) {
+    public Cart getCart(String cartId) {
         conn = DBConnect.getConnection();
         Cart cart = new Cart();
 
         try {
             ps = conn.prepareStatement("SELECT * FROM [CART] WHERE CART_ID = ?");
-            ps.setString(1, CART_ID);
+            ps.setString(1, cartId);
 
             rs = ps.executeQuery();
             rs.next();
-            cart.setCART_ID(rs.getString("WL_ID").trim());
-            cart.setCUS(customerService.getCustomer(rs.getString("CUS_ID").trim()));
+            cart.setCartId(rs.getString("CART_ID").trim());
+            cart.setUser(userService.getUser(rs.getString("USER_ID").trim()));
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -100,8 +100,8 @@ public class CartDao implements Dao.CartDao {
             rs = ps.executeQuery();
             while (rs.next()) {
                 Cart cart = new Cart();
-                cart.setCART_ID(rs.getString("CART_ID").trim());
-                cart.setCUS(customerService.getCustomer(rs.getString("CUS_ID").trim()));
+                cart.setCartId(rs.getString("CART_ID").trim());
+                cart.setUser(userService.getUser(rs.getString("USER_ID").trim()));
 
                 carts.add(cart);
             }

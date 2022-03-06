@@ -9,7 +9,7 @@ import java.io.IOException;
 
 @WebServlet(name = "DeleteCategoryController", value = "/admin/category/delete")
 public class DeleteCategoryController extends HttpServlet {
-    private CategoryService categoryService = new CategoryService();
+    private final CategoryService categoryService = new CategoryService();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

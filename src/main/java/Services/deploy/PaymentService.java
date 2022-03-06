@@ -19,13 +19,13 @@ public class PaymentService implements Services.PaymentService {
     }
 
     @Override
-    public void delete(String PAY_ID) {
-        paymentDao.delete(PAY_ID);
+    public void delete(String paymentId) {
+        paymentDao.delete(paymentId);
     }
 
     @Override
-    public Payment getPayment(String PAY_ID) {
-        return paymentDao.getPayment(PAY_ID);
+    public Payment getPayment(String paymentId) {
+        return paymentDao.getPayment(paymentId);
     }
 
     @Override

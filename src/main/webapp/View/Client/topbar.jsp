@@ -1,9 +1,10 @@
-<%@ page import="Entity.User" %><%--
+<%@ page import="Entity.User" %>
+<%--
   User: is2vi
   Date: 1/23/2022
   Time: 8:50 AM
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:url value="/assets" var="url" />
 <div class="top-bar">
@@ -37,9 +38,9 @@
             <c:otherwise>
                 <%
                     User account = (User) session.getAttribute("account");
-                    String displayName = account.getUSERNAME();
-                    String firstName = account.getFIRSTNAME();
-                    String lastName = account.getLASTNAME();
+                    String displayName = account.getUsername();
+                    String firstName = account.getFirstName();
+                    String lastName = account.getLastName();
 
                     if (lastName != null && !lastName.trim().equals("")) {
                         displayName = lastName;
@@ -52,7 +53,7 @@
 
                 <div class="right-top-bar flex-w h-full">
                     <c:choose>
-                        <c:when test="${!sessionScope.account.ROLE}">
+                        <c:when test="${!sessionScope.account.role}">
                             <a href="${pageContext.request.contextPath }/admin" class="flex-c-m trans-04 p-lr-25" style="border-left: none">
                         <span>
                             <% out.print(displayName); %>

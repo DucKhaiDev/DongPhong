@@ -16,17 +16,17 @@ public class RoomDao implements Dao.RoomDao {
     private ResultSet rs = null;
 
     @Override
-    public Room getRoom(String ROOM_ID) {
+    public Room getRoom(String roomId) {
         Room room = new Room();
         conn = DBConnect.getConnection();
 
         try {
             ps = conn.prepareStatement("SELECT * FROM [ROOM] WHERE ROOM_ID = ?");
-            ps.setString(1, ROOM_ID);
+            ps.setString(1, roomId);
             rs = ps.executeQuery();
             rs.next();
-            room.setROOM_ID(rs.getString("ROOM_ID").trim());
-            room.setROOM_NAME(rs.getString("ROOM_NAME"));
+            room.setRoomId(roomId);
+            room.setRoomName(rs.getString("ROOM_NAME"));
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -46,8 +46,8 @@ public class RoomDao implements Dao.RoomDao {
             rs = ps.executeQuery();
             while (rs.next()) {
                 Room room = new Room();
-                room.setROOM_ID(rs.getString("ROOM_ID").trim());
-                room.setROOM_NAME(rs.getString("ROOM_NAME"));
+                room.setRoomId(rs.getString("ROOM_ID").trim());
+                room.setRoomName(rs.getString("ROOM_NAME"));
                 rooms.add(room);
             }
         } catch (SQLException e) {

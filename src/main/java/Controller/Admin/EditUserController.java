@@ -19,57 +19,59 @@ import java.util.UUID;
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, maxFileSize = 1024 * 1024 * 10, maxRequestSize = 1024 * 1024 * 50)
 public class EditUserController extends HttpServlet {
     private final UserService userService = new UserService();
-    private int USER_ID;
+    private String userId;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        USER_ID = Integer.parseInt(request.getParameter("id"));
-        User user = userService.getUser(USER_ID);
+        userId = request.getParameter("id");
+        User user = userService.getUser(userId);
         request.setAttribute("user", user);
         request.getRequestDispatcher(Constant.Path.ADMIN_EDIT_USER).forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        User user = userService.getUser(USER_ID);
+        User user = userService.getUser(userId);
 
-        String update_firstname = request.getParameter("update_firstname");
-        if (update_firstname != null && !update_firstname.trim().isEmpty()) {
-            user.setFIRSTNAME(update_firstname);
+        String firstName = request.getParameter("firstName");
+        if (firstName != null && !firstName.trim().isEmpty()) {
+            user.setFirstName(firstName);
         }
 
-        String update_lastname = request.getParameter("update_lastname");
-        if (update_lastname != null && !update_lastname.trim().isEmpty()) {
-            user.setLASTNAME(update_lastname);
+        String lastName = request.getParameter("lastName");
+        if (lastName != null && !lastName.trim().isEmpty()) {
+            user.setLastName(lastName);
         }
 
-        String update_password = request.getParameter("update_password");
-        if (update_password != null && !update_password.trim().isEmpty()) {
-            user.setPASSWORD(update_password);
+        String password = request.getParameter("password");
+        if (password != null && !password.trim().isEmpty()) {
+            user.setPassword(password);
         }
 
-        String update_email = request.getParameter("update_email");
-        if (update_email != null && !update_email.trim().isEmpty()) {
-            user.setEMAIL(update_email);
+        String email = request.getParameter("email");
+        if (email != null && !email.trim().isEmpty()) {
+            user.setEmail(email);
         }
 
-        String update_address = request.getParameter("update_address");
-        if (update_address != null && !update_address.trim().isEmpty()) {
-            user.setADDRESS(update_address);
+        String address = request.getParameter("address");
+        if (address != null && !address.trim().isEmpty()) {
+            user.setAddress(address);
         }
 
-        String update_phone = request.getParameter("update_phone");
-        if (update_phone != null && !update_phone.trim().isEmpty()) {
-            user.setPHONE(update_phone);
+        String phone = request.getParameter("phone");
+        if (phone != null && !phone.trim().isEmpty()) {
+            user.setPhone(phone);
         }
 
-        user.setROLE(Boolean.parseBoolean(request.getParameter("update_role")));
+        user.setRole(Boolean.parseBoolean(request.getParameter("role")));
 
         String savePath = Constant.Path.AVATARS;
 
         File fileSaveDir = new File(savePath);
         if (!fileSaveDir .exists()) {
-            fileSaveDir.mkdir();
+            if (!fileSaveDir.mkdir()) {
+                System.out.println("Directory creation failed.");
+            }
         }
 
         String fileName, newName;
@@ -82,17 +84,17 @@ public class EditUserController extends HttpServlet {
                 part.write(savePath + File.separator + fileName);
                 newName = UUID.randomUUID() + "." + FilenameUtils.getExtension(fileName);
                 renameFile(fileName, newName);
-                user.setAVATAR(newName);
+                user.setAvatar(newName);
             }
         }
 
         userService.edit(user);
         HttpSession session = request.getSession();
-        if (((User) session.getAttribute("account")).getUSER_ID() == user.getUSER_ID()) {
+        if (((User) session.getAttribute("account")).getUserId().equals(user.getUserId())) {
             session.setAttribute("account", user);
         }
 
-        response.sendRedirect(request.getContextPath() + "/admin/user/edit?id=" + USER_ID);
+        response.sendRedirect(request.getContextPath() + "/admin/user/edit?id=" + userId);
     }
 
     private String extractFileName(Part part) {

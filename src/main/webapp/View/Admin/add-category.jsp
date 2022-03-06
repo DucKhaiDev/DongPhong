@@ -56,23 +56,23 @@
                             <div class="row">
                                 <form action="<c:url value="/admin/category/add"/>" method="post">
                                     <div class="row ml-1 mr-1">
-                                        <div class="col-md-6 mb-3"><label for="cat_id" class="labels">ID</label><input id="cat_id" type="text" class="form-control" name="cat_id" maxlength="10" required="required"></div>
-                                        <div class="col-md-6 mb-3"><label class="labels"></label><p class="exist-id">${requestScope.existID}</p></div>
-                                        <div class="col-md-12 mb-3"><label for="cat_name" class="labels">Loại sản phẩm</label><input id="cat_name" type="text" class="form-control" name="cat_name" maxlength="255" required="required"></div>
+                                        <div class="col-md-6 mb-3"><label for="categoryId" class="labels">ID</label><input id="categoryId" type="text" class="form-control" name="categoryId" maxlength="10" required="required"></div>
+                                        <div class="col-md-6 mb-3"><label class="labels"></label><p class="exist-id">${requestScope.existId}</p></div>
+                                        <div class="col-md-12 mb-3"><label for="categoryName" class="labels">Loại sản phẩm</label><input id="categoryName" type="text" class="form-control" name="categoryName" maxlength="255" required="required"></div>
                                         <div class="col-md-6 mb-3">
                                             <label class="labels">Danh mục</label>
                                             <div class="checkbox pl-0">
                                                 <select name="room" class="w-50">
                                                     <c:forEach items="${rooms}" var="room">
-                                                        <option value="${room.ROOM_ID}">${room.ROOM_NAME}</option>
+                                                        <option value="${room.roomId}">${room.roomName}</option>
                                                     </c:forEach>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
-                                            <label for="description" class="labels">Mô tả</label>
+                                            <label for="categoryDescription" class="labels">Mô tả</label>
                                             <br>
-                                            <textarea name="cat_des" id="description" class="form-control" cols="50" rows="5" maxlength="2000"></textarea>
+                                            <textarea name="categoryDescription" id="categoryDescription" class="form-control" cols="50" rows="5" maxlength="2000"></textarea>
                                         </div>
                                     </div>
                                     <div class="row ml-1 mr-1">
@@ -107,7 +107,7 @@
 <!-- CK EDITOR -->
 <script src="${url}/js/ckeditor/ckeditor.js"></script>
 <script type="text/javascript">
-    CKEDITOR.replace('description');
+    CKEDITOR.replace('categoryDescription');
 </script>
 
 </body>

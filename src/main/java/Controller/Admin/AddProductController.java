@@ -25,10 +25,10 @@ import java.util.UUID;
 @WebServlet(name = "AddProductController", value = "/admin/product/add")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, maxFileSize = 1024 * 1024 * 10, maxRequestSize = 1024 * 1024 * 50)
 public class AddProductController extends HttpServlet {
-    private ProductService productService = new ProductService();
-    private CategoryService categoryService = new CategoryService();
-    private BrandService brandService = new BrandService();
-    private ProImageService imageService = new ProImageService();
+    private final ProductService productService = new ProductService();
+    private final CategoryService categoryService = new CategoryService();
+    private final BrandService brandService = new BrandService();
+    private final ProImageService imageService = new ProImageService();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -42,22 +42,22 @@ public class AddProductController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //Thêm sản phẩm
-        String PRO_ID = request.getParameter("pro_id");
-        if (productService.checkExistID(PRO_ID)) {
-            String existID = "Mã sản phẩm đã tồn tại!";
-            request.setAttribute("existID", existID);
+        String productId = request.getParameter("productId");
+        if (productService.checkExistId(productId)) {
+            String existId = "Mã sản phẩm đã tồn tại!";
+            request.setAttribute("existId", existId);
             request.getRequestDispatcher(Constant.Path.ADMIN_ADD_PRODUCT).forward(request, response);
             return;
         }
 
-        String PRO_NAME = request.getParameter("pro_name");
-        String PRO_DES = request.getParameter("pro_des");
-        int PRO_QUANT = request.getParameter("pro_quant").isEmpty() ? 0 : Integer.parseInt(request.getParameter("pro_quant"));
-        String PRO_PRICE = request.getParameter("pro_price");
-        String PRO_COST = request.getParameter("pro_cost");
-        Category category = categoryService.getCategory(request.getParameter("cat"));
-        Brand brand = brandService.getBrand(request.getParameter("bra"));
-        Product product = new Product(PRO_ID, PRO_NAME, PRO_DES, PRO_PRICE, PRO_COST, PRO_QUANT, category, brand);
+        String productName = request.getParameter("productName");
+        String productDescription = request.getParameter("productDescription");
+        int productQuantity = request.getParameter("productQuantity").isEmpty() ? 0 : Integer.parseInt(request.getParameter("productQuantity"));
+        String productPrice = request.getParameter("productPrice");
+        String productCost = request.getParameter("productCost");
+        Category category = categoryService.getCategory(request.getParameter("category"));
+        Brand brand = brandService.getBrand(request.getParameter("brand"));
+        Product product = new Product(productId, productName, productDescription, productPrice, productCost, productQuantity, category, brand);
 
         productService.insert(product);
 
@@ -66,7 +66,9 @@ public class AddProductController extends HttpServlet {
 
         File fileSaveDir = new File(savePath);
         if (!fileSaveDir .exists()) {
-            fileSaveDir.mkdir();
+            if (!fileSaveDir.mkdir()) {
+                System.out.println("Directory creation failed.");
+            }
         }
 
         String fileName, newName;

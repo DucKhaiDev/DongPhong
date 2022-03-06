@@ -7,11 +7,11 @@ import java.util.List;
 public interface CategoryDao {
     void insert(Category category);
     void edit(Category category);
-    void delete(String CAT_ID);
-    Category getCategory(String CAT_ID);
+    void delete(String categoryId);
+    Category getCategory(String categoryId);
     List<Category> getAll();
-    List<Category> getCategoryByRoom(String ROOM_ID);
-    List<Category> searchByName(String NAME);
-    boolean checkExistID(String ID);
-    boolean isUnusedCategory(String CAT_ID);
+    List<Category> getCategoryByRoom(String roomId);
+    List<Category> searchByName(String categoryName);
+    boolean checkExistId(String id);
+    boolean isUnusedCategory(String categoryId);
 }

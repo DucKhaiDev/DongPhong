@@ -47,8 +47,8 @@
                             <div class="row">
                                 <form action="<c:url value="/admin/category/edit"/>" method="post">
                                     <div class="row ml-1 mr-1">
-                                        <div class="col-md-6 mb-3"><label class="labels">ID</label><input type="text" class="form-control" placeholder="${category.CAT_ID}" readonly></div>
-                                        <div class="col-md-12 mb-3"><label class="labels">Loại sản phẩm</label><input type="text" class="form-control" name="cat_name" maxlength="255" placeholder="${category.CAT_NAME}"></div>
+                                        <div class="col-md-6 mb-3"><label class="labels">ID</label><input type="text" class="form-control" placeholder="${category.categoryId}" readonly></div>
+                                        <div class="col-md-12 mb-3"><label class="labels">Loại sản phẩm</label><input type="text" class="form-control" name="categoryName" maxlength="255" placeholder="${category.categoryName}"></div>
                                         <div class="col-md-6 mb-3">
                                             <label class="labels">Danh mục</label>
                                             <div class="checkbox pl-0">
@@ -69,7 +69,7 @@
                                         <div class="col-md-12">
                                             <label class="labels">Mô tả</label>
                                             <br>
-                                            <textarea name="cat_des" id="description" class="form-control" cols="50" rows="5" maxlength="2000">${category.CAT_DES}</textarea>
+                                            <textarea name="categoryDescription" id="description" class="form-control" cols="50" rows="5" maxlength="2000">${category.categoryDescription}</textarea>
                                         </div>
                                     </div>
                                     <div class="row ml-1 mr-1">

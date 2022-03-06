@@ -5,49 +5,49 @@ import java.io.Serializable;
 public class Category implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private String CAT_ID;
-    private String CAT_NAME;
-    private Room ROOM;
-    private String CAT_DES;
+    private String categoryId;
+    private String categoryName;
+    private Room room;
+    private String categoryDescription;
 
     public Category() {}
 
-    public Category(String CAT_ID, String CAT_NAME, Room ROOM, String CAT_DES) {
-        this.CAT_ID = CAT_ID;
-        this.CAT_NAME = CAT_NAME;
-        this.ROOM = ROOM;
-        this.CAT_DES = CAT_DES;
+    public Category(String categoryId, String categoryName, Room room, String categoryDescription) {
+        this.categoryId = categoryId;
+        this.categoryName = categoryName;
+        this.room = room;
+        this.categoryDescription = categoryDescription;
     }
 
-    public String getCAT_ID() {
-        return CAT_ID;
+    public String getCategoryId() {
+        return categoryId;
     }
 
-    public void setCAT_ID(String CAT_ID) {
-        this.CAT_ID = CAT_ID;
+    public void setCategoryId(String categoryId) {
+        this.categoryId = categoryId;
     }
 
-    public String getCAT_NAME() {
-        return CAT_NAME;
+    public String getCategoryName() {
+        return categoryName;
     }
 
-    public void setCAT_NAME(String CAT_NAME) {
-        this.CAT_NAME = CAT_NAME;
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 
-    public Room getROOM() {
-        return ROOM;
+    public Room getRoom() {
+        return room;
     }
 
-    public void setROOM(Room ROOM) {
-        this.ROOM = ROOM;
+    public void setRoom(Room room) {
+        this.room = room;
     }
 
-    public String getCAT_DES() {
-        return CAT_DES;
+    public String getCategoryDescription() {
+        return categoryDescription;
     }
 
-    public void setCAT_DES(String CAT_DES) {
-        this.CAT_DES = CAT_DES;
+    public void setCategoryDescription(String categoryDescription) {
+        this.categoryDescription = categoryDescription;
     }
 }

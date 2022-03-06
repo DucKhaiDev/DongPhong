@@ -21,9 +21,9 @@ public class BrandDao implements Dao.BrandDao {
 
         try {
             ps = conn.prepareStatement("INSERT INTO [BRAND](BRA_ID, BRA_NAME, BRA_DES) VALUES(?, ?, ?)");
-            ps.setString(1, brand.getBRA_ID());
-            ps.setString(2, brand.getBRA_NAME());
-            ps.setString(3, brand.getBRA_DES());
+            ps.setString(1, brand.getBrandId());
+            ps.setString(2, brand.getBrandName());
+            ps.setString(3, brand.getBrandDescription());
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -38,9 +38,9 @@ public class BrandDao implements Dao.BrandDao {
 
         try {
             ps = conn.prepareStatement("UPDATE [BRAND] SET BRA_NAME = ?, BRA_DES = ? WHERE BRA_ID = ?");
-            ps.setString(1, brand.getBRA_NAME());
-            ps.setString(2, brand.getBRA_DES());
-            ps.setString(3, brand.getBRA_ID());
+            ps.setString(1, brand.getBrandName());
+            ps.setString(2, brand.getBrandDescription());
+            ps.setString(3, brand.getBrandId());
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -50,12 +50,12 @@ public class BrandDao implements Dao.BrandDao {
     }
 
     @Override
-    public void delete(String BRA_ID) {
+    public void delete(String brandId) {
         conn = DBConnect.getConnection();
 
         try {
             ps = conn.prepareStatement("DELETE FROM [BRAND] WHERE BRA_ID = ?");
-            ps.setString(1, BRA_ID);
+            ps.setString(1, brandId);
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -65,19 +65,19 @@ public class BrandDao implements Dao.BrandDao {
     }
 
     @Override
-    public Brand getBrand(String BRA_ID) {
+    public Brand getBrand(String brandId) {
         Brand brand = new Brand();
         conn = DBConnect.getConnection();
 
         try {
             ps = conn.prepareStatement("SELECT * FROM [BRAND] WHERE BRA_ID = ?");
-            ps.setString(1, BRA_ID);
+            ps.setString(1, brandId);
             rs = ps.executeQuery();
 
             rs.next();
-            brand.setBRA_ID(rs.getString("BRA_ID").trim());
-            brand.setBRA_NAME(rs.getString("BRA_NAME"));
-            brand.setBRA_DES(rs.getString("BRA_DES"));
+            brand.setBrandId(rs.getString("BRA_ID").trim());
+            brand.setBrandName(rs.getString("BRA_NAME"));
+            brand.setBrandDescription(rs.getString("BRA_DES"));
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -98,9 +98,9 @@ public class BrandDao implements Dao.BrandDao {
             rs = ps.executeQuery();
             while (rs.next()) {
                 Brand brand = new Brand();
-                brand.setBRA_ID(rs.getString("BRA_ID").trim());
-                brand.setBRA_NAME(rs.getString("BRA_NAME"));
-                brand.setBRA_DES(rs.getString("BRA_DES"));
+                brand.setBrandId(rs.getString("BRA_ID").trim());
+                brand.setBrandName(rs.getString("BRA_NAME"));
+                brand.setBrandDescription(rs.getString("BRA_DES"));
 
                 brands.add(brand);
             }
@@ -114,20 +114,20 @@ public class BrandDao implements Dao.BrandDao {
     }
 
     @Override
-    public List<Brand> searchByName(String NAME) {
+    public List<Brand> searchByName(String brandName) {
         List<Brand> brands = new ArrayList<>();
         conn = DBConnect.getConnection();
 
         try {
             ps = conn.prepareStatement("SELECT * FROM [BRAND] WHERE BRA_NAME LIKE ? ORDER BY BRA_NAME ASC");
-            ps.setString(1, "%" + NAME + "%");
+            ps.setString(1, "%" + brandName + "%");
 
             rs = ps.executeQuery();
             while (rs.next()) {
                 Brand brand = new Brand();
-                brand.setBRA_ID(rs.getString("BRA_ID").trim());
-                brand.setBRA_NAME(rs.getString("BRA_NAME"));
-                brand.setBRA_DES(rs.getString("BRA_DES"));
+                brand.setBrandId(rs.getString("BRA_ID").trim());
+                brand.setBrandName(rs.getString("BRA_NAME"));
+                brand.setBrandDescription(rs.getString("BRA_DES"));
 
                 brands.add(brand);
             }
@@ -141,12 +141,12 @@ public class BrandDao implements Dao.BrandDao {
     }
 
     @Override
-    public boolean checkExistID(String ID) {
+    public boolean checkExistId(String id) {
         conn = DBConnect.getConnection();
 
         try {
             ps = conn.prepareStatement("SELECT * FROM [BRAND] WHERE BRA_ID = ?");
-            ps.setString(1, ID);
+            ps.setString(1, id);
 
             rs = ps.executeQuery();
             if (rs.next()) {
@@ -162,12 +162,12 @@ public class BrandDao implements Dao.BrandDao {
     }
 
     @Override
-    public boolean isUnusedBrand(String BRA_ID) {
+    public boolean isUnusedBrand(String brandId) {
         conn = DBConnect.getConnection();
 
         try {
             ps = conn.prepareStatement("SELECT * FROM [PRODUCT] WHERE BRA_ID = ?");
-            ps.setString(1, BRA_ID);
+            ps.setString(1, brandId);
 
             rs = ps.executeQuery();
             if (rs.next()) {

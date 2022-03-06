@@ -19,13 +19,13 @@ public class WLItemService implements Services.WLItemService {
     }
 
     @Override
-    public void delete(String WLITEM_ID) {
-        itemDao.delete(WLITEM_ID);
+    public void delete(String wlItemId) {
+        itemDao.delete(wlItemId);
     }
 
     @Override
-    public WLItem getWLItem(String WLITEM_ID) {
-        return itemDao.getWLItem(WLITEM_ID);
+    public WLItem getWLItem(String wlItemId) {
+        return itemDao.getWLItem(wlItemId);
     }
 
     @Override

@@ -64,8 +64,8 @@
                                             </div>
                                             <div class="row">
                                                 <%
-                                                    BigDecimal price = new BigDecimal(((Product) request.getAttribute("product")).getPRO_PRICE());
-                                                    BigDecimal cost = new BigDecimal(((Product) request.getAttribute("product")).getPRO_COST());
+                                                    BigDecimal price = new BigDecimal(((Product) request.getAttribute("product")).getProductPrice());
+                                                    BigDecimal cost = new BigDecimal(((Product) request.getAttribute("product")).getProductCost());
                                                     Locale vie = new Locale("vi", "VN");
                                                     NumberFormat dongFormat = NumberFormat.getCurrencyInstance(vie);
                                                     String showPrice = dongFormat.format(price);
@@ -87,11 +87,11 @@
                                                         <select name="cat" class="w-50">
                                                             <c:forEach items="${categories}" var="category">
                                                                 <c:choose>
-                                                                    <c:when test="${product.CAT.CAT_ID == category.CAT_ID}">
-                                                                        <option value="${category.CAT_ID}" selected="selected">${category.CAT_NAME}</option>
+                                                                    <c:when test="${product.CAT.categoryId == category.categoryId}">
+                                                                        <option value="${category.categoryId}" selected="selected">${category.categoryName}</option>
                                                                     </c:when>
                                                                     <c:otherwise>
-                                                                        <option value="${category.CAT_ID}">${category.CAT_NAME}</option>
+                                                                        <option value="${category.categoryId}">${category.categoryName}</option>
                                                                     </c:otherwise>
                                                                 </c:choose>
                                                             </c:forEach>
@@ -104,11 +104,11 @@
                                                         <select name="bra" class="w-50">
                                                             <c:forEach items="${brands}" var="brand">
                                                                 <c:choose>
-                                                                    <c:when test="${product.BRA.BRA_ID == brand.BRA_ID}">
-                                                                        <option value="${brand.BRA_ID}" selected="selected">${brand.BRA_NAME}</option>
+                                                                    <c:when test="${product.BRA.brandId == brand.brandId}">
+                                                                        <option value="${brand.brandId}" selected="selected">${brand.brandName}</option>
                                                                     </c:when>
                                                                     <c:otherwise>
-                                                                        <option value="${brand.BRA_ID}">${brand.BRA_NAME}</option>
+                                                                        <option value="${brand.brandId}">${brand.brandName}</option>
                                                                     </c:otherwise>
                                                                 </c:choose>
                                                             </c:forEach>

@@ -12,7 +12,7 @@ import java.util.List;
 
 @WebServlet(name = "ProductController", value = "/admin/product")
 public class ProductController extends HttpServlet {
-    ProductService productService = new ProductService();
+    private final ProductService productService = new ProductService();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

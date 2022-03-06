@@ -12,7 +12,7 @@ import java.util.List;
 
 @WebServlet(name = "BrandController", value = "/admin/brand")
 public class BrandController extends HttpServlet {
-    private BrandService brandService = new BrandService();
+    private final BrandService brandService = new BrandService();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

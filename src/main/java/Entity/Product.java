@@ -1,106 +1,114 @@
 package Entity;
 
-import Services.deploy.ProImageService;
-
 import java.io.Serializable;
-import java.util.List;
 
 public class Product implements Serializable {
     private static final long serialVersionUID = 1L;
-    ProImageService imageService = new ProImageService();
 
-    private String PRO_ID;
-    private String PRO_NAME;
-    private double PRO_RATE;
-    private String PRO_DES;
-    private String PRO_PRICE;
-    private String PRO_COST;
-    private int PRO_QUANT;
-    private Category CAT;
-    private Brand BRA;
+    private String productId;
+    private String productName;
+    private double productRate;
+    private String productDescription;
+    private String productPrice;
+    private String productCost;
+    private int productQuantity;
+    private Category category;
+    private Brand brand;
 
     public Product() {}
 
-    public Product(String PRO_ID, String PRO_NAME, String PRO_DES, String PRO_PRICE, String PRO_COST, int PRO_QUANT, Category CAT, Brand BRA) {
-        this.PRO_ID = PRO_ID;
-        this.PRO_NAME = PRO_NAME;
-        this.PRO_DES = PRO_DES;
-        this.PRO_PRICE = PRO_PRICE;
-        this.PRO_COST = PRO_COST;
-        this.PRO_QUANT = PRO_QUANT;
-        this.CAT = CAT;
-        this.BRA = BRA;
+    public Product(String productId, String productName, String productDescription, String productPrice, String productCost, int productQuantity, Category category, Brand brand) {
+        this.productId = productId;
+        this.productName = productName;
+        this.productDescription = productDescription;
+        this.productPrice = productPrice;
+        this.productCost = productCost;
+        this.productQuantity = productQuantity;
+        this.category = category;
+        this.brand = brand;
     }
 
-    public String getPRO_ID() {
-        return PRO_ID;
+    public Product(String productId, String productName, double productRate, String productDescription, String productPrice, String productCost, int productQuantity, Category category, Brand brand) {
+        this.productId = productId;
+        this.productName = productName;
+        this.productRate = productRate;
+        this.productDescription = productDescription;
+        this.productPrice = productPrice;
+        this.productCost = productCost;
+        this.productQuantity = productQuantity;
+        this.category = category;
+        this.brand = brand;
     }
 
-    public void setPRO_ID(String PRO_ID) {
-        this.PRO_ID = PRO_ID;
+    public String getProductId() {
+        return productId;
     }
 
-    public String getPRO_NAME() {
-        return PRO_NAME;
+    public void setProductId(String productId) {
+        this.productId = productId;
     }
 
-    public void setPRO_NAME(String PRO_NAME) {
-        this.PRO_NAME = PRO_NAME;
+    public String getProductName() {
+        return productName;
     }
 
-    public double getPRO_RATE() {
-        return PRO_RATE;
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
-    public void setPRO_RATE(double PRO_RATE) {
-        this.PRO_RATE = PRO_RATE;
+    public double getProductRate() {
+        return productRate;
     }
 
-    public String getPRO_DES() {
-        return PRO_DES;
+    public void setProductRate(double productRate) {
+        this.productRate = productRate;
     }
 
-    public void setPRO_DES(String PRO_DES) {
-        this.PRO_DES = PRO_DES;
+    public String getProductDescription() {
+        return productDescription;
     }
 
-    public String getPRO_PRICE() {
-        return PRO_PRICE;
+    public void setProductDescription(String productDescription) {
+        this.productDescription = productDescription;
     }
 
-    public void setPRO_PRICE(String PRO_PRICE) {
-        this.PRO_PRICE = PRO_PRICE;
+    public String getProductPrice() {
+        return productPrice;
     }
 
-    public String getPRO_COST() {
-        return PRO_COST;
+    public void setProductPrice(String productPrice) {
+        this.productPrice = productPrice;
     }
 
-    public void setPRO_COST(String PRO_COST) {
-        this.PRO_COST = PRO_COST;
+    public String getProductCost() {
+        return productCost;
     }
 
-    public int getPRO_QUANT() {
-        return PRO_QUANT;
+    public void setProductCost(String productCost) {
+        this.productCost = productCost;
     }
 
-    public void setPRO_QUANT(int PRO_QUANT) {
-        this.PRO_QUANT = PRO_QUANT;
+    public int getProductQuantity() {
+        return productQuantity;
     }
 
-    public Category getCAT() {
-        return CAT;
+    public void setProductQuantity(int productQuantity) {
+        this.productQuantity = productQuantity;
     }
 
-    public void setCAT(Category CAT) {
-        this.CAT = CAT;
+    public Category getCategory() {
+        return category;
     }
 
-    public Brand getBRA() {
-        return BRA;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
-    public void setBRA(Brand BRA) {
-        this.BRA = BRA;
+    public Brand getBrand() {
+        return brand;
+    }
+
+    public void setBrand(Brand brand) {
+        this.brand = brand;
     }
 }

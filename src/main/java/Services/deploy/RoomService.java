@@ -9,8 +9,8 @@ public class RoomService implements Services.RoomService {
     private RoomDao roomDao = new RoomDao();
 
     @Override
-    public Room getRoom(String ROOM_ID) {
-        return roomDao.getRoom(ROOM_ID);
+    public Room getRoom(String roomId) {
+        return roomDao.getRoom(roomId);
     }
 
     @Override

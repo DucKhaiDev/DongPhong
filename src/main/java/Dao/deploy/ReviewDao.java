@@ -2,9 +2,8 @@ package Dao.deploy;
 
 import Connect.DBConnect;
 import Entity.Review;
-import Services.deploy.CustomerService;
 import Services.deploy.ProductService;
-import com.oracle.wls.shaded.org.apache.regexp.RE;
+import Services.deploy.UserService;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,7 +17,7 @@ public class ReviewDao implements Dao.ReviewDao {
     private PreparedStatement ps = null;
     private ResultSet rs = null;
 
-    private final CustomerService customerService = new CustomerService();
+    private final UserService userService = new UserService();
     private final ProductService productService = new ProductService();
 
     @Override
@@ -26,12 +25,12 @@ public class ReviewDao implements Dao.ReviewDao {
         conn = DBConnect.getConnection();
 
         try {
-            ps = conn.prepareStatement("INSERT INTO [REVIEW](CUS_ID, PRO_ID, REV_CONTENT, REV_DATE, REV_IMG) VALUES(?, ?, ?, ?, ?)");
-            ps.setString(1, review.getCUS().getCUS_ID());
-            ps.setString(2, review.getPRO().getPRO_ID());
-            ps.setString(3, review.getREV_CONTENT());
-            ps.setTimestamp(4, review.getREV_DATE());
-            ps.setString(5, review.getREV_IMG());
+            ps = conn.prepareStatement("INSERT INTO [REVIEW](USER_ID, PRO_ID, REV_CONTENT, REV_DATE, REV_IMG) VALUES(?, ?, ?, ?, ?)");
+            ps.setString(1, review.getUser().getUserId());
+            ps.setString(2, review.getProduct().getProductId());
+            ps.setString(3, review.getReviewContent());
+            ps.setTimestamp(4, review.getReviewDate());
+            ps.setString(5, review.getReviewImage());
 
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -46,13 +45,13 @@ public class ReviewDao implements Dao.ReviewDao {
         conn = DBConnect.getConnection();
 
         try {
-            ps = conn.prepareStatement("UPDATE [REVIEW] SET CUS_ID = ?, PRO_ID = ?, REV_CONTENT = ?, REV_DATE = ?, REV_IMG = ? WHERE REV_ID = ?");
-            ps.setString(1, review.getCUS().getCUS_ID());
-            ps.setString(2, review.getPRO().getPRO_ID());
-            ps.setString(3, review.getREV_CONTENT());
-            ps.setTimestamp(4, review.getREV_DATE());
-            ps.setString(5, review.getREV_IMG());
-            ps.setInt(6, review.getREV_ID());
+            ps = conn.prepareStatement("UPDATE [REVIEW] SET USER_ID = ?, PRO_ID = ?, REV_CONTENT = ?, REV_DATE = ?, REV_IMG = ? WHERE REV_ID = ?");
+            ps.setString(1, review.getUser().getUserId());
+            ps.setString(2, review.getProduct().getProductId());
+            ps.setString(3, review.getReviewContent());
+            ps.setTimestamp(4, review.getReviewDate());
+            ps.setString(5, review.getReviewImage());
+            ps.setInt(6, review.getReviewId());
 
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -63,12 +62,12 @@ public class ReviewDao implements Dao.ReviewDao {
     }
 
     @Override
-    public void delete(String REV_ID) {
+    public void delete(int reviewId) {
         conn = DBConnect.getConnection();
 
         try {
             ps = conn.prepareStatement("DELETE FROM [REVIEW] WHERE REV_ID = ?");
-            ps.setString(1, REV_ID);
+            ps.setInt(1, reviewId);
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -78,21 +77,21 @@ public class ReviewDao implements Dao.ReviewDao {
     }
 
     @Override
-    public Review getReview(String REV_ID) {
+    public Review getReview(int reviewId) {
         conn = DBConnect.getConnection();
         Review review = new Review();
 
         try {
             ps = conn.prepareStatement("SELECT * FROM [REVIEW] WHERE REV_ID = ?");
-            ps.setString(1, REV_ID);
+            ps.setInt(1, reviewId);
             rs = ps.executeQuery();
             rs.next();
-            review.setREV_ID(rs.getInt("REV_ID"));
-            review.setCUS(customerService.getCustomer(rs.getString("CUS_ID").trim()));
-            review.setPRO(productService.getProduct(rs.getString("PRO_ID").trim()));
-            review.setREV_CONTENT(rs.getString("REV_CONTENT"));
-            review.setREV_DATE(rs.getTimestamp("REV_DATE"));
-            review.setREV_IMG(rs.getString("REV_IMG"));
+            review.setReviewId(reviewId);
+            review.setUser(userService.getUser(rs.getString("USER_ID").trim()));
+            review.setProduct(productService.getProduct(rs.getString("PRO_ID").trim()));
+            review.setReviewContent(rs.getString("REV_CONTENT"));
+            review.setReviewDate(rs.getTimestamp("REV_DATE"));
+            review.setReviewImage(rs.getString("REV_IMG"));
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -112,12 +111,12 @@ public class ReviewDao implements Dao.ReviewDao {
             rs = ps.executeQuery();
             while (rs.next()) {
                 Review review = new Review();
-                review.setREV_ID(rs.getInt("REV_ID"));
-                review.setCUS(customerService.getCustomer(rs.getString("CUS_ID").trim()));
-                review.setPRO(productService.getProduct(rs.getString("PRO_ID").trim()));
-                review.setREV_CONTENT(rs.getString("REV_CONTENT"));
-                review.setREV_DATE(rs.getTimestamp("REV_DATE"));
-                review.setREV_IMG(rs.getString("REV_IMG"));
+                review.setReviewId(rs.getInt("REV_ID"));
+                review.setUser(userService.getUser(rs.getString("USER_ID").trim()));
+                review.setProduct(productService.getProduct(rs.getString("PRO_ID").trim()));
+                review.setReviewContent(rs.getString("REV_CONTENT"));
+                review.setReviewDate(rs.getTimestamp("REV_DATE"));
+                review.setReviewImage(rs.getString("REV_IMG"));
 
                 reviews.add(review);
             }

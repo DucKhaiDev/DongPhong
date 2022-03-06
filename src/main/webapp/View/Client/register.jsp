@@ -3,7 +3,7 @@
   Date: 1/30/2022
   Time: 9:32 AM
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:url value="/assets" var="url" />
 <!DOCTYPE html>
@@ -71,8 +71,8 @@
                                             <p class="text-muted" style="color: #FF0000 !important;">${requestScope.pswMsg}</p>
                                         </div>
                                         <div class="form-group">
-                                            <label for="repeat_password">Nhập lại mật khẩu</label>
-                                            <input type="password" class="form-control" id="repeat_password" name="repeat_password" required="required">
+                                            <label for="repeatPassword">Nhập lại mật khẩu</label>
+                                            <input type="password" class="form-control" id="repeatPassword" name="repeatPassword" required="required">
                                             <p class="text-muted" style="color: #FF0000 !important;">${requestScope.rpswMsg}</p>
                                         </div>
                                         <div class="form-group mb-5">
@@ -143,5 +143,6 @@
 </script>
 <!--===============================================================================================-->
 <script src="${url}/js/main.js"></script>
+
 </body>
 </html>

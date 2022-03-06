@@ -52,7 +52,7 @@
                         <div class="panel-heading">Danh sách người dùng</div>
                         <div class="panel-body">
                             <div class="table-responsive">
-                                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                <table class="table table-striped table-bordered table-hover" id="dataTable">
                                     <thead>
                                         <tr>
                                             <th>STT</th>
@@ -71,27 +71,27 @@
                                         <c:forEach items="${users}" var="user">
                                             <tr class="odd">
                                                 <td>${number = number + 1}</td>
-                                                <td>${user.USER_ID}</td>
-                                                <c:url value="/images/avatar?fname=${user.AVATAR}" var="avatarUrl"/>
-                                                <td><img class="user-img-empty" width="50" height="50" <c:if test="${not empty user.AVATAR}">src="${avatarUrl}"</c:if> style="object-fit: cover;"></td>
-                                                <td>${user.USERNAME}</td>
-                                                <td>${user.PASSWORD}</td>
-                                                <td>${user.EMAIL}</td>
+                                                <td>${user.userId}</td>
+                                                <c:url value="/images/avatar?fname=${user.avatar}" var="avatarUrl"/>
+                                                <td><img class="user-img-empty" width="50" height="50" <c:if test="${not empty user.avatar}">src="${avatarUrl}"</c:if> style="object-fit: cover;"></td>
+                                                <td>${user.username}</td>
+                                                <td>${user.password}</td>
+                                                <td>${user.email}</td>
                                                 <td>Đang hoạt động</td>
                                                 <td>
                                                     <c:choose>
-                                                        <c:when test="${!user.ROLE}">Quản trị viên</c:when>
+                                                        <c:when test="${!user.role}">Quản trị viên</c:when>
                                                         <c:otherwise>Thành viên</c:otherwise>
                                                     </c:choose>
                                                 </td>
                                                 <td>
-                                                    <a href="<c:url value="/admin/user/edit?id=${user.USER_ID}"/>" class="text-center">Sửa</a>&nbsp;|&nbsp;
+                                                    <a href="<c:url value="/admin/user/edit?id=${user.userId}"/>" class="text-center">Sửa</a>&nbsp;|&nbsp;
                                                     <c:choose>
-                                                        <c:when test="${countAdmin < 2}">
+                                                        <c:when test="${user.userId == 'FOUNDER'}">
                                                             <a class="text-center isDisabled">Xóa</a>
                                                         </c:when>
                                                         <c:otherwise>
-                                                            <a href="<c:url value="/admin/user/delete?id=${user.USER_ID}"/>" class="text-center">Xóa</a>
+                                                            <a href="<c:url value="/admin/user/delete?id=${user.userId}"/>" class="text-center">Xóa</a>
                                                         </c:otherwise>
                                                     </c:choose>
                                                 </td>
@@ -122,14 +122,13 @@
 <script src="${url}/js/dataTables/dataTables.bootstrap.js"></script>
 <script>
     $(document).ready(function () {
-        $('#dataTables-example').dataTable({
+        $('#dataTable').dataTable({
             "pagingType": "full_numbers"
         });
     });
 </script>
 <!-- CUSTOM SCRIPTS -->
 <script src="${url}/js/custom.js"></script>
-
 
 </body>
 </html>

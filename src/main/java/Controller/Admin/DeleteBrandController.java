@@ -9,7 +9,7 @@ import java.io.IOException;
 
 @WebServlet(name = "DeleteBrandController", value = "/admin/brand/delete")
 public class DeleteBrandController extends HttpServlet {
-    private BrandService brandService = new BrandService();
+    private final BrandService brandService = new BrandService();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

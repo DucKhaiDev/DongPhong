@@ -5,39 +5,39 @@ import java.io.Serializable;
 public class WLItem implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private String WLITEM_ID;
-    private Product PRO;
-    private Wishlist WL;
+    private String wlItemId;
+    private Product product;
+    private WishList wishList;
 
     public WLItem() {}
 
-    public WLItem(String WLITEM_ID, Product PRO, Wishlist WL) {
-        this.WLITEM_ID = WLITEM_ID;
-        this.PRO = PRO;
-        this.WL = WL;
+    public WLItem(String wlItemId, Product product, WishList wishList) {
+        this.wlItemId = wlItemId;
+        this.product = product;
+        this.wishList = wishList;
     }
 
-    public String getWLITEM_ID() {
-        return WLITEM_ID;
+    public String getWlItemId() {
+        return wlItemId;
     }
 
-    public void setWLITEM_ID(String WLITEM_ID) {
-        this.WLITEM_ID = WLITEM_ID;
+    public void setWlItemId(String wlItemId) {
+        this.wlItemId = wlItemId;
     }
 
-    public Product getPRO() {
-        return PRO;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setPRO(Product PRO) {
-        this.PRO = PRO;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
-    public Wishlist getWL() {
-        return WL;
+    public WishList getWishList() {
+        return wishList;
     }
 
-    public void setWL(Wishlist WL) {
-        this.WL = WL;
+    public void setWishList(WishList wishList) {
+        this.wishList = wishList;
     }
 }

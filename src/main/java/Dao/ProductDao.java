@@ -7,13 +7,13 @@ import java.util.List;
 public interface ProductDao {
     void insert(Product product);
     void edit(Product product);
-    void delete(String PRO_ID);
-    Product getProduct(String PRO_ID);
+    void delete(String productId);
+    Product getProduct(String productId);
     List<Product> getAll();
-    List<Product> searchByName(String NAME);
-    List<Product> searchByNameInCategory(String CAT_ID, String NAME);
-    List<Product> getProductByCategory(String CAT_ID);
-    List<Product> getProductByBrand(String BRA_ID);
-    boolean checkExistID(String ID);
-    int countProduct(String CAT_ID, String BRA_ID);
+    List<Product> searchByName(String productName);
+    List<Product> searchByNameInCategory(String categoryId, String name);
+    List<Product> getProductByCategory(String categoryId);
+    List<Product> getProductByBrand(String brandId);
+    boolean checkExistId(String id);
+    int countProduct(String categoryId, String brandId);
 }

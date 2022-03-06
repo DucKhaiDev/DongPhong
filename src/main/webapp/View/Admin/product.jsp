@@ -2,7 +2,6 @@
 <%@ page import="java.math.BigDecimal" %>
 <%@ page import="java.util.Locale" %>
 <%@ page import="java.text.NumberFormat" %>
-<%@ page import="Services.deploy.ProductService" %>
 <%@ page import="Services.deploy.ProImageService" %>
 <%--
   User: duckhaidev
@@ -68,7 +67,7 @@
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
-                                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                <table class="table table-striped table-bordered table-hover" id="dataTable">
                                     <thead>
                                     <tr>
                                         <th>STT</th>
@@ -86,10 +85,10 @@
                                         <c:forEach items="${products}" var="product">
                                             <tr class="odd">
                                                 <td>${number = number + 1}</td>
-                                                <td>${product.PRO_ID}</td>
+                                                <td>${product.productId}</td>
                                                 <%
                                                     ProImageService imageService = new ProImageService();
-                                                    String reImage = imageService.getProReImage(((Product) pageContext.getAttribute("product")).getPRO_ID());
+                                                    String reImage = imageService.getProReImage(((Product) pageContext.getAttribute("product")).getProductId());
                                                     request.setAttribute("reImage", reImage);
                                                 %>
                                                 <c:url value="/images/product-images?fname=${reImage}" var="imageUrl"/>
@@ -101,20 +100,20 @@
                                                         <td><img width="50" height="50" src="${imageUrl}" style="object-fit: cover;" alt="Hình ảnh"></td>
                                                     </c:otherwise>
                                                 </c:choose>
-                                                <td>${product.PRO_NAME}</td>
+                                                <td>${product.productName}</td>
                                                 <%
-                                                    BigDecimal price = new BigDecimal(((Product) pageContext.getAttribute("product")).getPRO_PRICE());
+                                                    BigDecimal price = new BigDecimal(((Product) pageContext.getAttribute("product")).getProductPrice());
                                                     Locale vie = new Locale("vi", "VN");
                                                     NumberFormat dongFormat = NumberFormat.getCurrencyInstance(vie);
                                                     String showPrice = dongFormat.format(price);
                                                     out.print("<td>" + showPrice + "</td>");
                                                 %>
-                                                <td>${product.CAT.CAT_NAME}</td>
-                                                <td>${product.BRA.BRA_NAME}</td>
+                                                <td>${product.category.categoryName}</td>
+                                                <td>${product.brand.brandName}</td>
                                                 <td>
                                                     <a href="<c:url value="#"/>" class="text-center">Chi tiết</a>&nbsp;|&nbsp;
-                                                    <a href="<c:url value="/admin/product/edit?id=${product.PRO_ID}"/>" class="text-center">Sửa</a>&nbsp;|&nbsp;
-                                                    <a href="<c:url value="/admin/product/delete?id=${product.PRO_ID}"/>" class="text-center">Xóa</a>
+                                                    <a href="<c:url value="/admin/product/edit?id=${product.productId}"/>" class="text-center">Sửa</a>&nbsp;|&nbsp;
+                                                    <a href="<c:url value="/admin/product/delete?id=${product.productId}"/>" class="text-center">Xóa</a>
                                                 </td>
                                             </tr>
                                         </c:forEach>
@@ -147,14 +146,13 @@
 <script src="${url}/js/dataTables/dataTables.bootstrap.js"></script>
 <script>
     $(document).ready(function () {
-        $('#dataTables-example').dataTable({
+        $('#dataTable').dataTable({
             "pagingType": "full_numbers"
         });
     });
 </script>
 <!-- CUSTOM SCRIPTS -->
 <script src="${url}/js/custom.js"></script>
-
 
 </body>
 </html>

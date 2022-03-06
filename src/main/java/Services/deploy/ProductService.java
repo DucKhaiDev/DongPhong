@@ -20,13 +20,13 @@ public class ProductService implements Services.ProductService {
     }
 
     @Override
-    public void delete(String PRO_ID) {
-        productDao.delete(PRO_ID);
+    public void delete(String productId) {
+        productDao.delete(productId);
     }
 
     @Override
-    public Product getProduct(String PRO_ID) {
-        return productDao.getProduct(PRO_ID);
+    public Product getProduct(String productId) {
+        return productDao.getProduct(productId);
     }
 
     @Override
@@ -35,33 +35,33 @@ public class ProductService implements Services.ProductService {
     }
 
     @Override
-    public List<Product> searchByName(String NAME) {
-        return productDao.searchByName(NAME);
+    public List<Product> searchByName(String productName) {
+        return productDao.searchByName(productName);
     }
 
     @Override
-    public List<Product> searchByNameInCategory(String CAT_ID, String NAME) {
-        return productDao.searchByNameInCategory(CAT_ID, NAME);
+    public List<Product> searchByNameInCategory(String categoryId, String productName) {
+        return productDao.searchByNameInCategory(categoryId, productName);
     }
 
     @Override
-    public List<Product> getProductByCategory(String CAT_ID) {
-        return productDao.getProductByCategory(CAT_ID);
+    public List<Product> getProductByCategory(String categoryId) {
+        return productDao.getProductByCategory(categoryId);
     }
 
     @Override
-    public List<Product> getProductByBrand(String BRA_ID) {
-        return productDao.getProductByBrand(BRA_ID);
+    public List<Product> getProductByBrand(String brandId) {
+        return productDao.getProductByBrand(brandId);
     }
 
     @Override
-    public boolean checkExistID(String PRO_ID) {
-        return productDao.checkExistID(PRO_ID);
+    public boolean checkExistId(String productId) {
+        return productDao.checkExistId(productId);
     }
 
     @Override
-    public int countProduct(String CAT_ID, String BRA_ID) {
-        return productDao.countProduct(CAT_ID, BRA_ID);
+    public int countProduct(String categoryId, String brandId) {
+        return productDao.countProduct(categoryId, brandId);
     }
 
     @Override
@@ -69,8 +69,8 @@ public class ProductService implements Services.ProductService {
         products.sort(new Comparator<Product>() {
             @Override
             public int compare(Product o1, Product o2) {
-                BigDecimal o1price = new BigDecimal(o1.getPRO_PRICE());
-                BigDecimal o2price = new BigDecimal(o2.getPRO_PRICE());
+                BigDecimal o1price = new BigDecimal(o1.getProductPrice());
+                BigDecimal o2price = new BigDecimal(o2.getProductPrice());
                 return o1price.compareTo(o2price);
             }
         });
@@ -81,8 +81,8 @@ public class ProductService implements Services.ProductService {
         products.sort(Collections.reverseOrder(new Comparator<Product>() {
             @Override
             public int compare(Product o1, Product o2) {
-                BigDecimal o1price = new BigDecimal(o1.getPRO_PRICE());
-                BigDecimal o2price = new BigDecimal(o2.getPRO_PRICE());
+                BigDecimal o1price = new BigDecimal(o1.getProductPrice());
+                BigDecimal o2price = new BigDecimal(o2.getProductPrice());
                 return o1price.compareTo(o2price);
             }
         }));
@@ -98,7 +98,7 @@ public class ProductService implements Services.ProductService {
             boolean exist = false;
 
             for (String b : brand) {
-                if (product.getBRA().getBRA_ID().equals(b)) {
+                if (product.getBrand().getBrandId().equals(b)) {
                     exist = true;
                     break;
                 }
@@ -119,7 +119,7 @@ public class ProductService implements Services.ProductService {
 
         while (iterator.hasNext()) {
             Product product = iterator.next();
-            BigDecimal proPrice = new BigDecimal(product.getPRO_PRICE());
+            BigDecimal proPrice = new BigDecimal(product.getProductPrice());
             BigDecimal
                     p10tr = new BigDecimal(10000000),
                     p50tr = new BigDecimal(50000000),
@@ -181,7 +181,7 @@ public class ProductService implements Services.ProductService {
 
     @Override
     public List<Product> filterProductByStars(List<Product> products, String stars) {
-        products.removeIf(product -> Double.compare(product.getPRO_RATE(), Double.parseDouble(stars)) < 0);
+        products.removeIf(product -> Double.compare(product.getProductRate(), Double.parseDouble(stars)) < 0);
         return products;
     }
 }

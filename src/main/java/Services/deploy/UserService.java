@@ -4,6 +4,7 @@ import Dao.deploy.UserDao;
 import Entity.User;
 
 import java.util.List;
+import java.util.UUID;
 
 public class UserService implements Services.UserService {
     UserDao userDao = new UserDao();
@@ -19,24 +20,19 @@ public class UserService implements Services.UserService {
     }
 
     @Override
-    public void delete(int USER_ID) {
-        userDao.delete(USER_ID);
+    public void delete(String identify) {
+        userDao.delete(identify);
     }
 
     @Override
-    public User getUser(int USER_ID) {
-        return userDao.getUser(USER_ID);
+    public User getUser(String identify) {
+        return userDao.getUser(identify);
     }
 
     @Override
-    public User getUser(String USERNAME_OR_EMAIL) {
-        return userDao.getUser(USERNAME_OR_EMAIL);
-    }
-
-    @Override
-    public User login(String USERNAME_OR_EMAIL, String PASSWORD) {
-        User user = userDao.getUser(USERNAME_OR_EMAIL);
-        if (user != null && PASSWORD.equals(user.getPASSWORD())) {
+    public User login(String username, String password) {
+        User user = userDao.getUser(username);
+        if (user != null && password.equals(user.getPassword())) {
             return user;
         }
 
@@ -44,11 +40,13 @@ public class UserService implements Services.UserService {
     }
 
     @Override
-    public boolean register(String USERNAME, String PASSWORD, String EMAIL) {
-        if (checkExistUSERNAME(USERNAME) || checkExistEMAIL(EMAIL)) {
+    public boolean register(String username, String password, String email) {
+        if (checkExistUsername(username) || checkExistEmail(email)) {
             return false;
         }
-        insert(new User(USERNAME, PASSWORD, EMAIL));
+
+        String userId = UUID.randomUUID().toString();
+        insert(new User(userId, username, password, email));
 
         return true;
     }
@@ -59,18 +57,18 @@ public class UserService implements Services.UserService {
     }
 
     @Override
-    public List<User> search(String NAME) {
-        return userDao.search(NAME);
+    public List<User> search(String username) {
+        return userDao.search(username);
     }
 
     @Override
-    public boolean checkExistUSERNAME(String USERNAME) {
-        return userDao.checkExistUSERNAME(USERNAME);
+    public boolean checkExistUsername(String username) {
+        return userDao.checkExistUsername(username);
     }
 
     @Override
-    public boolean checkExistEMAIL(String EMAIL) {
-        return userDao.checkExistEMAIL(EMAIL);
+    public boolean checkExistEmail(String email) {
+        return userDao.checkExistEmail(email);
     }
 
     @Override

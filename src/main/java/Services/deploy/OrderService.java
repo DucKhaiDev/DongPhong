@@ -19,13 +19,13 @@ public class OrderService implements Services.OrderService {
     }
 
     @Override
-    public void delete(String ORD_ID) {
-        orderDao.delete(ORD_ID);
+    public void delete(String orderId) {
+        orderDao.delete(orderId);
     }
 
     @Override
-    public Order getOrder(String ORD_ID) {
-        return orderDao.getOrder(ORD_ID);
+    public Order getOrder(String orderId) {
+        return orderDao.getOrder(orderId);
     }
 
     @Override

@@ -1,10 +1,11 @@
 <%@ page import="Services.deploy.CategoryService" %>
-<%@ page import="Entity.Category" %><%--
+<%@ page import="Entity.Category" %>
+<%--
   User: duckhaidev
   Date: 2/23/2022
   Time: 5:18 PM
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:url value="/assets" var="url" />
 <!DOCTYPE html>
@@ -88,19 +89,19 @@
                                         <c:forEach items="${categories}" var="category">
                                         <tr class="odd">
                                             <td>${number = number + 1}</td>
-                                            <td>${category.CAT_ID}</td>
-                                            <td>${category.CAT_NAME}</td>
-                                            <td>${category.ROOM.ROOM_NAME}</td>
-                                            <td>${category.CAT_DES}</td>
+                                            <td>${category.categoryId}</td>
+                                            <td>${category.categoryName}</td>
+                                            <td>${category.room.roomName}</td>
+                                            <td>${category.categoryDescription}</td>
                                             <td>
-                                                <a href="<c:url value="/admin/category/edit?id=${category.CAT_ID}"/>" class="text-center">Sửa</a>&nbsp;|&nbsp;
+                                                <a href="<c:url value="/admin/category/edit?id=${category.categoryId}"/>" class="text-center">Sửa</a>&nbsp;|&nbsp;
                                                 <%
-                                                    boolean isUnusedCategory = new CategoryService().isUnusedCategory(((Category)pageContext.getAttribute("category")).getCAT_ID());
+                                                    boolean isUnusedCategory = new CategoryService().isUnusedCategory(((Category)pageContext.getAttribute("category")).getCategoryId());
                                                     request.setAttribute("isUnusedCategory", isUnusedCategory);
                                                 %>
                                                 <c:choose>
                                                     <c:when test="${isUnusedCategory}">
-                                                        <a href="<c:url value="/admin/category/delete?id=${category.CAT_ID}"/>" class="text-center">Xóa</a>
+                                                        <a href="<c:url value="/admin/category/delete?id=${category.categoryId}"/>" class="text-center">Xóa</a>
                                                     </c:when>
                                                     <c:when test="${!isUnusedCategory}">
                                                         <a class="text-center isDisabled">(Đang được sử dụng)</a>
@@ -163,7 +164,6 @@
 </script>
 <!-- CUSTOM SCRIPTS -->
 <script src="${url}/js/custom.js"></script>
-
 
 </body>
 </html>

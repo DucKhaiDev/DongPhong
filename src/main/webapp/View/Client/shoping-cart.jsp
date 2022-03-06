@@ -3,7 +3,7 @@
   Date: 1/11/2022
   Time: 5:44 PM
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:url value="/assets" var="url" />
 <!DOCTYPE html>
