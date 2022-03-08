@@ -219,15 +219,15 @@
                         <div id="collapse-3" class="panel-collapse collapse in show">
                             <div class="panel-body d-flex justify-content-center">
                                 <div class="stars-ratings stars-ratings-label">
-                                    <input class="filter-input" type="radio" name="stars-rating" id="stars-rating-5" value="5">
+                                    <input class="filter-input" type="radio" name="rating" id="stars-rating-5" value="5">
                                     <label for="stars-rating-5"><i class="fa fa-star"></i></label>
-                                    <input class="filter-input" type="radio" name="stars-rating" id="stars-rating-4" value="4">
+                                    <input class="filter-input" type="radio" name="rating" id="stars-rating-4" value="4">
                                     <label for="stars-rating-4"><i class="fa fa-star"></i></label>
-                                    <input class="filter-input" type="radio" name="stars-rating" id="stars-rating-3" value="3">
+                                    <input class="filter-input" type="radio" name="rating" id="stars-rating-3" value="3">
                                     <label for="stars-rating-3"><i class="fa fa-star"></i></label>
-                                    <input class="filter-input" type="radio" name="stars-rating" id="stars-rating-2" value="2">
+                                    <input class="filter-input" type="radio" name="rating" id="stars-rating-2" value="2">
                                     <label for="stars-rating-2"><i class="fa fa-star"></i></label>
-                                    <input class="filter-input" type="radio" name="stars-rating" id="stars-rating-1" value="1">
+                                    <input class="filter-input" type="radio" name="rating" id="stars-rating-1" value="1">
                                     <label for="stars-rating-1"><i class="fa fa-star"></i></label>
                                 </div>
                                 <div class="clearfix"></div>
@@ -260,12 +260,24 @@
                                     <div class="block2-txt-child1 flex-col-l ">
                                         <a href="product-detail.jsp" class="product-name stext-104 cl4 hov-cl1 trans-04 js-name-b2 m-b-6">${product.productName}</a>
                                     </div>
-                                    <div class="block2-txt-child2 flex-r p-t-3">
-                                        <a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
+                                    <form action="<c:url value="/wishlist/add"/>" method="get" class="block2-txt-child2 flex-r p-t-3">
+                                        <!--Sign url-->
+                                        <input type="hidden" name="productListByCategory" value="${pageContext.request.contextPath}/products/category">
+                                        <input type="hidden" name="idParam" value="${category.categoryId}">
+                                        <input type="hidden" name="brandParam" value="${param.brand}">
+                                        <input type="hidden" name="priceParam" value="${param.price}">
+                                        <input type="hidden" name="ratingParam" value="${param.rating}">
+                                        <input type="hidden" name="searchParam" value="${param.search}">
+                                        <input type="hidden" name="sortByParam" value="${param.sortBy}">
+
+                                        <!--Sign product-->
+                                        <input type="hidden" name="productId" value="${product.productId}">
+
+                                        <button type="submit" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
                                             <img class="icon-heart1 dis-block trans-04" src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-01.png" alt="ICON">
                                             <img class="icon-heart2 dis-block trans-04 ab-t-l" src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-02.png" alt="ICON">
-                                        </a>
-                                    </div>
+                                        </button>
+                                    </form>
                                 </div>
                                 <div class="block2-txt flex-w flex-t">
                                     <div class="block2-txt-child1 flex-col-l ">
@@ -378,11 +390,23 @@
 
                                                 <!--  -->
                                                 <div class="flex-w flex-m p-l-100 p-t-40 respon7">
-                                                    <div class="flex-m bor9 p-r-10 m-r-11">
-                                                        <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100" data-tooltip="Add to Wishlist">
+                                                    <form action="<c:url value="/wishlist/add"/>" method="get" class="flex-m bor9 p-r-10 m-r-11">
+                                                        <!--Sign url-->
+                                                        <input type="hidden" name="productListByCategory" value="${pageContext.request.contextPath}/products/category">
+                                                        <input type="hidden" name="idParam" value="${category.categoryId}">
+                                                        <input type="hidden" name="brandParam" value="${param.brand}">
+                                                        <input type="hidden" name="priceParam" value="${param.price}">
+                                                        <input type="hidden" name="ratingParam" value="${param.rating}">
+                                                        <input type="hidden" name="searchParam" value="${param.search}">
+                                                        <input type="hidden" name="sortByParam" value="${param.sortBy}">
+
+                                                        <!--Sign product-->
+                                                        <input type="hidden" name="productId" value="${product.productId}">
+
+                                                        <button type="submit" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 tooltip100" data-tooltip="Thêm vào Danh sách yêu thích">
                                                             <i class="zmdi zmdi-favorite"></i>
-                                                        </a>
-                                                    </div>
+                                                        </button>
+                                                    </form>
 
                                                     <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Facebook">
                                                         <i class="fab fa-facebook"></i>
@@ -554,8 +578,8 @@
             });
         }
 
-        if (!params.has('stars-rating')) {
-            $('input[name="stars-rating"]').prop('checked', false).each(function () {
+        if (!params.has('rating')) {
+            $('input[name="rating"]').prop('checked', false).each(function () {
                 sessionStorage.removeItem(this.id);
             });
         }
@@ -570,7 +594,7 @@
             sessionStorage.clear();
             params.delete('brand');
             params.delete('price');
-            params.delete('stars-rating');
+            params.delete('rating');
             window.location = url.href;
         });
     });
@@ -597,11 +621,11 @@
                 tempArray = [];
             }
 
-            $('input[name="stars-rating"]:checked').each(function () {
+            $('input[name="rating"]:checked').each(function () {
                tempArray.push($(this).val());
             });
             if (tempArray.length !== 0) {
-               seasoning += '&stars-rating=' + tempArray.toString();
+               seasoning += '&rating=' + tempArray.toString();
                tempArray = [];
             }
 
@@ -610,7 +634,7 @@
             const params = url.searchParams;
             params.delete('brand');
             params.delete('price');
-            params.delete('stars-rating');
+            params.delete('rating');
             window.location = url.href + seasoning;
        });
     });

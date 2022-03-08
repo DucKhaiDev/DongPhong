@@ -2,8 +2,6 @@ package Tools;
 
 import Entity.ProImage;
 import Entity.User;
-import Services.deploy.ProImageService;
-import Services.deploy.UserService;
 import Util.Constant;
 
 import java.io.File;
@@ -11,13 +9,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class ReleaseMemory {
-    private static final UserService userService = new UserService();
-    private static final ProImageService imageService = new ProImageService();
-
-    public static void deleteUnusedImg() {
-        List<User> users = userService.getAll();
-        List<ProImage> images = imageService.getAll();
-        
+    public static void deleteUnusedImg(List<User> users, List<ProImage> images) {
         //Xóa avatar không còn sử dụng
         File avatars = new File(Constant.Path.AVATARS);
         if (!avatars.exists()) {

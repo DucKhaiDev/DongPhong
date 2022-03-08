@@ -9,5 +9,6 @@ public interface WishlistDao {
     void edit(WishList wishlist);
     void delete(String wishListId);
     WishList getWishlist(String wishListId);
+    WishList getWishListByUser(String userId);
     List<WishList> getAll();
 }

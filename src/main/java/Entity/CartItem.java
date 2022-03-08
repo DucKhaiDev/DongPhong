@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class CartItem implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private String cartItemId;
+    private int cartItemId;
     private int quantity;
     private String value;
     private Product product;
@@ -13,11 +13,18 @@ public class CartItem implements Serializable {
 
     public CartItem() {}
 
-    public String getCartItemId() {
+    public CartItem(int quantity, String value, Product product, Cart cart) {
+        this.quantity = quantity;
+        this.value = value;
+        this.product = product;
+        this.cart = cart;
+    }
+
+    public int getCartItemId() {
         return cartItemId;
     }
 
-    public void setCartItemId(String cartItemId) {
+    public void setCartItemId(int cartItemId) {
         this.cartItemId = cartItemId;
     }
 

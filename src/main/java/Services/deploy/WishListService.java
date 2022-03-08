@@ -6,7 +6,7 @@ import Entity.WishList;
 import java.util.List;
 
 public class WishListService implements Services.WishListService {
-    WishlistDao wishlistDao = new WishlistDao();
+    private final WishlistDao wishlistDao = new WishlistDao();
 
     @Override
     public void insert(WishList wishList) {
@@ -26,6 +26,11 @@ public class WishListService implements Services.WishListService {
     @Override
     public WishList getWishlist(String wishListId) {
         return wishlistDao.getWishlist(wishListId);
+    }
+
+    @Override
+    public WishList getWishListByUser(String userId) {
+        return wishlistDao.getWishListByUser(userId);
     }
 
     @Override

@@ -25,12 +25,11 @@ public class CartItemDao implements Dao.CartItemDao {
         conn = DBConnect.getConnection();
 
         try {
-            ps = conn.prepareStatement("INSERT INTO [CARTITEM](CITEM_ID, QUANT, [VALUE], PRO_ID, CART_ID) VALUES(?, ?, ?, ?, ?)");
-            ps.setString(1, item.getCartItemId());
-            ps.setInt(2, item.getQuantity());
-            ps.setString(3, item.getValue());
-            ps.setString(4, item.getProduct().getProductId());
-            ps.setString(5, item.getCart().getCartId());
+            ps = conn.prepareStatement("INSERT INTO [CARTITEM](QUANT, [VALUE], PRO_ID, CART_ID) VALUES(?, ?, ?, ?)");
+            ps.setInt(1, item.getQuantity());
+            ps.setString(2, item.getValue());
+            ps.setString(3, item.getProduct().getProductId());
+            ps.setString(4, item.getCart().getCartId());
 
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -50,7 +49,7 @@ public class CartItemDao implements Dao.CartItemDao {
             ps.setString(2, item.getValue());
             ps.setString(3, item.getProduct().getProductId());
             ps.setString(4, item.getCart().getCartId());
-            ps.setString(5, item.getCartItemId());
+            ps.setInt(5, item.getCartItemId());
 
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -61,12 +60,12 @@ public class CartItemDao implements Dao.CartItemDao {
     }
 
     @Override
-    public void delete(String cartItemId) {
+    public void delete(int cartItemId) {
         conn = DBConnect.getConnection();
 
         try {
             ps = conn.prepareStatement("DELETE FROM [CARTITEM] WHERE CITEM_ID = ?");
-            ps.setString(1, cartItemId);
+            ps.setInt(1, cartItemId);
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -76,13 +75,13 @@ public class CartItemDao implements Dao.CartItemDao {
     }
 
     @Override
-    public CartItem getCartItem(String cartItemId) {
+    public CartItem getCartItem(int cartItemId) {
         conn = DBConnect.getConnection();
         CartItem item = new CartItem();
 
         try {
             ps = conn.prepareStatement("SELECT * FROM [CARTITEM] WHERE CITEM_ID = ?");
-            ps.setString(1, cartItemId);
+            ps.setInt(1, cartItemId);
             rs = ps.executeQuery();
             item.setCartItemId(cartItemId);
             item.setQuantity(rs.getInt("QUANT"));
@@ -108,7 +107,7 @@ public class CartItemDao implements Dao.CartItemDao {
             rs = ps.executeQuery();
             while (rs.next()) {
                 CartItem item = new CartItem();
-                item.setCartItemId(rs.getString("CITEM_ID").trim());
+                item.setCartItemId(rs.getInt("CITEM_ID"));
                 item.setQuantity(rs.getInt("QUANT"));
                 item.setValue(rs.getString("VALUE"));
                 item.setProduct(productService.getProduct(rs.getString("PRO_ID").trim()));

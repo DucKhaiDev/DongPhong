@@ -19,12 +19,12 @@ public class CartItemService implements Services.CartItemService {
     }
 
     @Override
-    public void delete(String cartItemId) {
+    public void delete(int cartItemId) {
         itemDao.delete(cartItemId);
     }
 
     @Override
-    public CartItem getCartItem(String cartItemId) {
+    public CartItem getCartItem(int cartItemId) {
         return itemDao.getCartItem(cartItemId);
     }
 

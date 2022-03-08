@@ -2,8 +2,12 @@ package Controller.Client;
 
 import Entity.Brand;
 import Entity.Category;
+import Entity.ProImage;
+import Entity.User;
 import Services.deploy.BrandService;
 import Services.deploy.CategoryService;
+import Services.deploy.ProImageService;
+import Services.deploy.UserService;
 import Tools.ReleaseMemory;
 import Util.Constant;
 import jakarta.servlet.*;
@@ -17,13 +21,17 @@ import java.util.List;
 public class WelcomeController extends HttpServlet {
     private final CategoryService categoryService = new CategoryService();
     private final BrandService brandService = new BrandService();
-
+    private final UserService userService = new UserService();
+    private final ProImageService imageService = new ProImageService();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ResponsiveToInterruption deleteUnusedImg = new ResponsiveToInterruption();
+        //Đồng bộ dữ liệu đa luồng
+        List<User> users = userService.getAll();
+        List<ProImage> images = imageService.getAll();
+
+        Thread deleteUnusedImg = new Thread(() -> ReleaseMemory.deleteUnusedImg(users, images));
         deleteUnusedImg.start();
-        deleteUnusedImg.interrupt();
 
         ServletContext context = request.getServletContext();
 
@@ -42,14 +50,5 @@ public class WelcomeController extends HttpServlet {
         context.setAttribute("brands", brands);
 
         request.getRequestDispatcher(Constant.Path.HOME).forward(request, response);
-    }
-
-    static class ResponsiveToInterruption extends Thread {
-        @Override
-        public void run() {
-            while (!Thread.currentThread().isInterrupted()) {
-                ReleaseMemory.deleteUnusedImg();
-            }
-        }
     }
 }

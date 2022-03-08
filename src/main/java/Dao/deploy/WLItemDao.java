@@ -25,10 +25,9 @@ public class WLItemDao implements Dao.WLItemDao {
         conn = DBConnect.getConnection();
 
         try {
-            ps = conn.prepareStatement("INSERT INTO [WLITEM](WLITEM_ID, PRO_ID, WL_ID) VALUES(?, ?, ?)");
-            ps.setString(1, item.getWlItemId());
-            ps.setString(2, item.getProduct().getProductId());
-            ps.setString(3, item.getWishList().getWishListId());
+            ps = conn.prepareStatement("INSERT INTO [WLITEM](PRO_ID, WL_ID) VALUES(?, ?)");
+            ps.setString(1, item.getProduct().getProductId());
+            ps.setString(2, item.getWishList().getWishListId());
 
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -46,7 +45,7 @@ public class WLItemDao implements Dao.WLItemDao {
             ps = conn.prepareStatement("UPDATE [WLITEM] SET PRO_ID = ?, WL_ID = ? WHERE WLITEM_ID = ?");
             ps.setString(1, item.getProduct().getProductId());
             ps.setString(2, item.getWishList().getWishListId());
-            ps.setString(3, item.getWlItemId());
+            ps.setInt(3, item.getWlItemId());
 
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -57,12 +56,12 @@ public class WLItemDao implements Dao.WLItemDao {
     }
 
     @Override
-    public void delete(String wlItemId) {
+    public void delete(int wlItemId) {
         conn = DBConnect.getConnection();
 
         try {
             ps = conn.prepareStatement("DELETE FROM [WLITEM] WHERE WLITEM_ID = ?");
-            ps.setString(1, wlItemId);
+            ps.setInt(1, wlItemId);
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -72,13 +71,13 @@ public class WLItemDao implements Dao.WLItemDao {
     }
 
     @Override
-    public WLItem getWLItem(String wlItemId) {
+    public WLItem getWLItem(int wlItemId) {
         conn = DBConnect.getConnection();
         WLItem item = new WLItem();
 
         try {
             ps = conn.prepareStatement("SELECT * FROM [WLITEM] WHERE WLITEM_ID = ?");
-            ps.setString(1, wlItemId);
+            ps.setInt(1, wlItemId);
             rs = ps.executeQuery();
             rs.next();
             item.setWlItemId(wlItemId);
@@ -103,9 +102,9 @@ public class WLItemDao implements Dao.WLItemDao {
             rs = ps.executeQuery();
             while (rs.next()) {
                 WLItem item = new WLItem();
-                item.setWlItemId(rs.getString("WLITEM_ID").trim());
+                item.setWlItemId(rs.getInt("WLITEM_ID"));
                 item.setProduct(productService.getProduct(rs.getString("PRO_ID").trim()));
-                item.setWishList(wishlistService.getWishlist(rs.getString("WL_ID").trim()));
+                item.setWishList(wishlistService.getWishlist(rs.getString("WL_ID")));
 
                 items.add(item);
             }

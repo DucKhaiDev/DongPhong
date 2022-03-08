@@ -76,11 +76,31 @@ public class CartDao implements Dao.CartDao {
         try {
             ps = conn.prepareStatement("SELECT * FROM [CART] WHERE CART_ID = ?");
             ps.setString(1, cartId);
-
             rs = ps.executeQuery();
             rs.next();
-            cart.setCartId(rs.getString("CART_ID").trim());
-            cart.setUser(userService.getUser(rs.getString("USER_ID").trim()));
+            cart.setCartId(rs.getString("CART_ID"));
+            cart.setUser(userService.getUser(rs.getString("USER_ID")));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnect.closeAll(rs, ps, conn);
+        }
+
+        return cart;
+    }
+
+    @Override
+    public Cart getCartByUser(String userId) {
+        conn = DBConnect.getConnection();
+        Cart cart = new Cart();
+
+        try {
+            ps = conn.prepareStatement("SELECT * FROM [CART] WHERE USER_ID = ?");
+            ps.setString(1, userId);
+            rs = ps.executeQuery();
+            rs.next();
+            cart.setCartId(rs.getString("CART_ID"));
+            cart.setUser(userService.getUser(userId));
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -100,8 +120,8 @@ public class CartDao implements Dao.CartDao {
             rs = ps.executeQuery();
             while (rs.next()) {
                 Cart cart = new Cart();
-                cart.setCartId(rs.getString("CART_ID").trim());
-                cart.setUser(userService.getUser(rs.getString("USER_ID").trim()));
+                cart.setCartId(rs.getString("CART_ID"));
+                cart.setUser(userService.getUser(rs.getString("USER_ID")));
 
                 carts.add(cart);
             }

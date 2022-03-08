@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.UUID;
 
 public class UserService implements Services.UserService {
-    UserDao userDao = new UserDao();
+    private final UserDao userDao = new UserDao();
 
     @Override
     public void insert(User user) {
@@ -45,8 +45,10 @@ public class UserService implements Services.UserService {
             return false;
         }
 
+        //Tạo tài khoản
         String userId = UUID.randomUUID().toString();
-        insert(new User(userId, username, password, email));
+        User user = new User(userId, username, password, email);
+        insert(user);
 
         return true;
     }

@@ -2,7 +2,6 @@ package Dao.deploy;
 
 import Connect.DBConnect;
 import Entity.User;
-import Services.deploy.UserService;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -26,7 +25,7 @@ public class UserDao implements Dao.UserDao {
             ps.setString(2, identify);
             rs = ps.executeQuery();
             rs.next();
-            return rs.getString("USER_ID").trim();
+            return rs.getString("USER_ID");
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -113,7 +112,7 @@ public class UserDao implements Dao.UserDao {
             rs = ps.executeQuery();
 
             rs.next();
-            user.setUserId(rs.getString("USER_ID").trim());
+            user.setUserId(rs.getString("USER_ID"));
             user.setFirstName(rs.getString("FIRSTNAME"));
             user.setLastName(rs.getString("LASTNAME"));
             user.setUsername(rs.getString("USERNAME"));
@@ -143,7 +142,7 @@ public class UserDao implements Dao.UserDao {
             rs = ps.executeQuery();
             while (rs.next()) {
                 User user = new User();
-                user.setUserId(rs.getString("USER_ID").trim());
+                user.setUserId(rs.getString("USER_ID"));
                 user.setFirstName(rs.getString("FIRSTNAME"));
                 user.setLastName(rs.getString("LASTNAME"));
                 user.setUsername(rs.getString("USERNAME"));
@@ -177,7 +176,7 @@ public class UserDao implements Dao.UserDao {
             rs = ps.executeQuery();
             while (rs.next()) {
                 User user = new User();
-                user.setUserId(rs.getString("USER_ID").trim());
+                user.setUserId(rs.getString("USER_ID"));
                 user.setFirstName(rs.getString("FIRSTNAME"));
                 user.setLastName(rs.getString("LASTNAME"));
                 user.setUsername(rs.getString("USERNAME"));

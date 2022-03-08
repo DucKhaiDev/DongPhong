@@ -7,7 +7,7 @@ import java.util.List;
 public interface CartItemService {
     void insert(CartItem item);
     void edit(CartItem item);
-    void delete(String cartItemId);
-    CartItem getCartItem(String cartItemId);
+    void delete(int cartItemId);
+    CartItem getCartItem(int cartItemId);
     List<CartItem> getAll();
 }

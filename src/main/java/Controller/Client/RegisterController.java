@@ -1,6 +1,10 @@
 package Controller.Client;
 
+import Entity.Cart;
+import Entity.WishList;
+import Services.deploy.CartService;
 import Services.deploy.UserService;
+import Services.deploy.WishListService;
 import Tools.SendEmail;
 import Util.Constant;
 import jakarta.servlet.*;
@@ -12,6 +16,8 @@ import java.io.IOException;
 @WebServlet(name = "RegisterController", value = "/register")
 public class RegisterController extends HttpServlet {
     private final UserService userService = new UserService();
+    private final WishListService wishListService = new WishListService();
+    private final CartService cartService = new CartService();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -107,6 +113,14 @@ public class RegisterController extends HttpServlet {
         }
 
         if (userService.register(username, password, email)) {
+            //Tạo danh sách yêu thích cá nhân
+            String wishListId = "WL_" + username;
+            wishListService.insert(new WishList(wishListId, userService.getUser(username)));
+
+            //Tạo giỏ hàng cá nhân
+            String cartId = "CART_" + username;
+            cartService.insert(new Cart(cartId, userService.getUser(username)));
+
             String text = "Thân chào " + username + ",\n" +
                     "Chúc mừng bạn đã đăng ký tài khoản thành công!";
             SendEmail.sendEmail(email, "Dong Phong Furniture", text);

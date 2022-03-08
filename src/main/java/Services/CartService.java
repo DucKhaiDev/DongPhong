@@ -9,5 +9,6 @@ public interface CartService {
     void edit(Cart cart);
     void delete(String cartId);
     Cart getCart(String cartId);
+    Cart getCartByUser(String userId);
     List<Cart> getAll();
 }

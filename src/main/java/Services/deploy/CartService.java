@@ -29,6 +29,11 @@ public class CartService implements Services.CartService {
     }
 
     @Override
+    public Cart getCartByUser(String userId) {
+        return cartDao.getCartByUser(userId);
+    }
+
+    @Override
     public List<Cart> getAll() {
         return cartDao.getAll();
     }
