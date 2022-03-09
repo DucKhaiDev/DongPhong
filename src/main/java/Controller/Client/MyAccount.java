@@ -15,9 +15,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.UUID;
 
-@WebServlet(name = "MyAccountController", urlPatterns = "/member/my-account")
+@WebServlet(name = "MyAccount", urlPatterns = "/member/my-account")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, maxFileSize = 1024 * 1024 * 10, maxRequestSize = 1024 * 1024 * 50)
-public class MyAccountController extends HttpServlet {
+public class MyAccount extends HttpServlet {
     private final UserService userService = new UserService();
 
     @Override

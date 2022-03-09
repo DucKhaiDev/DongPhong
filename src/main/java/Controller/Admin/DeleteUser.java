@@ -7,8 +7,8 @@ import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 
-@WebServlet(name = "DeleteUserController", value = "/admin/user/delete")
-public class DeleteUserController extends HttpServlet {
+@WebServlet(name = "DeleteUser", value = "/admin/user/delete")
+public class DeleteUser extends HttpServlet {
     UserService userService = new UserService();
 
     @Override

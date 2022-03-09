@@ -282,7 +282,6 @@ public class ProductDao implements Dao.ProductDao {
         try {
             ps = conn.prepareStatement("SELECT * FROM [PRODUCT] WHERE PRO_ID = ?");
             ps.setString(1, id);
-
             rs = ps.executeQuery();
             if (rs.next()) {
                 return true;

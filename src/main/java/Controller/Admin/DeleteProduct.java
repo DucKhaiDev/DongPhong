@@ -8,8 +8,8 @@ import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 
-@WebServlet(name = "DeleteProductController", value = "/admin/product/delete")
-public class DeleteProductController extends HttpServlet {
+@WebServlet(name = "DeleteProduct", value = "/admin/product/delete")
+public class DeleteProduct extends HttpServlet {
     private final ProductService productService = new ProductService();
     private final ProImageService imageService = new ProImageService();
 

@@ -32,4 +32,14 @@ public class WLItemService implements Services.WLItemService {
     public List<WLItem> getAll() {
         return itemDao.getAll();
     }
+
+    @Override
+    public List<WLItem> getItemByWishList(String wishListId) {
+        return itemDao.getItemByWishList(wishListId);
+    }
+
+    @Override
+    public boolean checkExistItem(String productId, String wishListId) {
+        return itemDao.checkExistItem(productId, wishListId);
+    }
 }

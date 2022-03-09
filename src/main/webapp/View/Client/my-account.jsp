@@ -45,6 +45,9 @@
 <!-- Cart -->
 <jsp:include page="cart.jsp"/>
 
+<!-- WishList -->
+<jsp:include page="wishList.jsp"/>
+
 <!-- Content page -->
 <div class="container rounded bg-white mt-5 mb-5">
     <c:url value="/member/my-account" var="myAccount"/>
@@ -131,23 +134,7 @@
 <!--===============================================================================================-->
 <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
 <!--===============================================================================================-->
-<script type="text/javascript">
-    $(document).ready(function () {
-        const readURL = function (input) {
-            if (input.files && input.files[0]) {
-                const reader = new FileReader();
-                reader.onload = function (e) {
-                    $('.avatar').attr('src', e.target.result);
-                }
-                reader.readAsDataURL(input.files[0]);
-            }
-        };
-
-        $(".file-upload").on('change', function () {
-            readURL(this);
-        });
-    });
-</script>
+<script src="${pageContext.request.contextPath}/assets/js/custom.js"></script>
 
 </body>
 </html>

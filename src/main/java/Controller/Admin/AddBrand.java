@@ -9,8 +9,8 @@ import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 
-@WebServlet(name = "AddBrandController", value = "/admin/brand/add")
-public class AddBrandController extends HttpServlet {
+@WebServlet(name = "AddBrand", value = "/admin/brand/add")
+public class AddBrand extends HttpServlet {
     private final BrandService brandService = new BrandService();
 
     @Override

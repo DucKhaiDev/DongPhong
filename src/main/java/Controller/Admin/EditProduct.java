@@ -19,53 +19,69 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
-@WebServlet(name = "AddProductController", value = "/admin/product/add")
+@WebServlet(name = "EditProduct", value = "/admin/product/edit")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, maxFileSize = 1024 * 1024 * 10, maxRequestSize = 1024 * 1024 * 50)
-public class AddProductController extends HttpServlet {
+public class EditProduct extends HttpServlet {
     private final ProductService productService = new ProductService();
     private final CategoryService categoryService = new CategoryService();
     private final BrandService brandService = new BrandService();
     private final ProImageService imageService = new ProImageService();
 
+    private String productId;
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        productId = request.getParameter("id");
+        Product product = productService.getProduct(productId);
+        request.setAttribute("product", product);
         List<Category> categories = categoryService.getAll();
         request.setAttribute("categories", categories);
         List<Brand> brands = brandService.getAll();
         request.setAttribute("brands", brands);
-        request.getRequestDispatcher(Constant.Path.ADMIN_ADD_PRODUCT).forward(request, response);
+        List<ProImage> images = imageService.getProImage(productId);
+        request.setAttribute("images", images);
+        request.getRequestDispatcher(Constant.Path.ADMIN_EDIT_PRODUCT).forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //Thêm sản phẩm
-        String productId = request.getParameter("productId");
-        if (productService.checkExistId(productId)) {
-            String existId = "Mã sản phẩm đã tồn tại!";
-            request.setAttribute("existId", existId);
-            request.getRequestDispatcher(Constant.Path.ADMIN_ADD_PRODUCT).forward(request, response);
-            return;
-        }
+        //Cập nhật sản phẩm
+        Product product = productService.getProduct(productId);
 
         String productName = request.getParameter("productName");
-        String productDescription = request.getParameter("productDescription");
+        if (productName != null && !productName.trim().isEmpty()) {
+            product.setProductName(productName);
+        }
+
+        product.setProductDescription(request.getParameter("productDescription"));
+
         int productQuantity = request.getParameter("productQuantity").isEmpty() ? 0 : Integer.parseInt(request.getParameter("productQuantity"));
+        product.setProductQuantity(productQuantity);
+
         String productPrice = request.getParameter("productPrice");
+        if (productPrice != null && !productPrice.trim().isEmpty()) {
+            product.setProductPrice(productPrice);
+        }
+
         String productCost = request.getParameter("productCost");
-        Category category = categoryService.getCategory(request.getParameter("category"));
-        Brand brand = brandService.getBrand(request.getParameter("brand"));
-        Product product = new Product(productId, productName, productDescription, productPrice, productCost, productQuantity, category, brand);
+        if (productCost != null && !productCost.trim().isEmpty()) {
+            product.setProductCost(productCost);
+        }
 
-        productService.insert(product);
+        product.setCategory(categoryService.getCategory(request.getParameter("category")));
+        product.setBrand(brandService.getBrand(request.getParameter("brand")));
 
-        //Thêm hình ảnh sản phẩm
+        productService.edit(product);
+
+        //Cập nhật hình ảnh sản phẩm
+        List<ProImage> images = imageService.getProImage(productId);
+
         String savePath = Constant.Path.PRODUCT_IMAGES;
 
         File fileSaveDir = new File(savePath);
-        if (!fileSaveDir .exists()) {
+        if (!fileSaveDir.exists()) {
             if (!fileSaveDir.mkdir()) {
                 System.out.println("Directory creation failed.");
             }
@@ -81,12 +97,20 @@ public class AddProductController extends HttpServlet {
                 part.write(savePath + File.separator + fileName);
                 newName = UUID.randomUUID() + "." + FilenameUtils.getExtension(fileName);
                 renameFile(fileName, newName);
-                ProImage image = new ProImage(newName, product);
-                imageService.insert(image);
+
+                int index = Integer.parseInt(part.getName());
+                if (index < images.size() + 1) {
+                    ProImage image = images.get(index - 1);
+                    image.setImageName(newName);
+                    imageService.edit(image);
+                } else {
+                    ProImage image = new ProImage(newName, product);
+                    imageService.insert(image);
+                }
             }
         }
 
-        response.sendRedirect(request.getContextPath() + "/admin/product");
+        response.sendRedirect(request.getContextPath() + "/admin/product/edit?id=" + productId);
     }
 
     private String extractFileName(Part part) {

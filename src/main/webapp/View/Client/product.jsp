@@ -50,6 +50,9 @@
 <!-- Cart -->
 <jsp:include page="cart.jsp"/>
 
+<!-- WishList -->
+<jsp:include page="wishList.jsp"/>
+
 <!-- Product -->
 <div class="bg0 m-t-23 p-b-140">
     <div class="container">

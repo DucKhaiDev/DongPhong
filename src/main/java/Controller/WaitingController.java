@@ -2,20 +2,21 @@ package Controller;
 
 import Entity.Cart;
 import Entity.User;
+import Entity.WLItem;
 import Entity.WishList;
-import Services.deploy.CartService;
-import Services.deploy.UserService;
-import Services.deploy.WishListService;
+import Services.deploy.*;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet(name = "WaitingController", value = "/waiting")
 public class WaitingController extends HttpServlet {
     private final UserService userService = new UserService();
     private final WishListService wishListService = new WishListService();
+    private final WLItemService wlItemService = new WLItemService();
     private final CartService cartService = new CartService();
 
     @Override
@@ -34,14 +35,23 @@ public class WaitingController extends HttpServlet {
             User user = (User) session.getAttribute("account");
             request.setAttribute("username", user.getUsername());
 
+            //Danh sách yêu thích
             WishList wishList = wishListService.getWishListByUser(user.getUserId());
             session.setAttribute("wishList", wishList);
 
+            //Danh sách yêu thích item
+            List<WLItem> wlItems = wlItemService.getItemByWishList(wishList.getWishListId());
+            session.setAttribute("wlItems", wlItems);
+
+            //Giỏ hàng
             Cart cart = cartService.getCartByUser(user.getUserId());
             session.setAttribute("cart", cart);
 
-            if (session.getAttribute("forwardTo_1") != null) {
-                response.sendRedirect(session.getAttribute("forwardTo_1").toString());
+            //Giỏ hàng item
+
+
+            if (session.getAttribute("forwardTo") != null) {
+                response.sendRedirect(session.getAttribute("forwardTo").toString());
             } else if (user.getRole()) {
                 response.sendRedirect(request.getContextPath() + "/welcome");
             } else {

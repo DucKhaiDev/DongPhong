@@ -58,7 +58,6 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/main.css">
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/custom.css">
-
 </head>
 <body class="animsition">
 
@@ -67,6 +66,9 @@
 
 <!-- Cart -->
 <jsp:include page="cart.jsp"/>
+
+<!-- WishList -->
+<jsp:include page="wishList.jsp"/>
 
 <!-- Product -->
 <div class="bg0 m-t-23 p-b-140">
@@ -262,18 +264,12 @@
                                     </div>
                                     <form action="<c:url value="/wishlist/add"/>" method="get" class="block2-txt-child2 flex-r p-t-3">
                                         <!--Sign url-->
-                                        <input type="hidden" name="productListByCategory" value="${pageContext.request.contextPath}/products/category">
-                                        <input type="hidden" name="idParam" value="${category.categoryId}">
-                                        <input type="hidden" name="brandParam" value="${param.brand}">
-                                        <input type="hidden" name="priceParam" value="${param.price}">
-                                        <input type="hidden" name="ratingParam" value="${param.rating}">
-                                        <input type="hidden" name="searchParam" value="${param.search}">
-                                        <input type="hidden" name="sortByParam" value="${param.sortBy}">
+                                        <input type="hidden" class="input-add-item" name="forwardTo">
 
                                         <!--Sign product-->
-                                        <input type="hidden" name="productId" value="${product.productId}">
+                                        <input type="hidden" name="id" value="${product.productId}">
 
-                                        <button type="submit" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
+                                        <button type="submit" class="btn-add-item btn-addwish-b2 dis-block pos-relative js-addwish-b2">
                                             <img class="icon-heart1 dis-block trans-04" src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-01.png" alt="ICON">
                                             <img class="icon-heart2 dis-block trans-04 ab-t-l" src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-02.png" alt="ICON">
                                         </button>
@@ -392,18 +388,12 @@
                                                 <div class="flex-w flex-m p-l-100 p-t-40 respon7">
                                                     <form action="<c:url value="/wishlist/add"/>" method="get" class="flex-m bor9 p-r-10 m-r-11">
                                                         <!--Sign url-->
-                                                        <input type="hidden" name="productListByCategory" value="${pageContext.request.contextPath}/products/category">
-                                                        <input type="hidden" name="idParam" value="${category.categoryId}">
-                                                        <input type="hidden" name="brandParam" value="${param.brand}">
-                                                        <input type="hidden" name="priceParam" value="${param.price}">
-                                                        <input type="hidden" name="ratingParam" value="${param.rating}">
-                                                        <input type="hidden" name="searchParam" value="${param.search}">
-                                                        <input type="hidden" name="sortByParam" value="${param.sortBy}">
+                                                        <input type="hidden" class="input-add-item" name="forwardTo">
 
                                                         <!--Sign product-->
                                                         <input type="hidden" name="productId" value="${product.productId}">
 
-                                                        <button type="submit" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 tooltip100" data-tooltip="Thêm vào Danh sách yêu thích">
+                                                        <button type="submit" class="btn-add-item fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 tooltip100" data-tooltip="Thêm vào Danh sách yêu thích">
                                                             <i class="zmdi zmdi-favorite"></i>
                                                         </button>
                                                     </form>
@@ -544,6 +534,8 @@
 <!--===============================================================================================-->
 <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
 <!--===============================================================================================-->
+<script src="${pageContext.request.contextPath}/assets/js/custom.js"></script>
+<!--===============================================================================================-->
 <script>
     $(function () {
         <c:forEach items="${products}" varStatus="loop">
@@ -557,111 +549,6 @@
                 $('.js-modal${loop.index + 1}').removeClass('show-modal');
             });
         </c:forEach>
-    });
-</script>
-<!--===============================================================================================-->
-<script>
-    $(function () {
-        //Nếu URL không chứa parameter thì xóa hết parameter trong sessionScope
-        const url = new URL(location.href);
-        const params = url.searchParams;
-
-        if (!params.has('brand')) {
-            $('input[name="brand"]').prop('checked', false).each(function () {
-                sessionStorage.removeItem(this.id);
-            });
-        }
-
-        if (!params.has('price')) {
-            $('input[name="price"]').prop('checked', false).each(function () {
-                sessionStorage.removeItem(this.id);
-            });
-        }
-
-        if (!params.has('rating')) {
-            $('input[name="rating"]').prop('checked', false).each(function () {
-                sessionStorage.removeItem(this.id);
-            });
-        }
-
-        if (!params.has('page')) {
-            sessionStorage.removeItem('currPage');
-        }
-
-        //Đặt lại bộ lọc tìm kiếm
-        $('#filter-reset').on('click', function () {
-            $('.filter-input').prop('checked', false);
-            sessionStorage.clear();
-            params.delete('brand');
-            params.delete('price');
-            params.delete('rating');
-            window.location = url.href;
-        });
-    });
-</script>
-<!--===============================================================================================-->
-<script>
-    $(document).ready(function () {
-        //append parameter vào url
-        $('input[type="checkbox"], input[type="radio"]').click(function () {
-            let seasoning = '', tempArray = [];
-            $('input[name="brand"]:checked').each(function () {
-               tempArray.push($(this).val());
-            });
-            if (tempArray.length !== 0) {
-                seasoning += '&brand=' + tempArray.toString();
-                tempArray = [];
-            }
-
-            $('input[name="price"]:checked').each(function () {
-                tempArray.push($(this).val());
-            });
-            if (tempArray.length !== 0) {
-                seasoning += '&price=' + tempArray.toString();
-                tempArray = [];
-            }
-
-            $('input[name="rating"]:checked').each(function () {
-               tempArray.push($(this).val());
-            });
-            if (tempArray.length !== 0) {
-               seasoning += '&rating=' + tempArray.toString();
-               tempArray = [];
-            }
-
-            //Xóa parameter cũ
-            const url = new URL(location.href);
-            const params = url.searchParams;
-            params.delete('brand');
-            params.delete('price');
-            params.delete('rating');
-            window.location = url.href + seasoning;
-       });
-    });
-</script>
-<!--===============================================================================================-->
-<script>
-    $(function () {
-        //Lưu giá trị lọc thương hiệu, giá bán vào sessionScope
-        $('input[type="checkbox"]').each(function () {
-            $(this)
-                .prop('checked', sessionStorage.getItem(this.id) === 'true')
-                .on('change', function () {
-                    sessionStorage.setItem($(this).prop('id'), this.checked)
-                })
-                .trigger('change');
-        });
-
-        //Lưu giá trị lọc đánh giá
-        $('input[type="radio"]')
-            .each(function () {
-                $(this).prop('checked', sessionStorage.getItem(this.id) === 'true').trigger('change');
-            })
-            .on('click', function () {
-                $('input[type="radio"]').each(function () {
-                    sessionStorage.setItem(this.id, this.checked);
-                });
-            });
     });
 </script>
 <!--===============================================================================================-->
@@ -702,69 +589,6 @@
             }
         });
     });
-</script>
-<!--===============================================================================================-->
-<script>
-    //Tìm kiếm sản phẩm
-    $(function () {
-        const searchProduct = $('#search-product');
-        searchProduct.on('keyup', function (e) {
-            if (e.key === 'Enter' || e.keyCode === 13) {
-                appendParameterSearch(searchProduct);
-            }
-        });
-
-        $('#search-product-button').click(function () {
-            appendParameterSearch(searchProduct);
-        });
-        
-        function appendParameterSearch(searchProduct) {
-            let keyword = searchProduct.val();
-            keyword = keyword.trim().replace(/\s\s+/g, ' ');
-            const url = new URL(location.href);
-            url.searchParams.delete('search');
-            url.searchParams.append('search', keyword);
-            location.href = url.href;
-        }
-    });
-</script>
-<!--===============================================================================================-->
-<script>
-    //Sắp xếp sản phẩm
-    $('.filter-link').removeClass('filter-link-active');
-    const pVal = (new URL(location.href)).searchParams.get('sortBy');
-    const filter_link_default = $('#filter-link-default');
-    const filter_link_priceAsc = $('#filter-link-priceAsc');
-    const filter_link_priceDesc = $('#filter-link-priceDesc');
-
-    if (pVal === null) {
-        filter_link_default.addClass('filter-link-active');
-    } else if (pVal === 'priceAsc') {
-        filter_link_priceAsc.addClass('filter-link-active');
-    } else if (pVal === 'priceDesc') {
-        filter_link_priceDesc.addClass('filter-link-active');
-    }
-
-    filter_link_default.on('click', function () {
-        appendParameterSort('default');
-    });
-
-    filter_link_priceAsc.on('click', function () {
-        appendParameterSort('priceAsc');
-    });
-
-    filter_link_priceDesc.on('click', function () {
-        appendParameterSort('priceDesc');
-    });
-    
-    function appendParameterSort(parameter) {
-        const url = new URL(location.href);
-        url.searchParams.delete('sortBy');
-        if (parameter !== 'default') {
-            url.searchParams.append('sortBy', parameter);
-        }
-        location.href = url.href;
-    }
 </script>
 
 </body>

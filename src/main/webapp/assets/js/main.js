@@ -194,9 +194,6 @@
         }    
     });
 
-
-
-
     /*==================================================================
     [ Cart ]*/
     $('.js-show-cart').on('click',function(){
@@ -215,6 +212,16 @@
 
     $('.js-hide-sidebar').on('click',function(){
         $('.js-sidebar').removeClass('show-sidebar');
+    });
+
+    /*==================================================================
+    [ WishList ]*/
+    $('.js-show-wishList').on('click',function(){
+        $('.js-panel-wishList').addClass('show-header-wishList');
+    });
+
+    $('.js-hide-wishList').on('click',function(){
+        $('.js-panel-wishList').removeClass('show-header-wishList');
     });
 
     /*==================================================================

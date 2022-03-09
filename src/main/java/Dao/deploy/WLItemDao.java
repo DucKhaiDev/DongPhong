@@ -116,4 +116,51 @@ public class WLItemDao implements Dao.WLItemDao {
 
         return items;
     }
+
+    @Override
+    public List<WLItem> getItemByWishList(String wishListId) {
+        conn = DBConnect.getConnection();
+        List<WLItem> items = new ArrayList<>();
+
+        try {
+            ps = conn.prepareStatement("SELECT * FROM [WLITEM] WHERE WL_ID = ?");
+            ps.setString(1, wishListId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                WLItem item = new WLItem();
+                item.setWlItemId(rs.getInt("WLITEM_ID"));
+                item.setProduct(productService.getProduct(rs.getString("PRO_ID").trim()));
+                item.setWishList(wishlistService.getWishlist(wishListId));
+
+                items.add(item);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnect.closeAll(rs, ps, conn);
+        }
+
+        return items;
+    }
+
+    @Override
+    public boolean checkExistItem(String productId, String wishListId) {
+        conn = DBConnect.getConnection();
+
+        try {
+            ps = conn.prepareStatement("SELECT * FROM [WLITEM] WHERE PRO_ID = ? AND WL_ID = ?");
+            ps.setString(1, productId);
+            ps.setString(2, wishListId);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnect.closeAll(rs, ps, conn);
+        }
+
+        return false;
+    }
 }

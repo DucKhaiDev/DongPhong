@@ -45,6 +45,9 @@
 <!-- Cart -->
 <jsp:include page="cart.jsp"/>
 
+<!-- WishList -->
+<jsp:include page="wishList.jsp"/>
+
 <!-- Content page -->
 <section class="bg0 p-t-62 p-b-60">
     <div id="main-wrapper" class="container">
@@ -147,6 +150,8 @@
 </script>
 <!--===============================================================================================-->
 <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
+<!--===============================================================================================-->
+<script src="${pageContext.request.contextPath}/assets/js/custom.js"></script>
 
 </body>
 </html>

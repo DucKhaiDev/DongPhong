@@ -12,8 +12,8 @@ import jakarta.servlet.annotation.*;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "AddCategoryController", value = "/admin/category/add")
-public class AddCategoryController extends HttpServlet {
+@WebServlet(name = "AddCategory", value = "/admin/category/add")
+public class AddCategory extends HttpServlet {
     private final CategoryService categoryService = new CategoryService();
     private final RoomService roomService = new RoomService();
 

@@ -17,8 +17,8 @@ import jakarta.servlet.annotation.*;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "WelcomeController", value = "/welcome")
-public class WelcomeController extends HttpServlet {
+@WebServlet(name = "Welcome", value = "/welcome")
+public class Welcome extends HttpServlet {
     private final CategoryService categoryService = new CategoryService();
     private final BrandService brandService = new BrandService();
     private final UserService userService = new UserService();
@@ -27,10 +27,14 @@ public class WelcomeController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //Đồng bộ dữ liệu đa luồng
-        List<User> users = userService.getAll();
-        List<ProImage> images = imageService.getAll();
+        getUsers();
+        getImages();
 
-        Thread deleteUnusedImg = new Thread(() -> ReleaseMemory.deleteUnusedImg(users, images));
+        Thread deleteUnusedImg = new Thread(() -> {
+            List<User> users = getUsers();
+            List<ProImage> images = getImages();
+            ReleaseMemory.deleteUnusedImg(users, images);
+        });
         deleteUnusedImg.start();
 
         ServletContext context = request.getServletContext();
@@ -50,5 +54,13 @@ public class WelcomeController extends HttpServlet {
         context.setAttribute("brands", brands);
 
         request.getRequestDispatcher(Constant.Path.HOME).forward(request, response);
+    }
+
+    private synchronized List<User> getUsers() {
+        return userService.getAll();
+    }
+
+    private synchronized List<ProImage> getImages() {
+        return imageService.getAll();
     }
 }

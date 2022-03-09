@@ -1,6 +1,5 @@
 package Controller.Admin;
 
-import Entity.Brand;
 import Services.deploy.BrandService;
 import Util.Constant;
 import jakarta.servlet.*;
@@ -16,7 +15,7 @@ public class BrandController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Brand> brands = brandService.getAll();
+        List<Entity.Brand> brands = brandService.getAll();
         request.setAttribute("brands", brands);
         request.getRequestDispatcher(Constant.Path.ADMIN_BRAND).forward(request, response);
     }

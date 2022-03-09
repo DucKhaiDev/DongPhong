@@ -9,8 +9,8 @@ import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 
-@WebServlet(name = "ChangePasswordController", value = "/change-password")
-public class ChangePasswordController extends HttpServlet {
+@WebServlet(name = "ChangePassword", value = "/change-password")
+public class ChangePassword extends HttpServlet {
     private final UserService userService = new UserService();
 
     @Override

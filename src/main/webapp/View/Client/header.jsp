@@ -83,9 +83,9 @@
                         <i class="zmdi zmdi-shopping-cart"></i>
                     </div>
 
-                    <a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="0">
+                    <div class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-wishList" data-notify="${sessionScope.wlItems.size() != null ? sessionScope.wlItems.size() : 0}">
                         <i class="zmdi zmdi-favorite-outline"></i>
-                    </a>
+                    </div>
                 </div>
             </nav>
         </div>
@@ -197,7 +197,7 @@
                     <i class="zmdi zmdi-search"></i>
                 </button>
                 <label>
-                    <input class="plh3" type="text" name="search" placeholder="Search...">
+                    <input class="plh3" type="text" name="search" placeholder="Tìm kiếm...">
                 </label>
             </form>
         </div>

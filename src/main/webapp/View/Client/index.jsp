@@ -51,6 +51,9 @@
 <!-- Cart -->
 <jsp:include page="cart.jsp"/>
 
+<!-- WishList -->
+<jsp:include page="wishList.jsp"/>
+
 <!-- Slider -->
 <jsp:include page="slider.jsp"/>
 
@@ -1176,6 +1179,8 @@
 </script>
 <!--===============================================================================================-->
 <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
+<!--===============================================================================================-->
+<script src="${pageContext.request.contextPath}/assets/js/custom.js"></script>
 
 </body>
 </html>
