@@ -1,14 +1,12 @@
 <%@ page import="Services.deploy.ProductService" %>
-<%@ page import="Entity.Category" %>
-<%@ page import="Entity.Brand" %>
 <%@ page import="java.util.Locale" %>
 <%@ page import="java.math.BigDecimal" %>
-<%@ page import="Entity.Product" %>
 <%@ page import="java.text.NumberFormat" %>
 <%@ page import="java.math.RoundingMode" %>
 <%@ page import="Services.deploy.ProImageService" %>
 <%@ page import="java.util.List" %>
-<%@ page import="Entity.ProImage" %>
+<%@ page import="Services.deploy.WLItemService" %>
+<%@ page import="Entity.*" %>
 <%--
   User: duckhaidev
   Date: 2/25/2022
@@ -262,16 +260,22 @@
                                     <div class="block2-txt-child1 flex-col-l ">
                                         <a href="product-detail.jsp" class="product-name stext-104 cl4 hov-cl1 trans-04 js-name-b2 m-b-6">${product.productName}</a>
                                     </div>
-                                    <form id="wishlist-add-1" action="<c:url value="/wishlist/add"/>" method="get" class="block2-txt-child2 flex-r p-t-3">
+                                    <form action="<c:url value="/wishlist/add"/>" method="get" class="block2-txt-child2 flex-r p-t-3">
                                         <!--Sign url-->
                                         <input type="hidden" class="input-add-item" name="forwardTo">
-
                                         <!--Sign product-->
                                         <input type="hidden" name="id" value="${product.productId}">
 
-                                        <button type="button" class="btn-add-item btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-                                            <img class="icon-heart1 dis-block trans-04" src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-01.png" alt="ICON">
-                                            <img class="icon-heart2 dis-block trans-04 ab-t-l" src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-02.png" alt="ICON">
+                                        <%
+                                            WLItemService wlItemService = new WLItemService();
+                                            Product product = (Product) pageContext.getAttribute("product");
+                                            WishList wishList = (WishList) session.getAttribute("wishList");
+                                            boolean existItem = wlItemService.checkExistItem(product.getProductId(), wishList.getWishListId());
+                                            request.setAttribute("existItem", existItem);
+                                        %>
+                                        <button type="button" class="btn-add-item btn-addwish-b2 dis-block pos-relative <c:if test="${!existItem}">js-addwish-b2</c:if>">
+                                            <img class="icon-heart1 dis-block trans-04" src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-01.png" <c:if test="${existItem}">style="opacity: 0;" </c:if>alt="ICON">
+                                            <img class="icon-heart2 dis-block trans-04 ab-t-l" src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-02.png" <c:if test="${existItem}">style="opacity: 1;" </c:if>alt="ICON">
                                         </button>
                                     </form>
                                 </div>
@@ -365,7 +369,7 @@
                                                 <!--  -->
                                                 <div class="p-t-33">
                                                     <div class="flex-w flex-r-m p-b-10">
-                                                        <form id="cart-add" action="<c:url value="/cart/add"/>" method="get" class="size-204 flex-w flex-m respon6-next">
+                                                        <form action="<c:url value="/cart/add"/>" method="get" class="size-204 flex-w flex-m respon6-next">
                                                             <!--Sign url-->
                                                             <input type="hidden" class="input-add-item" name="forwardTo">
                                                             <!--Sign product-->
@@ -391,7 +395,7 @@
 
                                                 <!--  -->
                                                 <div class="flex-w flex-m p-l-100 p-t-40 respon7">
-                                                    <form id="wishlist-add-2" action="<c:url value="/wishlist/add"/>" method="get" class="flex-m bor9 p-r-10 m-r-11">
+                                                    <form action="<c:url value="/wishlist/add"/>" method="get" class="flex-m bor9 p-r-10 m-r-11">
                                                         <!--Sign url-->
                                                         <input type="hidden" class="input-add-item" name="forwardTo">
                                                         <!--Sign product-->
@@ -489,9 +493,10 @@
 
     $('.js-addwish-b2').each(function(){
         const nameProduct = $(this).parent().parent().find('.js-name-b2').html();
-        $(this).on('click', function(){
+        const addwishB2 = $(this);
+        addwishB2.on('click', function(){
             swal(nameProduct, "đã được thêm vào danh sách yêu thích!", "success").then(function () {
-                $('#wishlist-add-1').submit();
+                addwishB2.parent().submit();
             });
 
             $(this).addClass('js-addedwish-b2');
@@ -501,10 +506,10 @@
 
     $('.js-addwish-detail').each(function(){
         const nameProduct = $(this).parent().parent().parent().find('.js-name-detail').html();
-
-        $(this).on('click', function(){
+        const addwishDetail = $(this);
+        addwishDetail.on('click', function(){
             swal(nameProduct, "đã được thêm vào danh sách yêu thích!", "success").then(function () {
-                $('#wishlist-add-2').submit();
+                addwishDetail.parent().submit();
             });
 
             $(this).addClass('js-addedwish-detail');
@@ -516,9 +521,10 @@
 
     $('.js-addcart-detail').each(function(){
         const nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();
+        const addcartDetail = $(this);
         $(this).on('click', function(){
             swal(nameProduct, "đã được thêm vào giỏ hàng!", "success").then(function () {
-                $('#cart-add').submit();
+                addcartDetail.parent().submit();
             });
         });
     });
@@ -559,6 +565,13 @@
                 $('.js-modal${loop.index + 1}').removeClass('show-modal');
             });
         </c:forEach>
+
+        /*$('.js-show-modal').each(function () {
+           $(this).on('click', function (e) {
+              e.preventDefault();
+
+           });
+        });*/
     });
 </script>
 <!--===============================================================================================-->
@@ -598,6 +611,12 @@
                 location.href = url.href;
             }
         });
+    });
+</script>
+<!--===============================================================================================-->
+<script>
+    $(function () {
+
     });
 </script>
 
