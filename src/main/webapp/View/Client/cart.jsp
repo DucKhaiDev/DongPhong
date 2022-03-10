@@ -1,3 +1,10 @@
+<%@ page import="Services.deploy.ProImageService" %>
+<%@ page import="Entity.Product" %>
+<%@ page import="Entity.CartItem" %>
+<%@ page import="java.util.Locale" %>
+<%@ page import="java.text.NumberFormat" %>
+<%@ page import="java.math.BigDecimal" %>
+<%@ page import="java.math.RoundingMode" %>
 <%--
   User: duckhaidev
   Date: 1/22/2022
@@ -11,7 +18,7 @@
     <div class="header-cart flex-col-l p-l-65 p-r-25">
         <div class="header-cart-title flex-w flex-sb-m p-b-8">
 				<span class="mtext-103 cl2">
-					Your Cart
+					Giỏ Hàng
 				</span>
 
             <div class="fs-35 lh-10 cl2 p-lr-5 pointer hov-cl1 trans-04 js-hide-cart">
@@ -20,68 +27,103 @@
         </div>
 
         <div class="header-cart-content flex-w js-pscroll">
+            <%
+                Locale vie = new Locale("vi", "VN");
+                NumberFormat dongFormat = NumberFormat.getCurrencyInstance(vie);
+                BigDecimal total = new BigDecimal(0);
+            %>
             <ul class="header-cart-wrapitem w-full">
-                <li class="header-cart-item flex-w flex-t m-b-12">
-                    <div class="header-cart-item-img">
-                        <img src="${pageContext.request.contextPath}/assets/images/item-cart-01.jpg" alt="IMG">
-                    </div>
+                <c:forEach items="${sessionScope.cartItems}" var="item">
+                    <li class="header-cart-item flex-w flex-t m-b-12">
+                        <%
+                            ProImageService imageService = new ProImageService();
+                            Product product = ((CartItem) pageContext.getAttribute("item")).getProduct();
+                            request.setAttribute("cart_product", product);
+                        %>
+                        <form action="<c:url value="/cart/remove"/>" method="get" class="header-cart-item-img">
+                            <!--Id-->
+                            <input type="hidden" name="id" value="${item.cartItemId}">
+                            <!--Sign url-->
+                            <input class="input-remove-item" type="hidden" name="forwardTo">
+                            <%
+                                String reImage = imageService.getProReImage(product.getProductId());
+                                request.setAttribute("cart_reImage", reImage);
+                            %>
+                            <c:url value="/images/product-images?fname=${cart_reImage}" var="imageUrl"/>
+                            <img class="cart_image" src="${imageUrl}" alt="IMG">
+                            <button class="btn-remove-item" type="submit">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                        </form>
 
-                    <div class="header-cart-item-txt p-t-8">
-                        <a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-                            White Shirt Pleat
-                        </a>
+                        <div class="header-cart-item-txt p-t-8">
+                            <%
+                                String productName = product.getProductName();
+                                if (productName.length() > 24) {
+                                    productName = productName.substring(0, 25).trim() + "...";
+                                }
+                            %>
+                            <a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04 tooltip100" data-tooltip="<% out.print(product.getProductName()); %>>">
+                                <% out.print(productName); %>
+                            </a>
 
-                        <span class="header-cart-item-info">
-								1 x $19.00
-							</span>
-                    </div>
-                </li>
+                            <%
+                                BigDecimal price = new BigDecimal(product.getProductPrice());
+                                int productQuantity = ((CartItem) pageContext.getAttribute("item")).getQuantity();
+                                total = total.add(price.multiply(new BigDecimal(productQuantity)));
+                                BigDecimal cost = new BigDecimal(product.getProductCost());
+                            %>
 
-                <li class="header-cart-item flex-w flex-t m-b-12">
-                    <div class="header-cart-item-img">
-                        <img src="${pageContext.request.contextPath}/assets/images/item-cart-02.jpg" alt="IMG">
-                    </div>
+                            <div class="d-flex">
+                                <span class="header-cart-item-info product-price">
+								    <% out.print(dongFormat.format(price)); %>
+							    </span>
 
-                    <div class="header-cart-item-txt p-t-8">
-                        <a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-                            Converse All Star
-                        </a>
+                                <span class="header-cart-item-info product-quantity">
+								    x <% out.print(productQuantity); %>
+							    </span>
+                            </div>
 
-                        <span class="header-cart-item-info">
-								1 x $39.00
-							</span>
-                    </div>
-                </li>
 
-                <li class="header-cart-item flex-w flex-t m-b-12">
-                    <div class="header-cart-item-img">
-                        <img src="${pageContext.request.contextPath}/assets/images/item-cart-03.jpg" alt="IMG">
-                    </div>
+                            <div class="d-flex">
+                                <c:if test="${cart_product.productCost != '0' && cart_product.productCost != cart_product.productPrice}">
+                                    <span class="header-cart-item-info product-cost">
+                                        <% out.print(dongFormat.format(cost)); %>
+                                    </span>
+                                </c:if>
 
-                    <div class="header-cart-item-txt p-t-8">
-                        <a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-                            Nixon Porter Leather
-                        </a>
+                                <%
+                                    boolean b = price.compareTo(cost) < 0;
+                                    request.setAttribute("b", b);
 
-                        <span class="header-cart-item-info">
-								1 x $17.00
-							</span>
-                    </div>
-                </li>
+                                    BigDecimal percentage;
+                                %>
+                                <c:if test="${b}">
+                                    <span class="header-cart-item-info product-sale-off">
+                                    <%
+                                        percentage = ((cost.subtract(price)).divide(cost, 2, RoundingMode.HALF_UP)).multiply(new BigDecimal("100")).setScale(0, RoundingMode.UP);
+                                        out.print("(-" + percentage + "%)");
+                                    %>
+                                </span>
+                                </c:if>
+                            </div>
+                        </div>
+                    </li>
+                </c:forEach>
             </ul>
 
             <div class="w-full">
                 <div class="header-cart-total w-full p-tb-40">
-                    Total: $75.00
+                    Tổng: <% out.print(dongFormat.format(total)); %>
                 </div>
 
                 <div class="header-cart-buttons flex-w w-full">
                     <a href="shoping-cart.jsp" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
-                        View Cart
+                        Xem giỏ hàng
                     </a>
 
                     <a href="shoping-cart.jsp" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
-                        Check Out
+                        Thanh toán
                     </a>
                 </div>
             </div>

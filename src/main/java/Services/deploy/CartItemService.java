@@ -29,7 +29,22 @@ public class CartItemService implements Services.CartItemService {
     }
 
     @Override
+    public CartItem getCartItem(String productId, String cartId) {
+        return itemDao.getCartItem(productId, cartId);
+    }
+
+    @Override
     public List<CartItem> getAll() {
         return itemDao.getAll();
+    }
+
+    @Override
+    public List<CartItem> getItemByCart(String cartId) {
+        return itemDao.getItemByCart(cartId);
+    }
+
+    @Override
+    public boolean checkExistItem(String productId, String cartId) {
+        return itemDao.checkExistItem(productId, cartId);
     }
 }

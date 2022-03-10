@@ -40,7 +40,7 @@ public class AddToWishList extends HttpServlet {
             //Thêm sản phẩm vào Danh sách yêu thích
             wlItemService.insert(new WLItem(product, wishList));
 
-            //Cập nhật wlItems
+            //Cập nhật Danh sách yêu thích
             List<WLItem> wlItems = wlItemService.getItemByWishList(wishList.getWishListId());
             session.setAttribute("wlItems", wlItems);
         }

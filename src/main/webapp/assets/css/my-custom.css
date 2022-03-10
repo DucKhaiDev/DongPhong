@@ -331,11 +331,13 @@ ul.header-cart-wrapitem li {
 }
 
 .wl_image,
+.cart_image,
 .header-cart-item-img {
     height: 100%;
     object-fit: cover;
 }
 
+.header-cart-item-info.product-quantity,
 .header-cart-item-info.product-sale-off {
     width: 100%;
     margin-right: 48px;

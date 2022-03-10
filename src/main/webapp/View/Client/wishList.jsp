@@ -52,7 +52,15 @@
                         </form>
 
                         <div class="header-cart-item-txt p-t-8">
-                            <a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04"><% out.print(product.getProductName()); %></a>
+                            <%
+                                String productName = product.getProductName();
+                                if (productName.length() > 24) {
+                                    productName = productName.substring(0, 25).trim() + "...";
+                                }
+                            %>
+                            <a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04 tooltip100" data-tooltip="<% out.print(product.getProductName()); %>>">
+                                <% out.print(productName); %>
+                            </a>
 
                             <%
                                 Locale vie = new Locale("vi", "VN");
@@ -74,11 +82,11 @@
 
                                 <%
                                     boolean b = price.compareTo(cost) < 0;
-                                    request.setAttribute("b_1", b);
+                                    request.setAttribute("b", b);
 
                                     BigDecimal percentage;
                                 %>
-                                <c:if test="${b_1}">
+                                <c:if test="${b}">
                                     <span class="header-cart-item-info product-sale-off">
                                     <%
                                         percentage = ((cost.subtract(price)).divide(cost, 2, RoundingMode.HALF_UP)).multiply(new BigDecimal("100")).setScale(0, RoundingMode.UP);

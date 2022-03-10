@@ -83,11 +83,12 @@ public class CartItemDao implements Dao.CartItemDao {
             ps = conn.prepareStatement("SELECT * FROM [CARTITEM] WHERE CITEM_ID = ?");
             ps.setInt(1, cartItemId);
             rs = ps.executeQuery();
+            rs.next();
             item.setCartItemId(cartItemId);
             item.setQuantity(rs.getInt("QUANT"));
             item.setValue(rs.getString("VALUE"));
             item.setProduct(productService.getProduct(rs.getString("PRO_ID").trim()));
-            item.setCart(cartService.getCart(rs.getString("CART_ID").trim()));
+            item.setCart(cartService.getCart(rs.getString("CART_ID")));
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -95,6 +96,31 @@ public class CartItemDao implements Dao.CartItemDao {
         }
 
         return item;
+    }
+
+    @Override
+    public CartItem getCartItem(String productId, String cartId) {
+        conn = DBConnect.getConnection();
+        CartItem cartItem = new CartItem();
+
+        try {
+            ps = conn.prepareStatement("SELECT * FROM [CARTITEM] WHERE PRO_ID = ? AND CART_ID = ?");
+            ps.setString(1, productId);
+            ps.setString(2, cartId);
+            rs = ps.executeQuery();
+            rs.next();
+            cartItem.setCartItemId(rs.getInt("CITEM_ID"));
+            cartItem.setQuantity(rs.getInt("QUANT"));
+            cartItem.setValue(rs.getString("VALUE"));
+            cartItem.setProduct(productService.getProduct(rs.getString("PRO_ID")));
+            cartItem.setCart(cartService.getCart(rs.getString("CART_ID")));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnect.closeAll(rs, ps, conn);
+        }
+
+        return cartItem;
     }
 
     @Override
@@ -111,7 +137,7 @@ public class CartItemDao implements Dao.CartItemDao {
                 item.setQuantity(rs.getInt("QUANT"));
                 item.setValue(rs.getString("VALUE"));
                 item.setProduct(productService.getProduct(rs.getString("PRO_ID").trim()));
-                item.setCart(cartService.getCart(rs.getString("CART_ID").trim()));
+                item.setCart(cartService.getCart(rs.getString("CART_ID")));
 
                 items.add(item);
             }
@@ -122,5 +148,54 @@ public class CartItemDao implements Dao.CartItemDao {
         }
 
         return items;
+    }
+
+    @Override
+    public List<CartItem> getItemByCart(String cartId) {
+        conn = DBConnect.getConnection();
+        List<CartItem> items = new ArrayList<>();
+
+        try {
+            ps = conn.prepareStatement("SELECT * FROM [CARTITEM] WHERE CART_ID = ?");
+            ps.setString(1, cartId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                CartItem item = new CartItem();
+                item.setCartItemId(rs.getInt("CITEM_ID"));
+                item.setQuantity(rs.getInt("QUANT"));
+                item.setValue(rs.getString("VALUE"));
+                item.setProduct(productService.getProduct(rs.getString("PRO_ID").trim()));
+                item.setCart(cartService.getCart(rs.getString("CART_ID")));
+
+                items.add(item);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnect.closeAll(rs, ps, conn);
+        }
+
+        return items;
+    }
+
+    @Override
+    public boolean checkExistItem(String productId, String cartId) {
+        conn = DBConnect.getConnection();
+
+        try {
+            ps = conn.prepareStatement("SELECT * FROM [CARTITEM] WHERE PRO_ID = ? AND CART_ID = ?");
+            ps.setString(1, productId);
+            ps.setString(2, cartId);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnect.closeAll(rs, ps, conn);
+        }
+
+        return false;
     }
 }

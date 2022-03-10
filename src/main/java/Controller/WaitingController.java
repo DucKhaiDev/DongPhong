@@ -1,9 +1,6 @@
 package Controller;
 
-import Entity.Cart;
-import Entity.User;
-import Entity.WLItem;
-import Entity.WishList;
+import Entity.*;
 import Services.deploy.*;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -18,6 +15,7 @@ public class WaitingController extends HttpServlet {
     private final WishListService wishListService = new WishListService();
     private final WLItemService wlItemService = new WLItemService();
     private final CartService cartService = new CartService();
+    private final CartItemService cartItemService = new CartItemService();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -48,7 +46,8 @@ public class WaitingController extends HttpServlet {
             session.setAttribute("cart", cart);
 
             //Giỏ hàng item
-
+            List<CartItem> cartItems = cartItemService.getItemByCart(cart.getCartId());
+            session.setAttribute("cartItems", cartItems);
 
             if (session.getAttribute("forwardTo") != null) {
                 response.sendRedirect(session.getAttribute("forwardTo").toString());

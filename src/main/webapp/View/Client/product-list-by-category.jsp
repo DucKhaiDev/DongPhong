@@ -262,14 +262,14 @@
                                     <div class="block2-txt-child1 flex-col-l ">
                                         <a href="product-detail.jsp" class="product-name stext-104 cl4 hov-cl1 trans-04 js-name-b2 m-b-6">${product.productName}</a>
                                     </div>
-                                    <form action="<c:url value="/wishlist/add"/>" method="get" class="block2-txt-child2 flex-r p-t-3">
+                                    <form id="wishlist-add-1" action="<c:url value="/wishlist/add"/>" method="get" class="block2-txt-child2 flex-r p-t-3">
                                         <!--Sign url-->
                                         <input type="hidden" class="input-add-item" name="forwardTo">
 
                                         <!--Sign product-->
                                         <input type="hidden" name="id" value="${product.productId}">
 
-                                        <button type="submit" class="btn-add-item btn-addwish-b2 dis-block pos-relative js-addwish-b2">
+                                        <button type="button" class="btn-add-item btn-addwish-b2 dis-block pos-relative js-addwish-b2">
                                             <img class="icon-heart1 dis-block trans-04" src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-01.png" alt="ICON">
                                             <img class="icon-heart2 dis-block trans-04 ab-t-l" src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-02.png" alt="ICON">
                                         </button>
@@ -365,7 +365,12 @@
                                                 <!--  -->
                                                 <div class="p-t-33">
                                                     <div class="flex-w flex-r-m p-b-10">
-                                                        <div class="size-204 flex-w flex-m respon6-next">
+                                                        <form id="cart-add" action="<c:url value="/cart/add"/>" method="get" class="size-204 flex-w flex-m respon6-next">
+                                                            <!--Sign url-->
+                                                            <input type="hidden" class="input-add-item" name="forwardTo">
+                                                            <!--Sign product-->
+                                                            <input type="hidden" name="id" value="${product.productId}">
+
                                                             <div class="wrap-num-product flex-w m-r-20 m-tb-10">
                                                                 <label for="num-product" style="display: none"></label>
                                                                 <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
@@ -377,23 +382,22 @@
                                                                 </div>
                                                             </div>
 
-                                                            <button class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+                                                            <button type="button" class="btn-add-item flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
                                                                 Thêm vào giỏ hàng
                                                             </button>
-                                                        </div>
+                                                        </form>
                                                     </div>
                                                 </div>
 
                                                 <!--  -->
                                                 <div class="flex-w flex-m p-l-100 p-t-40 respon7">
-                                                    <form action="<c:url value="/wishlist/add"/>" method="get" class="flex-m bor9 p-r-10 m-r-11">
+                                                    <form id="wishlist-add-2" action="<c:url value="/wishlist/add"/>" method="get" class="flex-m bor9 p-r-10 m-r-11">
                                                         <!--Sign url-->
                                                         <input type="hidden" class="input-add-item" name="forwardTo">
-
                                                         <!--Sign product-->
-                                                        <input type="hidden" name="productId" value="${product.productId}">
+                                                        <input type="hidden" name="id" value="${product.productId}">
 
-                                                        <button type="submit" class="btn-add-item fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 tooltip100" data-tooltip="Thêm vào Danh sách yêu thích">
+                                                        <button type="button" class="btn-add-item fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100" data-tooltip="Thêm vào Danh sách yêu thích">
                                                             <i class="zmdi zmdi-favorite"></i>
                                                         </button>
                                                     </form>
@@ -486,7 +490,9 @@
     $('.js-addwish-b2').each(function(){
         const nameProduct = $(this).parent().parent().find('.js-name-b2').html();
         $(this).on('click', function(){
-            swal(nameProduct, "đã được thêm vào danh sách yêu thích!", "success");
+            swal(nameProduct, "đã được thêm vào danh sách yêu thích!", "success").then(function () {
+                $('#wishlist-add-1').submit();
+            });
 
             $(this).addClass('js-addedwish-b2');
             $(this).off('click');
@@ -497,7 +503,9 @@
         const nameProduct = $(this).parent().parent().parent().find('.js-name-detail').html();
 
         $(this).on('click', function(){
-            swal(nameProduct, "đã được thêm vào danh sách yêu thích!", "success");
+            swal(nameProduct, "đã được thêm vào danh sách yêu thích!", "success").then(function () {
+                $('#wishlist-add-2').submit();
+            });
 
             $(this).addClass('js-addedwish-detail');
             $(this).off('click');
@@ -509,7 +517,9 @@
     $('.js-addcart-detail').each(function(){
         const nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();
         $(this).on('click', function(){
-            swal(nameProduct, "đã được thêm vào giỏ hàng!", "success");
+            swal(nameProduct, "đã được thêm vào giỏ hàng!", "success").then(function () {
+                $('#cart-add').submit();
+            });
         });
     });
 
