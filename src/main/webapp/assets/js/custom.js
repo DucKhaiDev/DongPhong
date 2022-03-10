@@ -393,6 +393,30 @@ $(function () {
       $('.input-add-item').attr('value', location.href);
    });
 });
+<!--===============================================================================================-->
+$(function () {
+    $('.js-show-modal').each(function () {
+        $(this).on('click', function (e) {
+            e.preventDefault();
+            //Tìm js-modal và thêm class show
+            $(this).parent().parent().parent().next().addClass('show-modal');
+        });
+    });
+
+    $('button[class*="js-hide-modal"]').each(function () {
+        $(this).on('click', function () {
+            //Tìm js-modal và xóa class show
+            $(this).parent().parent().parent().removeClass('show-modal');
+        })
+    });
+
+    $('div[class*="js-hide-modal"]').each(function () {
+        $(this).on('click', function () {
+            //Tìm js-modal và xóa class show
+            $(this).parent().removeClass('show-modal');
+        })
+    });
+});
 
 /*
     wishList.jsp

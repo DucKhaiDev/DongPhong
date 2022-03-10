@@ -148,10 +148,9 @@
                         <div id="collapse-1" class="panel-collapse collapse in show">
                             <div class="panel-body">
                                 <ul class="list-unstyled checkbox-list">
-                                    <c:forEach items="${applicationScope.brands}" var="brand" varStatus="loop">
+                                    <c:forEach items="${applicationScope.brands}" var="brand">
                                         <li><label class="checkbox">
-                                            <c:set var="index" value="${loop.index + 1}"/>
-                                            <input id="brand-${index}" class="filter-input" type="checkbox" name="brand" value="${brand.brandId}"><i></i>${brand.brandName}
+                                            <input id="${brand.brandId}" class="filter-input" type="checkbox" name="brand" value="${brand.brandId}"><i></i>${brand.brandName}
                                             <small>
                                                 <a>
                                                     (<%
@@ -243,7 +242,7 @@
             <div class="col-md-9">
                 <div class="row content">
                     <jsp:useBean id="products" scope="request" type="java.util.List"/>
-                    <c:forEach items="${products}" var="product" varStatus="loop">
+                    <c:forEach items="${products}" var="product">
                         <div class="col-sm-6 col-md-4 col-lg-4 p-b-35 women">
                             <div class="block2">
                                 <div class="block2-pic hov-img0">
@@ -254,7 +253,7 @@
                                     %>
                                     <c:url value="/images/product-images?fname=${reImage}" var="productImg"/>
                                     <img class="product-img" src="${productImg}" alt="Hình ảnh">
-                                    <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal${loop.index + 1}">Xem</a>
+                                    <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal">Xem</a>
                                 </div>
                                 <div class="block2-txt flex-w flex-t p-t-14">
                                     <div class="block2-txt-child1 flex-col-l ">
@@ -270,7 +269,7 @@
                                             WLItemService wlItemService = new WLItemService();
                                             Product product = (Product) pageContext.getAttribute("product");
                                             WishList wishList = (WishList) session.getAttribute("wishList");
-                                            boolean existItem = wlItemService.checkExistItem(product.getProductId(), wishList.getWishListId());
+                                            boolean existItem = wishList != null && wlItemService.checkExistItem(product.getProductId(), wishList.getWishListId());
                                             request.setAttribute("existItem", existItem);
                                         %>
                                         <button type="button" class="btn-add-item btn-addwish-b2 dis-block pos-relative <c:if test="${!existItem}">js-addwish-b2</c:if>">
@@ -321,13 +320,13 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- Modal${loop.index + 1} -->
-                        <div class="wrap-modal1 js-modal${loop.index + 1} p-t-60 p-b-20">
-                            <div class="overlay-modal1 js-hide-modal${loop.index + 1}"></div>
+                        <!-- Modal-->
+                        <div class="wrap-modal1 js-modal p-t-60 p-b-20">
+                            <div class="overlay-modal1 js-hide-modal"></div>
 
                             <div class="container">
                                 <div class="bg0 p-t-60 p-b-30 p-lr-15-lg how-pos3-parent">
-                                    <button class="how-pos3 hov3 trans-04 js-hide-modal${loop.index + 1}">
+                                    <button class="how-pos3 hov3 trans-04 js-hide-modal">
                                         <img src="${pageContext.request.contextPath}/assets/images/icons/icon-close.png" alt="CLOSE">
                                     </button>
 
@@ -552,29 +551,6 @@
 <!--===============================================================================================-->
 <script src="${pageContext.request.contextPath}/assets/js/custom.js"></script>
 <!--===============================================================================================-->
-<script>
-    $(function () {
-        <c:forEach items="${products}" varStatus="loop">
-            <!--show-modal${loop.index + 1}-->
-            $('.js-show-modal${loop.index + 1}').on('click',function(e){
-                e.preventDefault();
-                $('.js-modal${loop.index + 1}').addClass('show-modal');
-            });
-
-            $('.js-hide-modal${loop.index + 1}').on('click',function(){
-                $('.js-modal${loop.index + 1}').removeClass('show-modal');
-            });
-        </c:forEach>
-
-        /*$('.js-show-modal').each(function () {
-           $(this).on('click', function (e) {
-              e.preventDefault();
-
-           });
-        });*/
-    });
-</script>
-<!--===============================================================================================-->
 <script src="${pageContext.request.contextPath}/assets/js/pagination.min.js"></script>
 <script>
     $(function () {
@@ -611,12 +587,6 @@
                 location.href = url.href;
             }
         });
-    });
-</script>
-<!--===============================================================================================-->
-<script>
-    $(function () {
-
     });
 </script>
 

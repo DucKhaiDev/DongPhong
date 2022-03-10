@@ -19,15 +19,15 @@ public class ProductListByCategory extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String CAT_ID = request.getParameter("id");
-        Category category = categoryService.getCategory(CAT_ID);
+        String categoryId = request.getParameter("id");
+        Category category = categoryService.getCategory(categoryId);
         request.setAttribute("category", category);
-        List<Product> products = productService.getProductByCategory(CAT_ID);
+        List<Product> products = productService.getProductByCategory(categoryId);
 
         //Tìm kiếm sản phẩm
         String keyword = request.getParameter("search");
         if (keyword != null && !keyword.trim().isEmpty()) {
-            products = productService.searchByNameInCategory(CAT_ID, keyword);
+            products = productService.searchByNameInCategory(categoryId, keyword);
         }
 
         //Sắp xếp sản phẩm
