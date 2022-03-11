@@ -820,7 +820,7 @@ img.modal-product-image {
 }
 
 .product-price {
-    color: #EE4B2B;
+    color: #d71010;
 }
 
 .product-cost {
@@ -916,4 +916,13 @@ ul.header-cart-wrapitem li {
 
 .swal-footer {
     text-align: center;
+}
+
+.font-size-18 {
+    font-size: 18px !important;
+}
+
+.product-detail-img {
+    height: 640px;
+    object-fit: cover;
 }

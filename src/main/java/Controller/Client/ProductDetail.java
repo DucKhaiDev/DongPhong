@@ -8,6 +8,7 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet(name = "ProductDetail", value = "/products/product-detail")
 public class ProductDetail extends HttpServlet {
@@ -18,6 +19,11 @@ public class ProductDetail extends HttpServlet {
         String productId = request.getParameter("id");
         Product product = productService.getProduct(productId);
         request.setAttribute("product", product);
+
+        //Sản phẩm liên quan
+        List<Product> relatedProducts = productService.getProductByCategory(product.getCategory().getCategoryId());
+        request.setAttribute("relatedProducts", relatedProducts);
+
         request.getRequestDispatcher(Constant.Path.PRODUCT_DETAIL).forward(request, response);
     }
 }

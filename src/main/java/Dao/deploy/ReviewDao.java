@@ -128,4 +128,23 @@ public class ReviewDao implements Dao.ReviewDao {
 
         return reviews;
     }
+
+    @Override
+    public int countReview(String productId) {
+        conn = DBConnect.getConnection();
+
+        try {
+            ps = conn.prepareStatement("SELECT COUNT(*) FROM [REVIEW] WHERE PRO_ID = ?");
+            ps.setString(1, productId);
+            rs = ps.executeQuery();
+            rs.next();
+            return rs.getInt(1);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnect.closeAll(rs, ps, conn);
+        }
+
+        return 0;
+    }
 }

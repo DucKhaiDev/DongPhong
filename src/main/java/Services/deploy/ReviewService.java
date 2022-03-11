@@ -32,4 +32,8 @@ public class ReviewService implements Services.ReviewService {
     public List<Review> getAll() {
         return reviewDao.getAll();
     }
+
+    public int countReview(String productId) {
+        return reviewDao.countReview(productId);
+    }
 }

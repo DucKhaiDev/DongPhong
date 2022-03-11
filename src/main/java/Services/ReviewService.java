@@ -10,4 +10,5 @@ public interface ReviewService {
     void delete(int reviewId);
     Review getReview(int reviewId);
     List<Review> getAll();
+    int countReview(String productId);
 }

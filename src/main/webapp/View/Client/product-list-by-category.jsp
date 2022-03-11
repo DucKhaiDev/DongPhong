@@ -263,7 +263,7 @@
                                     %>
                                     <c:url value="/images/product-images?fname=${reImage}" var="productImg"/>
                                     <img class="product-img" src="${productImg}" alt="Hình ảnh">
-                                    <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal">Xem</a>
+                                    <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal">Xem Qua</a>
                                 </div>
                                 <div class="block2-txt flex-w flex-t p-t-14">
                                     <div class="block2-txt-child1 flex-col-l ">
@@ -289,7 +289,7 @@
                                     </form>
                                 </div>
                                 <div class="block2-txt flex-w flex-t">
-                                    <div class="block2-txt-child1 flex-col-l ">
+                                    <div class="block2-txt-child1 flex-col-l">
                                         <div class="d-flex">
                                             <span class="stext-105 cl3 product-price m-r-12">
                                                 <%
