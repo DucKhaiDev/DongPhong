@@ -73,11 +73,21 @@
     <div class="container">
         <div class="flex-w flex-sb-m p-b-36">
             <div class="flex-w flex-l-m filter-tope-group m-tb-10">
-                <ul class="breadcrumb">
-                    <li><a href="${pageContext.request.contextPath}">Trang chủ</a></li>
-                    <li><a href="#">${category.room.roomName}</a></li>
-                    <li><a href="${pageContext.request.contextPath}/products/category?id=${category.categoryId}">${category.categoryName}</a></li>
-                </ul>
+                <div class="bread-crumb flex-w p-r-15 p-t-30 p-lr-0-lg">
+                    <a href="${pageContext.request.contextPath}" class="stext-109 cl8 hov-cl1 trans-04 font-size-15">
+                        Trang chủ
+                        <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+                    </a>
+
+                    <a href="#" class="stext-109 cl8 hov-cl1 trans-04 font-size-15">
+                        ${category.room.roomName}
+                        <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+                    </a>
+
+                    <span class="stext-109 cl4 font-size-15">
+                        ${category.categoryName}
+                    </span>
+                </div>
             </div>
 
             <div class="flex-w flex-c-m m-tb-10">
@@ -257,7 +267,7 @@
                                 </div>
                                 <div class="block2-txt flex-w flex-t p-t-14">
                                     <div class="block2-txt-child1 flex-col-l ">
-                                        <a href="product-detail.jsp" class="product-name stext-104 cl4 hov-cl1 trans-04 js-name-b2 m-b-6">${product.productName}</a>
+                                        <a href="${pageContext.request.contextPath}/products/product-detail?id=${product.productId}" class="product-name stext-104 cl4 hov-cl1 trans-04 js-name-b2 m-b-6">${product.productName}</a>
                                     </div>
                                     <form action="<c:url value="/wishlist/add"/>" method="get" class="block2-txt-child2 flex-r p-t-3">
                                         <!--Sign url-->
@@ -309,12 +319,12 @@
                                     %>
                                     <c:if test="${b}">
                                         <div class="block2-txt-child2 flex-r p-t-3">
-                                        <span class="stext-105 cl3 product-sale-off">
-                                            <%
-                                                percentage = ((cost.subtract(price)).divide(cost, 2, RoundingMode.HALF_UP)).multiply(new BigDecimal("100")).setScale(0, RoundingMode.UP);
-                                                out.print("(-" + percentage + "%)");
-                                            %>
-                                        </span>
+                                            <span class="stext-105 cl3 product-sale-off">
+                                                <%
+                                                    percentage = ((cost.subtract(price)).divide(cost, 2, RoundingMode.HALF_UP)).multiply(new BigDecimal("100")).setScale(0, RoundingMode.UP);
+                                                    out.print("(-" + percentage + "%)");
+                                                %>
+                                            </span>
                                         </div>
                                     </c:if>
                                 </div>
@@ -375,11 +385,10 @@
                                                             <input type="hidden" name="id" value="${product.productId}">
 
                                                             <div class="wrap-num-product flex-w m-r-20 m-tb-10">
-                                                                <label for="num-product" style="display: none"></label>
                                                                 <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
                                                                     <i class="fs-16 zmdi zmdi-minus"></i>
                                                                 </div>
-                                                                <input id="num-product" class="mtext-104 cl3 txt-center num-product" type="number" name="num-product" value="1">
+                                                                <input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product" value="1">
                                                                 <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
                                                                     <i class="fs-16 zmdi zmdi-plus"></i>
                                                                 </div>
@@ -439,6 +448,11 @@
 <!-- Footer -->
 <jsp:include page="footer.jsp"/>
 
+<label>
+    <!--Kiểm tra đăng nhập-->
+    <input id="checkAccount" type="hidden" value="<c:if test="${sessionScope.account == null}">null</c:if>"/>
+</label>
+
 <!--===============================================================================================-->
 <script src="${pageContext.request.contextPath}/assets/vendor/jquery/jquery-3.2.1.min.js"></script>
 <!--===============================================================================================-->
@@ -485,50 +499,6 @@
 <script src="${pageContext.request.contextPath}/assets/vendor/isotope/isotope.pkgd.min.js"></script>
 <!--===============================================================================================-->
 <script src="${pageContext.request.contextPath}/assets/vendor/sweetalert/sweetalert.min.js"></script>
-<script>
-    $('.js-addwish-b2, .js-addwish-detail').on('click', function(e){
-        e.preventDefault();
-    });
-
-    $('.js-addwish-b2').each(function(){
-        const nameProduct = $(this).parent().parent().find('.js-name-b2').html();
-        const addwishB2 = $(this);
-        addwishB2.on('click', function(){
-            swal(nameProduct, "đã được thêm vào danh sách yêu thích!", "success").then(function () {
-                addwishB2.parent().submit();
-            });
-
-            $(this).addClass('js-addedwish-b2');
-            $(this).off('click');
-        });
-    });
-
-    $('.js-addwish-detail').each(function(){
-        const nameProduct = $(this).parent().parent().parent().find('.js-name-detail').html();
-        const addwishDetail = $(this);
-        addwishDetail.on('click', function(){
-            swal(nameProduct, "đã được thêm vào danh sách yêu thích!", "success").then(function () {
-                addwishDetail.parent().submit();
-            });
-
-            $(this).addClass('js-addedwish-detail');
-            $(this).off('click');
-        });
-    });
-
-    /*---------------------------------------------*/
-
-    $('.js-addcart-detail').each(function(){
-        const nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();
-        const addcartDetail = $(this);
-        $(this).on('click', function(){
-            swal(nameProduct, "đã được thêm vào giỏ hàng!", "success").then(function () {
-                addcartDetail.parent().submit();
-            });
-        });
-    });
-
-</script>
 <!--===============================================================================================-->
 <script src="${pageContext.request.contextPath}/assets/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 <script>

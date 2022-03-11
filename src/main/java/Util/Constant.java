@@ -34,5 +34,6 @@ public class Constant {
         public static final String MY_ACCOUNT = "/View/Client/my-account.jsp";
         public static final String CHANGE_PASSWORD = "/View/Client/change-password.jsp";
         public static final String PRODUCT_LIST_BY_CATEGORY = "/View/Client/product-list-by-category.jsp";
+        public static final String PRODUCT_DETAIL = "/View/Client/product-detail.jsp";
     }
 }

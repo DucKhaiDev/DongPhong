@@ -1,10 +1,13 @@
+/*
+    General
+*/
 (function ($) {
     "use strict";
-    var mainApp = {
+    const mainApp = {
 
         main_fun: function () {
             /*====================================
-            METIS MENU 
+            METIS MENU
             ======================================*/
             $('#main-menu').metisMenu();
 
@@ -183,8 +186,8 @@
                 hideHover: 'auto',
                 resize: true
             });
-           
-     
+
+
         },
 
         initialization: function () {
@@ -192,7 +195,7 @@
 
         }
 
-    }
+    };
     // Initializing ///
 
     $(document).ready(function () {
@@ -200,6 +203,141 @@
     });
 
 }(jQuery));
+
+<!--===============================================================================================-->
+$(function () {
+    $('.btn-num-product-down').each(function () {
+       $(this).on('click', function () {
+           if ($(this).next().prop('value') < 2) {
+               $(this).next().prop('value', '1');
+               $(this).css('cursor', 'not-allowed');
+               $(this).hover(function () {
+                  $(this).css({
+                      'background-color': 'rgba(0, 0, 0, 0)',
+                      'border-color': 'rgb(85, 85, 85)'
+                  });
+
+                   $(this).children().css('color', 'rgb(85, 85, 85)');
+               });
+           }
+       });
+    });
+
+    $('.btn-num-product-up').each(function () {
+        $(this).on('click', function () {
+            const btnDown = $(this).prev().prev();
+            btnDown.css('cursor', 'auto');
+            btnDown.hover(function () {
+                btnDown.css({
+                    'background-color': '#717fe0',
+                    'border-color': '#717fe0'
+                });
+
+                btnDown.children().css('color', '#fff')
+            });
+        });
+    });
+
+    $('.num-product').each(function () {
+        $(this).on('change', function () {
+            const btnDown = $(this).prev();
+            if ($(this).prop('value') < 2) {
+                $(this).prop('value', '1');
+                btnDown.css('cursor', 'not-allowed');
+                btnDown.hover(function () {
+                    btnDown.css({
+                        'background-color': 'rgba(0, 0, 0, 0)',
+                        'border-color': 'rgb(85, 85, 85)'
+                    });
+
+                    btnDown.children().css('color', 'rgb(85, 85, 85)');
+                });
+            } else {
+                btnDown.css('cursor', 'auto');
+                btnDown.hover(function () {
+                    btnDown.css({
+                        'background-color': '#717fe0',
+                        'border-color': '#717fe0'
+                    });
+
+                    btnDown.children().css('color', '#fff');
+                });
+            }
+        });
+    });
+});
+
+<!--===============================================================================================-->
+$(function () {
+    $('.js-addwish-b2, .js-addwish-detail').on('click', function(e){
+        e.preventDefault();
+    });
+
+    $('.js-addwish-b2').each(function(){
+        const nameProduct = $(this).parent().parent().find('.js-name-b2').html();
+        const addwishB2 = $(this);
+        addwishB2.on('click', function(){
+            if ($('#checkAccount').prop('value') !== 'null') {
+                swal(nameProduct, "đã được thêm vào danh sách yêu thích!", "success").then(function () {
+                    addwishB2.parent().submit();
+                });
+            } else {
+                swal({
+                    text: 'Vui lòng đăng nhập để tiếp tục!',
+                    icon: 'warning'
+                }).then(function () {
+                    addwishB2.parent().submit();
+                });
+            }
+
+            $(this).addClass('js-addedwish-b2');
+            $(this).off('click');
+        });
+    });
+
+    $('.js-addwish-detail').each(function(){
+        const nameProduct = $(this).parent().parent().parent().find('.js-name-detail').html();
+        const addwishDetail = $(this);
+        addwishDetail.on('click', function(){
+            if ($('#checkAccount').prop('value') !== 'null') {
+                swal(nameProduct, "đã được thêm vào danh sách yêu thích!", "success").then(function () {
+                    addwishDetail.parent().submit();
+                });
+            } else {
+                swal({
+                    text: 'Vui lòng đăng nhập để tiếp tục!',
+                    icon: 'warning'
+                }).then(function () {
+                    addwishDetail.parent().submit();
+                });
+            }
+
+            $(this).addClass('js-addedwish-detail');
+            $(this).off('click');
+        });
+    });
+
+    /*---------------------------------------------*/
+
+    $('.js-addcart-detail').each(function(){
+        const nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();
+        const addcartDetail = $(this);
+        $(this).on('click', function(){
+            if ($('#checkAccount').prop('value') !== 'null') {
+                swal(nameProduct, "đã được thêm vào giỏ hàng!", "success").then(function () {
+                    addcartDetail.parent().submit();
+                });
+            } else {
+                swal({
+                    text: 'Vui lòng đăng nhập để tiếp tục!',
+                    icon: 'warning'
+                }).then(function () {
+                    addcartDetail.parent().submit();
+                });
+            }
+        });
+    });
+});
 
 /*
     my-account.jsp
@@ -264,7 +402,7 @@ $(function () {
 <!--===============================================================================================-->
 $(function () {
     //append parameter vào url
-    $('input[type="checkbox"], input[type="radio"]').click(function () {
+    $('input[class="filter-input"]').click(function () {
         let seasoning = '', tempArray = [];
         $('input[name="brand"]:checked').each(function () {
             tempArray.push($(this).val());
@@ -303,7 +441,7 @@ $(function () {
 <!--===============================================================================================-->
 $(function () {
     //Lưu giá trị lọc thương hiệu, giá bán vào sessionScope
-    $('input[type="checkbox"]').each(function () {
+    $('input[type="checkbox"][class="filter-input"]').each(function () {
         $(this)
             .prop('checked', sessionStorage.getItem(this.id) === 'true')
             .on('change', function () {
@@ -313,7 +451,7 @@ $(function () {
     });
 
     //Lưu giá trị lọc đánh giá
-    $('input[type="radio"]')
+    $('input[type="radio"][class="filter-input"]')
         .each(function () {
             $(this).prop('checked', sessionStorage.getItem(this.id) === 'true').trigger('change');
         })

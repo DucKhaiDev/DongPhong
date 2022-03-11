@@ -17,6 +17,7 @@ public class LogoutController extends HttpServlet {
         session.removeAttribute("wishList");
         session.removeAttribute("wlItems");
         session.removeAttribute("cart");
+        session.removeAttribute("cartItems");
 
         Cookie[] cookies = request.getCookies();
 
