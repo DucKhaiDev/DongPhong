@@ -9,16 +9,17 @@ public class Review implements Serializable {
     private int reviewId;
     private User user;
     private Product product;
+    private double reviewRate;
     private String reviewContent;
     private Timestamp reviewDate;
     private String reviewImage;
 
     public Review() {}
 
-    public Review(int reviewId, User user, Product product, String reviewContent, Timestamp reviewDate, String reviewImage) {
-        this.reviewId = reviewId;
+    public Review(User user, Product product, double reviewRate, String reviewContent, Timestamp reviewDate, String reviewImage) {
         this.user = user;
         this.product = product;
+        this.reviewRate = reviewRate;
         this.reviewContent = reviewContent;
         this.reviewDate = reviewDate;
         this.reviewImage = reviewImage;
@@ -46,6 +47,14 @@ public class Review implements Serializable {
 
     public void setProduct(Product product) {
         this.product = product;
+    }
+
+    public double getReviewRate() {
+        return reviewRate;
+    }
+
+    public void setReviewRate(double reviewRate) {
+        this.reviewRate = reviewRate;
     }
 
     public String getReviewContent() {

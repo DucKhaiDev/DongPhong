@@ -9,6 +9,10 @@ public class Product implements Serializable {
     private String productName;
     private double productRate;
     private String productDescription;
+    private String productDimension;
+    private String productWeight;
+    private String productMaterial;
+    private String productColor;
     private String productPrice;
     private String productCost;
     private int productQuantity;
@@ -17,10 +21,14 @@ public class Product implements Serializable {
 
     public Product() {}
 
-    public Product(String productId, String productName, String productDescription, String productPrice, String productCost, int productQuantity, Category category, Brand brand) {
+    public Product(String productId, String productName, String productDescription, String productDimension, String productWeight, String productMaterial, String productColor, String productPrice, String productCost, int productQuantity, Category category, Brand brand) {
         this.productId = productId;
         this.productName = productName;
         this.productDescription = productDescription;
+        this.productDimension = productDimension;
+        this.productWeight = productWeight;
+        this.productMaterial = productMaterial;
+        this.productColor = productColor;
         this.productPrice = productPrice;
         this.productCost = productCost;
         this.productQuantity = productQuantity;
@@ -70,6 +78,38 @@ public class Product implements Serializable {
 
     public void setProductDescription(String productDescription) {
         this.productDescription = productDescription;
+    }
+
+    public String getProductDimension() {
+        return productDimension;
+    }
+
+    public void setProductDimension(String productDimension) {
+        this.productDimension = productDimension;
+    }
+
+    public String getProductWeight() {
+        return productWeight;
+    }
+
+    public void setProductWeight(String productWeight) {
+        this.productWeight = productWeight;
+    }
+
+    public String getProductMaterial() {
+        return productMaterial;
+    }
+
+    public void setProductMaterial(String productMaterial) {
+        this.productMaterial = productMaterial;
+    }
+
+    public String getProductColor() {
+        return productColor;
+    }
+
+    public void setProductColor(String productColor) {
+        this.productColor = productColor;
     }
 
     public String getProductPrice() {

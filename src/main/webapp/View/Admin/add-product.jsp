@@ -65,15 +65,23 @@
                                                     <br>
                                                     <textarea name="productDescription" id="productDescription" class="form-control" cols="50" rows="5" maxlength="2000"></textarea>
                                                 </div>
-                                                <div class="col-md-6 mb-3"><label for="productQuantity" class="labels">Số lượng tồn kho</label><input id="productQuantity" type="number" class="form-control" name="productQuantity" min="0" max="<% out.print(Integer.MAX_VALUE); %>" step="1" placeholder="0"></div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12 mb-3"><label for="productDimension" class="labels">Kích thước</label><input id="productDimension" type="text" class="form-control" name="productDimension"></div>
+                                                <div class="col-md-12 mb-3"><label for="productWeight" class="labels">Khối lượng</label><input id="productWeight" type="text" class="form-control" name="productWeight"></div>
+                                                <div class="col-md-12 mb-3"><label for="productMaterial" class="labels">Loại gỗ</label><input id="productMaterial" type="text" class="form-control" name="productMaterial"></div>
+                                                <div class="col-md-12 mb-3"><label for="productColor" class="labels">Màu sơn</label><input id="productColor" type="text" class="form-control" name="productColor"></div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-6 mb-3"><label for="productPrice" class="labels">Giá bán (VNĐ)</label><input id="productPrice" type="number" class="form-control" name="productPrice" min="0" max="9999999999" step="0.01" placeholder="0"></div>
                                                 <div class="col-md-6 mb-3"><label for="productCost" class="labels">Giá gốc (VNĐ)</label><input id="productCost" type="number" class="form-control" name="productCost" min="0" max="9999999999" step="0.01" placeholder="0"></div>
+                                            </div>
+                                            <div class="row"><div class="col-md-6 mb-3"><label for="productQuantity" class="labels">Số lượng tồn kho</label><input id="productQuantity" type="number" class="form-control" name="productQuantity" min="0" max="<% out.print(Integer.MAX_VALUE); %>" step="1" placeholder="0"></div></div>
+                                            <div class="row">
                                                 <div class="col-md-6 mb-3">
                                                     <label for="category" class="labels">Loại sản phẩm</label>
                                                     <div class="checkbox pl-0">
-                                                        <select id="category" name="category" class="w-50">
+                                                        <select id="category" name="category" class="w-100">
                                                             <jsp:useBean id="categories" scope="request" type="java.util.List"/>
                                                             <c:forEach items="${categories}" var="category">
                                                                 <option value="${category.categoryId}">${category.categoryName}</option>
@@ -84,7 +92,7 @@
                                                 <div class="col-md-6 mb-3">
                                                     <label for="brand" class="labels">Thương hiệu</label>
                                                     <div class="checkbox pl-0">
-                                                        <select id="brand" name="brand" class="w-50">
+                                                        <select id="brand" name="brand" class="w-100">
                                                             <jsp:useBean id="brands" scope="request" type="java.util.List"/>
                                                             <c:forEach items="${brands}" var="brand">
                                                                 <option value="${brand.brandId}">${brand.brandName}</option>

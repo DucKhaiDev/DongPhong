@@ -262,7 +262,7 @@
                                 <ul class="p-lr-28 p-lr-15-sm">
                                     <li class="flex-w flex-t p-b-7">
                                         <span class="stext-102 cl3 size-205">
-                                            Khối lượng
+                                            Kích thước
                                         </span>
 
                                         <span class="stext-102 cl6 size-206">
@@ -272,7 +272,7 @@
 
                                     <li class="flex-w flex-t p-b-7">
                                         <span class="stext-102 cl3 size-205">
-                                            Kích thước
+                                            Khối lượng
                                         </span>
 
                                         <span class="stext-102 cl6 size-206">
@@ -292,7 +292,7 @@
 
                                     <li class="flex-w flex-t p-b-7">
                                         <span class="stext-102 cl3 size-205">
-                                            Màu sắc
+                                            Màu sơn
                                         </span>
 
                                         <span class="stext-102 cl6 size-206">

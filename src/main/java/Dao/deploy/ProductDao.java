@@ -25,16 +25,20 @@ public class ProductDao implements Dao.ProductDao {
         conn = DBConnect.getConnection();
 
         try {
-            ps = conn.prepareStatement("INSERT INTO [PRODUCT](PRO_ID, PRO_NAME, PRO_DES, PRO_PRICE, PRO_COST, PRO_QUANT, CAT_ID, BRA_ID)" +
-                                            "VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
+            ps = conn.prepareStatement("INSERT INTO [PRODUCT](PRO_ID, PRO_NAME, PRO_DES, PRO_DIMEN, PRO_WEIGHT, PRO_MATE, PRO_COLOR, PRO_PRICE, PRO_COST, PRO_QUANT, CAT_ID, BRA_ID)" +
+                                            "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
             ps.setString(1, product.getProductId());
             ps.setString(2, product.getProductName());
             ps.setString(3, product.getProductDescription());
-            ps.setString(4, product.getProductPrice());
-            ps.setString(5, product.getProductCost());
-            ps.setInt(6, product.getProductQuantity());
-            ps.setString(7, product.getCategory().getCategoryId());
-            ps.setString(8, product.getBrand().getBrandId());
+            ps.setString(4, product.getProductDimension());
+            ps.setString(5, product.getProductWeight());
+            ps.setString(6, product.getProductMaterial());
+            ps.setString(7, product.getProductColor());
+            ps.setString(8, product.getProductPrice());
+            ps.setString(9, product.getProductCost());
+            ps.setInt(10, product.getProductQuantity());
+            ps.setString(11, product.getCategory().getCategoryId());
+            ps.setString(12, product.getBrand().getBrandId());
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -48,16 +52,20 @@ public class ProductDao implements Dao.ProductDao {
         conn = DBConnect.getConnection();
 
         try {
-            ps = conn.prepareStatement("UPDATE [PRODUCT] SET PRO_NAME = ?, PRO_RATE = ?, PRO_DES = ?, PRO_PRICE = ?, PRO_COST = ?, PRO_QUANT = ?, CAT_ID = ?, BRA_ID = ? WHERE PRO_ID = ?");
+            ps = conn.prepareStatement("UPDATE [PRODUCT] SET PRO_NAME = ?, PRO_RATE = ?, PRO_DES = ?, PRO_DIMEN = ?, PRO_WEIGHT = ?, PRO_MATE = ?, PRO_COLOR = ?, PRO_PRICE = ?, PRO_COST = ?, PRO_QUANT = ?, CAT_ID = ?, BRA_ID = ? WHERE PRO_ID = ?");
             ps.setString(1, product.getProductName());
             ps.setDouble(2, product.getProductRate());
             ps.setString(3, product.getProductDescription());
-            ps.setString(4, product.getProductPrice());
-            ps.setString(5, product.getProductCost());
-            ps.setInt(6, product.getProductQuantity());
-            ps.setString(7, product.getCategory().getCategoryId());
-            ps.setString(8, product.getBrand().getBrandId());
-            ps.setString(9, product.getProductId());
+            ps.setString(4, product.getProductDimension());
+            ps.setString(5, product.getProductWeight());
+            ps.setString(6, product.getProductMaterial());
+            ps.setString(7, product.getProductColor());
+            ps.setString(8, product.getProductPrice());
+            ps.setString(9, product.getProductCost());
+            ps.setInt(10, product.getProductQuantity());
+            ps.setString(11, product.getCategory().getCategoryId());
+            ps.setString(12, product.getBrand().getBrandId());
+            ps.setString(13, product.getProductId());
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -96,6 +104,10 @@ public class ProductDao implements Dao.ProductDao {
             product.setProductName(rs.getString("PRO_NAME"));
             product.setProductRate(rs.getDouble("PRO_RATE"));
             product.setProductDescription(rs.getString("PRO_DES"));
+            product.setProductDimension(rs.getString("PRO_DIMEN"));
+            product.setProductWeight(rs.getString("PRO_WEIGHT"));
+            product.setProductMaterial(rs.getString("PRO_MATE"));
+            product.setProductColor(rs.getString("PRO_COLOR"));
             product.setProductPrice(rs.getString("PRO_PRICE"));
             product.setProductCost(rs.getString("PRO_COST"));
             product.setProductQuantity(rs.getInt("PRO_QUANT"));
@@ -125,6 +137,10 @@ public class ProductDao implements Dao.ProductDao {
                 product.setProductName(rs.getString("PRO_NAME"));
                 product.setProductRate(rs.getDouble("PRO_RATE"));
                 product.setProductDescription(rs.getString("PRO_DES"));
+                product.setProductDimension(rs.getString("PRO_DIMEN"));
+                product.setProductWeight(rs.getString("PRO_WEIGHT"));
+                product.setProductMaterial(rs.getString("PRO_MATE"));
+                product.setProductColor(rs.getString("PRO_COLOR"));
                 product.setProductPrice(rs.getString("PRO_PRICE"));
                 product.setProductCost(rs.getString("PRO_COST"));
                 product.setProductQuantity(rs.getInt("PRO_QUANT"));
@@ -158,6 +174,10 @@ public class ProductDao implements Dao.ProductDao {
                 product.setProductName(rs.getString("PRO_NAME"));
                 product.setProductRate(rs.getDouble("PRO_RATE"));
                 product.setProductDescription(rs.getString("PRO_DES"));
+                product.setProductDimension(rs.getString("PRO_DIMEN"));
+                product.setProductWeight(rs.getString("PRO_WEIGHT"));
+                product.setProductMaterial(rs.getString("PRO_MATE"));
+                product.setProductColor(rs.getString("PRO_COLOR"));
                 product.setProductPrice(rs.getString("PRO_PRICE"));
                 product.setProductCost(rs.getString("PRO_COST"));
                 product.setProductQuantity(rs.getInt("PRO_QUANT"));
@@ -192,6 +212,10 @@ public class ProductDao implements Dao.ProductDao {
                 product.setProductName(rs.getString("PRO_NAME"));
                 product.setProductRate(rs.getDouble("PRO_RATE"));
                 product.setProductDescription(rs.getString("PRO_DES"));
+                product.setProductDimension(rs.getString("PRO_DIMEN"));
+                product.setProductWeight(rs.getString("PRO_WEIGHT"));
+                product.setProductMaterial(rs.getString("PRO_MATE"));
+                product.setProductColor(rs.getString("PRO_COLOR"));
                 product.setProductPrice(rs.getString("PRO_PRICE"));
                 product.setProductCost(rs.getString("PRO_COST"));
                 product.setProductQuantity(rs.getInt("PRO_QUANT"));
@@ -225,6 +249,10 @@ public class ProductDao implements Dao.ProductDao {
                 product.setProductName(rs.getString("PRO_NAME"));
                 product.setProductRate(rs.getDouble("PRO_RATE"));
                 product.setProductDescription(rs.getString("PRO_DES"));
+                product.setProductDimension(rs.getString("PRO_DIMEN"));
+                product.setProductWeight(rs.getString("PRO_WEIGHT"));
+                product.setProductMaterial(rs.getString("PRO_MATE"));
+                product.setProductColor(rs.getString("PRO_COLOR"));
                 product.setProductPrice(rs.getString("PRO_PRICE"));
                 product.setProductCost(rs.getString("PRO_COST"));
                 product.setProductQuantity(rs.getInt("PRO_QUANT"));
@@ -258,6 +286,10 @@ public class ProductDao implements Dao.ProductDao {
                 product.setProductName(rs.getString("PRO_NAME"));
                 product.setProductRate(rs.getDouble("PRO_RATE"));
                 product.setProductDescription(rs.getString("PRO_DES"));
+                product.setProductDimension(rs.getString("PRO_DIMEN"));
+                product.setProductWeight(rs.getString("PRO_WEIGHT"));
+                product.setProductMaterial(rs.getString("PRO_MATE"));
+                product.setProductColor(rs.getString("PRO_COLOR"));
                 product.setProductPrice(rs.getString("PRO_PRICE"));
                 product.setProductCost(rs.getString("PRO_COST"));
                 product.setProductQuantity(rs.getInt("PRO_QUANT"));

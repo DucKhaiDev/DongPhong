@@ -56,6 +56,9 @@ public class EditProduct extends HttpServlet {
         }
 
         product.setProductDescription(request.getParameter("productDescription"));
+        product.setProductDimension(request.getParameter("productDimension"));
+        product.setProductWeight(request.getParameter("productWeight"));
+        product.setProductColor(request.getParameter("productColor"));
 
         int productQuantity = request.getParameter("productQuantity").isEmpty() ? 0 : Integer.parseInt(request.getParameter("productQuantity"));
         product.setProductQuantity(productQuantity);

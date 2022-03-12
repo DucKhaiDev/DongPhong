@@ -52,12 +52,16 @@ public class AddProduct extends HttpServlet {
 
         String productName = request.getParameter("productName");
         String productDescription = request.getParameter("productDescription");
+        String productDimension = request.getParameter("productDimension");
+        String productWeight = request.getParameter("productWeight");
+        String productMaterial = request.getParameter("productMaterial");
+        String productColor = request.getParameter("productColor");
         int productQuantity = request.getParameter("productQuantity").isEmpty() ? 0 : Integer.parseInt(request.getParameter("productQuantity"));
         String productPrice = request.getParameter("productPrice");
         String productCost = request.getParameter("productCost");
         Category category = categoryService.getCategory(request.getParameter("category"));
         Brand brand = brandService.getBrand(request.getParameter("brand"));
-        Product product = new Product(productId, productName, productDescription, productPrice, productCost, productQuantity, category, brand);
+        Product product = new Product(productId, productName, productDescription, productDimension, productWeight, productMaterial, productColor, productPrice, productCost, productQuantity, category, brand);
 
         productService.insert(product);
 
