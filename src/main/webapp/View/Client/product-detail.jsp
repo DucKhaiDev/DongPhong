@@ -413,7 +413,7 @@
         <div class="wrap-slick2">
             <div class="slick2">
                 <jsp:useBean id="relatedProducts" scope="request" type="java.util.List"/>
-                <c:forEach items="${relatedProducts}" var="relatedProduct">
+                <c:forEach items="${relatedProducts}" var="relatedProduct" varStatus="loop">
                     <div class="item-slick2 p-l-15 p-r-15 p-t-15 p-b-15">
                         <div class="block2">
                             <div class="block2-pic hov-img0">
@@ -424,7 +424,7 @@
                                 <c:url value="/images/product-images?fname=${reImage}" var="productImg"/>
                                 <img class="product-img" src="${productImg}" alt="Hình ảnh">
 
-                                <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal">
+                                <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal${loop.index}">
                                     Xem Qua
                                 </a>
                             </div>
@@ -479,7 +479,7 @@
                                     boolean b = relatedProductPrice.compareTo(relatedProductCost) < 0;
                                     request.setAttribute("b", b);
 
-                                    BigDecimal percentage = new BigDecimal(0);
+                                    BigDecimal percentage;
                                 %>
                                 <c:if test="${b}">
                                     <div class="block2-txt-child2 flex-r p-t-3">
@@ -494,111 +494,122 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Modal -->
-                    <div class="wrap-modal1 js-modal p-t-60 p-b-20">
-                        <div class="overlay-modal1 js-hide-modal"></div>
+                </c:forEach>
+            </div>
+        </div>
 
-                        <div class="container">
-                            <div class="bg0 p-t-60 p-b-30 p-lr-15-lg how-pos3-parent">
-                                <button class="how-pos3 hov3 trans-04 js-hide-modal">
-                                    <img src="${pageContext.request.contextPath}/assets/images/icons/icon-close.png" alt="CLOSE">
-                                </button>
+        <c:forEach items="${relatedProducts}" var="relatedProduct" varStatus="loop">
+            <!-- Modal -->
+            <div class="wrap-modal1 js-modal${loop.index} p-t-60 p-b-20">
+                <div class="overlay-modal1 js-hide-modal${loop.index}"></div>
 
-                                <div class="row">
-                                    <div class="col-md-6 col-lg-7 p-b-30">
-                                        <div class="p-l-25 p-r-30 p-lr-0-lg">
-                                            <div class="wrap-slick3 flex-sb flex-w">
-                                                <div class="wrap-slick3-dots"></div>
-                                                <div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
+                <div class="container">
+                    <div class="bg0 p-t-60 p-b-30 p-lr-15-lg how-pos3-parent">
+                        <button class="how-pos3 hov3 trans-04 js-hide-modal${loop.index}">
+                            <img src="${pageContext.request.contextPath}/assets/images/icons/icon-close.png" alt="CLOSE">
+                        </button>
 
-                                                <div class="slick3 gallery-lb">
-                                                    <%
-                                                        List<ProImage> relatedProductImages = imageService.getProImage(((Product) pageContext.getAttribute("relatedProduct")).getProductId());
-                                                        request.setAttribute("relatedProductImages", relatedProductImages);
-                                                    %>
-                                                    <c:forEach items="${relatedProductImages}" var="image">
-                                                        <c:url var="imageUrl" value="/images/product-images?fname=${image.imageName}"/>
-                                                        <div class="item-slick3" data-thumb="${imageUrl}">
-                                                            <div class="wrap-pic-w pos-relative">
-                                                                <img class="modal-product-image" src="${imageUrl}" alt="Hình ảnh sản phẩm">
-                                                                <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="${imageUrl}">
-                                                                    <i class="fa fa-expand"></i>
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </c:forEach>
+                        <div class="row">
+                            <div class="col-md-6 col-lg-7 p-b-30">
+                                <div class="p-l-25 p-r-30 p-lr-0-lg">
+                                    <div class="wrap-slick3 flex-sb flex-w">
+                                        <div class="wrap-slick3-dots"></div>
+                                        <div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
+
+                                        <div class="slick3 gallery-lb">
+                                            <%
+                                                List<ProImage> relatedProductImages = imageService.getProImage(((Product) pageContext.getAttribute("relatedProduct")).getProductId());
+                                                request.setAttribute("relatedProductImages", relatedProductImages);
+                                            %>
+                                            <c:forEach items="${relatedProductImages}" var="image">
+                                                <c:url var="imageUrl" value="/images/product-images?fname=${image.imageName}"/>
+                                                <div class="item-slick3" data-thumb="${imageUrl}">
+                                                    <div class="wrap-pic-w pos-relative">
+                                                        <img class="modal-product-image" src="${imageUrl}" alt="Hình ảnh sản phẩm">
+                                                        <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="${imageUrl}">
+                                                            <i class="fa fa-expand"></i>
+                                                        </a>
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            </c:forEach>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-lg-5 p-b-30">
+                                <div class="p-r-50 p-t-5 p-lr-0-lg">
+                                    <h4 class="mtext-105 cl2 js-name-detail p-b-14">${relatedProduct.productName}</h4>
+                                    <%
+                                        Product relatedProduct = (Product) pageContext.getAttribute("relatedProduct");
+                                        BigDecimal relatedProductPrice = new BigDecimal(relatedProduct.getProductPrice());
+                                        String showPrice = dongFormat.format(relatedProductPrice);
+                                        BigDecimal relatedProductCost = new BigDecimal(relatedProduct.getProductCost());
+                                        String showCost = dongFormat.format(relatedProductCost);
+                                        BigDecimal percentage = ((relatedProductCost.subtract(relatedProductPrice)).divide(relatedProductCost, 2, RoundingMode.HALF_UP)).multiply(new BigDecimal("100")).setScale(0, RoundingMode.UP);
+                                    %>
+                                    <span class="product-price mtext-106 cl2 m-r-16"><% out.print(showPrice); %></span>
+                                    <span class="product-cost mtext-106 cl2 m-r-16"><% out.print(showCost); %></span>
+                                    <span class="product-sale-off mtext-106 cl2"><% out.print("(-" + percentage + "%)"); %></span>
+                                    <p class="stext-102 cl3 p-t-23">${relatedProduct.productDescription}</p>
+                                    <!--  -->
+                                    <div class="p-t-33">
+                                        <div class="flex-w flex-r-m p-b-10">
+                                            <form action="<c:url value="/cart/add"/>" method="get" class="size-204 flex-w flex-m respon6-next">
+                                                <!--Sign url-->
+                                                <input type="hidden" class="input-add-item" name="forwardTo">
+                                                <!--Sign product-->
+                                                <input type="hidden" name="id" value="${relatedProduct.productId}">
+
+                                                <div class="wrap-num-product flex-w m-r-20 m-tb-10">
+                                                    <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
+                                                        <i class="fs-16 zmdi zmdi-minus"></i>
+                                                    </div>
+                                                    <input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product" value="1">
+                                                    <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
+                                                        <i class="fs-16 zmdi zmdi-plus"></i>
+                                                    </div>
+                                                </div>
+
+                                                <button type="button" class="btn-add-item flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+                                                    Thêm vào giỏ hàng
+                                                </button>
+                                            </form>
                                         </div>
                                     </div>
 
-                                    <div class="col-md-6 col-lg-5 p-b-30">
-                                        <div class="p-r-50 p-t-5 p-lr-0-lg">
-                                            <h4 class="mtext-105 cl2 js-name-detail p-b-14">${relatedProduct.productName}</h4>
-                                            <span class="product-price mtext-106 cl2 m-r-16"><% out.print(showPrice); %></span>
-                                            <span class="product-cost mtext-106 cl2 m-r-16"><% out.print(showCost); %></span>
-                                            <span class="product-sale-off mtext-106 cl2"><% out.print("(-" + percentage + "%)"); %></span>
-                                            <p class="stext-102 cl3 p-t-23">${relatedProduct.productDescription}</p>
-                                            <!--  -->
-                                            <div class="p-t-33">
-                                                <div class="flex-w flex-r-m p-b-10">
-                                                    <form action="<c:url value="/cart/add"/>" method="get" class="size-204 flex-w flex-m respon6-next">
-                                                        <!--Sign url-->
-                                                        <input type="hidden" class="input-add-item" name="forwardTo">
-                                                        <!--Sign product-->
-                                                        <input type="hidden" name="id" value="${relatedProduct.productId}">
+                                    <!--  -->
+                                    <div class="flex-w flex-m p-l-100 p-t-40 respon7">
+                                        <form action="<c:url value="/wishlist/add"/>" method="get" class="flex-m bor9 p-r-10 m-r-11">
+                                            <!--Sign url-->
+                                            <input type="hidden" class="input-add-item" name="forwardTo">
+                                            <!--Sign product-->
+                                            <input type="hidden" name="id" value="${relatedProduct.productId}">
 
-                                                        <div class="wrap-num-product flex-w m-r-20 m-tb-10">
-                                                            <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
-                                                                <i class="fs-16 zmdi zmdi-minus"></i>
-                                                            </div>
-                                                            <input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product" value="1">
-                                                            <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
-                                                                <i class="fs-16 zmdi zmdi-plus"></i>
-                                                            </div>
-                                                        </div>
+                                            <button type="button" class="btn-add-item fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100" data-tooltip="Thêm vào Danh sách yêu thích">
+                                                <i class="zmdi zmdi-favorite"></i>
+                                            </button>
+                                        </form>
 
-                                                        <button type="button" class="btn-add-item flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
-                                                            Thêm vào giỏ hàng
-                                                        </button>
-                                                    </form>
-                                                </div>
-                                            </div>
+                                        <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Facebook">
+                                            <i class="fab fa-facebook"></i>
+                                        </a>
 
-                                            <!--  -->
-                                            <div class="flex-w flex-m p-l-100 p-t-40 respon7">
-                                                <form action="<c:url value="/wishlist/add"/>" method="get" class="flex-m bor9 p-r-10 m-r-11">
-                                                    <!--Sign url-->
-                                                    <input type="hidden" class="input-add-item" name="forwardTo">
-                                                    <!--Sign product-->
-                                                    <input type="hidden" name="id" value="${relatedProduct.productId}">
+                                        <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Twitter">
+                                            <i class="fab fa-twitter"></i>
+                                        </a>
 
-                                                    <button type="button" class="btn-add-item fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100" data-tooltip="Thêm vào Danh sách yêu thích">
-                                                        <i class="zmdi zmdi-favorite"></i>
-                                                    </button>
-                                                </form>
-
-                                                <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Facebook">
-                                                    <i class="fab fa-facebook"></i>
-                                                </a>
-
-                                                <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Twitter">
-                                                    <i class="fab fa-twitter"></i>
-                                                </a>
-
-                                                <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Google Plus">
-                                                    <i class="fab fa-google-plus"></i>
-                                                </a>
-                                            </div>
-                                        </div>
+                                        <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Google Plus">
+                                            <i class="fab fa-google-plus"></i>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </c:forEach>
+                </div>
             </div>
-        </div>
+        </c:forEach>
     </div>
 </section>
 
@@ -677,6 +688,21 @@
 <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
 <!--===============================================================================================-->
 <script src="${pageContext.request.contextPath}/assets/js/custom.js"></script>
+<!--===============================================================================================-->
+<script>
+    $(function () {
+        <c:forEach items="${relatedProducts}" varStatus="loop">
+            $('.js-show-modal${loop.index}').on('click', function (e) {
+               e.preventDefault();
+               $('.js-modal${loop.index}').addClass('show-modal');
+            });
+
+            $('.js-hide-modal${loop.index}').on('click', function () {
+               $('.js-modal${loop.index}').removeClass('show-modal')
+            });
+        </c:forEach>
+    });
+</script>
 
 </body>
 </html>
