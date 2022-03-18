@@ -266,7 +266,7 @@
                                         </span>
 
                                         <span class="stext-102 cl6 size-206">
-                                            <%----%>
+                                            ${product.productDimension}
                                         </span>
                                     </li>
 
@@ -276,7 +276,7 @@
                                         </span>
 
                                         <span class="stext-102 cl6 size-206">
-                                            <%----%>
+                                            ${product.productWeight}
                                         </span>
                                     </li>
 
@@ -286,7 +286,7 @@
                                         </span>
 
                                         <span class="stext-102 cl6 size-206">
-                                            <%----%>
+                                            ${product.productMaterial}
                                         </span>
                                     </li>
 
@@ -296,7 +296,7 @@
                                         </span>
 
                                         <span class="stext-102 cl6 size-206">
-                                            <%----%>
+                                            ${product.productColor}
                                         </span>
                                     </li>
                                 </ul>

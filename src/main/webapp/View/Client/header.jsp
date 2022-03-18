@@ -168,7 +168,7 @@
             </li>
 
             <li>
-                <a href="shoping-cart.jsp" class="label1 rs1" data-label1="hot">Features</a>
+                <a href="cart-detail.jsp" class="label1 rs1" data-label1="hot">Features</a>
             </li>
 
             <li>

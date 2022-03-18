@@ -26,6 +26,7 @@ public class Constant {
         public static final String USER_HOME = System.getProperty("user.home");
         public static final String IMAGES = USER_HOME + File.separator + "Images";
         public static final String AVATARS = IMAGES + File.separator + "Avatars";
+        public static final String DP_RESOURCES = USER_HOME + File.separator + "resources";
         public static final String PRODUCT_IMAGES = IMAGES + File.separator + "Product images";
 
         //Client constants
@@ -35,5 +36,6 @@ public class Constant {
         public static final String CHANGE_PASSWORD = "/View/Client/change-password.jsp";
         public static final String PRODUCT_LIST_BY_CATEGORY = "/View/Client/product-list-by-category.jsp";
         public static final String PRODUCT_DETAIL = "/View/Client/product-detail.jsp";
+        public static final String CART = "/View/Client/cart-detail.jsp";
     }
 }

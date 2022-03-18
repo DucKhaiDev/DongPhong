@@ -339,9 +339,7 @@ $(function () {
     });
 });
 
-/*
-    my-account.jsp
-*/
+<!--===============================================================================================-->
 $(function () {
     const readURL = function (input) {
         if (input.files && input.files[0]) {
@@ -358,9 +356,7 @@ $(function () {
     });
 });
 
-/*
-    product-list-by-category.jsp
-*/
+<!--===============================================================================================-->
 $(function () {
     //Nếu URL không chứa parameter thì xóa hết parameter trong sessionScope
     const url = new URL(location.href);
@@ -531,6 +527,7 @@ $(function () {
       $('.input-add-item').attr('value', location.href);
    });
 });
+
 <!--===============================================================================================-->
 $(function () {
     $('.js-show-modal').each(function () {
@@ -556,9 +553,7 @@ $(function () {
     });
 });
 
-/*
-    wishList.jsp
-*/
+<!--===============================================================================================-->
 $(function () {
    $('.btn-remove-item').on('click', function () {
       $('.input-remove-item').attr('value', location.href);
