@@ -40,12 +40,4 @@ public class GraphHopper {
         ResponsePath path = response.getBest();
         return path.getDistance();
     }
-
-    public static void main(String[] args) {
-        double lat1 = 21.013268;
-        double long1 = 105.812856;
-        double lat2 = 21.023323;
-        double long2 = 105.820055;
-        System.out.println(calculateDistance(lat1, long1, lat2, long2));
-    }
 }
