@@ -3,13 +3,15 @@
 <%@ page import="Entity.CartItem" %>
 <%@ page import="java.math.BigDecimal" %>
 <%@ page import="java.util.Locale" %>
-<%@ page import="java.text.NumberFormat" %><%--
+<%@ page import="java.text.NumberFormat" %>
+<%@ page import="Tools.CalculateShipping" %>
+<%--
   Author: is2vi
   Date: 1/11/2022
   Time: 5:44 PM
 --%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -68,7 +70,7 @@
 </div>
 
 <!-- Shoping Cart -->
-<form class="bg0 p-t-75 p-b-85">
+<div class="bg0 p-t-75 p-b-85">
     <div class="container">
         <div class="row">
             <div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
@@ -179,7 +181,7 @@
                         </div>
 
                         <div class="size-209">
-                            <span class="mtext-110 cl2">
+                            <span id="totalCart" class="mtext-110 cl2">
                                 <% out.print(dongFormat.format(total)); %>
                             </span>
                         </div>
@@ -194,21 +196,32 @@
 
                         <div class="size-209 p-r-18 p-r-0-sm w-full-ssm">
                             <p class="stext-111 cl6 p-t-2">
-                                There are no shipping methods available. Please double check your address, or contact us if you need any help.
+                                Vui lòng chọn địa điểm nhận hàng.
+                                <br>
+                                (Miễn phí vận chuyển trong khu vực tỉnh Bắc Ninh)
                             </p>
 
                             <div class="p-t-15">
                                 <span class="stext-112 cl8">
-                                    Calculate Shipping
+                                    Chi phí vận chuyển:
                                 </span>
 
-                                <select name="province" class="bor8 bg0 m-b-12 m-t-9"></select>
-                                <select name="district" class="bor8 bg0 m-b-12 m-t-9"></select>
-                                <select name="ward" class="bor8 bg0 m-b-12 m-t-9"></select>
-
-                                <div class="flex-w">
-                                    <div class="flex-c-m stext-101 cl2 size-115 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer">
-                                        Update Totals
+                                <select id="province" name="province" class="w-full bor8 bg0 m-b-12 m-t-9 p-1">
+                                    <option value="0" selected hidden disabled>Tỉnh/Thành phố</option>
+                                </select>
+                                <select id="district" name="district" class="w-full bor8 bg0 m-b-12 m-t-9 p-1">
+                                    <option value="0" selected hidden disabled>Quận/Huyện</option>
+                                </select>
+                                <select id="ward" name="ward" class="w-full bor8 bg0 m-b-12 m-t-9 p-1">
+                                    <option value="0" selected hidden disabled>Phường/Xã</option>
+                                </select>
+                                <hr>
+                                <div class="flex-w justify-content-center">
+                                    <span id="shippingCost" class="mtext-110 cl2 m-b-12">
+                                        <% out.print(dongFormat.format(0)); %>
+                                    </span>
+                                    <div id="btnUpdateTotal" class="flex-c-m stext-101 cl2 size-115 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer">
+                                        Cập nhật
                                     </div>
                                 </div>
 
@@ -231,13 +244,13 @@
                     </div>
 
                     <button class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
-                        Proceed to Checkout
+                        Tiến hành thanh toán
                     </button>
                 </div>
             </div>
         </div>
     </div>
-</form>
+</div>
 
 <!-- Footer -->
 <jsp:include page="footer.jsp"/>
@@ -283,14 +296,54 @@
 <!--===============================================================================================-->
 <script src="${pageContext.request.contextPath}/assets/js/custom.js"></script>
 <!--===============================================================================================-->
-<script src="${pageContext.request.contextPath}/assets/js/local-picker.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/axios.min.js"></script>
+<!--===============================================================================================-->
 <script>
     $(function () {
-        const localPicker = new LocalPicker({
-            province: 'province',
-            district: 'district',
-            ward: 'ward'
+        const provinces = document.getElementById("province");
+        const districts = document.getElementById("district");
+        const wards = document.getElementById("ward");
+
+        const Parameter = {
+            url: '${pageContext.request.contextPath}/assets/js/vietnam.json',
+            method: 'GET',
+            responseType: 'application/json'
+        };
+
+        const promise = axios(Parameter);
+        promise.then(function (result) {
+            renderProvince(result.data);
         });
+
+        function renderProvince(data) {
+            for (const x of data) {
+                provinces.options[provinces.options.length] = new Option(x.Name, x.Id);
+            }
+
+            provinces.onchange = function () {
+                districts.length = 1;
+                wards.length = 1;
+                if (this.value !== "") {
+                    const result = data.filter(n => n.Id === this.value);
+
+                    for (const k of result[0].Districts) {
+                        districts.options[districts.options.length] = new Option(k.Name, k.Id);
+                    }
+                }
+            };
+
+            districts.onchange = function () {
+                wards.length = 1;
+                const dataProvince = data.filter((n) => n.Id === provinces.value);
+                if (this.value !== "") {
+                    const dataWards = dataProvince[0].Districts.filter(n => n.Id === this.value)[0].Wards;
+
+                    for (const w of dataWards) {
+                        wards.options[wards.options.length] = new Option(w.Name, w.Id);
+                    }
+                }
+            };
+        }
     });
 </script>
 

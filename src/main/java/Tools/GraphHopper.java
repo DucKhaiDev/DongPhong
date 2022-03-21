@@ -27,7 +27,7 @@ public class GraphHopper {
         hopper.importOrLoad();
     }
 
-    private static double calculateDistance(double lat1, double long1, double lat2, double long2) {
+    public static double calculateDistance(double lat1, double long1, double lat2, double long2) {
         init();
         GHRequest request = new GHRequest(lat1, long1, lat2, long2).setProfile("car").setLocale(Locale.US);
         GHResponse response = hopper.route(request);

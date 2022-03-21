@@ -5,14 +5,17 @@
     <file url="file://$PROJECT_DIR$/src/main/java/Dao/deploy/CartDao.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/main/java/Dao/deploy/CartItemDao.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/main/java/Dao/deploy/CategoryDao.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/Dao/deploy/DistrictDao.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/main/java/Dao/deploy/OrderDao.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/main/java/Dao/deploy/PaymentDao.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/main/java/Dao/deploy/ProImageDao.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/main/java/Dao/deploy/ProductDao.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/Dao/deploy/ProvinceDao.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/main/java/Dao/deploy/ReviewDao.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/main/java/Dao/deploy/RoomDao.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/main/java/Dao/deploy/UserDao.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/main/java/Dao/deploy/WLItemDao.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/Dao/deploy/WardDao.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/main/java/Dao/deploy/WishlistDao.java" dialect="GenericSQL" />
   </component>
 </project>
