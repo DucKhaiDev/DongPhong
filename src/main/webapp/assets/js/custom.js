@@ -226,15 +226,7 @@ $(function () {
     $('.btn-num-product-up').each(function () {
         $(this).on('click', function () {
             const btnDown = $(this).prev().prev();
-            btnDown.css('cursor', 'auto');
-            btnDown.hover(function () {
-                btnDown.css({
-                    'background-color': '#717fe0',
-                    'border-color': '#717fe0'
-                });
-
-                btnDown.children().css('color', '#fff')
-            });
+            btnDownCss(btnDown);
         });
     });
 
@@ -253,18 +245,29 @@ $(function () {
                     btnDown.children().css('color', 'rgb(85, 85, 85)');
                 });
             } else {
-                btnDown.css('cursor', 'auto');
-                btnDown.hover(function () {
-                    btnDown.css({
-                        'background-color': '#717fe0',
-                        'border-color': '#717fe0'
-                    });
-
-                    btnDown.children().css('color', '#fff');
-                });
+                btnDownCss(btnDown);
             }
         });
     });
+
+    function btnDownCss(btnDown) {
+        btnDown.css('cursor', 'auto');
+        btnDown.mouseover(function () {
+            btnDown.css({
+                'background-color': '#717fe0',
+                'border-color': '#717fe0'
+            });
+
+            btnDown.children().css('color', '#fff');
+        }).mouseout(function () {
+            btnDown.css({
+                'background-color': 'rgba(0, 0, 0, 0)',
+                'border-color': 'rgb(85, 85, 85)'
+            });
+
+            btnDown.children().css('color', 'rgb(85, 85, 85)');
+        });
+    }
 });
 
 <!--===============================================================================================-->

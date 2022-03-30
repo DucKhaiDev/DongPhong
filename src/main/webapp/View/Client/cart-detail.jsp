@@ -42,6 +42,8 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/main.css">
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/custom.css">
+    <!--===============================================================================================-->
+    <script src="${pageContext.request.contextPath}/assets/vendor/jquery/jquery-3.2.1.min.js"></script>
 </head>
 <body class="animsition">
 
@@ -87,7 +89,7 @@
                             <%
                                 Locale vie = new Locale("vi", "VN");
                                 NumberFormat dongFormat = NumberFormat.getCurrencyInstance(vie);
-                                BigDecimal total = new BigDecimal(0);
+                                BigDecimal totalCart = new BigDecimal(0);
                             %>
                             <c:forEach items="${sessionScope.cartItems}" var="item" varStatus="loop">
                                 <c:set var="index" value="${loop.index + 1}"/>
@@ -115,7 +117,7 @@
 
                                     <td class="column-2">
                                         <a href="${pageContext.request.contextPath}/products/product-detail?id=${cart_product.productId}" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-                                            ${cart_product.productName}
+                                                ${cart_product.productName}
                                         </a>
                                     </td>
 
@@ -123,7 +125,7 @@
                                         <%
                                             BigDecimal price = new BigDecimal(product.getProductPrice());
                                             int productQuantity = ((CartItem) pageContext.getAttribute("item")).getQuantity();
-                                            total = total.add(price.multiply(new BigDecimal(productQuantity)));
+                                            totalCart = totalCart.add(price.multiply(new BigDecimal(productQuantity)));
                                             out.print(dongFormat.format(price));
                                         %>
                                     </td>
@@ -133,11 +135,15 @@
                                             <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
                                                 <i class="fs-16 zmdi zmdi-minus"></i>
                                             </div>
-                                            <input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product${index}" value="${item.quantity}">
+                                            <input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product" value="${item.quantity}">
                                             <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
                                                 <i class="fs-16 zmdi zmdi-plus"></i>
                                             </div>
                                         </div>
+                                        <form action="<c:url value="/cart"/>" method="post">
+                                            <input name="cartItemId" type="hidden" value="${item.cartItemId}">
+                                            <input name="numProduct" type="hidden" class="numProduct">
+                                        </form>
                                     </td>
 
                                     <td class="column-5">
@@ -158,10 +164,6 @@
                                 Áp dụng
                             </div>
                         </div>
-
-                        <div class="flex-c-m stext-101 cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10">
-                            Cập nhật giỏ hàng
-                        </div>
                     </div>
                 </div>
             </div>
@@ -181,7 +183,7 @@
 
                         <div class="size-209">
                             <span id="totalCart" class="mtext-110 cl2">
-                                <% out.print(dongFormat.format(total)); %>
+                                <% out.print(dongFormat.format(totalCart)); %>
                             </span>
                         </div>
                     </div>
@@ -248,7 +250,7 @@
                         <div class="size-209 p-t-1">
                             <span class="mtext-110 cl2">
                                 <%
-                                    total = total.add(shippingCost);
+                                    BigDecimal total = totalCart.add(shippingCost);
                                     out.print(dongFormat.format(total));
                                     session.removeAttribute("shippingCost");
                                 %>
@@ -268,8 +270,6 @@
 <!-- Footer -->
 <jsp:include page="footer.jsp"/>
 
-<!--===============================================================================================-->
-<script src="${pageContext.request.contextPath}/assets/vendor/jquery/jquery-3.2.1.min.js"></script>
 <!--===============================================================================================-->
 <script src="${pageContext.request.contextPath}/assets/vendor/animsition/js/animsition.min.js"></script>
 <!--===============================================================================================-->
@@ -373,6 +373,31 @@
                 <% session.removeAttribute("selectedWard"); %>
             }
         }
+    });
+</script>
+<!--===============================================================================================-->
+<script>
+    $(function () {
+       $('.btn-num-product-down').each(function () {
+           $(this).on('click', function () {
+               $(this).parent().next().children('.numProduct').val($(this).next().prop('value'));
+               $(this).parent().next().submit();
+           });
+       });
+
+       $('.numProduct').each(function () {
+           $(this).on('change', function () {
+               $(this).parent().next().children('.numProduct').val($(this).prop('value'));
+               $(this).parent().next().submit();
+           });
+       });
+
+       $('.btn-num-product-up').each(function () {
+           $(this).on('click', function () {
+               $(this).parent().next().children('.numProduct').val($(this).prev().prop('value'));
+               $(this).parent().next().submit();
+           });
+       });
     });
 </script>
 
