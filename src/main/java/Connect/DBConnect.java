@@ -44,21 +44,6 @@ public class DBConnect {
 
     //Check connection
     public static void main(String[] args) throws IOException {
-//        System.out.println(DBConnect.getConnection());
-        FileOutputStream fout = null;
-        try {
-            fout = new FileOutputStream("C:\\Users\\is2vi\\OneDrive\\Desktop\\Dom.txt");
-            for (int i = 0; i < 4000; i++) {
-                String str = "Do m\n";
-                byte[] b = str.getBytes();
-                fout.write(b);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            assert fout != null;
-            fout.close();
-        }
-
+        System.out.println(DBConnect.getConnection());
     }
 }
