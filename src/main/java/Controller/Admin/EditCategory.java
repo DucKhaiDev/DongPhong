@@ -42,7 +42,6 @@ public class EditCategory extends HttpServlet {
         }
 
         category.setRoom(roomService.getRoom(request.getParameter("room")));
-
         categoryService.edit(category);
         response.sendRedirect(request.getContextPath() + "/admin/category/edit?id=" + categoryId);
     }

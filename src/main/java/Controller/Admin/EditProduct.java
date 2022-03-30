@@ -28,7 +28,6 @@ public class EditProduct extends HttpServlet {
     private final CategoryService categoryService = new CategoryService();
     private final BrandService brandService = new BrandService();
     private final ProImageService imageService = new ProImageService();
-
     private String productId;
 
     @Override
@@ -47,7 +46,7 @@ public class EditProduct extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //Cập nhật sản phẩm
+        //Update product
         Product product = productService.getProduct(productId);
 
         String productName = request.getParameter("productName");
@@ -75,15 +74,12 @@ public class EditProduct extends HttpServlet {
 
         product.setCategory(categoryService.getCategory(request.getParameter("category")));
         product.setBrand(brandService.getBrand(request.getParameter("brand")));
-
         productService.edit(product);
-
-        //Cập nhật hình ảnh sản phẩm
+        //Update product images
         List<ProImage> images = imageService.getProImage(productId);
-
         String savePath = Constant.Path.PRODUCT_IMAGES;
-
         File fileSaveDir = new File(savePath);
+
         if (!fileSaveDir.exists()) {
             if (!fileSaveDir.mkdir()) {
                 System.out.println("Directory creation failed.");

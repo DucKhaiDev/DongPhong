@@ -21,7 +21,7 @@ public class WaitingController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
 
-        //Sử dụng tài khoản đã lưu trong cookie
+        //Use the account stored in cookie
         String username = (String) session.getAttribute("username");
         String password = (String) session.getAttribute("password");
         if (username != null && password != null) {
@@ -33,19 +33,19 @@ public class WaitingController extends HttpServlet {
             User user = (User) session.getAttribute("account");
             request.setAttribute("username", user.getUsername());
 
-            //Danh sách yêu thích
+            //wishlist
             WishList wishList = wishListService.getWishListByUser(user.getUserId());
             session.setAttribute("wishList", wishList);
 
-            //Danh sách yêu thích item
+            //wishlist items
             List<WLItem> wlItems = wlItemService.getItemByWishList(wishList.getWishListId());
             session.setAttribute("wlItems", wlItems);
 
-            //Giỏ hàng
+            //cart
             Cart cart = cartService.getCartByUser(user.getUserId());
             session.setAttribute("cart", cart);
 
-            //Giỏ hàng item
+            //cart items
             List<CartItem> cartItems = cartItemService.getItemByCart(cart.getCartId());
             session.setAttribute("cartItems", cartItems);
 

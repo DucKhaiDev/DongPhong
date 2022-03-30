@@ -74,7 +74,7 @@ public class LoginController extends HttpServlet {
     }
 
     private void saveRememberMe(HttpServletResponse response, String username, String password) {
-        //Ghi nhớ đăng nhập trong thời gian: 3 ngày
+        //Remember login information for: 3 days
         Cookie ckUsername = new Cookie(Constant.COOKIE_USERNAME, username);
         ckUsername.setMaxAge(3 * 24 * 60 * 60);
         response.addCookie(ckUsername);

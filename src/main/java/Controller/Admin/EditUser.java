@@ -64,10 +64,9 @@ public class EditUser extends HttpServlet {
         }
 
         user.setRole(Boolean.parseBoolean(request.getParameter("role")));
-
         String savePath = Constant.Path.AVATARS;
-
         File fileSaveDir = new File(savePath);
+
         if (!fileSaveDir .exists()) {
             if (!fileSaveDir.mkdir()) {
                 System.out.println("Directory creation failed.");

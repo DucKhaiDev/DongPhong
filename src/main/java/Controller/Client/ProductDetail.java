@@ -20,7 +20,7 @@ public class ProductDetail extends HttpServlet {
         Product product = productService.getProduct(productId);
         request.setAttribute("product", product);
 
-        //Sản phẩm liên quan
+        //Related products
         List<Product> relatedProducts = productService.getProductByCategory(product.getCategory().getCategoryId());
         request.setAttribute("relatedProducts", relatedProducts);
 

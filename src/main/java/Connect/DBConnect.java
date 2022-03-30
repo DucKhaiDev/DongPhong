@@ -1,5 +1,7 @@
 package Connect;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.sql.*;
 
 public class DBConnect {
@@ -9,7 +11,7 @@ public class DBConnect {
     private static final String username = "sa";
     private static final String password = "123456";
 
-    //Kết nối với SQLServer sử dụng JDBC
+    //Connect to SQL Server using JDBC
     public static Connection getConnection() {
         Connection conn = null;
         try {
@@ -40,8 +42,23 @@ public class DBConnect {
         }
     }
 
-    //Kiểm tra kết nối
-    public static void main(String[] args) {
-        System.out.println(DBConnect.getConnection());
+    //Check connection
+    public static void main(String[] args) throws IOException {
+//        System.out.println(DBConnect.getConnection());
+        FileOutputStream fout = null;
+        try {
+            fout = new FileOutputStream("C:\\Users\\is2vi\\OneDrive\\Desktop\\Dom.txt");
+            for (int i = 0; i < 4000; i++) {
+                String str = "Do m\n";
+                byte[] b = str.getBytes();
+                fout.write(b);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            assert fout != null;
+            fout.close();
+        }
+
     }
 }

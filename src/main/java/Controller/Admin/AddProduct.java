@@ -41,7 +41,7 @@ public class AddProduct extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //Thêm sản phẩm
+        //Add product
         String productId = request.getParameter("productId");
         if (productService.checkExistId(productId)) {
             String existId = "Mã sản phẩm đã tồn tại!";
@@ -65,7 +65,7 @@ public class AddProduct extends HttpServlet {
 
         productService.insert(product);
 
-        //Thêm hình ảnh sản phẩm
+        //Add product images
         String savePath = Constant.Path.PRODUCT_IMAGES;
 
         File fileSaveDir = new File(savePath);

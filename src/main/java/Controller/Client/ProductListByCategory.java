@@ -24,13 +24,13 @@ public class ProductListByCategory extends HttpServlet {
         request.setAttribute("category", category);
         List<Product> products = productService.getProductByCategory(categoryId);
 
-        //Tìm kiếm sản phẩm
+        //Search products
         String keyword = request.getParameter("search");
         if (keyword != null && !keyword.trim().isEmpty()) {
             products = productService.searchByNameInCategory(categoryId, keyword);
         }
 
-        //Sắp xếp sản phẩm
+        //Sort products
         String sortBy = request.getParameter("sortBy");
         if (sortBy != null) {
             if (sortBy.equals("priceAsc")) {
@@ -42,7 +42,7 @@ public class ProductListByCategory extends HttpServlet {
             }
         }
 
-        //Phân trang
+        //Pagination
         int totalNumber = products.size();
         request.setAttribute("totalNumber", totalNumber);
         int pageSize = 12;
@@ -56,19 +56,19 @@ public class ProductListByCategory extends HttpServlet {
         int toIndex = fromIndex + pageSize;
         products = products.subList(fromIndex, Math.min(toIndex, totalNumber));
 
-        //Lọc thương hiệu
+        //Filter brand
         String brands = request.getParameter("brand");
         if (brands != null) {
             products = productService.filterProductByBrand(products, brands);
         }
 
-        //Lọc giá
+        //Filter prices
         String price = request.getParameter("price");
         if (price != null) {
             products = productService.filterProductByPrice(products, price);
         }
 
-        //Lọc số sao đánh giá
+        //Filter star rating
         String stars = request.getParameter("stars-rating");
         if (stars != null) {
             products = productService.filterProductByStars(products, stars);

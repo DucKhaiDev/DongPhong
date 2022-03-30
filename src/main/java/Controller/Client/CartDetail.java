@@ -11,6 +11,8 @@ import java.io.IOException;
 public class CartDetail extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int selected = 26;
+        request.setAttribute("selected", selected);
         request.getRequestDispatcher(Constant.Path.CART).forward(request, response);
     }
 }

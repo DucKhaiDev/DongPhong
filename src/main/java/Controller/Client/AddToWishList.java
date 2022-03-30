@@ -22,7 +22,7 @@ public class AddToWishList extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String forwardTo = request.getParameter("forwardTo");
 
-        //Kiểm tra đăng nhập
+        //Check login
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("account");
         if (user == null) {
@@ -35,12 +35,12 @@ public class AddToWishList extends HttpServlet {
         Product product = productService.getProduct(productId);
         WishList wishList = (WishList) session.getAttribute("wishList");
 
-        //Thêm sản phẩm nếu sản phẩm chưa tồn tại trong danh sách yêu thích
+        //Add the product if it doesn't exist in the wishList
         if (!wlItemService.checkExistItem(productId, wishList.getWishListId())) {
-            //Thêm sản phẩm vào Danh sách yêu thích
+            //Add product to wishList
             wlItemService.insert(new WLItem(product, wishList));
 
-            //Cập nhật Danh sách yêu thích
+            //Update wishlist items
             List<WLItem> wlItems = wlItemService.getItemByWishList(wishList.getWishListId());
             session.setAttribute("wlItems", wlItems);
         }

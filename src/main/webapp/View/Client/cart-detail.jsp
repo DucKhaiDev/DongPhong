@@ -4,7 +4,6 @@
 <%@ page import="java.math.BigDecimal" %>
 <%@ page import="java.util.Locale" %>
 <%@ page import="java.text.NumberFormat" %>
-<%@ page import="Tools.CalculateShipping" %>
 <%--
   Author: is2vi
   Date: 1/11/2022
@@ -201,44 +200,58 @@
                                 (Miễn phí vận chuyển trong khu vực tỉnh Bắc Ninh)
                             </p>
 
-                            <div class="p-t-15">
+                            <form action="<c:url value="/shipping-cost"/>" method="get" class="p-t-15">
                                 <span class="stext-112 cl8">
-                                    Chi phí vận chuyển:
+                                    Chi phí vận chuyển tới:
                                 </span>
 
-                                <select id="province" name="province" class="w-full bor8 bg0 m-b-12 m-t-9 p-1">
+                                <input id="selectedProvince" type="hidden" value="${sessionScope.selectedProvince}">
+                                <select id="province" name="province" class="w-full bor8 bg0 m-b-12 m-t-9 p-1" required="required">
                                     <option value="0" selected hidden disabled>Tỉnh/Thành phố</option>
                                 </select>
+
+                                <input id="selectedDistrict" type="hidden" value="${sessionScope.selectedDistrict}" required="required">
                                 <select id="district" name="district" class="w-full bor8 bg0 m-b-12 m-t-9 p-1">
                                     <option value="0" selected hidden disabled>Quận/Huyện</option>
                                 </select>
+
+                                <input id="selectedWard" type="hidden" value="${sessionScope.selectedWard}" required="required">
                                 <select id="ward" name="ward" class="w-full bor8 bg0 m-b-12 m-t-9 p-1">
                                     <option value="0" selected hidden disabled>Phường/Xã</option>
                                 </select>
                                 <hr>
                                 <div class="flex-w justify-content-center">
                                     <span id="shippingCost" class="mtext-110 cl2 m-b-12">
-                                        <% out.print(dongFormat.format(0)); %>
+                                        <%
+                                            BigDecimal shippingCost = new BigDecimal(0);
+                                            if (session.getAttribute("shippingCost") != null) {
+                                                shippingCost = (BigDecimal) session.getAttribute("shippingCost");
+                                            }
+                                            out.print(dongFormat.format(shippingCost));
+                                        %>
                                     </span>
-                                    <div id="btnUpdateTotal" class="flex-c-m stext-101 cl2 size-115 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer">
+                                    <button type="submit" id="btnUpdateTotal" class="flex-c-m stext-101 cl2 size-115 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer">
                                         Cập nhật
-                                    </div>
+                                    </button>
                                 </div>
-
-                            </div>
+                            </form>
                         </div>
                     </div>
 
                     <div class="flex-w flex-t p-t-27 p-b-33">
                         <div class="size-208">
                             <span class="mtext-101 cl2">
-                                Total:
+                                Tổng:
                             </span>
                         </div>
 
                         <div class="size-209 p-t-1">
                             <span class="mtext-110 cl2">
-                                $79.65
+                                <%
+                                    total = total.add(shippingCost);
+                                    out.print(dongFormat.format(total));
+                                    session.removeAttribute("shippingCost");
+                                %>
                             </span>
                         </div>
                     </div>
@@ -343,6 +356,22 @@
                     }
                 }
             };
+
+            const selectedProvince = $('#selectedProvince').prop('value');
+            const selectedDistrict = $('#selectedDistrict').prop('value');
+            const selectedWard = $('#selectedWard').prop('value');
+            if (selectedProvince !== '') {
+                $('#province').val(selectedProvince).trigger('change');
+                <% session.removeAttribute("selectedProvince"); %>
+            }
+            if (selectedDistrict !== '') {
+                $('#district').val(selectedDistrict).trigger('change');
+                <% session.removeAttribute("selectedDistrict"); %>
+            }
+            if (selectedWard !== '') {
+                $('#ward').val(selectedWard);
+                <% session.removeAttribute("selectedWard"); %>
+            }
         }
     });
 </script>

@@ -19,7 +19,7 @@ public class RemoveProductFromWishList extends HttpServlet {
         String wishListId = wlItemService.getWLItem(wlItemId).getWishList().getWishListId();
         wlItemService.delete(wlItemId);
 
-        //Cập nhật wlItems
+        //Update wishlist items
         HttpSession session = request.getSession();
         List<WLItem> wlItems = wlItemService.getItemByWishList(wishListId);
         session.setAttribute("wlItems", wlItems);

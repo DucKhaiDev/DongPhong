@@ -10,7 +10,7 @@ import java.util.Objects;
 
 public class ReleaseMemory {
     public static void deleteUnusedImg(List<User> users, List<ProImage> images) {
-        //Xóa avatar không còn sử dụng
+        //Delete unused avatars
         File avatars = new File(Constant.Path.AVATARS);
         if (!avatars.exists()) {
             if (!avatars.mkdir()) {
@@ -34,7 +34,7 @@ public class ReleaseMemory {
             }
         }
         
-        //Xóa ảnh sản phẩm không còn sử dụng
+        //Delete unused products images
         File product_images = new File(Constant.Path.PRODUCT_IMAGES);
         if (!product_images.exists()) {
             if (!product_images.mkdir()) {

@@ -26,7 +26,7 @@ public class Welcome extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //Đồng bộ dữ liệu đa luồng
+        //Synchronized
         getUsers();
         getImages();
 

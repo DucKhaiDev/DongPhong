@@ -19,7 +19,7 @@ public class RemoveProductFromCart extends HttpServlet {
         String cartId = cartItemService.getCartItem(cartItemId).getCart().getCartId();
         cartItemService.delete(cartItemId);
 
-        //Cập nhật giỏ hàng
+        //Update cart items
         HttpSession session = request.getSession();
         List<CartItem> cartItems = cartItemService.getItemByCart(cartId);
         session.setAttribute("cartItems", cartItems);

@@ -22,8 +22,7 @@ public class AddToCart extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String forwardTo = request.getParameter("forwardTo");
-
-        //Kiểm tra đăng nhập
+        //Check login
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("account");
         if (user == null) {
@@ -39,26 +38,25 @@ public class AddToCart extends HttpServlet {
         String cartId = cart.getCartId();
 
         /*
-            Nếu sản phẩm đã tồn tại trong giỏ hàng, cộng thêm số lượng sản phẩm mới
-            Nếu chưa tồn tại, thêm sản phẩm vào giỏ hàng
+            If the product is already in the cart, add the quantity of the new product, otherwise add the product to the cart
         */
         if (cartItemService.checkExistItem(productId, cartId)) {
             //Get item
             CartItem cartItem = cartItemService.getCartItem(productId, cartId);
 
             /*
-                Cập nhật item
+                Update item
             */
-            //Cập nhật số lượng sản phẩm
+            //Update cartItem quantity
             cartItem.setQuantity(cartItem.getQuantity() + productQuantity);
-            //Cập nhật giá trị
+            //Update cartItem value
             BigDecimal productPrice = new BigDecimal(product.getProductPrice());
             BigDecimal value = productPrice.multiply(new BigDecimal(cartItem.getQuantity()));
             cartItem.setValue(value.toString());
 
             cartItemService.edit(cartItem);
         } else {
-            //Thêm sản phẩm vào giỏ hàng
+            //Add product to cart
             CartItem item = new CartItem();
             item.setQuantity(productQuantity);
             BigDecimal productPrice = new BigDecimal(product.getProductPrice());
@@ -70,7 +68,7 @@ public class AddToCart extends HttpServlet {
             cartItemService.insert(item);
         }
 
-        //Cập nhật giỏ hàng
+        //Update cart items
         List<CartItem> cartItems = cartItemService.getItemByCart(cartId);
         session.setAttribute("cartItems", cartItems);
 

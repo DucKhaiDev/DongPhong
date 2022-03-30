@@ -39,12 +39,12 @@ public class RegisterController extends HttpServlet {
 
         String regexUsername = "^[A-Za-z][A-Za-z0-9_.-]{5,14}$";
         /*
-        Kiểm tra tên đăng nhập:
-            + Tên đăng nhập phải có độ dài 6-15 ký tự
-            + Tên đăng nhập phải bắt đầu bằng chữ cái
-            + Có thể chứa chữ in hoa A-Z, chữ in thường a-z, chữ số 0-9 và các ký tự: -_.
+        Check username:
+            + Username must be between 6-15 characters
+            + Username must start with a letter
+            + Username can contain A-Z, a-z, 0-9 and characters: -_.
          */
-        //Kiểm tra độ dài tên đăng nhập
+        //Check username length
         if (username.length() < 6 || username.length() > 15) {
             usnMsg = "Tên đăng nhập phải có độ dài 6-15 ký tự";
             request.setAttribute("usnMsg", usnMsg);
@@ -52,7 +52,7 @@ public class RegisterController extends HttpServlet {
             return;
         }
 
-        //Kiểm tra định dạng tên đăng nhập
+        //Check username format
         if (!username.matches(regexUsername)) {
             usnMsg = "Tên đăng nhập chỉ chứa các kí tự cho phép gồm: " +
                     "chữ in hoa, chữ in thường, chữ số (a-z, A-Z, 0-9), dấu gạch dưới, dấu gạch ngang và dấu chấm. " +
@@ -62,7 +62,7 @@ public class RegisterController extends HttpServlet {
             return;
         }
 
-        //Kiểm tra sự tồn tại tên đăng nhập
+        //Check if the username already exists
         if (userService.checkExistUsername(username)) {
             usnMsg = "Tên đăng nhập đã tồn tại!";
             request.setAttribute("usnMsg", usnMsg);
@@ -72,13 +72,13 @@ public class RegisterController extends HttpServlet {
 
         String regexPassword = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d@$!%*#?&]{8,32}$";
         /*
-        Kiểm tra mật khẩu:
-            + Mật khẩu phải có độ dài 8-32 ký tự
-            + Mật khẩu phải chứa ít nhất 1 chữ cái a-z hoặc A-Z
-            + Mật khẩu phải chứa ít nhất 1 chữ số 0-9
-            + Chỉ cho phép dùng các ký tự đặc biệt: @ $ ! % * # ?
+        Check password:
+            + Password must be between 8-32 characters
+            + Password must contain at least 1 letter a-z or A-Z
+            + Password must contain at least 1 digit 0-9
+            + Only special characters as: @ $ ! % * # ?
          */
-        //Kiểm tra độ dài mật khẩu
+        //Check password length
         if (password.length() < 8 || password.length() > 32 || password.equals(username)) {
             pswMsg = "Mật khẩu phải có độ dài 8-32 ký tự và không được trùng với tên đăng nhập";
             request.setAttribute("pswMsg", pswMsg);
@@ -86,7 +86,7 @@ public class RegisterController extends HttpServlet {
             return;
         }
 
-        //Kiểm tra định dạng mật khẩu
+        //Check password format
         if (!password.matches(regexPassword)) {
             pswMsg = "Mật khẩu phải đảm bảo: " +
                     "có ít nhất 1 chữ cái (a-z hoặc A-Z) và 1 chữ số, " +
@@ -96,7 +96,7 @@ public class RegisterController extends HttpServlet {
             return;
         }
 
-        //Kiểm tra đối chiếu nhập lại mật khẩu
+        //Check repeat password
         if (!password.equals(repeatPassword)) {
             rpswMsg = "Mật khẩu không trùng khớp!";
             request.setAttribute("rpswMsg", rpswMsg);
@@ -104,7 +104,7 @@ public class RegisterController extends HttpServlet {
             return;
         }
 
-        //Kiểm tra sự tồn tại email
+        //Check if the email already exists
         if (userService.checkExistEmail(email)) {
             emailMsg = "Email đã tồn tại!";
             request.setAttribute("emailMsg", emailMsg);
@@ -113,11 +113,11 @@ public class RegisterController extends HttpServlet {
         }
 
         if (userService.register(username, password, email)) {
-            //Tạo danh sách yêu thích cá nhân
+            //Create wishlist
             String wishListId = "WL_" + username;
             wishListService.insert(new WishList(wishListId, userService.getUser(username)));
 
-            //Tạo giỏ hàng cá nhân
+            //Create cart
             String cartId = "CART_" + username;
             cartService.insert(new Cart(cartId, userService.getUser(username)));
 
