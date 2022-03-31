@@ -2546,6 +2546,11 @@ input.num-product::-webkit-inner-spin-button {
   height: 40px;
 }
 
+.size-126 {
+  width: 400px;
+  height: 45px;
+}
+
 /*//////////////////////////////////////////////////////////////////
 [ Width ]*/
 .size-201 {
