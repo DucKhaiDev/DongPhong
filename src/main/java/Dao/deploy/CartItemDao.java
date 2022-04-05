@@ -75,6 +75,21 @@ public class CartItemDao implements Dao.CartItemDao {
     }
 
     @Override
+    public void deleteAll(String cartId) {
+        conn = DBConnect.getConnection();
+
+        try {
+            ps = conn.prepareStatement("DELETE FROM [CARTITEM] WHERE CART_ID = ?");
+            ps.setString(1, cartId);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnect.closeAll(rs, ps, conn);
+        }
+    }
+
+    @Override
     public CartItem getCartItem(int cartItemId) {
         conn = DBConnect.getConnection();
         CartItem item = new CartItem();

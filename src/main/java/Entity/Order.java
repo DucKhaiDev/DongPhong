@@ -7,7 +7,7 @@ import java.sql.Timestamp;
 public class Order implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private String orderId;
+    private int orderId;
     private User user;
     private String recipientName;
     private String recipientAddress;
@@ -15,15 +15,18 @@ public class Order implements Serializable {
     private Timestamp orderDate;
     private Date recipientDate;
     private String orderStatus;
-    private int orderTotalProduct;
-    private String orderTotalPayment;
+    private int orderSumProduct;
+    private String orderShipping;
+    private String orderTax;
+    private String orderSubTotal;
+    private String orderDiscount;
+    private String orderTotal;
     private Cart cart;
     private Payment payment;
 
     public Order() {}
 
-    public Order(String orderId, User user, String recipientName, String recipientAddress, String recipientPhone, Timestamp orderDate, Date recipientDate, String orderStatus, int orderTotalProduct, String orderTotalPayment, Cart cart, Payment payment) {
-        this.orderId = orderId;
+    public Order(User user, String recipientName, String recipientAddress, String recipientPhone, Timestamp orderDate, Date recipientDate, String orderStatus, int orderSumProduct, String orderShipping, String orderTax, String orderSubTotal, String orderDiscount, String orderTotal, Cart cart, Payment payment) {
         this.user = user;
         this.recipientName = recipientName;
         this.recipientAddress = recipientAddress;
@@ -31,17 +34,21 @@ public class Order implements Serializable {
         this.orderDate = orderDate;
         this.recipientDate = recipientDate;
         this.orderStatus = orderStatus;
-        this.orderTotalProduct = orderTotalProduct;
-        this.orderTotalPayment = orderTotalPayment;
+        this.orderSumProduct = orderSumProduct;
+        this.orderShipping = orderShipping;
+        this.orderTax = orderTax;
+        this.orderSubTotal = orderSubTotal;
+        this.orderDiscount = orderDiscount;
+        this.orderTotal = orderTotal;
         this.cart = cart;
         this.payment = payment;
     }
 
-    public String getOrderId() {
+    public int getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(String orderId) {
+    public void setOrderId(int orderId) {
         this.orderId = orderId;
     }
 
@@ -101,20 +108,52 @@ public class Order implements Serializable {
         this.orderStatus = orderStatus;
     }
 
-    public int getOrderTotalProduct() {
-        return orderTotalProduct;
+    public int getOrderSumProduct() {
+        return orderSumProduct;
     }
 
-    public void setOrderTotalProduct(int orderTotalProduct) {
-        this.orderTotalProduct = orderTotalProduct;
+    public void setOrderSumProduct(int orderSumProduct) {
+        this.orderSumProduct = orderSumProduct;
     }
 
-    public String getOrderTotalPayment() {
-        return orderTotalPayment;
+    public String getOrderSubTotal() {
+        return orderSubTotal;
     }
 
-    public void setOrderTotalPayment(String orderTotalPayment) {
-        this.orderTotalPayment = orderTotalPayment;
+    public String getOrderShipping() {
+        return orderShipping;
+    }
+
+    public void setOrderShipping(String orderShipping) {
+        this.orderShipping = orderShipping;
+    }
+
+    public String getOrderTax() {
+        return orderTax;
+    }
+
+    public void setOrderTax(String orderTax) {
+        this.orderTax = orderTax;
+    }
+
+    public void setOrderSubTotal(String orderSubTotal) {
+        this.orderSubTotal = orderSubTotal;
+    }
+
+    public String getOrderDiscount() {
+        return orderDiscount;
+    }
+
+    public void setOrderDiscount(String orderDiscount) {
+        this.orderDiscount = orderDiscount;
+    }
+
+    public String getOrderTotal() {
+        return orderTotal;
+    }
+
+    public void setOrderTotal(String orderTotal) {
+        this.orderTotal = orderTotal;
     }
 
     public Cart getCart() {

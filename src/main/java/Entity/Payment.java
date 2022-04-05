@@ -7,12 +7,14 @@ public class Payment implements Serializable {
 
     private String paymentId;
     private String paymentMethod;
+    private boolean paymentStatus;
 
     public Payment() {}
 
-    public Payment(String paymentId, String paymentMethod) {
+    public Payment(String paymentId, String paymentMethod, boolean paymentStatus) {
         this.paymentId = paymentId;
         this.paymentMethod = paymentMethod;
+        this.paymentStatus = paymentStatus;
     }
 
     public String getPaymentId() {
@@ -29,5 +31,13 @@ public class Payment implements Serializable {
 
     public void setPaymentMethod(String paymentMethod) {
         this.paymentMethod = paymentMethod;
+    }
+
+    public boolean getPaymentStatus() {
+        return paymentStatus;
+    }
+
+    public void setPaymentStatus(boolean paymentStatus) {
+        this.paymentStatus = paymentStatus;
     }
 }

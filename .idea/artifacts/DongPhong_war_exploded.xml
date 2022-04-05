@@ -32,6 +32,8 @@
           <element id="library" level="project" name="Maven: com.graphhopper:graphhopper-reader-osm:1.0" />
           <element id="library" level="project" name="Maven: org.openstreetmap.osmosis:osmosis-osm-binary:0.47.3" />
           <element id="library" level="project" name="Maven: com.google.protobuf:protobuf-java:3.11.4" />
+          <element id="library" level="project" name="Maven: com.paypal.sdk:paypal-core:1.7.2" />
+          <element id="library" level="project" name="Maven: com.google.code.gson:gson:2.2.2" />
         </element>
       </element>
       <element id="directory" name="META-INF">

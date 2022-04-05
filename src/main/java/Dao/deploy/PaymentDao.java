@@ -20,9 +20,10 @@ public class PaymentDao implements Dao.PaymentDao {
         conn = DBConnect.getConnection();
 
         try {
-            ps = conn.prepareStatement("INSERT INTO [PAYMENT](PAY_ID, PAY_METHOD) VALUES(?, ?)");
+            ps = conn.prepareStatement("INSERT INTO [PAYMENT](PAY_ID, PAY_METHOD, PAY_STATUS) VALUES(?, ?, ?)");
             ps.setString(1, payment.getPaymentId());
             ps.setString(2, payment.getPaymentMethod());
+            ps.setBoolean(3, payment.getPaymentStatus());
 
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -37,9 +38,10 @@ public class PaymentDao implements Dao.PaymentDao {
         conn = DBConnect.getConnection();
 
         try {
-            ps = conn.prepareStatement("UPDATE [PAYMENT] SET PAY_METHOD = ? WHERE PAY_ID = ?");
+            ps = conn.prepareStatement("UPDATE [PAYMENT] SET PAY_METHOD = ?, PAY_STATUS = ? WHERE PAY_ID = ?");
             ps.setString(1, payment.getPaymentMethod());
-            ps.setString(2, payment.getPaymentId());
+            ps.setBoolean(2, payment.getPaymentStatus());
+            ps.setString(3, payment.getPaymentId());
 
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -76,6 +78,7 @@ public class PaymentDao implements Dao.PaymentDao {
             rs.next();
             payment.setPaymentId(PAY_ID);
             payment.setPaymentMethod(rs.getString("PAY_METHOD"));
+            payment.setPaymentStatus(rs.getBoolean("PAY_STATUS"));
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -91,12 +94,13 @@ public class PaymentDao implements Dao.PaymentDao {
         List<Payment> payments = new ArrayList<>();
 
         try {
-            ps = conn.prepareStatement("SELECT * FROM [PAYMENT]");
+            ps = conn.prepareStatement("SELECT * FROM [PAYMENT] ORDER BY PAY_ID ASC");
             rs = ps.executeQuery();
             while (rs.next()) {
                 Payment payment = new Payment();
                 payment.setPaymentId(rs.getString("PAY_ID").trim());
                 payment.setPaymentMethod(rs.getString("PAY_METHOD"));
+                payment.setPaymentStatus(rs.getBoolean("PAY_STATUS"));
 
                 payments.add(payment);
             }

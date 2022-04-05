@@ -7,7 +7,8 @@ import java.util.List;
 public interface OrderService {
     void insert(Order order);
     void edit(Order order);
-    void delete(String orderId);
-    Order getOrder(String orderId);
+    void delete(int orderId);
+    Order getOrder(int orderId);
+    Order getNewestOrder();
     List<Order> getAll();
 }

@@ -4,6 +4,7 @@
 <%@ page import="java.math.BigDecimal" %>
 <%@ page import="java.util.Locale" %>
 <%@ page import="java.text.NumberFormat" %>
+<%@ page import="java.math.RoundingMode" %>
 <%--
   Author: is2vi
   Date: 1/11/2022
@@ -12,7 +13,7 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <title>Giỏ hàng</title>
     <meta charset="UTF-8">
@@ -89,7 +90,7 @@
                             <%
                                 Locale vie = new Locale("vi", "VN");
                                 NumberFormat dongFormat = NumberFormat.getCurrencyInstance(vie);
-                                BigDecimal totalCart = new BigDecimal(0);
+                                BigDecimal subTotal = new BigDecimal(0);
                             %>
                             <c:forEach items="${sessionScope.cartItems}" var="item" varStatus="loop">
                                 <c:set var="index" value="${loop.index + 1}"/>
@@ -125,7 +126,7 @@
                                         <%
                                             BigDecimal price = new BigDecimal(product.getProductPrice());
                                             int productQuantity = ((CartItem) pageContext.getAttribute("item")).getQuantity();
-                                            totalCart = totalCart.add(price.multiply(new BigDecimal(productQuantity)));
+                                            subTotal = subTotal.add(price.multiply(new BigDecimal(productQuantity)));
                                             out.print(dongFormat.format(price));
                                         %>
                                     </td>
@@ -179,8 +180,8 @@
                         </div>
 
                         <div class="size-209">
-                            <span id="totalCart" class="mtext-110 cl2">
-                                <% out.print(dongFormat.format(totalCart)); %>
+                            <span id="subTotal" class="mtext-110 cl2">
+                                <% out.print(dongFormat.format(subTotal)); %>
                             </span>
                         </div>
                     </div>
@@ -194,7 +195,7 @@
 
                         <div class="size-209 p-r-18 p-r-0-sm w-full-ssm">
                             <p class="stext-111 cl6 p-t-2">
-                                Vui lòng chọn địa điểm nhận hàng.
+                                Vui lòng chọn địa chỉ nhận hàng.
                                 <br>
                                 (Miễn phí vận chuyển trong khu vực tỉnh Bắc Ninh)
                             </p>
@@ -205,19 +206,21 @@
                                 </span>
 
                                 <input id="selectedProvince" type="hidden" value="${sessionScope.selectedProvince}">
-                                <select id="province" name="province" class="w-full bor8 bg0 m-b-12 m-t-9 p-1" required="required">
+                                <select id="province" name="province" class="w-full bor8 bg0 m-t-9 p-1" style="height: 30px" required>
                                     <option value="0" selected hidden disabled>Tỉnh/Thành phố</option>
                                 </select>
 
-                                <input id="selectedDistrict" type="hidden" value="${sessionScope.selectedDistrict}" required="required">
-                                <select id="district" name="district" class="w-full bor8 bg0 m-b-12 m-t-9 p-1">
+                                <input id="selectedDistrict" type="hidden" value="${sessionScope.selectedDistrict}">
+                                <select id="district" name="district" class="w-full bor8 bg0 m-t-9 p-1" style="height: 30px" required>
                                     <option value="0" selected hidden disabled>Quận/Huyện</option>
                                 </select>
 
-                                <input id="selectedWard" type="hidden" value="${sessionScope.selectedWard}" required="required">
-                                <select id="ward" name="ward" class="w-full bor8 bg0 m-b-12 m-t-9 p-1">
+                                <input id="selectedWard" type="hidden" value="${sessionScope.selectedWard}">
+                                <select id="ward" name="ward" class="w-full bor8 bg0 m-t-9 p-1" style="height: 30px" required>
                                     <option value="0" selected hidden disabled>Phường/Xã</option>
                                 </select>
+
+                                <input name="recaddress" type="text" value="${sessionScope.recaddress}" class="w-full bor8 m-b-12 m-t-9 p-1" style="height: 30px" placeholder="Số nhà" required>
                                 <hr>
                                 <div class="flex-w justify-content-center">
                                     <span id="shippingCost" class="mtext-110 cl2 m-b-12">
@@ -230,10 +233,27 @@
                                         %>
                                     </span>
                                     <button type="submit" id="btnUpdateTotal" class="flex-c-m stext-101 cl2 size-115 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer">
-                                        Cập nhật
+                                        Tính COD
                                     </button>
                                 </div>
                             </form>
+                        </div>
+                    </div>
+
+                    <div class="flex-w flex-t bor12 p-t-15 p-b-30">
+                        <div class="size-208 w-full-ssm">
+                            <span class="stext-110 cl2">
+                                VAT (8%):
+                            </span>
+                        </div>
+
+                        <div class="size-209 p-t-1">
+                            <span class="mtext-110 cl2">
+                                <%
+                                    BigDecimal vat = subTotal.multiply(new BigDecimal(8)).divide(new BigDecimal(100), 2, RoundingMode.HALF_UP);
+                                    out.print(dongFormat.format(vat));
+                                %>
+                            </span>
                         </div>
                     </div>
 
@@ -245,19 +265,26 @@
                         </div>
 
                         <div class="size-209 p-t-1">
-                            <span class="mtext-110 cl2">
+                            <span class="mtext-110 cl2 product-price">
                                 <%
-                                    BigDecimal total = totalCart.add(shippingCost);
+                                    BigDecimal total = (subTotal.add(shippingCost)).add(vat);
                                     out.print(dongFormat.format(total));
-                                    session.removeAttribute("shippingCost");
                                 %>
                             </span>
                         </div>
                     </div>
 
-                    <button class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
-                        Tiến hành thanh toán
-                    </button>
+                    <form id="checkout" action="<c:url value="/checkout"/>" method="get">
+                        <input type="hidden" name="subTotal" value="<% out.print(subTotal); %>">
+                        <input type="hidden" name="discount" value="0"> <%--Edit after having voucher function--%>
+                        <input type="hidden" name="shipping" value="<% out.print(shippingCost); %>">
+                        <input type="hidden" name="vat" value="<% out.print(vat); %>">
+                        <input type="hidden" name="total" value="<% out.print(total); %>">
+
+                        <button id="btn-checkout" type="submit" class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
+                            Tiến hành thanh toán
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -359,15 +386,12 @@
             const selectedWard = $('#selectedWard').prop('value');
             if (selectedProvince !== '') {
                 $('#province').val(selectedProvince).trigger('change');
-                <% session.removeAttribute("selectedProvince"); %>
             }
             if (selectedDistrict !== '') {
                 $('#district').val(selectedDistrict).trigger('change');
-                <% session.removeAttribute("selectedDistrict"); %>
             }
             if (selectedWard !== '') {
                 $('#ward').val(selectedWard);
-                <% session.removeAttribute("selectedWard"); %>
             }
         }
     });

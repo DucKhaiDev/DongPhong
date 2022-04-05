@@ -517,6 +517,56 @@ line-height: 1.428571429;
     box-shadow: none
 }
 
+.ct-button2 {
+    background: #fff;
+    box-shadow: none;
+    border: 1px #333 solid;
+    color: #333;
+}
+
+.ct-button2:hover {
+    color: #fff;
+    background: #333;
+    border: 1px #fff solid;
+}
+
+.ct-button2:focus {
+    box-shadow: none;
+}
+
+.ct-button2:active {
+    color: #fff;
+    background: #333;
+    border: 1px #fff solid;
+}
+
+.ct-button3 {
+    background: #333;
+    box-shadow: none;
+    color: #fff !important;
+    border: 1px #333 solid;
+}
+
+.ct-button3:hover {
+    color: #333 !important;
+    background: #fff;
+    border: 1px solid #333;
+}
+
+.ct-button3:focus {
+    box-shadow: none;
+}
+
+.ct-button3:active {
+    color: #333 !important;
+    background: #fff;
+    border: 1px solid #333;
+}
+
+.ct-border-1 {
+    border: 1px solid #999;
+}
+
 .labels {
     font-size: 13px
 }
@@ -954,4 +1004,16 @@ ul.header-cart-wrapitem li {
 .table-shopping-cart .table_head th:not(:first-child, .column-2),
 .table-shopping-cart .table_row td:not(.column-2) {
     text-align: center;
+}
+
+.bor20 {
+    border: 1px dashed #999;
+}
+
+.bor21 {
+    border: double #999;
+}
+
+.text-start {
+    text-align: start !important;
 }

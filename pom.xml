@@ -60,6 +60,13 @@
             <artifactId>graphhopper-reader-osm</artifactId>
             <version>1.0</version>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.paypal.sdk/paypal-core -->
+        <dependency>
+            <groupId>com.paypal.sdk</groupId>
+            <artifactId>paypal-core</artifactId>
+            <version>1.7.2</version>
+        </dependency>
     </dependencies>
 
     <build>

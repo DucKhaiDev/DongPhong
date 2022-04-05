@@ -4,6 +4,7 @@ import Entity.Province;
 import Services.deploy.ProvinceService;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class CalculateShipping {
     private final static ProvinceService provinceService = new ProvinceService();
@@ -17,6 +18,6 @@ public class CalculateShipping {
         double long2 = province.getLongitude();
         double distance = GraphHopper.calculateDistance(lat1, long1, lat2, long2);
 
-        return (new BigDecimal(distance/1000)).multiply(new BigDecimal("50000"));
+        return (new BigDecimal(distance).divide(new BigDecimal(1000), 2, RoundingMode.HALF_UP).multiply(new BigDecimal("50000")));
     }
 }

@@ -24,6 +24,11 @@ public class CartItemService implements Services.CartItemService {
     }
 
     @Override
+    public void deleteAll(String cartId) {
+        itemDao.deleteAll(cartId);
+    }
+
+    @Override
     public CartItem getCartItem(int cartItemId) {
         return itemDao.getCartItem(cartItemId);
     }
