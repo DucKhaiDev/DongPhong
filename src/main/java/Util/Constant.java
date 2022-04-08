@@ -28,6 +28,7 @@ public class Constant {
         public static final String AVATARS = IMAGES + File.separator + "Avatars";
         public static final String DP_RESOURCES = USER_HOME + File.separator + "resources";
         public static final String PRODUCT_IMAGES = IMAGES + File.separator + "Product images";
+        public static final String ADMIN_ORDER = "/View/Admin/order.jsp";
 
         //Client constants
         public static final String REGISTER = "/View/Client/register.jsp";

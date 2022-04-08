@@ -162,16 +162,12 @@
                             </c:forEach>
                         </div>
                         <div class="row d-flex">
-                            <button class="col-md-2 btn-previous btn btn-primary ct-button2 mt-3 text-uppercase">
+                            <button id="btn-previous" type="button" class="col-md-2 btn btn-primary ct-button2 mt-3 text-uppercase">
                                 Bước trước
                             </button>
                             <div class="col-md-3"></div>
                             <button id="btn-order" type="submit" class="col-md-2 btn btn-primary ct-button3 mt-3 text-uppercase">
                                 Đặt hàng
-                            </button>
-                            <div class="col-md-3"></div>
-                            <button id="btn-3" type="button" class="col-md-2 btn btn-primary ct-button3 mt-3 text-uppercase">
-                                3
                             </button>
                         </div>
                     </form>
@@ -297,12 +293,12 @@
 <script>
     $(function () {
         const stepper = new Stepper($('.bs-stepper')[0]);
-        stepper.next();
+        stepper.to(2);
         $('#btn-continue').on('click', function () {
-            stepper.next();
+            stepper.to(2);
         });
-        $('.btn-previous').on('click', function () {
-            stepper.previous();
+        $('#btn-previous').on('click', function () {
+            stepper.to(1);
         });
         $('#btn-order').on('click', function () {
             $('input[name="selectedProvince"]').val($('#province option:selected').text());
@@ -313,10 +309,6 @@
             stepper.to(3);
             <% session.removeAttribute("message"); %>
         }
-
-        $('#btn-3').on('click', function () {
-            stepper.to(3);
-        });
     });
 </script>
 <!-- DATA TABLE SCRIPTS -->

@@ -34,12 +34,12 @@
             </li>
             <li>
                 <a href="${pageContext.request.contextPath}/admin/user">
-                    <i class="fa fa-users fa-3x"></i>
-                    QL Tài Khoản
+                    <i class="fa fa-users fa-3x w-25"></i>
+                    QL Tài khoản
                 </a>
             </li>
             <li>
-                <a href="#"><i class="fa fa-boxes fa-3x"></i> QL Sản phẩm<span class="fa arrow fa-2x"></span></a>
+                <a href="#"><i class="fa fa-boxes fa-3x w-25"></i> QL Sản phẩm<span class="fa arrow fa-2x"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
                         <a href="${pageContext.request.contextPath}/admin/product">Danh mục Sản phẩm</a>
@@ -51,6 +51,12 @@
                         <a href="${pageContext.request.contextPath}/admin/brand">Danh mục Thương hiệu</a>
                     </li>
                 </ul>
+            </li>
+            <li>
+                <a href="${pageContext.request.contextPath}/admin/order">
+                    <i class="fa fa-file-alt fa-3x w-25"></i>
+                    QL Đơn hàng
+                </a>
             </li>
         </ul>
 

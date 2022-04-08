@@ -126,7 +126,7 @@ public class RegisterController extends HttpServlet {
             SendEmail.sendEmail(email, "Dong Phong Furniture", text);
             response.sendRedirect("./login");
         } else {
-            rgtMsg = "Lỗi hệ thống";
+            rgtMsg = "Lỗi hệ thống!";
             request.setAttribute("rgtMsg", rgtMsg);
             request.getRequestDispatcher(Constant.Path.REGISTER).forward(request, response);
         }

@@ -1017,3 +1017,7 @@ ul.header-cart-wrapitem li {
 .text-start {
     text-align: start !important;
 }
+
+.w-25 {
+    width: 25%;
+}
