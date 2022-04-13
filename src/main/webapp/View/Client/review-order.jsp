@@ -92,14 +92,14 @@
                                 <td>${item.product.productName}</td>
                                 <td>
                                     <%
-                                        BigDecimal price = new BigDecimal(((CartItem) pageContext.getAttribute("item")).getProduct().getProductPrice());
+                                        BigDecimal price = ((CartItem) pageContext.getAttribute("item")).getProduct().getProductPrice();
                                         out.print(dongFormat.format(price));
                                     %>
                                 </td>
                                 <td>${item.quantity}</td>
                                 <td>
                                     <%
-                                        BigDecimal value = new BigDecimal(((CartItem) pageContext.getAttribute("item")).getValue());
+                                        BigDecimal value = ((CartItem) pageContext.getAttribute("item")).getValue();
                                         out.print(dongFormat.format(value));
                                     %>
                                 </td>
@@ -117,11 +117,11 @@
                 BigDecimal total = new BigDecimal(0);
 
                 if (order != null) {
-                    subTotal = new BigDecimal(order.getOrderSubTotal());
-                    discount = new BigDecimal(order.getOrderDiscount());
-                    tax = new BigDecimal(order.getOrderTax());
-                    shipping = new BigDecimal(order.getOrderShipping());
-                    total = new BigDecimal(order.getOrderTotal());
+                    subTotal = order.getOrderSubTotal();
+                    discount = order.getOrderDiscount();
+                    tax = order.getOrderTax();
+                    shipping = order.getOrderShipping();
+                    total = order.getOrderTotal();
                 }
             %>
             <div class="col-md-12 mb-2">

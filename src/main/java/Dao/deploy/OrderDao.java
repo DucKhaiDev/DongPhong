@@ -3,6 +3,7 @@ package Dao.deploy;
 import Connect.DBConnect;
 import Entity.Order;
 import Services.deploy.CartService;
+import Services.deploy.OrderService;
 import Services.deploy.PaymentService;
 import Services.deploy.UserService;
 
@@ -37,11 +38,11 @@ public class OrderDao implements Dao.OrderDao {
             ps.setDate(6, order.getRecipientDate());
             ps.setString(7, order.getOrderStatus());
             ps.setInt(8, order.getOrderSumProduct());
-            ps.setString(9, order.getOrderShipping());
-            ps.setString(10, order.getOrderTax());
-            ps.setString(11, order.getOrderSubTotal());
-            ps.setString(12, order.getOrderDiscount());
-            ps.setString(13, order.getOrderTotal());
+            ps.setBigDecimal(9, order.getOrderShipping());
+            ps.setBigDecimal(10, order.getOrderTax());
+            ps.setBigDecimal(11, order.getOrderSubTotal());
+            ps.setBigDecimal(12, order.getOrderDiscount());
+            ps.setBigDecimal(13, order.getOrderTotal());
             ps.setString(14, order.getCart().getCartId());
             ps.setString(15, order.getPayment().getPaymentId());
 
@@ -67,11 +68,11 @@ public class OrderDao implements Dao.OrderDao {
             ps.setDate(6, order.getRecipientDate());
             ps.setString(7, order.getOrderStatus());
             ps.setInt(8, order.getOrderSumProduct());
-            ps.setString(9, order.getOrderShipping());
-            ps.setString(10, order.getOrderTax());
-            ps.setString(11, order.getOrderSubTotal());
-            ps.setString(12, order.getOrderDiscount());
-            ps.setString(13, order.getOrderTotal());
+            ps.setBigDecimal(9, order.getOrderShipping());
+            ps.setBigDecimal(10, order.getOrderTax());
+            ps.setBigDecimal(11, order.getOrderSubTotal());
+            ps.setBigDecimal(12, order.getOrderDiscount());
+            ps.setBigDecimal(13, order.getOrderTotal());
             ps.setString(14, order.getCart().getCartId());
             ps.setString(15, order.getPayment().getPaymentId());
             ps.setInt(16, order.getOrderId());
@@ -118,11 +119,11 @@ public class OrderDao implements Dao.OrderDao {
             order.setRecipientDate(rs.getDate("REC_DATE"));
             order.setOrderStatus(rs.getString("ORD_STATUS"));
             order.setOrderSumProduct(rs.getInt("ORD_SUMPRO"));
-            order.setOrderShipping(rs.getString("ORD_SHIPPING"));
-            order.setOrderTax(rs.getString("ORD_TAX"));
-            order.setOrderSubTotal(rs.getString("ORD_SUBTOTAL"));
-            order.setOrderDiscount(rs.getString("ORD_DISCOUNT"));
-            order.setOrderTotal(rs.getString("ORD_TOTAL"));
+            order.setOrderShipping(rs.getBigDecimal("ORD_SHIPPING"));
+            order.setOrderTax(rs.getBigDecimal("ORD_TAX"));
+            order.setOrderSubTotal(rs.getBigDecimal("ORD_SUBTOTAL"));
+            order.setOrderDiscount(rs.getBigDecimal("ORD_DISCOUNT"));
+            order.setOrderTotal(rs.getBigDecimal("ORD_TOTAL"));
             order.setCart(cartService.getCart(rs.getString("CART_ID").trim()));
             order.setPayment(paymentService.getPayment(rs.getString("PAY_ID").trim()));
         } catch (SQLException e) {
@@ -152,11 +153,11 @@ public class OrderDao implements Dao.OrderDao {
             order.setRecipientDate(rs.getDate("REC_DATE"));
             order.setOrderStatus(rs.getString("ORD_STATUS"));
             order.setOrderSumProduct(rs.getInt("ORD_SUMPRO"));
-            order.setOrderShipping(rs.getString("ORD_SHIPPING"));
-            order.setOrderTax(rs.getString("ORD_TAX"));
-            order.setOrderSubTotal(rs.getString("ORD_SUBTOTAL"));
-            order.setOrderDiscount(rs.getString("ORD_DISCOUNT"));
-            order.setOrderTotal(rs.getString("ORD_TOTAL"));
+            order.setOrderShipping(rs.getBigDecimal("ORD_SHIPPING"));
+            order.setOrderTax(rs.getBigDecimal("ORD_TAX"));
+            order.setOrderSubTotal(rs.getBigDecimal("ORD_SUBTOTAL"));
+            order.setOrderDiscount(rs.getBigDecimal("ORD_DISCOUNT"));
+            order.setOrderTotal(rs.getBigDecimal("ORD_TOTAL"));
             order.setCart(cartService.getCart(rs.getString("CART_ID").trim()));
             order.setPayment(paymentService.getPayment(rs.getString("PAY_ID").trim()));
         } catch (SQLException e) {
@@ -187,11 +188,11 @@ public class OrderDao implements Dao.OrderDao {
                 order.setRecipientDate(rs.getDate("REC_DATE"));
                 order.setOrderStatus(rs.getString("ORD_STATUS"));
                 order.setOrderSumProduct(rs.getInt("ORD_SUMPRO"));
-                order.setOrderShipping(rs.getString("ORD_SHIPPING"));
-                order.setOrderTax(rs.getString("ORD_TAX"));
-                order.setOrderSubTotal(rs.getString("ORD_SUBTOTAL"));
-                order.setOrderDiscount(rs.getString("ORD_DISCOUNT"));
-                order.setOrderTotal(rs.getString("ORD_TOTAL"));
+                order.setOrderShipping(rs.getBigDecimal("ORD_SHIPPING"));
+                order.setOrderTax(rs.getBigDecimal("ORD_TAX"));
+                order.setOrderSubTotal(rs.getBigDecimal("ORD_SUBTOTAL"));
+                order.setOrderDiscount(rs.getBigDecimal("ORD_DISCOUNT"));
+                order.setOrderTotal(rs.getBigDecimal("ORD_TOTAL"));
                 order.setCart(cartService.getCart(rs.getString("CART_ID").trim()));
                 order.setPayment(paymentService.getPayment(rs.getString("PAY_ID").trim()));
 

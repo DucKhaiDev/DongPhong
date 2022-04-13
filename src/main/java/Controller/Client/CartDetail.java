@@ -29,9 +29,9 @@ public class CartDetail extends HttpServlet {
         int numProduct = Integer.parseInt(request.getParameter("numProduct"));
         CartItem item = cartItemService.getCartItem(cartItemId);
         item.setQuantity(numProduct);
-        BigDecimal productPrice = new BigDecimal(item.getProduct().getProductPrice());
+        BigDecimal productPrice = item.getProduct().getProductPrice();
         BigDecimal value = productPrice.multiply(new BigDecimal(numProduct));
-        item.setValue(value.toString());
+        item.setValue(value);
         cartItemService.edit(item);
 
         //Update cart

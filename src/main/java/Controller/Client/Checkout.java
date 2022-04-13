@@ -10,6 +10,7 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -27,11 +28,11 @@ public class Checkout extends HttpServlet {
         String total = request.getParameter("total");
 
         order = new Order();
-        order.setOrderShipping(shipping);
-        order.setOrderTax(vat);
-        order.setOrderSubTotal(subTotal);
-        order.setOrderDiscount(discount);
-        order.setOrderTotal(total);
+        order.setOrderShipping(new BigDecimal(shipping));
+        order.setOrderTax(new BigDecimal(vat));
+        order.setOrderSubTotal(new BigDecimal(subTotal));
+        order.setOrderDiscount(new BigDecimal(discount));
+        order.setOrderTotal(new BigDecimal(total));
 
         List<Payment> payments = new PaymentService().getAll();
         request.setAttribute("payments", payments);

@@ -135,8 +135,8 @@
                     <%
                         Locale vie = new Locale("vi", "VN");
                         NumberFormat dongFormat = NumberFormat.getCurrencyInstance(vie);
-                        BigDecimal productPrice = new BigDecimal(((Product) request.getAttribute("product")).getProductPrice());
-                        BigDecimal productCost = new BigDecimal(((Product) request.getAttribute("product")).getProductCost());
+                        BigDecimal productPrice = ((Product) request.getAttribute("product")).getProductPrice();
+                        BigDecimal productCost = ((Product) request.getAttribute("product")).getProductCost();
                     %>
                     <div class="d-block">
                         <label class="font-size-18 m-r-8 d-inline-block">Giá bán:</label>
@@ -459,13 +459,13 @@
                                     <div class="d-flex">
                                             <span class="stext-105 cl3 product-price m-r-12">
                                                 <%
-                                                    BigDecimal relatedProductPrice = new BigDecimal(relatedProduct.getProductPrice());
+                                                    BigDecimal relatedProductPrice = relatedProduct.getProductPrice();
                                                     String showPrice = dongFormat.format(relatedProductPrice);
                                                     out.print("<td>" + showPrice + "</td>");
                                                 %>
                                             </span>
                                         <%
-                                            BigDecimal relatedProductCost = new BigDecimal(relatedProduct.getProductCost());
+                                            BigDecimal relatedProductCost = relatedProduct.getProductCost();
                                             String showCost = dongFormat.format(relatedProductCost);
                                         %>
                                         <c:if test="${relatedProduct.productCost != '0' && relatedProduct.productCost != relatedProduct.productPrice}">
@@ -542,9 +542,9 @@
                                     <h4 class="mtext-105 cl2 js-name-detail p-b-14">${relatedProduct.productName}</h4>
                                     <%
                                         Product relatedProduct = (Product) pageContext.getAttribute("relatedProduct");
-                                        BigDecimal relatedProductPrice = new BigDecimal(relatedProduct.getProductPrice());
+                                        BigDecimal relatedProductPrice = relatedProduct.getProductPrice();
                                         String showPrice = dongFormat.format(relatedProductPrice);
-                                        BigDecimal relatedProductCost = new BigDecimal(relatedProduct.getProductCost());
+                                        BigDecimal relatedProductCost = relatedProduct.getProductCost();
                                         String showCost = dongFormat.format(relatedProductCost);
                                         BigDecimal percentage = ((relatedProductCost.subtract(relatedProductPrice)).divide(relatedProductCost, 2, RoundingMode.HALF_UP)).multiply(new BigDecimal("100")).setScale(0, RoundingMode.UP);
                                     %>

@@ -16,6 +16,7 @@ import org.apache.commons.io.FilenameUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -61,7 +62,7 @@ public class AddProduct extends HttpServlet {
         String productCost = request.getParameter("productCost");
         Category category = categoryService.getCategory(request.getParameter("category"));
         Brand brand = brandService.getBrand(request.getParameter("brand"));
-        Product product = new Product(productId, productName, productDescription, productDimension, productWeight, productMaterial, productColor, productPrice, productCost, productQuantity, category, brand);
+        Product product = new Product(productId, productName, productDescription, productDimension, productWeight, productMaterial, productColor, new BigDecimal(productPrice), new BigDecimal(productCost), productQuantity, category, brand);
 
         productService.insert(product);
 

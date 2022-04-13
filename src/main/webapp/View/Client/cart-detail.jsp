@@ -124,7 +124,7 @@
 
                                     <td class="column-3">
                                         <%
-                                            BigDecimal price = new BigDecimal(product.getProductPrice());
+                                            BigDecimal price = product.getProductPrice();
                                             int productQuantity = ((CartItem) pageContext.getAttribute("item")).getQuantity();
                                             subTotal = subTotal.add(price.multiply(new BigDecimal(productQuantity)));
                                             out.print(dongFormat.format(price));
@@ -148,7 +148,7 @@
                                     </td>
 
                                     <td class="column-5">
-                                        <% out.print(dongFormat.format(new BigDecimal(((CartItem) pageContext.getAttribute("item")).getValue()))); %>
+                                        <% out.print(dongFormat.format(((CartItem) pageContext.getAttribute("item")).getValue())); %>
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -204,6 +204,9 @@
                                 <span class="stext-112 cl8">
                                     Chi phí vận chuyển tới:
                                 </span>
+
+                                <!--Sign url-->
+                                <input type="hidden" name="forwardTo" value="/cart">
 
                                 <input id="selectedProvince" type="hidden" value="${sessionScope.selectedProvince}">
                                 <select id="province" name="province" class="w-full bor8 bg0 m-t-9 p-1" style="height: 30px" required>

@@ -1,6 +1,7 @@
 package Entity;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.sql.Date;
 import java.sql.Timestamp;
 
@@ -16,17 +17,17 @@ public class Order implements Serializable {
     private Date recipientDate;
     private String orderStatus;
     private int orderSumProduct;
-    private String orderShipping;
-    private String orderTax;
-    private String orderSubTotal;
-    private String orderDiscount;
-    private String orderTotal;
+    private BigDecimal orderShipping;
+    private BigDecimal orderTax;
+    private BigDecimal orderSubTotal;
+    private BigDecimal orderDiscount;
+    private BigDecimal orderTotal;
     private Cart cart;
     private Payment payment;
 
     public Order() {}
 
-    public Order(User user, String recipientName, String recipientAddress, String recipientPhone, Timestamp orderDate, Date recipientDate, String orderStatus, int orderSumProduct, String orderShipping, String orderTax, String orderSubTotal, String orderDiscount, String orderTotal, Cart cart, Payment payment) {
+    public Order(User user, String recipientName, String recipientAddress, String recipientPhone, Timestamp orderDate, Date recipientDate, String orderStatus, int orderSumProduct, BigDecimal orderShipping, BigDecimal orderTax, BigDecimal orderSubTotal, BigDecimal orderDiscount, BigDecimal orderTotal, Cart cart, Payment payment) {
         this.user = user;
         this.recipientName = recipientName;
         this.recipientAddress = recipientAddress;
@@ -116,43 +117,43 @@ public class Order implements Serializable {
         this.orderSumProduct = orderSumProduct;
     }
 
-    public String getOrderSubTotal() {
+    public BigDecimal getOrderSubTotal() {
         return orderSubTotal;
     }
 
-    public String getOrderShipping() {
+    public BigDecimal getOrderShipping() {
         return orderShipping;
     }
 
-    public void setOrderShipping(String orderShipping) {
+    public void setOrderShipping(BigDecimal orderShipping) {
         this.orderShipping = orderShipping;
     }
 
-    public String getOrderTax() {
+    public BigDecimal getOrderTax() {
         return orderTax;
     }
 
-    public void setOrderTax(String orderTax) {
+    public void setOrderTax(BigDecimal orderTax) {
         this.orderTax = orderTax;
     }
 
-    public void setOrderSubTotal(String orderSubTotal) {
+    public void setOrderSubTotal(BigDecimal orderSubTotal) {
         this.orderSubTotal = orderSubTotal;
     }
 
-    public String getOrderDiscount() {
+    public BigDecimal getOrderDiscount() {
         return orderDiscount;
     }
 
-    public void setOrderDiscount(String orderDiscount) {
+    public void setOrderDiscount(BigDecimal orderDiscount) {
         this.orderDiscount = orderDiscount;
     }
 
-    public String getOrderTotal() {
+    public BigDecimal getOrderTotal() {
         return orderTotal;
     }
 
-    public void setOrderTotal(String orderTotal) {
+    public void setOrderTotal(BigDecimal orderTotal) {
         this.orderTotal = orderTotal;
     }
 

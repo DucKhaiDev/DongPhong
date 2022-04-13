@@ -50,18 +50,18 @@ public class AddToCart extends HttpServlet {
             //Update cartItem quantity
             cartItem.setQuantity(cartItem.getQuantity() + productQuantity);
             //Update cartItem value
-            BigDecimal productPrice = new BigDecimal(product.getProductPrice());
+            BigDecimal productPrice = product.getProductPrice();
             BigDecimal value = productPrice.multiply(new BigDecimal(cartItem.getQuantity()));
-            cartItem.setValue(value.toString());
+            cartItem.setValue(value);
 
             cartItemService.edit(cartItem);
         } else {
             //Add product to cart
             CartItem item = new CartItem();
             item.setQuantity(productQuantity);
-            BigDecimal productPrice = new BigDecimal(product.getProductPrice());
+            BigDecimal productPrice = product.getProductPrice();
             BigDecimal value = productPrice.multiply(new BigDecimal(productQuantity));
-            item.setValue(value.toString());
+            item.setValue(value);
             item.setProduct(product);
             item.setCart(cart);
 
@@ -71,6 +71,14 @@ public class AddToCart extends HttpServlet {
         //Update cart items
         List<CartItem> cartItems = cartItemService.getItemByCart(cartId);
         session.setAttribute("cartItems", cartItems);
+
+        //Order info
+        String ord_username = request.getParameter("username");
+        session.setAttribute("ord_username", ord_username);
+        String ord_recipientName = request.getParameter("recipientName");
+        session.setAttribute("ord_recipientName", ord_recipientName);
+        String ord_recipientPhone = request.getParameter("recipientPhone");
+        session.setAttribute("ord_recipientPhone", ord_recipientPhone);
 
         response.sendRedirect(forwardTo);
     }

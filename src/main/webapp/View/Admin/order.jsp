@@ -1,3 +1,7 @@
+<%@ page import="java.math.BigDecimal" %>
+<%@ page import="Entity.Order" %>
+<%@ page import="java.util.Locale" %>
+<%@ page import="java.text.NumberFormat" %>
 <%--
   User: duckhaidev
   Date: 4/8/2022
@@ -56,7 +60,7 @@
             <hr />
             <div class="row">
                 <div class="col-md-12 mb-3">
-                    <a href="#" class="btn btn-primary ct-button float-right">
+                    <a href="${pageContext.request.contextPath}/admin/order/add" class="btn btn-primary ct-button float-right">
                         <i class="fa fa-plus"></i>&nbsp;Tạo đơn hàng
                     </a>
                 </div>
@@ -72,14 +76,17 @@
                             <div class="table-responsive">
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                     <thead>
-                                    <tr>
-                                        <th>STT</th>
-                                        <th>ID</th>
-                                        <th>Loại sản phẩm</th>
-                                        <th>Danh mục</th>
-                                        <th>Mô tả</th>
-                                        <th>Tác vụ</th>
-                                    </tr>
+                                        <tr>
+                                            <th>STT</th>
+                                            <th>ID</th>
+                                            <th>Người đặt</th>
+                                            <th>Người nhận</th>
+                                            <th style="width: 20%">Địa chỉ giao hàng</th>
+                                            <th>SĐT người nhận</th>
+                                            <th>Tổng tiền</th>
+                                            <th>Tình trạng</th>
+                                            <th>Tác vụ</th>
+                                        </tr>
                                     </thead>
                                     <tbody>
                                     <c:set var="number" value="0"/>
@@ -87,11 +94,25 @@
                                     <c:forEach items="${orders}" var="order">
                                         <tr class="odd">
                                             <td>${number = number + 1}</td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
+                                            <td>${order.orderId}</td>
+                                            <td>${order.user.username}</td>
+                                            <td>${order.recipientName}</td>
+                                            <td>${order.recipientAddress}</td>
+                                            <td>${order.recipientPhone}</td>
+                                            <td>
+                                                <%
+                                                    BigDecimal total = ((Order) pageContext.getAttribute("order")).getOrderTotal();
+                                                    Locale vie = new Locale("vi", "VN");
+                                                    NumberFormat dongFormat = NumberFormat.getCurrencyInstance(vie);
+                                                    out.print(dongFormat.format(total));
+                                                %>
+                                            </td>
+                                            <td>${order.orderStatus}</td>
+                                            <td>
+                                                <a href="<c:url value="/admin/order/detail?id=${order.orderId}"/>" class="text-center">Chi tiết</a>&nbsp;|&nbsp;
+                                                <a href="<c:url value="#"/>" class="text-center">Sửa</a>&nbsp;|&nbsp;
+                                                <a href="<c:url value="/admin/order/delete?id=${order.orderId}"/>" class="text-center">Xóa</a>
+                                            </td>
                                         </tr>
                                     </c:forEach>
                                     </tbody>
@@ -124,26 +145,8 @@
 <script>
     $(document).ready(function () {
         $('#dataTables-example').dataTable({
-                "pagingType": "full_numbers"
-            },
-            {
-                columnDefs: [
-                    {
-                        targets: 2,
-                        render: function (data, type) {
-                            return type === 'display' && data.length > 111 ?
-                                data.substr(0, 111) + ' (Còn nữa...)' :
-                                data;
-                        }
-                    },
-                    {"width": "5%", "targets": 0},
-                    {"width": "10%", "targets": 1},
-                    {"width": "20%", "targets": 2},
-                    {"width": "10%", "targets": 3},
-                    {"width": "35%", "targets": 4},
-                    {"width": "20%", "targets": 5}
-                ]
-            });
+            "pagingType": "full_numbers"
+        });
     });
 </script>
 <!-- CUSTOM SCRIPTS -->

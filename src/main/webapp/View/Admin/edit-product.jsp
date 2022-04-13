@@ -69,8 +69,8 @@
                                             </div>
                                             <div class="row">
                                                 <%
-                                                    BigDecimal price = new BigDecimal(((Product) request.getAttribute("product")).getProductPrice());
-                                                    BigDecimal cost = new BigDecimal(((Product) request.getAttribute("product")).getProductCost());
+                                                    BigDecimal price = ((Product) request.getAttribute("product")).getProductPrice();
+                                                    BigDecimal cost = ((Product) request.getAttribute("product")).getProductCost();
                                                     Locale vie = new Locale("vi", "VN");
                                                     NumberFormat dongFormat = NumberFormat.getCurrencyInstance(vie);
                                                     String showPrice = dongFormat.format(price);

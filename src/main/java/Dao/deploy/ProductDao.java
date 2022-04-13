@@ -34,8 +34,8 @@ public class ProductDao implements Dao.ProductDao {
             ps.setString(5, product.getProductWeight());
             ps.setString(6, product.getProductMaterial());
             ps.setString(7, product.getProductColor());
-            ps.setString(8, product.getProductPrice());
-            ps.setString(9, product.getProductCost());
+            ps.setBigDecimal(8, product.getProductPrice());
+            ps.setBigDecimal(9, product.getProductCost());
             ps.setInt(10, product.getProductQuantity());
             ps.setString(11, product.getCategory().getCategoryId());
             ps.setString(12, product.getBrand().getBrandId());
@@ -60,8 +60,8 @@ public class ProductDao implements Dao.ProductDao {
             ps.setString(5, product.getProductWeight());
             ps.setString(6, product.getProductMaterial());
             ps.setString(7, product.getProductColor());
-            ps.setString(8, product.getProductPrice());
-            ps.setString(9, product.getProductCost());
+            ps.setBigDecimal(8, product.getProductPrice());
+            ps.setBigDecimal(9, product.getProductCost());
             ps.setInt(10, product.getProductQuantity());
             ps.setString(11, product.getCategory().getCategoryId());
             ps.setString(12, product.getBrand().getBrandId());
@@ -108,8 +108,8 @@ public class ProductDao implements Dao.ProductDao {
             product.setProductWeight(rs.getString("PRO_WEIGHT"));
             product.setProductMaterial(rs.getString("PRO_MATE"));
             product.setProductColor(rs.getString("PRO_COLOR"));
-            product.setProductPrice(rs.getString("PRO_PRICE"));
-            product.setProductCost(rs.getString("PRO_COST"));
+            product.setProductPrice(rs.getBigDecimal("PRO_PRICE"));
+            product.setProductCost(rs.getBigDecimal("PRO_COST"));
             product.setProductQuantity(rs.getInt("PRO_QUANT"));
             product.setCategory(categoryService.getCategory(rs.getString("CAT_ID").trim()));
             product.setBrand(brandService.getBrand(rs.getString("BRA_ID").trim()));
@@ -141,8 +141,8 @@ public class ProductDao implements Dao.ProductDao {
                 product.setProductWeight(rs.getString("PRO_WEIGHT"));
                 product.setProductMaterial(rs.getString("PRO_MATE"));
                 product.setProductColor(rs.getString("PRO_COLOR"));
-                product.setProductPrice(rs.getString("PRO_PRICE"));
-                product.setProductCost(rs.getString("PRO_COST"));
+                product.setProductPrice(rs.getBigDecimal("PRO_PRICE"));
+                product.setProductCost(rs.getBigDecimal("PRO_COST"));
                 product.setProductQuantity(rs.getInt("PRO_QUANT"));
                 product.setCategory(categoryService.getCategory(rs.getString("CAT_ID").trim()));
                 product.setBrand(brandService.getBrand(rs.getString("BRA_ID").trim()));
@@ -178,8 +178,8 @@ public class ProductDao implements Dao.ProductDao {
                 product.setProductWeight(rs.getString("PRO_WEIGHT"));
                 product.setProductMaterial(rs.getString("PRO_MATE"));
                 product.setProductColor(rs.getString("PRO_COLOR"));
-                product.setProductPrice(rs.getString("PRO_PRICE"));
-                product.setProductCost(rs.getString("PRO_COST"));
+                product.setProductPrice(rs.getBigDecimal("PRO_PRICE"));
+                product.setProductCost(rs.getBigDecimal("PRO_COST"));
                 product.setProductQuantity(rs.getInt("PRO_QUANT"));
                 product.setCategory(categoryService.getCategory(rs.getString("CAT_ID").trim()));
                 product.setBrand(brandService.getBrand(rs.getString("BRA_ID").trim()));
@@ -216,8 +216,8 @@ public class ProductDao implements Dao.ProductDao {
                 product.setProductWeight(rs.getString("PRO_WEIGHT"));
                 product.setProductMaterial(rs.getString("PRO_MATE"));
                 product.setProductColor(rs.getString("PRO_COLOR"));
-                product.setProductPrice(rs.getString("PRO_PRICE"));
-                product.setProductCost(rs.getString("PRO_COST"));
+                product.setProductPrice(rs.getBigDecimal("PRO_PRICE"));
+                product.setProductCost(rs.getBigDecimal("PRO_COST"));
                 product.setProductQuantity(rs.getInt("PRO_QUANT"));
                 product.setCategory(categoryService.getCategory(categoryId));
                 product.setBrand(brandService.getBrand(rs.getString("BRA_ID").trim()));
@@ -253,8 +253,8 @@ public class ProductDao implements Dao.ProductDao {
                 product.setProductWeight(rs.getString("PRO_WEIGHT"));
                 product.setProductMaterial(rs.getString("PRO_MATE"));
                 product.setProductColor(rs.getString("PRO_COLOR"));
-                product.setProductPrice(rs.getString("PRO_PRICE"));
-                product.setProductCost(rs.getString("PRO_COST"));
+                product.setProductPrice(rs.getBigDecimal("PRO_PRICE"));
+                product.setProductCost(rs.getBigDecimal("PRO_COST"));
                 product.setProductQuantity(rs.getInt("PRO_QUANT"));
                 product.setCategory(categoryService.getCategory(categoryId));
                 product.setBrand(brandService.getBrand(rs.getString("BRA_ID").trim()));
@@ -290,8 +290,8 @@ public class ProductDao implements Dao.ProductDao {
                 product.setProductWeight(rs.getString("PRO_WEIGHT"));
                 product.setProductMaterial(rs.getString("PRO_MATE"));
                 product.setProductColor(rs.getString("PRO_COLOR"));
-                product.setProductPrice(rs.getString("PRO_PRICE"));
-                product.setProductCost(rs.getString("PRO_COST"));
+                product.setProductPrice(rs.getBigDecimal("PRO_PRICE"));
+                product.setProductCost(rs.getBigDecimal("PRO_COST"));
                 product.setProductQuantity(rs.getInt("PRO_QUANT"));
                 product.setCategory(categoryService.getCategory(rs.getString("CAT_ID").trim()));
                 product.setBrand(brandService.getBrand(brandId));

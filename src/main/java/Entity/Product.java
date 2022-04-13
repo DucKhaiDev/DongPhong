@@ -1,6 +1,7 @@
 package Entity;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 public class Product implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -13,15 +14,15 @@ public class Product implements Serializable {
     private String productWeight;
     private String productMaterial;
     private String productColor;
-    private String productPrice;
-    private String productCost;
+    private BigDecimal productPrice;
+    private BigDecimal productCost;
     private int productQuantity;
     private Category category;
     private Brand brand;
 
     public Product() {}
 
-    public Product(String productId, String productName, String productDescription, String productDimension, String productWeight, String productMaterial, String productColor, String productPrice, String productCost, int productQuantity, Category category, Brand brand) {
+    public Product(String productId, String productName, String productDescription, String productDimension, String productWeight, String productMaterial, String productColor, BigDecimal productPrice, BigDecimal productCost, int productQuantity, Category category, Brand brand) {
         this.productId = productId;
         this.productName = productName;
         this.productDescription = productDescription;
@@ -36,7 +37,7 @@ public class Product implements Serializable {
         this.brand = brand;
     }
 
-    public Product(String productId, String productName, double productRate, String productDescription, String productPrice, String productCost, int productQuantity, Category category, Brand brand) {
+    public Product(String productId, String productName, double productRate, String productDescription, BigDecimal productPrice, BigDecimal productCost, int productQuantity, Category category, Brand brand) {
         this.productId = productId;
         this.productName = productName;
         this.productRate = productRate;
@@ -112,19 +113,19 @@ public class Product implements Serializable {
         this.productColor = productColor;
     }
 
-    public String getProductPrice() {
+    public BigDecimal getProductPrice() {
         return productPrice;
     }
 
-    public void setProductPrice(String productPrice) {
+    public void setProductPrice(BigDecimal productPrice) {
         this.productPrice = productPrice;
     }
 
-    public String getProductCost() {
+    public BigDecimal getProductCost() {
         return productCost;
     }
 
-    public void setProductCost(String productCost) {
+    public void setProductCost(BigDecimal productCost) {
         this.productCost = productCost;
     }
 

@@ -65,8 +65,8 @@
                             <%
                                 Locale vie = new Locale("vi", "VN");
                                 NumberFormat dongFormat = NumberFormat.getCurrencyInstance(vie);
-                                BigDecimal price = new BigDecimal(product.getProductPrice());
-                                BigDecimal cost = new BigDecimal(product.getProductCost());
+                                BigDecimal price = product.getProductPrice();
+                                BigDecimal cost = product.getProductCost();
                             %>
 
                             <span class="header-cart-item-info product-price">

@@ -102,7 +102,7 @@
                                                 </c:choose>
                                                 <td>${product.productName}</td>
                                                 <%
-                                                    BigDecimal price = new BigDecimal(((Product) pageContext.getAttribute("product")).getProductPrice());
+                                                    BigDecimal price = ((Product) pageContext.getAttribute("product")).getProductPrice();
                                                     Locale vie = new Locale("vi", "VN");
                                                     NumberFormat dongFormat = NumberFormat.getCurrencyInstance(vie);
                                                     String showPrice = dongFormat.format(price);
@@ -111,7 +111,7 @@
                                                 <td>${product.category.categoryName}</td>
                                                 <td>${product.brand.brandName}</td>
                                                 <td>
-                                                    <a href="<c:url value="#"/>" class="text-center">Chi tiết</a>&nbsp;|&nbsp;
+                                                    <a href="<c:url value="/products/product-detail?id=${product.productId}"/>" class="text-center">Chi tiết</a>&nbsp;|&nbsp;
                                                     <a href="<c:url value="/admin/product/edit?id=${product.productId}"/>" class="text-center">Sửa</a>&nbsp;|&nbsp;
                                                     <a href="<c:url value="/admin/product/delete?id=${product.productId}"/>" class="text-center">Xóa</a>
                                                 </td>

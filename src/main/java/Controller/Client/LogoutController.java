@@ -6,6 +6,8 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
+import java.util.Enumeration;
+import java.util.TreeSet;
 
 @WebServlet(name = "LogoutController", value = "/logout")
 public class LogoutController extends HttpServlet {
@@ -13,11 +15,15 @@ public class LogoutController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
 
-        session.removeAttribute("account");
-        session.removeAttribute("wishList");
-        session.removeAttribute("wlItems");
-        session.removeAttribute("cart");
-        session.removeAttribute("cartItems");
+        //Remove all attribute
+        TreeSet<String> attributes = new TreeSet<>();
+        Enumeration<String> enumeration = session.getAttributeNames();
+        while (enumeration.hasMoreElements()) {
+            attributes.add(enumeration.nextElement());
+        }
+        for (String attribute : attributes) {
+            session.removeAttribute(attribute);
+        }
 
         Cookie[] cookies = request.getCookies();
 

@@ -293,7 +293,7 @@
                                         <div class="d-flex">
                                             <span class="stext-105 cl3 product-price m-r-12">
                                                 <%
-                                                    BigDecimal price = new BigDecimal(((Product) pageContext.getAttribute("product")).getProductPrice());
+                                                    BigDecimal price = ((Product) pageContext.getAttribute("product")).getProductPrice();
                                                     Locale vie = new Locale("vi", "VN");
                                                     NumberFormat dongFormat = NumberFormat.getCurrencyInstance(vie);
                                                     String showPrice = dongFormat.format(price);
@@ -301,7 +301,7 @@
                                                 %>
                                             </span>
                                             <%
-                                                BigDecimal cost = new BigDecimal(((Product) pageContext.getAttribute("product")).getProductCost());
+                                                BigDecimal cost = ((Product) pageContext.getAttribute("product")).getProductCost();
                                                 String showCost = dongFormat.format(cost);
                                             %>
                                             <c:if test="${product.productCost != '0' && product.productCost != product.productPrice}">

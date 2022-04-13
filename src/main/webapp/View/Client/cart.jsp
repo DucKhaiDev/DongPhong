@@ -68,10 +68,10 @@
                             </a>
 
                             <%
-                                BigDecimal price = new BigDecimal(product.getProductPrice());
+                                BigDecimal price = product.getProductPrice();
                                 int productQuantity = ((CartItem) pageContext.getAttribute("item")).getQuantity();
                                 total = total.add(price.multiply(new BigDecimal(productQuantity)));
-                                BigDecimal cost = new BigDecimal(product.getProductCost());
+                                BigDecimal cost = product.getProductCost();
                             %>
 
                             <div class="d-flex">

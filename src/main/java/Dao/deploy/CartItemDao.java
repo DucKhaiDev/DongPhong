@@ -27,7 +27,7 @@ public class CartItemDao implements Dao.CartItemDao {
         try {
             ps = conn.prepareStatement("INSERT INTO [CARTITEM](QUANT, [VALUE], PRO_ID, CART_ID) VALUES(?, ?, ?, ?)");
             ps.setInt(1, item.getQuantity());
-            ps.setString(2, item.getValue());
+            ps.setBigDecimal(2, item.getValue());
             ps.setString(3, item.getProduct().getProductId());
             ps.setString(4, item.getCart().getCartId());
 
@@ -46,7 +46,7 @@ public class CartItemDao implements Dao.CartItemDao {
         try {
             ps = conn.prepareStatement("UPDATE [CARTITEM] SET QUANT = ?, [VALUE] = ?, PRO_ID = ?, CART_ID = ? WHERE CITEM_ID = ?");
             ps.setInt(1, item.getQuantity());
-            ps.setString(2, item.getValue());
+            ps.setBigDecimal(2, item.getValue());
             ps.setString(3, item.getProduct().getProductId());
             ps.setString(4, item.getCart().getCartId());
             ps.setInt(5, item.getCartItemId());
@@ -101,7 +101,7 @@ public class CartItemDao implements Dao.CartItemDao {
             rs.next();
             item.setCartItemId(cartItemId);
             item.setQuantity(rs.getInt("QUANT"));
-            item.setValue(rs.getString("VALUE"));
+            item.setValue(rs.getBigDecimal("VALUE"));
             item.setProduct(productService.getProduct(rs.getString("PRO_ID").trim()));
             item.setCart(cartService.getCart(rs.getString("CART_ID")));
         } catch (SQLException e) {
@@ -126,7 +126,7 @@ public class CartItemDao implements Dao.CartItemDao {
             rs.next();
             cartItem.setCartItemId(rs.getInt("CITEM_ID"));
             cartItem.setQuantity(rs.getInt("QUANT"));
-            cartItem.setValue(rs.getString("VALUE"));
+            cartItem.setValue(rs.getBigDecimal("VALUE"));
             cartItem.setProduct(productService.getProduct(rs.getString("PRO_ID")));
             cartItem.setCart(cartService.getCart(rs.getString("CART_ID")));
         } catch (SQLException e) {
@@ -150,7 +150,7 @@ public class CartItemDao implements Dao.CartItemDao {
                 CartItem item = new CartItem();
                 item.setCartItemId(rs.getInt("CITEM_ID"));
                 item.setQuantity(rs.getInt("QUANT"));
-                item.setValue(rs.getString("VALUE"));
+                item.setValue(rs.getBigDecimal("VALUE"));
                 item.setProduct(productService.getProduct(rs.getString("PRO_ID").trim()));
                 item.setCart(cartService.getCart(rs.getString("CART_ID")));
 
@@ -178,7 +178,7 @@ public class CartItemDao implements Dao.CartItemDao {
                 CartItem item = new CartItem();
                 item.setCartItemId(rs.getInt("CITEM_ID"));
                 item.setQuantity(rs.getInt("QUANT"));
-                item.setValue(rs.getString("VALUE"));
+                item.setValue(rs.getBigDecimal("VALUE"));
                 item.setProduct(productService.getProduct(rs.getString("PRO_ID").trim()));
                 item.setCart(cartService.getCart(rs.getString("CART_ID")));
 

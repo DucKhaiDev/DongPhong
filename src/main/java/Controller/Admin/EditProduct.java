@@ -16,6 +16,7 @@ import org.apache.commons.io.FilenameUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -64,12 +65,12 @@ public class EditProduct extends HttpServlet {
 
         String productPrice = request.getParameter("productPrice");
         if (productPrice != null && !productPrice.trim().isEmpty()) {
-            product.setProductPrice(productPrice);
+            product.setProductPrice(new BigDecimal(productPrice));
         }
 
         String productCost = request.getParameter("productCost");
         if (productCost != null && !productCost.trim().isEmpty()) {
-            product.setProductCost(productCost);
+            product.setProductCost(new BigDecimal(productCost));
         }
 
         product.setCategory(categoryService.getCategory(request.getParameter("category")));

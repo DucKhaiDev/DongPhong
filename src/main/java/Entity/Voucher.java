@@ -1,6 +1,7 @@
 package Entity;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 public class Voucher implements Serializable {
@@ -8,13 +9,13 @@ public class Voucher implements Serializable {
 
     private String voucher;
     private int minProduct;
-    private double minValue;
+    private BigDecimal minValue;
     private Timestamp fromDate;
     private Timestamp toDate;
 
     public Voucher() {}
 
-    public Voucher(String voucher, int minProduct, double minValue, Timestamp fromDate, Timestamp toDate) {
+    public Voucher(String voucher, int minProduct, BigDecimal minValue, Timestamp fromDate, Timestamp toDate) {
         this.voucher = voucher;
         this.minProduct = minProduct;
         this.minValue = minValue;
@@ -38,11 +39,11 @@ public class Voucher implements Serializable {
         this.minProduct = minProduct;
     }
 
-    public double getMinValue() {
+    public BigDecimal getMinValue() {
         return minValue;
     }
 
-    public void setMinValue(double minValue) {
+    public void setMinValue(BigDecimal minValue) {
         this.minValue = minValue;
     }
 

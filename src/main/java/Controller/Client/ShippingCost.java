@@ -26,6 +26,16 @@ public class ShippingCost extends HttpServlet {
         session.setAttribute("selectedWard", ward);
         String recaddress = request.getParameter("recaddress");
         session.setAttribute("recaddress", recaddress);
-        response.sendRedirect(request.getContextPath() + "/cart");
+
+        String orderAccount = request.getParameter("signOrderAccount");
+        session.setAttribute("orderAccount", orderAccount);
+
+        String ord_recipientName = request.getParameter("signRecipientName");
+        session.setAttribute("ord_recipientName", ord_recipientName);
+
+        String ord_recipientPhone = request.getParameter("signRecipientPhone");
+        session.setAttribute("ord_recipientPhone", ord_recipientPhone);
+
+        response.sendRedirect(request.getContextPath() + request.getParameter("forwardTo"));
     }
 }

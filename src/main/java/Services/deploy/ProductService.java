@@ -69,8 +69,8 @@ public class ProductService implements Services.ProductService {
         products.sort(new Comparator<Product>() {
             @Override
             public int compare(Product o1, Product o2) {
-                BigDecimal o1price = new BigDecimal(o1.getProductPrice());
-                BigDecimal o2price = new BigDecimal(o2.getProductPrice());
+                BigDecimal o1price = o1.getProductPrice();
+                BigDecimal o2price = o2.getProductPrice();
                 return o1price.compareTo(o2price);
             }
         });
@@ -81,8 +81,8 @@ public class ProductService implements Services.ProductService {
         products.sort(Collections.reverseOrder(new Comparator<Product>() {
             @Override
             public int compare(Product o1, Product o2) {
-                BigDecimal o1price = new BigDecimal(o1.getProductPrice());
-                BigDecimal o2price = new BigDecimal(o2.getProductPrice());
+                BigDecimal o1price = o1.getProductPrice();
+                BigDecimal o2price = o2.getProductPrice();
                 return o1price.compareTo(o2price);
             }
         }));
@@ -119,7 +119,7 @@ public class ProductService implements Services.ProductService {
 
         while (iterator.hasNext()) {
             Product product = iterator.next();
-            BigDecimal proPrice = new BigDecimal(product.getProductPrice());
+            BigDecimal proPrice = product.getProductPrice();
             BigDecimal
                     p10tr = new BigDecimal(10000000),
                     p50tr = new BigDecimal(50000000),
