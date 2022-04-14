@@ -1,4 +1,4 @@
-<%--
+<%@ page import="Entity.User" %><%--
   User: duckhaidev
   Date: 2/15/2022
   Time: 5:22 PM
@@ -37,7 +37,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <h2>Quản Lý Tài Khoản</h2>
-                    <h5>Welcome Jhon Deo , Love to see you back. </h5>
+                    <h5>Chào mừng ${sessionScope.displayName}, rất vui được gặp lại bạn.</h5>
 
                 </div>
             </div>

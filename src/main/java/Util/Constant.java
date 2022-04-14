@@ -31,6 +31,7 @@ public class Constant {
         public static final String ADMIN_ORDER = "/View/Admin/order.jsp";
         public static final String ADMIN_ADD_ORDER = "/View/Admin/add-order.jsp";
         public static final String ADMIN_ORDER_DETAIL = "/View/Admin/order-detail.jsp";
+        public static final String ADMIN_EDIT_ORDER = "/View/Admin/edit-order.jsp";
 
         //Client constants
         public static final String REGISTER = "/View/Client/register.jsp";

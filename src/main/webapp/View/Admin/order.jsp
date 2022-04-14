@@ -51,7 +51,7 @@
                 <div class="col-md-12">
                     <h2>Quản Lý Đơn Hàng</h2>
                     <div class="row">
-                        <div class="col-md-12"><h5>Welcome Jhon Deo , Love to see you back. </h5></div>
+                        <div class="col-md-12"><h5>Chào mừng ${sessionScope.displayName}, rất vui được gặp lại bạn. </h5></div>
                     </div>
 
                 </div>
@@ -110,7 +110,7 @@
                                             <td>${order.orderStatus}</td>
                                             <td>
                                                 <a href="<c:url value="/admin/order/detail?id=${order.orderId}"/>" class="text-center">Chi tiết</a>&nbsp;|&nbsp;
-                                                <a href="<c:url value="#"/>" class="text-center">Sửa</a>&nbsp;|&nbsp;
+                                                <a href="<c:url value="/admin/order/edit?id=${order.orderId}"/>" class="text-center">Sửa</a>&nbsp;|&nbsp;
                                                 <a href="<c:url value="/admin/order/delete?id=${order.orderId}"/>" class="text-center">Xóa</a>
                                             </td>
                                         </tr>

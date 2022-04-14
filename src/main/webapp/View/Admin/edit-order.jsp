@@ -1,3 +1,4 @@
+<jsp:useBean id="order" scope="request" type="Entity.Order"/>
 <%@ page import="Services.deploy.OrderService" %>
 <%@ page import="Entity.CartItem" %>
 <%@ page import="java.util.List" %>
@@ -8,10 +9,11 @@
 <%@ page import="java.text.NumberFormat" %>
 <%@ page import="java.math.RoundingMode" %>
 <%@ page import="Entity.Product" %>
+<%@ page import="Entity.User" %>
 <%--
   User: duckhaidev
-  Date: 4/9/2022
-  Time: 12:26 PM
+  Date: 4/14/2022
+  Time: 8:09 PM
 --%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -60,7 +62,7 @@
             <div class="row d-flex justify-content-center">
                 <div class="col-md-8">
                     <div class="panel panel-default">
-                        <div class="panel-heading">Tạo đơn hàng</div>
+                        <div class="panel-heading">Chỉnh sửa đơn hàng</div>
                         <div class="panel-body">
                             <div class="row">
                                 <%
@@ -68,10 +70,10 @@
                                     NumberFormat dongFormat = NumberFormat.getCurrencyInstance(vie);
                                 %>
                                 <div class="row ml-1 mr-1">
-                                    <div class="col-md-6 mb-3"><label for="orderId" class="labels">Mã đơn hàng (auto)</label><input id="orderId" type="text" class="form-control" name="orderId" value="<% out.print(new OrderService().getNewestOrder().getOrderId() + 1); %>" readonly></div>
-                                    <div class="col-md-6 mb-3"><label for="username" class="labels">Người đặt</label><input id="username" type="text" class="form-control" name="username" value="${sessionScope.orderAccount == null ? sessionScope.account.username : sessionScope.orderAccount}" required></div>
-                                    <div class="col-md-6 mb-3"><label for="recipientName" class="labels">Người nhận</label><input id="recipientName" type="text" class="form-control" name="recipientName" value="${sessionScope.ord_recipientName}" placeholder="Tên người nhận" required></div>
-                                    <div class="col-md-6 mb-3"><label for="recipientPhone" class="labels">SĐT người nhận</label><input id="recipientPhone" type="text" class="form-control" name="recipientPhone" maxlength="12" value="${sessionScope.ord_recipientPhone}" placeholder="SĐT người nhận" required></div>
+                                    <div class="col-md-6 mb-3"><label for="orderId" class="labels">Mã đơn hàng</label><input id="orderId" type="text" class="form-control" name="orderId" value="${order.orderId}" readonly></div>
+                                    <div class="col-md-6 mb-3"><label for="username" class="labels">Người đặt</label><input id="username" type="text" class="form-control" name="username" value="${sessionScope.orderAccount == null ? order.user.username : sessionScope.orderAccount}" required></div>
+                                    <div class="col-md-6 mb-3"><label for="recipientName" class="labels">Người nhận</label><input id="recipientName" type="text" class="form-control" name="recipientName" value="${sessionScope.ord_recipientName == null ? order.recipientName : sessionScope.ord_recipientName}" placeholder="Tên người nhận" required></div>
+                                    <div class="col-md-6 mb-3"><label for="recipientPhone" class="labels">SĐT người nhận</label><input id="recipientPhone" type="text" class="form-control" name="recipientPhone" maxlength="12" value="${sessionScope.ord_recipientPhone == null ? order.recipientPhone : sessionScope.ord_recipientPhone}" placeholder="SĐT người nhận" required></div>
                                     <hr class="w-100 mt-3 mb-3">
                                     <div class="col-md-12"><label class="labels">Danh sách sản phẩm</label></div>
                                     <div class="col-md-12 mb-3 outer">
@@ -91,7 +93,8 @@
                                                     </thead>
                                                     <tbody>
                                                     <c:set var="number" value="0"/>
-                                                    <c:forEach items="${sessionScope.cartItems}" var="item">
+                                                    <jsp:useBean id="cartItems" scope="request" type="java.util.List"/>
+                                                    <c:forEach items="${cartItems}" var="item">
                                                         <tr class="odd">
                                                             <td>${number = number + 1}</td>
                                                             <td>${item.product.productId}</td>
@@ -106,7 +109,7 @@
                                                             <td>${item.quantity}</td>
                                                             <td><% out.print(dongFormat.format(item.getValue())); %></td>
                                                             <td>
-                                                                <a href="<c:url value="/cart/remove?id=${item.cartItemId}&forwardTo=${pageContext.request.contextPath}/admin/order/add"/>" class="text-center">Xóa</a>
+                                                                <a href="<c:url value="/admin/order/edit/removeItem?id=${item.cartItemId}&forwardTo=${pageContext.request.contextPath}/admin/order/edit?id=${order.orderId}"/>" class="text-center">Xóa</a>
                                                             </td>
                                                         </tr>
                                                     </c:forEach>
@@ -121,6 +124,12 @@
                                     <hr class="w-100 mt-3 mb-3">
                                     <form action="<c:url value="/shipping-cost"/>" method="get" class="col-md-12 mb-3">
                                         <label class="labels">Địa chỉ giao hàng</label>
+                                        <div class="row mb-4">
+                                            <div class="col-md-12">
+                                                <input type="text" class="form-control" value="${sessionScope.recipientAddress}" placeholder="Địa chỉ giao hàng">
+                                            </div>
+                                        </div>
+                                        <label class="labels">Cập nhật địa chỉ giao hàng</label>
                                         <div class="row">
                                             <!--Sign url-->
                                             <input type="hidden" name="forwardTo" value="/admin/order/add">
@@ -167,10 +176,9 @@
                                     <hr class="w-100 mt-3 mb-3">
                                     <div class="col-md-12 mb-2">
                                         <label class="labels d-flex text-nowrap align-items-center float-right">Tổng tiền:&nbsp;<input type="text" class="form-control w-fit-content text-center" value="<%
-                                            List<CartItem> cartItems = new CartItemService().getItemByCart(((Cart) session.getAttribute("cart")).getCartId());
                                             BigDecimal subTotal = new BigDecimal(0);
-                                            for (CartItem item : cartItems) {
-                                                subTotal = subTotal.add(item.getValue());
+                                            for (Object item : cartItems) {
+                                                subTotal = subTotal.add(((CartItem) item).getValue());
                                             }
                                             out.print(dongFormat.format(subTotal));
                                         %>"></label>
@@ -202,7 +210,8 @@
                                 </div>
                                 <div class="row ml-1 mr-1">
                                     <div class="mt-5 text-center col-md-12 d-flex justify-content-end">
-                                        <form action="<c:url value="/admin/order/add"/>" method="post">
+                                        <form action="<c:url value="/admin/order/edit"/>" method="post">
+                                            <input type="hidden" value="${order.orderId}" name="orderId">
                                             <input type="hidden" value="<% out.print(subTotal); %>" name="subTotal">
                                             <input type="hidden" value="0" name="discount">
                                             <input type="hidden" value="<% out.print(shippingCost); %>" name="shipping">
@@ -210,10 +219,7 @@
                                             <input type="hidden" value="<% out.print(total); %>" name="total">
                                             <input type="hidden" name="fullName">
                                             <input type="hidden" name="phone">
-                                            <input type="hidden" name="recaddress">
-                                            <input type="hidden" name="selectedWard">
-                                            <input type="hidden" name="selectedDistrict">
-                                            <input type="hidden" name="selectedProvince">
+                                            <input type="hidden" value="${sessionScope.recipientAddress}" name="recipientAddress">
                                             <input type="hidden" name="orderAccount">
                                             <input type="hidden" value="4" name="paymentMethod">
 
@@ -319,24 +325,24 @@
         $('#btn-add-product').on('click', function () {
             const component =
                 "<form action=\"<c:url value="/cart/add"/>\" method=\"get\">"
-                    + "\n" +
-                    "<input type=\"hidden\" name=\"forwardTo\" value=\"${pageContext.request.contextPath}/admin/order/add\">"
-                    + "\n" +
-                    "<input class=\"ip-username\" type=\"hidden\" name=\"username\">"
-                    + "\n" +
-                    "<input class=\"ip-recipientName\" type=\"hidden\" name=\"recipientName\">"
-                    + "\n" +
-                    "<input class=\"ip-recipientPhone\" type=\"hidden\" name=\"recipientPhone\">"
-                    + "\n\n" +
-                    "<div class=\"d-flex mb-3\">"
-                        + "\n" +
-                        "<label class=\"labels d-flex align-items-center mb-0 wsp-nowrap\">Mã sản phẩm:</label>&nbsp;<input type=\"text\" class=\"form-control w-20 mr-4\" name=\"id\">"
-                        + "\n" +
-                        "<label class=\"labels d-flex align-items-center mb-0 wsp-nowrap\">Số lượng:</label>&nbsp;<input type=\"number\" class=\"form-control w-20 mr-5\" min=\"1\" value=\"1\" name=\"num-product\">"
-                        + "\n" +
-                        "<button class=\"w-10 btn btn-primary ct-button mr-3 btn-add\" type=\"button\">Thêm</button>"
-                        + "\n" +
-                    "</div>"
+                + "\n" +
+                "<input type=\"hidden\" name=\"forwardTo\" value=\"${pageContext.request.contextPath}/admin/order/add\">"
+                + "\n" +
+                "<input class=\"ip-username\" type=\"hidden\" name=\"username\">"
+                + "\n" +
+                "<input class=\"ip-recipientName\" type=\"hidden\" name=\"recipientName\">"
+                + "\n" +
+                "<input class=\"ip-recipientPhone\" type=\"hidden\" name=\"recipientPhone\">"
+                + "\n\n" +
+                "<div class=\"d-flex mb-3\">"
+                + "\n" +
+                "<label class=\"labels d-flex align-items-center mb-0 wsp-nowrap\">Mã sản phẩm:</label>&nbsp;<input type=\"text\" class=\"form-control w-20 mr-4\" name=\"id\">"
+                + "\n" +
+                "<label class=\"labels d-flex align-items-center mb-0 wsp-nowrap\">Số lượng:</label>&nbsp;<input type=\"number\" class=\"form-control w-20 mr-5\" min=\"1\" value=\"1\" name=\"num-product\">"
+                + "\n" +
+                "<button class=\"w-10 btn btn-primary ct-button mr-3 btn-add\" type=\"button\">Thêm</button>"
+                + "\n" +
+                "</div>"
                 + "\n" +
                 "</form>"
             $('.outer').append(component);

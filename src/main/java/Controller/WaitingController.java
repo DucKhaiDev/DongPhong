@@ -33,6 +33,20 @@ public class WaitingController extends HttpServlet {
             User user = (User) session.getAttribute("account");
             request.setAttribute("username", user.getUsername());
 
+            //displayName
+            String displayName = user.getUsername();
+            String firstName = user.getFirstName();
+            String lastName = user.getLastName();
+
+            if (lastName != null && !lastName.trim().equals("")) {
+                displayName = lastName;
+
+                if (firstName != null && !firstName.trim().equals("")) {
+                    displayName += " " + firstName;
+                }
+            }
+            session.setAttribute("displayName", displayName);
+
             //wishlist
             WishList wishList = wishListService.getWishListByUser(user.getUserId());
             session.setAttribute("wishList", wishList);

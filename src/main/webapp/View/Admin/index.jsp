@@ -34,8 +34,8 @@
         <div id="page-inner">
             <div class="row">
                 <div class="col-md-12">
-                    <h2>Admin Dashboard</h2>
-                    <h5>Welcome Jhon Deo , Love to see you back. </h5>
+                    <h2>Trang Chủ</h2>
+                    <h5>Chào mừng ${sessionScope.displayName}, rất vui được gặp lại bạn. </h5>
                 </div>
             </div>
             <!-- /. ROW  -->

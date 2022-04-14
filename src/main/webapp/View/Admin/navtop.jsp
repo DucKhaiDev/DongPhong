@@ -1,3 +1,6 @@
+<%@ page import="java.util.Locale" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.Date" %>
 <%--
   User: duckhaidev
   Date: 2/14/2022
@@ -18,5 +21,12 @@
     <div style="color: white;
 padding: 15px 50px 5px 50px;
 float: right;
-font-size: 16px;"> Truy cập lần cuối : 30 May 2014 &nbsp; <a href="${pageContext.request.contextPath}/logout" class="btn btn-danger square-btn-adjust">Đăng Xuất</a> </div>
+font-size: 16px;"> Truy cập lần cuối : <%
+        Locale vie = new Locale("vi", "VN");
+        SimpleDateFormat formatDow = new SimpleDateFormat("EEEE", vie);
+        SimpleDateFormat formatDam = new SimpleDateFormat("dd MMMM", vie);
+        SimpleDateFormat formatYear = new SimpleDateFormat("yyyy");
+        Date date = new Date();
+        out.print(formatDow.format(date) + ", ngày " + formatDam.format(date) + " năm " + formatYear.format(date));
+    %> &nbsp; <a href="${pageContext.request.contextPath}/logout" class="btn btn-danger square-btn-adjust">Đăng Xuất</a> </div>
 </nav>
