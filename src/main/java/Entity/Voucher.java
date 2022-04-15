@@ -7,28 +7,30 @@ import java.sql.Timestamp;
 public class Voucher implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private String voucher;
+    private String voucherId;
     private int minProduct;
     private BigDecimal minValue;
+    private double discount;
     private Timestamp fromDate;
     private Timestamp toDate;
 
     public Voucher() {}
 
-    public Voucher(String voucher, int minProduct, BigDecimal minValue, Timestamp fromDate, Timestamp toDate) {
-        this.voucher = voucher;
+    public Voucher(String voucherId, int minProduct, BigDecimal minValue, double discount, Timestamp fromDate, Timestamp toDate) {
+        this.voucherId = voucherId;
         this.minProduct = minProduct;
         this.minValue = minValue;
+        this.discount = discount;
         this.fromDate = fromDate;
         this.toDate = toDate;
     }
 
-    public String getVoucher() {
-        return voucher;
+    public String getVoucherId() {
+        return voucherId;
     }
 
-    public void setVoucher(String voucher) {
-        this.voucher = voucher;
+    public void setVoucherId(String voucherId) {
+        this.voucherId = voucherId;
     }
 
     public int getMinProduct() {
@@ -45,6 +47,14 @@ public class Voucher implements Serializable {
 
     public void setMinValue(BigDecimal minValue) {
         this.minValue = minValue;
+    }
+
+    public double getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(double discount) {
+        this.discount = discount;
     }
 
     public Timestamp getFromDate() {

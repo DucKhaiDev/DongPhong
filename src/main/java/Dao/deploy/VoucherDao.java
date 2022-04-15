@@ -1,0 +1,148 @@
+package Dao.deploy;
+
+import Connect.DBConnect;
+import Entity.Voucher;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+public class VoucherDao implements Dao.VoucherDao {
+    private Connection conn = null;
+    private PreparedStatement ps = null;
+    private ResultSet rs = null;
+
+    @Override
+    public void insert(Voucher voucher) {
+        conn = DBConnect.getConnection();
+
+        try {
+            ps = conn.prepareStatement("INSERT INTO [VOUCHER](VOUCHER, MIN_PRO, MIN_VAL, DISCOUNT, FROM_DATE, TO_DATE) VALUES(?, ?, ?, ?, ?, ?)");
+            ps.setString(1, voucher.getVoucherId());
+            ps.setInt(2, voucher.getMinProduct());
+            ps.setBigDecimal(3, voucher.getMinValue());
+            ps.setDouble(4, voucher.getDiscount());
+            ps.setTimestamp(5, voucher.getFromDate());
+            ps.setTimestamp(6, voucher.getToDate());
+
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnect.closeAll(rs, ps, conn);
+        }
+    }
+
+    @Override
+    public void edit(Voucher voucher) {
+        conn = DBConnect.getConnection();
+
+        try {
+            ps = conn.prepareStatement("UPDATE [VOUCHER] SET MIN_PRO = ?, MIN_VAL = ?, DISCOUNT = ?, FROM_DATE = ?, TO_DATE = ? WHERE VOUCHER = ?");
+            ps.setInt(1, voucher.getMinProduct());
+            ps.setBigDecimal(2, voucher.getMinValue());
+            ps.setDouble(3, voucher.getDiscount());
+            ps.setTimestamp(4, voucher.getFromDate());
+            ps.setTimestamp(5, voucher.getToDate());
+            ps.setString(6, voucher.getVoucherId());
+
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnect.closeAll(rs, ps, conn);
+        }
+    }
+
+    @Override
+    public void delete(String voucherId) {
+        conn = DBConnect.getConnection();
+
+        try {
+            ps = conn.prepareStatement("DELETE FROM [VOUCHER] WHERE VOUCHER = ?");
+            ps.setString(1, voucherId);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnect.closeAll(rs, ps, conn);
+        }
+    }
+
+    @Override
+    public Voucher getVoucher(String voucherId) {
+        conn = DBConnect.getConnection();
+        Voucher voucher = new Voucher();
+
+        try {
+            ps = conn.prepareStatement("SELECT * FROM [VOUCHER] WHERE VOUCHER = ?");
+            ps.setString(1, voucherId);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                voucher.setVoucherId(rs.getString("VOUCHER"));
+                voucher.setMinProduct(rs.getInt("MIN_PRO"));
+                voucher.setMinValue(rs.getBigDecimal("MIN_VAL"));
+                voucher.setDiscount(rs.getDouble("DISCOUNT"));
+                voucher.setFromDate(rs.getTimestamp("FROM_DATE"));
+                voucher.setToDate(rs.getTimestamp("TO_DATE"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnect.closeAll(rs, ps, conn);
+        }
+
+        return voucher;
+    }
+
+    @Override
+    public List<Voucher> getAll() {
+        conn = DBConnect.getConnection();
+        List<Voucher> vouchers = new ArrayList<>();
+
+        try {
+            ps = conn.prepareStatement("SELECT * FROM [VOUCHER]");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Voucher voucher = new Voucher();
+                voucher.setVoucherId(rs.getString("VOUCHER"));
+                voucher.setMinProduct(rs.getInt("MIN_PRO"));
+                voucher.setMinValue(rs.getBigDecimal("MIN_VAL"));
+                voucher.setDiscount(rs.getDouble("DISCOUNT"));
+                voucher.setFromDate(rs.getTimestamp("FROM_DATE"));
+                voucher.setToDate(rs.getTimestamp("TO_DATE"));
+
+                vouchers.add(voucher);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnect.closeAll(rs, ps, conn);
+        }
+
+        return vouchers;
+    }
+
+    @Override
+    public List<String> getAllVoucher() {
+        conn = DBConnect.getConnection();
+        List<String> vouchers = new ArrayList<>();
+
+        try {
+            ps = conn.prepareStatement("SELECT [VOUCHER] FROM [VOUCHER]");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                vouchers.add(rs.getString("VOUCHER"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnect.closeAll(rs, ps, conn);
+        }
+
+        return vouchers;
+    }
+}

@@ -1,6 +1,5 @@
 package Controller.Client;
 
-import Services.deploy.ProvinceService;
 import Tools.CalculateShipping;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -11,8 +10,6 @@ import java.math.BigDecimal;
 
 @WebServlet(name = "ShippingCost", value = "/shipping-cost")
 public class ShippingCost extends HttpServlet {
-    private final ProvinceService provinceService = new ProvinceService();
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();

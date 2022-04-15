@@ -156,12 +156,13 @@
                     </div>
 
                     <div class="flex-w flex-sb-m bor15 p-t-18 p-b-15 p-lr-40 p-lr-15-sm justify-content-center">
-                        <div class="flex-w flex-m m-r-20 m-tb-5">
-                            <input class="stext-104 cl2 plh4 size-126 bor13 p-lr-20 m-r-10 m-tb-5 text-center" type="text" name="coupon" placeholder="Mã giảm giá">
-                            <div class="flex-c-m stext-101 cl2 size-118 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5">
+                        <form action="<c:url value="/add-voucher"/>" method="get" class="flex-w flex-m m-r-20 m-tb-5">
+                            <input class="stext-104 cl2 plh4 size-126 bor13 p-lr-20 m-r-10 m-tb-5 text-center" type="text" name="voucher" placeholder="Mã giảm giá">
+                            <input type="hidden" name="forwardTo" value="/cart">
+                            <button type="submit" class="flex-c-m stext-101 cl2 size-118 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5">
                                 Áp dụng
-                            </div>
-                        </div>
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -246,6 +247,28 @@
                     <div class="flex-w flex-t bor12 p-t-15 p-b-30">
                         <div class="size-208 w-full-ssm">
                             <span class="stext-110 cl2">
+                                Giảm giá:
+                            </span>
+                        </div>
+
+                        <div class="size-209 p-t-1">
+                            <span class="mtext-110 cl2">
+                                <%
+                                    BigDecimal discount = new BigDecimal(0);
+                                    if (session.getAttribute("discount") != null) {
+
+                                        discount = BigDecimal.valueOf((double) session.getAttribute("discount"));
+                                    }
+                                    discount = subTotal.multiply(discount);
+                                    out.print(dongFormat.format(discount));
+                                %>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="flex-w flex-t bor12 p-t-15 p-b-30">
+                        <div class="size-208 w-full-ssm">
+                            <span class="stext-110 cl2">
                                 VAT (8%):
                             </span>
                         </div>
@@ -270,7 +293,7 @@
                         <div class="size-209 p-t-1">
                             <span class="mtext-110 cl2 product-price">
                                 <%
-                                    BigDecimal total = (subTotal.add(shippingCost)).add(vat);
+                                    BigDecimal total = ((subTotal.subtract(discount)).add(shippingCost)).add(vat);
                                     out.print(dongFormat.format(total));
                                 %>
                             </span>
@@ -279,7 +302,7 @@
 
                     <form id="checkout" action="<c:url value="/checkout"/>" method="get">
                         <input type="hidden" name="subTotal" value="<% out.print(subTotal); %>">
-                        <input type="hidden" name="discount" value="0"> <%--Edit after having voucher function--%>
+                        <input type="hidden" name="discount" value="<% out.print(discount); %>">
                         <input type="hidden" name="shipping" value="<% out.print(shippingCost); %>">
                         <input type="hidden" name="vat" value="<% out.print(vat); %>">
                         <input type="hidden" name="total" value="<% out.print(total); %>">

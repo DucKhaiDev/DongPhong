@@ -59,7 +59,6 @@ public class CartDao implements Dao.CartDao {
         try {
             ps = conn.prepareStatement("DELETE FROM [CART] WHERE CART_ID = ?");
             ps.setString(1, cartId);
-
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
