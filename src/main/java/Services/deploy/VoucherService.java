@@ -37,4 +37,9 @@ public class VoucherService implements Services.VoucherService {
     public List<String> getAllVoucher() {
         return voucherDao.getAllVoucher();
     }
+
+    @Override
+    public boolean checkExistId(String voucherId) {
+        return voucherDao.checkExistId(voucherId);
+    }
 }

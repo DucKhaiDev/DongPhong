@@ -1,6 +1,7 @@
 package Services.deploy;
 
 import Dao.deploy.ReviewDao;
+import Entity.Product;
 import Entity.Review;
 
 import java.util.List;
@@ -33,7 +34,42 @@ public class ReviewService implements Services.ReviewService {
         return reviewDao.getAll();
     }
 
+    @Override
+    public List<Review> getAll(String productId) {
+        return reviewDao.getAll(productId);
+    }
+
     public int countReview(String productId) {
         return reviewDao.countReview(productId);
+    }
+
+    @Override
+    public double checkRateStatus(String productId, String username) {
+        return reviewDao.checkRateStatus(productId, username);
+    }
+
+    @Override
+    public void syncRate(String productId, String username, double rate) {
+        reviewDao.syncRate(productId, username, rate);
+    }
+
+    @Override
+    public List<Product> getAllProducts() {
+        return reviewDao.getAllProducts();
+    }
+
+    @Override
+    public int countRate(String productId) {
+        return reviewDao.countRate(productId);
+    }
+
+    @Override
+    public int countGoodRate(String productId) {
+        return reviewDao.countGoodRate(productId);
+    }
+
+    @Override
+    public int countBadRate(String productId) {
+        return reviewDao.countBadRate(productId);
     }
 }

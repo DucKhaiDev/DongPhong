@@ -12,11 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CartDao implements Dao.CartDao {
+    private final UserService userService = new UserService();
     private Connection conn = null;
     private PreparedStatement ps = null;
     private ResultSet rs = null;
-
-    private final UserService userService = new UserService();
 
     @Override
     public void insert(Cart cart) {
@@ -43,7 +42,6 @@ public class CartDao implements Dao.CartDao {
             ps = conn.prepareStatement("UPDATE [CART] SET USER_ID = ? WHERE CART_ID = ?");
             ps.setString(1, cart.getUser().getUserId());
             ps.setString(2, cart.getCartId());
-
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

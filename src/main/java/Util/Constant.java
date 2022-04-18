@@ -26,12 +26,17 @@ public class Constant {
         public static final String USER_HOME = System.getProperty("user.home");
         public static final String IMAGES = USER_HOME + File.separator + "Images";
         public static final String AVATARS = IMAGES + File.separator + "Avatars";
-        public static final String DP_RESOURCES = USER_HOME + File.separator + "resources";
         public static final String PRODUCT_IMAGES = IMAGES + File.separator + "Product images";
+        public static final String DP_RESOURCES = USER_HOME + File.separator + "resources";
         public static final String ADMIN_ORDER = "/View/Admin/order.jsp";
         public static final String ADMIN_ADD_ORDER = "/View/Admin/add-order.jsp";
         public static final String ADMIN_ORDER_DETAIL = "/View/Admin/order-detail.jsp";
         public static final String ADMIN_EDIT_ORDER = "/View/Admin/edit-order.jsp";
+        public static final String ADMIN_VOUCHER = "/View/Admin/voucher.jsp";
+        public static final String ADMIN_ADD_VOUCHER = "/View/Admin/add-voucher.jsp";
+        public static final String ADMIN_EDIT_VOUCHER = "/View/Admin/edit-voucher.jsp";
+        public static final String ADMIN_REVIEW = "/View/Admin/review.jsp";
+        public static final String ADMIN_REVIEW_DETAIL = "/View/Admin/review-detail.jsp";
 
         //Client constants
         public static final String REGISTER = "/View/Client/register.jsp";

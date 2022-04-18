@@ -12,17 +12,17 @@ public class Review implements Serializable {
     private double reviewRate;
     private String reviewContent;
     private Timestamp reviewDate;
-    private String reviewImage;
+    private boolean isRate;
 
     public Review() {}
 
-    public Review(User user, Product product, double reviewRate, String reviewContent, Timestamp reviewDate, String reviewImage) {
+    public Review(User user, Product product, double reviewRate, String reviewContent, Timestamp reviewDate, boolean isRate) {
         this.user = user;
         this.product = product;
         this.reviewRate = reviewRate;
         this.reviewContent = reviewContent;
         this.reviewDate = reviewDate;
-        this.reviewImage = reviewImage;
+        this.isRate = isRate;
     }
 
     public int getReviewId() {
@@ -73,11 +73,11 @@ public class Review implements Serializable {
         this.reviewDate = reviewDate;
     }
 
-    public String getReviewImage() {
-        return reviewImage;
+    public boolean isRate() {
+        return isRate;
     }
 
-    public void setReviewImage(String reviewImage) {
-        this.reviewImage = reviewImage;
+    public void setRateStatus(boolean status) {
+        isRate = status;
     }
 }

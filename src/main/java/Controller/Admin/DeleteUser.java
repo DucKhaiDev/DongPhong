@@ -9,11 +9,9 @@ import java.io.IOException;
 
 @WebServlet(name = "DeleteUser", value = "/admin/user/delete")
 public class DeleteUser extends HttpServlet {
-    UserService userService = new UserService();
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        userService.delete(request.getParameter("id"));
+        new UserService().delete(request.getParameter("id"));
         response.sendRedirect(request.getContextPath() + "/admin/user");
     }
 }

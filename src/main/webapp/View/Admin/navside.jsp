@@ -48,6 +48,18 @@
                     QL Đơn hàng
                 </a>
             </li>
+            <li>
+                <a href="${pageContext.request.contextPath}/admin/voucher">
+                    <i class="fa fa-gift-card fa-3x w-25 text-center"></i>
+                    QL Mã giảm giá
+                </a>
+            </li>
+            <li>
+                <a href="${pageContext.request.contextPath}/admin/review">
+                    <i class="fa fa-comment-alt-lines fa-3x w-25 text-center"></i>
+                    QL Bình luận
+                </a>
+            </li>
         </ul>
 
     </div>

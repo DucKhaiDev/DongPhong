@@ -1,13 +1,19 @@
 package Controller.Client;
 
-import Entity.*;
+import Entity.Cart;
+import Entity.Order;
+import Entity.Payment;
+import Entity.User;
 import Services.deploy.CartItemService;
 import Services.deploy.OrderService;
 import Services.deploy.PaymentService;
 import Util.Constant;
-import jakarta.servlet.*;
-import jakarta.servlet.http.*;
-import jakarta.servlet.annotation.*;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -16,8 +22,8 @@ import java.util.List;
 
 @WebServlet(name = "Checkout", value = "/checkout")
 public class Checkout extends HttpServlet {
-    private Order order;
     private final CartItemService cartItemService = new CartItemService();
+    private Order order;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -28,11 +34,11 @@ public class Checkout extends HttpServlet {
         String total = request.getParameter("total");
 
         order = new Order();
-        order.setOrderShipping(new BigDecimal(shipping));
-        order.setOrderTax(new BigDecimal(vat));
-        order.setOrderSubTotal(new BigDecimal(subTotal));
-        order.setOrderDiscount(new BigDecimal(discount));
-        order.setOrderTotal(new BigDecimal(total));
+        order.setOrderShipping(new BigDecimal(shipping == null ? "0" : shipping));
+        order.setOrderTax(new BigDecimal(vat == null ? "0" : vat));
+        order.setOrderSubTotal(new BigDecimal(subTotal == null ? "0" : subTotal));
+        order.setOrderDiscount(new BigDecimal(discount == null ? "0" : discount));
+        order.setOrderTotal(new BigDecimal(total == null ? "0" : total));
 
         List<Payment> payments = new PaymentService().getAll();
         request.setAttribute("payments", payments);
@@ -80,6 +86,10 @@ public class Checkout extends HttpServlet {
         cartItemService.deleteAll(cartId);
         List<CartItem> cartItems = cartItemService.getItemByCart(cartId);
         session.setAttribute("cartItems", cartItems);*/
+        String[] attributes = {"recaddress", "selectedWard", "selectedDistrict", "selectedProvince", "shippingCost", "voucher"};
+        for (String attribute : attributes) {
+            session.removeAttribute(attribute);
+        }
 
         response.sendRedirect(request.getContextPath() + "/checkout");
     }

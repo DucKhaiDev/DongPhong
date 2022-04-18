@@ -20,7 +20,7 @@ public class VoucherDao implements Dao.VoucherDao {
         conn = DBConnect.getConnection();
 
         try {
-            ps = conn.prepareStatement("INSERT INTO [VOUCHER](VOUCHER, MIN_PRO, MIN_VAL, DISCOUNT, FROM_DATE, TO_DATE) VALUES(?, ?, ?, ?, ?, ?)");
+            ps = conn.prepareStatement("INSERT INTO [VOUCHER](VCR_ID, MIN_PRO, MIN_VAL, DISCOUNT, FROM_DATE, TO_DATE) VALUES(?, ?, ?, ?, ?, ?)");
             ps.setString(1, voucher.getVoucherId());
             ps.setInt(2, voucher.getMinProduct());
             ps.setBigDecimal(3, voucher.getMinValue());
@@ -41,7 +41,7 @@ public class VoucherDao implements Dao.VoucherDao {
         conn = DBConnect.getConnection();
 
         try {
-            ps = conn.prepareStatement("UPDATE [VOUCHER] SET MIN_PRO = ?, MIN_VAL = ?, DISCOUNT = ?, FROM_DATE = ?, TO_DATE = ? WHERE VOUCHER = ?");
+            ps = conn.prepareStatement("UPDATE [VOUCHER] SET MIN_PRO = ?, MIN_VAL = ?, DISCOUNT = ?, FROM_DATE = ?, TO_DATE = ? WHERE VCR_ID = ?");
             ps.setInt(1, voucher.getMinProduct());
             ps.setBigDecimal(2, voucher.getMinValue());
             ps.setDouble(3, voucher.getDiscount());
@@ -62,7 +62,7 @@ public class VoucherDao implements Dao.VoucherDao {
         conn = DBConnect.getConnection();
 
         try {
-            ps = conn.prepareStatement("DELETE FROM [VOUCHER] WHERE VOUCHER = ?");
+            ps = conn.prepareStatement("DELETE FROM [VOUCHER] WHERE VCR_ID = ?");
             ps.setString(1, voucherId);
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -78,11 +78,11 @@ public class VoucherDao implements Dao.VoucherDao {
         Voucher voucher = new Voucher();
 
         try {
-            ps = conn.prepareStatement("SELECT * FROM [VOUCHER] WHERE VOUCHER = ?");
+            ps = conn.prepareStatement("SELECT * FROM [VOUCHER] WHERE VCR_ID = ?");
             ps.setString(1, voucherId);
             rs = ps.executeQuery();
             if (rs.next()) {
-                voucher.setVoucherId(rs.getString("VOUCHER"));
+                voucher.setVoucherId(rs.getString("VCR_ID"));
                 voucher.setMinProduct(rs.getInt("MIN_PRO"));
                 voucher.setMinValue(rs.getBigDecimal("MIN_VAL"));
                 voucher.setDiscount(rs.getDouble("DISCOUNT"));
@@ -108,7 +108,7 @@ public class VoucherDao implements Dao.VoucherDao {
             rs = ps.executeQuery();
             while (rs.next()) {
                 Voucher voucher = new Voucher();
-                voucher.setVoucherId(rs.getString("VOUCHER"));
+                voucher.setVoucherId(rs.getString("VCR_ID"));
                 voucher.setMinProduct(rs.getInt("MIN_PRO"));
                 voucher.setMinValue(rs.getBigDecimal("MIN_VAL"));
                 voucher.setDiscount(rs.getDouble("DISCOUNT"));
@@ -132,10 +132,10 @@ public class VoucherDao implements Dao.VoucherDao {
         List<String> vouchers = new ArrayList<>();
 
         try {
-            ps = conn.prepareStatement("SELECT [VOUCHER] FROM [VOUCHER]");
+            ps = conn.prepareStatement("SELECT VCR_ID FROM [VOUCHER]");
             rs = ps.executeQuery();
             while (rs.next()) {
-                vouchers.add(rs.getString("VOUCHER"));
+                vouchers.add(rs.getString("VCR_ID"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -144,5 +144,25 @@ public class VoucherDao implements Dao.VoucherDao {
         }
 
         return vouchers;
+    }
+
+    @Override
+    public boolean checkExistId(String voucherId) {
+        conn = DBConnect.getConnection();
+
+        try {
+            ps = conn.prepareStatement("SELECT * FROM [VOUCHER] WHERE VCR_ID = ?");
+            ps.setString(1, voucherId);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnect.closeAll(rs, ps, conn);
+        }
+
+        return false;
     }
 }

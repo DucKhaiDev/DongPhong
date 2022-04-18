@@ -147,7 +147,6 @@ public class BrandDao implements Dao.BrandDao {
         try {
             ps = conn.prepareStatement("SELECT * FROM [BRAND] WHERE BRA_ID = ?");
             ps.setString(1, id);
-
             rs = ps.executeQuery();
             if (rs.next()) {
                 return true;

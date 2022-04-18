@@ -10,6 +10,8 @@
 <%@ page import="Services.deploy.WLItemService" %>
 <%@ page import="Entity.WishList" %>
 <%@ page import="java.math.RoundingMode" %>
+<%@ page import="Entity.Review" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <%--
   Author: duckhaidev
   Date: 1/11/2022
@@ -130,6 +132,18 @@
                     <span class="mtext-106 cl2">
                         ${product.productId}
                     </span>
+                    <br>
+                    <span class="fs-20 cl11">
+                        <%
+                            double productRate = product.getProductRate();
+                            productRate = Math.round(productRate*2)/2.0;
+                        %>
+						<i class="<% if (Double.compare(productRate, 0.5) == 0) out.print("zmdi zmdi-star-half"); else if (Double.compare(productRate, 1.0) > -1) out.print("zmdi zmdi-star"); else out.print("zmdi zmdi-star-outline"); %>"></i>
+                        <i class="<% if (Double.compare(productRate, 1.5) == 0) out.print("zmdi zmdi-star-half"); else if (Double.compare(productRate, 2.0) > -1) out.print("zmdi zmdi-star"); else out.print("zmdi zmdi-star-outline"); %>"></i>
+                        <i class="<% if (Double.compare(productRate, 2.5) == 0) out.print("zmdi zmdi-star-half"); else if (Double.compare(productRate, 3.0) > -1) out.print("zmdi zmdi-star"); else out.print("zmdi zmdi-star-outline"); %>"></i>
+                        <i class="<% if (Double.compare(productRate, 3.5) == 0) out.print("zmdi zmdi-star-half"); else if (Double.compare(productRate, 4.0) > -1) out.print("zmdi zmdi-star"); else out.print("zmdi zmdi-star-outline"); %>"></i>
+                        <i class="<% if (Double.compare(productRate, 4.5) == 0) out.print("zmdi zmdi-star-half"); else if (Double.compare(productRate, 5.0) == 0) out.print("zmdi zmdi-star"); else out.print("zmdi zmdi-star-outline"); %>"></i>
+					</span>
                     <hr>
 
                     <%
@@ -240,7 +254,7 @@
                     </li>
 
                     <li class="nav-item p-b-10">
-                        <a class="nav-link" data-toggle="tab" href="#reviews" role="tab">Đánh giá (<% out.print(new ReviewService().countReview(((Product) request.getAttribute("product")).getProductId())); %>)</a>
+                        <a class="nav-link" data-toggle="tab" href="#reviews" role="tab">Bình luận (<% out.print(new ReviewService().countReview(((Product) request.getAttribute("product")).getProductId())); %>)</a>
                     </li>
                 </ul>
 
@@ -310,80 +324,104 @@
                             <div class="col-sm-10 col-md-8 col-lg-6 m-lr-auto">
                                 <div class="p-b-30 m-lr-15-sm">
                                     <!-- Review -->
-                                    <div class="flex-w flex-t p-b-68">
-                                        <div class="wrap-pic-s size-109 bor0 of-hidden m-r-18 m-t-6">
-                                            <img src="${pageContext.request.contextPath}/assets/images/avatar-01.jpg" alt="AVATAR">
-                                        </div>
+                                    <jsp:useBean id="reviews" scope="request" type="java.util.List"/>
+                                    <c:forEach items="${reviews}" var="review">
+                                        <div class="flex-w flex-t p-b-68">
+                                            <div class="wrap-pic-s size-109 bor0 of-hidden m-r-18 m-t-6">
+                                                <c:url value="/images/avatar?fname=${review.user.avatar}" var="avatarUrl"/>
+                                                <img class="user-img-empty" <c:if test="${not empty review.user.avatar}">src="${avatarUrl}"</c:if> alt="">
+                                            </div>
 
-                                        <div class="size-207">
-                                            <div class="flex-w flex-sb-m p-b-17">
+                                            <div class="size-207">
+                                                <div class="flex-w flex-sb-m p-b-0">
 													<span class="mtext-107 cl2 p-r-20">
-														Ariana Grande
+														<%
+                                                            Review review = (Review) pageContext.getAttribute("review");
+                                                            String displayName = review.getUser().getUsername();
+                                                            String firstName = review.getUser().getFirstName();
+                                                            String lastName = review.getUser().getLastName();
+                                                            if (lastName != null && !lastName.trim().equals("")) {
+                                                                displayName = lastName;
+
+                                                                if (firstName != null && !firstName.trim().equals("")) {
+                                                                    displayName += " " + firstName;
+                                                                }
+                                                            }
+                                                            out.print(displayName + " (" + review.getUser().getUsername() + ")");
+                                                        %>
 													</span>
-
-                                                <span class="fs-18 cl11">
-														<i class="zmdi zmdi-star"></i>
-														<i class="zmdi zmdi-star"></i>
-														<i class="zmdi zmdi-star"></i>
-														<i class="zmdi zmdi-star"></i>
-														<i class="zmdi zmdi-star-half"></i>
+                                                    <span class="fs-18 cl11">
+														<i class="<% if (Double.compare(review.getReviewRate(), 1.0) > -1) out.print("zmdi zmdi-star"); else out.print("zmdi zmdi-star-outline"); %>"></i>
+														<i class="<% if (Double.compare(review.getReviewRate(), 2.0) > -1) out.print("zmdi zmdi-star"); else out.print("zmdi zmdi-star-outline"); %>"></i>
+														<i class="<% if (Double.compare(review.getReviewRate(), 3.0) > -1) out.print("zmdi zmdi-star"); else out.print("zmdi zmdi-star-outline"); %>"></i>
+														<i class="<% if (Double.compare(review.getReviewRate(), 4.0) > -1) out.print("zmdi zmdi-star"); else out.print("zmdi zmdi-star-outline"); %>"></i>
+														<i class="<% if (Double.compare(review.getReviewRate(), 5.0) == 0) out.print("zmdi zmdi-star"); else out.print("zmdi zmdi-star-outline"); %>"></i>
 													</span>
-                                            </div>
+                                                </div>
+                                                <p class="stext-102 cl6 p-t-0">
+                                                    <%
+                                                        out.print(new SimpleDateFormat("HH:mm dd-MM-yyyy").format(review.getReviewDate()));
+                                                    %>
+                                                </p>
 
-                                            <p class="stext-102 cl6">
-                                                Quod autem in homine praestantissimum atque optimum est, id deseruit. Apud ceteros autem philosophos
-                                            </p>
-                                        </div>
-                                    </div>
-
-                                    <!-- Add review -->
-                                    <form class="w-full">
-                                        <h5 class="mtext-108 cl2 p-b-7">
-                                            Add a review
-                                        </h5>
-
-                                        <p class="stext-102 cl6">
-                                            Your email address will not be published. Required fields are marked *
-                                        </p>
-
-                                        <div class="flex-w flex-m p-t-50 p-b-23">
-												<span class="stext-102 cl3 m-r-16">
-													Your Rating
-												</span>
-
-                                            <span class="wrap-rating fs-18 cl11 pointer">
-													<i class="item-rating pointer zmdi zmdi-star-outline"></i>
-													<i class="item-rating pointer zmdi zmdi-star-outline"></i>
-													<i class="item-rating pointer zmdi zmdi-star-outline"></i>
-													<i class="item-rating pointer zmdi zmdi-star-outline"></i>
-													<i class="item-rating pointer zmdi zmdi-star-outline"></i>
-                                                    <label>
-                                                        <input class="dis-none" type="number" name="rating">
-                                                    </label>
-												</span>
-                                        </div>
-
-                                        <div class="row p-b-25">
-                                            <div class="col-12 p-b-5">
-                                                <label class="stext-102 cl3" for="review">Your review</label>
-                                                <textarea class="size-110 bor8 stext-102 cl2 p-lr-20 p-tb-10" id="review" name="review"></textarea>
-                                            </div>
-
-                                            <div class="col-sm-6 p-b-5">
-                                                <label class="stext-102 cl3" for="name">Name</label>
-                                                <input class="size-111 bor8 stext-102 cl2 p-lr-20" id="name" type="text" name="name">
-                                            </div>
-
-                                            <div class="col-sm-6 p-b-5">
-                                                <label class="stext-102 cl3" for="email">Email</label>
-                                                <input class="size-111 bor8 stext-102 cl2 p-lr-20" id="email" type="text" name="email">
+                                                <p class="stext-102 cl6">
+                                                    ${review.reviewContent}
+                                                </p>
                                             </div>
                                         </div>
+                                    </c:forEach>
 
-                                        <button class="flex-c-m stext-101 cl0 size-112 bg7 bor11 hov-btn3 p-lr-15 trans-04 m-b-10">
-                                            Submit
-                                        </button>
-                                    </form>
+                                    <c:choose>
+                                        <c:when test="${sessionScope.account != null}">
+                                            <!-- Add review -->
+                                            <form action="<c:url value="/add-review"/>" method="get" class="w-full">
+                                                <input type="hidden" value="${product.productId}" name="productId">
+                                                <h5 class="mtext-108 cl2 p-b-7">
+                                                    Thêm bình luận
+                                                </h5>
+
+                                                <jsp:useBean id="isRate" scope="request" type="java.lang.Boolean"/>
+                                                <c:choose>
+                                                    <c:when test="${!isRate}">
+                                                        <div class="flex-w flex-m p-t-50 p-b-23">
+                                                        <span class="stext-102 cl3 m-r-16">
+                                                            Đánh giá
+                                                        </span>
+                                                            <span class="wrap-rating fs-18 cl11 pointer">
+                                                            <i class="item-rating pointer zmdi zmdi-star-outline"></i>
+                                                            <i class="item-rating pointer zmdi zmdi-star-outline"></i>
+                                                            <i class="item-rating pointer zmdi zmdi-star-outline"></i>
+                                                            <i class="item-rating pointer zmdi zmdi-star-outline"></i>
+                                                            <i class="item-rating pointer zmdi zmdi-star-outline"></i>
+                                                            <input class="dis-none" type="number" name="rating">
+                                                        </span>
+                                                        </div>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <input class="dis-none" type="number" name="rating" value="0">
+                                                    </c:otherwise>
+                                                </c:choose>
+                                                <div class="row p-b-25">
+                                                    <div class="col-12 p-b-5">
+                                                        <label class="stext-102 cl3" for="review">Bình luận</label>
+                                                        <textarea class="size-110 bor8 stext-102 cl2 p-lr-20 p-tb-10" id="review" name="review"></textarea>
+                                                    </div>
+                                                </div>
+
+                                                <button type="submit" class="flex-c-m stext-101 cl0 size-112 bg7 bor11 hov-btn3 p-lr-15 trans-04 m-b-10">
+                                                    Đồng ý
+                                                </button>
+                                            </form>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <h5 class="mtext-110 cl2">
+                                                Vui lòng đăng nhập/đăng ký để tham gia bình luận.
+                                            </h5>
+                                            <a href="${pageContext.request.contextPath}/login" class="text-center"><i>Đăng nhập</i></a>
+                                            hoặc
+                                            <a href="${pageContext.request.contextPath}/register" class="text-center"><i>Đăng ký</i></a>
+                                        </c:otherwise>
+                                    </c:choose>
                                 </div>
                             </div>
                         </div>
@@ -703,6 +741,7 @@
         </c:forEach>
     });
 </script>
+
 
 </body>
 </html>

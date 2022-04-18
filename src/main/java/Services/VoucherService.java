@@ -11,4 +11,5 @@ public interface VoucherService {
     Voucher getVoucher(String voucherId);
     List<Voucher> getAll();
     List<String> getAllVoucher();
+    boolean checkExistId(String voucherId);
 }
