@@ -10,8 +10,8 @@
 <%@ page import="Entity.*" %>
 <%--
   User: duckhaidev
-  Date: 2/27/2022
-  Time: 1:00 AM
+  Date: 4/20/2022
+  Time: 12:37 AM
 --%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -20,7 +20,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Sản phẩm ${room.roomName}</title>
+    <title>${room.roomName}</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--===============================================================================================-->
@@ -555,3 +555,4 @@
 
 </body>
 </html>
+

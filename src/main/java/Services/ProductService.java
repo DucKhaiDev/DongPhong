@@ -22,4 +22,7 @@ public interface ProductService {
     List<Product> filterProductByPrice(List<Product> products, String price);
     List<Product> filterProductByStars(List<Product> products, String stars);
     int countProduct(String roomId);
+    int countPrd_RoomBrand(String roomId, String brandId);
+    List<Product> getProductByRoom(String roomId);
+    List<Product> searchByNameInRoom(String roomId, String name);
 }

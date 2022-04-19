@@ -370,4 +370,110 @@ public class ProductDao implements Dao.ProductDao {
 
         return 0;
     }
+
+    @Override
+    public int countPrd_RoomBrand(String roomId, String brandId) {
+        conn = DBConnect.getConnection();
+
+        try {
+            ps = conn.prepareStatement("SELECT COUNT(*) " +
+                                                "FROM dbo.PRODUCT " +
+                                                "JOIN dbo.CATEGORY ON CATEGORY.CAT_ID = PRODUCT.CAT_ID " +
+                                                "JOIN dbo.ROOM ON ROOM.ROOM_ID = CATEGORY.ROOM_ID " +
+                                                "JOIN dbo.BRAND ON BRAND.BRA_ID = PRODUCT.BRA_ID " +
+                                                "WHERE dbo.ROOM.ROOM_ID = ? AND dbo.BRAND.BRA_ID = ?");
+            ps.setString(1, roomId);
+            ps.setString(2, brandId);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnect.closeAll(rs, ps, conn);
+        }
+
+        return 0;
+    }
+
+    @Override
+    public List<Product> getProductByRoom(String roomId) {
+        conn = DBConnect.getConnection();
+        List<Product> products = new ArrayList<>();
+
+        try {
+            ps = conn.prepareStatement("SELECT * " +
+                                                "FROM dbo.PRODUCT JOIN dbo.CATEGORY ON CATEGORY.CAT_ID = PRODUCT.CAT_ID " +
+                                                "JOIN dbo.ROOM ON ROOM.ROOM_ID = CATEGORY.ROOM_ID " +
+                                                "WHERE ROOM.ROOM_ID = ?");
+            ps.setString(1, roomId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Product product = new Product();
+                product.setProductId(rs.getString("PRO_ID").trim());
+                product.setProductName(rs.getString("PRO_NAME"));
+                product.setProductRate(rs.getDouble("PRO_RATE"));
+                product.setProductDescription(rs.getString("PRO_DES"));
+                product.setProductDimension(rs.getString("PRO_DIMEN"));
+                product.setProductWeight(rs.getString("PRO_WEIGHT"));
+                product.setProductMaterial(rs.getString("PRO_MATE"));
+                product.setProductColor(rs.getString("PRO_COLOR"));
+                product.setProductPrice(rs.getBigDecimal("PRO_PRICE"));
+                product.setProductCost(rs.getBigDecimal("PRO_COST"));
+                product.setProductQuantity(rs.getInt("PRO_QUANT"));
+                product.setCategory(categoryService.getCategory(rs.getString("CAT_ID").trim()));
+                product.setBrand(brandService.getBrand(rs.getString("BRA_ID").trim()));
+
+                products.add(product);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnect.closeAll(rs, ps, conn);
+        }
+
+        return products;
+    }
+
+    @Override
+    public List<Product> searchByNameInRoom(String roomId, String name) {
+        conn = DBConnect.getConnection();
+        List<Product> products = new ArrayList<>();
+
+        try {
+            ps = conn.prepareStatement("SELECT * " +
+                                                "FROM dbo.PRODUCT " +
+                                                "JOIN dbo.CATEGORY ON CATEGORY.CAT_ID = PRODUCT.CAT_ID " +
+                                                "JOIN dbo.ROOM ON ROOM.ROOM_ID = CATEGORY.ROOM_ID " +
+                                                "WHERE ROOM.ROOM_ID = ? AND PRO_NAME LIKE ? ORDER BY PRO_ID ASC");
+            ps.setString(1, roomId);
+            ps.setString(2, name);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Product product = new Product();
+                product.setProductId(rs.getString("PRO_ID").trim());
+                product.setProductName(rs.getString("PRO_NAME"));
+                product.setProductRate(rs.getDouble("PRO_RATE"));
+                product.setProductDescription(rs.getString("PRO_DES"));
+                product.setProductDimension(rs.getString("PRO_DIMEN"));
+                product.setProductWeight(rs.getString("PRO_WEIGHT"));
+                product.setProductMaterial(rs.getString("PRO_MATE"));
+                product.setProductColor(rs.getString("PRO_COLOR"));
+                product.setProductPrice(rs.getBigDecimal("PRO_PRICE"));
+                product.setProductCost(rs.getBigDecimal("PRO_COST"));
+                product.setProductQuantity(rs.getInt("PRO_QUANT"));
+                product.setCategory(categoryService.getCategory(rs.getString("CAT_ID").trim()));
+                product.setBrand(brandService.getBrand(rs.getString("BRA_ID").trim()));
+
+                products.add(product);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnect.closeAll(rs, ps, conn);
+        }
+
+        return products;
+    }
 }

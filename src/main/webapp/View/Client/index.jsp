@@ -77,13 +77,13 @@
                 <div class="block1 wrap-pic-w">
                     <img src="${pageContext.request.contextPath}/assets/images/Co_Dien.jpg" style="object-fit: cover; height: 210px;" alt="IMG-BANNER">
 
-                    <a href="#" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
-                        <div class="block1-txt-child1 flex-col-l">
-                            <span class="block1-name ltext-102 trans-04 p-b-8 glow-text">
+                    <a href="#" class="block1-txt ab-t-l s-full flex-col-l-sb p-16-38-34-16 trans-03 respon3">
+                        <div class="block1-txt-child1 flex-col-l p-all-8 bg-2 w-60">
+                            <span class="block1-name ltext-102 trans-04 p-b-8 text-white">
                                 Cổ Điển
                             </span>
 
-                            <span class="block1-info stext-102 trans-04 glow-text">
+                            <span class="block1-info stext-102 trans-04 text-white">
                                 Classic
                                 <%
                                     int year = Calendar.getInstance().get(Calendar.YEAR);
@@ -106,13 +106,13 @@
                 <div class="block1 wrap-pic-w">
                     <img src="${pageContext.request.contextPath}/assets/images/Tan_Co_Dien.jpg" style="object-fit: cover; height: 210px;" alt="IMG-BANNER">
 
-                    <a href="#" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
-                        <div class="block1-txt-child1 flex-col-l">
-								<span class="block1-name ltext-102 trans-04 p-b-8 glow-text">
-									Tân Cổ Điển
-								</span>
+                    <a href="#" class="block1-txt ab-t-l s-full flex-col-l-sb p-16-38-34-16 trans-03 respon3">
+                        <div class="block1-txt-child1 flex-col-l p-all-8 bg-2 w-60">
+                            <span class="block1-name ltext-102 trans-04 p-b-8 text-white">
+                                Tân Cổ Điển
+                            </span>
 
-                            <span class="block1-info stext-102 trans-04 glow-text">
+                            <span class="block1-info stext-102 trans-04 text-white">
 									Neoclassical <% out.print(year); %>
 								</span>
                         </div>
@@ -131,13 +131,13 @@
                 <div class="block1 wrap-pic-w">
                     <img src="${pageContext.request.contextPath}/assets/images/Hien_Dai.jpg" style="object-fit: cover; height: 210px;" alt="IMG-BANNER">
 
-                    <a href="#" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
-                        <div class="block1-txt-child1 flex-col-l">
-                            <span class="block1-name ltext-102 trans-04 p-b-8 glow-text">
+                    <a href="#" class="block1-txt ab-t-l s-full flex-col-l-sb p-16-38-34-16 trans-03 respon3">
+                        <div class="block1-txt-child1 flex-col-l p-all-8 bg-2 w-60">
+                            <span class="block1-name ltext-102 trans-04 p-b-8 text-white">
                                 Hiện Đại
                             </span>
 
-                            <span class="block1-info stext-102 trans-04 glow-text">
+                            <span class="block1-info stext-102 trans-04 text-white">
                                 Modern <% out.print(year); %>
 							</span>
                         </div>
@@ -154,12 +154,11 @@
     </div>
 </div>
 
-
 <!-- Product -->
 <section class="bg0 p-t-23 p-b-140">
     <div class="container">
         <div class="p-b-10">
-            <h3 class="ltext-103 cl5">
+            <h3 class="ltext-103 cl5 soft-emboss-1">
                 Sản Phẩm Của Chúng Tôi
             </h3>
         </div>
@@ -187,7 +186,7 @@
                 </button>
 
                 <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 my-products" data-filter=".watches">
-                    Phòng thờ
+                    Phòng Thờ
                 </button>
             </div>
         </div>

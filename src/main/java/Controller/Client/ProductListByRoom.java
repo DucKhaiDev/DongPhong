@@ -1,9 +1,9 @@
 package Controller.Client;
 
-import Entity.Category;
 import Entity.Product;
-import Services.deploy.CategoryService;
+import Entity.Room;
 import Services.deploy.ProductService;
+import Services.deploy.RoomService;
 import Util.Constant;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -12,21 +12,21 @@ import jakarta.servlet.annotation.*;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "ProductListByCategory", value = "/products/category")
-public class ProductListByCategory extends HttpServlet {
+@WebServlet(name = "ProductListByRoom", value = "/products/room")
+public class ProductListByRoom extends HttpServlet {
     private final ProductService productService = new ProductService();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String categoryId = request.getParameter("id");
-        Category category = new CategoryService().getCategory(categoryId);
-        request.setAttribute("category", category);
-        List<Product> products = productService.getProductByCategory(categoryId);
+        String roomId = request.getParameter("id");
+        Room room = new RoomService().getRoom(roomId);
+        request.setAttribute("room", room);
+        List<Product> products = productService.getProductByRoom(roomId);
 
         //Search products
         String keyword = request.getParameter("search");
         if (keyword != null && !keyword.trim().isEmpty()) {
-            products = productService.searchByNameInCategory(categoryId, keyword);
+            products = productService.searchByNameInRoom(roomId, keyword);
         }
 
         //Sort products
@@ -74,6 +74,6 @@ public class ProductListByCategory extends HttpServlet {
         }
 
         request.setAttribute("products", products);
-        request.getRequestDispatcher(Constant.Path.PRODUCT_LIST_BY_CATEGORY).forward(request, response);
+        request.getRequestDispatcher(Constant.Path.PRODUCT_LIST_BY_ROOM).forward(request, response);
     }
 }

@@ -47,5 +47,7 @@ public class Constant {
         public static final String PRODUCT_DETAIL = "/View/Client/product-detail.jsp";
         public static final String CART = "/View/Client/cart-detail.jsp";
         public static final String CHECKOUT = "/View/Client/checkout.jsp";
+        public static final String PRODUCT_LIST_BY_ROOM = "/View/Client/product-list-by-room.jsp";
+        public static final String PRODUCT_SEARCH = "/View/Client/product-search.jsp";
     }
 }
