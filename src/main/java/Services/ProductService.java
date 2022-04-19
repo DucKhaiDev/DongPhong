@@ -21,4 +21,5 @@ public interface ProductService {
     List<Product> filterProductByBrand(List<Product> products, String brands);
     List<Product> filterProductByPrice(List<Product> products, String price);
     List<Product> filterProductByStars(List<Product> products, String stars);
+    int countProduct(String roomId);
 }

@@ -16,4 +16,5 @@ public interface ProductDao {
     List<Product> getProductByBrand(String brandId);
     boolean checkExistId(String id);
     int countProduct(String categoryId, String brandId);
+    int countProduct(String roomId);
 }

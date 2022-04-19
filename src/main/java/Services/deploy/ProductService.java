@@ -184,4 +184,9 @@ public class ProductService implements Services.ProductService {
         products.removeIf(product -> Double.compare(product.getProductRate(), Double.parseDouble(stars)) < 0);
         return products;
     }
+
+    @Override
+    public int countProduct(String roomId) {
+        return productDao.countProduct(roomId);
+    }
 }

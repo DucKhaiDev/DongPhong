@@ -1,13 +1,7 @@
 package Controller.Client;
 
-import Entity.Brand;
-import Entity.Category;
-import Entity.ProImage;
-import Entity.User;
-import Services.deploy.BrandService;
-import Services.deploy.CategoryService;
-import Services.deploy.ProImageService;
-import Services.deploy.UserService;
+import Entity.*;
+import Services.deploy.*;
 import Tools.ReleaseMemory;
 import Util.Constant;
 import jakarta.servlet.*;
@@ -23,6 +17,7 @@ public class Welcome extends HttpServlet {
     private final BrandService brandService = new BrandService();
     private final UserService userService = new UserService();
     private final ProImageService imageService = new ProImageService();
+    private final ProductService productService = new ProductService();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -50,9 +45,19 @@ public class Welcome extends HttpServlet {
         List<Category> altCategories = categoryService.getCategoryByRoom("ALT");
         context.setAttribute("altCategories", altCategories);
 
+        List<Room> rooms = new RoomService().getAll();
+        context.setAttribute("rooms", rooms);
+
         List<Brand> brands = brandService.getAll();
         context.setAttribute("brands", brands);
 
+        List<Product> products = productService.getAll();
+        request.setAttribute("products", products);
+        request.setAttribute("productLvr", productService.countProduct("LVR"));
+        request.setAttribute("productKit", productService.countProduct("KIT"));
+        request.setAttribute("productBed", productService.countProduct("BED"));
+        request.setAttribute("productOff", productService.countProduct("OFF"));
+        request.setAttribute("productAlt", productService.countProduct("ALT"));
         request.getRequestDispatcher(Constant.Path.HOME).forward(request, response);
     }
 

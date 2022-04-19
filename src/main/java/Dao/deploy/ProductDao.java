@@ -346,4 +346,28 @@ public class ProductDao implements Dao.ProductDao {
 
         return 0;
     }
+
+    @Override
+    public int countProduct(String roomId) {
+        conn = DBConnect.getConnection();
+
+        try {
+            ps = conn.prepareStatement("SELECT COUNT(*) " +
+                                                "FROM dbo.PRODUCT " +
+                                                "JOIN dbo.CATEGORY ON CATEGORY.CAT_ID = PRODUCT.CAT_ID " +
+                                                "JOIN dbo.ROOM ON ROOM.ROOM_ID = CATEGORY.ROOM_ID " +
+                                                "WHERE ROOM.ROOM_ID = ?");
+            ps.setString(1, roomId);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnect.closeAll(rs, ps, conn);
+        }
+
+        return 0;
+    }
 }

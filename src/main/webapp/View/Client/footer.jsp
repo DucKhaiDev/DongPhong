@@ -8,59 +8,43 @@
 <footer class="bg3 p-t-75 p-b-32">
     <div class="container">
         <div class="row">
-            <div class="col-sm-6 col-lg-3 p-b-50">
+            <div class="col-sm-6 col-lg-2 p-b-50">
                 <h4 class="stext-301 cl0 p-b-30">
-                    Categories
+                    Sản phẩm
                 </h4>
 
                 <ul>
-                    <li class="p-b-10">
-                        <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-                            Women
-                        </a>
-                    </li>
-
-                    <li class="p-b-10">
-                        <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-                            Men
-                        </a>
-                    </li>
-
-                    <li class="p-b-10">
-                        <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-                            Shoes
-                        </a>
-                    </li>
-
-                    <li class="p-b-10">
-                        <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-                            Watches
-                        </a>
-                    </li>
+                    <c:forEach items="${applicationScope.rooms}" var="room">
+                        <li class="p-b-10">
+                            <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+                                ${room.roomName}
+                            </a>
+                        </li>
+                    </c:forEach>
                 </ul>
             </div>
 
-            <div class="col-sm-6 col-lg-3 p-b-50">
+            <div class="col-sm-6 col-lg-2 p-b-50">
                 <h4 class="stext-301 cl0 p-b-30">
-                    Help
+                    Hỗ trợ
                 </h4>
 
                 <ul>
                     <li class="p-b-10">
                         <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-                            Track Order
+                            Theo dõi đơn hàng
                         </a>
                     </li>
 
                     <li class="p-b-10">
                         <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-                            Returns
+                            Đổi trả
                         </a>
                     </li>
 
                     <li class="p-b-10">
                         <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-                            Shipping
+                            Giao nhận
                         </a>
                     </li>
 
@@ -74,48 +58,31 @@
 
             <div class="col-sm-6 col-lg-3 p-b-50">
                 <h4 class="stext-301 cl0 p-b-30">
-                    GET IN TOUCH
+                    Địa chỉ liên hệ
                 </h4>
 
-                <p class="stext-107 cl7 size-201">
-                    Any questions? Let us know in store at 8th floor, 379 Hudson St, New York, NY 10018 or call us on (+1) 96 716 6879
+                <p class="stext-107 cl7 size-201 p-t-0">
+                    Nội thất cao cấp Đông Phong, thôn Phong Nẫm, xã Đông Phong, huyện Yên Phong, tỉnh Bắc Ninh.
+                    <br>
+                    SĐT: (+84) 98 252 3005
                 </p>
 
                 <div class="p-t-27">
-                    <a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
-                        <i class="fa fa-facebook"></i>
+                    <a href="https://www.facebook.com/DucKhaiDev/" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
+                        <i class="fab fa-facebook"></i>
                     </a>
 
                     <a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
-                        <i class="fa fa-instagram"></i>
+                        <i class="fab fa-twitter"></i>
                     </a>
 
                     <a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
-                        <i class="fa fa-pinterest-p"></i>
+                        <i class="fab fa-google-plus"></i>
                     </a>
                 </div>
             </div>
-
-            <div class="col-sm-6 col-lg-3 p-b-50">
-                <h4 class="stext-301 cl0 p-b-30">
-                    Newsletter
-                </h4>
-
-                <form>
-                    <div class="wrap-input1 w-full p-b-4">
-                        <label>
-                            <input class="input1 bg-none plh1 stext-107 cl7" type="text" name="email" placeholder="email@example.com">
-                        </label>
-                        <div class="focus-input1 trans-04"></div>
-                    </div>
-
-                    <div class="p-t-18">
-                        <button class="flex-c-m stext-101 cl0 size-103 bg1 bor1 hov-btn2 p-lr-15 trans-04">
-                            Subscribe
-                        </button>
-                    </div>
-                </form>
-            </div>
+            <div class="col-lg-1"></div>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7303.987023982453!2d106.01402162920304!3d21.200006849751542!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xa477e840bb7953f5!2zMjHCsDEyJzAwLjciTiAxMDbCsDAxJzE1LjQiRQ!5e1!3m2!1svi!2s!4v1650273694352!5m2!1svi!2s" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
 
         <div class="p-t-40">
@@ -143,9 +110,12 @@
 
             <p class="stext-107 cl6 txt-center">
                 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                Copyright &copy;<script>document.write(new Date().getFullYear().toString());</script> All rights reserved | Made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a> &amp; distributed by <a href="https://themewagon.com" target="_blank">ThemeWagon</a>
+                Bản quyền Nội dung &copy;<script>document.write(new Date().getFullYear().toString());</script>: Công ty TNHH MTV <i class="fa fa-heart-o" aria-hidden="true"></i><a href="${pageContext.request.contextPath}" target="_blank">Đông Phong</a>.
+                <br>
+                Địa chỉ: Thôn Phong Nẫm, xã Đông Phong, huyện Yên Phong, tỉnh Bắc Ninh. SĐT: (+84) 98 252 3005
+                <br>
+                Bản quyền Website: <a href="https://www.facebook.com/DucKhaiDev/" target="_blank">DucKhaiDev</a>
                 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-
             </p>
         </div>
     </div>

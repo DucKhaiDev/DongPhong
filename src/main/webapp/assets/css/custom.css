@@ -1065,3 +1065,12 @@ ul.header-cart-wrapitem li {
 .justify-content-spa {
     justify-content: space-around !important;
 }
+
+.glow-text {
+    color: #333;
+    text-shadow: 3px 0 7px rgba(192,192,192,0.8), -3px 0 7px rgba(192,192,192,0.8), 0 4px 7px rgba(192,192,192,0.8);
+}
+
+.bg-1 {
+    background-color: rgba(255, 255, 255, 0.69);
+}
