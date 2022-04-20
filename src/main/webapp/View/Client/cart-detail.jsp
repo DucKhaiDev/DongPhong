@@ -205,7 +205,7 @@
                                 (Miễn phí vận chuyển trong khu vực tỉnh Bắc Ninh)
                             </p>
 
-                            <form action="<c:url value="/shipping-cost"/>" method="get" class="p-t-15">
+                            <form id="shipping-cost" action="<c:url value="/shipping-cost"/>" method="get" class="p-t-15">
                                 <span class="stext-112 cl8">
                                     Chi phí vận chuyển tới:
                                 </span>
@@ -228,7 +228,7 @@
                                     <option value="0" selected hidden disabled>Phường/Xã</option>
                                 </select>
 
-                                <input name="recaddress" type="text" value="${sessionScope.recaddress}" class="w-full bor8 m-b-12 m-t-9 p-1" style="height: 30px" placeholder="Số nhà" required>
+                                <input id="recaddress" name="recaddress" type="text" value="${sessionScope.recaddress}" class="w-full bor8 m-b-12 m-t-9 p-1" style="height: 30px" placeholder="Số nhà" required>
                                 <hr>
                                 <div class="flex-w justify-content-center">
                                     <span id="shippingCost" class="mtext-110 cl2 m-b-12">
@@ -240,8 +240,8 @@
                                             out.print(dongFormat.format(shippingCost));
                                         %>
                                     </span>
-                                    <button type="submit" id="btnUpdateTotal" class="flex-c-m stext-101 cl2 size-115 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer">
-                                        Tính COD
+                                    <button type="button" id="btnUpdateTotal" class="flex-c-m stext-101 cl2 size-115 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer">
+                                        Tính phí Ship
                                     </button>
                                 </div>
                             </form>
@@ -317,7 +317,7 @@
                         <input type="hidden" name="vat" value="<% out.print(vat); %>">
                         <input type="hidden" name="total" value="<% out.print(total); %>">
 
-                        <button id="btn-checkout" type="submit" class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
+                        <button id="btn-checkout" type="button" class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
                             Tiến hành thanh toán
                         </button>
                     </form>
@@ -455,6 +455,45 @@
                $(this).parent().next().submit();
            });
        });
+    });
+</script>
+<!--===============================================================================================-->
+<script src="${pageContext.request.contextPath}/assets/vendor/sweetalert/sweetalert.min.js"></script>
+<!--===============================================================================================-->
+<script>
+    $(function () {
+        let pv = '0', dt = '0', wd = '0', rd = 0;
+
+        $('#btnUpdateTotal').on('click', function () {
+            pv = $('#province option:selected').prop('value');
+            dt = $('#district option:selected').prop('value');
+            wd = $('#ward option:selected').prop('value');
+
+            if (pv === '0' || dt === '0' || wd === '0') {
+                swal({
+                    text: 'Vui lòng chọn địa chỉ giao hàng!',
+                    icon: 'warning'
+                });
+            } else {
+                $('#shipping-cost').submit();
+            }
+        });
+
+        $('#btn-checkout').on('click', function () {
+            pv = $('#province option:selected').prop('value');
+            dt = $('#district option:selected').prop('value');
+            wd = $('#ward option:selected').prop('value');
+            rd = $('#recaddress').val().trim().length;
+
+            if (pv === '0' || dt === '0' || wd === '0' || rd === 0) {
+                swal({
+                    text: 'Vui lòng chọn địa chỉ giao hàng và chọn Tính phí Ship!',
+                    icon: 'warning'
+                });
+            } else {
+                $('#checkout').submit();
+            }
+        });
     });
 </script>
 

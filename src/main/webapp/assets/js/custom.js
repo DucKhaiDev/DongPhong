@@ -480,6 +480,7 @@ $(function () {
         keyword = keyword.trim().replace(/\s\s+/g, ' ');
         const url = new URL(location.href);
         url.searchParams.delete('search');
+        url.searchParams.delete('page');
         url.searchParams.append('search', keyword);
         location.href = url.href;
     }

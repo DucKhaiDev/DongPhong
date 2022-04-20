@@ -25,4 +25,5 @@ public interface ProductService {
     int countPrd_RoomBrand(String roomId, String brandId);
     List<Product> getProductByRoom(String roomId);
     List<Product> searchByNameInRoom(String roomId, String name);
+    int countPrd_KeywordBrand(String keyword, String brandId);
 }

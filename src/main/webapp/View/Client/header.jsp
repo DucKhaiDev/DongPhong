@@ -192,14 +192,25 @@
                 <img src="${pageContext.request.contextPath}/assets/images/icons/icon-close2.png" alt="CLOSE">
             </button>
 
-            <form class="wrap-search-header flex-w p-l-15">
-                <button class="flex-c-m trans-04">
+            <form id="search-header" action="<c:url value="/search"/>" class="wrap-search-header flex-w p-l-15">
+                <button type="submit" class="flex-c-m trans-04">
                     <i class="zmdi zmdi-search"></i>
                 </button>
                 <label>
-                    <input class="plh3" type="text" name="search" placeholder="Tìm kiếm...">
+                    <input class="plh3" type="text" name="keyword-search-header" placeholder="Tìm kiếm...">
                 </label>
             </form>
         </div>
     </div>
 </header>
+
+<script>
+    $(function () {
+        $('input[name="keyword-search-header"]').keypress(function (e) {
+            const keycode = (e.keyCode ? e.keyCode : e.which);
+            if (keycode === '13') {
+                $('#search-header').submit();
+            }
+        });
+    });
+</script>

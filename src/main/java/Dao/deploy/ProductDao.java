@@ -476,4 +476,25 @@ public class ProductDao implements Dao.ProductDao {
 
         return products;
     }
+
+    @Override
+    public int countPrd_KeywordBrand(String keyword, String brandId) {
+        conn = DBConnect.getConnection();
+
+        try {
+            ps = conn.prepareStatement("SELECT COUNT(*) FROM dbo.PRODUCT WHERE PRO_NAME LIKE ? AND BRA_ID = ?");
+            ps.setString(1, keyword);
+            ps.setString(2, brandId);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnect.closeAll(rs, ps, conn);
+        }
+
+        return 0;
+    }
 }

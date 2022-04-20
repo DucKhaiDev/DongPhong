@@ -1,4 +1,3 @@
-<jsp:useBean id="room" scope="request" type="Entity.Room"/>
 <%@ page import="Services.deploy.ProductService" %>
 <%@ page import="java.util.Locale" %>
 <%@ page import="java.math.BigDecimal" %>
@@ -20,7 +19,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>${room.roomName}</title>
+    <title>Tìm Kiếm: ${requestScope.keyword}</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--===============================================================================================-->
@@ -73,16 +72,9 @@
     <div class="container">
         <div class="flex-w flex-sb-m p-b-36">
             <div class="flex-w flex-l-m filter-tope-group m-tb-10">
-                <div class="bread-crumb flex-w p-r-15 p-t-30 p-lr-0-lg">
-                    <a href="${pageContext.request.contextPath}" class="stext-109 cl8 hov-cl1 trans-04 font-size-15">
-                        Trang chủ
-                        <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
-                    </a>
-
-                    <span class="stext-109 cl4 font-size-15">
-                        ${room.roomName}
-                    </span>
-                </div>
+                <span class="stext-109 cl4 font-size-15">
+                    Kết quả tìm kiếm cho: ${requestScope.keyword}
+                </span>
             </div>
 
             <div class="flex-w flex-c-m m-tb-10">
@@ -158,9 +150,9 @@
                                             <input id="${brand.brandId}" class="filter-input" type="checkbox" name="brand" value="${brand.brandId}"><i></i>${brand.brandName}
                                             <small>
                                                 <a>(<%
-                                                    String roomId = ((Room) request.getAttribute("room")).getRoomId();
+                                                    String keyword = request.getAttribute("keyword").toString();
                                                     String brandId = ((Brand) pageContext.getAttribute("brand")).getBrandId();
-                                                    out.print(new ProductService().countPrd_RoomBrand(roomId, brandId));
+                                                    out.print(new ProductService().countPrd_KeywordBrand(keyword, brandId));
                                                 %>)</a>
                                             </small>
                                         </label></li>

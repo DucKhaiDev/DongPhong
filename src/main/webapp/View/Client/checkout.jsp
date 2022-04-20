@@ -126,7 +126,7 @@
                                 <label for="province" class="labels">Tỉnh/Thành phố</label>
                                 <input id="selectedProvince" type="hidden" value="${sessionScope.selectedProvince}">
                                 <input type="hidden" name="selectedProvince">
-                                <select id="province" name="province" class="w-full form-control" required>
+                                <select id="province" name="province" class="w-full form-control" disabled>
                                     <option value="0" selected hidden disabled>Tỉnh/Thành phố</option>
                                 </select>
                             </div>
@@ -134,7 +134,7 @@
                                 <label for="district" class="labels">Quận/Huyện</label>
                                 <input id="selectedDistrict" type="hidden" value="${sessionScope.selectedDistrict}">
                                 <input type="hidden" name="selectedDistrict">
-                                <select id="district" name="district" class="w-full form-control" required>
+                                <select id="district" name="district" class="w-full form-control" disabled>
                                     <option value="0" selected hidden disabled>Quận/Huyện</option>
                                 </select>
                             </div>
@@ -142,13 +142,13 @@
                                 <label for="ward" class="labels">Phường/Xã</label>
                                 <input id="selectedWard" type="hidden" value="${sessionScope.selectedWard}">
                                 <input type="hidden" name="selectedWard">
-                                <select id="ward" name="ward" class="w-full form-control" required>
+                                <select id="ward" name="ward" class="w-full form-control" disabled>
                                     <option value="0" selected hidden disabled>Phường/Xã</option>
                                 </select>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="recaddress" class="labels">Số nhà</label>
-                                <input id="recaddress" name="recaddress" class="w-full form-control" type="text" value="${sessionScope.recaddress}" placeholder="Số nhà" required>
+                                <input id="recaddress" name="recaddress" class="w-full form-control" type="text" value="${sessionScope.recaddress}" placeholder="Số nhà" disabled>
                             </div>
                         </div>
                         <div class="row m-t-8 m-b-8"><div class="col p-0">Hình thức thanh toán:</div></div>

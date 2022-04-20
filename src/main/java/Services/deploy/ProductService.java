@@ -204,4 +204,9 @@ public class ProductService implements Services.ProductService {
     public List<Product> searchByNameInRoom(String roomId, String name) {
         return productDao.searchByNameInRoom(roomId, name);
     }
+
+    @Override
+    public int countPrd_KeywordBrand(String keyword, String brandId) {
+        return productDao.countPrd_KeywordBrand(keyword, brandId);
+    }
 }
