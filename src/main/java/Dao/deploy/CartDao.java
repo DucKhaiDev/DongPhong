@@ -130,4 +130,27 @@ public class CartDao implements Dao.CartDao {
 
         return carts;
     }
+
+    @Override
+    public Cart getLastCart(String userId) {
+        conn = DBConnect.getConnection();
+        Cart cart = new Cart();
+
+        try {
+            ps = conn.prepareStatement("SELECT TOP(1) * " +
+                                                "FROM dbo.CART " +
+                                                "WHERE USER_ID = ? ORDER BY CART_ID DESC");
+            ps.setString(1, userId);
+            rs = ps.executeQuery();
+            rs.next();
+            cart.setCartId(rs.getString("CART_ID"));
+            cart.setUser(userService.getUser(rs.getString("USER_ID")));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnect.closeAll(rs, ps, conn);
+        }
+
+        return cart;
+    }
 }

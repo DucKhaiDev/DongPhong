@@ -37,4 +37,9 @@ public class CartService implements Services.CartService {
     public List<Cart> getAll() {
         return cartDao.getAll();
     }
+
+    @Override
+    public Cart getLastCart(String userId) {
+        return cartDao.getLastCart(userId);
+    }
 }

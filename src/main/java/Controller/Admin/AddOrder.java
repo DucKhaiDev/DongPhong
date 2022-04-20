@@ -1,12 +1,7 @@
 package Controller.Admin;
 
-import Entity.Cart;
-import Entity.Order;
-import Entity.Payment;
-import Entity.User;
-import Services.deploy.OrderService;
-import Services.deploy.PaymentService;
-import Services.deploy.UserService;
+import Entity.*;
+import Services.deploy.*;
 import Util.Constant;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -49,18 +44,21 @@ public class AddOrder extends HttpServlet {
         order.setOrderStatus(payment.getPaymentMethod());
 
         new OrderService().insert(order);
-        /*String cartId = ((Cart) session.getAttribute("cart")).getCartId();
-        cartItemService.deleteAll(cartId);
-        List<CartItem> cartItems = cartItemService.getItemByCart(cartId);
-        session.setAttribute("cartItems", cartItems);*/
-        session.removeAttribute("orderAccount");
-        session.removeAttribute("ord_recipientName");
-        session.removeAttribute("ord_recipientPhone");
-        session.removeAttribute("selectedProvince");
-        session.removeAttribute("selectedDistrict");
-        session.removeAttribute("selectedWard");
-        session.removeAttribute("recaddress");
-        session.removeAttribute("shippingCost");
+
+        //Create new cart
+        String CurrCartId = ((Cart) session.getAttribute("cart")).getCartId();
+        int curr = Integer.parseInt(CurrCartId.split("-")[1]);
+        User user = (User) session.getAttribute("account");
+        String newCartId = user.getUsername() + "-" + (curr + 1);
+        Cart cart = new Cart(newCartId, user);
+        new CartService().insert(cart);
+        List<CartItem> cartItems = new CartItemService().getItemByCart(cart.getCartId());
+        session.setAttribute("cartItems", cartItems);
+
+        String[] attributes = {"orderAccount", "ord_recipientName", "ord_recipientPhone", "selectedProvince", "selectedDistrict", "selectedWard", "recaddress", "shippingCost", "voucher"};
+        for (String attribute : attributes) {
+            session.removeAttribute(attribute);
+        }
 
         response.sendRedirect(request.getContextPath() + "/admin/order/detail?id=" + (new OrderService().getNewestOrder()).getOrderId());
     }

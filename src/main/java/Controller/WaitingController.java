@@ -56,7 +56,7 @@ public class WaitingController extends HttpServlet {
             session.setAttribute("wlItems", wlItems);
 
             //cart
-            Cart cart = cartService.getCartByUser(user.getUserId());
+            Cart cart = cartService.getLastCart(user.getUserId());
             session.setAttribute("cart", cart);
 
             //cart items

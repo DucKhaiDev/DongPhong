@@ -1,10 +1,8 @@
 package Controller.Client;
 
-import Entity.Cart;
-import Entity.Order;
-import Entity.Payment;
-import Entity.User;
+import Entity.*;
 import Services.deploy.CartItemService;
+import Services.deploy.CartService;
 import Services.deploy.OrderService;
 import Services.deploy.PaymentService;
 import Util.Constant;
@@ -80,12 +78,19 @@ public class Checkout extends HttpServlet {
         }
 
         new OrderService().insert(order);
-        session.setAttribute("order", new OrderService().getNewestOrder());
-        session.setAttribute("cartItems", cartItemService.getItemByCart(order.getCart().getCartId()));
-        /*String cartId = ((Cart) session.getAttribute("cart")).getCartId();
-        cartItemService.deleteAll(cartId);
-        List<CartItem> cartItems = cartItemService.getItemByCart(cartId);
-        session.setAttribute("cartItems", cartItems);*/
+        session.setAttribute("order_rv", new OrderService().getNewestOrder());
+        session.setAttribute("cartItems_rv", cartItemService.getItemByCart(order.getCart().getCartId()));
+
+        //Create new cart
+        String CurrCartId = ((Cart) session.getAttribute("cart")).getCartId();
+        int curr = Integer.parseInt(CurrCartId.split("-")[1]);
+        User user = (User) session.getAttribute("account");
+        String newCartId = user.getUsername() + "-" + (curr + 1);
+        Cart cart = new Cart(newCartId, user);
+        new CartService().insert(cart);
+        List<CartItem> cartItems = cartItemService.getItemByCart(cart.getCartId());
+        session.setAttribute("cartItems", cartItems);
+
         String[] attributes = {"recaddress", "selectedWard", "selectedDistrict", "selectedProvince", "shippingCost", "voucher"};
         for (String attribute : attributes) {
             session.removeAttribute(attribute);

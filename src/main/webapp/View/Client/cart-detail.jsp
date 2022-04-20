@@ -468,8 +468,9 @@
             pv = $('#province option:selected').prop('value');
             dt = $('#district option:selected').prop('value');
             wd = $('#ward option:selected').prop('value');
+            rd = $('#recaddress').val().trim().length;
 
-            if (pv === '0' || dt === '0' || wd === '0') {
+            if (pv === '0' || dt === '0' || wd === '0' || rd === 0) {
                 swal({
                     text: 'Vui lòng chọn địa chỉ giao hàng!',
                     icon: 'warning'

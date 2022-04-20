@@ -14,14 +14,14 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<h5 class="mb-3 text-start">Đơn hàng #${sessionScope.order.orderId}</h5>
+<h5 class="mb-3 text-start">Đơn hàng #${sessionScope.order_rv.orderId}</h5>
 <div class="bor21 p-3">
     <div class="row d-flex mb-3">
         <div class="col-md-12"><span class="float-right">
             <%
-                Order order = (Order) session.getAttribute("order");
+                Order order = (Order) session.getAttribute("order_rv");
                 if (order != null) {
-                    Timestamp timestamp = ((Order) session.getAttribute("order")).getOrderDate();
+                    Timestamp timestamp = order.getOrderDate();
                     Date date = new Date();
                     date.setTime(timestamp.getTime());
                     out.print(new SimpleDateFormat("HH:mm:ss dd/MM/yyyy").format(date));
@@ -32,9 +32,9 @@
     <div class="bor20 p-3 mb-3">
         <div class="mb-3 text-center text-uppercase">Thông tin giao hàng</div>
         <div class="row d-flex justify-content-center">
-            <div class="col-md-6 mb-3"><label for="fullName" class="labels">Họ và tên</label><input id="fullName" name="fullName" type="text" class="form-control" value="${sessionScope.order.recipientName}" readonly></div>
-            <div class="col-md-6 mb-3"><label for="phone" class="labels">Số điện thoại</label><input id="phone" name="phone" type="text" class="form-control" value="${sessionScope.order.recipientPhone}" readonly></div>
-            <div class="col-md-12 mb-3"><label for="recaddress" class="labels">Địa chỉ</label><input type="text" id="recaddress" class="form-control" value="${sessionScope.order.recipientAddress}" readonly></div>
+            <div class="col-md-6 mb-3"><label for="fullName" class="labels">Họ và tên</label><input id="fullName" name="fullName" type="text" class="form-control" value="${sessionScope.order_rv.recipientName}" readonly></div>
+            <div class="col-md-6 mb-3"><label for="phone" class="labels">Số điện thoại</label><input id="phone" name="phone" type="text" class="form-control" value="${sessionScope.order_rv.recipientPhone}" readonly></div>
+            <div class="col-md-12 mb-3"><label for="recaddress" class="labels">Địa chỉ</label><input type="text" id="recaddress" class="form-control" value="${sessionScope.order_rv.recipientAddress}" readonly></div>
         </div>
     </div>
     <div class="bor20 p-3 mb-3">
@@ -45,7 +45,7 @@
         </div>
         <div class="row d-flex mb-3 align-items-center">
             <div class="col-md-2"><label for="ip2" class="labels text-nowrap">Thời gian giao hàng dự kiến:&nbsp;</label></div>
-            <div class="col-md-2"><input id="ip2" type="text" class="form-control w-fit-content text-center" value="${sessionScope.order.recipientDate} <c:if test="${sessionScope.order.recipientDate == null}">Chưa xác định</c:if>" readonly></div>
+            <div class="col-md-2"><input id="ip2" type="text" class="form-control w-fit-content text-center" value="${sessionScope.order_rv.recipientDate} <c:if test="${sessionScope.order_rv.recipientDate == null}">Chưa xác định</c:if>" readonly></div>
         </div>
     </div>
     <div class="bor20 p-3 mb-3">
@@ -71,7 +71,7 @@
                         </thead>
                         <tbody>
                         <c:set var="count" value="0"/>
-                        <c:forEach items="${sessionScope.cartItems}" var="item">
+                        <c:forEach items="${sessionScope.cartItems_rv}" var="item">
                             <tr class="odd">
                                 <td>${count = count + 1}</td>
                                 <td>${item.product.productId}</td>

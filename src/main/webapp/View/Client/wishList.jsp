@@ -58,7 +58,7 @@
                                     productName = productName.substring(0, 25).trim() + "...";
                                 }
                             %>
-                            <a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04 tooltip100" data-tooltip="<% out.print(product.getProductName()); %>>">
+                            <a href="${pageContext.request.contextPath}/products/product-detail?id=${wl_product.productId}" class="header-cart-item-name m-b-18 hov-cl1 trans-04 tooltip100" data-tooltip="<% out.print(product.getProductName()); %>>">
                                 <% out.print(productName); %>
                             </a>
 

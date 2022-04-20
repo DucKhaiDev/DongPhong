@@ -118,7 +118,7 @@ public class RegisterController extends HttpServlet {
             wishListService.insert(new WishList(wishListId, userService.getUser(username)));
 
             //Create cart
-            String cartId = "CART_" + username;
+            String cartId = username + "-0";
             cartService.insert(new Cart(cartId, userService.getUser(username)));
 
             String text = "Thân chào " + username + ",\n" +

@@ -11,4 +11,5 @@ public interface CartService {
     Cart getCart(String cartId);
     Cart getCartByUser(String userId);
     List<Cart> getAll();
+    Cart getLastCart(String userId);
 }
