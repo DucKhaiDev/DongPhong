@@ -2,10 +2,11 @@ package Services.deploy;
 
 import Dao.deploy.CartItemDao;
 import Entity.CartItem;
+import Services.ICartItemService;
 
 import java.util.List;
 
-public class CartItemService implements Services.CartItemService {
+public class CartItemService implements ICartItemService {
     private final CartItemDao itemDao = new CartItemDao();
 
     @Override

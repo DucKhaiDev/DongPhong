@@ -2,10 +2,11 @@ package Services.deploy;
 
 import Dao.deploy.PaymentDao;
 import Entity.Payment;
+import Services.IPaymentService;
 
 import java.util.List;
 
-public class PaymentService implements Services.PaymentService {
+public class PaymentService implements IPaymentService {
     private final PaymentDao paymentDao = new PaymentDao();
 
     @Override

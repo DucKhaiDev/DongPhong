@@ -64,10 +64,10 @@
                 <a href="#"><i class="fa fa-file-chart-line fa-3x w-25 text-center"></i>Báo cáo & Thống kê<span class="fa arrow fa-2x"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
-                        <a href="${pageContext.request.contextPath}/admin/category">Báo cáo</a>
+                        <a href="${pageContext.request.contextPath}/admin/report">Báo cáo</a>
                     </li>
                     <li>
-                        <a href="${pageContext.request.contextPath}/admin/product">Thống kê</a>
+                        <a href="${pageContext.request.contextPath}/admin/statistic">Thống kê</a>
                     </li>
                 </ul>
             </li>

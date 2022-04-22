@@ -1,6 +1,7 @@
 package Dao.deploy;
 
 import Connect.DBConnect;
+import Dao.IProImageDao;
 import Entity.ProImage;
 import Services.deploy.ProductService;
 
@@ -11,7 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProImageDao implements Dao.ProImageDao {
+public class ProImageDao implements IProImageDao {
     private Connection conn = null;
     private PreparedStatement ps = null;
     private ResultSet rs = null;

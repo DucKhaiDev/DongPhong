@@ -1,6 +1,7 @@
 package Dao.deploy;
 
 import Connect.DBConnect;
+import Dao.ICartDao;
 import Entity.Cart;
 import Services.deploy.UserService;
 
@@ -11,7 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CartDao implements Dao.CartDao {
+public class CartDao implements ICartDao {
     private final UserService userService = new UserService();
     private Connection conn = null;
     private PreparedStatement ps = null;

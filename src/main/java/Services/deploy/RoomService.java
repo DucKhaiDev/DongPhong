@@ -2,10 +2,11 @@ package Services.deploy;
 
 import Dao.deploy.RoomDao;
 import Entity.Room;
+import Services.IRoomService;
 
 import java.util.List;
 
-public class RoomService implements Services.RoomService {
+public class RoomService implements IRoomService {
     private RoomDao roomDao = new RoomDao();
 
     @Override

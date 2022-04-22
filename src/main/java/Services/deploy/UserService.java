@@ -2,11 +2,12 @@ package Services.deploy;
 
 import Dao.deploy.UserDao;
 import Entity.User;
+import Services.IUserService;
 
 import java.util.List;
 import java.util.UUID;
 
-public class UserService implements Services.UserService {
+public class UserService implements IUserService {
     private final UserDao userDao = new UserDao();
 
     @Override

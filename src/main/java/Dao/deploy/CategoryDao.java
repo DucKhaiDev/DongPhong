@@ -1,6 +1,7 @@
 package Dao.deploy;
 
 import Connect.DBConnect;
+import Dao.ICategoryDao;
 import Entity.Category;
 import Services.deploy.RoomService;
 
@@ -11,7 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CategoryDao implements Dao.CategoryDao {
+public class CategoryDao implements ICategoryDao {
     private Connection conn = null;
     private PreparedStatement ps = null;
     private ResultSet rs = null;

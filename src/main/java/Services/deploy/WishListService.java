@@ -2,10 +2,11 @@ package Services.deploy;
 
 import Dao.deploy.WishlistDao;
 import Entity.WishList;
+import Services.IWishListService;
 
 import java.util.List;
 
-public class WishListService implements Services.WishListService {
+public class WishListService implements IWishListService {
     private final WishlistDao wishlistDao = new WishlistDao();
 
     @Override

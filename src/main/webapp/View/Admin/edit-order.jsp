@@ -1,15 +1,10 @@
 <jsp:useBean id="order" scope="request" type="Entity.Order"/>
-<%@ page import="Services.deploy.OrderService" %>
 <%@ page import="Entity.CartItem" %>
-<%@ page import="java.util.List" %>
-<%@ page import="Entity.Cart" %>
-<%@ page import="Services.deploy.CartItemService" %>
 <%@ page import="java.math.BigDecimal" %>
 <%@ page import="java.util.Locale" %>
 <%@ page import="java.text.NumberFormat" %>
 <%@ page import="java.math.RoundingMode" %>
 <%@ page import="Entity.Product" %>
-<%@ page import="Entity.User" %>
 <%--
   User: duckhaidev
   Date: 4/14/2022

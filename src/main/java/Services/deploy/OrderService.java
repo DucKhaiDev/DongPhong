@@ -2,10 +2,11 @@ package Services.deploy;
 
 import Dao.deploy.OrderDao;
 import Entity.Order;
+import Services.IOrderService;
 
 import java.util.List;
 
-public class OrderService implements Services.OrderService {
+public class OrderService implements IOrderService {
     private final OrderDao orderDao = new OrderDao();
 
     @Override

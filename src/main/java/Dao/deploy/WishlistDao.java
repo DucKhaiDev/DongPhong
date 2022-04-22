@@ -1,6 +1,7 @@
 package Dao.deploy;
 
 import Connect.DBConnect;
+import Dao.IWishlistDao;
 import Entity.WishList;
 import Services.deploy.UserService;
 
@@ -11,7 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WishlistDao implements Dao.WishlistDao {
+public class WishlistDao implements IWishlistDao {
     private Connection conn = null;
     private PreparedStatement ps = null;
     private ResultSet rs = null;

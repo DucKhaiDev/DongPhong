@@ -1,6 +1,7 @@
 package Dao.deploy;
 
 import Connect.DBConnect;
+import Dao.IWLItemDao;
 import Entity.WLItem;
 import Services.deploy.ProductService;
 import Services.deploy.WishListService;
@@ -12,7 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WLItemDao implements Dao.WLItemDao {
+public class WLItemDao implements IWLItemDao {
     private Connection conn = null;
     private PreparedStatement ps = null;
     private ResultSet rs = null;

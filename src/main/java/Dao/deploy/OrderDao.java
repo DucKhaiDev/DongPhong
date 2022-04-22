@@ -1,9 +1,9 @@
 package Dao.deploy;
 
 import Connect.DBConnect;
+import Dao.IOrderDao;
 import Entity.Order;
 import Services.deploy.CartService;
-import Services.deploy.OrderService;
 import Services.deploy.PaymentService;
 import Services.deploy.UserService;
 
@@ -14,7 +14,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OrderDao implements Dao.OrderDao {
+public class OrderDao implements IOrderDao {
     private Connection conn = null;
     private PreparedStatement ps = null;
     private ResultSet rs = null;

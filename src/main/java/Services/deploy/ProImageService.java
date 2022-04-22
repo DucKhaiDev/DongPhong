@@ -2,10 +2,11 @@ package Services.deploy;
 
 import Dao.deploy.ProImageDao;
 import Entity.ProImage;
+import Services.IProImageService;
 
 import java.util.List;
 
-public class ProImageService implements Services.ProImageService {
+public class ProImageService implements IProImageService {
     private final ProImageDao imageDao = new ProImageDao();
 
     @Override

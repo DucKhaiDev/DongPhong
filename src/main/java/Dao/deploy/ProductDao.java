@@ -1,18 +1,16 @@
 package Dao.deploy;
 
 import Connect.DBConnect;
+import Dao.IProductDao;
 import Entity.Product;
 import Services.deploy.BrandService;
 import Services.deploy.CategoryService;
+import Services.deploy.ProductService;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.*;
+import java.util.*;
 
-public class ProductDao implements Dao.ProductDao {
+public class ProductDao implements IProductDao {
     private Connection conn = null;
     private PreparedStatement ps = null;
     private ResultSet rs = null;
@@ -496,5 +494,83 @@ public class ProductDao implements Dao.ProductDao {
         }
 
         return 0;
+    }
+
+    @Override
+    public Map<Product, Integer> bestseller(Timestamp fromDate, Timestamp toDate) {
+        conn = DBConnect.getConnection();
+        Map<Product, Integer> bestseller = new LinkedHashMap<>();
+
+        try {
+            ps = conn.prepareStatement("SELECT dbo.PRODUCT.PRO_ID, SUM(QUANT) " +
+                                                "FROM dbo.PRODUCT " +
+                                                "JOIN dbo.CARTITEM ON CARTITEM.PRO_ID = PRODUCT.PRO_ID " +
+                                                "JOIN dbo.CART ON CART.CART_ID = CARTITEM.CART_ID " +
+                                                "JOIN dbo.[ORDER] ON [ORDER].CART_ID = CART.CART_ID " +
+                                                "WHERE ? <= ORD_DATE AND ORD_DATE <= ? " +
+                                                "GROUP BY PRODUCT.PRO_ID " +
+                                                "ORDER BY SUM(QUANT) DESC, PRODUCT.PRO_ID ASC");
+            ps.setTimestamp(1, fromDate);
+            ps.setTimestamp(2, toDate);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Product product = new ProductService().getProduct(rs.getString(1));
+                bestseller.put(product, rs.getInt(2));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnect.closeAll(rs, ps, conn);
+        }
+
+        return bestseller;
+    }
+
+    @Override
+    public Map<Product, Integer> favourite() {
+        conn = DBConnect.getConnection();
+        Map<Product, Integer> favourite = new LinkedHashMap<>();
+
+        try {
+            ps = conn.prepareStatement("SELECT dbo.PRODUCT.PRO_ID, COUNT(WL_ID) " +
+                                                "FROM dbo.PRODUCT " +
+                                                "JOIN dbo.WLITEM ON WLITEM.PRO_ID = PRODUCT.PRO_ID " +
+                                                "GROUP BY PRODUCT.PRO_ID " +
+                                                "ORDER BY COUNT(WL_ID) DESC, PRODUCT.PRO_ID ASC");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Product product = new ProductService().getProduct(rs.getString(1));
+                favourite.put(product, rs.getInt(2));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnect.closeAll(rs, ps, conn);
+        }
+
+        return favourite;
+    }
+
+    @Override
+    public Map<Product, Double> highestRated() {
+        conn = DBConnect.getConnection();
+        Map<Product, Double> highestRated = new LinkedHashMap<>();
+
+        try {
+            ps = conn.prepareStatement("SELECT PRO_ID, PRO_RATE " +
+                                                "FROM dbo.PRODUCT " +
+                                                "ORDER BY PRO_RATE DESC, PRO_ID ASC");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Product product = new ProductService().getProduct(rs.getString(1));
+                highestRated.put(product, rs.getDouble(2));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnect.closeAll(rs, ps, conn);
+        }
+
+        return highestRated;
     }
 }

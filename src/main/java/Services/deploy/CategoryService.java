@@ -2,10 +2,11 @@ package Services.deploy;
 
 import Dao.deploy.CategoryDao;
 import Entity.Category;
+import Services.ICategoryService;
 
 import java.util.List;
 
-public class CategoryService implements Services.CategoryService {
+public class CategoryService implements ICategoryService {
     CategoryDao categoryDao = new CategoryDao();
 
     @Override

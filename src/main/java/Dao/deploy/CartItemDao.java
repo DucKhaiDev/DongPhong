@@ -1,6 +1,7 @@
 package Dao.deploy;
 
 import Connect.DBConnect;
+import Dao.ICartItemDao;
 import Entity.CartItem;
 import Services.deploy.CartService;
 import Services.deploy.ProductService;
@@ -12,7 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CartItemDao implements Dao.CartItemDao {
+public class CartItemDao implements ICartItemDao {
     private Connection conn = null;
     private PreparedStatement ps = null;
     private ResultSet rs = null;

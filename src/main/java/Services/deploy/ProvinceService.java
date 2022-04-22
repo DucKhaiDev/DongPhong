@@ -2,10 +2,11 @@ package Services.deploy;
 
 import Dao.deploy.ProvinceDao;
 import Entity.Province;
+import Services.IProvinceService;
 
 import java.util.List;
 
-public class ProvinceService implements Services.ProvinceService {
+public class ProvinceService implements IProvinceService {
     private final ProvinceDao provinceDao = new ProvinceDao();
 
     @Override

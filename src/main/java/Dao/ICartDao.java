@@ -1,0 +1,15 @@
+package Dao;
+
+import Entity.Cart;
+
+import java.util.List;
+
+public interface ICartDao {
+    void insert(Cart cart);
+    void edit(Cart cart);
+    void delete(String cartId);
+    Cart getCart(String cartId);
+    Cart getCartByUser(String userId);
+    List<Cart> getAll();
+    Cart getLastCart(String userId);
+}

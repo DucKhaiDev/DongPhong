@@ -3,10 +3,11 @@ package Services.deploy;
 import Dao.deploy.ReviewDao;
 import Entity.Product;
 import Entity.Review;
+import Services.IReviewService;
 
 import java.util.List;
 
-public class ReviewService implements Services.ReviewService {
+public class ReviewService implements IReviewService {
     private final ReviewDao reviewDao = new ReviewDao();
 
     @Override

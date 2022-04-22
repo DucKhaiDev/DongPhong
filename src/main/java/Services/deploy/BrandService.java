@@ -2,10 +2,11 @@ package Services.deploy;
 
 import Dao.deploy.BrandDao;
 import Entity.Brand;
+import Services.IBrandService;
 
 import java.util.List;
 
-public class BrandService implements Services.BrandService {
+public class BrandService implements IBrandService {
     private final BrandDao brandDao = new BrandDao();
 
     @Override

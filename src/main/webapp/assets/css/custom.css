@@ -78,6 +78,10 @@ p {
     margin-top: 3rem !important;
 }
 
+.mt-3 {
+    margin-top: 1rem !important;
+}
+
 .mb-1 {
     margin-bottom: 0.25rem !important;
 }
@@ -92,6 +96,14 @@ p {
 
 .mb-2 {
     margin-bottom: 0.5rem !important;
+}
+
+.text-uppercase {
+    text-transform: uppercase !important;
+}
+
+.align-items-end {
+    align-items: end !important;
 }
 
 .mt-2 {
@@ -1091,4 +1103,12 @@ ul.header-cart-wrapitem li {
 
 .w-60 {
     width: 60% !important;
+}
+
+.ml-0 {
+    margin-left: 0 !important;
+}
+
+.mr-0 {
+    margin-right: 0 !important;
 }

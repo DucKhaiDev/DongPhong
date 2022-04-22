@@ -2,11 +2,13 @@ package Services.deploy;
 
 import Dao.deploy.ProductDao;
 import Entity.Product;
+import Services.IProductService;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.util.*;
 
-public class ProductService implements Services.ProductService {
+public class ProductService implements IProductService {
     private final ProductDao productDao = new ProductDao();
 
     @Override
@@ -208,5 +210,20 @@ public class ProductService implements Services.ProductService {
     @Override
     public int countPrd_KeywordBrand(String keyword, String brandId) {
         return productDao.countPrd_KeywordBrand(keyword, brandId);
+    }
+
+    @Override
+    public Map<Product, Integer> bestseller(Timestamp fromDate, Timestamp toDate) {
+        return productDao.bestseller(fromDate, toDate);
+    }
+
+    @Override
+    public Map<Product, Integer> favourite() {
+        return productDao.favourite();
+    }
+
+    @Override
+    public Map<Product, Double> highestRated() {
+        return productDao.highestRated();
     }
 }

@@ -2,10 +2,11 @@ package Services.deploy;
 
 import Dao.deploy.VoucherDao;
 import Entity.Voucher;
+import Services.IVoucherService;
 
 import java.util.List;
 
-public class VoucherService implements Services.VoucherService {
+public class VoucherService implements IVoucherService {
     private final VoucherDao voucherDao = new VoucherDao();
 
     @Override

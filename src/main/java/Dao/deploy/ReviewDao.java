@@ -1,6 +1,7 @@
 package Dao.deploy;
 
 import Connect.DBConnect;
+import Dao.IReviewDao;
 import Entity.Product;
 import Entity.Review;
 import Services.deploy.ProductService;
@@ -13,7 +14,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReviewDao implements Dao.ReviewDao {
+public class ReviewDao implements IReviewDao {
     private Connection conn = null;
     private PreparedStatement ps = null;
     private ResultSet rs = null;

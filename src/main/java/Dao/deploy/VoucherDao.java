@@ -1,6 +1,7 @@
 package Dao.deploy;
 
 import Connect.DBConnect;
+import Dao.IVoucherDao;
 import Entity.Voucher;
 
 import java.sql.Connection;
@@ -10,7 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class VoucherDao implements Dao.VoucherDao {
+public class VoucherDao implements IVoucherDao {
     private Connection conn = null;
     private PreparedStatement ps = null;
     private ResultSet rs = null;

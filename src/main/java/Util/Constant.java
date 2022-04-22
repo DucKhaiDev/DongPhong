@@ -37,6 +37,8 @@ public class Constant {
         public static final String ADMIN_EDIT_VOUCHER = "/View/Admin/edit-voucher.jsp";
         public static final String ADMIN_REVIEW = "/View/Admin/review.jsp";
         public static final String ADMIN_REVIEW_DETAIL = "/View/Admin/review-detail.jsp";
+        public static final String ADMIN_REPORT = "/View/Admin/report.jsp";
+        public static final String ADMIN_STATISTIC = "/View/Admin/statistic.jsp";
 
         //Client constants
         public static final String REGISTER = "/View/Client/register.jsp";

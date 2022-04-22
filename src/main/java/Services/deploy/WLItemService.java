@@ -2,10 +2,11 @@ package Services.deploy;
 
 import Dao.deploy.WLItemDao;
 import Entity.WLItem;
+import Services.IWLItemService;
 
 import java.util.List;
 
-public class WLItemService implements Services.WLItemService {
+public class WLItemService implements IWLItemService {
     private final WLItemDao itemDao = new WLItemDao();
 
     @Override

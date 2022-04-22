@@ -1,6 +1,7 @@
 package Dao.deploy;
 
 import Connect.DBConnect;
+import Dao.IRoomDao;
 import Entity.Room;
 
 import java.sql.Connection;
@@ -10,7 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RoomDao implements Dao.RoomDao {
+public class RoomDao implements IRoomDao {
     private Connection conn = null;
     private PreparedStatement ps = null;
     private ResultSet rs = null;
