@@ -36,7 +36,7 @@ public class OrderDao implements IOrderDao {
             ps.setString(4, order.getRecipientPhone());
             ps.setTimestamp(5, order.getOrderDate());
             ps.setDate(6, order.getRecipientDate());
-            ps.setString(7, order.getOrderStatus());
+            ps.setBoolean(7, order.getOrderStatus());
             ps.setInt(8, order.getOrderSumProduct());
             ps.setBigDecimal(9, order.getOrderShipping());
             ps.setBigDecimal(10, order.getOrderTax());
@@ -66,7 +66,7 @@ public class OrderDao implements IOrderDao {
             ps.setString(4, order.getRecipientPhone());
             ps.setTimestamp(5, order.getOrderDate());
             ps.setDate(6, order.getRecipientDate());
-            ps.setString(7, order.getOrderStatus());
+            ps.setBoolean(7, order.getOrderStatus());
             ps.setInt(8, order.getOrderSumProduct());
             ps.setBigDecimal(9, order.getOrderShipping());
             ps.setBigDecimal(10, order.getOrderTax());
@@ -117,7 +117,9 @@ public class OrderDao implements IOrderDao {
             order.setRecipientPhone(rs.getString("REC_PHONE"));
             order.setOrderDate(rs.getTimestamp("ORD_DATE"));
             order.setRecipientDate(rs.getDate("REC_DATE"));
-            order.setOrderStatus(rs.getString("ORD_STATUS"));
+            Boolean status = rs.getBoolean("ORD_STATUS");
+            if (rs.wasNull()) status = null;
+            order.setOrderStatus(status);
             order.setOrderSumProduct(rs.getInt("ORD_SUMPRO"));
             order.setOrderShipping(rs.getBigDecimal("ORD_SHIPPING"));
             order.setOrderTax(rs.getBigDecimal("ORD_TAX"));
@@ -151,7 +153,9 @@ public class OrderDao implements IOrderDao {
             order.setRecipientPhone(rs.getString("REC_PHONE"));
             order.setOrderDate(rs.getTimestamp("ORD_DATE"));
             order.setRecipientDate(rs.getDate("REC_DATE"));
-            order.setOrderStatus(rs.getString("ORD_STATUS"));
+            Boolean status = rs.getBoolean("ORD_STATUS");
+            if (rs.wasNull()) status = null;
+            order.setOrderStatus(status);
             order.setOrderSumProduct(rs.getInt("ORD_SUMPRO"));
             order.setOrderShipping(rs.getBigDecimal("ORD_SHIPPING"));
             order.setOrderTax(rs.getBigDecimal("ORD_TAX"));
@@ -186,7 +190,9 @@ public class OrderDao implements IOrderDao {
                 order.setRecipientPhone(rs.getString("REC_PHONE"));
                 order.setOrderDate(rs.getTimestamp("ORD_DATE"));
                 order.setRecipientDate(rs.getDate("REC_DATE"));
-                order.setOrderStatus(rs.getString("ORD_STATUS"));
+                Boolean status = rs.getBoolean("ORD_STATUS");
+                if (rs.wasNull()) status = null;
+                order.setOrderStatus(status);
                 order.setOrderSumProduct(rs.getInt("ORD_SUMPRO"));
                 order.setOrderShipping(rs.getBigDecimal("ORD_SHIPPING"));
                 order.setOrderTax(rs.getBigDecimal("ORD_TAX"));

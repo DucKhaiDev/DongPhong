@@ -507,7 +507,7 @@ public class ProductDao implements IProductDao {
                                                 "JOIN dbo.CARTITEM ON CARTITEM.PRO_ID = PRODUCT.PRO_ID " +
                                                 "JOIN dbo.CART ON CART.CART_ID = CARTITEM.CART_ID " +
                                                 "JOIN dbo.[ORDER] ON [ORDER].CART_ID = CART.CART_ID " +
-                                                "WHERE ? <= ORD_DATE AND ORD_DATE <= ? " +
+                                                "WHERE ? <= ORD_DATE AND ORD_DATE <= DATEADD(DAY, 1, ?) " +
                                                 "GROUP BY PRODUCT.PRO_ID " +
                                                 "ORDER BY SUM(QUANT) DESC, PRODUCT.PRO_ID ASC");
             ps.setTimestamp(1, fromDate);

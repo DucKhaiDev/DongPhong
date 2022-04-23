@@ -72,7 +72,6 @@ public class Checkout extends HttpServlet {
         } else if (paymentMethod == 3) {
             return;
         } else if (paymentMethod == 4) {
-            order.setOrderStatus(payment.getPaymentMethod());
             String message = "Cảm ơn bạn đã đặt hàng. Đơn hàng của bạn đã được ghi nhận. Vui lòng thanh toán khi nhận được hàng.";
             session.setAttribute("message", message);
         }

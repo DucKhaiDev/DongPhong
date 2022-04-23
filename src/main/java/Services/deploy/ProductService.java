@@ -68,25 +68,19 @@ public class ProductService implements IProductService {
 
     @Override
     public void sortByPriceAsc(List<Product> products) {
-        products.sort(new Comparator<Product>() {
-            @Override
-            public int compare(Product o1, Product o2) {
-                BigDecimal o1price = o1.getProductPrice();
-                BigDecimal o2price = o2.getProductPrice();
-                return o1price.compareTo(o2price);
-            }
+        products.sort((o1, o2) -> {
+            BigDecimal o1price = o1.getProductPrice();
+            BigDecimal o2price = o2.getProductPrice();
+            return o1price.compareTo(o2price);
         });
     }
 
     @Override
     public void sortByPriceDesc(List<Product> products) {
-        products.sort(Collections.reverseOrder(new Comparator<Product>() {
-            @Override
-            public int compare(Product o1, Product o2) {
-                BigDecimal o1price = o1.getProductPrice();
-                BigDecimal o2price = o2.getProductPrice();
-                return o1price.compareTo(o2price);
-            }
+        products.sort(Collections.reverseOrder((o1, o2) -> {
+            BigDecimal o1price = o1.getProductPrice();
+            BigDecimal o2price = o2.getProductPrice();
+            return o1price.compareTo(o2price);
         }));
     }
 

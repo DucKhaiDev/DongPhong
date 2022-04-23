@@ -41,7 +41,6 @@ public class AddOrder extends HttpServlet {
         order.setCart((Cart) session.getAttribute("cart"));
         Payment payment = new PaymentService().getPayment(request.getParameter("paymentMethod"));
         order.setPayment(payment);
-        order.setOrderStatus(payment.getPaymentMethod());
 
         new OrderService().insert(order);
 

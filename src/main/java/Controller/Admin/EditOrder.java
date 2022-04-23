@@ -55,7 +55,7 @@ public class EditOrder extends HttpServlet {
         order.setCart((Cart) session.getAttribute("cart"));
         Payment payment = new PaymentService().getPayment(request.getParameter("paymentMethod"));
         order.setPayment(payment);
-        order.setOrderStatus(payment.getPaymentMethod());
+        order.setOrderStatus(false);
 
         new OrderService().edit(order);
         /*String cartId = ((Cart) session.getAttribute("cart")).getCartId();

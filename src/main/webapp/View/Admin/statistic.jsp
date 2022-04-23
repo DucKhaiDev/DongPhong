@@ -76,25 +76,11 @@
                                 <form action="<c:url value="/admin/statistic"/>" method="get" class="row d-flex justify-content-center mt-3 mb-3">
                                     <div class="col-md-2 mb-3">
                                         <label for="fromDate" class="labels">Từ ngày</label>
-                                        <input id="fromDate" type="date" value="<%
-                                            Timestamp fromDate = (Timestamp) request.getAttribute("fromDate");
-                                            if (fromDate != null) {
-                                                out.print(new SimpleDateFormat("yyyy-MM-dd").format(fromDate));
-                                            } else {
-                                                out.print(new SimpleDateFormat("yyyy-MM-dd").format(Date.from(LocalDate.now().minusDays(30).atStartOfDay(ZoneId.systemDefault()).toInstant())));
-                                            }
-                                        %>" class="form-control text-center" name="fromDate">
+                                        <input id="fromDate" type="date" value="<% out.print(new SimpleDateFormat("yyyy-MM-dd").format((Timestamp) request.getAttribute("fromDate"))); %>" class="form-control text-center" name="fromDate">
                                     </div>
                                     <div class="col-md-2 mb-3">
                                         <label for="toDate" class="labels">Đến ngày</label>
-                                        <input id="toDate" type="date" value="<%
-                                            Timestamp toDate = (Timestamp) request.getAttribute("toDate");
-                                            if (toDate != null) {
-                                                out.print(new SimpleDateFormat("yyyy-MM-dd").format(toDate));
-                                            } else {
-                                                out.print(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
-                                            }
-                                        %>" class="form-control text-center" name="toDate">
+                                        <input id="toDate" type="date" value="<% out.print(new SimpleDateFormat("yyyy-MM-dd").format((Timestamp) request.getAttribute("toDate"))); %>" class="form-control text-center" name="toDate">
                                     </div>
                                     <div class="col-md-2 mb-3 d-flex align-items-end">
                                         <button type="submit" class="btn btn-primary ct-button w-100">

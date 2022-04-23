@@ -107,7 +107,7 @@
                                                     out.print(dongFormat.format(total));
                                                 %>
                                             </td>
-                                            <td>${order.orderStatus}</td>
+                                            <td>${order.orderStatus == null ? "Chưa hoàn thành" : (order.orderStatus ? "Hoàn thành" : "Hủy bỏ")}</td>
                                             <td>
                                                 <a href="<c:url value="/admin/order/detail?id=${order.orderId}"/>" class="text-center">Chi tiết</a>&nbsp;|&nbsp;
                                                 <a href="<c:url value="/admin/order/edit?id=${order.orderId}"/>" class="text-center">Sửa</a>&nbsp;|&nbsp;

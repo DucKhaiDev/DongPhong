@@ -29,22 +29,22 @@ public class StatisticController extends HttpServlet {
         if (fromDateParam != null && !fromDateParam.trim().isEmpty()) {
             try {
                 fromDate = new Timestamp(new SimpleDateFormat("yyyy-MM-dd").parse(fromDateParam).getTime());
-                request.setAttribute("fromDate", fromDate);
             } catch (ParseException e) {
                 e.printStackTrace();
             }
         }
+        request.setAttribute("fromDate", fromDate);
 
         Timestamp toDate = new Timestamp(new Date().getTime());
         String toDateParam = request.getParameter("toDate");
         if (toDateParam != null && !toDateParam.trim().isEmpty()) {
             try {
                 toDate = new Timestamp(new SimpleDateFormat("yyyy-MM-dd").parse(toDateParam).getTime());
-                request.setAttribute("toDate", toDate);
             } catch (ParseException e) {
                 e.printStackTrace();
             }
         }
+        request.setAttribute("toDate", toDate);
 
         Map<Product, Integer> bestseller = productService.bestseller(fromDate, toDate);
         request.setAttribute("bestseller", bestseller);
