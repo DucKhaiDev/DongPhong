@@ -228,7 +228,7 @@ public class ForgetPassword extends HttpServlet {
                 "                                            <td style=\"vertical-align: top; text-align: center; padding: 10px 20px 15px 20px; font-family: sans-serif; font-size: 15px; line-height: 20px; color: #fff;\">\n" +
                 "                                                <p style=\"margin: 0; text-align: start\">\n" +
                 "                                                    Chúng tôi đã nhận được yêu cầu cấp lại mật khẩu của bạn! <br>\n" +
-                "                                                    Mật khẩu mới của bạn là: " + newPassword + " <br>\n" +
+                "                                                    Mật khẩu mới của bạn là: <b>" + newPassword + "</b> <br>\n" +
                 "                                                    Nếu bạn không thực hiện yêu cầu này, vui lòng thông báo cho chúng tôi biết.\n" +
                 "                                                </p>\n" +
                 "                                            </td>\n" +
