@@ -1,10 +1,7 @@
 package Controller.Client;
 
 import Entity.*;
-import Services.deploy.CartItemService;
-import Services.deploy.CartService;
-import Services.deploy.OrderService;
-import Services.deploy.PaymentService;
+import Services.deploy.*;
 import Tools.SendEmail;
 import Util.Constant;
 import jakarta.servlet.ServletException;
@@ -88,6 +85,13 @@ public class Checkout extends HttpServlet {
         session.setAttribute("order_rv", order_rv);
         List<CartItem> cartItems_rv = cartItemService.getItemByCart(order.getCart().getCartId());
         session.setAttribute("cartItems_rv", cartItems_rv);
+
+        //Update product quantity
+        for (CartItem item : cartItems_rv) {
+            Product product = item.getProduct();
+            product.setProductQuantity(product.getProductQuantity() - item.getQuantity());
+            new ProductService().edit(product);
+        }
 
         //Send email
         String content = "<!DOCTYPE html>\n" +
