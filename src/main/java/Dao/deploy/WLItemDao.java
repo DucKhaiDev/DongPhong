@@ -80,10 +80,11 @@ public class WLItemDao implements IWLItemDao {
             ps = conn.prepareStatement("SELECT * FROM [WLITEM] WHERE WLITEM_ID = ?");
             ps.setInt(1, wlItemId);
             rs = ps.executeQuery();
-            rs.next();
-            item.setWlItemId(wlItemId);
-            item.setProduct(productService.getProduct(rs.getString("PRO_ID").trim()));
-            item.setWishList(wishlistService.getWishlist(rs.getString("WL_ID").trim()));
+            if (rs.next()) {
+                item.setWlItemId(wlItemId);
+                item.setProduct(productService.getProduct(rs.getString("PRO_ID").trim()));
+                item.setWishList(wishlistService.getWishlist(rs.getString("WL_ID").trim()));
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

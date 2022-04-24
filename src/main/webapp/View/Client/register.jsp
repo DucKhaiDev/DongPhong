@@ -36,6 +36,8 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/main.css">
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/login-stylesheet.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/custom.css">
 </head>
 <body>
 <!-- Header -->
@@ -77,10 +79,13 @@
                                             <input type="password" class="form-control" id="repeatPassword" name="repeatPassword" required="required">
                                             <p class="text-muted" style="color: #FF0000 !important;">${requestScope.rpswMsg}</p>
                                         </div>
-                                        <div class="form-group mb-5">
+                                        <div class="form-group">
                                             <label for="email">Email</label>
                                             <input type="email" class="form-control" id="email" name="email" required="required">
                                             <p class="text-muted" style="color: #FF0000 !important;">${requestScope.emailMsg}</p>
+                                        </div>
+                                        <div class="form-group mb-5 text-end">
+                                            Đã có tài khoản? <a href="${pageContext.request.contextPath}/login">Đăng nhập</a>
                                         </div>
                                         <button type="submit" class="btn btn-theme float-r">Đăng ký</button>
                                     </form>

@@ -75,10 +75,11 @@ public class BrandDao implements IBrandDao {
             ps.setString(1, brandId);
             rs = ps.executeQuery();
 
-            rs.next();
-            brand.setBrandId(rs.getString("BRA_ID").trim());
-            brand.setBrandName(rs.getString("BRA_NAME"));
-            brand.setBrandDescription(rs.getString("BRA_DES"));
+            if (rs.next()) {
+                brand.setBrandId(rs.getString("BRA_ID").trim());
+                brand.setBrandName(rs.getString("BRA_NAME"));
+                brand.setBrandDescription(rs.getString("BRA_DES"));
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

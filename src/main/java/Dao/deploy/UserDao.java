@@ -25,8 +25,9 @@ public class UserDao implements IUserDao {
             ps.setString(1, identify);
             ps.setString(2, identify);
             rs = ps.executeQuery();
-            rs.next();
-            return rs.getString("USER_ID");
+            if (rs.next()) {
+                return rs.getString("USER_ID");
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -111,18 +112,18 @@ public class UserDao implements IUserDao {
             ps.setString(2, identify);
             ps.setString(3, identify);
             rs = ps.executeQuery();
-
-            rs.next();
-            user.setUserId(rs.getString("USER_ID"));
-            user.setFirstName(rs.getString("FIRSTNAME"));
-            user.setLastName(rs.getString("LASTNAME"));
-            user.setUsername(rs.getString("USERNAME"));
-            user.setPassword(rs.getString("PASSWORD"));
-            user.setEmail(rs.getString("EMAIL"));
-            user.setAddress(rs.getString("ADDRESS"));
-            user.setPhone(rs.getString("PHONE"));
-            user.setAvatar(rs.getString("AVATAR"));
-            user.setRole(rs.getBoolean("ROLE"));
+            if (rs.next()) {
+                user.setUserId(rs.getString("USER_ID"));
+                user.setFirstName(rs.getString("FIRSTNAME"));
+                user.setLastName(rs.getString("LASTNAME"));
+                user.setUsername(rs.getString("USERNAME"));
+                user.setPassword(rs.getString("PASSWORD"));
+                user.setEmail(rs.getString("EMAIL"));
+                user.setAddress(rs.getString("ADDRESS"));
+                user.setPhone(rs.getString("PHONE"));
+                user.setAvatar(rs.getString("AVATAR"));
+                user.setRole(rs.getBoolean("ROLE"));
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -139,7 +140,6 @@ public class UserDao implements IUserDao {
 
         try {
             ps = conn.prepareStatement("SELECT * FROM [USER] ORDER BY [ROLE] ASC");
-
             rs = ps.executeQuery();
             while (rs.next()) {
                 User user = new User();
@@ -173,7 +173,6 @@ public class UserDao implements IUserDao {
         try {
             ps = conn.prepareStatement("SELECT * FROM [USER] WHERE USERNAME LIKE ? ORDER BY USER_ID ASC");
             ps.setString(1, "%" + username + "%");
-
             rs = ps.executeQuery();
             while (rs.next()) {
                 User user = new User();
@@ -206,7 +205,6 @@ public class UserDao implements IUserDao {
         try {
             ps = conn.prepareStatement("SELECT * FROM [USER] WHERE USERNAME = ?");
             ps.setString(1, username);
-
             rs = ps.executeQuery();
             if (rs.next()) {
                 return true;
@@ -227,7 +225,6 @@ public class UserDao implements IUserDao {
         try {
             ps = conn.prepareStatement("SELECT * FROM [USER] WHERE EMAIL = ?");
             ps.setString(1, email);
-
             rs = ps.executeQuery();
             if (rs.next()) {
                 return true;
@@ -249,8 +246,9 @@ public class UserDao implements IUserDao {
         try {
             ps = conn.prepareStatement("SELECT COUNT(*) FROM [USER] WHERE [ROLE] = 'False'");
             rs = ps.executeQuery();
-            rs.next();
-            count = rs.getInt(1);
+            if (rs.next()) {
+                count = rs.getInt(1);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

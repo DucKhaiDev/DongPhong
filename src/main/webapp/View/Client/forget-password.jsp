@@ -1,14 +1,14 @@
 <%--
   User: duckhaidev
-  Date: 1/23/2022
-  Time: 10:57 AM
+  Date: 4/24/2022
+  Time: 8:27 PM
 --%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Đăng nhập</title>
+    <title>Quên mật khẩu</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--===============================================================================================-->
@@ -52,56 +52,19 @@
 <section class="bg0 p-t-62 p-b-60">
     <div id="main-wrapper" class="container">
         <div class="row justify-content-center">
-            <div class="col-xl-10">
-                <div class="card border-0">
-                    <div class="card-body p-0">
-                        <div class="row no-gutters">
-                            <div class="col-lg-6">
-                                <div class="p-5">
-                                    <div class="mb-5">
-                                        <h3 class="h4 font-weight-bold text-theme">ĐĂNG NHẬP</h3>
-                                    </div>
-                                    <h6 class="h5 mb-0">Chào mừng bạn quay trở lại!</h6>
-                                    <p class="text-muted mt-2 mb-5" style="color: #FF0000 !important;">${requestScope.loginMsg}</p>
-                                    <form id="form-login" action="login" method="post">
-                                        <div class="form-group">
-                                            <label for="username">Tên đăng nhập hoặc Email</label>
-                                            <input type="text" class="form-control" id="username" name="username" required="required">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="password">Mật khẩu</label>
-                                            <input type="password" class="form-control" id="password" name="password" required="required">
-                                        </div>
-                                        <div class="form-group row mb-5">
-                                            <div class="col-6">
-                                                <label class="checkbox">
-                                                    <input class="d-inline-block mr-2" type="checkbox" id="rememberMe" name="rememberMe">
-                                                    <label class="d-inline-block" for="rememberMe">Nhớ mật khẩu</label>
-                                                </label>
-                                            </div>
-                                            <div class="col-6">
-                                                <a href="${pageContext.request.contextPath}/forget-password" class="forgot-link float-right text-primary">Quên mật khẩu?</a>
-                                            </div>
-                                        </div>
-                                        <button type="submit" class="btn btn-theme">Đăng nhập</button>
-                                    </form>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-6 d-none d-lg-inline-block">
-                                <div class="account-block rounded-right"></div>
-                            </div>
+            <div class="col-md-6">
+                <div class="mb-5">
+                    <h3 class="h4 font-weight-bold text-theme text-center mb-5">QUÊN MẬT KHẨU?</h3>
+                    <form action="<c:url value="/forget-password"/>" method="post">
+                        <div class="form-group mb-4">
+                            <label for="username">Tên đăng nhập hoặc Email</label>
+                            <input type="text" class="form-control" id="username" name="username" required="required">
                         </div>
-
-                    </div>
-                    <!-- end card-body -->
+                        <div class="form-group d-flex justify-content-center">
+                            <button type="submit" class="btn btn-theme">Gửi yêu cầu</button>
+                        </div>
+                    </form>
                 </div>
-                <!-- end card -->
-
-                <p class="text-muted text-center mt-4 mb-0">Chưa có tài khoản? <a href="${pageContext.request.contextPath}/register" class="text-primary ml-1">Đăng ký ngay</a></p>
-
-                <!-- end row -->
-
             </div>
             <!-- end col -->
         </div>
@@ -152,6 +115,23 @@
 <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
 <!--===============================================================================================-->
 <script src="${pageContext.request.contextPath}/assets/js/custom.js"></script>
+<!--===============================================================================================-->
+<script src="${pageContext.request.contextPath}/assets/vendor/sweetalert/sweetalert.min.js"></script>
+<script>
+    $(function () {
+        const message = '${requestScope.message}';
+        if (message !== '') {
+            swal({
+                text: '${requestScope.message}',
+                icon: 'info'
+            }).then(function () {
+                if (message !== 'Email/Tên đăng nhập không tồn tại!') {
+                    location.href = '${pageContext.request.contextPath}/login';
+                }
+            });
+        }
+    });
+</script>
 
 </body>
 </html>

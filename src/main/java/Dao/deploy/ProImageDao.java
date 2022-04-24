@@ -93,11 +93,11 @@ public class ProImageDao implements IProImageDao {
             ps = conn.prepareStatement("SELECT * FROM [PROIMAGE] WHERE IMG_ID =  ?");
             ps.setInt(1, imageId);
             rs = ps.executeQuery();
-
-            rs.next();
-            image.setImageId(imageId);
-            image.setImageName(rs.getString("IMG_NAME"));
-            image.setProduct(productService.getProduct(rs.getString("PRO_ID")));
+            if (rs.next()) {
+                image.setImageId(imageId);
+                image.setImageName(rs.getString("IMG_NAME"));
+                image.setProduct(productService.getProduct(rs.getString("PRO_ID")));
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -115,7 +115,6 @@ public class ProImageDao implements IProImageDao {
         try {
             ps = conn.prepareStatement("SELECT * FROM [PROIMAGE] WHERE PRO_ID = ? ORDER BY IMG_ID ASC");
             ps.setString(1, productId);
-
             rs = ps.executeQuery();
             while (rs.next()) {
                 ProImage image = new ProImage();
@@ -141,7 +140,6 @@ public class ProImageDao implements IProImageDao {
 
         try {
             ps = conn.prepareStatement("SELECT * FROM [PROIMAGE] ORDER BY IMG_ID ASC");
-
             rs = ps.executeQuery();
             while (rs.next()) {
                 ProImage image = new ProImage();

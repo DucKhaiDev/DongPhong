@@ -109,25 +109,26 @@ public class OrderDao implements IOrderDao {
             ps = conn.prepareStatement("SELECT * FROM [ORDER] WHERE ORD_ID = ?");
             ps.setInt(1, orderId);
             rs = ps.executeQuery();
-            rs.next();
-            order.setOrderId(orderId);
-            order.setUser(userService.getUser(rs.getString("USER_ID").trim()));
-            order.setRecipientName(rs.getString("REC_NAME"));
-            order.setRecipientAddress(rs.getString("REC_ADDRESS"));
-            order.setRecipientPhone(rs.getString("REC_PHONE"));
-            order.setOrderDate(rs.getTimestamp("ORD_DATE"));
-            order.setRecipientDate(rs.getDate("REC_DATE"));
-            Boolean status = rs.getBoolean("ORD_STATUS");
-            if (rs.wasNull()) status = null;
-            order.setOrderStatus(status);
-            order.setOrderSumProduct(rs.getInt("ORD_SUMPRO"));
-            order.setOrderShipping(rs.getBigDecimal("ORD_SHIPPING"));
-            order.setOrderTax(rs.getBigDecimal("ORD_TAX"));
-            order.setOrderSubTotal(rs.getBigDecimal("ORD_SUBTOTAL"));
-            order.setOrderDiscount(rs.getBigDecimal("ORD_DISCOUNT"));
-            order.setOrderTotal(rs.getBigDecimal("ORD_TOTAL"));
-            order.setCart(cartService.getCart(rs.getString("CART_ID").trim()));
-            order.setPayment(paymentService.getPayment(rs.getString("PAY_ID").trim()));
+            if (rs.next()) {
+                order.setOrderId(orderId);
+                order.setUser(userService.getUser(rs.getString("USER_ID").trim()));
+                order.setRecipientName(rs.getString("REC_NAME"));
+                order.setRecipientAddress(rs.getString("REC_ADDRESS"));
+                order.setRecipientPhone(rs.getString("REC_PHONE"));
+                order.setOrderDate(rs.getTimestamp("ORD_DATE"));
+                order.setRecipientDate(rs.getDate("REC_DATE"));
+                Boolean status = rs.getBoolean("ORD_STATUS");
+                if (rs.wasNull()) status = null;
+                order.setOrderStatus(status);
+                order.setOrderSumProduct(rs.getInt("ORD_SUMPRO"));
+                order.setOrderShipping(rs.getBigDecimal("ORD_SHIPPING"));
+                order.setOrderTax(rs.getBigDecimal("ORD_TAX"));
+                order.setOrderSubTotal(rs.getBigDecimal("ORD_SUBTOTAL"));
+                order.setOrderDiscount(rs.getBigDecimal("ORD_DISCOUNT"));
+                order.setOrderTotal(rs.getBigDecimal("ORD_TOTAL"));
+                order.setCart(cartService.getCart(rs.getString("CART_ID").trim()));
+                order.setPayment(paymentService.getPayment(rs.getString("PAY_ID").trim()));
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -145,25 +146,26 @@ public class OrderDao implements IOrderDao {
         try {
             ps = conn.prepareStatement("SELECT * FROM [ORDER] WHERE ORD_ID = (SELECT MAX(ORD_ID) FROM [ORDER])");
             rs = ps.executeQuery();
-            rs.next();
-            order.setOrderId(rs.getInt("ORD_ID"));
-            order.setUser(userService.getUser(rs.getString("USER_ID").trim()));
-            order.setRecipientName(rs.getString("REC_NAME"));
-            order.setRecipientAddress(rs.getString("REC_ADDRESS"));
-            order.setRecipientPhone(rs.getString("REC_PHONE"));
-            order.setOrderDate(rs.getTimestamp("ORD_DATE"));
-            order.setRecipientDate(rs.getDate("REC_DATE"));
-            Boolean status = rs.getBoolean("ORD_STATUS");
-            if (rs.wasNull()) status = null;
-            order.setOrderStatus(status);
-            order.setOrderSumProduct(rs.getInt("ORD_SUMPRO"));
-            order.setOrderShipping(rs.getBigDecimal("ORD_SHIPPING"));
-            order.setOrderTax(rs.getBigDecimal("ORD_TAX"));
-            order.setOrderSubTotal(rs.getBigDecimal("ORD_SUBTOTAL"));
-            order.setOrderDiscount(rs.getBigDecimal("ORD_DISCOUNT"));
-            order.setOrderTotal(rs.getBigDecimal("ORD_TOTAL"));
-            order.setCart(cartService.getCart(rs.getString("CART_ID").trim()));
-            order.setPayment(paymentService.getPayment(rs.getString("PAY_ID").trim()));
+            if (rs.next()) {
+                order.setOrderId(rs.getInt("ORD_ID"));
+                order.setUser(userService.getUser(rs.getString("USER_ID").trim()));
+                order.setRecipientName(rs.getString("REC_NAME"));
+                order.setRecipientAddress(rs.getString("REC_ADDRESS"));
+                order.setRecipientPhone(rs.getString("REC_PHONE"));
+                order.setOrderDate(rs.getTimestamp("ORD_DATE"));
+                order.setRecipientDate(rs.getDate("REC_DATE"));
+                Boolean status = rs.getBoolean("ORD_STATUS");
+                if (rs.wasNull()) status = null;
+                order.setOrderStatus(status);
+                order.setOrderSumProduct(rs.getInt("ORD_SUMPRO"));
+                order.setOrderShipping(rs.getBigDecimal("ORD_SHIPPING"));
+                order.setOrderTax(rs.getBigDecimal("ORD_TAX"));
+                order.setOrderSubTotal(rs.getBigDecimal("ORD_SUBTOTAL"));
+                order.setOrderDiscount(rs.getBigDecimal("ORD_DISCOUNT"));
+                order.setOrderTotal(rs.getBigDecimal("ORD_TOTAL"));
+                order.setCart(cartService.getCart(rs.getString("CART_ID").trim()));
+                order.setPayment(paymentService.getPayment(rs.getString("PAY_ID").trim()));
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

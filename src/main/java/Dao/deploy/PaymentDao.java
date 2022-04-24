@@ -76,10 +76,11 @@ public class PaymentDao implements IPaymentDao {
             ps = conn.prepareStatement("SELECT * FROM [PAYMENT] WHERE PAY_ID = ?");
             ps.setString(1, PAY_ID);
             rs = ps.executeQuery();
-            rs.next();
-            payment.setPaymentId(PAY_ID);
-            payment.setPaymentMethod(rs.getString("PAY_METHOD"));
-            payment.setPaymentStatus(rs.getBoolean("PAY_STATUS"));
+            if (rs.next()) {
+                payment.setPaymentId(PAY_ID);
+                payment.setPaymentMethod(rs.getString("PAY_METHOD"));
+                payment.setPaymentStatus(rs.getBoolean("PAY_STATUS"));
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

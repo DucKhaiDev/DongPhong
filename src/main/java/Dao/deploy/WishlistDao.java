@@ -79,9 +79,10 @@ public class WishlistDao implements IWishlistDao {
             ps.setString(1, wishListId);
 
             rs = ps.executeQuery();
-            rs.next();
-            wishlist.setWishListId(wishListId);
-            wishlist.setUser(userService.getUser(rs.getString("USER_ID")));
+            if (rs.next()) {
+                wishlist.setWishListId(wishListId);
+                wishlist.setUser(userService.getUser(rs.getString("USER_ID")));
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -100,9 +101,10 @@ public class WishlistDao implements IWishlistDao {
             ps = conn.prepareStatement("SELECT * FROM [WISHLIST] WHERE USER_ID = ?");
             ps.setString(1, userId);
             rs = ps.executeQuery();
-            rs.next();
-            wishList.setWishListId(rs.getString("WL_ID"));
-            wishList.setUser(userService.getUser(userId));
+            if (rs.next()) {
+                wishList.setWishListId(rs.getString("WL_ID"));
+                wishList.setUser(userService.getUser(userId));
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

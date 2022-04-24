@@ -1112,3 +1112,7 @@ ul.header-cart-wrapitem li {
 .mr-0 {
     margin-right: 0 !important;
 }
+
+.text-end {
+    text-align: end !important;
+}

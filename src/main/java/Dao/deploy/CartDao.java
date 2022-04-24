@@ -75,9 +75,10 @@ public class CartDao implements ICartDao {
             ps = conn.prepareStatement("SELECT * FROM [CART] WHERE CART_ID = ?");
             ps.setString(1, cartId);
             rs = ps.executeQuery();
-            rs.next();
-            cart.setCartId(rs.getString("CART_ID"));
-            cart.setUser(userService.getUser(rs.getString("USER_ID")));
+            if (rs.next()) {
+                cart.setCartId(rs.getString("CART_ID"));
+                cart.setUser(userService.getUser(rs.getString("USER_ID")));
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -96,9 +97,10 @@ public class CartDao implements ICartDao {
             ps = conn.prepareStatement("SELECT * FROM [CART] WHERE USER_ID = ?");
             ps.setString(1, userId);
             rs = ps.executeQuery();
-            rs.next();
-            cart.setCartId(rs.getString("CART_ID"));
-            cart.setUser(userService.getUser(userId));
+            if (rs.next()) {
+                cart.setCartId(rs.getString("CART_ID"));
+                cart.setUser(userService.getUser(userId));
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -143,9 +145,10 @@ public class CartDao implements ICartDao {
                                                 "WHERE USER_ID = ? ORDER BY CART_ID DESC");
             ps.setString(1, userId);
             rs = ps.executeQuery();
-            rs.next();
-            cart.setCartId(rs.getString("CART_ID"));
-            cart.setUser(userService.getUser(rs.getString("USER_ID")));
+            if (rs.next()) {
+                cart.setCartId(rs.getString("CART_ID"));
+                cart.setUser(userService.getUser(rs.getString("USER_ID")));
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

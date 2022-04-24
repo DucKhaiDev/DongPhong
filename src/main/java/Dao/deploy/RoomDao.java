@@ -25,9 +25,10 @@ public class RoomDao implements IRoomDao {
             ps = conn.prepareStatement("SELECT * FROM [ROOM] WHERE ROOM_ID = ?");
             ps.setString(1, roomId);
             rs = ps.executeQuery();
-            rs.next();
-            room.setRoomId(roomId);
-            room.setRoomName(rs.getString("ROOM_NAME"));
+            if (rs.next()) {
+                room.setRoomId(roomId);
+                room.setRoomName(rs.getString("ROOM_NAME"));
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

@@ -25,11 +25,12 @@ public class ProvinceDao implements IProvinceDao {
             ps = conn.prepareStatement("SELECT * FROM [PROVINCE] WHERE PVC_ID = ?");
             ps.setInt(1, id);
             rs = ps.executeQuery();
-            rs.next();
-            province.setProvinceId(id);
-            province.setProvinceName(rs.getString("PVC_NAME"));
-            province.setLatitude(rs.getDouble("LAT"));
-            province.setLongitude(rs.getDouble("LONG"));
+            if (rs.next()) {
+                province.setProvinceId(id);
+                province.setProvinceName(rs.getString("PVC_NAME"));
+                province.setLatitude(rs.getDouble("LAT"));
+                province.setLongitude(rs.getDouble("LONG"));
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -53,7 +54,6 @@ public class ProvinceDao implements IProvinceDao {
                 province.setProvinceName(rs.getString("PVC_NAME"));
                 province.setLatitude(rs.getDouble("LAT"));
                 province.setLongitude(rs.getDouble("LONG"));
-
                 provinces.add(province);
             }
         } catch (SQLException e) {

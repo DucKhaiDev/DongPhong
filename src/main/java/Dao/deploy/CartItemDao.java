@@ -99,12 +99,13 @@ public class CartItemDao implements ICartItemDao {
             ps = conn.prepareStatement("SELECT * FROM [CARTITEM] WHERE CITEM_ID = ?");
             ps.setInt(1, cartItemId);
             rs = ps.executeQuery();
-            rs.next();
-            item.setCartItemId(cartItemId);
-            item.setQuantity(rs.getInt("QUANT"));
-            item.setValue(rs.getBigDecimal("VALUE"));
-            item.setProduct(productService.getProduct(rs.getString("PRO_ID").trim()));
-            item.setCart(cartService.getCart(rs.getString("CART_ID")));
+            if (rs.next()) {
+                item.setCartItemId(cartItemId);
+                item.setQuantity(rs.getInt("QUANT"));
+                item.setValue(rs.getBigDecimal("VALUE"));
+                item.setProduct(productService.getProduct(rs.getString("PRO_ID").trim()));
+                item.setCart(cartService.getCart(rs.getString("CART_ID")));
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -124,12 +125,13 @@ public class CartItemDao implements ICartItemDao {
             ps.setString(1, productId);
             ps.setString(2, cartId);
             rs = ps.executeQuery();
-            rs.next();
-            cartItem.setCartItemId(rs.getInt("CITEM_ID"));
-            cartItem.setQuantity(rs.getInt("QUANT"));
-            cartItem.setValue(rs.getBigDecimal("VALUE"));
-            cartItem.setProduct(productService.getProduct(rs.getString("PRO_ID")));
-            cartItem.setCart(cartService.getCart(rs.getString("CART_ID")));
+            if (rs.next()) {
+                cartItem.setCartItemId(rs.getInt("CITEM_ID"));
+                cartItem.setQuantity(rs.getInt("QUANT"));
+                cartItem.setValue(rs.getBigDecimal("VALUE"));
+                cartItem.setProduct(productService.getProduct(rs.getString("PRO_ID")));
+                cartItem.setCart(cartService.getCart(rs.getString("CART_ID")));
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

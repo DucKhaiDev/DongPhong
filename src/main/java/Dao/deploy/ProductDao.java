@@ -96,21 +96,21 @@ public class ProductDao implements IProductDao {
             ps = conn.prepareStatement("SELECT * FROM [PRODUCT] WHERE PRO_ID = ?");
             ps.setString(1, productId);
             rs = ps.executeQuery();
-
-            rs.next();
-            product.setProductId(productId);
-            product.setProductName(rs.getString("PRO_NAME"));
-            product.setProductRate(rs.getDouble("PRO_RATE"));
-            product.setProductDescription(rs.getString("PRO_DES"));
-            product.setProductDimension(rs.getString("PRO_DIMEN"));
-            product.setProductWeight(rs.getString("PRO_WEIGHT"));
-            product.setProductMaterial(rs.getString("PRO_MATE"));
-            product.setProductColor(rs.getString("PRO_COLOR"));
-            product.setProductPrice(rs.getBigDecimal("PRO_PRICE"));
-            product.setProductCost(rs.getBigDecimal("PRO_COST"));
-            product.setProductQuantity(rs.getInt("PRO_QUANT"));
-            product.setCategory(categoryService.getCategory(rs.getString("CAT_ID").trim()));
-            product.setBrand(brandService.getBrand(rs.getString("BRA_ID").trim()));
+            if (rs.next()) {
+                product.setProductId(productId);
+                product.setProductName(rs.getString("PRO_NAME"));
+                product.setProductRate(rs.getDouble("PRO_RATE"));
+                product.setProductDescription(rs.getString("PRO_DES"));
+                product.setProductDimension(rs.getString("PRO_DIMEN"));
+                product.setProductWeight(rs.getString("PRO_WEIGHT"));
+                product.setProductMaterial(rs.getString("PRO_MATE"));
+                product.setProductColor(rs.getString("PRO_COLOR"));
+                product.setProductPrice(rs.getBigDecimal("PRO_PRICE"));
+                product.setProductCost(rs.getBigDecimal("PRO_COST"));
+                product.setProductQuantity(rs.getInt("PRO_QUANT"));
+                product.setCategory(categoryService.getCategory(rs.getString("CAT_ID").trim()));
+                product.setBrand(brandService.getBrand(rs.getString("BRA_ID").trim()));
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -127,7 +127,6 @@ public class ProductDao implements IProductDao {
 
         try {
             ps = conn.prepareStatement("SELECT * FROM [PRODUCT] ORDER BY PRO_ID ASC");
-
             rs = ps.executeQuery();
             while (rs.next()) {
                 Product product = new Product();
@@ -164,7 +163,6 @@ public class ProductDao implements IProductDao {
         try {
             ps = conn.prepareStatement("SELECT * FROM [PRODUCT] WHERE PRO_NAME LIKE ? ORDER BY PRO_ID ASC");
             ps.setString(1, "%" + productName + "%");
-
             rs = ps.executeQuery();
             while (rs.next()) {
                 Product product = new Product();
@@ -202,7 +200,6 @@ public class ProductDao implements IProductDao {
             ps = conn.prepareStatement("SELECT * FROM [PRODUCT] WHERE CAT_ID = ? AND PRO_NAME LIKE ? ORDER BY PRO_ID ASC");
             ps.setString(1, categoryId);
             ps.setString(2, "%" + productName + "%");
-
             rs = ps.executeQuery();
             while (rs.next()) {
                 Product product = new Product();
@@ -239,7 +236,6 @@ public class ProductDao implements IProductDao {
         try {
             ps = conn.prepareStatement("SELECT * FROM [PRODUCT] WHERE CAT_ID = ? ORDER BY PRO_ID ASC");
             ps.setString(1, categoryId);
-
             rs = ps.executeQuery();
             while (rs.next()) {
                 Product product = new Product();
@@ -276,7 +272,6 @@ public class ProductDao implements IProductDao {
         try {
             ps = conn.prepareStatement("SELECT * FROM [PRODUCT] WHERE BRA_ID = ? ORDER BY PRO_ID ASC");
             ps.setString(1, brandId);
-
             rs = ps.executeQuery();
             while (rs.next()) {
                 Product product = new Product();
@@ -334,8 +329,9 @@ public class ProductDao implements IProductDao {
             ps.setString(1, categoryId);
             ps.setString(2, brandId);
             rs = ps.executeQuery();
-            rs.next();
-            return rs.getInt(1);
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

@@ -79,12 +79,12 @@ public class CategoryDao implements ICategoryDao {
             ps = conn.prepareStatement("SELECT * FROM [CATEGORY] WHERE CAT_ID = ?");
             ps.setString(1, categoryId);
             rs = ps.executeQuery();
-
-            rs.next();
-            category.setCategoryId(rs.getString("CAT_ID").trim());
-            category.setCategoryName(rs.getString("CAT_NAME"));
-            category.setRoom(roomService.getRoom(rs.getString("ROOM_ID").trim()));
-            category.setCategoryDescription(rs.getString("CAT_DES"));
+            if (rs.next()) {
+                category.setCategoryId(rs.getString("CAT_ID").trim());
+                category.setCategoryName(rs.getString("CAT_NAME"));
+                category.setRoom(roomService.getRoom(rs.getString("ROOM_ID").trim()));
+                category.setCategoryDescription(rs.getString("CAT_DES"));
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -101,7 +101,6 @@ public class CategoryDao implements ICategoryDao {
 
         try {
             ps = conn.prepareStatement("SELECT * FROM [CATEGORY] ORDER BY CAT_ID ASC");
-
             rs = ps.executeQuery();
             while (rs.next()) {
                 Category category = new Category();
@@ -156,7 +155,6 @@ public class CategoryDao implements ICategoryDao {
         try {
             ps = conn.prepareStatement("SELECT * FROM [CATEGORY] WHERE CAT_NAME LIKE ? ORDER BY CAT_ID ASC");
             ps.setString(1, "%" + categoryName + "%");
-
             rs = ps.executeQuery();
             while (rs.next()) {
                 Category category = new Category();
@@ -184,7 +182,6 @@ public class CategoryDao implements ICategoryDao {
         try {
             ps = conn.prepareStatement("SELECT * FROM [CATEGORY] WHERE CAT_ID = ?");
             ps.setString(1, id);
-
             rs = ps.executeQuery();
             if (rs.next()) {
                 exist = true;
@@ -205,7 +202,6 @@ public class CategoryDao implements ICategoryDao {
         try {
             ps = conn.prepareStatement("SELECT * FROM [PRODUCT] WHERE CAT_ID = ?");
             ps.setString(1, categoryId);
-
             rs = ps.executeQuery();
             if (rs.next()) {
                 return false;

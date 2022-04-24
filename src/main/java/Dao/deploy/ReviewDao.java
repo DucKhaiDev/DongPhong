@@ -89,14 +89,15 @@ public class ReviewDao implements IReviewDao {
             ps = conn.prepareStatement("SELECT * FROM [REVIEW] WHERE REV_ID = ?");
             ps.setInt(1, reviewId);
             rs = ps.executeQuery();
-            rs.next();
-            review.setReviewId(reviewId);
-            review.setUser(userService.getUser(rs.getString("USER_ID")));
-            review.setProduct(productService.getProduct(rs.getString("PRO_ID").trim()));
-            review.setReviewRate(rs.getDouble("REV_RATE"));
-            review.setReviewContent(rs.getString("REV_CONTENT"));
-            review.setReviewDate(rs.getTimestamp("REV_DATE"));
-            review.setRateStatus(rs.getBoolean("IS_RATE"));
+            if (rs.next()) {
+                review.setReviewId(reviewId);
+                review.setUser(userService.getUser(rs.getString("USER_ID")));
+                review.setProduct(productService.getProduct(rs.getString("PRO_ID").trim()));
+                review.setReviewRate(rs.getDouble("REV_RATE"));
+                review.setReviewContent(rs.getString("REV_CONTENT"));
+                review.setReviewDate(rs.getTimestamp("REV_DATE"));
+                review.setRateStatus(rs.getBoolean("IS_RATE"));
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -173,8 +174,9 @@ public class ReviewDao implements IReviewDao {
             ps = conn.prepareStatement("SELECT COUNT(*) FROM [REVIEW] WHERE PRO_ID = ?");
             ps.setString(1, productId);
             rs = ps.executeQuery();
-            rs.next();
-            return rs.getInt(1);
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
