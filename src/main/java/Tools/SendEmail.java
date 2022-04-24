@@ -9,7 +9,7 @@ public class SendEmail {
     private final static String fromEmail = "iamdevgenz@gmail.com";
     private final static String fromPassword = "#DoDucKhai@BN";
 
-    public static boolean sendEmail(String toEmail, String subject, String text) {
+    public static boolean sendEmail(String toEmail, String subject, String content) {
         Properties props = new Properties();
         props.put("mail.smtp.host", "smtp.gmail.com"); //SMTP Host
         props.put("mail.smtp.port", "587"); //TLS Port
@@ -28,14 +28,15 @@ public class SendEmail {
         try {
             MimeMessage msg = new MimeMessage(session);
             //Headers
-            msg.addHeader("Content-Type", "text/plain; charset=UTF-8");
+            msg.setHeader("Content-Type", "text/plain; charset=UTF-8");
             msg.setFrom(new InternetAddress("DongPhong"));
             msg.setSubject(subject);
-            msg.setText(text);
+            msg.setContent(content, "text/html; charset=UTF-8");
             msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail));
 
             Transport.send(msg);
         } catch (MessagingException e) {
+            e.printStackTrace();
             return false;
         }
 
