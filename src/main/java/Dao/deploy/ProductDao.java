@@ -569,4 +569,30 @@ public class ProductDao implements IProductDao {
 
         return highestRated;
     }
+
+    @Override
+    public int countSale(String productId) {
+        conn = DBConnect.getConnection();
+
+        try {
+            ps = conn.prepareStatement("SELECT SUM(QUANT) " +
+                    "FROM dbo.PRODUCT " +
+                    "JOIN dbo.CARTITEM ON CARTITEM.PRO_ID = PRODUCT.PRO_ID " +
+                    "JOIN dbo.CART ON CART.CART_ID = CARTITEM.CART_ID " +
+                    "JOIN dbo.[ORDER] ON [ORDER].CART_ID = CART.CART_ID " +
+                    "WHERE PRODUCT.PRO_ID = ? " +
+                    "GROUP BY PRODUCT.PRO_ID");
+            ps.setString(1, productId);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnect.closeAll(rs, ps, conn);
+        }
+
+        return 0;
+    }
 }

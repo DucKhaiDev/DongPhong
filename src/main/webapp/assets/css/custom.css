@@ -1116,3 +1116,22 @@ ul.header-cart-wrapitem li {
 .text-end {
     text-align: end !important;
 }
+
+button:disabled,
+button[disabled]{
+    border: #999;
+    background-color: #ccc;
+    color: #666;
+    pointer-events: none;
+}
+
+button:disabled:hover,
+button[disabled]:hover{
+    border: #999;
+    background-color: #ccc;
+    color: #666;
+}
+
+.pointer-events-none {
+    pointer-events: none;
+}

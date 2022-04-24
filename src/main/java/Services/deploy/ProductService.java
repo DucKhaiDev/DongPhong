@@ -6,7 +6,10 @@ import Services.IProductService;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-import java.util.*;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 public class ProductService implements IProductService {
     private final ProductDao productDao = new ProductDao();
@@ -18,7 +21,7 @@ public class ProductService implements IProductService {
 
     @Override
     public void edit(Product product) {
-       productDao.edit(product);
+        productDao.edit(product);
     }
 
     @Override
@@ -219,5 +222,10 @@ public class ProductService implements IProductService {
     @Override
     public Map<Product, Double> highestRated() {
         return productDao.highestRated();
+    }
+
+    @Override
+    public int countSale(String productId) {
+        return productDao.countSale(productId);
     }
 }

@@ -7,6 +7,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="Services.deploy.WLItemService" %>
 <%@ page import="Entity.*" %>
+<%@ page import="Services.deploy.ReviewService" %>
 <%--
   User: duckhaidev
   Date: 2/25/2022
@@ -369,12 +370,28 @@
                                         </div>
 
                                         <div class="col-md-6 col-lg-5 p-b-30">
-                                            <div class="p-r-50 p-t-5 p-lr-0-lg">
-                                                <h4 class="mtext-105 cl2 js-name-detail p-b-14">${product.productName}</h4>
-                                                <span class="product-price mtext-106 cl2 m-r-16"><% out.print(showPrice); %></span>
-                                                <span class="product-cost mtext-106 cl2 m-r-16"><% out.print(showCost); %></span>
-                                                <span class="product-sale-off mtext-106 cl2"><% out.print("(-" + percentage + "%)"); %></span>
-                                                <p class="stext-102 cl3 p-t-23">${product.productDescription}</p>
+                                            <div class="p-r-50 p-t-5 p-lr-0-lg" style="height: 100%;">
+                                                <h4 class="mtext-105 cl2 js-name-detail">${product.productName}</h4>
+                                                <span class="fs-14">Mã sản phẩm: ${product.productId}</span>
+                                                <div class="m-t-14" style="height: 42%;">
+                                                    <span class="fs-24 cl11">
+                                                        <%
+                                                            double productRate = product.getProductRate();
+                                                            productRate = Math.round(productRate*2)/2.0;
+                                                        %>
+                                                        <i class="<% if (Double.compare(productRate, 0.5) == 0) out.print("zmdi zmdi-star-half"); else if (Double.compare(productRate, 1.0) > -1) out.print("zmdi zmdi-star"); else out.print("zmdi zmdi-star-outline"); %>"></i>
+                                                        <i class="<% if (Double.compare(productRate, 1.5) == 0) out.print("zmdi zmdi-star-half"); else if (Double.compare(productRate, 2.0) > -1) out.print("zmdi zmdi-star"); else out.print("zmdi zmdi-star-outline"); %>"></i>
+                                                        <i class="<% if (Double.compare(productRate, 2.5) == 0) out.print("zmdi zmdi-star-half"); else if (Double.compare(productRate, 3.0) > -1) out.print("zmdi zmdi-star"); else out.print("zmdi zmdi-star-outline"); %>"></i>
+                                                        <i class="<% if (Double.compare(productRate, 3.5) == 0) out.print("zmdi zmdi-star-half"); else if (Double.compare(productRate, 4.0) > -1) out.print("zmdi zmdi-star"); else out.print("zmdi zmdi-star-outline"); %>"></i>
+                                                        <i class="<% if (Double.compare(productRate, 4.5) == 0) out.print("zmdi zmdi-star-half"); else if (Double.compare(productRate, 5.0) == 0) out.print("zmdi zmdi-star"); else out.print("zmdi zmdi-star-outline"); %>"></i>
+                                                        <span class="fs-18" style="color: #333;">&nbsp;|&nbsp;<% out.print(new ReviewService().countRate(product.getProductId())); %> đánh giá&nbsp;|&nbsp;<% out.print(new ProductService().countSale(product.getProductId())); %> đã bán</span>
+                                                    </span>
+                                                    <br>
+                                                    <span class="product-price mtext-106 cl2 m-r-16"><% out.print(showPrice); %></span>
+                                                    <span class="product-cost mtext-106 cl2 m-r-16"><% out.print(showCost); %></span>
+                                                    <span class="product-sale-off mtext-106 cl2"><% out.print("(-" + percentage + "%)"); %></span>
+                                                    <p class="stext-102 cl3 p-t-23">${product.productDescription}</p>
+                                                </div>
                                                 <!--  -->
                                                 <div class="p-t-33">
                                                     <div class="flex-w flex-r-m p-b-10">
@@ -388,13 +405,30 @@
                                                                 <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
                                                                     <i class="fs-16 zmdi zmdi-minus"></i>
                                                                 </div>
-                                                                <input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product" value="1">
+                                                                <input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product" value="<%
+                                                                    if (product.getProductQuantity() > 0) {
+                                                                        out.print(1);
+                                                                    } else {
+                                                                        out.print(0);
+                                                                    }
+                                                                %>">
                                                                 <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
                                                                     <i class="fs-16 zmdi zmdi-plus"></i>
                                                                 </div>
+                                                                <input type="hidden" value="${product.productQuantity}">
                                                             </div>
+                                                            <span class="flex-c-m">
+                                                                <c:choose>
+                                                                    <c:when test="${product.productQuantity == 0}">
+                                                                        Tạm hết hàng!
+                                                                    </c:when>
+                                                                    <c:otherwise>
+                                                                        ${product.productQuantity} sản phẩm có sẵn
+                                                                    </c:otherwise>
+                                                                </c:choose>
+                                                            </span>
 
-                                                            <button type="button" class="btn-add-item flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+                                                            <button type="button" class="btn-add-item flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail" <c:if test="${product.productQuantity == 0}">disabled</c:if>>
                                                                 Thêm vào giỏ hàng
                                                             </button>
                                                         </form>
@@ -410,19 +444,19 @@
                                                         <input type="hidden" name="id" value="${product.productId}">
 
                                                         <button type="button" class="btn-add-item fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100" data-tooltip="Thêm vào Danh sách yêu thích">
-                                                            <i class="zmdi zmdi-favorite"></i>
+                                                            <i class="zmdi zmdi-favorite fs-24"></i>
                                                         </button>
                                                     </form>
 
-                                                    <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Facebook">
+                                                    <a href="#" class="fs-18 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Facebook">
                                                         <i class="fab fa-facebook"></i>
                                                     </a>
 
-                                                    <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Twitter">
+                                                    <a href="#" class="fs-18 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Twitter">
                                                         <i class="fab fa-twitter"></i>
                                                     </a>
 
-                                                    <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Google Plus">
+                                                    <a href="#" class="fs-18 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Google Plus">
                                                         <i class="fab fa-google-plus"></i>
                                                     </a>
                                                 </div>

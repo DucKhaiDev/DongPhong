@@ -44,4 +44,6 @@ public interface IProductDao {
     Map<Product, Integer> favourite();
 
     Map<Product, Double> highestRated();
+
+    int countSale(String productId);
 }

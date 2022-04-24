@@ -206,68 +206,50 @@
 
 <!--===============================================================================================-->
 $(function () {
-    $('.btn-num-product-down').each(function () {
-       $(this).on('click', function () {
-           if ($(this).next().prop('value') < 2) {
-               $(this).next().prop('value', '1');
-               $(this).css('cursor', 'not-allowed');
-               $(this).hover(function () {
-                  $(this).css({
-                      'background-color': 'rgba(0, 0, 0, 0)',
-                      'border-color': 'rgb(85, 85, 85)'
-                  });
+    $('.num-product').each(function () {
+        if ($(this).prop('value') === '0' || $(this).next().next().prop('value') === '1') {
+            $(this).addClass('pointer-events-none');
+            $(this).prev().addClass('pointer-events-none');
+            $(this).next().addClass('pointer-events-none');
+        }
+    });
 
-                   $(this).children().css('color', 'rgb(85, 85, 85)');
-               });
-           }
-       });
+    $('.btn-num-product-down').each(function () {
+        $(this).on('click', function () {
+            if ($(this).next().prop('value') < 2) {
+                $(this).next().prop('value', '1');
+                $(this).addClass('pointer-events-none');
+            }
+            $(this).next().next().removeClass('pointer-events-none');
+        });
     });
 
     $('.btn-num-product-up').each(function () {
         $(this).on('click', function () {
-            const btnDown = $(this).prev().prev();
-            btnDownCss(btnDown);
+            if ($(this).prev().prop('value') >= $(this).next().prop('value')) {
+                $(this).prev().prop('value', $(this).next().prop('value'));
+                $(this).addClass('pointer-events-none');
+            }
+            $(this).prev().prev().removeClass('pointer-events-none');
         });
     });
 
     $('.num-product').each(function () {
         $(this).on('change', function () {
             const btnDown = $(this).prev();
+            const btnUp = $(this).next();
             if ($(this).prop('value') < 2) {
                 $(this).prop('value', '1');
-                btnDown.css('cursor', 'not-allowed');
-                btnDown.hover(function () {
-                    btnDown.css({
-                        'background-color': 'rgba(0, 0, 0, 0)',
-                        'border-color': 'rgb(85, 85, 85)'
-                    });
-
-                    btnDown.children().css('color', 'rgb(85, 85, 85)');
-                });
+                btnDown.addClass('pointer-events-none');
+            } else if ($(this).prop('value') >= $(this).next().next().prop('value')) {
+                $(this).prop('value', $(this).next().next().prop('value'));
+                btnUp.addClass('pointer-events-none');
             } else {
-                btnDownCss(btnDown);
+                btnDown.removeClass('pointer-events-none');
+                btnUp.removeClass('pointer-events-none');
             }
         });
     });
-
-    function btnDownCss(btnDown) {
-        btnDown.css('cursor', 'auto');
-        btnDown.mouseover(function () {
-            btnDown.css({
-                'background-color': '#717fe0',
-                'border-color': '#717fe0'
-            });
-
-            btnDown.children().css('color', '#fff');
-        }).mouseout(function () {
-            btnDown.css({
-                'background-color': 'rgba(0, 0, 0, 0)',
-                'border-color': 'rgb(85, 85, 85)'
-            });
-
-            btnDown.children().css('color', 'rgb(85, 85, 85)');
-        });
-    }
 });
 
 <!--===============================================================================================-->

@@ -1,17 +1,14 @@
 <%@ page import="java.util.List" %>
 <%@ page import="Entity.ProImage" %>
-<%@ page import="Services.deploy.ProImageService" %>
 <%@ page import="Entity.Product" %>
 <%@ page import="java.util.Locale" %>
 <%@ page import="java.text.NumberFormat" %>
 <%@ page import="java.math.BigDecimal" %>
-<%@ page import="Services.deploy.UserService" %>
-<%@ page import="Services.deploy.ReviewService" %>
-<%@ page import="Services.deploy.WLItemService" %>
 <%@ page import="Entity.WishList" %>
 <%@ page import="java.math.RoundingMode" %>
 <%@ page import="Entity.Review" %>
 <%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="Services.deploy.*" %>
 <%--
   Author: duckhaidev
   Date: 1/11/2022
@@ -203,13 +200,30 @@
                                     <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
                                         <i class="fs-16 zmdi zmdi-minus"></i>
                                     </div>
-                                    <input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product" value="1">
+                                    <input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product" value="<%
+                                        if (product.getProductQuantity() > 0) {
+                                            out.print(1);
+                                        } else {
+                                            out.print(0);
+                                        }
+                                    %>">
                                     <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
                                         <i class="fs-16 zmdi zmdi-plus"></i>
                                     </div>
+                                    <input type="hidden" value="${product.productQuantity}">
                                 </div>
+                                <span class="flex-c-m">
+                                    <c:choose>
+                                        <c:when test="${product.productQuantity == 0}">
+                                            Tạm hết hàng!
+                                        </c:when>
+                                        <c:otherwise>
+                                            ${product.productQuantity} sản phẩm có sẵn
+                                        </c:otherwise>
+                                    </c:choose>
+                                </span>
 
-                                <button type="button" class=" btn-add-item flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+                                <button type="button" class=" btn-add-item flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail" <c:if test="${product.productQuantity == 0}">disabled</c:if>>
                                     Thêm vào giỏ hàng
                                 </button>
                             </form>
@@ -577,19 +591,35 @@
 
                             <div class="col-md-6 col-lg-5 p-b-30">
                                 <div class="p-r-50 p-t-5 p-lr-0-lg">
-                                    <h4 class="mtext-105 cl2 js-name-detail p-b-14">${relatedProduct.productName}</h4>
-                                    <%
-                                        Product relatedProduct = (Product) pageContext.getAttribute("relatedProduct");
-                                        BigDecimal relatedProductPrice = relatedProduct.getProductPrice();
-                                        String showPrice = dongFormat.format(relatedProductPrice);
-                                        BigDecimal relatedProductCost = relatedProduct.getProductCost();
-                                        String showCost = dongFormat.format(relatedProductCost);
-                                        BigDecimal percentage = ((relatedProductCost.subtract(relatedProductPrice)).divide(relatedProductCost, 2, RoundingMode.HALF_UP)).multiply(new BigDecimal("100")).setScale(0, RoundingMode.UP);
-                                    %>
-                                    <span class="product-price mtext-106 cl2 m-r-16"><% out.print(showPrice); %></span>
-                                    <span class="product-cost mtext-106 cl2 m-r-16"><% out.print(showCost); %></span>
-                                    <span class="product-sale-off mtext-106 cl2"><% out.print("(-" + percentage + "%)"); %></span>
-                                    <p class="stext-102 cl3 p-t-23">${relatedProduct.productDescription}</p>
+                                    <h4 class="mtext-105 cl2 js-name-detail">${relatedProduct.productName}</h4>
+                                    <span class="fs-14">Mã sản phẩm: ${relatedProduct.productId}</span>
+                                    <div class="m-t-14" style="height: 42%;">
+                                        <%
+                                            Product relatedProduct = (Product) pageContext.getAttribute("relatedProduct");
+                                            BigDecimal relatedProductPrice = relatedProduct.getProductPrice();
+                                            String showPrice = dongFormat.format(relatedProductPrice);
+                                            BigDecimal relatedProductCost = relatedProduct.getProductCost();
+                                            String showCost = dongFormat.format(relatedProductCost);
+                                            BigDecimal percentage = ((relatedProductCost.subtract(relatedProductPrice)).divide(relatedProductCost, 2, RoundingMode.HALF_UP)).multiply(new BigDecimal("100")).setScale(0, RoundingMode.UP);
+                                        %>
+                                        <span class="fs-24 cl11">
+                                            <%
+                                                double relatedProductRate = relatedProduct.getProductRate();
+                                                relatedProductRate = Math.round(relatedProductRate*2)/2.0;
+                                                %>
+                                            <i class="<% if (Double.compare(relatedProductRate, 0.5) == 0) out.print("zmdi zmdi-star-half"); else if (Double.compare(relatedProductRate, 1.0) > -1) out.print("zmdi zmdi-star"); else out.print("zmdi zmdi-star-outline"); %>"></i>
+                                            <i class="<% if (Double.compare(relatedProductRate, 1.5) == 0) out.print("zmdi zmdi-star-half"); else if (Double.compare(relatedProductRate, 2.0) > -1) out.print("zmdi zmdi-star"); else out.print("zmdi zmdi-star-outline"); %>"></i>
+                                            <i class="<% if (Double.compare(relatedProductRate, 2.5) == 0) out.print("zmdi zmdi-star-half"); else if (Double.compare(relatedProductRate, 3.0) > -1) out.print("zmdi zmdi-star"); else out.print("zmdi zmdi-star-outline"); %>"></i>
+                                            <i class="<% if (Double.compare(relatedProductRate, 3.5) == 0) out.print("zmdi zmdi-star-half"); else if (Double.compare(relatedProductRate, 4.0) > -1) out.print("zmdi zmdi-star"); else out.print("zmdi zmdi-star-outline"); %>"></i>
+                                            <i class="<% if (Double.compare(relatedProductRate, 4.5) == 0) out.print("zmdi zmdi-star-half"); else if (Double.compare(relatedProductRate, 5.0) == 0) out.print("zmdi zmdi-star"); else out.print("zmdi zmdi-star-outline"); %>"></i>
+                                            <span class="fs-18" style="color: #333;">&nbsp;|&nbsp;<% out.print(new ReviewService().countRate(relatedProduct.getProductId())); %> đánh giá&nbsp;|&nbsp;<% out.print(new ProductService().countSale(relatedProduct.getProductId())); %> đã bán</span>
+                                        </span>
+                                        <br>
+                                        <span class="product-price mtext-106 cl2 m-r-16"><% out.print(showPrice); %></span>
+                                        <span class="product-cost mtext-106 cl2 m-r-16"><% out.print(showCost); %></span>
+                                        <span class="product-sale-off mtext-106 cl2"><% out.print("(-" + percentage + "%)"); %></span>
+                                        <p class="stext-102 cl3 p-t-23">${relatedProduct.productDescription}</p>
+                                    </div>
                                     <!--  -->
                                     <div class="p-t-33">
                                         <div class="flex-w flex-r-m p-b-10">
@@ -603,13 +633,30 @@
                                                     <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
                                                         <i class="fs-16 zmdi zmdi-minus"></i>
                                                     </div>
-                                                    <input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product" value="1">
+                                                    <input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product" value="<%
+                                                        if (relatedProduct.getProductQuantity() > 0) {
+                                                            out.print(1);
+                                                        } else {
+                                                            out.print(0);
+                                                        }
+                                                    %>">
                                                     <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
                                                         <i class="fs-16 zmdi zmdi-plus"></i>
                                                     </div>
+                                                    <input type="hidden" value="${relatedProduct.productQuantity}">
                                                 </div>
+                                                <span class="flex-c-m">
+                                                    <c:choose>
+                                                        <c:when test="${relatedProduct.productQuantity == 0}">
+                                                            Tạm hết hàng!
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            ${relatedProduct.productQuantity} sản phẩm có sẵn
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                </span>
 
-                                                <button type="button" class="btn-add-item flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+                                                <button type="button" class="btn-add-item flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail" <c:if test="${relatedProduct.productQuantity == 0}">disabled</c:if>>
                                                     Thêm vào giỏ hàng
                                                 </button>
                                             </form>
@@ -741,7 +788,6 @@
         </c:forEach>
     });
 </script>
-
 
 </body>
 </html>
