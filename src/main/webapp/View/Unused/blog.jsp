@@ -47,10 +47,10 @@
 <body class="animsition">
 
 <!-- Header -->
-<jsp:include page="header-v4.jsp"/>
+<jsp:include page="../Client/header-v4.jsp"/>
 
 <!-- Cart -->
-<jsp:include page="cart.jsp"/>
+<jsp:include page="../Client/cart.jsp"/>
 
 <!-- Title page -->
 <section class="bg-img1 txt-center p-lr-15 p-tb-92"
@@ -495,7 +495,7 @@
 </section>
 
 <!-- Footer -->
-<jsp:include page="footer.jsp"/>
+<jsp:include page="../Client/footer.jsp"/>
 
 <!--===============================================================================================-->
 <script src="${pageContext.request.contextPath}/assets/vendor/jquery/jquery-3.2.1.min.js"></script>

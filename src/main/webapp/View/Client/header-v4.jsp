@@ -192,15 +192,15 @@
             </li>
 
             <li>
-                <a href="blog.jsp">Blog</a>
+                <a href="../Unused/blog.jsp">Blog</a>
             </li>
 
             <li>
-                <a href="about.jsp">About</a>
+                <a href="../Unused/about.jsp">About</a>
             </li>
 
             <li>
-                <a href="contact.jsp">Contact</a>
+                <a href="../Unused/contact.jsp">Contact</a>
             </li>
         </ul>
     </div>
