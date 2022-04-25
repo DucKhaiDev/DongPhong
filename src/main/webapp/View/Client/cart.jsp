@@ -1,10 +1,10 @@
-<%@ page import="Services.deploy.ProImageService" %>
 <%@ page import="Entity.Product" %>
 <%@ page import="Entity.CartItem" %>
 <%@ page import="java.util.Locale" %>
 <%@ page import="java.text.NumberFormat" %>
 <%@ page import="java.math.BigDecimal" %>
 <%@ page import="java.math.RoundingMode" %>
+<%@ page import="Util.Constant" %>
 <%--
   User: duckhaidev
   Date: 1/22/2022
@@ -36,7 +36,6 @@
                 <c:forEach items="${sessionScope.cartItems}" var="item">
                     <li class="header-cart-item flex-w flex-t m-b-12">
                         <%
-                            ProImageService imageService = new ProImageService();
                             Product product = ((CartItem) pageContext.getAttribute("item")).getProduct();
                             request.setAttribute("cart_product", product);
                         %>
@@ -46,7 +45,7 @@
                             <!--Sign url-->
                             <input class="input-remove-item" type="hidden" name="forwardTo">
                             <%
-                                String reImage = imageService.getProReImage(product.getProductId());
+                                String reImage = Constant.Service.PRO_IMAGE_SERVICE.getProReImage(product.getProductId());
                                 request.setAttribute("cart_reImage", reImage);
                             %>
                             <c:url value="/images/product-images?fname=${cart_reImage}" var="imageUrl"/>
@@ -63,7 +62,9 @@
                                     productName = productName.substring(0, 25).trim() + "...";
                                 }
                             %>
-                            <a href="${cart_product.productId}" class="header-cart-item-name m-b-18 hov-cl1 trans-04 tooltip100" data-tooltip="<% out.print(product.getProductName()); %>>">
+                            <a href="${cart_product.productId}"
+                               class="header-cart-item-name m-b-18 hov-cl1 trans-04 tooltip100"
+                               data-tooltip="<% out.print(product.getProductName()); %>>">
                                 <% out.print(productName); %>
                             </a>
 
@@ -118,11 +119,13 @@
                 </div>
 
                 <div class="header-cart-buttons flex-w w-full">
-                    <a href="${pageContext.request.contextPath}/cart" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
+                    <a href="${pageContext.request.contextPath}/cart"
+                       class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
                         Xem giỏ hàng
                     </a>
 
-                    <a href="${pageContext.request.contextPath}/cart" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
+                    <a href="${pageContext.request.contextPath}/cart"
+                       class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
                         Thanh toán
                     </a>
                 </div>

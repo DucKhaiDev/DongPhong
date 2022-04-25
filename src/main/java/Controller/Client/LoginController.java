@@ -1,11 +1,10 @@
 package Controller.Client;
 
 import Entity.User;
-import Services.deploy.UserService;
 import Util.Constant;
-import jakarta.servlet.*;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
-import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 
@@ -23,7 +22,7 @@ public class LoginController extends HttpServlet {
         Cookie[] cookies = request.getCookies();
         String username = "", password = "";
         if (cookies != null) {
-            for (Cookie cookie: cookies) {
+            for (Cookie cookie : cookies) {
                 if (cookie.getName().equals("username")) {
                     username = cookie.getValue();
                     session = request.getSession(true);
@@ -53,9 +52,7 @@ public class LoginController extends HttpServlet {
 
         String loginMsg;
 
-        UserService service = new UserService();
-
-        User user = service.login(username, password);
+        User user = Constant.Service.USER_SERVICE.login(username, password);
 
         if (user != null) {
             HttpSession session = request.getSession(true);

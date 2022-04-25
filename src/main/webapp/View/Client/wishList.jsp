@@ -1,10 +1,10 @@
-<%@ page import="Services.deploy.ProImageService" %>
 <%@ page import="Entity.WLItem" %>
 <%@ page import="Entity.Product" %>
 <%@ page import="java.math.BigDecimal" %>
 <%@ page import="java.util.Locale" %>
 <%@ page import="java.text.NumberFormat" %>
 <%@ page import="java.math.RoundingMode" %>
+<%@ page import="Util.Constant" %>
 <%--
   User: duckhaidev
   Date: 3/9/2022
@@ -31,7 +31,6 @@
                 <c:forEach items="${sessionScope.wlItems}" var="item">
                     <li class="header-cart-item flex-w flex-t m-b-12">
                         <%
-                            ProImageService imageService = new ProImageService();
                             Product product = ((WLItem) pageContext.getAttribute("item")).getProduct();
                             request.setAttribute("wl_product", product);
                         %>
@@ -41,7 +40,7 @@
                             <!--Sign url-->
                             <input class="input-remove-item" type="hidden" name="forwardTo">
                             <%
-                                String reImage = imageService.getProReImage(product.getProductId());
+                                String reImage = Constant.Service.PRO_IMAGE_SERVICE.getProReImage(product.getProductId());
                                 request.setAttribute("wl_reImage", reImage);
                             %>
                             <c:url value="/images/product-images?fname=${wl_reImage}" var="imageUrl"/>
@@ -58,7 +57,9 @@
                                     productName = productName.substring(0, 25).trim() + "...";
                                 }
                             %>
-                            <a href="${pageContext.request.contextPath}/products/product-detail?id=${wl_product.productId}" class="header-cart-item-name m-b-18 hov-cl1 trans-04 tooltip100" data-tooltip="<% out.print(product.getProductName()); %>>">
+                            <a href="${pageContext.request.contextPath}/products/product-detail?id=${wl_product.productId}"
+                               class="header-cart-item-name m-b-18 hov-cl1 trans-04 tooltip100"
+                               data-tooltip="<% out.print(product.getProductName()); %>>">
                                 <% out.print(productName); %>
                             </a>
 

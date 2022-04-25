@@ -1,13 +1,10 @@
-<%@ page import="Services.deploy.ProductService" %>
 <%@ page import="java.util.Locale" %>
 <%@ page import="java.math.BigDecimal" %>
 <%@ page import="java.text.NumberFormat" %>
 <%@ page import="java.math.RoundingMode" %>
-<%@ page import="Services.deploy.ProImageService" %>
 <%@ page import="java.util.List" %>
-<%@ page import="Services.deploy.WLItemService" %>
 <%@ page import="Entity.*" %>
-<%@ page import="Services.deploy.ReviewService" %>
+<%@ page import="Util.Constant" %>
 <%--
   User: duckhaidev
   Date: 4/20/2022
@@ -26,29 +23,39 @@
     <!--===============================================================================================-->
     <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/assets/images/icons/icon-logo.png"/>
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/assets/vendor/bootstrap/css/bootstrap.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/fonts/fontawesome-pro-5.15.4-web/css/all.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/assets/fonts/fontawesome-pro-5.15.4-web/css/all.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/fonts/iconic/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/assets/fonts/iconic/css/material-design-iconic-font.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/fonts/linearicons-v1.0.0/icon-font.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/assets/fonts/linearicons-v1.0.0/icon-font.min.css">
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/animate/animate.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/css-hamburgers/hamburgers.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/assets/vendor/css-hamburgers/hamburgers.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/animsition/css/animsition.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/assets/vendor/animsition/css/animsition.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/select2/select2.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/assets/vendor/select2/select2.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/daterangepicker/daterangepicker.css">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/assets/vendor/daterangepicker/daterangepicker.css">
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/slick/slick.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/MagnificPopup/magnific-popup.css">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/assets/vendor/MagnificPopup/magnific-popup.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/assets/vendor/perfect-scrollbar/perfect-scrollbar.css">
     <!--===============================================================================================-->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/pagination.css">
     <!--===============================================================================================-->
@@ -97,7 +104,8 @@
                 <div class="wrap-filter flex-w bg6 p-lr-40 p-t-27 p-lr-15-sm w-fit-content float-right m-r-60">
                     <ul>
                         <li class="p-b-6">
-                            <a id="filter-link-default" href="#" class="filter-link stext-106 trans-04 filter-link-active">
+                            <a id="filter-link-default" href="#"
+                               class="filter-link stext-106 trans-04 filter-link-active">
                                 Mặc định
                             </a>
                         </li>
@@ -124,7 +132,9 @@
                         <i class="zmdi zmdi-search"></i>
                     </button>
 
-                    <label for="search-product"></label><input id="search-product" class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="search-product" placeholder="Tìm kiếm">
+                    <label for="search-product"></label><input id="search-product"
+                                                               class="mtext-107 cl2 size-114 plh2 p-r-15" type="text"
+                                                               name="search-product" placeholder="Tìm kiếm">
                 </div>
             </div>
         </div>
@@ -148,12 +158,13 @@
                                 <ul class="list-unstyled checkbox-list">
                                     <c:forEach items="${applicationScope.brands}" var="brand">
                                         <li><label class="checkbox">
-                                            <input id="${brand.brandId}" class="filter-input" type="checkbox" name="brand" value="${brand.brandId}"><i></i>${brand.brandName}
+                                            <input id="${brand.brandId}" class="filter-input" type="checkbox"
+                                                   name="brand" value="${brand.brandId}"><i></i>${brand.brandName}
                                             <small>
                                                 <a>(<%
                                                     String keyword = request.getAttribute("keyword").toString();
                                                     String brandId = ((Brand) pageContext.getAttribute("brand")).getBrandId();
-                                                    out.print(new ProductService().countPrd_KeywordBrand(keyword, brandId));
+                                                    out.print(Constant.Service.PRODUCT_SERVICE.countPrd_KeywordBrand(keyword, brandId));
                                                 %>)</a>
                                             </small>
                                         </label></li>
@@ -178,22 +189,28 @@
                             <div class="panel-body">
                                 <ul class="list-unstyled checkbox-list">
                                     <li><label class="checkbox">
-                                        <input id="price-1" class="filter-input" type="checkbox" name="price" value="lt10"><i></i>< 10,000,000
+                                        <input id="price-1" class="filter-input" type="checkbox" name="price"
+                                               value="lt10"><i></i>< 10,000,000
                                     </label></li>
                                     <li><label class="checkbox">
-                                        <input id="price-2" class="filter-input" type="checkbox" name="price" value="10t50"><i></i>10,000,000 - 50,000,000
+                                        <input id="price-2" class="filter-input" type="checkbox" name="price"
+                                               value="10t50"><i></i>10,000,000 - 50,000,000
                                     </label></li>
                                     <li><label class="checkbox">
-                                        <input id="price-3" class="filter-input" type="checkbox" name="price" value="50t100"><i></i>50,000,000 - 100,000,000
+                                        <input id="price-3" class="filter-input" type="checkbox" name="price"
+                                               value="50t100"><i></i>50,000,000 - 100,000,000
                                     </label></li>
                                     <li><label class="checkbox">
-                                        <input id="price-4" class="filter-input" type="checkbox" name="price" value="100t200"><i></i>100,000,000 - 200,000,000
+                                        <input id="price-4" class="filter-input" type="checkbox" name="price"
+                                               value="100t200"><i></i>100,000,000 - 200,000,000
                                     </label></li>
                                     <li><label class="checkbox">
-                                        <input id="price-5" class="filter-input" type="checkbox" name="price" value="200t500"><i></i>200,000,000 - 500,000,000
+                                        <input id="price-5" class="filter-input" type="checkbox" name="price"
+                                               value="200t500"><i></i>200,000,000 - 500,000,000
                                     </label></li>
                                     <li><label class="checkbox">
-                                        <input id="price-6" class="filter-input" type="checkbox" name="price" value="mt500"><i></i>> 500,000,000
+                                        <input id="price-6" class="filter-input" type="checkbox" name="price"
+                                               value="mt500"><i></i>> 500,000,000
                                     </label></li>
                                 </ul>
                             </div>
@@ -214,15 +231,20 @@
                         <div id="collapse-3" class="panel-collapse collapse in show">
                             <div class="panel-body d-flex justify-content-center">
                                 <div class="stars-ratings stars-ratings-label">
-                                    <input class="filter-input" type="radio" name="rating" id="stars-rating-5" value="5">
+                                    <input class="filter-input" type="radio" name="rating" id="stars-rating-5"
+                                           value="5">
                                     <label for="stars-rating-5"><i class="fa fa-star"></i></label>
-                                    <input class="filter-input" type="radio" name="rating" id="stars-rating-4" value="4">
+                                    <input class="filter-input" type="radio" name="rating" id="stars-rating-4"
+                                           value="4">
                                     <label for="stars-rating-4"><i class="fa fa-star"></i></label>
-                                    <input class="filter-input" type="radio" name="rating" id="stars-rating-3" value="3">
+                                    <input class="filter-input" type="radio" name="rating" id="stars-rating-3"
+                                           value="3">
                                     <label for="stars-rating-3"><i class="fa fa-star"></i></label>
-                                    <input class="filter-input" type="radio" name="rating" id="stars-rating-2" value="2">
+                                    <input class="filter-input" type="radio" name="rating" id="stars-rating-2"
+                                           value="2">
                                     <label for="stars-rating-2"><i class="fa fa-star"></i></label>
-                                    <input class="filter-input" type="radio" name="rating" id="stars-rating-1" value="1">
+                                    <input class="filter-input" type="radio" name="rating" id="stars-rating-1"
+                                           value="1">
                                     <label for="stars-rating-1"><i class="fa fa-star"></i></label>
                                 </div>
                                 <div class="clearfix"></div>
@@ -231,7 +253,10 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-12"><button id="filter-reset" class="btn btn-primary filter-button w-full" type="reset">ĐẶT LẠI</button></div>
+                    <div class="col-md-12">
+                        <button id="filter-reset" class="btn btn-primary filter-button w-full" type="reset">ĐẶT LẠI
+                        </button>
+                    </div>
                 </div>
             </div>
 
@@ -243,34 +268,41 @@
                             <div class="block2">
                                 <div class="block2-pic hov-img0">
                                     <%
-                                        ProImageService imageService = new ProImageService();
-                                        String reImage = imageService.getProReImage(((Product) pageContext.getAttribute("product")).getProductId());
+                                        String reImage = Constant.Service.PRO_IMAGE_SERVICE.getProReImage(((Product) pageContext.getAttribute("product")).getProductId());
                                         request.setAttribute("reImage", reImage);
                                     %>
                                     <c:url value="/images/product-images?fname=${reImage}" var="productImg"/>
                                     <img class="product-img" src="${productImg}" alt="Hình ảnh">
-                                    <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal">Xem Qua</a>
+                                    <a href="#"
+                                       class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal">Xem
+                                        Qua</a>
                                 </div>
                                 <div class="block2-txt flex-w flex-t p-t-14">
                                     <div class="block2-txt-child1 flex-col-l ">
-                                        <a href="${pageContext.request.contextPath}/products/product-detail?id=${product.productId}" class="product-name stext-104 cl4 hov-cl1 trans-04 js-name-b2 m-b-6">${product.productName}</a>
+                                        <a href="${pageContext.request.contextPath}/products/product-detail?id=${product.productId}"
+                                           class="product-name stext-104 cl4 hov-cl1 trans-04 js-name-b2 m-b-6">${product.productName}</a>
                                     </div>
-                                    <form action="<c:url value="/wishlist/add"/>" method="get" class="block2-txt-child2 flex-r p-t-3">
+                                    <form action="<c:url value="/wishlist/add"/>" method="get"
+                                          class="block2-txt-child2 flex-r p-t-3">
                                         <!--Sign url-->
                                         <input type="hidden" class="input-add-item" name="forwardTo">
                                         <!--Sign product-->
                                         <input type="hidden" name="id" value="${product.productId}">
 
                                         <%
-                                            WLItemService wlItemService = new WLItemService();
                                             Product product = (Product) pageContext.getAttribute("product");
                                             WishList wishList = (WishList) session.getAttribute("wishList");
-                                            boolean existItem = wishList != null && wlItemService.checkExistItem(product.getProductId(), wishList.getWishListId());
+                                            boolean existItem = wishList != null && Constant.Service.WL_ITEM_SERVICE.checkExistItem(product.getProductId(), wishList.getWishListId());
                                             request.setAttribute("existItem", existItem);
                                         %>
-                                        <button type="button" class="btn-add-item btn-addwish-b2 dis-block pos-relative <c:if test="${!existItem}">js-addwish-b2</c:if>">
-                                            <img class="icon-heart1 dis-block trans-04" src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-01.png" <c:if test="${existItem}">style="opacity: 0;" </c:if>alt="ICON">
-                                            <img class="icon-heart2 dis-block trans-04 ab-t-l" src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-02.png" <c:if test="${existItem}">style="opacity: 1;" </c:if>alt="ICON">
+                                        <button type="button"
+                                                class="btn-add-item btn-addwish-b2 dis-block pos-relative <c:if test="${!existItem}">js-addwish-b2</c:if>">
+                                            <img class="icon-heart1 dis-block trans-04"
+                                                 src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-01.png"
+                                                 <c:if test="${existItem}">style="opacity: 0;" </c:if>alt="ICON">
+                                            <img class="icon-heart2 dis-block trans-04 ab-t-l"
+                                                 src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-02.png"
+                                                 <c:if test="${existItem}">style="opacity: 1;" </c:if>alt="ICON">
                                         </button>
                                     </form>
                                 </div>
@@ -323,7 +355,8 @@
                             <div class="container">
                                 <div class="bg0 p-t-60 p-b-30 p-lr-15-lg how-pos3-parent">
                                     <button class="how-pos3 hov3 trans-04 js-hide-modal">
-                                        <img src="${pageContext.request.contextPath}/assets/images/icons/icon-close.png" alt="CLOSE">
+                                        <img src="${pageContext.request.contextPath}/assets/images/icons/icon-close.png"
+                                             alt="CLOSE">
                                     </button>
 
                                     <div class="row">
@@ -335,15 +368,18 @@
 
                                                     <div class="slick3 gallery-lb">
                                                         <%
-                                                            List<ProImage> images = imageService.getProImage(((Product) pageContext.getAttribute("product")).getProductId());
+                                                            List<ProImage> images = Constant.Service.PRO_IMAGE_SERVICE.getProImage(((Product) pageContext.getAttribute("product")).getProductId());
                                                             request.setAttribute("images", images);
                                                         %>
                                                         <c:forEach items="${images}" var="image">
-                                                            <c:url var="imageUrl" value="/images/product-images?fname=${image.imageName}"/>
+                                                            <c:url var="imageUrl"
+                                                                   value="/images/product-images?fname=${image.imageName}"/>
                                                             <div class="item-slick3" data-thumb="${imageUrl}">
                                                                 <div class="wrap-pic-w pos-relative">
-                                                                    <img class="modal-product-image" src="${imageUrl}" alt="Hình ảnh sản phẩm">
-                                                                    <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="${imageUrl}">
+                                                                    <img class="modal-product-image" src="${imageUrl}"
+                                                                         alt="Hình ảnh sản phẩm">
+                                                                    <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
+                                                                       href="${imageUrl}">
                                                                         <i class="fa fa-expand"></i>
                                                                     </a>
                                                                 </div>
@@ -356,20 +392,21 @@
 
                                         <div class="col-md-6 col-lg-5 p-b-30">
                                             <div class="p-r-50 p-t-5 p-lr-0-lg" style="height: 100%;">
-                                                <h4 class="mtext-105 cl2 js-name-detail">${product.productName}</h4>
+                                                <a href="${pageContext.request.contextPath}/products/product-detail?id=${product.productId}" class="mtext-105 cl2 js-name-detail"><h4>${product.productName}</h4></a>
                                                 <span class="fs-14">Mã sản phẩm: ${product.productId}</span>
                                                 <div class="m-t-14" style="height: 42%;">
                                                     <span class="fs-24 cl11">
                                                         <%
                                                             double productRate = product.getProductRate();
-                                                            productRate = Math.round(productRate*2)/2.0;
+                                                            productRate = Math.round(productRate * 2) / 2.0;
                                                         %>
                                                         <i class="<% if (Double.compare(productRate, 0.5) == 0) out.print("zmdi zmdi-star-half"); else if (Double.compare(productRate, 1.0) > -1) out.print("zmdi zmdi-star"); else out.print("zmdi zmdi-star-outline"); %>"></i>
                                                         <i class="<% if (Double.compare(productRate, 1.5) == 0) out.print("zmdi zmdi-star-half"); else if (Double.compare(productRate, 2.0) > -1) out.print("zmdi zmdi-star"); else out.print("zmdi zmdi-star-outline"); %>"></i>
                                                         <i class="<% if (Double.compare(productRate, 2.5) == 0) out.print("zmdi zmdi-star-half"); else if (Double.compare(productRate, 3.0) > -1) out.print("zmdi zmdi-star"); else out.print("zmdi zmdi-star-outline"); %>"></i>
                                                         <i class="<% if (Double.compare(productRate, 3.5) == 0) out.print("zmdi zmdi-star-half"); else if (Double.compare(productRate, 4.0) > -1) out.print("zmdi zmdi-star"); else out.print("zmdi zmdi-star-outline"); %>"></i>
                                                         <i class="<% if (Double.compare(productRate, 4.5) == 0) out.print("zmdi zmdi-star-half"); else if (Double.compare(productRate, 5.0) == 0) out.print("zmdi zmdi-star"); else out.print("zmdi zmdi-star-outline"); %>"></i>
-                                                        <span class="fs-18" style="color: #333;">&nbsp;|&nbsp;<% out.print(new ReviewService().countRate(product.getProductId())); %> đánh giá&nbsp;|&nbsp;<% out.print(new ProductService().countSale(product.getProductId())); %> đã bán</span>
+                                                        <span class="fs-18"
+                                                              style="color: #333;">&nbsp;|&nbsp;<% out.print(Constant.Service.REVIEW_SERVICE.countRate(product.getProductId())); %> đánh giá&nbsp;|&nbsp;<% out.print(Constant.Service.PRODUCT_SERVICE.countSale(product.getProductId())); %> đã bán</span>
                                                     </span>
                                                     <br>
                                                     <span class="product-price mtext-106 cl2 m-r-16"><% out.print(showPrice); %></span>
@@ -380,9 +417,11 @@
                                                 <!--  -->
                                                 <div class="p-t-33">
                                                     <div class="flex-w flex-r-m p-b-10">
-                                                        <form action="<c:url value="/cart/add"/>" method="get" class="size-204 flex-w flex-m respon6-next">
+                                                        <form action="<c:url value="/cart/add"/>" method="get"
+                                                              class="size-204 flex-w flex-m respon6-next">
                                                             <!--Sign url-->
-                                                            <input type="hidden" class="input-add-item" name="forwardTo">
+                                                            <input type="hidden" class="input-add-item"
+                                                                   name="forwardTo">
                                                             <!--Sign product-->
                                                             <input type="hidden" name="id" value="${product.productId}">
 
@@ -390,7 +429,8 @@
                                                                 <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
                                                                     <i class="fs-16 zmdi zmdi-minus"></i>
                                                                 </div>
-                                                                <input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product" value="<%
+                                                                <input class="mtext-104 cl3 txt-center num-product"
+                                                                       type="number" name="num-product" value="<%
                                                                     if (product.getProductQuantity() > 0) {
                                                                         out.print(1);
                                                                     } else {
@@ -413,7 +453,9 @@
                                                                 </c:choose>
                                                             </span>
 
-                                                            <button type="button" class="btn-add-item flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail"<c:if test="${product.productQuantity == 0}">disabled</c:if>>
+                                                            <button type="button"
+                                                                    class="btn-add-item flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail"
+                                                                    <c:if test="${product.productQuantity == 0}">disabled</c:if>>
                                                                 Thêm vào giỏ hàng
                                                             </button>
                                                         </form>
@@ -422,26 +464,35 @@
 
                                                 <!--  -->
                                                 <div class="flex-w flex-m p-l-100 p-t-40 respon7">
-                                                    <form action="<c:url value="/wishlist/add"/>" method="get" class="flex-m bor9 p-r-10 m-r-11">
+                                                    <form action="<c:url value="/wishlist/add"/>" method="get"
+                                                          class="flex-m bor9 p-r-10 m-r-11">
                                                         <!--Sign url-->
                                                         <input type="hidden" class="input-add-item" name="forwardTo">
                                                         <!--Sign product-->
                                                         <input type="hidden" name="id" value="${product.productId}">
 
-                                                        <button type="button" class="btn-add-item fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100" data-tooltip="Thêm vào Danh sách yêu thích">
+                                                        <button type="button"
+                                                                class="btn-add-item fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100"
+                                                                data-tooltip="Thêm vào Danh sách yêu thích">
                                                             <i class="zmdi zmdi-favorite fs-24"></i>
                                                         </button>
                                                     </form>
 
-                                                    <a href="#" class="fs-18 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Facebook">
+                                                    <a href="#"
+                                                       class="fs-18 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100"
+                                                       data-tooltip="Facebook">
                                                         <i class="fab fa-facebook"></i>
                                                     </a>
 
-                                                    <a href="#" class="fs-18 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Twitter">
+                                                    <a href="#"
+                                                       class="fs-18 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100"
+                                                       data-tooltip="Twitter">
                                                         <i class="fab fa-twitter"></i>
                                                     </a>
 
-                                                    <a href="#" class="fs-18 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Google Plus">
+                                                    <a href="#"
+                                                       class="fs-18 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100"
+                                                       data-tooltip="Google Plus">
                                                         <i class="fab fa-google-plus"></i>
                                                     </a>
                                                 </div>
@@ -482,7 +533,7 @@
 <!--===============================================================================================-->
 <script src="${pageContext.request.contextPath}/assets/vendor/select2/select2.min.js"></script>
 <script>
-    $(".js-select2").each(function(){
+    $(".js-select2").each(function () {
         $(this).select2({
             minimumResultsForSearch: 20,
             dropdownParent: $(this).next('.dropDownSelect2')
@@ -503,12 +554,12 @@
 <!--===============================================================================================-->
 <script src="${pageContext.request.contextPath}/assets/vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
 <script>
-    $('.gallery-lb').each(function() { // the containers for all your galleries
+    $('.gallery-lb').each(function () { // the containers for all your galleries
         $(this).magnificPopup({
             delegate: 'a', // the selector for gallery item
             type: 'image',
             gallery: {
-                enabled:true
+                enabled: true
             },
             mainClass: 'mfp-fade'
         });
@@ -521,16 +572,16 @@
 <!--===============================================================================================-->
 <script src="${pageContext.request.contextPath}/assets/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 <script>
-    $('.js-pscroll').each(function(){
-        $(this).css('position','relative');
-        $(this).css('overflow','hidden');
+    $('.js-pscroll').each(function () {
+        $(this).css('position', 'relative');
+        $(this).css('overflow', 'hidden');
         const ps = new PerfectScrollbar(this, {
             wheelSpeed: 1,
             scrollingThreshold: 1000,
             wheelPropagation: false,
         });
 
-        $(window).on('resize', function(){
+        $(window).on('resize', function () {
             ps.update();
         })
     });

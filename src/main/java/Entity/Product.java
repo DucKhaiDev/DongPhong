@@ -20,7 +20,8 @@ public class Product implements Serializable {
     private Category category;
     private Brand brand;
 
-    public Product() {}
+    public Product() {
+    }
 
     public Product(String productId, String productName, String productDescription, String productDimension, String productWeight, String productMaterial, String productColor, BigDecimal productPrice, BigDecimal productCost, int productQuantity, Category category, Brand brand) {
         this.productId = productId;

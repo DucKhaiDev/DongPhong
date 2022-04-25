@@ -12,13 +12,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDao implements IUserDao {
-    private Connection conn = null;
-    private PreparedStatement ps = null;
-    private ResultSet rs = null;
-
     @Override
     public String getUserId(String identify) {
-        conn = DBConnect.getConnection();
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
 
         try {
             ps = conn.prepareStatement("SELECT USER_ID FROM [USER] WHERE USERNAME = ? OR EMAIL = ?");
@@ -38,7 +36,8 @@ public class UserDao implements IUserDao {
 
     @Override
     public void insert(User user) {
-        conn = DBConnect.getConnection();
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
 
         try {
             ps = conn.prepareStatement("INSERT INTO [USER](USER_ID, FIRSTNAME, LASTNAME, USERNAME, PASSWORD, EMAIL, ADDRESS, PHONE, AVATAR, [ROLE]) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
@@ -56,37 +55,39 @@ public class UserDao implements IUserDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBConnect.closeAll(rs, ps, conn);
+            DBConnect.closeAll(null, ps, conn);
         }
     }
 
     @Override
     public void edit(User user) {
-        conn = DBConnect.getConnection();
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
 
         try {
-             ps = conn.prepareStatement("UPDATE [USER] SET FIRSTNAME = ?, LASTNAME = ?, USERNAME = ?, PASSWORD = ?, EMAIL = ?, ADDRESS = ?, PHONE = ?, AVATAR = ?, [ROLE] = ? WHERE USER_ID = ?");
-             ps.setString(1, user.getFirstName());
-             ps.setString(2, user.getLastName());
-             ps.setString(3, user.getUsername());
-             ps.setString(4, user.getPassword());
-             ps.setString(5, user.getEmail());
-             ps.setString(6, user.getAddress());
-             ps.setString(7, user.getPhone());
-             ps.setString(8, user.getAvatar());
-             ps.setBoolean(9, user.getRole());
-             ps.setString(10, user.getUserId());
-             ps.executeUpdate();
-         } catch (SQLException e) {
-             e.printStackTrace();
-         } finally {
-             DBConnect.closeAll(rs, ps, conn);
-         }
+            ps = conn.prepareStatement("UPDATE [USER] SET FIRSTNAME = ?, LASTNAME = ?, USERNAME = ?, PASSWORD = ?, EMAIL = ?, ADDRESS = ?, PHONE = ?, AVATAR = ?, [ROLE] = ? WHERE USER_ID = ?");
+            ps.setString(1, user.getFirstName());
+            ps.setString(2, user.getLastName());
+            ps.setString(3, user.getUsername());
+            ps.setString(4, user.getPassword());
+            ps.setString(5, user.getEmail());
+            ps.setString(6, user.getAddress());
+            ps.setString(7, user.getPhone());
+            ps.setString(8, user.getAvatar());
+            ps.setBoolean(9, user.getRole());
+            ps.setString(10, user.getUserId());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnect.closeAll(null, ps, conn);
+        }
     }
 
     @Override
     public void delete(String identify) {
-        conn = DBConnect.getConnection();
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
 
         try {
             ps = conn.prepareStatement("DELETE FROM [USER] WHERE USER_ID = ? OR USERNAME = ? OR EMAIL = ?");
@@ -97,14 +98,16 @@ public class UserDao implements IUserDao {
         } catch (SQLException ex) {
             ex.printStackTrace();
         } finally {
-            DBConnect.closeAll(rs, ps, conn);
+            DBConnect.closeAll(null, ps, conn);
         }
     }
 
     @Override
     public User getUser(String identify) {
         User user = new User();
-        conn = DBConnect.getConnection();
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
 
         try {
             ps = conn.prepareStatement("SELECT * FROM [USER] WHERE USER_ID = ? OR USERNAME = ? OR EMAIL = ?");
@@ -136,7 +139,9 @@ public class UserDao implements IUserDao {
     @Override
     public List<User> getAll() {
         List<User> users = new ArrayList<>();
-        conn = DBConnect.getConnection();
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
 
         try {
             ps = conn.prepareStatement("SELECT * FROM [USER] ORDER BY [ROLE] ASC");
@@ -168,7 +173,9 @@ public class UserDao implements IUserDao {
     @Override
     public List<User> search(String username) {
         List<User> users = new ArrayList<>();
-        conn = DBConnect.getConnection();
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
 
         try {
             ps = conn.prepareStatement("SELECT * FROM [USER] WHERE USERNAME LIKE ? ORDER BY USER_ID ASC");
@@ -200,7 +207,9 @@ public class UserDao implements IUserDao {
 
     @Override
     public boolean checkExistUsername(String username) {
-        conn = DBConnect.getConnection();
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
 
         try {
             ps = conn.prepareStatement("SELECT * FROM [USER] WHERE USERNAME = ?");
@@ -220,7 +229,9 @@ public class UserDao implements IUserDao {
 
     @Override
     public boolean checkExistEmail(String email) {
-        conn = DBConnect.getConnection();
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
 
         try {
             ps = conn.prepareStatement("SELECT * FROM [USER] WHERE EMAIL = ?");
@@ -240,7 +251,9 @@ public class UserDao implements IUserDao {
 
     @Override
     public int countAdmin() {
-        conn = DBConnect.getConnection();
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         int count = 0;
 
         try {

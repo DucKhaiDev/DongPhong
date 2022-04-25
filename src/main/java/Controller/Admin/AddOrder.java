@@ -10,20 +10,14 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-import java.text.NumberFormat;
 import java.util.List;
-import java.util.Locale;
 
 @WebServlet(name = "AddOrder", value = "/admin/order/add")
 public class AddOrder extends HttpServlet {
-    private final Locale vie = new Locale("vi", "VN");
-    private final NumberFormat dongFormat = NumberFormat.getCurrencyInstance(vie);
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher(Constant.Path.ADMIN_ADD_ORDER).forward(request, response);
@@ -37,7 +31,8 @@ public class AddOrder extends HttpServlet {
         order.setOrderShipping(new BigDecimal(request.getParameter("shipping")));
         order.setOrderTax(new BigDecimal(request.getParameter("vat")));
         order.setOrderTotal(new BigDecimal(request.getParameter("total")));
-        order.setUser(new UserService().getUser(request.getParameter("orderAccount")));
+        User user = Constant.Service.USER_SERVICE.getUser(request.getParameter("orderAccount"));
+        order.setUser(user);
         order.setRecipientName(request.getParameter("fullName"));
         String recAddress = request.getParameter("recaddress") + ", "
                 + request.getParameter("selectedWard") + ", "
@@ -46,15 +41,16 @@ public class AddOrder extends HttpServlet {
         order.setRecipientAddress(recAddress);
         order.setRecipientPhone(request.getParameter("phone"));
         order.setOrderDate(new Timestamp(System.currentTimeMillis()));
-        HttpSession session = request.getSession();
-        order.setOrderSumProduct(((List<?>) session.getAttribute("cartItems")).size());
-        order.setCart((Cart) session.getAttribute("cart"));
-        Payment payment = new PaymentService().getPayment(request.getParameter("paymentMethod"));
+        order.setOrderSumProduct(((List<?>) request.getSession().getAttribute("cartItems")).size());
+        order.setCart((Cart) request.getSession().getAttribute("cart"));
+        Payment payment = Constant.Service.PAYMENT_SERVICE.getPayment(request.getParameter("paymentMethod"));
         order.setPayment(payment);
 
-        new OrderService().insert(order);
-        Order order_rv = new OrderService().getNewestOrder();
-        List<CartItem> cartItems_rv = new CartItemService().getItemByCart(order.getCart().getCartId());
+        Constant.Service.ORDER_SERVICE.insert(order);
+
+        Order order_rv = Constant.Service.ORDER_SERVICE.getNewestOrder();
+        List<CartItem> cartItems_rv = Constant.Service.CART_ITEM_SERVICE.getItemByCart(order.getCart().getCartId());
+
         //Send email
         Checkout checkout = new Checkout();
         String content = "<!DOCTYPE html>\n" +
@@ -198,7 +194,7 @@ public class AddOrder extends HttpServlet {
                 "                                            </td>\n" +
                 "                                            <td align=\"left\" style=\"font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px; padding: 10px; border-top: 3px solid #eeeeee;\"\n" +
                 "                                                width=\"25%\">\n" +
-                "                                                " + dongFormat.format(order_rv.getOrderSubTotal()) + "\n" +
+                "                                                " + Constant.NF_DONG.format(order_rv.getOrderSubTotal()) + "\n" +
                 "                                            </td>\n" +
                 "                                        </tr>\n" +
                 "                                        <tr>\n" +
@@ -208,7 +204,7 @@ public class AddOrder extends HttpServlet {
                 "                                            </td>\n" +
                 "                                            <td align=\"left\" style=\"font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px; padding: 10px;\"\n" +
                 "                                                width=\"25%\">\n" +
-                "                                                " + dongFormat.format(order_rv.getOrderDiscount()) + "\n" +
+                "                                                " + Constant.NF_DONG.format(order_rv.getOrderDiscount()) + "\n" +
                 "                                            </td>\n" +
                 "                                        </tr>\n" +
                 "                                        <tr>\n" +
@@ -218,7 +214,7 @@ public class AddOrder extends HttpServlet {
                 "                                            </td>\n" +
                 "                                            <td align=\"left\" style=\"font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px; padding: 10px;\"\n" +
                 "                                                width=\"25%\">\n" +
-                "                                                " + dongFormat.format(order_rv.getOrderShipping()) + "\n" +
+                "                                                " + Constant.NF_DONG.format(order_rv.getOrderShipping()) + "\n" +
                 "                                            </td>\n" +
                 "                                        </tr>\n" +
                 "                                        <tr>\n" +
@@ -228,7 +224,7 @@ public class AddOrder extends HttpServlet {
                 "                                            </td>\n" +
                 "                                            <td align=\"left\" style=\"font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px; padding: 10px; border-bottom: 3px solid #eeeeee;\"\n" +
                 "                                                width=\"25%\">\n" +
-                "                                                " + dongFormat.format(order_rv.getOrderTax()) + "\n" +
+                "                                                " + Constant.NF_DONG.format(order_rv.getOrderTax()) + "\n" +
                 "                                            </td>\n" +
                 "                                        </tr>\n" +
                 "                                        <tr>\n" +
@@ -238,7 +234,7 @@ public class AddOrder extends HttpServlet {
                 "                                            </td>\n" +
                 "                                            <td align=\"left\" style=\"font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: bold; line-height: 24px; padding: 10px; border-top: 3px solid #eeeeee; border-bottom: 3px solid #eeeeee;\"\n" +
                 "                                                width=\"25%\">\n" +
-                "                                                " + dongFormat.format(order_rv.getOrderTotal()) + "\n" +
+                "                                                " + Constant.NF_DONG.format(order_rv.getOrderTotal()) + "\n" +
                 "                                            </td>\n" +
                 "                                        </tr>\n" +
                 "                                    </table>\n" +
@@ -347,20 +343,14 @@ public class AddOrder extends HttpServlet {
         SendEmail.sendEmail(order.getUser().getEmail(), "DongPhong.store", content);
 
         //Create new cart
-        String CurrCartId = ((Cart) session.getAttribute("cart")).getCartId();
-        int curr = Integer.parseInt(CurrCartId.split("-")[1]);
-        User user = (User) session.getAttribute("account");
-        String newCartId = user.getUsername() + "-" + (curr + 1);
-        Cart cart = new Cart(newCartId, user);
-        new CartService().insert(cart);
-        List<CartItem> cartItems = new CartItemService().getItemByCart(cart.getCartId());
-        session.setAttribute("cartItems", cartItems);
+        Checkout.createNewCart(request, user);
 
+        //Remove attributes
         String[] attributes = {"orderAccount", "ord_recipientName", "ord_recipientPhone", "selectedProvince", "selectedDistrict", "selectedWard", "recaddress", "shippingCost", "voucher"};
         for (String attribute : attributes) {
-            session.removeAttribute(attribute);
+            request.getSession().removeAttribute(attribute);
         }
 
-        response.sendRedirect(request.getContextPath() + "/admin/order/detail?id=" + (new OrderService().getNewestOrder()).getOrderId());
+        response.sendRedirect(request.getContextPath() + "/admin/order/detail?id=" + (Constant.Service.ORDER_SERVICE.getNewestOrder()).getOrderId());
     }
 }

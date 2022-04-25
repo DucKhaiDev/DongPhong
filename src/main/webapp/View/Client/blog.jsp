@@ -14,23 +14,31 @@
     <!--===============================================================================================-->
     <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/assets/images/icons/icon-logo.png"/>
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/assets/vendor/bootstrap/css/bootstrap.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/fonts/fontawesome-pro-5.15.4-web/css/all.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/assets/fonts/fontawesome-pro-5.15.4-web/css/all.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/fonts/iconic/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/assets/fonts/iconic/css/material-design-iconic-font.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/fonts/linearicons-v1.0.0/icon-font.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/assets/fonts/linearicons-v1.0.0/icon-font.min.css">
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/animate/animate.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/css-hamburgers/hamburgers.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/assets/vendor/css-hamburgers/hamburgers.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/animsition/css/animsition.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/assets/vendor/animsition/css/animsition.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/select2/select2.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/assets/vendor/select2/select2.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/assets/vendor/perfect-scrollbar/perfect-scrollbar.css">
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/util.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/main.css">
@@ -45,7 +53,8 @@
 <jsp:include page="cart.jsp"/>
 
 <!-- Title page -->
-<section class="bg-img1 txt-center p-lr-15 p-tb-92" style="background-image: url('${pageContext.request.contextPath}/assets/images/bg-02.jpg');">
+<section class="bg-img1 txt-center p-lr-15 p-tb-92"
+         style="background-image: url('${pageContext.request.contextPath}/assets/images/bg-02.jpg');">
     <h2 class="ltext-105 cl0 txt-center">
         Blog
     </h2>
@@ -82,7 +91,8 @@
                             </h4>
 
                             <p class="stext-117 cl6">
-                                Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce eget dictum tortor. Donec dictum vitae sapien eu varius
+                                Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos
+                                himenaeos. Fusce eget dictum tortor. Donec dictum vitae sapien eu varius
                             </p>
 
                             <div class="flex-w flex-sb-m p-t-18">
@@ -135,7 +145,8 @@
                             </h4>
 
                             <p class="stext-117 cl6">
-                                Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce eget dictum tortor. Donec dictum vitae sapien eu varius
+                                Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos
+                                himenaeos. Fusce eget dictum tortor. Donec dictum vitae sapien eu varius
                             </p>
 
                             <div class="flex-w flex-sb-m p-t-18">
@@ -188,7 +199,8 @@
                             </h4>
 
                             <p class="stext-117 cl6">
-                                Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce eget dictum tortor. Donec dictum vitae sapien eu varius
+                                Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos
+                                himenaeos. Fusce eget dictum tortor. Donec dictum vitae sapien eu varius
                             </p>
 
                             <div class="flex-w flex-sb-m p-t-18">
@@ -234,7 +246,8 @@
                 <div class="side-menu">
                     <div class="bor17 of-hidden pos-relative">
                         <label>
-                            <input class="stext-103 cl2 plh4 size-116 p-l-28 p-r-55" type="text" name="search" placeholder="Search">
+                            <input class="stext-103 cl2 plh4 size-116 p-l-28 p-r-55" type="text" name="search"
+                                   placeholder="Search">
                         </label>
 
                         <button class="flex-c-m size-122 ab-t-r fs-18 cl4 hov-cl1 trans-04">
@@ -288,7 +301,8 @@
                         <ul>
                             <li class="flex-w flex-t p-b-30">
                                 <a href="#" class="wrao-pic-w size-214 hov-ovelay1 m-r-20">
-                                    <img src="${pageContext.request.contextPath}/assets/images/product-min-01.jpg" alt="PRODUCT">
+                                    <img src="${pageContext.request.contextPath}/assets/images/product-min-01.jpg"
+                                         alt="PRODUCT">
                                 </a>
 
                                 <div class="size-215 flex-col-t p-t-8">
@@ -304,7 +318,8 @@
 
                             <li class="flex-w flex-t p-b-30">
                                 <a href="#" class="wrao-pic-w size-214 hov-ovelay1 m-r-20">
-                                    <img src="${pageContext.request.contextPath}/assets/images/product-min-02.jpg" alt="PRODUCT">
+                                    <img src="${pageContext.request.contextPath}/assets/images/product-min-02.jpg"
+                                         alt="PRODUCT">
                                 </a>
 
                                 <div class="size-215 flex-col-t p-t-8">
@@ -320,7 +335,8 @@
 
                             <li class="flex-w flex-t p-b-30">
                                 <a href="#" class="wrao-pic-w size-214 hov-ovelay1 m-r-20">
-                                    <img src="${pageContext.request.contextPath}/assets/images/product-min-03.jpg" alt="PRODUCT">
+                                    <img src="${pageContext.request.contextPath}/assets/images/product-min-03.jpg"
+                                         alt="PRODUCT">
                                 </a>
 
                                 <div class="size-215 flex-col-t p-t-8">
@@ -446,23 +462,28 @@
                         </h4>
 
                         <div class="flex-w m-r--5">
-                            <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+                            <a href="#"
+                               class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
                                 Fashion
                             </a>
 
-                            <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+                            <a href="#"
+                               class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
                                 Lifestyle
                             </a>
 
-                            <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+                            <a href="#"
+                               class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
                                 Denim
                             </a>
 
-                            <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+                            <a href="#"
+                               class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
                                 Streetstyle
                             </a>
 
-                            <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+                            <a href="#"
+                               class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
                                 Crafts
                             </a>
                         </div>
@@ -486,7 +507,7 @@
 <!--===============================================================================================-->
 <script src="${pageContext.request.contextPath}/assets/vendor/select2/select2.min.js"></script>
 <script>
-    $(".js-select2").each(function(){
+    $(".js-select2").each(function () {
         $(this).select2({
             minimumResultsForSearch: 20,
             dropdownParent: $(this).next('.dropDownSelect2')
@@ -498,16 +519,16 @@
 <!--===============================================================================================-->
 <script src="${pageContext.request.contextPath}/assets/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 <script>
-    $('.js-pscroll').each(function(){
-        $(this).css('position','relative');
-        $(this).css('overflow','hidden');
+    $('.js-pscroll').each(function () {
+        $(this).css('position', 'relative');
+        $(this).css('overflow', 'hidden');
         const ps = new PerfectScrollbar(this, {
             wheelSpeed: 1,
             scrollingThreshold: 1000,
             wheelPropagation: false,
         });
 
-        $(window).on('resize', function(){
+        $(window).on('resize', function () {
             ps.update();
         })
     });

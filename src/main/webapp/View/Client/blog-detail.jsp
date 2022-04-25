@@ -14,23 +14,31 @@
     <!--===============================================================================================-->
     <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/assets/images/icons/icon-logo.png"/>
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/assets/vendor/bootstrap/css/bootstrap.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/fonts/fontawesome-pro-5.15.4-web/css/all.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/assets/fonts/fontawesome-pro-5.15.4-web/css/all.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/fonts/iconic/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/assets/fonts/iconic/css/material-design-iconic-font.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/fonts/linearicons-v1.0.0/icon-font.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/assets/fonts/linearicons-v1.0.0/icon-font.min.css">
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/animate/animate.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/css-hamburgers/hamburgers.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/assets/vendor/css-hamburgers/hamburgers.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/animsition/css/animsition.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/assets/vendor/animsition/css/animsition.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/select2/select2.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/assets/vendor/select2/select2.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/assets/vendor/perfect-scrollbar/perfect-scrollbar.css">
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/util.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/main.css">
@@ -115,11 +123,13 @@
                         <i class="zmdi zmdi-search"></i>
                     </div>
 
-                    <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="2">
+                    <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart"
+                         data-notify="2">
                         <i class="zmdi zmdi-shopping-cart"></i>
                     </div>
 
-                    <a href="#" class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="0">
+                    <a href="#" class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti"
+                       data-notify="0">
                         <i class="zmdi zmdi-favorite-outline"></i>
                     </a>
                 </div>
@@ -131,7 +141,8 @@
     <div class="wrap-header-mobile">
         <!-- Logo moblie -->
         <div class="logo-mobile">
-            <a href="index.jsp"><img src="${pageContext.request.contextPath}/assets/images/icons/logo.png" alt="IMG-LOGO"></a>
+            <a href="index.jsp"><img src="${pageContext.request.contextPath}/assets/images/icons/logo.png"
+                                     alt="IMG-LOGO"></a>
         </div>
 
         <!-- Icon header -->
@@ -140,11 +151,13 @@
                 <i class="zmdi zmdi-search"></i>
             </div>
 
-            <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart" data-notify="2">
+            <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart"
+                 data-notify="2">
                 <i class="zmdi zmdi-shopping-cart"></i>
             </div>
 
-            <a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti" data-notify="0">
+            <a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti"
+               data-notify="0">
                 <i class="zmdi zmdi-favorite-outline"></i>
             </a>
         </div>
@@ -312,11 +325,13 @@
                 </div>
 
                 <div class="header-cart-buttons flex-w w-full">
-                    <a href="cart-detail.jsp" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
+                    <a href="cart-detail.jsp"
+                       class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
                         View Cart
                     </a>
 
-                    <a href="cart-detail.jsp" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
+                    <a href="cart-detail.jsp"
+                       class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
                         Check Out
                     </a>
                 </div>
@@ -394,11 +409,22 @@
                         </h4>
 
                         <p class="stext-117 cl6 p-b-26">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sit amet est vel orci luctus sollicitudin. Duis eleifend vestibulum justo, varius semper lacus condimentum dictum. Donec pulvinar a magna ut malesuada. In posuere felis diam, vel sodales metus accumsan in. Duis viverra dui eu pharetra pellentesque. Donec a eros leo. Quisque sed ligula vitae lorem efficitur faucibus. Praesent sit amet imperdiet ante. Nulla id tellus auctor, dictum libero a, malesuada nisi. Nulla in porta nibh, id vestibulum ipsum. Praesent dapibus tempus erat quis aliquet. Donec ac purus id sapien condimentum feugiat.
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sit amet est vel orci luctus
+                            sollicitudin. Duis eleifend vestibulum justo, varius semper lacus condimentum dictum. Donec
+                            pulvinar a magna ut malesuada. In posuere felis diam, vel sodales metus accumsan in. Duis
+                            viverra dui eu pharetra pellentesque. Donec a eros leo. Quisque sed ligula vitae lorem
+                            efficitur faucibus. Praesent sit amet imperdiet ante. Nulla id tellus auctor, dictum libero
+                            a, malesuada nisi. Nulla in porta nibh, id vestibulum ipsum. Praesent dapibus tempus erat
+                            quis aliquet. Donec ac purus id sapien condimentum feugiat.
                         </p>
 
                         <p class="stext-117 cl6 p-b-26">
-                            Praesent vel mi bibendum, finibus leo ac, condimentum arcu. Pellentesque sem ex, tristique sit amet suscipit in, mattis imperdiet enim. Integer tempus justo nec velit fringilla, eget eleifend neque blandit. Sed tempor magna sed congue auctor. Mauris eu turpis eget tortor ultricies elementum. Phasellus vel placerat orci, a venenatis justo. Phasellus faucibus venenatis nisl vitae vestibulum. Praesent id nibh arcu. Vivamus sagittis accumsan felis, quis vulputate
+                            Praesent vel mi bibendum, finibus leo ac, condimentum arcu. Pellentesque sem ex, tristique
+                            sit amet suscipit in, mattis imperdiet enim. Integer tempus justo nec velit fringilla, eget
+                            eleifend neque blandit. Sed tempor magna sed congue auctor. Mauris eu turpis eget tortor
+                            ultricies elementum. Phasellus vel placerat orci, a venenatis justo. Phasellus faucibus
+                            venenatis nisl vitae vestibulum. Praesent id nibh arcu. Vivamus sagittis accumsan felis,
+                            quis vulputate
                         </p>
                     </div>
 
@@ -408,11 +434,13 @@
 							</span>
 
                         <div class="flex-w size-217">
-                            <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+                            <a href="#"
+                               class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
                                 Streetstyle
                             </a>
 
-                            <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+                            <a href="#"
+                               class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
                                 Crafts
                             </a>
                         </div>
@@ -431,25 +459,29 @@
                         <form>
                             <div class="bor19 m-b-20">
                                 <label>
-                                    <textarea class="stext-111 cl2 plh3 size-124 p-lr-18 p-tb-15" name="cmt" placeholder="Comment..."></textarea>
+                                    <textarea class="stext-111 cl2 plh3 size-124 p-lr-18 p-tb-15" name="cmt"
+                                              placeholder="Comment..."></textarea>
                                 </label>
                             </div>
 
                             <div class="bor19 size-218 m-b-20">
                                 <label>
-                                    <input class="stext-111 cl2 plh3 size-116 p-lr-18" type="text" name="name" placeholder="Name *">
+                                    <input class="stext-111 cl2 plh3 size-116 p-lr-18" type="text" name="name"
+                                           placeholder="Name *">
                                 </label>
                             </div>
 
                             <div class="bor19 size-218 m-b-20">
                                 <label>
-                                    <input class="stext-111 cl2 plh3 size-116 p-lr-18" type="text" name="email" placeholder="Email *">
+                                    <input class="stext-111 cl2 plh3 size-116 p-lr-18" type="text" name="email"
+                                           placeholder="Email *">
                                 </label>
                             </div>
 
                             <div class="bor19 size-218 m-b-30">
                                 <label>
-                                    <input class="stext-111 cl2 plh3 size-116 p-lr-18" type="text" name="web" placeholder="Website">
+                                    <input class="stext-111 cl2 plh3 size-116 p-lr-18" type="text" name="web"
+                                           placeholder="Website">
                                 </label>
                             </div>
 
@@ -465,7 +497,8 @@
                 <div class="side-menu">
                     <div class="bor17 of-hidden pos-relative">
                         <label>
-                            <input class="stext-103 cl2 plh4 size-116 p-l-28 p-r-55" type="text" name="search" placeholder="Search">
+                            <input class="stext-103 cl2 plh4 size-116 p-l-28 p-r-55" type="text" name="search"
+                                   placeholder="Search">
                         </label>
 
                         <button class="flex-c-m size-122 ab-t-r fs-18 cl4 hov-cl1 trans-04">
@@ -519,7 +552,8 @@
                         <ul>
                             <li class="flex-w flex-t p-b-30">
                                 <a href="#" class="wrao-pic-w size-214 hov-ovelay1 m-r-20">
-                                    <img src="${pageContext.request.contextPath}/assets/images/product-min-01.jpg" alt="PRODUCT">
+                                    <img src="${pageContext.request.contextPath}/assets/images/product-min-01.jpg"
+                                         alt="PRODUCT">
                                 </a>
 
                                 <div class="size-215 flex-col-t p-t-8">
@@ -535,7 +569,8 @@
 
                             <li class="flex-w flex-t p-b-30">
                                 <a href="#" class="wrao-pic-w size-214 hov-ovelay1 m-r-20">
-                                    <img src="${pageContext.request.contextPath}/assets/images/product-min-02.jpg" alt="PRODUCT">
+                                    <img src="${pageContext.request.contextPath}/assets/images/product-min-02.jpg"
+                                         alt="PRODUCT">
                                 </a>
 
                                 <div class="size-215 flex-col-t p-t-8">
@@ -551,7 +586,8 @@
 
                             <li class="flex-w flex-t p-b-30">
                                 <a href="#" class="wrao-pic-w size-214 hov-ovelay1 m-r-20">
-                                    <img src="${pageContext.request.contextPath}/assets/images/product-min-03.jpg" alt="PRODUCT">
+                                    <img src="${pageContext.request.contextPath}/assets/images/product-min-03.jpg"
+                                         alt="PRODUCT">
                                 </a>
 
                                 <div class="size-215 flex-col-t p-t-8">
@@ -677,23 +713,28 @@
                         </h4>
 
                         <div class="flex-w m-r--5">
-                            <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+                            <a href="#"
+                               class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
                                 Fashion
                             </a>
 
-                            <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+                            <a href="#"
+                               class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
                                 Lifestyle
                             </a>
 
-                            <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+                            <a href="#"
+                               class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
                                 Denim
                             </a>
 
-                            <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+                            <a href="#"
+                               class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
                                 Streetstyle
                             </a>
 
-                            <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+                            <a href="#"
+                               class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
                                 Crafts
                             </a>
                         </div>
@@ -703,7 +744,6 @@
         </div>
     </div>
 </section>
-
 
 
 <!-- Footer -->
@@ -780,7 +820,8 @@
                 </h4>
 
                 <p class="stext-107 cl7 size-201">
-                    Any questions? Let us know in store at 8th floor, 379 Hudson St, New York, NY 10018 or call us on (+1) 96 716 6879
+                    Any questions? Let us know in store at 8th floor, 379 Hudson St, New York, NY 10018 or call us on
+                    (+1) 96 716 6879
                 </p>
 
                 <div class="p-t-27">
@@ -806,7 +847,8 @@
                 <form>
                     <div class="wrap-input1 w-full p-b-4">
                         <label>
-                            <input class="input1 bg-none plh1 stext-107 cl7" type="text" name="email" placeholder="email@example.com">
+                            <input class="input1 bg-none plh1 stext-107 cl7" type="text" name="email"
+                                   placeholder="email@example.com">
                         </label>
                         <div class="focus-input1 trans-04"></div>
                     </div>
@@ -845,7 +887,10 @@
 
             <p class="stext-107 cl6 txt-center">
                 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                Copyright &copy;<script>document.write(new Date().getFullYear().toString());</script> All rights reserved | Made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a> &amp; distributed by <a href="https://themewagon.com" target="_blank">ThemeWagon</a>
+                Copyright &copy;<script>document.write(new Date().getFullYear().toString());</script>
+                All rights reserved | Made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a
+                    href="https://colorlib.com" target="_blank">Colorlib</a> &amp; distributed by <a
+                    href="https://themewagon.com" target="_blank">ThemeWagon</a>
                 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 
             </p>
@@ -871,7 +916,7 @@
 <!--===============================================================================================-->
 <script src="${pageContext.request.contextPath}/assets/vendor/select2/select2.min.js"></script>
 <script>
-    $(".js-select2").each(function(){
+    $(".js-select2").each(function () {
         $(this).select2({
             minimumResultsForSearch: 20,
             dropdownParent: $(this).next('.dropDownSelect2')
@@ -883,16 +928,16 @@
 <!--===============================================================================================-->
 <script src="${pageContext.request.contextPath}/assets/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 <script>
-    $('.js-pscroll').each(function(){
-        $(this).css('position','relative');
-        $(this).css('overflow','hidden');
+    $('.js-pscroll').each(function () {
+        $(this).css('position', 'relative');
+        $(this).css('overflow', 'hidden');
         const ps = new PerfectScrollbar(this, {
             wheelSpeed: 1,
             scrollingThreshold: 1000,
             wheelPropagation: false,
         });
 
-        $(window).on('resize', function(){
+        $(window).on('resize', function () {
             ps.update();
         })
     });

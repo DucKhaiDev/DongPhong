@@ -1,4 +1,3 @@
-<%@ page import="Services.deploy.ProImageService" %>
 <%@ page import="Entity.Product" %>
 <%@ page import="Entity.CartItem" %>
 <%@ page import="java.math.BigDecimal" %>
@@ -9,6 +8,7 @@
 <%@ page import="java.sql.Timestamp" %>
 <%@ page import="Entity.Cart" %>
 <%@ page import="java.util.List" %>
+<%@ page import="Util.Constant" %>
 <%--
   Author: is2vi
   Date: 1/11/2022
@@ -25,23 +25,31 @@
     <!--===============================================================================================-->
     <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/assets/images/icons/icon-logo.png"/>
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/assets/vendor/bootstrap/css/bootstrap.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/fonts/fontawesome-pro-5.15.4-web/css/all.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/assets/fonts/fontawesome-pro-5.15.4-web/css/all.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/fonts/iconic/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/assets/fonts/iconic/css/material-design-iconic-font.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/fonts/linearicons-v1.0.0/icon-font.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/assets/fonts/linearicons-v1.0.0/icon-font.min.css">
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/animate/animate.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/css-hamburgers/hamburgers.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/assets/vendor/css-hamburgers/hamburgers.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/animsition/css/animsition.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/assets/vendor/animsition/css/animsition.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/select2/select2.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/assets/vendor/select2/select2.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/assets/vendor/perfect-scrollbar/perfect-scrollbar.css">
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/util.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/main.css">
@@ -102,18 +110,19 @@
                                     <td class="column-1">
                                         <div class="how-itemcart1">
                                             <%
-                                                ProImageService imageService = new ProImageService();
                                                 Product product = ((CartItem) pageContext.getAttribute("item")).getProduct();
                                                 request.setAttribute("cart_product", product);
                                             %>
                                             <div class="header-cart-item-img">
                                                 <%
-                                                    String reImage = imageService.getProReImage(product.getProductId());
+                                                    String reImage = Constant.Service.PRO_IMAGE_SERVICE.getProReImage(product.getProductId());
                                                     request.setAttribute("cart_reImage", reImage);
                                                 %>
-                                                <c:url value="/images/product-images?fname=${cart_reImage}" var="imageUrl"/>
+                                                <c:url value="/images/product-images?fname=${cart_reImage}"
+                                                       var="imageUrl"/>
                                                 <img class="cart_image" src="${imageUrl}" alt="IMG">
-                                                <a href="${pageContext.request.contextPath}/cart/remove?id=${item.cartItemId}&forwardTo=${pageContext.request.contextPath}/cart" class="btn-remove-item">
+                                                <a href="${pageContext.request.contextPath}/cart/remove?id=${item.cartItemId}&forwardTo=${pageContext.request.contextPath}/cart"
+                                                   class="btn-remove-item">
                                                     <i class="fa fa-minus"></i>
                                                 </a>
                                             </div>
@@ -121,7 +130,8 @@
                                     </td>
 
                                     <td class="column-2">
-                                        <a href="${pageContext.request.contextPath}/products/product-detail?id=${cart_product.productId}" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+                                        <a href="${pageContext.request.contextPath}/products/product-detail?id=${cart_product.productId}"
+                                           class="header-cart-item-name m-b-18 hov-cl1 trans-04">
                                                 ${cart_product.productName}
                                         </a>
                                     </td>
@@ -140,7 +150,8 @@
                                             <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
                                                 <i class="fs-16 zmdi zmdi-minus"></i>
                                             </div>
-                                            <input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product" value="${item.quantity}">
+                                            <input class="mtext-104 cl3 txt-center num-product" type="number"
+                                                   name="num-product" value="${item.quantity}">
                                             <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
                                                 <i class="fs-16 zmdi zmdi-plus"></i>
                                             </div>
@@ -161,9 +172,12 @@
 
                     <div class="flex-w flex-sb-m bor15 p-t-18 p-b-15 p-lr-40 p-lr-15-sm justify-content-center">
                         <form action="<c:url value="/apply-voucher"/>" method="get" class="flex-w flex-m m-r-20 m-tb-5">
-                            <input class="stext-104 cl2 plh4 size-126 bor13 p-lr-20 m-r-10 m-tb-5 text-center" type="text" name="voucher" value="${sessionScope.voucher.voucherId}" placeholder="Mã giảm giá">
+                            <input class="stext-104 cl2 plh4 size-126 bor13 p-lr-20 m-r-10 m-tb-5 text-center"
+                                   type="text" name="voucher" value="${sessionScope.voucher.voucherId}"
+                                   placeholder="Mã giảm giá">
                             <input type="hidden" name="forwardTo" value="/cart">
-                            <button type="submit" class="flex-c-m stext-101 cl2 size-118 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5">
+                            <button type="submit"
+                                    class="flex-c-m stext-101 cl2 size-118 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5">
                                 Áp dụng
                             </button>
                         </form>
@@ -205,7 +219,8 @@
                                 (Miễn phí vận chuyển trong khu vực tỉnh Bắc Ninh)
                             </p>
 
-                            <form id="shipping-cost" action="<c:url value="/shipping-cost"/>" method="get" class="p-t-15">
+                            <form id="shipping-cost" action="<c:url value="/shipping-cost"/>" method="get"
+                                  class="p-t-15">
                                 <span class="stext-112 cl8">
                                     Chi phí vận chuyển tới:
                                 </span>
@@ -214,21 +229,26 @@
                                 <input type="hidden" name="forwardTo" value="/cart">
 
                                 <input id="selectedProvince" type="hidden" value="${sessionScope.selectedProvince}">
-                                <select id="province" name="province" class="w-full bor8 bg0 m-t-9 p-1" style="height: 30px" required>
+                                <select id="province" name="province" class="w-full bor8 bg0 m-t-9 p-1"
+                                        style="height: 30px" required>
                                     <option value="0" selected hidden disabled>Tỉnh/Thành phố</option>
                                 </select>
 
                                 <input id="selectedDistrict" type="hidden" value="${sessionScope.selectedDistrict}">
-                                <select id="district" name="district" class="w-full bor8 bg0 m-t-9 p-1" style="height: 30px" required>
+                                <select id="district" name="district" class="w-full bor8 bg0 m-t-9 p-1"
+                                        style="height: 30px" required>
                                     <option value="0" selected hidden disabled>Quận/Huyện</option>
                                 </select>
 
                                 <input id="selectedWard" type="hidden" value="${sessionScope.selectedWard}">
-                                <select id="ward" name="ward" class="w-full bor8 bg0 m-t-9 p-1" style="height: 30px" required>
+                                <select id="ward" name="ward" class="w-full bor8 bg0 m-t-9 p-1" style="height: 30px"
+                                        required>
                                     <option value="0" selected hidden disabled>Phường/Xã</option>
                                 </select>
 
-                                <input id="recaddress" name="recaddress" type="text" value="${sessionScope.recaddress}" class="w-full bor8 m-b-12 m-t-9 p-1" style="height: 30px" placeholder="Số nhà" required>
+                                <input id="recaddress" name="recaddress" type="text" value="${sessionScope.recaddress}"
+                                       class="w-full bor8 m-b-12 m-t-9 p-1" style="height: 30px" placeholder="Số nhà"
+                                       required>
                                 <hr>
                                 <div class="flex-w justify-content-center">
                                     <span id="shippingCost" class="mtext-110 cl2 m-b-12">
@@ -240,7 +260,8 @@
                                             out.print(dongFormat.format(shippingCost));
                                         %>
                                     </span>
-                                    <button type="button" id="btnUpdateTotal" class="flex-c-m stext-101 cl2 size-115 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer">
+                                    <button type="button" id="btnUpdateTotal"
+                                            class="flex-c-m stext-101 cl2 size-115 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer">
                                         Tính phí Ship
                                     </button>
                                 </div>
@@ -317,7 +338,8 @@
                         <input type="hidden" name="vat" value="<% out.print(vat); %>">
                         <input type="hidden" name="total" value="<% out.print(total); %>">
 
-                        <button id="btn-checkout" type="button" class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
+                        <button id="btn-checkout" type="button"
+                                class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
                             Tiến hành thanh toán
                         </button>
                     </form>
@@ -338,7 +360,7 @@
 <!--===============================================================================================-->
 <script src="${pageContext.request.contextPath}/assets/vendor/select2/select2.min.js"></script>
 <script>
-    $(".js-select2").each(function(){
+    $(".js-select2").each(function () {
         $(this).select2({
             minimumResultsForSearch: 20,
             dropdownParent: $(this).next('.dropDownSelect2')
@@ -350,16 +372,16 @@
 <!--===============================================================================================-->
 <script src="${pageContext.request.contextPath}/assets/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 <script>
-    $('.js-pscroll').each(function(){
-        $(this).css('position','relative');
-        $(this).css('overflow','hidden');
+    $('.js-pscroll').each(function () {
+        $(this).css('position', 'relative');
+        $(this).css('overflow', 'hidden');
         const ps = new PerfectScrollbar(this, {
             wheelSpeed: 1,
             scrollingThreshold: 1000,
             wheelPropagation: false,
         });
 
-        $(window).on('resize', function(){
+        $(window).on('resize', function () {
             ps.update();
         })
     });
@@ -435,26 +457,26 @@
 <!--===============================================================================================-->
 <script>
     $(function () {
-       $('.btn-num-product-down').each(function () {
-           $(this).on('click', function () {
-               $(this).parent().next().children('.numProduct').val($(this).next().prop('value'));
-               $(this).parent().next().submit();
-           });
-       });
+        $('.btn-num-product-down').each(function () {
+            $(this).on('click', function () {
+                $(this).parent().next().children('.numProduct').val($(this).next().prop('value'));
+                $(this).parent().next().submit();
+            });
+        });
 
-       $('.numProduct').each(function () {
-           $(this).on('change', function () {
-               $(this).parent().next().children('.numProduct').val($(this).prop('value'));
-               $(this).parent().next().submit();
-           });
-       });
+        $('.numProduct').each(function () {
+            $(this).on('change', function () {
+                $(this).parent().next().children('.numProduct').val($(this).prop('value'));
+                $(this).parent().next().submit();
+            });
+        });
 
-       $('.btn-num-product-up').each(function () {
-           $(this).on('click', function () {
-               $(this).parent().next().children('.numProduct').val($(this).prev().prop('value'));
-               $(this).parent().next().submit();
-           });
-       });
+        $('.btn-num-product-up').each(function () {
+            $(this).on('click', function () {
+                $(this).parent().next().children('.numProduct').val($(this).prev().prop('value'));
+                $(this).parent().next().submit();
+            });
+        });
     });
 </script>
 <!--===============================================================================================-->

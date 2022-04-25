@@ -17,23 +17,24 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Dong Phong</title>
     <!-- BOOTSTRAP STYLES-->
-    <link href="${pageContext.request.contextPath}/assets/css/bootstrap.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/css/bootstrap.css" rel="stylesheet"/>
     <!-- FONTAWESOME STYLES-->
-    <link href="${pageContext.request.contextPath}/assets/fonts/fontawesome-pro-5.15.4-web/css/all.min.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/fonts/fontawesome-pro-5.15.4-web/css/all.min.css"
+          rel="stylesheet"/>
     <!-- MORRIS CHART STYLES-->
 
     <!-- CUSTOM STYLES-->
-    <link href="${pageContext.request.contextPath}/assets/css/custom.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/css/custom.css" rel="stylesheet"/>
     <!-- GOOGLE FONTS-->
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
     <!-- TABLE STYLES-->
-    <link href="${pageContext.request.contextPath}/assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet"/>
     <!--===============================================================================================-->
-    <link href="${pageContext.request.contextPath}/assets/js/Chart.js-v2.9.4/Chart.min.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/js/Chart.js-v2.9.4/Chart.min.css" rel="stylesheet"/>
     <!--===============================================================================================-->
     <style>
         .table > tbody > tr > td > p {
@@ -52,18 +53,19 @@
     <jsp:include page="navside.jsp"/>
     <!-- /. NAV SIDE  -->
 
-    <div id="page-wrapper" >
+    <div id="page-wrapper">
         <div id="page-inner">
             <div class="row">
                 <div class="col-md-12">
                     <h2>Báo Cáo & Thống Kê</h2>
                     <div class="row">
-                        <div class="col-md-12"><h5>Chào mừng ${sessionScope.displayName}, rất vui được gặp lại bạn. </h5></div>
+                        <div class="col-md-12"><h5>Chào mừng ${sessionScope.displayName}, rất vui được gặp lại
+                            bạn. </h5></div>
                     </div>
                 </div>
             </div>
             <!-- /. ROW  -->
-            <hr />
+            <hr/>
             <div class="row">
                 <div class="col-md-12">
                     <!-- Advanced Tables -->
@@ -73,15 +75,21 @@
                         </div>
                         <div class="panel-body row ml-0 mr-0">
                             <div class="col-md-12 mb-3">
-                                <h4 class="text-uppercase mb-3" style="color: mediumaquamarine"><strong>Doanh số theo tháng</strong></h4>
-                                <form action="<c:url value="/admin/report"/>" method="get" class="row d-flex justify-content-center mt-3 mb-3">
+                                <h4 class="text-uppercase mb-3" style="color: mediumaquamarine"><strong>Doanh số theo
+                                    tháng</strong></h4>
+                                <form action="<c:url value="/admin/report"/>" method="get"
+                                      class="row d-flex justify-content-center mt-3 mb-3">
                                     <div class="col-md-2 mb-3">
                                         <label for="from" class="labels">Từ</label>
-                                        <input id="from" type="month" value="<% out.print(new SimpleDateFormat("yyyy-MM").format((Timestamp) request.getAttribute("from"))); %>" class="form-control text-center" min="2000-01" name="from">
+                                        <input id="from" type="month"
+                                               value="<% out.print(new SimpleDateFormat("yyyy-MM").format((Timestamp) request.getAttribute("from"))); %>"
+                                               class="form-control text-center" min="2000-01" name="from">
                                     </div>
                                     <div class="col-md-2 mb-3">
                                         <label for="to" class="labels">Đến</label>
-                                        <input id="to" type="month" value="<% out.print(new SimpleDateFormat("yyyy-MM").format((Timestamp) request.getAttribute("to"))); %>" class="form-control text-center" min="2000-01" name="to">
+                                        <input id="to" type="month"
+                                               value="<% out.print(new SimpleDateFormat("yyyy-MM").format((Timestamp) request.getAttribute("to"))); %>"
+                                               class="form-control text-center" min="2000-01" name="to">
                                     </div>
                                     <div class="col-md-2 mb-3 d-flex align-items-end">
                                         <button type="submit" class="btn btn-primary ct-button w-100">
@@ -93,10 +101,17 @@
                                     <div class="col-md-1"></div>
                                     <div class="col-md-10 mb-3">
                                         <canvas id="myChart"></canvas>
-                                        <h4 class="text-uppercase text-center" style="color: blue;">Biểu đồ tăng trưởng doanh thu từ <% out.print(new SimpleDateFormat("MM/yyyy").format((Timestamp) request.getAttribute("from"))); %> đến <% out.print(new SimpleDateFormat("MM/yyyy").format((Timestamp) request.getAttribute("to"))); %></h4>
+                                        <h4 class="text-uppercase text-center" style="color: blue;">Biểu đồ tăng trưởng
+                                            doanh thu
+                                            từ <% out.print(new SimpleDateFormat("MM/yyyy").format((Timestamp) request.getAttribute("from"))); %>
+                                            đến <% out.print(new SimpleDateFormat("MM/yyyy").format((Timestamp) request.getAttribute("to"))); %></h4>
                                     </div>
                                     <div class="col-md-12 bor21 mb-3 table-responsive">
-                                        <h4 class="mt-3 mb-3 text-uppercase" style="color: mediumaquamarine">Báo cáo doanh thu từ <% out.print(new SimpleDateFormat("MM/yyyy").format((Timestamp) request.getAttribute("from"))); %> đến <% out.print(new SimpleDateFormat("MM/yyyy").format((Timestamp) request.getAttribute("to"))); %>:</h4>
+                                        <h4 class="mt-3 mb-3 text-uppercase" style="color: mediumaquamarine">Báo cáo
+                                            doanh thu
+                                            từ <% out.print(new SimpleDateFormat("MM/yyyy").format((Timestamp) request.getAttribute("from"))); %>
+                                            đến <% out.print(new SimpleDateFormat("MM/yyyy").format((Timestamp) request.getAttribute("to"))); %>
+                                            :</h4>
                                         <table class="table table-striped table-bordered table-hover">
                                             <thead>
                                             <tr style="background-color: #32383e; color: #fff">
@@ -139,7 +154,11 @@
                                         </table>
                                     </div>
                                     <div class="col-md-12 bor21 mb-3 table-responsive">
-                                        <h4 class="mt-3 mb-3 text-uppercase" style="color: mediumaquamarine">Báo cáo đơn hàng đang vận chuyển từ <% out.print(new SimpleDateFormat("MM/yyyy").format((Timestamp) request.getAttribute("from"))); %> đến <% out.print(new SimpleDateFormat("MM/yyyy").format((Timestamp) request.getAttribute("to"))); %>:</h4>
+                                        <h4 class="mt-3 mb-3 text-uppercase" style="color: mediumaquamarine">Báo cáo đơn
+                                            hàng đang vận chuyển
+                                            từ <% out.print(new SimpleDateFormat("MM/yyyy").format((Timestamp) request.getAttribute("from"))); %>
+                                            đến <% out.print(new SimpleDateFormat("MM/yyyy").format((Timestamp) request.getAttribute("to"))); %>
+                                            :</h4>
                                         <table class="table table-striped table-bordered table-hover">
                                             <thead>
                                             <tr style="background-color: #32383e; color: #fff">
@@ -179,7 +198,11 @@
                                         </table>
                                     </div>
                                     <div class="col-md-12 bor21 mb-3 table-responsive">
-                                        <h4 class="mt-3 mb-3 text-uppercase" style="color: mediumaquamarine">Báo cáo đơn hàng bị hủy từ <% out.print(new SimpleDateFormat("MM/yyyy").format((Timestamp) request.getAttribute("from"))); %> đến <% out.print(new SimpleDateFormat("MM/yyyy").format((Timestamp) request.getAttribute("to"))); %>:</h4>
+                                        <h4 class="mt-3 mb-3 text-uppercase" style="color: mediumaquamarine">Báo cáo đơn
+                                            hàng bị hủy
+                                            từ <% out.print(new SimpleDateFormat("MM/yyyy").format((Timestamp) request.getAttribute("from"))); %>
+                                            đến <% out.print(new SimpleDateFormat("MM/yyyy").format((Timestamp) request.getAttribute("to"))); %>
+                                            :</h4>
                                         <table class="table table-striped table-bordered table-hover">
                                             <thead>
                                             <tr style="background-color: #32383e; color: #fff">
@@ -260,10 +283,10 @@
             xValues.push(minMonth + '/' + minYear);
             let exist = false;
             <c:forEach items="${reportDone}" var="item">
-                if (minMonth === ${item.monthDate} && minYear === ${item.yearDate}) {
-                    yValues.push(${item.sumTotal});
-                    exist = true;
-                }
+            if (minMonth === ${item.monthDate} && minYear === ${item.yearDate}) {
+                yValues.push(${item.sumTotal});
+                exist = true;
+            }
             </c:forEach>
             if (!exist) {
                 yValues.push(0);
@@ -293,7 +316,7 @@
                     yAxes: [{
                         ticks: {
                             beginAtZero: true,
-                            callback: function(value) {
+                            callback: function (value) {
                                 if (parseInt(value) >= 1000) {
                                     return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + ' \u20AB';
                                 } else {
@@ -305,8 +328,8 @@
                 },
                 tooltips: {
                     callbacks: {
-                        label: function(tooltipItem) {
-                            return Number(tooltipItem.yLabel).toFixed(0).replace(/./g, function(c, i, a) {
+                        label: function (tooltipItem) {
+                            return Number(tooltipItem.yLabel).toFixed(0).replace(/./g, function (c, i, a) {
                                 return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "." + c : c;
                             }) + ' \u20AB';
                         }

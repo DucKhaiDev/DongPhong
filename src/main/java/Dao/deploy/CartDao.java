@@ -3,7 +3,7 @@ package Dao.deploy;
 import Connect.DBConnect;
 import Dao.ICartDao;
 import Entity.Cart;
-import Services.deploy.UserService;
+import Util.Constant;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,14 +13,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CartDao implements ICartDao {
-    private final UserService userService = new UserService();
-    private Connection conn = null;
-    private PreparedStatement ps = null;
-    private ResultSet rs = null;
-
     @Override
     public void insert(Cart cart) {
-        conn = DBConnect.getConnection();
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
 
         try {
             ps = conn.prepareStatement("INSERT INTO [CART](CART_ID, USER_ID) VALUES(?, ?)");
@@ -31,13 +27,14 @@ public class CartDao implements ICartDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBConnect.closeAll(rs, ps, conn);
+            DBConnect.closeAll(null, ps, conn);
         }
     }
 
     @Override
     public void edit(Cart cart) {
-        conn = DBConnect.getConnection();
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
 
         try {
             ps = conn.prepareStatement("UPDATE [CART] SET USER_ID = ? WHERE CART_ID = ?");
@@ -47,13 +44,14 @@ public class CartDao implements ICartDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBConnect.closeAll(rs, ps, conn);
+            DBConnect.closeAll(null, ps, conn);
         }
     }
 
     @Override
     public void delete(String cartId) {
-        conn = DBConnect.getConnection();
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
 
         try {
             ps = conn.prepareStatement("DELETE FROM [CART] WHERE CART_ID = ?");
@@ -62,13 +60,15 @@ public class CartDao implements ICartDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBConnect.closeAll(rs, ps, conn);
+            DBConnect.closeAll(null, ps, conn);
         }
     }
 
     @Override
     public Cart getCart(String cartId) {
-        conn = DBConnect.getConnection();
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         Cart cart = new Cart();
 
         try {
@@ -77,7 +77,7 @@ public class CartDao implements ICartDao {
             rs = ps.executeQuery();
             if (rs.next()) {
                 cart.setCartId(rs.getString("CART_ID"));
-                cart.setUser(userService.getUser(rs.getString("USER_ID")));
+                cart.setUser(Constant.Service.USER_SERVICE.getUser(rs.getString("USER_ID")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -90,7 +90,9 @@ public class CartDao implements ICartDao {
 
     @Override
     public Cart getCartByUser(String userId) {
-        conn = DBConnect.getConnection();
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         Cart cart = new Cart();
 
         try {
@@ -99,7 +101,7 @@ public class CartDao implements ICartDao {
             rs = ps.executeQuery();
             if (rs.next()) {
                 cart.setCartId(rs.getString("CART_ID"));
-                cart.setUser(userService.getUser(userId));
+                cart.setUser(Constant.Service.USER_SERVICE.getUser(userId));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -112,7 +114,9 @@ public class CartDao implements ICartDao {
 
     @Override
     public List<Cart> getAll() {
-        conn = DBConnect.getConnection();
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         List<Cart> carts = new ArrayList<>();
 
         try {
@@ -121,7 +125,7 @@ public class CartDao implements ICartDao {
             while (rs.next()) {
                 Cart cart = new Cart();
                 cart.setCartId(rs.getString("CART_ID"));
-                cart.setUser(userService.getUser(rs.getString("USER_ID")));
+                cart.setUser(Constant.Service.USER_SERVICE.getUser(rs.getString("USER_ID")));
 
                 carts.add(cart);
             }
@@ -136,18 +140,20 @@ public class CartDao implements ICartDao {
 
     @Override
     public Cart getLastCart(String userId) {
-        conn = DBConnect.getConnection();
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         Cart cart = new Cart();
 
         try {
             ps = conn.prepareStatement("SELECT TOP(1) * " +
-                                                "FROM dbo.CART " +
-                                                "WHERE USER_ID = ? ORDER BY CART_ID DESC");
+                    "FROM dbo.CART " +
+                    "WHERE USER_ID = ? ORDER BY CART_ID DESC");
             ps.setString(1, userId);
             rs = ps.executeQuery();
             if (rs.next()) {
                 cart.setCartId(rs.getString("CART_ID"));
-                cart.setUser(userService.getUser(rs.getString("USER_ID")));
+                cart.setUser(Constant.Service.USER_SERVICE.getUser(rs.getString("USER_ID")));
             }
         } catch (SQLException e) {
             e.printStackTrace();

@@ -9,13 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ReportDao implements IReportDao {
-    private Connection conn = null;
-    private PreparedStatement ps = null;
-    private ResultSet rs = null;
-
     @Override
     public List<Report> getReports(Timestamp from, Timestamp to, boolean status) {
-        conn = DBConnect.getConnection();
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         List<Report> reports = new ArrayList<>();
 
         try {
@@ -51,7 +49,9 @@ public class ReportDao implements IReportDao {
 
     @Override
     public List<Report> getReportsUndone(Timestamp from, Timestamp to) {
-        conn = DBConnect.getConnection();
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         List<Report> reports = new ArrayList<>();
 
         try {
@@ -86,7 +86,9 @@ public class ReportDao implements IReportDao {
 
     @Override
     public Report getSum(Timestamp from, Timestamp to, boolean status) {
-        conn = DBConnect.getConnection();
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         Report report = new Report();
 
         try {
@@ -116,7 +118,9 @@ public class ReportDao implements IReportDao {
 
     @Override
     public Report getSumUndone(Timestamp from, Timestamp to) {
-        conn = DBConnect.getConnection();
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         Report report = new Report();
 
         try {

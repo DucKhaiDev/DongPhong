@@ -1135,3 +1135,7 @@ button[disabled]:hover{
 .pointer-events-none {
     pointer-events: none;
 }
+
+.account-block.bg-size-auto {
+    background-size: auto !important;
+}

@@ -14,23 +14,31 @@
     <!--===============================================================================================-->
     <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/assets/images/icons/icon-logo.png"/>
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/assets/vendor/bootstrap/css/bootstrap.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/fonts/fontawesome-pro-5.15.4-web/css/all.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/assets/fonts/fontawesome-pro-5.15.4-web/css/all.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/fonts/iconic/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/assets/fonts/iconic/css/material-design-iconic-font.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/fonts/linearicons-v1.0.0/icon-font.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/assets/fonts/linearicons-v1.0.0/icon-font.min.css">
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/animate/animate.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/css-hamburgers/hamburgers.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/assets/vendor/css-hamburgers/hamburgers.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/animsition/css/animsition.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/assets/vendor/animsition/css/animsition.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/select2/select2.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/assets/vendor/select2/select2.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/assets/vendor/perfect-scrollbar/perfect-scrollbar.css">
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/util.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/main.css">
@@ -41,7 +49,8 @@
     <!--===============================================================================================-->
     <script src="${pageContext.request.contextPath}/assets/vendor/jquery/jquery-3.2.1.min.js"></script>
     <!-- TABLE STYLES-->
-    <link href="${pageContext.request.contextPath}/assets/js/dataTables-bs4/dataTables.bootstrap4.min.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/js/dataTables-bs4/dataTables.bootstrap4.min.css"
+          rel="stylesheet"/>
 </head>
 <body class="animsition">
 
@@ -81,21 +90,24 @@
                 <div class="bs-stepper-header" role="tablist">
                     <!--Your steps here-->
                     <div class="step" data-target="#logins-part">
-                        <button type="button" class="step-trigger" role="tab" aria-controls="logins-part" id="logins-part-trigger">
+                        <button type="button" class="step-trigger" role="tab" aria-controls="logins-part"
+                                id="logins-part-trigger">
                             <span class="bs-stepper-circle">1</span>
                             <span class="bs-stepper-label">Đăng nhập</span>
                         </button>
                     </div>
                     <div class="line"></div>
                     <div class="step" data-target="#recaddress-part">
-                        <button type="button" class="step-trigger" role="tab" aria-controls="recaddress-part" id="recaddress-part-trigger">
+                        <button type="button" class="step-trigger" role="tab" aria-controls="recaddress-part"
+                                id="recaddress-part-trigger">
                             <span class="bs-stepper-circle">2</span>
                             <span class="bs-stepper-label">Địa chỉ giao hàng</span>
                         </button>
                     </div>
                     <div class="line"></div>
                     <div class="step" data-target="#payment-part">
-                        <button type="button" class="step-trigger" role="tab" aria-controls="recaddress-part" id="payment-part-trigger">
+                        <button type="button" class="step-trigger" role="tab" aria-controls="recaddress-part"
+                                id="payment-part-trigger">
                             <span class="bs-stepper-circle">3</span>
                             <span class="bs-stepper-label">Thanh toán</span>
                         </button>
@@ -107,21 +119,28 @@
                         <div class="row d-flex justify-content-center m-t-20">
                             <div class="col-md-6 d-flex flex-column align-items-center">
                                 <span class="text-center p-b-8">Xin chào ${sessionScope.account.lastName} ${sessionScope.account.firstName}, bạn đã đăng nhập, bạn muốn?</span>
-                                <a href="${pageContext.request.contextPath}/logout" class="btn btn-primary ct-button2 text-uppercase m-b-8" style="width: 250px;">
+                                <a href="${pageContext.request.contextPath}/logout"
+                                   class="btn btn-primary ct-button2 text-uppercase m-b-8" style="width: 250px;">
                                     Đăng nhập tài khoản khác
                                 </a>
                                 <span class="text-center p-b-8">hoặc</span>
-                                <button id="btn-continue" class="btn btn-primary ct-button3 text-uppercase" style="width: 250px;">
+                                <button id="btn-continue" class="btn btn-primary ct-button3 text-uppercase"
+                                        style="width: 250px;">
                                     Tiếp tục
                                 </button>
                             </div>
                         </div>
                     </div>
-                    <form action="<c:url value="/checkout"/>" method="post" id="recaddress-part" class="content" role="tabpanel" aria-labelledby="recaddress-part-trigger">
+                    <form action="<c:url value="/checkout"/>" method="post" id="recaddress-part" class="content"
+                          role="tabpanel" aria-labelledby="recaddress-part-trigger">
                         <div class="mb-3 text-center text-uppercase">Thông tin giao hàng</div>
                         <div class="row d-flex justify-content-center m-t-20 p-3 ct-border-1">
-                            <div class="col-md-6 mb-3"><label for="fullName" class="labels">Họ và tên</label><input id="fullName" name="fullName" type="text" class="form-control" value="${sessionScope.account.lastName} ${sessionScope.account.firstName}"></div>
-                            <div class="col-md-6 mb-3"><label for="phone" class="labels">Số điện thoại</label><input id="phone" name="phone" type="text" class="form-control" value="${sessionScope.account.phone}"></div>
+                            <div class="col-md-6 mb-3"><label for="fullName" class="labels">Họ và tên</label><input
+                                    id="fullName" name="fullName" type="text" class="form-control"
+                                    value="${sessionScope.account.lastName} ${sessionScope.account.firstName}"></div>
+                            <div class="col-md-6 mb-3"><label for="phone" class="labels">Số điện thoại</label><input
+                                    id="phone" name="phone" type="text" class="form-control"
+                                    value="${sessionScope.account.phone}"></div>
                             <div class="col-md-6 mb-3">
                                 <label for="province" class="labels">Tỉnh/Thành phố</label>
                                 <input id="selectedProvince" type="hidden" value="${sessionScope.selectedProvince}">
@@ -148,25 +167,35 @@
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="recaddress" class="labels">Số nhà</label>
-                                <input id="recaddress" name="recaddress" class="w-full form-control" type="text" value="${sessionScope.recaddress}" placeholder="Số nhà" disabled>
+                                <input id="recaddress" name="recaddress" class="w-full form-control" type="text"
+                                       value="${sessionScope.recaddress}" placeholder="Số nhà" disabled>
                             </div>
                         </div>
-                        <div class="row m-t-8 m-b-8"><div class="col p-0">Hình thức thanh toán:</div></div>
+                        <div class="row m-t-8 m-b-8">
+                            <div class="col p-0">Hình thức thanh toán:</div>
+                        </div>
                         <div class="row d-flex justify-content-center p-3 ct-border-1">
                             <jsp:useBean id="payments" scope="request" type="java.util.List"/>
                             <c:forEach items="${payments}" var="payment">
                                 <div class="col-md-12 d-flex align-items-center">
-                                    <input type="radio" id="${payment.paymentId}" name="paymentMethod" class="m-r-12" value="${payment.paymentId}" <c:if test="${!payment.paymentStatus}">disabled</c:if> <c:if test="${payment.paymentId == 4}">checked</c:if>>
-                                    <label for="${payment.paymentId}" class="m-0" <c:if test="${!payment.paymentStatus}">disabled</c:if>>${payment.paymentMethod}<c:if test="${!payment.paymentStatus}"> (Đang bảo trì)</c:if></label>
+                                    <input type="radio" id="${payment.paymentId}" name="paymentMethod" class="m-r-12"
+                                           value="${payment.paymentId}"
+                                           <c:if test="${!payment.paymentStatus}">disabled</c:if>
+                                           <c:if test="${payment.paymentId == 4}">checked</c:if>>
+                                    <label for="${payment.paymentId}" class="m-0"
+                                           <c:if test="${!payment.paymentStatus}">disabled</c:if>>${payment.paymentMethod}
+                                        <c:if test="${!payment.paymentStatus}"> (Đang bảo trì)</c:if></label>
                                 </div>
                             </c:forEach>
                         </div>
                         <div class="row d-flex">
-                            <button id="btn-previous" type="button" class="col-md-2 btn btn-primary ct-button2 mt-3 text-uppercase">
+                            <button id="btn-previous" type="button"
+                                    class="col-md-2 btn btn-primary ct-button2 mt-3 text-uppercase">
                                 Bước trước
                             </button>
                             <div class="col-md-3"></div>
-                            <button id="btn-order" type="submit" class="col-md-2 btn btn-primary ct-button3 mt-3 text-uppercase">
+                            <button id="btn-order" type="submit"
+                                    class="col-md-2 btn btn-primary ct-button3 mt-3 text-uppercase">
                                 Đặt hàng
                             </button>
                         </div>
@@ -194,7 +223,7 @@
 <!--===============================================================================================-->
 <script src="${pageContext.request.contextPath}/assets/vendor/select2/select2.min.js"></script>
 <script>
-    $(".js-select2").each(function(){
+    $(".js-select2").each(function () {
         $(this).select2({
             minimumResultsForSearch: 20,
             dropdownParent: $(this).next('.dropDownSelect2')
@@ -206,16 +235,16 @@
 <!--===============================================================================================-->
 <script src="${pageContext.request.contextPath}/assets/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 <script>
-    $('.js-pscroll').each(function(){
-        $(this).css('position','relative');
-        $(this).css('overflow','hidden');
+    $('.js-pscroll').each(function () {
+        $(this).css('position', 'relative');
+        $(this).css('overflow', 'hidden');
         const ps = new PerfectScrollbar(this, {
             wheelSpeed: 1,
             scrollingThreshold: 1000,
             wheelPropagation: false,
         });
 
-        $(window).on('resize', function(){
+        $(window).on('resize', function () {
             ps.update();
         })
     });

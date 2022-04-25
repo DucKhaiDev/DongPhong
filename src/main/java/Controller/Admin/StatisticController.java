@@ -1,7 +1,5 @@
 package Controller.Admin;
 
-import Entity.Product;
-import Services.deploy.ProductService;
 import Util.Constant;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -16,12 +14,9 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
-import java.util.Map;
 
 @WebServlet(name = "StatisticController", value = "/admin/statistic")
 public class StatisticController extends HttpServlet {
-    private final ProductService productService = new ProductService();
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Timestamp fromDate = new Timestamp(Date.from(LocalDate.now().minusDays(30).atStartOfDay(ZoneId.systemDefault()).toInstant()).getTime());
@@ -46,14 +41,9 @@ public class StatisticController extends HttpServlet {
         }
         request.setAttribute("toDate", toDate);
 
-        Map<Product, Integer> bestseller = productService.bestseller(fromDate, toDate);
-        request.setAttribute("bestseller", bestseller);
-
-        Map<Product, Integer> favourite = productService.favourite();
-        request.setAttribute("favourite", favourite);
-
-        Map<Product, Double> highestRated = productService.highestRated();
-        request.setAttribute("highestRated", highestRated);
+        request.setAttribute("bestseller", Constant.Service.PRODUCT_SERVICE.bestseller(fromDate, toDate));
+        request.setAttribute("favourite", Constant.Service.PRODUCT_SERVICE.favourite());
+        request.setAttribute("highestRated", Constant.Service.PRODUCT_SERVICE.highestRated());
 
         request.getRequestDispatcher(Constant.Path.ADMIN_STATISTIC).forward(request, response);
     }

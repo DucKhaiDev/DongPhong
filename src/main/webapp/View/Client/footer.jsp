@@ -16,8 +16,8 @@
                 <ul>
                     <c:forEach items="${applicationScope.rooms}" var="room">
                         <li class="p-b-10">
-                            <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-                                ${room.roomName}
+                            <a href="${pageContext.request.contextPath}/products/room?id=${room.roomId}" class="stext-107 cl7 hov-cl1 trans-04">
+                                    ${room.roomName}
                             </a>
                         </li>
                     </c:forEach>
@@ -82,7 +82,9 @@
                 </div>
             </div>
             <div class="col-lg-1"></div>
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7303.987023982453!2d106.01402162920304!3d21.200006849751542!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xa477e840bb7953f5!2zMjHCsDEyJzAwLjciTiAxMDbCsDAxJzE1LjQiRQ!5e1!3m2!1svi!2s!4v1650273694352!5m2!1svi!2s" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7303.987023982453!2d106.01402162920304!3d21.200006849751542!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xa477e840bb7953f5!2zMjHCsDEyJzAwLjciTiAxMDbCsDAxJzE1LjQiRQ!5e1!3m2!1svi!2s!4v1650273694352!5m2!1svi!2s"
+                    width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
 
         <div class="p-t-40">
@@ -110,7 +112,9 @@
 
             <p class="stext-107 cl6 txt-center">
                 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                Bản quyền Nội dung &copy;<script>document.write(new Date().getFullYear().toString());</script>: Công ty TNHH MTV <i class="fa fa-heart-o" aria-hidden="true"></i><a href="${pageContext.request.contextPath}" target="_blank">Đông Phong</a>.
+                Bản quyền Nội dung &copy;<script>document.write(new Date().getFullYear().toString());</script>
+                : Công ty TNHH MTV <i class="fa fa-heart-o" aria-hidden="true"></i><a
+                    href="${pageContext.request.contextPath}" target="_blank">Đông Phong</a>.
                 <br>
                 Địa chỉ: Thôn Phong Nẫm, xã Đông Phong, huyện Yên Phong, tỉnh Bắc Ninh. SĐT: (+84) 98 252 3005
                 <br>

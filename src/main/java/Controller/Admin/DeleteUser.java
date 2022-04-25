@@ -1,9 +1,11 @@
 package Controller.Admin;
 
-import Services.deploy.UserService;
-import jakarta.servlet.*;
-import jakarta.servlet.http.*;
-import jakarta.servlet.annotation.*;
+import Util.Constant;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
@@ -11,7 +13,7 @@ import java.io.IOException;
 public class DeleteUser extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        new UserService().delete(request.getParameter("id"));
+        Constant.Service.USER_SERVICE.delete(request.getParameter("id"));
         response.sendRedirect(request.getContextPath() + "/admin/user");
     }
 }

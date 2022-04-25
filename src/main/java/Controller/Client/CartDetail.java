@@ -2,11 +2,13 @@ package Controller.Client;
 
 import Entity.Cart;
 import Entity.CartItem;
-import Services.deploy.CartItemService;
 import Util.Constant;
-import jakarta.servlet.*;
-import jakarta.servlet.http.*;
-import jakarta.servlet.annotation.*;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -14,30 +16,30 @@ import java.util.List;
 
 @WebServlet(name = "CartDetail", value = "/cart")
 public class CartDetail extends HttpServlet {
-    private final CartItemService cartItemService = new CartItemService();
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int selected = 26;
-        request.setAttribute("selected", selected);
+        request.setAttribute("selected", 26);
         request.getRequestDispatcher(Constant.Path.CART).forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int cartItemId = Integer.parseInt(request.getParameter("cartItemId"));
+        CartItem item = Constant.Service.CART_ITEM_SERVICE.getCartItem(cartItemId);
+
         int numProduct = Integer.parseInt(request.getParameter("numProduct"));
-        CartItem item = cartItemService.getCartItem(cartItemId);
-        item.setQuantity(numProduct);
         BigDecimal productPrice = item.getProduct().getProductPrice();
         BigDecimal value = productPrice.multiply(new BigDecimal(numProduct));
+
+        item.setQuantity(numProduct);
         item.setValue(value);
-        cartItemService.edit(item);
+
+        Constant.Service.CART_ITEM_SERVICE.edit(item);
 
         //Update cart
         HttpSession session = request.getSession();
         String cartId = ((Cart) session.getAttribute("cart")).getCartId();
-        List<CartItem> cartItems = cartItemService.getItemByCart(cartId);
+        List<CartItem> cartItems = Constant.Service.CART_ITEM_SERVICE.getItemByCart(cartId);
         session.setAttribute("cartItems", cartItems);
 
         response.sendRedirect(request.getContextPath() + "/cart");

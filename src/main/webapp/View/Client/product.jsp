@@ -14,29 +14,39 @@
     <!--===============================================================================================-->
     <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/assets/images/icons/icon-logo.png"/>
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/assets/vendor/bootstrap/css/bootstrap.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/fonts/fontawesome-pro-5.15.4-web/css/all.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/assets/fonts/fontawesome-pro-5.15.4-web/css/all.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/fonts/iconic/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/assets/fonts/iconic/css/material-design-iconic-font.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/fonts/linearicons-v1.0.0/icon-font.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/assets/fonts/linearicons-v1.0.0/icon-font.min.css">
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/animate/animate.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/css-hamburgers/hamburgers.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/assets/vendor/css-hamburgers/hamburgers.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/animsition/css/animsition.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/assets/vendor/animsition/css/animsition.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/select2/select2.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/assets/vendor/select2/select2.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/daterangepicker/daterangepicker.css">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/assets/vendor/daterangepicker/daterangepicker.css">
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/slick/slick.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/MagnificPopup/magnific-popup.css">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/assets/vendor/MagnificPopup/magnific-popup.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/assets/vendor/perfect-scrollbar/perfect-scrollbar.css">
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/util.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/main.css">
@@ -105,7 +115,8 @@
                     </button>
 
                     <label>
-                        <input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="search-product" placeholder="Search">
+                        <input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="search-product"
+                               placeholder="Search">
                     </label>
                 </div>
             </div>
@@ -275,23 +286,28 @@
                         </div>
 
                         <div class="flex-w p-t-4 m-r--5">
-                            <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+                            <a href="#"
+                               class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
                                 Fashion
                             </a>
 
-                            <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+                            <a href="#"
+                               class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
                                 Lifestyle
                             </a>
 
-                            <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+                            <a href="#"
+                               class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
                                 Denim
                             </a>
 
-                            <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+                            <a href="#"
+                               class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
                                 Streetstyle
                             </a>
 
-                            <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+                            <a href="#"
+                               class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
                                 Crafts
                             </a>
                         </div>
@@ -307,7 +323,8 @@
                     <div class="block2-pic hov-img0">
                         <img src="${pageContext.request.contextPath}/assets/images/product-01.jpg" alt="IMG-PRODUCT">
 
-                        <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+                        <a href="#"
+                           class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
                             Quick View
                         </a>
                     </div>
@@ -325,8 +342,12 @@
 
                         <div class="block2-txt-child2 flex-r p-t-3">
                             <a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-                                <img class="icon-heart1 dis-block trans-04" src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-01.png" alt="ICON">
-                                <img class="icon-heart2 dis-block trans-04 ab-t-l" src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-02.png" alt="ICON">
+                                <img class="icon-heart1 dis-block trans-04"
+                                     src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-01.png"
+                                     alt="ICON">
+                                <img class="icon-heart2 dis-block trans-04 ab-t-l"
+                                     src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-02.png"
+                                     alt="ICON">
                             </a>
                         </div>
                     </div>
@@ -339,7 +360,8 @@
                     <div class="block2-pic hov-img0">
                         <img src="${pageContext.request.contextPath}/assets/images/product-02.jpg" alt="IMG-PRODUCT">
 
-                        <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+                        <a href="#"
+                           class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
                             Quick View
                         </a>
                     </div>
@@ -357,8 +379,12 @@
 
                         <div class="block2-txt-child2 flex-r p-t-3">
                             <a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-                                <img class="icon-heart1 dis-block trans-04" src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-01.png" alt="ICON">
-                                <img class="icon-heart2 dis-block trans-04 ab-t-l" src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-02.png" alt="ICON">
+                                <img class="icon-heart1 dis-block trans-04"
+                                     src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-01.png"
+                                     alt="ICON">
+                                <img class="icon-heart2 dis-block trans-04 ab-t-l"
+                                     src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-02.png"
+                                     alt="ICON">
                             </a>
                         </div>
                     </div>
@@ -371,7 +397,8 @@
                     <div class="block2-pic hov-img0">
                         <img src="${pageContext.request.contextPath}/assets/images/product-03.jpg" alt="IMG-PRODUCT">
 
-                        <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+                        <a href="#"
+                           class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
                             Quick View
                         </a>
                     </div>
@@ -389,8 +416,12 @@
 
                         <div class="block2-txt-child2 flex-r p-t-3">
                             <a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-                                <img class="icon-heart1 dis-block trans-04" src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-01.png" alt="ICON">
-                                <img class="icon-heart2 dis-block trans-04 ab-t-l" src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-02.png" alt="ICON">
+                                <img class="icon-heart1 dis-block trans-04"
+                                     src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-01.png"
+                                     alt="ICON">
+                                <img class="icon-heart2 dis-block trans-04 ab-t-l"
+                                     src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-02.png"
+                                     alt="ICON">
                             </a>
                         </div>
                     </div>
@@ -403,7 +434,8 @@
                     <div class="block2-pic hov-img0">
                         <img src="${pageContext.request.contextPath}/assets/images/product-04.jpg" alt="IMG-PRODUCT">
 
-                        <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+                        <a href="#"
+                           class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
                             Quick View
                         </a>
                     </div>
@@ -421,8 +453,12 @@
 
                         <div class="block2-txt-child2 flex-r p-t-3">
                             <a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-                                <img class="icon-heart1 dis-block trans-04" src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-01.png" alt="ICON">
-                                <img class="icon-heart2 dis-block trans-04 ab-t-l" src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-02.png" alt="ICON">
+                                <img class="icon-heart1 dis-block trans-04"
+                                     src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-01.png"
+                                     alt="ICON">
+                                <img class="icon-heart2 dis-block trans-04 ab-t-l"
+                                     src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-02.png"
+                                     alt="ICON">
                             </a>
                         </div>
                     </div>
@@ -435,7 +471,8 @@
                     <div class="block2-pic hov-img0">
                         <img src="${pageContext.request.contextPath}/assets/images/product-05.jpg" alt="IMG-PRODUCT">
 
-                        <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+                        <a href="#"
+                           class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
                             Quick View
                         </a>
                     </div>
@@ -453,8 +490,12 @@
 
                         <div class="block2-txt-child2 flex-r p-t-3">
                             <a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-                                <img class="icon-heart1 dis-block trans-04" src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-01.png" alt="ICON">
-                                <img class="icon-heart2 dis-block trans-04 ab-t-l" src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-02.png" alt="ICON">
+                                <img class="icon-heart1 dis-block trans-04"
+                                     src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-01.png"
+                                     alt="ICON">
+                                <img class="icon-heart2 dis-block trans-04 ab-t-l"
+                                     src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-02.png"
+                                     alt="ICON">
                             </a>
                         </div>
                     </div>
@@ -467,7 +508,8 @@
                     <div class="block2-pic hov-img0">
                         <img src="${pageContext.request.contextPath}/assets/images/product-06.jpg" alt="IMG-PRODUCT">
 
-                        <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+                        <a href="#"
+                           class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
                             Quick View
                         </a>
                     </div>
@@ -485,8 +527,12 @@
 
                         <div class="block2-txt-child2 flex-r p-t-3">
                             <a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-                                <img class="icon-heart1 dis-block trans-04" src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-01.png" alt="ICON">
-                                <img class="icon-heart2 dis-block trans-04 ab-t-l" src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-02.png" alt="ICON">
+                                <img class="icon-heart1 dis-block trans-04"
+                                     src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-01.png"
+                                     alt="ICON">
+                                <img class="icon-heart2 dis-block trans-04 ab-t-l"
+                                     src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-02.png"
+                                     alt="ICON">
                             </a>
                         </div>
                     </div>
@@ -499,7 +545,8 @@
                     <div class="block2-pic hov-img0">
                         <img src="${pageContext.request.contextPath}/assets/images/product-07.jpg" alt="IMG-PRODUCT">
 
-                        <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+                        <a href="#"
+                           class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
                             Quick View
                         </a>
                     </div>
@@ -517,8 +564,12 @@
 
                         <div class="block2-txt-child2 flex-r p-t-3">
                             <a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-                                <img class="icon-heart1 dis-block trans-04" src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-01.png" alt="ICON">
-                                <img class="icon-heart2 dis-block trans-04 ab-t-l" src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-02.png" alt="ICON">
+                                <img class="icon-heart1 dis-block trans-04"
+                                     src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-01.png"
+                                     alt="ICON">
+                                <img class="icon-heart2 dis-block trans-04 ab-t-l"
+                                     src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-02.png"
+                                     alt="ICON">
                             </a>
                         </div>
                     </div>
@@ -531,7 +582,8 @@
                     <div class="block2-pic hov-img0">
                         <img src="${pageContext.request.contextPath}/assets/images/product-08.jpg" alt="IMG-PRODUCT">
 
-                        <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+                        <a href="#"
+                           class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
                             Quick View
                         </a>
                     </div>
@@ -549,8 +601,12 @@
 
                         <div class="block2-txt-child2 flex-r p-t-3">
                             <a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-                                <img class="icon-heart1 dis-block trans-04" src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-01.png" alt="ICON">
-                                <img class="icon-heart2 dis-block trans-04 ab-t-l" src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-02.png" alt="ICON">
+                                <img class="icon-heart1 dis-block trans-04"
+                                     src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-01.png"
+                                     alt="ICON">
+                                <img class="icon-heart2 dis-block trans-04 ab-t-l"
+                                     src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-02.png"
+                                     alt="ICON">
                             </a>
                         </div>
                     </div>
@@ -563,7 +619,8 @@
                     <div class="block2-pic hov-img0">
                         <img src="${pageContext.request.contextPath}/assets/images/product-09.jpg" alt="IMG-PRODUCT">
 
-                        <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+                        <a href="#"
+                           class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
                             Quick View
                         </a>
                     </div>
@@ -581,8 +638,12 @@
 
                         <div class="block2-txt-child2 flex-r p-t-3">
                             <a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-                                <img class="icon-heart1 dis-block trans-04" src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-01.png" alt="ICON">
-                                <img class="icon-heart2 dis-block trans-04 ab-t-l" src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-02.png" alt="ICON">
+                                <img class="icon-heart1 dis-block trans-04"
+                                     src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-01.png"
+                                     alt="ICON">
+                                <img class="icon-heart2 dis-block trans-04 ab-t-l"
+                                     src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-02.png"
+                                     alt="ICON">
                             </a>
                         </div>
                     </div>
@@ -595,7 +656,8 @@
                     <div class="block2-pic hov-img0">
                         <img src="${pageContext.request.contextPath}/assets/images/product-10.jpg" alt="IMG-PRODUCT">
 
-                        <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+                        <a href="#"
+                           class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
                             Quick View
                         </a>
                     </div>
@@ -613,8 +675,12 @@
 
                         <div class="block2-txt-child2 flex-r p-t-3">
                             <a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-                                <img class="icon-heart1 dis-block trans-04" src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-01.png" alt="ICON">
-                                <img class="icon-heart2 dis-block trans-04 ab-t-l" src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-02.png" alt="ICON">
+                                <img class="icon-heart1 dis-block trans-04"
+                                     src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-01.png"
+                                     alt="ICON">
+                                <img class="icon-heart2 dis-block trans-04 ab-t-l"
+                                     src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-02.png"
+                                     alt="ICON">
                             </a>
                         </div>
                     </div>
@@ -627,7 +693,8 @@
                     <div class="block2-pic hov-img0">
                         <img src="${pageContext.request.contextPath}/assets/images/product-11.jpg" alt="IMG-PRODUCT">
 
-                        <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+                        <a href="#"
+                           class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
                             Quick View
                         </a>
                     </div>
@@ -645,8 +712,12 @@
 
                         <div class="block2-txt-child2 flex-r p-t-3">
                             <a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-                                <img class="icon-heart1 dis-block trans-04" src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-01.png" alt="ICON">
-                                <img class="icon-heart2 dis-block trans-04 ab-t-l" src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-02.png" alt="ICON">
+                                <img class="icon-heart1 dis-block trans-04"
+                                     src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-01.png"
+                                     alt="ICON">
+                                <img class="icon-heart2 dis-block trans-04 ab-t-l"
+                                     src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-02.png"
+                                     alt="ICON">
                             </a>
                         </div>
                     </div>
@@ -659,7 +730,8 @@
                     <div class="block2-pic hov-img0">
                         <img src="${pageContext.request.contextPath}/assets/images/product-12.jpg" alt="IMG-PRODUCT">
 
-                        <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+                        <a href="#"
+                           class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
                             Quick View
                         </a>
                     </div>
@@ -677,8 +749,12 @@
 
                         <div class="block2-txt-child2 flex-r p-t-3">
                             <a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-                                <img class="icon-heart1 dis-block trans-04" src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-01.png" alt="ICON">
-                                <img class="icon-heart2 dis-block trans-04 ab-t-l" src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-02.png" alt="ICON">
+                                <img class="icon-heart1 dis-block trans-04"
+                                     src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-01.png"
+                                     alt="ICON">
+                                <img class="icon-heart2 dis-block trans-04 ab-t-l"
+                                     src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-02.png"
+                                     alt="ICON">
                             </a>
                         </div>
                     </div>
@@ -691,7 +767,8 @@
                     <div class="block2-pic hov-img0">
                         <img src="${pageContext.request.contextPath}/assets/images/product-13.jpg" alt="IMG-PRODUCT">
 
-                        <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+                        <a href="#"
+                           class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
                             Quick View
                         </a>
                     </div>
@@ -709,8 +786,12 @@
 
                         <div class="block2-txt-child2 flex-r p-t-3">
                             <a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-                                <img class="icon-heart1 dis-block trans-04" src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-01.png" alt="ICON">
-                                <img class="icon-heart2 dis-block trans-04 ab-t-l" src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-02.png" alt="ICON">
+                                <img class="icon-heart1 dis-block trans-04"
+                                     src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-01.png"
+                                     alt="ICON">
+                                <img class="icon-heart2 dis-block trans-04 ab-t-l"
+                                     src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-02.png"
+                                     alt="ICON">
                             </a>
                         </div>
                     </div>
@@ -723,7 +804,8 @@
                     <div class="block2-pic hov-img0">
                         <img src="${pageContext.request.contextPath}/assets/images/product-14.jpg" alt="IMG-PRODUCT">
 
-                        <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+                        <a href="#"
+                           class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
                             Quick View
                         </a>
                     </div>
@@ -741,8 +823,12 @@
 
                         <div class="block2-txt-child2 flex-r p-t-3">
                             <a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-                                <img class="icon-heart1 dis-block trans-04" src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-01.png" alt="ICON">
-                                <img class="icon-heart2 dis-block trans-04 ab-t-l" src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-02.png" alt="ICON">
+                                <img class="icon-heart1 dis-block trans-04"
+                                     src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-01.png"
+                                     alt="ICON">
+                                <img class="icon-heart2 dis-block trans-04 ab-t-l"
+                                     src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-02.png"
+                                     alt="ICON">
                             </a>
                         </div>
                     </div>
@@ -755,7 +841,8 @@
                     <div class="block2-pic hov-img0">
                         <img src="${pageContext.request.contextPath}/assets/images/product-15.jpg" alt="IMG-PRODUCT">
 
-                        <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+                        <a href="#"
+                           class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
                             Quick View
                         </a>
                     </div>
@@ -773,8 +860,12 @@
 
                         <div class="block2-txt-child2 flex-r p-t-3">
                             <a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-                                <img class="icon-heart1 dis-block trans-04" src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-01.png" alt="ICON">
-                                <img class="icon-heart2 dis-block trans-04 ab-t-l" src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-02.png" alt="ICON">
+                                <img class="icon-heart1 dis-block trans-04"
+                                     src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-01.png"
+                                     alt="ICON">
+                                <img class="icon-heart2 dis-block trans-04 ab-t-l"
+                                     src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-02.png"
+                                     alt="ICON">
                             </a>
                         </div>
                     </div>
@@ -787,7 +878,8 @@
                     <div class="block2-pic hov-img0">
                         <img src="${pageContext.request.contextPath}/assets/images/product-16.jpg" alt="IMG-PRODUCT">
 
-                        <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+                        <a href="#"
+                           class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
                             Quick View
                         </a>
                     </div>
@@ -805,8 +897,12 @@
 
                         <div class="block2-txt-child2 flex-r p-t-3">
                             <a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-                                <img class="icon-heart1 dis-block trans-04" src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-01.png" alt="ICON">
-                                <img class="icon-heart2 dis-block trans-04 ab-t-l" src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-02.png" alt="ICON">
+                                <img class="icon-heart1 dis-block trans-04"
+                                     src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-01.png"
+                                     alt="ICON">
+                                <img class="icon-heart2 dis-block trans-04 ab-t-l"
+                                     src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-02.png"
+                                     alt="ICON">
                             </a>
                         </div>
                     </div>
@@ -847,9 +943,11 @@
                             <div class="slick3 gallery-lb">
                                 <div class="item-slick3" data-thumb="images/product-detail-01.jpg">
                                     <div class="wrap-pic-w pos-relative">
-                                        <img src="${pageContext.request.contextPath}/assets/images/product-detail-01.jpg" alt="IMG-PRODUCT">
+                                        <img src="${pageContext.request.contextPath}/assets/images/product-detail-01.jpg"
+                                             alt="IMG-PRODUCT">
 
-                                        <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="${pageContext.request.contextPath}/assets/images/product-detail-01.jpg">
+                                        <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
+                                           href="${pageContext.request.contextPath}/assets/images/product-detail-01.jpg">
                                             <i class="fa fa-expand"></i>
                                         </a>
                                     </div>
@@ -857,9 +955,11 @@
 
                                 <div class="item-slick3" data-thumb="images/product-detail-02.jpg">
                                     <div class="wrap-pic-w pos-relative">
-                                        <img src="${pageContext.request.contextPath}/assets/images/product-detail-02.jpg" alt="IMG-PRODUCT">
+                                        <img src="${pageContext.request.contextPath}/assets/images/product-detail-02.jpg"
+                                             alt="IMG-PRODUCT">
 
-                                        <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="${pageContext.request.contextPath}/assets/images/product-detail-02.jpg">
+                                        <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
+                                           href="${pageContext.request.contextPath}/assets/images/product-detail-02.jpg">
                                             <i class="fa fa-expand"></i>
                                         </a>
                                     </div>
@@ -867,9 +967,11 @@
 
                                 <div class="item-slick3" data-thumb="images/product-detail-03.jpg">
                                     <div class="wrap-pic-w pos-relative">
-                                        <img src="${pageContext.request.contextPath}/assets/images/product-detail-03.jpg" alt="IMG-PRODUCT">
+                                        <img src="${pageContext.request.contextPath}/assets/images/product-detail-03.jpg"
+                                             alt="IMG-PRODUCT">
 
-                                        <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="${pageContext.request.contextPath}/assets/images/product-detail-03.jpg">
+                                        <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
+                                           href="${pageContext.request.contextPath}/assets/images/product-detail-03.jpg">
                                             <i class="fa fa-expand"></i>
                                         </a>
                                     </div>
@@ -890,7 +992,8 @@
 							</span>
 
                         <p class="stext-102 cl3 p-t-23">
-                            Nulla eget sem vitae eros pharetra viverra. Nam vitae luctus ligula. Mauris consequat ornare feugiat.
+                            Nulla eget sem vitae eros pharetra viverra. Nam vitae luctus ligula. Mauris consequat ornare
+                            feugiat.
                         </p>
 
                         <!--  -->
@@ -945,7 +1048,8 @@
                                         </div>
 
                                         <label>
-                                            <input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product" value="1">
+                                            <input class="mtext-104 cl3 txt-center num-product" type="number"
+                                                   name="num-product" value="1">
                                         </label>
 
                                         <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
@@ -963,20 +1067,25 @@
                         <!--  -->
                         <div class="flex-w flex-m p-l-100 p-t-40 respon7">
                             <div class="flex-m bor9 p-r-10 m-r-11">
-                                <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100" data-tooltip="Add to Wishlist">
+                                <a href="#"
+                                   class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100"
+                                   data-tooltip="Add to Wishlist">
                                     <i class="zmdi zmdi-favorite"></i>
                                 </a>
                             </div>
 
-                            <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Facebook">
+                            <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100"
+                               data-tooltip="Facebook">
                                 <i class="fa fa-facebook"></i>
                             </a>
 
-                            <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Twitter">
+                            <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100"
+                               data-tooltip="Twitter">
                                 <i class="fa fa-twitter"></i>
                             </a>
 
-                            <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Google Plus">
+                            <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100"
+                               data-tooltip="Google Plus">
                                 <i class="fa fa-google-plus"></i>
                             </a>
                         </div>
@@ -997,7 +1106,7 @@
 <!--===============================================================================================-->
 <script src="${pageContext.request.contextPath}/assets/vendor/select2/select2.min.js"></script>
 <script>
-    $(".js-select2").each(function(){
+    $(".js-select2").each(function () {
         $(this).select2({
             minimumResultsForSearch: 20,
             dropdownParent: $(this).next('.dropDownSelect2')
@@ -1018,12 +1127,12 @@
 <!--===============================================================================================-->
 <script src="${pageContext.request.contextPath}/assets/vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
 <script>
-    $('.gallery-lb').each(function() { // the containers for all your galleries
+    $('.gallery-lb').each(function () { // the containers for all your galleries
         $(this).magnificPopup({
             delegate: 'a', // the selector for gallery item
             type: 'image',
             gallery: {
-                enabled:true
+                enabled: true
             },
             mainClass: 'mfp-fade'
         });
@@ -1034,13 +1143,13 @@
 <!--===============================================================================================-->
 <script src="${pageContext.request.contextPath}/assets/vendor/sweetalert/sweetalert.min.js"></script>
 <script>
-    $('.js-addwish-b2, .js-addwish-detail').on('click', function(e){
+    $('.js-addwish-b2, .js-addwish-detail').on('click', function (e) {
         e.preventDefault();
     });
 
-    $('.js-addwish-b2').each(function(){
+    $('.js-addwish-b2').each(function () {
         const nameProduct = $(this).parent().parent().find('.js-name-b2').html();
-        $(this).on('click', function(){
+        $(this).on('click', function () {
             swal(nameProduct, "is added to wishlist !", "success");
 
             $(this).addClass('js-addedwish-b2');
@@ -1048,10 +1157,10 @@
         });
     });
 
-    $('.js-addwish-detail').each(function(){
+    $('.js-addwish-detail').each(function () {
         const nameProduct = $(this).parent().parent().parent().find('.js-name-detail').html();
 
-        $(this).on('click', function(){
+        $(this).on('click', function () {
             swal(nameProduct, "is added to wishlist !", "success");
 
             $(this).addClass('js-addedwish-detail');
@@ -1061,9 +1170,9 @@
 
     /*---------------------------------------------*/
 
-    $('.js-addcart-detail').each(function(){
+    $('.js-addcart-detail').each(function () {
         const nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();
-        $(this).on('click', function(){
+        $(this).on('click', function () {
             swal(nameProduct, "is added to cart !", "success");
         });
     });
@@ -1072,16 +1181,16 @@
 <!--===============================================================================================-->
 <script src="${pageContext.request.contextPath}/assets/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 <script>
-    $('.js-pscroll').each(function(){
-        $(this).css('position','relative');
-        $(this).css('overflow','hidden');
+    $('.js-pscroll').each(function () {
+        $(this).css('position', 'relative');
+        $(this).css('overflow', 'hidden');
         const ps = new PerfectScrollbar(this, {
             wheelSpeed: 1,
             scrollingThreshold: 1000,
             wheelPropagation: false,
         });
 
-        $(window).on('resize', function(){
+        $(window).on('resize', function () {
             ps.update();
         })
     });

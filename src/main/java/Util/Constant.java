@@ -1,10 +1,35 @@
 package Util;
 
+import Services.deploy.*;
+
 import java.io.File;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 public class Constant {
     public static final String COOKIE_USERNAME = "username";
     public static final String COOKIE_PASSWORD = "password";
+    public static final Locale LC_VIETNAM = new Locale("vi", "VN");
+    public static final NumberFormat NF_DONG = NumberFormat.getCurrencyInstance(LC_VIETNAM);
+
+    public static class Service {
+        public static final BrandService BRAND_SERVICE = new BrandService();
+        public static final CartItemService CART_ITEM_SERVICE = new CartItemService();
+        public static final CartService CART_SERVICE = new CartService();
+        public static final CategoryService CATEGORY_SERVICE = new CategoryService();
+        public static final OrderService ORDER_SERVICE = new OrderService();
+        public static final PaymentService PAYMENT_SERVICE = new PaymentService();
+        public static final ProductService PRODUCT_SERVICE = new ProductService();
+        public static final ProImageService PRO_IMAGE_SERVICE = new ProImageService();
+        public static final ProvinceService PROVINCE_SERVICE = new ProvinceService();
+        public static final ReportService REPORT_SERVICE = new ReportService();
+        public static final ReviewService REVIEW_SERVICE = new ReviewService();
+        public static final RoomService ROOM_SERVICE = new RoomService();
+        public static final UserService USER_SERVICE = new UserService();
+        public static final VoucherService VOUCHER_SERVICE = new VoucherService();
+        public static final WishListService WISH_LIST_SERVICE = new WishListService();
+        public static final WLItemService WL_ITEM_SERVICE = new WLItemService();
+    }
 
     public static class Path {
         //General constants

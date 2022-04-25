@@ -18,9 +18,11 @@ public class LogoutController extends HttpServlet {
         //Remove all attribute
         TreeSet<String> attributes = new TreeSet<>();
         Enumeration<String> enumeration = session.getAttributeNames();
+
         while (enumeration.hasMoreElements()) {
             attributes.add(enumeration.nextElement());
         }
+
         for (String attribute : attributes) {
             session.removeAttribute(attribute);
         }

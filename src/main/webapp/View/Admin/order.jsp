@@ -12,21 +12,22 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Dong Phong</title>
     <!-- BOOTSTRAP STYLES-->
-    <link href="${pageContext.request.contextPath}/assets/css/bootstrap.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/css/bootstrap.css" rel="stylesheet"/>
     <!-- FONTAWESOME STYLES-->
-    <link href="${pageContext.request.contextPath}/assets/fonts/fontawesome-pro-5.15.4-web/css/all.min.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/fonts/fontawesome-pro-5.15.4-web/css/all.min.css"
+          rel="stylesheet"/>
     <!-- MORRIS CHART STYLES-->
 
     <!-- CUSTOM STYLES-->
-    <link href="${pageContext.request.contextPath}/assets/css/custom.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/css/custom.css" rel="stylesheet"/>
     <!-- GOOGLE FONTS-->
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
     <!-- TABLE STYLES-->
-    <link href="${pageContext.request.contextPath}/assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet"/>
     <%---------------------------------------------------------------------------------------------%>
     <style>
         .table > tbody > tr > td > p {
@@ -45,22 +46,24 @@
     <jsp:include page="navside.jsp"/>
     <!-- /. NAV SIDE  -->
 
-    <div id="page-wrapper" >
+    <div id="page-wrapper">
         <div id="page-inner">
             <div class="row">
                 <div class="col-md-12">
                     <h2>Quản Lý Đơn Hàng</h2>
                     <div class="row">
-                        <div class="col-md-12"><h5>Chào mừng ${sessionScope.displayName}, rất vui được gặp lại bạn. </h5></div>
+                        <div class="col-md-12"><h5>Chào mừng ${sessionScope.displayName}, rất vui được gặp lại
+                            bạn. </h5></div>
                     </div>
 
                 </div>
             </div>
             <!-- /. ROW  -->
-            <hr />
+            <hr/>
             <div class="row">
                 <div class="col-md-12 mb-3">
-                    <a href="${pageContext.request.contextPath}/admin/order/add" class="btn btn-primary ct-button float-right">
+                    <a href="${pageContext.request.contextPath}/admin/order/add"
+                       class="btn btn-primary ct-button float-right">
                         <i class="fa fa-plus"></i>&nbsp;Tạo đơn hàng
                     </a>
                 </div>
@@ -76,17 +79,17 @@
                             <div class="table-responsive">
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                     <thead>
-                                        <tr>
-                                            <th>STT</th>
-                                            <th>ID</th>
-                                            <th>Người đặt</th>
-                                            <th>Người nhận</th>
-                                            <th style="width: 20%">Địa chỉ giao hàng</th>
-                                            <th>SĐT người nhận</th>
-                                            <th>Tổng tiền</th>
-                                            <th>Tình trạng</th>
-                                            <th>Tác vụ</th>
-                                        </tr>
+                                    <tr>
+                                        <th>STT</th>
+                                        <th>ID</th>
+                                        <th>Người đặt</th>
+                                        <th>Người nhận</th>
+                                        <th style="width: 20%">Địa chỉ giao hàng</th>
+                                        <th>SĐT người nhận</th>
+                                        <th>Tổng tiền</th>
+                                        <th>Tình trạng</th>
+                                        <th>Tác vụ</th>
+                                    </tr>
                                     </thead>
                                     <tbody>
                                     <c:set var="number" value="0"/>
@@ -109,9 +112,12 @@
                                             </td>
                                             <td>${order.orderStatus == null ? "Chưa hoàn thành" : (order.orderStatus ? "Hoàn thành" : "Hủy bỏ")}</td>
                                             <td>
-                                                <a href="<c:url value="/admin/order/detail?id=${order.orderId}"/>" class="text-center">Chi tiết</a>&nbsp;|&nbsp;
-                                                <a href="<c:url value="/admin/order/edit?id=${order.orderId}"/>" class="text-center">Sửa</a>&nbsp;|&nbsp;
-                                                <a href="<c:url value="/admin/order/delete?id=${order.orderId}"/>" class="text-center">Xóa</a>
+                                                <a href="<c:url value="/admin/order/detail?id=${order.orderId}"/>"
+                                                   class="text-center">Chi tiết</a>&nbsp;|&nbsp;
+                                                <a href="<c:url value="/admin/order/edit?id=${order.orderId}"/>"
+                                                   class="text-center">Sửa</a>&nbsp;|&nbsp;
+                                                <a href="<c:url value="/admin/order/delete?id=${order.orderId}"/>"
+                                                   class="text-center">Xóa</a>
                                             </td>
                                         </tr>
                                     </c:forEach>

@@ -2,11 +2,11 @@
 <%@ page import="Entity.CartItem" %>
 <%@ page import="java.util.Locale" %>
 <%@ page import="java.text.NumberFormat" %>
-<%@ page import="Services.deploy.ProImageService" %>
 <%@ page import="Entity.Order" %>
 <%@ page import="java.sql.Timestamp" %>
 <%@ page import="java.util.Date" %>
 <%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="Util.Constant" %>
 <%--
   User: duckhaidev
   Date: 4/3/2022
@@ -32,20 +32,38 @@
     <div class="bor20 p-3 mb-3">
         <div class="mb-3 text-center text-uppercase">Thông tin giao hàng</div>
         <div class="row d-flex justify-content-center">
-            <div class="col-md-6 mb-3"><label for="fullName" class="labels">Họ và tên</label><input id="fullName" name="fullName" type="text" class="form-control" value="${sessionScope.order_rv.recipientName}" readonly></div>
-            <div class="col-md-6 mb-3"><label for="phone" class="labels">Số điện thoại</label><input id="phone" name="phone" type="text" class="form-control" value="${sessionScope.order_rv.recipientPhone}" readonly></div>
-            <div class="col-md-12 mb-3"><label for="recaddress" class="labels">Địa chỉ</label><input type="text" id="recaddress" class="form-control" value="${sessionScope.order_rv.recipientAddress}" readonly></div>
+            <div class="col-md-6 mb-3"><label for="fullName" class="labels">Họ và tên</label><input id="fullName"
+                                                                                                    name="fullName"
+                                                                                                    type="text"
+                                                                                                    class="form-control"
+                                                                                                    value="${sessionScope.order_rv.recipientName}"
+                                                                                                    readonly></div>
+            <div class="col-md-6 mb-3"><label for="phone" class="labels">Số điện thoại</label><input id="phone"
+                                                                                                     name="phone"
+                                                                                                     type="text"
+                                                                                                     class="form-control"
+                                                                                                     value="${sessionScope.order_rv.recipientPhone}"
+                                                                                                     readonly></div>
+            <div class="col-md-12 mb-3"><label for="recaddress" class="labels">Địa chỉ</label><input type="text"
+                                                                                                     id="recaddress"
+                                                                                                     class="form-control"
+                                                                                                     value="${sessionScope.order_rv.recipientAddress}"
+                                                                                                     readonly></div>
         </div>
     </div>
     <div class="bor20 p-3 mb-3">
         <div class="mb-3 text-center text-uppercase">Phương thức vận chuyển</div>
         <div class="row d-flex mb-2 align-items-center">
             <div class="col-md-2"><label for="ip1" class="labels text-nowrap">Đơn vị vận chuyển:&nbsp;</label></div>
-            <div class="col-md-2"><input id="ip1" type="text" class="form-control w-fit-content text-center" value="Đông Phong" readonly></div>
+            <div class="col-md-2"><input id="ip1" type="text" class="form-control w-fit-content text-center"
+                                         value="Đông Phong" readonly></div>
         </div>
         <div class="row d-flex mb-3 align-items-center">
-            <div class="col-md-2"><label for="ip2" class="labels text-nowrap">Thời gian giao hàng dự kiến:&nbsp;</label></div>
-            <div class="col-md-2"><input id="ip2" type="text" class="form-control w-fit-content text-center" value="${sessionScope.order_rv.recipientDate} <c:if test="${sessionScope.order_rv.recipientDate == null}">Chưa xác định</c:if>" readonly></div>
+            <div class="col-md-2"><label for="ip2" class="labels text-nowrap">Thời gian giao hàng dự kiến:&nbsp;</label>
+            </div>
+            <div class="col-md-2"><input id="ip2" type="text" class="form-control w-fit-content text-center"
+                                         value="${sessionScope.order_rv.recipientDate} <c:if test="${sessionScope.order_rv.recipientDate == null}">Chưa xác định</c:if>"
+                                         readonly></div>
         </div>
     </div>
     <div class="bor20 p-3 mb-3">
@@ -76,8 +94,7 @@
                                 <td>${count = count + 1}</td>
                                 <td>${item.product.productId}</td>
                                 <%
-                                    ProImageService imageService = new ProImageService();
-                                    String reImage = imageService.getProReImage(((CartItem) pageContext.getAttribute("item")).getProduct().getProductId());
+                                    String reImage = Constant.Service.PRO_IMAGE_SERVICE.getProReImage(((CartItem) pageContext.getAttribute("item")).getProduct().getProductId());
                                     request.setAttribute("reImage", reImage);
                                 %>
                                 <c:url value="/images/product-images?fname=${reImage}" var="imageUrl"/>
@@ -86,7 +103,8 @@
                                         <td><i>NULL</i></td>
                                     </c:when>
                                     <c:otherwise>
-                                        <td><img width="50" height="50" src="${imageUrl}" style="object-fit: cover;" alt="Hình ảnh"></td>
+                                        <td><img width="50" height="50" src="${imageUrl}" style="object-fit: cover;"
+                                                 alt="Hình ảnh"></td>
                                     </c:otherwise>
                                 </c:choose>
                                 <td>${item.product.productName}</td>
@@ -125,19 +143,29 @@
                 }
             %>
             <div class="col-md-12 mb-2">
-                <label class="labels d-flex text-nowrap align-items-center float-right">Tổng tiền:&nbsp;<input type="text" class="form-control w-fit-content text-center" value="<% out.print(dongFormat.format(subTotal)); %>" readonly></label>
+                <label class="labels d-flex text-nowrap align-items-center float-right">Tổng tiền:&nbsp;<input
+                        type="text" class="form-control w-fit-content text-center"
+                        value="<% out.print(dongFormat.format(subTotal)); %>" readonly></label>
             </div>
             <div class="col-md-12 mb-2">
-                <label class="labels d-flex text-nowrap align-items-center float-right">Giảm giá:&nbsp;<input type="text" class="form-control w-fit-content text-center" value="<% out.print(dongFormat.format(discount)); %>" readonly></label>
+                <label class="labels d-flex text-nowrap align-items-center float-right">Giảm giá:&nbsp;<input
+                        type="text" class="form-control w-fit-content text-center"
+                        value="<% out.print(dongFormat.format(discount)); %>" readonly></label>
             </div>
             <div class="col-md-12 mb-2">
-                <label class="labels d-flex text-nowrap align-items-center float-right">Thuế (8%):&nbsp;<input type="text" class="form-control w-fit-content text-center" value="<% out.print(dongFormat.format(tax)); %>" readonly></label>
+                <label class="labels d-flex text-nowrap align-items-center float-right">Thuế (8%):&nbsp;<input
+                        type="text" class="form-control w-fit-content text-center"
+                        value="<% out.print(dongFormat.format(tax)); %>" readonly></label>
             </div>
             <div class="col-md-12 mb-2">
-                <label class="labels d-flex text-nowrap align-items-center float-right">Phí vận chuyển:&nbsp;<input type="text" class="form-control w-fit-content text-center" value="<% out.print(dongFormat.format(shipping)); %>" readonly></label>
+                <label class="labels d-flex text-nowrap align-items-center float-right">Phí vận chuyển:&nbsp;<input
+                        type="text" class="form-control w-fit-content text-center"
+                        value="<% out.print(dongFormat.format(shipping)); %>" readonly></label>
             </div>
             <div class="col-md-12 mb-2">
-                <label class="labels d-flex text-nowrap align-items-center float-right"><strong>Thành tiền:</strong>&nbsp;<input type="text" class="form-control w-fit-content text-center product-price" value="<% out.print(dongFormat.format(total)); %>" readonly></label>
+                <label class="labels d-flex text-nowrap align-items-center float-right"><strong>Thành tiền:</strong>&nbsp;<input
+                        type="text" class="form-control w-fit-content text-center product-price"
+                        value="<% out.print(dongFormat.format(total)); %>" readonly></label>
             </div>
         </div>
     </div>

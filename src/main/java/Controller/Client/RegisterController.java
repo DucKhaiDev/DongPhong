@@ -2,9 +2,6 @@ package Controller.Client;
 
 import Entity.Cart;
 import Entity.WishList;
-import Services.deploy.CartService;
-import Services.deploy.UserService;
-import Services.deploy.WishListService;
 import Tools.SendEmail;
 import Util.Constant;
 import jakarta.servlet.ServletException;
@@ -20,10 +17,6 @@ import java.util.Date;
 
 @WebServlet(name = "RegisterController", value = "/register")
 public class RegisterController extends HttpServlet {
-    private final UserService userService = new UserService();
-    private final WishListService wishListService = new WishListService();
-    private final CartService cartService = new CartService();
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher(Constant.Path.REGISTER).forward(request, response);
@@ -68,7 +61,7 @@ public class RegisterController extends HttpServlet {
         }
 
         //Check if the username already exists
-        if (userService.checkExistUsername(username)) {
+        if (Constant.Service.USER_SERVICE.checkExistUsername(username)) {
             usnMsg = "Tên đăng nhập đã tồn tại!";
             request.setAttribute("usnMsg", usnMsg);
             request.getRequestDispatcher(Constant.Path.REGISTER).forward(request, response);
@@ -110,21 +103,21 @@ public class RegisterController extends HttpServlet {
         }
 
         //Check if the email already exists
-        if (userService.checkExistEmail(email)) {
+        if (Constant.Service.USER_SERVICE.checkExistEmail(email)) {
             emailMsg = "Email đã tồn tại!";
             request.setAttribute("emailMsg", emailMsg);
             request.getRequestDispatcher(Constant.Path.REGISTER).forward(request, response);
             return;
         }
 
-        if (userService.register(username, password, email)) {
+        if (Constant.Service.USER_SERVICE.register(username, password, email)) {
             //Create wishlist
             String wishListId = "WL_" + username;
-            wishListService.insert(new WishList(wishListId, userService.getUser(username)));
+            Constant.Service.WISH_LIST_SERVICE.insert(new WishList(wishListId, Constant.Service.USER_SERVICE.getUser(username)));
 
             //Create cart
             String cartId = username + "-0";
-            cartService.insert(new Cart(cartId, userService.getUser(username)));
+            Constant.Service.CART_SERVICE.insert(new Cart(cartId, Constant.Service.USER_SERVICE.getUser(username)));
             String content = "<!DOCTYPE html>\n" +
                     "<html lang=\"en\" xmlns=\"http://www.w3.org/1999/xhtml\">\n" +
                     "<head>\n" +

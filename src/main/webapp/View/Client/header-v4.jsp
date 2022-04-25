@@ -27,46 +27,61 @@
                         </li>
 
                         <li class="dropdown show">
-                            <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="">Phòng Khách</a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                               href="">Phòng Khách</a>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                 <c:forEach items="${applicationScope.lvrCategories}" var="lvrCategory">
-                                    <li class="dropdown-item"><a href="${pageContext.request.contextPath}/products/category?id=${lvrCategory.categoryId}">${lvrCategory.categoryName}</a></li>
+                                    <li class="dropdown-item"><a
+                                            href="${pageContext.request.contextPath}/products/category?id=${lvrCategory.categoryId}">${lvrCategory.categoryName}</a>
+                                    </li>
                                 </c:forEach>
                             </ul>
                         </li>
 
                         <li class="dropdown show">
-                            <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="">Phòng Bếp</a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                               href="">Phòng Bếp</a>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                 <c:forEach items="${applicationScope.kitCategories}" var="kitCategory">
-                                    <li class="dropdown-item"><a href="${pageContext.request.contextPath}/products/category?id=${kitCategory.categoryId}">${kitCategory.categoryName}</a></li>
+                                    <li class="dropdown-item"><a
+                                            href="${pageContext.request.contextPath}/products/category?id=${kitCategory.categoryId}">${kitCategory.categoryName}</a>
+                                    </li>
                                 </c:forEach>
                             </ul>
                         </li>
 
                         <li class="dropdown show">
-                            <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="">Phòng Ngủ</a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                               href="">Phòng Ngủ</a>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                 <c:forEach items="${applicationScope.bedCategories}" var="bedCategory">
-                                    <li class="dropdown-item"><a href="${pageContext.request.contextPath}/products/category?id=${bedCategory.categoryId}">${bedCategory.categoryName}</a></li>
+                                    <li class="dropdown-item"><a
+                                            href="${pageContext.request.contextPath}/products/category?id=${bedCategory.categoryId}">${bedCategory.categoryName}</a>
+                                    </li>
                                 </c:forEach>
                             </ul>
                         </li>
 
                         <li class="dropdown show">
-                            <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="">Văn Phòng</a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                               href="">Văn Phòng</a>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                 <c:forEach items="${applicationScope.offCategories}" var="offCategory">
-                                    <li class="dropdown-item"><a href="${pageContext.request.contextPath}/products/category?id=${offCategory.categoryId}">${offCategory.categoryName}</a></li>
+                                    <li class="dropdown-item"><a
+                                            href="${pageContext.request.contextPath}/products/category?id=${offCategory.categoryId}">${offCategory.categoryName}</a>
+                                    </li>
                                 </c:forEach>
                             </ul>
                         </li>
 
                         <li class="dropdown show">
-                            <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="">Phòng Thờ</a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                               href="">Phòng Thờ</a>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                 <c:forEach items="${applicationScope.altCategories}" var="altCategory">
-                                    <li class="dropdown-item"><a href="${pageContext.request.contextPath}/products/category?id=${altCategory.categoryId}">${altCategory.categoryName}</a></li>
+                                    <li class="dropdown-item"><a
+                                            href="${pageContext.request.contextPath}/products/category?id=${altCategory.categoryId}">${altCategory.categoryName}</a>
+                                    </li>
                                 </c:forEach>
                             </ul>
                         </li>
@@ -79,11 +94,13 @@
                         <i class="zmdi zmdi-search"></i>
                     </div>
 
-                    <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="${sessionScope.cartItems.size() != null ? sessionScope.cartItems.size() : 0}">
+                    <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart"
+                         data-notify="${sessionScope.cartItems.size() != null ? sessionScope.cartItems.size() : 0}">
                         <i class="zmdi zmdi-shopping-cart"></i>
                     </div>
 
-                    <div class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-wishList" data-notify="${sessionScope.wlItems.size() != null ? sessionScope.wlItems.size() : 0}">
+                    <div class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-wishList"
+                         data-notify="${sessionScope.wlItems.size() != null ? sessionScope.wlItems.size() : 0}">
                         <i class="zmdi zmdi-favorite-outline"></i>
                     </div>
                 </div>
@@ -95,7 +112,8 @@
     <div class="wrap-header-mobile">
         <!-- Logo moblie -->
         <div class="logo-mobile">
-            <a href="index.jsp"><img src="${pageContext.request.contextPath}/assets/images/icons/logo.png" alt="IMG-LOGO"></a>
+            <a href="index.jsp"><img src="${pageContext.request.contextPath}/assets/images/icons/logo.png"
+                                     alt="IMG-LOGO"></a>
         </div>
 
         <!-- Icon header -->
@@ -104,11 +122,13 @@
                 <i class="zmdi zmdi-search"></i>
             </div>
 
-            <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart" data-notify="2">
+            <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart"
+                 data-notify="2">
                 <i class="zmdi zmdi-shopping-cart"></i>
             </div>
 
-            <a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti" data-notify="0">
+            <a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti"
+               data-notify="0">
                 <i class="zmdi zmdi-favorite-outline"></i>
             </a>
         </div>

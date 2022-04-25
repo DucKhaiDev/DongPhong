@@ -1,7 +1,6 @@
 package Entity;
 
 import java.io.Serializable;
-import java.util.UUID;
 
 public class User implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -17,7 +16,8 @@ public class User implements Serializable {
     private String avatar;
     private boolean role;
 
-    public User() {}
+    public User() {
+    }
 
     //Constructor đăng ký
     public User(String userId, String username, String password, String email) {

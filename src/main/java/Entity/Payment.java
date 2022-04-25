@@ -9,7 +9,8 @@ public class Payment implements Serializable {
     private String paymentMethod;
     private boolean paymentStatus;
 
-    public Payment() {}
+    public Payment() {
+    }
 
     public Payment(String paymentId, String paymentMethod, boolean paymentStatus) {
         this.paymentId = paymentId;

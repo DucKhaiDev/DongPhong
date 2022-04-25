@@ -1,25 +1,27 @@
 package Controller.Admin;
 
 import Entity.Brand;
-import Services.deploy.BrandService;
 import Util.Constant;
-import jakarta.servlet.*;
-import jakarta.servlet.http.*;
-import jakarta.servlet.annotation.*;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
 @WebServlet(name = "EditBrand", value = "/admin/brand/edit")
 public class EditBrand extends HttpServlet {
-    private final BrandService brandService = new BrandService();
     private Brand brand;
     private String brandId;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         brandId = request.getParameter("id");
-        brand = brandService.getBrand(brandId);
+
+        brand = Constant.Service.BRAND_SERVICE.getBrand(brandId);
         request.setAttribute("brand", brand);
+
         request.getRequestDispatcher(Constant.Path.ADMIN_EDIT_BRAND).forward(request, response);
     }
 
@@ -35,7 +37,8 @@ public class EditBrand extends HttpServlet {
             brand.setBrandDescription(brandDescription);
         }
 
-        brandService.edit(brand);
+        Constant.Service.BRAND_SERVICE.edit(brand);
+
         response.sendRedirect(request.getContextPath() + "/admin/brand/edit?id=" + brandId);
     }
 }

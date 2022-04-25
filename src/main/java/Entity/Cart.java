@@ -8,7 +8,8 @@ public class Cart implements Serializable {
     private String cartId;
     private User user;
 
-    public Cart() {}
+    public Cart() {
+    }
 
     public Cart(String cartId, User user) {
         this.cartId = cartId;

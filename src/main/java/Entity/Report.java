@@ -15,7 +15,7 @@ public class Report implements Serializable {
     private BigDecimal sumShipping;
     private BigDecimal sumTotal;
 
-    public Report(){
+    public Report() {
     }
 
     public Report(int monthDate, int yearDate, int countId, BigDecimal sumSubTotal, BigDecimal sumDiscount, BigDecimal sumTax, BigDecimal sumShipping, BigDecimal sumTotal) {

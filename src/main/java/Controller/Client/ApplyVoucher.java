@@ -1,7 +1,6 @@
 package Controller.Client;
 
-import Entity.Voucher;
-import Services.deploy.VoucherService;
+import Util.Constant;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -15,8 +14,7 @@ public class ApplyVoucher extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String voucherId = request.getParameter("voucher");
-        Voucher voucher = new VoucherService().getVoucher(voucherId);
-        request.getSession().setAttribute("voucher", voucher);
+        request.getSession().setAttribute("voucher", Constant.Service.VOUCHER_SERVICE.getVoucher(voucherId));
         response.sendRedirect(request.getContextPath() + request.getParameter("forwardTo"));
     }
 }

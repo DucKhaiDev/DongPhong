@@ -11,10 +11,12 @@
         <ul class="nav" id="main-menu">
             <li class="text-center">
                 <c:url value="/images/avatar?fname=${sessionScope.account.avatar}" var="avatarUrl"/>
-                <img class="user-image user-img-empty img-responsive" <c:if test="${not empty sessionScope.account.avatar}">src="${avatarUrl}"</c:if> alt="Ảnh đại diện">
+                <img class="user-image user-img-empty img-responsive"
+                     <c:if test="${not empty sessionScope.account.avatar}">src="${avatarUrl}"</c:if> alt="Ảnh đại diện">
             </li>
             <li>
-                <a class="active-menu text-center" href="${pageContext.request.contextPath}/admin/user/edit?id=${sessionScope.account.userId}">${sessionScope.displayName}</a>
+                <a class="active-menu text-center"
+                   href="${pageContext.request.contextPath}/admin/user/edit?id=${sessionScope.account.userId}">${sessionScope.displayName}</a>
             </li>
             <li>
                 <a href="${pageContext.request.contextPath}/admin">
@@ -29,7 +31,8 @@
                 </a>
             </li>
             <li>
-                <a href="#"><i class="fa fa-boxes fa-3x w-25 text-center"></i> QL Sản phẩm<span class="fa arrow fa-2x"></span></a>
+                <a href="#"><i class="fa fa-boxes fa-3x w-25 text-center"></i> QL Sản phẩm<span
+                        class="fa arrow fa-2x"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
                         <a href="${pageContext.request.contextPath}/admin/product">Danh mục Sản phẩm</a>
@@ -61,7 +64,8 @@
                 </a>
             </li>
             <li>
-                <a href="#"><i class="fa fa-file-chart-line fa-3x w-25 text-center"></i>Báo cáo & Thống kê<span class="fa arrow fa-2x"></span></a>
+                <a href="#"><i class="fa fa-file-chart-line fa-3x w-25 text-center"></i>Báo cáo & Thống kê<span
+                        class="fa arrow fa-2x"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
                         <a href="${pageContext.request.contextPath}/admin/report">Báo cáo</a>

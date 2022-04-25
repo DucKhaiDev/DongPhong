@@ -1,7 +1,6 @@
 package Controller.Client;
 
 import Entity.User;
-import Services.deploy.UserService;
 import Tools.SendEmail;
 import Util.Constant;
 import jakarta.servlet.ServletException;
@@ -17,8 +16,6 @@ import java.util.Random;
 
 @WebServlet(name = "ForgetPassword", value = "/forget-password")
 public class ForgetPassword extends HttpServlet {
-    private final UserService userService = new UserService();
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher(Constant.Path.FORGET_PASSWORD).forward(request, response);
@@ -27,14 +24,15 @@ public class ForgetPassword extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String username = request.getParameter("username");
-        if (userService.getUser(username).getUserId() == null) {
+        if (Constant.Service.USER_SERVICE.getUser(username).getUserId() == null) {
             request.setAttribute("message", "Email/Tên đăng nhập không tồn tại!");
             request.getRequestDispatcher(Constant.Path.FORGET_PASSWORD).forward(request, response);
             return;
         }
 
-        User user = userService.getUser(username);
+        User user = Constant.Service.USER_SERVICE.getUser(username);
         String newPassword = Integer.toString(10000000 + new Random().nextInt(90000000));
+
         //displayName
         String displayName = user.getUsername();
         String firstName = user.getFirstName();
@@ -200,7 +198,7 @@ public class ForgetPassword extends HttpServlet {
                 "                    <table role=\"presentation\" style=\"border-spacing: 0; padding: 0; border: 0; width: 100%\">\n" +
                 "                        <tr>\n" +
                 "                            <td style=\"padding: 30px 40px 30px 40px; text-align: center;\">\n" +
-                "                                <span style=\"color:#fff; font-size: 30px\">DongPhong.store</span>\n" +
+                "                                <span style=\"color:#fff; font-size: 30px; font-weight: bold;\">DongPhong.store</span>\n" +
                 "                            </td>\n" +
                 "                        </tr>\n" +
                 "                    </table>\n" +
@@ -226,7 +224,7 @@ public class ForgetPassword extends HttpServlet {
                 "                                        </tr>\n" +
                 "                                        <tr style=\"background-color: rgba(0, 0, 0, 0.5)\">\n" +
                 "                                            <td style=\"vertical-align: top; text-align: center; padding: 10px 20px 15px 20px; font-family: sans-serif; font-size: 15px; line-height: 20px; color: #fff;\">\n" +
-                "                                                <p style=\"margin: 0; text-align: start\">\n" +
+                "                                                <p style=\"margin: 0; text-align: start; color: #fff;\">\n" +
                 "                                                    Chúng tôi đã nhận được yêu cầu cấp lại mật khẩu của bạn! <br>\n" +
                 "                                                    Mật khẩu mới của bạn là: <b>" + newPassword + "</b> <br>\n" +
                 "                                                    Nếu bạn không thực hiện yêu cầu này, vui lòng thông báo cho chúng tôi biết.\n" +
@@ -297,8 +295,8 @@ public class ForgetPassword extends HttpServlet {
                 "</html>";
         if (SendEmail.sendEmail(user.getEmail(), "DongPhong.store", content)) {
             user.setPassword(newPassword);
-            userService.edit(user);
-            request.setAttribute("message", "Chúng tôi đã gửi mật khẩu mới tới email đã đăng ký của bạn.\nVui lòng kiểm tra email.");
+            Constant.Service.USER_SERVICE.edit(user);
+            request.setAttribute("message", "Chúng tôi đã gửi mật khẩu mới tới email đã đăng ký của bạn. Vui lòng kiểm tra email.");
         } else {
             request.setAttribute("message", "Có lỗi xảy ra, chúng tôi sẽ liên hệ lại với bạn sau!");
         }

@@ -1,13 +1,12 @@
 package Connect;
 
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.*;
 
 public class DBConnect {
     private static final String dbUrl = "jdbc:sqlserver://localhost:1433;"
-                                    + "databaseName=DongPhong;"
-                                    + "integratedSecurity=true";
+            + "databaseName=DongPhong;"
+            + "integratedSecurity=true";
     private static final String username = "sa";
     private static final String password = "123456";
 
@@ -40,10 +39,5 @@ public class DBConnect {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
-
-    //Check connection
-    public static void main(String[] args) throws IOException {
-        System.out.println(DBConnect.getConnection());
     }
 }

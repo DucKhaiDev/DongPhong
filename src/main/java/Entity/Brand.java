@@ -9,7 +9,8 @@ public class Brand implements Serializable {
     private String brandName;
     private String brandDescription;
 
-    public Brand() {}
+    public Brand() {
+    }
 
     public Brand(String brandId, String brandName, String brandDescription) {
         this.brandId = brandId;

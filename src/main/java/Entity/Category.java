@@ -10,7 +10,8 @@ public class Category implements Serializable {
     private Room room;
     private String categoryDescription;
 
-    public Category() {}
+    public Category() {
+    }
 
     public Category(String categoryId, String categoryName, Room room, String categoryDescription) {
         this.categoryId = categoryId;

@@ -3,8 +3,7 @@ package Dao.deploy;
 import Connect.DBConnect;
 import Dao.ICartItemDao;
 import Entity.CartItem;
-import Services.deploy.CartService;
-import Services.deploy.ProductService;
+import Util.Constant;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,16 +13,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CartItemDao implements ICartItemDao {
-    private Connection conn = null;
-    private PreparedStatement ps = null;
-    private ResultSet rs = null;
-
-    private final ProductService productService = new ProductService();
-    private final CartService cartService = new CartService();
-
     @Override
     public void insert(CartItem item) {
-        conn = DBConnect.getConnection();
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
 
         try {
             ps = conn.prepareStatement("INSERT INTO [CARTITEM](QUANT, [VALUE], PRO_ID, CART_ID) VALUES(?, ?, ?, ?)");
@@ -36,13 +29,14 @@ public class CartItemDao implements ICartItemDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBConnect.closeAll(rs, ps, conn);
+            DBConnect.closeAll(null, ps, conn);
         }
     }
 
     @Override
     public void edit(CartItem item) {
-        conn = DBConnect.getConnection();
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
 
         try {
             ps = conn.prepareStatement("UPDATE [CARTITEM] SET QUANT = ?, [VALUE] = ?, PRO_ID = ?, CART_ID = ? WHERE CITEM_ID = ?");
@@ -56,13 +50,14 @@ public class CartItemDao implements ICartItemDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBConnect.closeAll(rs, ps, conn);
+            DBConnect.closeAll(null, ps, conn);
         }
     }
 
     @Override
     public void delete(int cartItemId) {
-        conn = DBConnect.getConnection();
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
 
         try {
             ps = conn.prepareStatement("DELETE FROM [CARTITEM] WHERE CITEM_ID = ?");
@@ -71,13 +66,14 @@ public class CartItemDao implements ICartItemDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBConnect.closeAll(rs, ps, conn);
+            DBConnect.closeAll(null, ps, conn);
         }
     }
 
     @Override
     public void deleteAll(String cartId) {
-        conn = DBConnect.getConnection();
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
 
         try {
             ps = conn.prepareStatement("DELETE FROM [CARTITEM] WHERE CART_ID = ?");
@@ -86,13 +82,15 @@ public class CartItemDao implements ICartItemDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBConnect.closeAll(rs, ps, conn);
+            DBConnect.closeAll(null, ps, conn);
         }
     }
 
     @Override
     public CartItem getCartItem(int cartItemId) {
-        conn = DBConnect.getConnection();
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         CartItem item = new CartItem();
 
         try {
@@ -103,8 +101,8 @@ public class CartItemDao implements ICartItemDao {
                 item.setCartItemId(cartItemId);
                 item.setQuantity(rs.getInt("QUANT"));
                 item.setValue(rs.getBigDecimal("VALUE"));
-                item.setProduct(productService.getProduct(rs.getString("PRO_ID").trim()));
-                item.setCart(cartService.getCart(rs.getString("CART_ID")));
+                item.setProduct(Constant.Service.PRODUCT_SERVICE.getProduct(rs.getString("PRO_ID").trim()));
+                item.setCart(Constant.Service.CART_SERVICE.getCart(rs.getString("CART_ID")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -117,7 +115,9 @@ public class CartItemDao implements ICartItemDao {
 
     @Override
     public CartItem getCartItem(String productId, String cartId) {
-        conn = DBConnect.getConnection();
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         CartItem cartItem = new CartItem();
 
         try {
@@ -129,8 +129,8 @@ public class CartItemDao implements ICartItemDao {
                 cartItem.setCartItemId(rs.getInt("CITEM_ID"));
                 cartItem.setQuantity(rs.getInt("QUANT"));
                 cartItem.setValue(rs.getBigDecimal("VALUE"));
-                cartItem.setProduct(productService.getProduct(rs.getString("PRO_ID")));
-                cartItem.setCart(cartService.getCart(rs.getString("CART_ID")));
+                cartItem.setProduct(Constant.Service.PRODUCT_SERVICE.getProduct(rs.getString("PRO_ID")));
+                cartItem.setCart(Constant.Service.CART_SERVICE.getCart(rs.getString("CART_ID")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -143,7 +143,9 @@ public class CartItemDao implements ICartItemDao {
 
     @Override
     public List<CartItem> getAll() {
-        conn = DBConnect.getConnection();
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         List<CartItem> items = new ArrayList<>();
 
         try {
@@ -154,8 +156,8 @@ public class CartItemDao implements ICartItemDao {
                 item.setCartItemId(rs.getInt("CITEM_ID"));
                 item.setQuantity(rs.getInt("QUANT"));
                 item.setValue(rs.getBigDecimal("VALUE"));
-                item.setProduct(productService.getProduct(rs.getString("PRO_ID").trim()));
-                item.setCart(cartService.getCart(rs.getString("CART_ID")));
+                item.setProduct(Constant.Service.PRODUCT_SERVICE.getProduct(rs.getString("PRO_ID").trim()));
+                item.setCart(Constant.Service.CART_SERVICE.getCart(rs.getString("CART_ID")));
 
                 items.add(item);
             }
@@ -170,7 +172,9 @@ public class CartItemDao implements ICartItemDao {
 
     @Override
     public List<CartItem> getItemByCart(String cartId) {
-        conn = DBConnect.getConnection();
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         List<CartItem> items = new ArrayList<>();
 
         try {
@@ -182,8 +186,8 @@ public class CartItemDao implements ICartItemDao {
                 item.setCartItemId(rs.getInt("CITEM_ID"));
                 item.setQuantity(rs.getInt("QUANT"));
                 item.setValue(rs.getBigDecimal("VALUE"));
-                item.setProduct(productService.getProduct(rs.getString("PRO_ID").trim()));
-                item.setCart(cartService.getCart(rs.getString("CART_ID")));
+                item.setProduct(Constant.Service.PRODUCT_SERVICE.getProduct(rs.getString("PRO_ID").trim()));
+                item.setCart(Constant.Service.CART_SERVICE.getCart(rs.getString("CART_ID")));
 
                 items.add(item);
             }
@@ -198,7 +202,9 @@ public class CartItemDao implements ICartItemDao {
 
     @Override
     public boolean checkExistItem(String productId, String cartId) {
-        conn = DBConnect.getConnection();
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
 
         try {
             ps = conn.prepareStatement("SELECT * FROM [CARTITEM] WHERE PRO_ID = ? AND CART_ID = ?");

@@ -4,8 +4,7 @@ import Connect.DBConnect;
 import Dao.IReviewDao;
 import Entity.Product;
 import Entity.Review;
-import Services.deploy.ProductService;
-import Services.deploy.UserService;
+import Util.Constant;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,16 +14,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ReviewDao implements IReviewDao {
-    private Connection conn = null;
-    private PreparedStatement ps = null;
-    private ResultSet rs = null;
-
-    private final UserService userService = new UserService();
-    private final ProductService productService = new ProductService();
-
     @Override
     public void insert(Review review) {
-        conn = DBConnect.getConnection();
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
 
         try {
             ps = conn.prepareStatement("INSERT INTO [REVIEW](USER_ID, PRO_ID, REV_RATE, REV_CONTENT, REV_DATE, IS_RATE) VALUES(?, ?, ?, ?, ?, ?)");
@@ -39,13 +32,14 @@ public class ReviewDao implements IReviewDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBConnect.closeAll(rs, ps, conn);
+            DBConnect.closeAll(null, ps, conn);
         }
     }
 
     @Override
     public void edit(Review review) {
-        conn = DBConnect.getConnection();
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
 
         try {
             ps = conn.prepareStatement("UPDATE [REVIEW] SET USER_ID = ?, PRO_ID = ?, REV_RATE = ?, REV_CONTENT = ?, REV_DATE = ?, IS_RATE = ? WHERE REV_ID = ?");
@@ -61,13 +55,14 @@ public class ReviewDao implements IReviewDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBConnect.closeAll(rs, ps, conn);
+            DBConnect.closeAll(null, ps, conn);
         }
     }
 
     @Override
     public void delete(int reviewId) {
-        conn = DBConnect.getConnection();
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
 
         try {
             ps = conn.prepareStatement("DELETE FROM [REVIEW] WHERE REV_ID = ?");
@@ -76,13 +71,15 @@ public class ReviewDao implements IReviewDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBConnect.closeAll(rs, ps, conn);
+            DBConnect.closeAll(null, ps, conn);
         }
     }
 
     @Override
     public Review getReview(int reviewId) {
-        conn = DBConnect.getConnection();
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         Review review = new Review();
 
         try {
@@ -91,8 +88,8 @@ public class ReviewDao implements IReviewDao {
             rs = ps.executeQuery();
             if (rs.next()) {
                 review.setReviewId(reviewId);
-                review.setUser(userService.getUser(rs.getString("USER_ID")));
-                review.setProduct(productService.getProduct(rs.getString("PRO_ID").trim()));
+                review.setUser(Constant.Service.USER_SERVICE.getUser(rs.getString("USER_ID")));
+                review.setProduct(Constant.Service.PRODUCT_SERVICE.getProduct(rs.getString("PRO_ID").trim()));
                 review.setReviewRate(rs.getDouble("REV_RATE"));
                 review.setReviewContent(rs.getString("REV_CONTENT"));
                 review.setReviewDate(rs.getTimestamp("REV_DATE"));
@@ -109,7 +106,9 @@ public class ReviewDao implements IReviewDao {
 
     @Override
     public List<Review> getAll() {
-        conn = DBConnect.getConnection();
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         List<Review> reviews = new ArrayList<>();
 
         try {
@@ -118,8 +117,8 @@ public class ReviewDao implements IReviewDao {
             while (rs.next()) {
                 Review review = new Review();
                 review.setReviewId(rs.getInt("REV_ID"));
-                review.setUser(userService.getUser(rs.getString("USER_ID")));
-                review.setProduct(productService.getProduct(rs.getString("PRO_ID").trim()));
+                review.setUser(Constant.Service.USER_SERVICE.getUser(rs.getString("USER_ID")));
+                review.setProduct(Constant.Service.PRODUCT_SERVICE.getProduct(rs.getString("PRO_ID").trim()));
                 review.setReviewRate(rs.getDouble("REV_RATE"));
                 review.setReviewContent(rs.getString("REV_CONTENT"));
                 review.setReviewDate(rs.getTimestamp("REV_DATE"));
@@ -138,7 +137,9 @@ public class ReviewDao implements IReviewDao {
 
     @Override
     public List<Review> getAll(String productId) {
-        conn = DBConnect.getConnection();
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         List<Review> reviews = new ArrayList<>();
 
         try {
@@ -148,8 +149,8 @@ public class ReviewDao implements IReviewDao {
             while (rs.next()) {
                 Review review = new Review();
                 review.setReviewId(rs.getInt("REV_ID"));
-                review.setUser(userService.getUser(rs.getString("USER_ID")));
-                review.setProduct(productService.getProduct(rs.getString("PRO_ID").trim()));
+                review.setUser(Constant.Service.USER_SERVICE.getUser(rs.getString("USER_ID")));
+                review.setProduct(Constant.Service.PRODUCT_SERVICE.getProduct(rs.getString("PRO_ID").trim()));
                 review.setReviewRate(rs.getDouble("REV_RATE"));
                 review.setReviewContent(rs.getString("REV_CONTENT"));
                 review.setReviewDate(rs.getTimestamp("REV_DATE"));
@@ -168,7 +169,9 @@ public class ReviewDao implements IReviewDao {
 
     @Override
     public int countReview(String productId) {
-        conn = DBConnect.getConnection();
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
 
         try {
             ps = conn.prepareStatement("SELECT COUNT(*) FROM [REVIEW] WHERE PRO_ID = ?");
@@ -188,12 +191,14 @@ public class ReviewDao implements IReviewDao {
 
     @Override
     public double checkRateStatus(String productId, String username) {
-        conn = DBConnect.getConnection();
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
 
         try {
             ps = conn.prepareStatement("SELECT TOP(1) REV_RATE FROM [REVIEW] WHERE PRO_ID = ? AND USER_ID = ? AND IS_RATE = 'TRUE'");
             ps.setString(1, productId);
-            ps.setString(2, userService.getUser(username).getUserId());
+            ps.setString(2, Constant.Service.USER_SERVICE.getUser(username).getUserId());
             rs = ps.executeQuery();
             if (rs.next()) {
                 return rs.getDouble("REV_RATE");
@@ -209,31 +214,34 @@ public class ReviewDao implements IReviewDao {
 
     @Override
     public void syncRate(String productId, String username, double rate) {
-        conn = DBConnect.getConnection();
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
 
         try {
             ps = conn.prepareStatement("UPDATE [REVIEW] SET REV_RATE = ? WHERE PRO_ID = ? AND USER_ID = ? AND IS_RATE = 'FALSE'");
             ps.setDouble(1, rate);
             ps.setString(2, productId);
-            ps.setString(3, userService.getUser(username).getUserId());
+            ps.setString(3, Constant.Service.USER_SERVICE.getUser(username).getUserId());
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBConnect.closeAll(rs, ps, conn);
+            DBConnect.closeAll(null, ps, conn);
         }
     }
 
     @Override
     public List<Product> getAllProducts() {
-        conn = DBConnect.getConnection();
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         List<Product> products = new ArrayList<>();
 
         try {
             ps = conn.prepareStatement("SELECT PRO_ID FROM [REVIEW] GROUP BY PRO_ID");
             rs = ps.executeQuery();
             while (rs.next()) {
-                Product product = new ProductService().getProduct(rs.getString("PRO_ID"));
+                Product product = Constant.Service.PRODUCT_SERVICE.getProduct(rs.getString("PRO_ID"));
                 products.add(product);
             }
         } catch (SQLException e) {
@@ -247,7 +255,9 @@ public class ReviewDao implements IReviewDao {
 
     @Override
     public int countRate(String productId) {
-        conn = DBConnect.getConnection();
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
 
         try {
             ps = conn.prepareStatement("SELECT COUNT(*) FROM (SELECT USER_ID FROM [REVIEW] WHERE PRO_ID = ? AND IS_RATE = 'TRUE' GROUP BY USER_ID) AS COUNT_RATE");
@@ -267,7 +277,9 @@ public class ReviewDao implements IReviewDao {
 
     @Override
     public int countGoodRate(String productId) {
-        conn = DBConnect.getConnection();
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
 
         try {
             ps = conn.prepareStatement("SELECT COUNT(*) FROM (SELECT USER_ID FROM [REVIEW] WHERE PRO_ID = ? AND REV_RATE >= 4 GROUP BY USER_ID) AS COUNT_GOOD_RATE");
@@ -287,7 +299,9 @@ public class ReviewDao implements IReviewDao {
 
     @Override
     public int countBadRate(String productId) {
-        conn = DBConnect.getConnection();
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
 
         try {
             ps = conn.prepareStatement("SELECT COUNT(*) FROM (SELECT USER_ID FROM [REVIEW] WHERE PRO_ID = ? AND REV_RATE < 4 GROUP BY USER_ID) AS COUNT_GOOD_RATE");

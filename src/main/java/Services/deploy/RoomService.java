@@ -7,7 +7,7 @@ import Services.IRoomService;
 import java.util.List;
 
 public class RoomService implements IRoomService {
-    private RoomDao roomDao = new RoomDao();
+    private final RoomDao roomDao = new RoomDao();
 
     @Override
     public Room getRoom(String roomId) {

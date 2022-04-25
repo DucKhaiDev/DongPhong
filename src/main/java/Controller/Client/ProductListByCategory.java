@@ -2,55 +2,63 @@ package Controller.Client;
 
 import Entity.Category;
 import Entity.Product;
-import Services.deploy.CategoryService;
-import Services.deploy.ProductService;
 import Util.Constant;
-import jakarta.servlet.*;
-import jakarta.servlet.http.*;
-import jakarta.servlet.annotation.*;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.util.List;
 
 @WebServlet(name = "ProductListByCategory", value = "/products/category")
 public class ProductListByCategory extends HttpServlet {
-    private final ProductService productService = new ProductService();
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String categoryId = request.getParameter("id");
-        Category category = new CategoryService().getCategory(categoryId);
+        Category category = Constant.Service.CATEGORY_SERVICE.getCategory(categoryId);
         request.setAttribute("category", category);
-        List<Product> products = productService.getProductByCategory(categoryId);
+        List<Product> products = Constant.Service.PRODUCT_SERVICE.getProductByCategory(categoryId);
 
         //Search products
         String keyword = request.getParameter("search");
         if (keyword != null && !keyword.trim().isEmpty()) {
-            products = productService.searchByNameInCategory(categoryId, keyword);
+            products = Constant.Service.PRODUCT_SERVICE.searchByNameInCategory(categoryId, keyword);
         }
 
-        //Sort products
+        //Product page tools
+        ProductListByCategory.productPageTools(request, products);
+
+        request.getRequestDispatcher(Constant.Path.PRODUCT_LIST_BY_CATEGORY).forward(request, response);
+    }
+
+    public static void productPageTools(HttpServletRequest request, List<Product> products) throws ServletException, IOException {
         String sortBy = request.getParameter("sortBy");
         if (sortBy != null) {
             if (sortBy.equals("priceAsc")) {
-                productService.sortByPriceAsc(products);
+                Constant.Service.PRODUCT_SERVICE.sortByPriceAsc(products);
             }
 
             if (sortBy.equals("priceDesc")) {
-                productService.sortByPriceDesc(products);
+                Constant.Service.PRODUCT_SERVICE.sortByPriceDesc(products);
             }
         }
 
         //Pagination
         int totalNumber = products.size();
         request.setAttribute("totalNumber", totalNumber);
+
         int pageSize = 12;
         request.setAttribute("pageSize", pageSize);
+
         String page = request.getParameter("page");
         int pageNumber = 1;
+
         if (page != null) {
             pageNumber = Integer.parseInt(page);
         }
+
         int fromIndex = (pageNumber - 1) * pageSize;
         int toIndex = fromIndex + pageSize;
         products = products.subList(fromIndex, Math.min(toIndex, totalNumber));
@@ -58,22 +66,21 @@ public class ProductListByCategory extends HttpServlet {
         //Filter brand
         String brands = request.getParameter("brand");
         if (brands != null) {
-            products = productService.filterProductByBrand(products, brands);
+            products = Constant.Service.PRODUCT_SERVICE.filterProductByBrand(products, brands);
         }
 
         //Filter prices
         String price = request.getParameter("price");
         if (price != null) {
-            products = productService.filterProductByPrice(products, price);
+            products = Constant.Service.PRODUCT_SERVICE.filterProductByPrice(products, price);
         }
 
         //Filter star rating
         String stars = request.getParameter("stars-rating");
         if (stars != null) {
-            products = productService.filterProductByStars(products, stars);
+            products = Constant.Service.PRODUCT_SERVICE.filterProductByStars(products, stars);
         }
 
         request.setAttribute("products", products);
-        request.getRequestDispatcher(Constant.Path.PRODUCT_LIST_BY_CATEGORY).forward(request, response);
     }
 }

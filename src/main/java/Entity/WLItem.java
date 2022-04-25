@@ -9,7 +9,8 @@ public class WLItem implements Serializable {
     private Product product;
     private WishList wishList;
 
-    public WLItem() {}
+    public WLItem() {
+    }
 
     public WLItem(Product product, WishList wishList) {
         this.product = product;

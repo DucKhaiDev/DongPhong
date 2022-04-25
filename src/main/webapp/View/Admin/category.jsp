@@ -1,5 +1,5 @@
-<%@ page import="Services.deploy.CategoryService" %>
 <%@ page import="Entity.Category" %>
+<%@ page import="Util.Constant" %>
 <%--
   User: duckhaidev
   Date: 2/23/2022
@@ -10,21 +10,22 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Dong Phong</title>
     <!-- BOOTSTRAP STYLES-->
-    <link href="${pageContext.request.contextPath}/assets/css/bootstrap.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/css/bootstrap.css" rel="stylesheet"/>
     <!-- FONTAWESOME STYLES-->
-    <link href="${pageContext.request.contextPath}/assets/fonts/fontawesome-pro-5.15.4-web/css/all.min.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/fonts/fontawesome-pro-5.15.4-web/css/all.min.css"
+          rel="stylesheet"/>
     <!-- MORRIS CHART STYLES-->
 
     <!-- CUSTOM STYLES-->
-    <link href="${pageContext.request.contextPath}/assets/css/custom.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/css/custom.css" rel="stylesheet"/>
     <!-- GOOGLE FONTS-->
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
     <!-- TABLE STYLES-->
-    <link href="${pageContext.request.contextPath}/assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet"/>
     <%---------------------------------------------------------------------------------------------%>
     <style>
         .table > tbody > tr > td > p {
@@ -43,22 +44,24 @@
     <jsp:include page="navside.jsp"/>
     <!-- /. NAV SIDE  -->
 
-    <div id="page-wrapper" >
+    <div id="page-wrapper">
         <div id="page-inner">
             <div class="row">
                 <div class="col-md-12">
                     <h2>Quản Lý Sản Phẩm</h2>
                     <div class="row">
-                        <div class="col-md-12"><h5>Chào mừng ${sessionScope.displayName}, rất vui được gặp lại bạn. </h5></div>
+                        <div class="col-md-12"><h5>Chào mừng ${sessionScope.displayName}, rất vui được gặp lại
+                            bạn. </h5></div>
                     </div>
 
                 </div>
             </div>
             <!-- /. ROW  -->
-            <hr />
+            <hr/>
             <div class="row">
                 <div class="col-md-12 mb-3">
-                    <a href="${pageContext.request.contextPath}/admin/category/add" class="btn btn-primary ct-button float-right">
+                    <a href="${pageContext.request.contextPath}/admin/category/add"
+                       class="btn btn-primary ct-button float-right">
                         <i class="fa fa-plus"></i>&nbsp;Thêm loại sản phẩm
                     </a>
                 </div>
@@ -84,9 +87,9 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                        <c:set var="number" value="0"/>
-                                        <jsp:useBean id="categories" scope="request" type="java.util.List"/>
-                                        <c:forEach items="${categories}" var="category">
+                                    <c:set var="number" value="0"/>
+                                    <jsp:useBean id="categories" scope="request" type="java.util.List"/>
+                                    <c:forEach items="${categories}" var="category">
                                         <tr class="odd">
                                             <td>${number = number + 1}</td>
                                             <td>${category.categoryId}</td>
@@ -94,14 +97,16 @@
                                             <td>${category.room.roomName}</td>
                                             <td>${category.categoryDescription}</td>
                                             <td>
-                                                <a href="<c:url value="/admin/category/edit?id=${category.categoryId}"/>" class="text-center">Sửa</a>&nbsp;|&nbsp;
+                                                <a href="<c:url value="/admin/category/edit?id=${category.categoryId}"/>"
+                                                   class="text-center">Sửa</a>&nbsp;|&nbsp;
                                                 <%
-                                                    boolean isUnusedCategory = new CategoryService().isUnusedCategory(((Category)pageContext.getAttribute("category")).getCategoryId());
+                                                    boolean isUnusedCategory = Constant.Service.CATEGORY_SERVICE.isUnusedCategory(((Category) pageContext.getAttribute("category")).getCategoryId());
                                                     request.setAttribute("isUnusedCategory", isUnusedCategory);
                                                 %>
                                                 <c:choose>
                                                     <c:when test="${isUnusedCategory}">
-                                                        <a href="<c:url value="/admin/category/delete?id=${category.categoryId}"/>" class="text-center">Xóa</a>
+                                                        <a href="<c:url value="/admin/category/delete?id=${category.categoryId}"/>"
+                                                           class="text-center">Xóa</a>
                                                     </c:when>
                                                     <c:when test="${!isUnusedCategory}">
                                                         <a class="text-center isDisabled">(Đang được sử dụng)</a>
@@ -141,25 +146,25 @@
     $(document).ready(function () {
         $('#dataTables-example').dataTable({
                 "pagingType": "full_numbers"
-        },
+            },
             {
-            columnDefs: [
-                {
-                    targets: 2,
-                    render: function (data, type) {
-                        return type === 'display' && data.length > 111 ?
-                            data.substr(0, 111) + ' (Còn nữa...)' :
-                            data;
-                    }
-                },
-                {"width": "5%", "targets": 0},
-                {"width": "10%", "targets": 1},
-                {"width": "20%", "targets": 2},
-                {"width": "10%", "targets": 3},
-                {"width": "35%", "targets": 4},
-                {"width": "20%", "targets": 5}
-            ]
-        });
+                columnDefs: [
+                    {
+                        targets: 2,
+                        render: function (data, type) {
+                            return type === 'display' && data.length > 111 ?
+                                data.substr(0, 111) + ' (Còn nữa...)' :
+                                data;
+                        }
+                    },
+                    {"width": "5%", "targets": 0},
+                    {"width": "10%", "targets": 1},
+                    {"width": "20%", "targets": 2},
+                    {"width": "10%", "targets": 3},
+                    {"width": "35%", "targets": 4},
+                    {"width": "20%", "targets": 5}
+                ]
+            });
     });
 </script>
 <!-- CUSTOM SCRIPTS -->

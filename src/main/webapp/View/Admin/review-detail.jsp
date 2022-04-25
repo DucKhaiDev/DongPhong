@@ -11,21 +11,22 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Dong Phong</title>
     <!-- BOOTSTRAP STYLES-->
-    <link href="${pageContext.request.contextPath}/assets/css/bootstrap.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/css/bootstrap.css" rel="stylesheet"/>
     <!-- FONTAWESOME STYLES-->
-    <link href="${pageContext.request.contextPath}/assets/fonts/fontawesome-pro-5.15.4-web/css/all.min.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/fonts/fontawesome-pro-5.15.4-web/css/all.min.css"
+          rel="stylesheet"/>
     <!-- MORRIS CHART STYLES-->
 
     <!-- CUSTOM STYLES-->
-    <link href="${pageContext.request.contextPath}/assets/css/custom.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/css/custom.css" rel="stylesheet"/>
     <!-- GOOGLE FONTS-->
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
     <!-- TABLE STYLES-->
-    <link href="${pageContext.request.contextPath}/assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet"/>
     <%---------------------------------------------------------------------------------------------%>
     <style>
         .table > tbody > tr > td > p {
@@ -44,19 +45,20 @@
     <jsp:include page="navside.jsp"/>
     <!-- /. NAV SIDE  -->
 
-    <div id="page-wrapper" >
+    <div id="page-wrapper">
         <div id="page-inner">
             <div class="row">
                 <div class="col-md-12">
                     <h2>Danh Sách Bình Luận</h2>
                     <div class="row">
-                        <div class="col-md-12"><h5>Chào mừng ${sessionScope.displayName}, rất vui được gặp lại bạn. </h5></div>
+                        <div class="col-md-12"><h5>Chào mừng ${sessionScope.displayName}, rất vui được gặp lại
+                            bạn. </h5></div>
                     </div>
 
                 </div>
             </div>
             <!-- /. ROW  -->
-            <hr />
+            <hr/>
             <div class="row">
                 <div class="col-md-12">
                     <!-- Advanced Tables -->
@@ -94,7 +96,9 @@
                                                 out.print((int) review.getReviewRate() + "/5");
                                             %></td>
                                             <td><% out.print(new SimpleDateFormat("HH:mm:ss dd-MM-yyyy").format(review.getReviewDate())); %></td>
-                                            <td><a href="<c:url value="/admin/review/delete?id=${review.reviewId}&productId=${product.productId}"/>" class="text-center">Xóa</a></td>
+                                            <td>
+                                                <a href="<c:url value="/admin/review/delete?id=${review.reviewId}&productId=${product.productId}"/>"
+                                                   class="text-center">Xóa</a></td>
                                         </tr>
                                     </c:forEach>
                                     </tbody>
@@ -106,7 +110,8 @@
                     <!--End Advanced Tables -->
                 </div>
                 <div class="col-md-12">
-                    <a href="${pageContext.request.contextPath}/admin/review" class="btn btn-primary ct-button ml-3 float-right"><i class="fa fa-angle-left"></i>&nbsp;Quay lại</a>
+                    <a href="${pageContext.request.contextPath}/admin/review"
+                       class="btn btn-primary ct-button ml-3 float-right"><i class="fa fa-angle-left"></i>&nbsp;Quay lại</a>
                 </div>
             </div>
             <!-- /. ROW  -->

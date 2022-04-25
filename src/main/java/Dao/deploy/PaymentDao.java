@@ -12,13 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PaymentDao implements IPaymentDao {
-    private Connection conn = null;
-    private PreparedStatement ps = null;
-    private ResultSet rs = null;
-
     @Override
     public void insert(Payment payment) {
-        conn = DBConnect.getConnection();
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
 
         try {
             ps = conn.prepareStatement("INSERT INTO [PAYMENT](PAY_ID, PAY_METHOD, PAY_STATUS) VALUES(?, ?, ?)");
@@ -30,13 +27,14 @@ public class PaymentDao implements IPaymentDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBConnect.closeAll(rs, ps, conn);
+            DBConnect.closeAll(null, ps, conn);
         }
     }
 
     @Override
     public void edit(Payment payment) {
-        conn = DBConnect.getConnection();
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
 
         try {
             ps = conn.prepareStatement("UPDATE [PAYMENT] SET PAY_METHOD = ?, PAY_STATUS = ? WHERE PAY_ID = ?");
@@ -48,13 +46,14 @@ public class PaymentDao implements IPaymentDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBConnect.closeAll(rs, ps, conn);
+            DBConnect.closeAll(null, ps, conn);
         }
     }
 
     @Override
     public void delete(String PAY_ID) {
-        conn = DBConnect.getConnection();
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
 
         try {
             ps = conn.prepareStatement("DELETE FROM [PAYMENT] WHERE PAY_ID = ?");
@@ -63,13 +62,15 @@ public class PaymentDao implements IPaymentDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBConnect.closeAll(rs, ps, conn);
+            DBConnect.closeAll(null, ps, conn);
         }
     }
 
     @Override
     public Payment getPayment(String PAY_ID) {
-        conn = DBConnect.getConnection();
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         Payment payment = new Payment();
 
         try {
@@ -92,7 +93,9 @@ public class PaymentDao implements IPaymentDao {
 
     @Override
     public List<Payment> getAll() {
-        conn = DBConnect.getConnection();
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         List<Payment> payments = new ArrayList<>();
 
         try {

@@ -6,7 +6,8 @@ public class Province {
     private double latitude;
     private double longitude;
 
-    public Province() {}
+    public Province() {
+    }
 
     public Province(int provinceId, String provinceName, double latitude, double longitude) {
         this.provinceId = provinceId;

@@ -14,17 +14,12 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Locale;
 
 @WebServlet(name = "Checkout", value = "/checkout")
 public class Checkout extends HttpServlet {
-    private final CartItemService cartItemService = new CartItemService();
     private Order order;
-    private final Locale vie = new Locale("vi", "VN");
-    private final NumberFormat dongFormat = NumberFormat.getCurrencyInstance(vie);
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -41,8 +36,7 @@ public class Checkout extends HttpServlet {
         order.setOrderDiscount(new BigDecimal(discount == null ? "0" : discount));
         order.setOrderTotal(new BigDecimal(total == null ? "0" : total));
 
-        List<Payment> payments = new PaymentService().getAll();
-        request.setAttribute("payments", payments);
+        request.setAttribute("payments", Constant.Service.PAYMENT_SERVICE.getAll());
 
         request.getRequestDispatcher(Constant.Path.CHECKOUT).forward(request, response);
     }
@@ -58,6 +52,8 @@ public class Checkout extends HttpServlet {
                 + request.getParameter("selectedDistrict") + ", "
                 + request.getParameter("selectedProvince") + ".";
         User user = (User) session.getAttribute("account");
+        Payment payment = Constant.Service.PAYMENT_SERVICE.getPayment(request.getParameter("paymentMethod"));
+
         order.setUser(user);
         order.setRecipientName(recName);
         order.setRecipientAddress(recAddress);
@@ -65,7 +61,6 @@ public class Checkout extends HttpServlet {
         order.setOrderDate(new Timestamp(System.currentTimeMillis()));
         order.setOrderSumProduct(((List<?>) session.getAttribute("cartItems")).size());
         order.setCart((Cart) session.getAttribute("cart"));
-        Payment payment = new PaymentService().getPayment(request.getParameter("paymentMethod"));
         order.setPayment(payment);
 
         int paymentMethod = Integer.parseInt(request.getParameter("paymentMethod"));
@@ -80,17 +75,19 @@ public class Checkout extends HttpServlet {
             session.setAttribute("message", message);
         }
 
-        new OrderService().insert(order);
-        Order order_rv = new OrderService().getNewestOrder();
+        Constant.Service.ORDER_SERVICE.insert(order);
+        
+        Order order_rv = Constant.Service.ORDER_SERVICE.getNewestOrder();
         session.setAttribute("order_rv", order_rv);
-        List<CartItem> cartItems_rv = cartItemService.getItemByCart(order.getCart().getCartId());
+        
+        List<CartItem> cartItems_rv = Constant.Service.CART_ITEM_SERVICE.getItemByCart(order.getCart().getCartId());
         session.setAttribute("cartItems_rv", cartItems_rv);
 
         //Update product quantity
         for (CartItem item : cartItems_rv) {
             Product product = item.getProduct();
             product.setProductQuantity(product.getProductQuantity() - item.getQuantity());
-            new ProductService().edit(product);
+            Constant.Service.PRODUCT_SERVICE.edit(product);
         }
 
         //Send email
@@ -235,7 +232,7 @@ public class Checkout extends HttpServlet {
                 "                                            </td>\n" +
                 "                                            <td align=\"left\" style=\"font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px; padding: 10px; border-top: 3px solid #eeeeee;\"\n" +
                 "                                                width=\"25%\">\n" +
-                "                                                " + dongFormat.format(order_rv.getOrderSubTotal()) + "\n" +
+                "                                                " + Constant.NF_DONG.format(order_rv.getOrderSubTotal()) + "\n" +
                 "                                            </td>\n" +
                 "                                        </tr>\n" +
                 "                                        <tr>\n" +
@@ -245,7 +242,7 @@ public class Checkout extends HttpServlet {
                 "                                            </td>\n" +
                 "                                            <td align=\"left\" style=\"font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px; padding: 10px;\"\n" +
                 "                                                width=\"25%\">\n" +
-                "                                                " + dongFormat.format(order_rv.getOrderDiscount()) + "\n" +
+                "                                                " + Constant.NF_DONG.format(order_rv.getOrderDiscount()) + "\n" +
                 "                                            </td>\n" +
                 "                                        </tr>\n" +
                 "                                        <tr>\n" +
@@ -255,7 +252,7 @@ public class Checkout extends HttpServlet {
                 "                                            </td>\n" +
                 "                                            <td align=\"left\" style=\"font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px; padding: 10px;\"\n" +
                 "                                                width=\"25%\">\n" +
-                "                                                " + dongFormat.format(order_rv.getOrderShipping()) + "\n" +
+                "                                                " + Constant.NF_DONG.format(order_rv.getOrderShipping()) + "\n" +
                 "                                            </td>\n" +
                 "                                        </tr>\n" +
                 "                                        <tr>\n" +
@@ -265,7 +262,7 @@ public class Checkout extends HttpServlet {
                 "                                            </td>\n" +
                 "                                            <td align=\"left\" style=\"font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px; padding: 10px; border-bottom: 3px solid #eeeeee;\"\n" +
                 "                                                width=\"25%\">\n" +
-                "                                                " + dongFormat.format(order_rv.getOrderTax()) + "\n" +
+                "                                                " + Constant.NF_DONG.format(order_rv.getOrderTax()) + "\n" +
                 "                                            </td>\n" +
                 "                                        </tr>\n" +
                 "                                        <tr>\n" +
@@ -275,7 +272,7 @@ public class Checkout extends HttpServlet {
                 "                                            </td>\n" +
                 "                                            <td align=\"left\" style=\"font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: bold; line-height: 24px; padding: 10px; border-top: 3px solid #eeeeee; border-bottom: 3px solid #eeeeee;\"\n" +
                 "                                                width=\"25%\">\n" +
-                "                                                " + dongFormat.format(order_rv.getOrderTotal()) + "\n" +
+                "                                                " + Constant.NF_DONG.format(order_rv.getOrderTotal()) + "\n" +
                 "                                            </td>\n" +
                 "                                        </tr>\n" +
                 "                                    </table>\n" +
@@ -384,13 +381,7 @@ public class Checkout extends HttpServlet {
         SendEmail.sendEmail(user.getEmail(), "DongPhong.store", content);
 
         //Create new cart
-        String CurrCartId = ((Cart) session.getAttribute("cart")).getCartId();
-        int curr = Integer.parseInt(CurrCartId.split("-")[1]);
-        String newCartId = user.getUsername() + "-" + (curr + 1);
-        Cart cart = new Cart(newCartId, user);
-        new CartService().insert(cart);
-        List<CartItem> cartItems = cartItemService.getItemByCart(cart.getCartId());
-        session.setAttribute("cartItems", cartItems);
+        Checkout.createNewCart(request, user);
 
         String[] attributes = {"recaddress", "selectedWard", "selectedDistrict", "selectedProvince", "shippingCost", "voucher"};
         for (String attribute : attributes) {
@@ -400,18 +391,32 @@ public class Checkout extends HttpServlet {
         response.sendRedirect(request.getContextPath() + "/checkout");
     }
 
+    public static void createNewCart(HttpServletRequest request, User user) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+
+        String CurrCartId = ((Cart) session.getAttribute("cart")).getCartId();
+        int curr = Integer.parseInt(CurrCartId.split("-")[1]);
+
+        String newCartId = user.getUsername() + "-" + (curr + 1);
+        Cart cart = new Cart(newCartId, user);
+        Constant.Service.CART_SERVICE.insert(cart);
+
+        List<CartItem> cartItems = Constant.Service.CART_ITEM_SERVICE.getItemByCart(cart.getCartId());
+        session.setAttribute("cartItems", cartItems);
+    }
+
     public String listProducts(List<CartItem> cartItems) {
         StringBuilder res = new StringBuilder();
         for (CartItem item : cartItems) {
-            res.append( "                                        <tr>\n" +
-                        "                                            <td align=\"left\" style=\"font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding: 15px 10px 5px 10px;\"\n" +
-                        "                                                width=\"75%\">\n" +
-                        "                                                ").append(item.getProduct().getProductName()).append(" x ").append(item.getQuantity()).append("\n").append("                                            </td>\n").
-                append( "                                            <td align=\"left\" style=\"font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding: 15px 10px 5px 10px;\"\n").
-                append( "                                                width=\"25%\">\n").
-                append( "                                                ").append(dongFormat.format(item.getValue())).append("\n").
-                append( "                                            </td>\n").
-                append( "                                        </tr>\n");
+            res.append("                                        <tr>\n" +
+                            "                                            <td align=\"left\" style=\"font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding: 15px 10px 5px 10px;\"\n" +
+                            "                                                width=\"75%\">\n" +
+                            "                                                ").append(item.getProduct().getProductName()).append(" x ").append(item.getQuantity()).append("\n").append("                                            </td>\n").
+                    append("                                            <td align=\"left\" style=\"font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding: 15px 10px 5px 10px;\"\n").
+                    append("                                                width=\"25%\">\n").
+                    append("                                                ").append(Constant.NF_DONG.format(item.getValue())).append("\n").
+                    append("                                            </td>\n").
+                    append("                                        </tr>\n");
         }
         return res.toString();
     }

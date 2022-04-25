@@ -1,11 +1,11 @@
 package Controller.Client;
 
 import Entity.User;
-import Services.deploy.UserService;
 import Util.Constant;
-import jakarta.servlet.*;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
-import jakarta.servlet.annotation.*;
 import org.apache.commons.io.FilenameUtils;
 
 import java.io.File;
@@ -18,8 +18,6 @@ import java.util.UUID;
 @WebServlet(name = "MyAccount", urlPatterns = "/member/my-account")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, maxFileSize = 1024 * 1024 * 10, maxRequestSize = 1024 * 1024 * 50)
 public class MyAccount extends HttpServlet {
-    private final UserService userService = new UserService();
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher(Constant.Path.MY_ACCOUNT).forward(request, response);
@@ -56,9 +54,8 @@ public class MyAccount extends HttpServlet {
         }
 
         String savePath = Constant.Path.AVATARS;
-
         File fileSaveDir = new File(savePath);
-        if (!fileSaveDir .exists()) {
+        if (!fileSaveDir.exists()) {
             if (!fileSaveDir.mkdir()) {
                 System.out.println("Directory creation failed.");
             }
@@ -78,7 +75,7 @@ public class MyAccount extends HttpServlet {
             }
         }
 
-        userService.edit(user);
+        Constant.Service.USER_SERVICE.edit(user);
         session.setAttribute("account", user);
         response.sendRedirect(request.getContextPath() + "/member/my-account");
     }

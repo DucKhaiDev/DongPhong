@@ -8,19 +8,20 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Dong Phong</title>
     <!-- BOOTSTRAP STYLES-->
-    <link href="${pageContext.request.contextPath}/assets/css/bootstrap.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/css/bootstrap.css" rel="stylesheet"/>
     <!-- FONTAWESOME STYLES-->
-    <link href="${pageContext.request.contextPath}/assets/fonts/fontawesome-pro-5.15.4-web/css/all.min.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/fonts/fontawesome-pro-5.15.4-web/css/all.min.css"
+          rel="stylesheet"/>
     <!-- MORRIS CHART STYLES-->
-    <link href="${pageContext.request.contextPath}/assets/js/morris/morris-0.4.3.min.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/js/morris/morris-0.4.3.min.css" rel="stylesheet"/>
     <!-- CUSTOM STYLES-->
-    <link href="${pageContext.request.contextPath}/assets/css/custom.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/css/custom.css" rel="stylesheet"/>
     <!-- GOOGLE FONTS-->
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
 </head>
 <body>
 <div id="wrapper">
@@ -30,7 +31,7 @@
     <%--NAV SIDE--%>
     <jsp:include page="navside.jsp"/>
 
-    <div id="page-wrapper" >
+    <div id="page-wrapper">
         <div id="page-inner">
             <div class="row">
                 <div class="col-md-12">
@@ -39,14 +40,14 @@
                 </div>
             </div>
             <!-- /. ROW  -->
-            <hr />
+            <hr/>
             <div class="row">
                 <div class="col-md-3 col-sm-6 col-xs-6">
                     <div class="panel panel-back noti-box">
                 <span class="icon-box bg-color-red set-icon">
                     <i class="fa fa-envelope-o"></i>
                 </span>
-                        <div class="text-box" >
+                        <div class="text-box">
                             <p class="main-text">120 New</p>
                             <p class="text-muted">Messages</p>
                         </div>
@@ -57,7 +58,7 @@
                 <span class="icon-box bg-color-green set-icon">
                     <i class="fa fa-bars"></i>
                 </span>
-                        <div class="text-box" >
+                        <div class="text-box">
                             <p class="main-text">30 Tasks</p>
                             <p class="text-muted">Remaining</p>
                         </div>
@@ -68,7 +69,7 @@
                 <span class="icon-box bg-color-blue set-icon">
                     <i class="fa fa-bell-o"></i>
                 </span>
-                        <div class="text-box" >
+                        <div class="text-box">
                             <p class="main-text">240 New</p>
                             <p class="text-muted">Notifications</p>
                         </div>
@@ -79,7 +80,7 @@
                 <span class="icon-box bg-color-brown set-icon">
                     <i class="fa fa-rocket"></i>
                 </span>
-                        <div class="text-box" >
+                        <div class="text-box">
                             <p class="main-text">3 Orders</p>
                             <p class="text-muted">Pending</p>
                         </div>
@@ -87,18 +88,18 @@
                 </div>
             </div>
             <!-- /. ROW  -->
-            <hr />
+            <hr/>
             <div class="row">
                 <div class="col-md-6 col-sm-12 col-xs-12">
                     <div class="panel panel-back noti-box">
                 <span class="icon-box bg-color-blue">
                     <i class="fa fa-warning"></i>
                 </span>
-                        <div class="text-box" >
+                        <div class="text-box">
                             <p class="main-text">52 Important Issues to Fix </p>
                             <p class="text-muted">Please fix these issues to work smooth</p>
                             <p class="text-muted">Time Left: 30 mins</p>
-                            <hr />
+                            <hr/>
                             <p class="text-muted">
                           <span class="text-muted color-bottom-txt"><i class="fa fa-edit"></i>
                                Lorem ipsum dolor sit amet, consectetur adipiscing elit gthn.
@@ -113,7 +114,8 @@
                 <div class="col-md-3 col-sm-12 col-xs-12">
                     <div class="panel back-dash">
                         <i class="fa fa-dashboard fa-3x"></i><strong> &nbsp; SPEED</strong>
-                        <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing sit ametsit amet elit ftr. Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
+                        <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing sit ametsit amet elit
+                            ftr. Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
                     </div>
 
                 </div>
@@ -122,9 +124,9 @@
                         <div class="main-temp-back">
                             <div class="panel-body">
                                 <div class="row">
-                                    <div class="col-xs-6"> <i class="fa fa-cloud fa-3x"></i> Newyork City </div>
+                                    <div class="col-xs-6"><i class="fa fa-cloud fa-3x"></i> Newyork City</div>
                                     <div class="col-xs-6">
-                                        <div class="text-temp"> 10° </div>
+                                        <div class="text-temp"> 10°</div>
                                     </div>
                                 </div>
                             </div>
@@ -135,7 +137,7 @@
                 <span class="icon-box bg-color-green set-icon">
                     <i class="fa fa-desktop"></i>
                 </span>
-                        <div class="text-box" >
+                        <div class="text-box">
                             <p class="main-text">Display</p>
                             <p class="text-muted">Looking Good</p>
                         </div>
@@ -183,17 +185,18 @@
 
             </div>
             <!-- /. ROW  -->
-            <div class="row" >
+            <div class="row">
                 <div class="col-md-3 col-sm-12 col-xs-12">
                     <div class="panel panel-primary text-center no-boder bg-color-green">
                         <div class="panel-body">
                             <i class="fa fa-comments-o fa-5x"></i>
                             <h4>200 New Comments </h4>
-                            <h4>See All Comments  </h4>
+                            <h4>See All Comments </h4>
                         </div>
                         <div class="panel-footer back-footer-green">
                             <i class="fa fa-rocket fa-5x"></i>
-                            Lorem ipsum dolor sit amet sit sit, consectetur adipiscing elitsit sit gthn ipsum dolor sit amet ipsum dolor sit amet
+                            Lorem ipsum dolor sit amet sit sit, consectetur adipiscing elitsit sit gthn ipsum dolor sit
+                            amet ipsum dolor sit amet
 
                         </div>
                     </div>
@@ -272,12 +275,13 @@
             <div class="row">
                 <div class="col-md-6 col-sm-12 col-xs-12">
 
-                    <div class="chat-panel panel panel-default chat-boder chat-panel-head" >
+                    <div class="chat-panel panel panel-default chat-boder chat-panel-head">
                         <div class="panel-heading">
                             <i class="fa fa-comments fa-fw"></i>
                             Chat Box
                             <div class="btn-group pull-right">
-                                <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                                <button type="button" class="btn btn-default btn-xs dropdown-toggle"
+                                        data-toggle="dropdown">
                                     <i class="fa fa-chevron-down"></i>
                                 </button>
                                 <ul class="dropdown-menu slidedown">
@@ -315,22 +319,25 @@
                             <ul class="chat-box">
                                 <li class="left clearfix">
                                     <span class="chat-img pull-left">
-                                        <img src="${pageContext.request.contextPath}/assets/images/1.png" alt="User" class="img-circle" />
+                                        <img src="${pageContext.request.contextPath}/assets/images/1.png" alt="User"
+                                             class="img-circle"/>
                                     </span>
                                     <div class="chat-body">
-                                        <strong >Jack Sparrow</strong>
+                                        <strong>Jack Sparrow</strong>
                                         <small class="pull-right text-muted">
                                             <i class="fa fa-clock-o fa-fw"></i>12 mins ago
                                         </small>
                                         <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum
+                                            ornare dolor, quis ullamcorper ligula sodales.
                                         </p>
                                     </div>
                                 </li>
                                 <li class="right clearfix">
                                     <span class="chat-img pull-right">
 
-                                        <img src="${pageContext.request.contextPath}/assets/images/2.png" alt="User" class="img-circle" />
+                                        <img src="${pageContext.request.contextPath}/assets/images/2.png" alt="User"
+                                             class="img-circle"/>
                                     </span>
                                     <div class="chat-body clearfix">
 
@@ -339,28 +346,32 @@
                                         <strong class="pull-right">Jhonson Deed</strong>
 
                                         <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum
+                                            ornare dolor, quis ullamcorper ligula sodales.
                                         </p>
                                     </div>
                                 </li>
                                 <li class="left clearfix">
                                     <span class="chat-img pull-left">
-                                         <img src="${pageContext.request.contextPath}/assets/images/3.png" alt="User" class="img-circle" />
+                                         <img src="${pageContext.request.contextPath}/assets/images/3.png" alt="User"
+                                              class="img-circle"/>
                                     </span>
                                     <div class="chat-body clearfix">
 
-                                        <strong >Jack Sparrow</strong>
+                                        <strong>Jack Sparrow</strong>
                                         <small class="pull-right text-muted">
                                             <i class="fa fa-clock-o fa-fw"></i>14 mins ago</small>
 
                                         <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum
+                                            ornare dolor, quis ullamcorper ligula sodales.
                                         </p>
                                     </div>
                                 </li>
                                 <li class="right clearfix">
                                     <span class="chat-img pull-right">
-                                         <img src="${pageContext.request.contextPath}/assets/images/4.png" alt="User" class="img-circle" />
+                                         <img src="${pageContext.request.contextPath}/assets/images/4.png" alt="User"
+                                              class="img-circle"/>
                                     </span>
                                     <div class="chat-body clearfix">
 
@@ -369,27 +380,31 @@
                                         <strong class="pull-right">Jhonson Deed</strong>
 
                                         <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum
+                                            ornare dolor, quis ullamcorper ligula sodales.
                                         </p>
                                     </div>
                                 </li>
                                 <li class="left clearfix">
                                     <span class="chat-img pull-left">
-                                        <img src="${pageContext.request.contextPath}/assets/images/1.png" alt="User" class="img-circle" />
+                                        <img src="${pageContext.request.contextPath}/assets/images/1.png" alt="User"
+                                             class="img-circle"/>
                                     </span>
                                     <div class="chat-body">
-                                        <strong >Jack Sparrow</strong>
+                                        <strong>Jack Sparrow</strong>
                                         <small class="pull-right text-muted">
                                             <i class="fa fa-clock-o fa-fw"></i>12 mins ago
                                         </small>
                                         <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum
+                                            ornare dolor, quis ullamcorper ligula sodales.
                                         </p>
                                     </div>
                                 </li>
                                 <li class="right clearfix">
                                     <span class="chat-img pull-right">
-                                       <img src="${pageContext.request.contextPath}/assets/images/2.png" alt="User" class="img-circle" />
+                                       <img src="${pageContext.request.contextPath}/assets/images/2.png" alt="User"
+                                            class="img-circle"/>
                                     </span>
                                     <div class="chat-body clearfix">
 
@@ -398,7 +413,8 @@
                                         <strong class="pull-right">Jhonson Deed</strong>
 
                                         <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum
+                                            ornare dolor, quis ullamcorper ligula sodales.
                                         </p>
                                     </div>
                                 </li>
@@ -407,7 +423,9 @@
 
                         <div class="panel-footer">
                             <div class="input-group">
-                                <label for="btn-input"></label><input id="btn-input" type="text" class="form-control input-sm" placeholder="Type your message to send..." />
+                                <label for="btn-input"></label><input id="btn-input" type="text"
+                                                                      class="form-control input-sm"
+                                                                      placeholder="Type your message to send..."/>
                                 <span class="input-group-btn">
                                     <button class="btn btn-warning btn-sm" id="btn-chat">
                                         Send

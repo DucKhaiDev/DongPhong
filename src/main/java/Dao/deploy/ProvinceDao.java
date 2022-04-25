@@ -12,13 +12,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProvinceDao implements IProvinceDao {
-    private Connection conn = null;
-    private PreparedStatement ps = null;
-    private ResultSet rs = null;
-
     @Override
     public Province getProvince(int id) {
-        conn = DBConnect.getConnection();
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         Province province = new Province();
 
         try {
@@ -42,7 +40,9 @@ public class ProvinceDao implements IProvinceDao {
 
     @Override
     public List<Province> getAll() {
-        conn = DBConnect.getConnection();
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         List<Province> provinces = new ArrayList<>();
 
         try {

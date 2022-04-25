@@ -12,7 +12,8 @@ public class CartItem implements Serializable {
     private Product product;
     private Cart cart;
 
-    public CartItem() {}
+    public CartItem() {
+    }
 
     public CartItem(int quantity, BigDecimal value, Product product, Cart cart) {
         this.quantity = quantity;

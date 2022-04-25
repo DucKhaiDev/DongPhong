@@ -6,5 +6,6 @@ import java.util.List;
 
 public interface IProvinceDao {
     Province getProvince(int id);
+
     List<Province> getAll();
 }

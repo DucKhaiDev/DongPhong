@@ -1,23 +1,19 @@
 package Controller.Admin;
 
-import Entity.User;
-import Services.deploy.UserService;
 import Util.Constant;
-import jakarta.servlet.*;
-import jakarta.servlet.http.*;
-import jakarta.servlet.annotation.*;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.util.List;
 
 @WebServlet(name = "UserController", value = "/admin/user")
 public class UserController extends HttpServlet {
-    private final UserService userService = new UserService();
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<User> users = userService.getAll();
-        request.setAttribute("users", users);
+        request.setAttribute("users", Constant.Service.USER_SERVICE.getAll());
         request.getRequestDispatcher(Constant.Path.ADMIN_USER).forward(request, response);
     }
 }

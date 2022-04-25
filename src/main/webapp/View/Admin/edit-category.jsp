@@ -9,17 +9,18 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Dong Phong</title>
     <!-- BOOTSTRAP STYLES-->
     <link href="${pageContext.request.contextPath}/assets/css/bootstrap.css" rel="stylesheet"/>
     <!-- FONTAWESOME STYLES-->
-    <link href="${pageContext.request.contextPath}/assets/fonts/fontawesome-pro-5.15.4-web/css/all.min.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/fonts/fontawesome-pro-5.15.4-web/css/all.min.css"
+          rel="stylesheet"/>
     <!-- CUSTOM STYLES-->
-    <link href="${pageContext.request.contextPath}/assets/css/custom.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/css/custom.css" rel="stylesheet"/>
     <!-- GOOGLE FONTS-->
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
 </head>
 <body>
 <div id="wrapper">
@@ -29,7 +30,7 @@
     <jsp:include page="navside.jsp"/>
     <!-- /. NAV SIDE  -->
 
-    <div id="page-wrapper" >
+    <div id="page-wrapper">
         <div id="page-inner">
             <div class="row">
                 <div class="col-md-12">
@@ -38,7 +39,7 @@
                 </div>
             </div>
             <!-- /. ROW  -->
-            <hr />
+            <hr/>
             <div class="row d-flex justify-content-center">
                 <div class="col-md-6">
                     <div class="panel panel-default">
@@ -47,8 +48,14 @@
                             <div class="row">
                                 <form action="<c:url value="/admin/category/edit"/>" method="post">
                                     <div class="row ml-1 mr-1">
-                                        <div class="col-md-6 mb-3"><label for="categoryId" class="labels">ID</label><input id="categoryId" type="text" class="form-control" placeholder="${category.categoryId}" readonly></div>
-                                        <div class="col-md-12 mb-3"><label for="categoryName" class="labels">Loại sản phẩm</label><input id="categoryName" type="text" class="form-control" name="categoryName" maxlength="255" placeholder="${category.categoryName}"></div>
+                                        <div class="col-md-6 mb-3"><label for="categoryId"
+                                                                          class="labels">ID</label><input
+                                                id="categoryId" type="text" class="form-control"
+                                                placeholder="${category.categoryId}" readonly></div>
+                                        <div class="col-md-12 mb-3"><label for="categoryName" class="labels">Loại sản
+                                            phẩm</label><input id="categoryName" type="text" class="form-control"
+                                                               name="categoryName" maxlength="255"
+                                                               placeholder="${category.categoryName}"></div>
                                         <div class="col-md-6 mb-3">
                                             <label for="room" class="labels">Danh mục</label>
                                             <div class="checkbox pl-0">
@@ -57,7 +64,8 @@
                                                     <c:forEach items="${rooms}" var="room">
                                                         <c:choose>
                                                             <c:when test="${category.room.roomId == room.roomId}">
-                                                                <option value="${room.roomId}" selected="selected">${room.roomName}</option>
+                                                                <option value="${room.roomId}"
+                                                                        selected="selected">${room.roomName}</option>
                                                             </c:when>
                                                             <c:otherwise>
                                                                 <option value="${room.roomId}">${room.roomName}</option>
@@ -70,14 +78,22 @@
                                         <div class="col-md-12">
                                             <label for="categoryDescription" class="labels">Mô tả</label>
                                             <br>
-                                            <textarea name="categoryDescription" id="categoryDescription" class="form-control" cols="50" rows="5" maxlength="2000">${category.categoryDescription}</textarea>
+                                            <textarea name="categoryDescription" id="categoryDescription"
+                                                      class="form-control" cols="50" rows="5"
+                                                      maxlength="2000">${category.categoryDescription}</textarea>
                                         </div>
                                     </div>
                                     <div class="row ml-1 mr-1">
                                         <div class="mt-5 text-center col-md-12 d-flex justify-content-end">
-                                            <button class="btn btn-primary ct-button" type="submit"><i class="fa fa-check"></i>&nbsp;Đồng ý</button>
-                                            <button class="btn btn-primary ct-button ml-3" type="reset"><i class="fa fa-undo-alt"></i>&nbsp;Nhập lại</button>
-                                            <a href="${pageContext.request.contextPath}/admin/category" class="btn btn-primary ct-button ml-3"><i class="fa fa-angle-left"></i>&nbsp;Quay lại</a>
+                                            <button class="btn btn-primary ct-button" type="submit"><i
+                                                    class="fa fa-check"></i>&nbsp;Đồng ý
+                                            </button>
+                                            <button class="btn btn-primary ct-button ml-3" type="reset"><i
+                                                    class="fa fa-undo-alt"></i>&nbsp;Nhập lại
+                                            </button>
+                                            <a href="${pageContext.request.contextPath}/admin/category"
+                                               class="btn btn-primary ct-button ml-3"><i class="fa fa-angle-left"></i>&nbsp;Quay
+                                                lại</a>
                                         </div>
                                     </div>
                                 </form>

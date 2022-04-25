@@ -3,9 +3,7 @@ package Dao.deploy;
 import Connect.DBConnect;
 import Dao.IOrderDao;
 import Entity.Order;
-import Services.deploy.CartService;
-import Services.deploy.PaymentService;
-import Services.deploy.UserService;
+import Util.Constant;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,17 +13,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OrderDao implements IOrderDao {
-    private Connection conn = null;
-    private PreparedStatement ps = null;
-    private ResultSet rs = null;
-
-    private final UserService userService = new UserService();
-    private final CartService cartService = new CartService();
-    private final PaymentService paymentService = new PaymentService();
-
     @Override
     public void insert(Order order) {
-        conn = DBConnect.getConnection();
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
 
         try {
             ps = conn.prepareStatement("INSERT INTO [ORDER](USER_ID, REC_NAME, REC_ADDRESS, REC_PHONE, ORD_DATE, REC_DATE, ORD_STATUS, ORD_SUMPRO, ORD_SHIPPING, ORD_TAX, ORD_SUBTOTAL, ORD_DISCOUNT, ORD_TOTAL, CART_ID, PAY_ID) " +
@@ -50,13 +41,14 @@ public class OrderDao implements IOrderDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBConnect.closeAll(rs, ps, conn);
+            DBConnect.closeAll(null, ps, conn);
         }
     }
 
     @Override
     public void edit(Order order) {
-        conn = DBConnect.getConnection();
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
 
         try {
             ps = conn.prepareStatement("UPDATE [ORDER] SET USER_ID = ?, REC_NAME = ?, REC_ADDRESS = ?, REC_PHONE = ?, ORD_DATE = ?, REC_DATE = ?, ORD_STATUS = ?, ORD_SUMPRO = ?, ORD_SHIPPING = ?, ORD_TAX = ?, ORD_SUBTOTAL = ?, ORD_DISCOUNT = ?, ORD_TOTAL = ?, CART_ID = ?, PAY_ID = ? WHERE ORD_ID = ?");
@@ -81,13 +73,14 @@ public class OrderDao implements IOrderDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBConnect.closeAll(rs, ps, conn);
+            DBConnect.closeAll(null, ps, conn);
         }
     }
 
     @Override
     public void delete(int orderId) {
-        conn = DBConnect.getConnection();
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
 
         try {
             ps = conn.prepareStatement("DELETE FROM [ORDER] WHERE ORD_ID = ?");
@@ -96,13 +89,15 @@ public class OrderDao implements IOrderDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBConnect.closeAll(rs, ps, conn);
+            DBConnect.closeAll(null, ps, conn);
         }
     }
 
     @Override
     public Order getOrder(int orderId) {
-        conn = DBConnect.getConnection();
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         Order order = new Order();
 
         try {
@@ -111,7 +106,7 @@ public class OrderDao implements IOrderDao {
             rs = ps.executeQuery();
             if (rs.next()) {
                 order.setOrderId(orderId);
-                order.setUser(userService.getUser(rs.getString("USER_ID").trim()));
+                order.setUser(Constant.Service.USER_SERVICE.getUser(rs.getString("USER_ID").trim()));
                 order.setRecipientName(rs.getString("REC_NAME"));
                 order.setRecipientAddress(rs.getString("REC_ADDRESS"));
                 order.setRecipientPhone(rs.getString("REC_PHONE"));
@@ -126,8 +121,8 @@ public class OrderDao implements IOrderDao {
                 order.setOrderSubTotal(rs.getBigDecimal("ORD_SUBTOTAL"));
                 order.setOrderDiscount(rs.getBigDecimal("ORD_DISCOUNT"));
                 order.setOrderTotal(rs.getBigDecimal("ORD_TOTAL"));
-                order.setCart(cartService.getCart(rs.getString("CART_ID").trim()));
-                order.setPayment(paymentService.getPayment(rs.getString("PAY_ID").trim()));
+                order.setCart(Constant.Service.CART_SERVICE.getCart(rs.getString("CART_ID").trim()));
+                order.setPayment(Constant.Service.PAYMENT_SERVICE.getPayment(rs.getString("PAY_ID").trim()));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -140,7 +135,9 @@ public class OrderDao implements IOrderDao {
 
     @Override
     public Order getNewestOrder() {
-        conn = DBConnect.getConnection();
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         Order order = new Order();
 
         try {
@@ -148,7 +145,7 @@ public class OrderDao implements IOrderDao {
             rs = ps.executeQuery();
             if (rs.next()) {
                 order.setOrderId(rs.getInt("ORD_ID"));
-                order.setUser(userService.getUser(rs.getString("USER_ID").trim()));
+                order.setUser(Constant.Service.USER_SERVICE.getUser(rs.getString("USER_ID").trim()));
                 order.setRecipientName(rs.getString("REC_NAME"));
                 order.setRecipientAddress(rs.getString("REC_ADDRESS"));
                 order.setRecipientPhone(rs.getString("REC_PHONE"));
@@ -163,8 +160,8 @@ public class OrderDao implements IOrderDao {
                 order.setOrderSubTotal(rs.getBigDecimal("ORD_SUBTOTAL"));
                 order.setOrderDiscount(rs.getBigDecimal("ORD_DISCOUNT"));
                 order.setOrderTotal(rs.getBigDecimal("ORD_TOTAL"));
-                order.setCart(cartService.getCart(rs.getString("CART_ID").trim()));
-                order.setPayment(paymentService.getPayment(rs.getString("PAY_ID").trim()));
+                order.setCart(Constant.Service.CART_SERVICE.getCart(rs.getString("CART_ID").trim()));
+                order.setPayment(Constant.Service.PAYMENT_SERVICE.getPayment(rs.getString("PAY_ID").trim()));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -177,7 +174,9 @@ public class OrderDao implements IOrderDao {
 
     @Override
     public List<Order> getAll() {
-        conn = DBConnect.getConnection();
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         List<Order> orders = new ArrayList<>();
 
         try {
@@ -186,7 +185,7 @@ public class OrderDao implements IOrderDao {
             while (rs.next()) {
                 Order order = new Order();
                 order.setOrderId(rs.getInt("ORD_ID"));
-                order.setUser(userService.getUser(rs.getString("USER_ID").trim()));
+                order.setUser(Constant.Service.USER_SERVICE.getUser(rs.getString("USER_ID").trim()));
                 order.setRecipientName(rs.getString("REC_NAME"));
                 order.setRecipientAddress(rs.getString("REC_ADDRESS"));
                 order.setRecipientPhone(rs.getString("REC_PHONE"));
@@ -201,8 +200,8 @@ public class OrderDao implements IOrderDao {
                 order.setOrderSubTotal(rs.getBigDecimal("ORD_SUBTOTAL"));
                 order.setOrderDiscount(rs.getBigDecimal("ORD_DISCOUNT"));
                 order.setOrderTotal(rs.getBigDecimal("ORD_TOTAL"));
-                order.setCart(cartService.getCart(rs.getString("CART_ID").trim()));
-                order.setPayment(paymentService.getPayment(rs.getString("PAY_ID").trim()));
+                order.setCart(Constant.Service.CART_SERVICE.getCart(rs.getString("CART_ID").trim()));
+                order.setPayment(Constant.Service.PAYMENT_SERVICE.getPayment(rs.getString("PAY_ID").trim()));
 
                 orders.add(order);
             }

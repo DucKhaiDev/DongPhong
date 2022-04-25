@@ -8,21 +8,22 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Dong Phong</title>
     <!-- BOOTSTRAP STYLES-->
-    <link href="${pageContext.request.contextPath}/assets/css/bootstrap.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/css/bootstrap.css" rel="stylesheet"/>
     <!-- FONTAWESOME STYLES-->
-    <link href="${pageContext.request.contextPath}/assets/fonts/fontawesome-pro-5.15.4-web/css/all.min.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/fonts/fontawesome-pro-5.15.4-web/css/all.min.css"
+          rel="stylesheet"/>
     <!-- MORRIS CHART STYLES-->
 
     <!-- CUSTOM STYLES-->
-    <link href="${pageContext.request.contextPath}/assets/css/custom.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/css/custom.css" rel="stylesheet"/>
     <!-- GOOGLE FONTS-->
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
     <!-- TABLE STYLES-->
-    <link href="${pageContext.request.contextPath}/assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet"/>
 </head>
 <body>
 <div id="wrapper">
@@ -32,7 +33,7 @@
     <jsp:include page="navside.jsp"/>
     <!-- /. NAV SIDE  -->
 
-    <div id="page-wrapper" >
+    <div id="page-wrapper">
         <div id="page-inner">
             <div class="row">
                 <div class="col-md-12">
@@ -42,7 +43,7 @@
                 </div>
             </div>
             <!-- /. ROW  -->
-            <hr />
+            <hr/>
 
             <div class="row">
                 <div class="col-md-12">
@@ -53,50 +54,54 @@
                             <div class="table-responsive">
                                 <table class="table table-striped table-bordered table-hover" id="dataTable">
                                     <thead>
-                                        <tr>
-                                            <th>STT</th>
-                                            <th>ID</th>
-                                            <th>Avatar</th>
-                                            <th>Tên đăng nhập</th>
-                                            <th>Mật khẩu</th>
-                                            <th>Email</th>
-                                            <th>Trạng thái</th>
-                                            <th>Quyền truy cập</th>
-                                            <th>Tác vụ</th>
-                                        </tr>
+                                    <tr>
+                                        <th>STT</th>
+                                        <th>ID</th>
+                                        <th>Avatar</th>
+                                        <th>Tên đăng nhập</th>
+                                        <th>Mật khẩu</th>
+                                        <th>Email</th>
+                                        <th>Trạng thái</th>
+                                        <th>Quyền truy cập</th>
+                                        <th>Tác vụ</th>
+                                    </tr>
                                     </thead>
                                     <tbody>
-                                        <c:set var="number" value="0"/>
-                                        <jsp:useBean id="users" scope="request" type="java.util.List"/>
-                                        <c:forEach items="${users}" var="user">
-                                            <tr class="odd">
-                                                <td>${number = number + 1}</td>
-                                                <td>${user.userId}</td>
-                                                <c:url value="/images/avatar?fname=${user.avatar}" var="avatarUrl"/>
-                                                <td><img class="user-img-empty" width="50" height="50" <c:if test="${not empty user.avatar}">src="${avatarUrl}"</c:if> style="object-fit: cover;" alt=""></td>
-                                                <td>${user.username}</td>
-                                                <td>${user.password}</td>
-                                                <td>${user.email}</td>
-                                                <td>Đang hoạt động</td>
-                                                <td>
-                                                    <c:choose>
-                                                        <c:when test="${!user.role}">Quản trị viên</c:when>
-                                                        <c:otherwise>Thành viên</c:otherwise>
-                                                    </c:choose>
-                                                </td>
-                                                <td>
-                                                    <a href="<c:url value="/admin/user/edit?id=${user.userId}"/>" class="text-center">Sửa</a>&nbsp;|&nbsp;
-                                                    <c:choose>
-                                                        <c:when test="${user.userId == 'FOUNDER'}">
-                                                            <a class="text-center isDisabled">Xóa</a>
-                                                        </c:when>
-                                                        <c:otherwise>
-                                                            <a href="<c:url value="/admin/user/delete?id=${user.userId}"/>" class="text-center">Xóa</a>
-                                                        </c:otherwise>
-                                                    </c:choose>
-                                                </td>
-                                            </tr>
-                                        </c:forEach>
+                                    <c:set var="number" value="0"/>
+                                    <jsp:useBean id="users" scope="request" type="java.util.List"/>
+                                    <c:forEach items="${users}" var="user">
+                                        <tr class="odd">
+                                            <td>${number = number + 1}</td>
+                                            <td>${user.userId}</td>
+                                            <c:url value="/images/avatar?fname=${user.avatar}" var="avatarUrl"/>
+                                            <td><img class="user-img-empty" width="50" height="50"
+                                                     <c:if test="${not empty user.avatar}">src="${avatarUrl}"</c:if>
+                                                     style="object-fit: cover;" alt=""></td>
+                                            <td>${user.username}</td>
+                                            <td>${user.password}</td>
+                                            <td>${user.email}</td>
+                                            <td>Đang hoạt động</td>
+                                            <td>
+                                                <c:choose>
+                                                    <c:when test="${!user.role}">Quản trị viên</c:when>
+                                                    <c:otherwise>Thành viên</c:otherwise>
+                                                </c:choose>
+                                            </td>
+                                            <td>
+                                                <a href="<c:url value="/admin/user/edit?id=${user.userId}"/>"
+                                                   class="text-center">Sửa</a>&nbsp;|&nbsp;
+                                                <c:choose>
+                                                    <c:when test="${user.userId == 'FOUNDER'}">
+                                                        <a class="text-center isDisabled">Xóa</a>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <a href="<c:url value="/admin/user/delete?id=${user.userId}"/>"
+                                                           class="text-center">Xóa</a>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
                                     </tbody>
                                 </table>
                             </div>

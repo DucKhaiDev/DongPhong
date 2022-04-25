@@ -1,5 +1,3 @@
-<%@ page import="Services.deploy.BrandService" %>
-<%@ page import="Entity.Brand" %>
 <%@ page import="java.util.Locale" %>
 <%@ page import="java.text.NumberFormat" %>
 <%@ page import="Entity.Voucher" %>
@@ -15,21 +13,22 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Dong Phong</title>
     <!-- BOOTSTRAP STYLES-->
-    <link href="${pageContext.request.contextPath}/assets/css/bootstrap.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/css/bootstrap.css" rel="stylesheet"/>
     <!-- FONTAWESOME STYLES-->
-    <link href="${pageContext.request.contextPath}/assets/fonts/fontawesome-pro-5.15.4-web/css/all.min.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/fonts/fontawesome-pro-5.15.4-web/css/all.min.css"
+          rel="stylesheet"/>
     <!-- MORRIS CHART STYLES-->
 
     <!-- CUSTOM STYLES-->
-    <link href="${pageContext.request.contextPath}/assets/css/custom.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/css/custom.css" rel="stylesheet"/>
     <!-- GOOGLE FONTS-->
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
     <!-- TABLE STYLES-->
-    <link href="${pageContext.request.contextPath}/assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet"/>
     <%---------------------------------------------------------------------------------------------%>
     <style>
         .table > tbody > tr > td > p {
@@ -48,22 +47,24 @@
     <jsp:include page="navside.jsp"/>
     <!-- /. NAV SIDE  -->
 
-    <div id="page-wrapper" >
+    <div id="page-wrapper">
         <div id="page-inner">
             <div class="row">
                 <div class="col-md-12">
                     <h2>Quản Lý Mã Giảm Giá</h2>
                     <div class="row">
-                        <div class="col-md-12"><h5>Chào mừng ${sessionScope.displayName}, rất vui được gặp lại bạn. </h5></div>
+                        <div class="col-md-12"><h5>Chào mừng ${sessionScope.displayName}, rất vui được gặp lại
+                            bạn. </h5></div>
                     </div>
 
                 </div>
             </div>
             <!-- /. ROW  -->
-            <hr />
+            <hr/>
             <div class="row">
                 <div class="col-md-12 mb-3">
-                    <a href="${pageContext.request.contextPath}/admin/voucher/add" class="btn btn-primary ct-button float-right">
+                    <a href="${pageContext.request.contextPath}/admin/voucher/add"
+                       class="btn btn-primary ct-button float-right">
                         <i class="fa fa-plus"></i>&nbsp;Tạo mã
                     </a>
                 </div>
@@ -115,8 +116,10 @@
                                             <td><% out.print(dateFormat.format(fromDate)); %></td>
                                             <td><% out.print(dateFormat.format(toDate)); %></td>
                                             <td>
-                                                <a href="<c:url value="/admin/voucher/edit?id=${voucher.voucherId}"/>" class="text-center">Sửa</a>&nbsp;|&nbsp;
-                                                <a href="<c:url value="/admin/voucher/delete?id=${voucher.voucherId}"/>" class="text-center">Xóa</a>
+                                                <a href="<c:url value="/admin/voucher/edit?id=${voucher.voucherId}"/>"
+                                                   class="text-center">Sửa</a>&nbsp;|&nbsp;
+                                                <a href="<c:url value="/admin/voucher/delete?id=${voucher.voucherId}"/>"
+                                                   class="text-center">Xóa</a>
                                             </td>
                                         </tr>
                                     </c:forEach>

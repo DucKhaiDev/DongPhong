@@ -15,17 +15,18 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Dong Phong</title>
     <!-- BOOTSTRAP STYLES-->
     <link href="${pageContext.request.contextPath}/assets/css/bootstrap.css" rel="stylesheet"/>
     <!-- FONTAWESOME STYLES-->
-    <link href="${pageContext.request.contextPath}/assets/fonts/fontawesome-pro-5.15.4-web/css/all.min.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/fonts/fontawesome-pro-5.15.4-web/css/all.min.css"
+          rel="stylesheet"/>
     <!-- CUSTOM STYLES-->
-    <link href="${pageContext.request.contextPath}/assets/css/custom.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/css/custom.css" rel="stylesheet"/>
     <!-- GOOGLE FONTS-->
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
     <%---------------------------------------------------------------------------------------------%>
     <style>
         p.exist-id {
@@ -44,7 +45,7 @@
     <jsp:include page="navside.jsp"/>
     <!-- /. NAV SIDE  -->
 
-    <div id="page-wrapper" >
+    <div id="page-wrapper">
         <div id="page-inner">
             <div class="row">
                 <div class="col-md-12">
@@ -53,7 +54,7 @@
                 </div>
             </div>
             <!-- /. ROW  -->
-            <hr />
+            <hr/>
             <div class="row d-flex justify-content-center">
                 <div class="col-md-8">
                     <div class="panel panel-default">
@@ -65,16 +66,30 @@
                                     NumberFormat dongFormat = NumberFormat.getCurrencyInstance(vie);
                                 %>
                                 <div class="row ml-1 mr-1">
-                                    <div class="col-md-6 mb-3"><label for="orderId" class="labels">Mã đơn hàng</label><input id="orderId" type="text" class="form-control" name="orderId" value="${order.orderId}" readonly></div>
-                                    <div class="col-md-6 mb-3"><label for="username" class="labels">Người đặt</label><input id="username" type="text" class="form-control" name="username" value="${sessionScope.orderAccount == null ? order.user.username : sessionScope.orderAccount}" required></div>
-                                    <div class="col-md-6 mb-3"><label for="recipientName" class="labels">Người nhận</label><input id="recipientName" type="text" class="form-control" name="recipientName" value="${sessionScope.ord_recipientName == null ? order.recipientName : sessionScope.ord_recipientName}" placeholder="Tên người nhận" required></div>
-                                    <div class="col-md-6 mb-3"><label for="recipientPhone" class="labels">SĐT người nhận</label><input id="recipientPhone" type="text" class="form-control" name="recipientPhone" maxlength="12" value="${sessionScope.ord_recipientPhone == null ? order.recipientPhone : sessionScope.ord_recipientPhone}" placeholder="SĐT người nhận" required></div>
+                                    <div class="col-md-6 mb-3"><label for="orderId" class="labels">Mã đơn
+                                        hàng</label><input id="orderId" type="text" class="form-control" name="orderId"
+                                                           value="${order.orderId}" readonly></div>
+                                    <div class="col-md-6 mb-3"><label for="username" class="labels">Người
+                                        đặt</label><input id="username" type="text" class="form-control" name="username"
+                                                          value="${sessionScope.orderAccount == null ? order.user.username : sessionScope.orderAccount}"
+                                                          required></div>
+                                    <div class="col-md-6 mb-3"><label for="recipientName" class="labels">Người
+                                        nhận</label><input id="recipientName" type="text" class="form-control"
+                                                           name="recipientName"
+                                                           value="${sessionScope.ord_recipientName == null ? order.recipientName : sessionScope.ord_recipientName}"
+                                                           placeholder="Tên người nhận" required></div>
+                                    <div class="col-md-6 mb-3"><label for="recipientPhone" class="labels">SĐT người
+                                        nhận</label><input id="recipientPhone" type="text" class="form-control"
+                                                           name="recipientPhone" maxlength="12"
+                                                           value="${sessionScope.ord_recipientPhone == null ? order.recipientPhone : sessionScope.ord_recipientPhone}"
+                                                           placeholder="SĐT người nhận" required></div>
                                     <hr class="w-100 mt-3 mb-3">
                                     <div class="col-md-12"><label class="labels">Danh sách sản phẩm</label></div>
                                     <div class="col-md-12 mb-3 outer">
                                         <div class="panel-body">
                                             <div class="table-responsive">
-                                                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                                <table class="table table-striped table-bordered table-hover"
+                                                       id="dataTables-example">
                                                     <thead>
                                                     <tr>
                                                         <th>STT</th>
@@ -104,7 +119,8 @@
                                                             <td>${item.quantity}</td>
                                                             <td><% out.print(dongFormat.format(item.getValue())); %></td>
                                                             <td>
-                                                                <a href="<c:url value="/admin/order/edit/removeItem?id=${item.cartItemId}&forwardTo=${pageContext.request.contextPath}/admin/order/edit?id=${order.orderId}"/>" class="text-center">Xóa</a>
+                                                                <a href="<c:url value="/admin/order/edit/removeItem?id=${item.cartItemId}&forwardTo=${pageContext.request.contextPath}/admin/order/edit?id=${order.orderId}"/>"
+                                                                   class="text-center">Xóa</a>
                                                             </td>
                                                         </tr>
                                                     </c:forEach>
@@ -114,14 +130,18 @@
                                         </div>
                                     </div>
                                     <div class="col-md-12 mb-3 d-flex justify-content-center">
-                                        <button id="btn-add-product" class="w-20 btn btn-primary ct-button" type="button"><i class="fa fa-plus"></i>&nbsp;Thêm sản phẩm</button>
+                                        <button id="btn-add-product" class="w-20 btn btn-primary ct-button"
+                                                type="button"><i class="fa fa-plus"></i>&nbsp;Thêm sản phẩm
+                                        </button>
                                     </div>
                                     <hr class="w-100 mt-3 mb-3">
                                     <form action="<c:url value="/shipping-cost"/>" method="get" class="col-md-12 mb-3">
                                         <label class="labels">Địa chỉ giao hàng</label>
                                         <div class="row mb-4">
                                             <div class="col-md-12">
-                                                <input type="text" class="form-control" value="${sessionScope.recipientAddress}" placeholder="Địa chỉ giao hàng">
+                                                <input type="text" class="form-control"
+                                                       value="${sessionScope.recipientAddress}"
+                                                       placeholder="Địa chỉ giao hàng">
                                             </div>
                                         </div>
                                         <label class="labels">Cập nhật địa chỉ giao hàng</label>
@@ -134,25 +154,30 @@
 
                                             <div class="col-md-6 mb-3">
                                                 <label for="province" class="labels">Tỉnh/Thành phố</label>
-                                                <input id="selectedProvince" type="hidden" value="${sessionScope.selectedProvince}">
+                                                <input id="selectedProvince" type="hidden"
+                                                       value="${sessionScope.selectedProvince}">
                                                 <input type="hidden" name="selectedProvince">
-                                                <select id="province" name="province" class="w-full form-control" required>
+                                                <select id="province" name="province" class="w-full form-control"
+                                                        required>
                                                     <option value="0" selected hidden disabled>Tỉnh/Thành phố</option>
                                                 </select>
                                             </div>
 
                                             <div class="col-md-6 mb-3">
                                                 <label for="district" class="labels">Quận/Huyện</label>
-                                                <input id="selectedDistrict" type="hidden" value="${sessionScope.selectedDistrict}">
+                                                <input id="selectedDistrict" type="hidden"
+                                                       value="${sessionScope.selectedDistrict}">
                                                 <input type="hidden" name="selectedDistrict">
-                                                <select id="district" name="district" class="w-full form-control" required>
+                                                <select id="district" name="district" class="w-full form-control"
+                                                        required>
                                                     <option value="0" selected hidden disabled>Quận/Huyện</option>
                                                 </select>
                                             </div>
 
                                             <div class="col-md-6 mb-3">
                                                 <label for="ward" class="labels">Phường/Xã</label>
-                                                <input id="selectedWard" type="hidden" value="${sessionScope.selectedWard}">
+                                                <input id="selectedWard" type="hidden"
+                                                       value="${sessionScope.selectedWard}">
                                                 <input type="hidden" name="selectedWard">
                                                 <select id="ward" name="ward" class="w-full form-control" required>
                                                     <option value="0" selected hidden disabled>Phường/Xã</option>
@@ -161,16 +186,22 @@
 
                                             <div class="col-md-6 mb-3">
                                                 <label for="recaddress" class="labels">Số nhà</label>
-                                                <input id="recaddress" name="recaddress" class="w-full form-control" type="text" value="${sessionScope.recaddress}" placeholder="Số nhà" required>
+                                                <input id="recaddress" name="recaddress" class="w-full form-control"
+                                                       type="text" value="${sessionScope.recaddress}"
+                                                       placeholder="Số nhà" required>
                                             </div>
                                         </div>
                                         <div class="col-md-12 mb-3 d-flex justify-content-center">
-                                            <button id="btn-calculate-shipping" class="w-20 btn btn-primary ct-button" type="submit"><i class="fa fa-calculator"></i>&nbsp;Tính phí ship</button>
+                                            <button id="btn-calculate-shipping" class="w-20 btn btn-primary ct-button"
+                                                    type="submit"><i class="fa fa-calculator"></i>&nbsp;Tính phí ship
+                                            </button>
                                         </div>
                                     </form>
                                     <hr class="w-100 mt-3 mb-3">
                                     <div class="col-md-12 mb-2">
-                                        <label class="labels d-flex text-nowrap align-items-center float-right">Tổng tiền:&nbsp;<input type="text" class="form-control w-fit-content text-center" value="<%
+                                        <label class="labels d-flex text-nowrap align-items-center float-right">Tổng
+                                            tiền:&nbsp;<input type="text" class="form-control w-fit-content text-center"
+                                                              value="<%
                                             BigDecimal subTotal = new BigDecimal(0);
                                             for (Object item : cartItems) {
                                                 subTotal = subTotal.add(((CartItem) item).getValue());
@@ -179,16 +210,22 @@
                                         %>"></label>
                                     </div>
                                     <div class="col-md-12 mb-2">
-                                        <label class="labels d-flex text-nowrap align-items-center float-right">Giảm giá:&nbsp;<input type="text" class="form-control w-fit-content text-center" value="<% out.print(dongFormat.format(0)); %>"></label>
+                                        <label class="labels d-flex text-nowrap align-items-center float-right">Giảm
+                                            giá:&nbsp;<input type="text" class="form-control w-fit-content text-center"
+                                                             value="<% out.print(dongFormat.format(0)); %>"></label>
                                     </div>
                                     <div class="col-md-12 mb-2">
-                                        <label class="labels d-flex text-nowrap align-items-center float-right">Thuế (8%):&nbsp;<input type="text" class="form-control w-fit-content text-center" value="<%
+                                        <label class="labels d-flex text-nowrap align-items-center float-right">Thuế
+                                            (8%):&nbsp;<input type="text" class="form-control w-fit-content text-center"
+                                                              value="<%
                                             BigDecimal vat = subTotal.multiply(new BigDecimal(8)).divide(new BigDecimal(100), 2, RoundingMode.HALF_UP);
                                             out.print(dongFormat.format(vat));
                                         %>"></label>
                                     </div>
                                     <div class="col-md-12 mb-2">
-                                        <label class="labels d-flex text-nowrap align-items-center float-right">Phí vận chuyển:&nbsp;<input type="text" class="form-control w-fit-content text-center" value="<%
+                                        <label class="labels d-flex text-nowrap align-items-center float-right">Phí vận
+                                            chuyển:&nbsp;<input type="text"
+                                                                class="form-control w-fit-content text-center" value="<%
                                             BigDecimal shippingCost = new BigDecimal(0);
                                             if (session.getAttribute("shippingCost") != null) {
                                                 shippingCost = (BigDecimal) session.getAttribute("shippingCost");
@@ -197,7 +234,10 @@
                                         %>"></label>
                                     </div>
                                     <div class="col-md-12 mb-2">
-                                        <label class="labels d-flex text-nowrap align-items-center float-right"><strong>Thành tiền:</strong>&nbsp;<input type="text" class="form-control w-fit-content text-center product-price" value="<%
+                                        <label class="labels d-flex text-nowrap align-items-center float-right"><strong>Thành
+                                            tiền:</strong>&nbsp;<input type="text"
+                                                                       class="form-control w-fit-content text-center product-price"
+                                                                       value="<%
                                             BigDecimal total = (subTotal.add(shippingCost)).add(vat);
                                             out.print(dongFormat.format(total));
                                         %>"></label>
@@ -214,14 +254,21 @@
                                             <input type="hidden" value="<% out.print(total); %>" name="total">
                                             <input type="hidden" name="fullName">
                                             <input type="hidden" name="phone">
-                                            <input type="hidden" value="${sessionScope.recipientAddress}" name="recipientAddress">
+                                            <input type="hidden" value="${sessionScope.recipientAddress}"
+                                                   name="recipientAddress">
                                             <input type="hidden" name="orderAccount">
                                             <input type="hidden" value="4" name="paymentMethod">
 
-                                            <button id="btn-add-order" class="btn btn-primary ct-button" type="submit"><i class="fa fa-check"></i>&nbsp;Đồng ý</button>
+                                            <button id="btn-add-order" class="btn btn-primary ct-button" type="submit">
+                                                <i class="fa fa-check"></i>&nbsp;Đồng ý
+                                            </button>
                                         </form>
-                                        <button class="btn btn-primary ct-button ml-3" type="reset"><i class="fa fa-undo-alt"></i>&nbsp;Nhập lại</button>
-                                        <a href="${pageContext.request.contextPath}/admin/order" class="btn btn-primary ct-button ml-3"><i class="fa fa-angle-left"></i>&nbsp;Quay lại</a>
+                                        <button class="btn btn-primary ct-button ml-3" type="reset"><i
+                                                class="fa fa-undo-alt"></i>&nbsp;Nhập lại
+                                        </button>
+                                        <a href="${pageContext.request.contextPath}/admin/order"
+                                           class="btn btn-primary ct-button ml-3"><i class="fa fa-angle-left"></i>&nbsp;Quay
+                                            lại</a>
                                     </div>
                                 </div>
                             </div>

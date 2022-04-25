@@ -2,30 +2,31 @@ package Controller.Admin;
 
 import Entity.Category;
 import Entity.Room;
-import Services.deploy.CategoryService;
-import Services.deploy.RoomService;
 import Util.Constant;
-import jakarta.servlet.*;
-import jakarta.servlet.http.*;
-import jakarta.servlet.annotation.*;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.util.List;
 
 @WebServlet(name = "EditCategory", value = "/admin/category/edit")
 public class EditCategory extends HttpServlet {
-    private final CategoryService categoryService = new CategoryService();
-    private final RoomService roomService = new RoomService();
     private Category category;
     private String categoryId;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         categoryId = request.getParameter("id");
-        category = categoryService.getCategory(categoryId);
+
+        category = Constant.Service.CATEGORY_SERVICE.getCategory(categoryId);
         request.setAttribute("category", category);
-        List<Room> rooms = roomService.getAll();
+
+        List<Room> rooms = Constant.Service.ROOM_SERVICE.getAll();
         request.setAttribute("rooms", rooms);
+
         request.getRequestDispatcher(Constant.Path.ADMIN_EDIT_CATEGORY).forward(request, response);
     }
 
@@ -41,8 +42,9 @@ public class EditCategory extends HttpServlet {
             category.setCategoryDescription(categoryDescription);
         }
 
-        category.setRoom(roomService.getRoom(request.getParameter("room")));
-        categoryService.edit(category);
+        category.setRoom(Constant.Service.ROOM_SERVICE.getRoom(request.getParameter("room")));
+        Constant.Service.CATEGORY_SERVICE.edit(category);
+
         response.sendRedirect(request.getContextPath() + "/admin/category/edit?id=" + categoryId);
     }
 }

@@ -8,7 +8,8 @@ public class WishList implements Serializable {
     private String wishListId;
     private User user;
 
-    public WishList() {}
+    public WishList() {
+    }
 
     public WishList(String wishListId, User user) {
         this.wishListId = wishListId;

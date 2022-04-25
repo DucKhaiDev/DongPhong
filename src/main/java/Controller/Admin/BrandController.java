@@ -1,22 +1,19 @@
 package Controller.Admin;
 
-import Services.deploy.BrandService;
 import Util.Constant;
-import jakarta.servlet.*;
-import jakarta.servlet.http.*;
-import jakarta.servlet.annotation.*;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.util.List;
 
 @WebServlet(name = "BrandController", value = "/admin/brand")
 public class BrandController extends HttpServlet {
-    private final BrandService brandService = new BrandService();
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Entity.Brand> brands = brandService.getAll();
-        request.setAttribute("brands", brands);
+        request.setAttribute("brands", Constant.Service.BRAND_SERVICE.getAll());
         request.getRequestDispatcher(Constant.Path.ADMIN_BRAND).forward(request, response);
     }
 }

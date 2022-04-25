@@ -1,6 +1,6 @@
 package Controller.Admin;
 
-import Services.deploy.VoucherService;
+import Util.Constant;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -13,7 +13,7 @@ import java.io.IOException;
 public class DeleteVoucher extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        new VoucherService().delete(request.getParameter("id"));
+        Constant.Service.VOUCHER_SERVICE.delete(request.getParameter("id"));
         response.sendRedirect(request.getContextPath() + "/admin/voucher");
     }
 }

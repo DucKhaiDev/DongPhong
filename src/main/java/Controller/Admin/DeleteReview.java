@@ -1,6 +1,6 @@
 package Controller.Admin;
 
-import Services.deploy.ReviewService;
+import Util.Constant;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -13,8 +13,7 @@ import java.io.IOException;
 public class DeleteReview extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int reviewId = Integer.parseInt(request.getParameter("id"));
-        new ReviewService().delete(reviewId);
+        Constant.Service.REVIEW_SERVICE.delete(Integer.parseInt(request.getParameter("id")));
         response.sendRedirect(request.getContextPath() + "/admin/review/review-detail?id=" + request.getParameter("productId"));
     }
 }

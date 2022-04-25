@@ -25,7 +25,8 @@ public class Order implements Serializable {
     private Cart cart;
     private Payment payment;
 
-    public Order() {}
+    public Order() {
+    }
 
     public Order(User user, String recipientName, String recipientAddress, String recipientPhone, Timestamp orderDate, Date recipientDate, Boolean orderStatus, int orderSumProduct, BigDecimal orderShipping, BigDecimal orderTax, BigDecimal orderSubTotal, BigDecimal orderDiscount, BigDecimal orderTotal, Cart cart, Payment payment) {
         this.user = user;
@@ -121,6 +122,10 @@ public class Order implements Serializable {
         return orderSubTotal;
     }
 
+    public void setOrderSubTotal(BigDecimal orderSubTotal) {
+        this.orderSubTotal = orderSubTotal;
+    }
+
     public BigDecimal getOrderShipping() {
         return orderShipping;
     }
@@ -135,10 +140,6 @@ public class Order implements Serializable {
 
     public void setOrderTax(BigDecimal orderTax) {
         this.orderTax = orderTax;
-    }
-
-    public void setOrderSubTotal(BigDecimal orderSubTotal) {
-        this.orderSubTotal = orderSubTotal;
     }
 
     public BigDecimal getOrderDiscount() {

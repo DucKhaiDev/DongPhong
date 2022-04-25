@@ -28,5 +28,6 @@ font-size: 16px;"> Truy cập lần cuối : <%
         SimpleDateFormat formatYear = new SimpleDateFormat("yyyy");
         Date date = new Date();
         out.print(formatDow.format(date) + ", ngày " + formatDam.format(date) + " năm " + formatYear.format(date));
-    %> &nbsp; <a href="${pageContext.request.contextPath}/logout" class="btn btn-danger square-btn-adjust">Đăng Xuất</a> </div>
+    %> &nbsp; <a href="${pageContext.request.contextPath}/logout" class="btn btn-danger square-btn-adjust">Đăng Xuất</a>
+    </div>
 </nav>

@@ -4,14 +4,14 @@ import Entity.Brand;
 import Entity.Category;
 import Entity.ProImage;
 import Entity.Product;
-import Services.deploy.BrandService;
-import Services.deploy.CategoryService;
-import Services.deploy.ProImageService;
-import Services.deploy.ProductService;
 import Util.Constant;
-import jakarta.servlet.*;
-import jakarta.servlet.http.*;
-import jakarta.servlet.annotation.*;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
 import org.apache.commons.io.FilenameUtils;
 
 import java.io.File;
@@ -20,23 +20,15 @@ import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
 import java.util.UUID;
 
 @WebServlet(name = "AddProduct", value = "/admin/product/add")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, maxFileSize = 1024 * 1024 * 10, maxRequestSize = 1024 * 1024 * 50)
 public class AddProduct extends HttpServlet {
-    private final ProductService productService = new ProductService();
-    private final CategoryService categoryService = new CategoryService();
-    private final BrandService brandService = new BrandService();
-    private final ProImageService imageService = new ProImageService();
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Category> categories = categoryService.getAll();
-        request.setAttribute("categories", categories);
-        List<Brand> brands = brandService.getAll();
-        request.setAttribute("brands", brands);
+        request.setAttribute("categories", Constant.Service.CATEGORY_SERVICE.getAll());
+        request.setAttribute("brands", Constant.Service.BRAND_SERVICE.getAll());
         request.getRequestDispatcher(Constant.Path.ADMIN_ADD_PRODUCT).forward(request, response);
     }
 
@@ -44,7 +36,7 @@ public class AddProduct extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //Add product
         String productId = request.getParameter("productId");
-        if (productService.checkExistId(productId)) {
+        if (Constant.Service.PRODUCT_SERVICE.checkExistId(productId)) {
             String existId = "Mã sản phẩm đã tồn tại!";
             request.setAttribute("existId", existId);
             request.getRequestDispatcher(Constant.Path.ADMIN_ADD_PRODUCT).forward(request, response);
@@ -60,17 +52,17 @@ public class AddProduct extends HttpServlet {
         int productQuantity = request.getParameter("productQuantity").isEmpty() ? 0 : Integer.parseInt(request.getParameter("productQuantity"));
         String productPrice = request.getParameter("productPrice");
         String productCost = request.getParameter("productCost");
-        Category category = categoryService.getCategory(request.getParameter("category"));
-        Brand brand = brandService.getBrand(request.getParameter("brand"));
+        Category category = Constant.Service.CATEGORY_SERVICE.getCategory(request.getParameter("category"));
+        Brand brand = Constant.Service.BRAND_SERVICE.getBrand(request.getParameter("brand"));
         Product product = new Product(productId, productName, productDescription, productDimension, productWeight, productMaterial, productColor, new BigDecimal(productPrice), new BigDecimal(productCost), productQuantity, category, brand);
 
-        productService.insert(product);
+        Constant.Service.PRODUCT_SERVICE.insert(product);
 
         //Add product images
         String savePath = Constant.Path.PRODUCT_IMAGES;
 
         File fileSaveDir = new File(savePath);
-        if (!fileSaveDir .exists()) {
+        if (!fileSaveDir.exists()) {
             if (!fileSaveDir.mkdir()) {
                 System.out.println("Directory creation failed.");
             }
@@ -87,7 +79,7 @@ public class AddProduct extends HttpServlet {
                 newName = UUID.randomUUID() + "." + FilenameUtils.getExtension(fileName);
                 renameFile(fileName, newName);
                 ProImage image = new ProImage(newName, product);
-                imageService.insert(image);
+                Constant.Service.PRO_IMAGE_SERVICE.insert(image);
             }
         }
 

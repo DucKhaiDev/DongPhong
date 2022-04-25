@@ -8,17 +8,18 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Dong Phong</title>
     <!-- BOOTSTRAP STYLES-->
     <link href="${pageContext.request.contextPath}/assets/css/bootstrap.css" rel="stylesheet"/>
     <!-- FONTAWESOME STYLES-->
-    <link href="${pageContext.request.contextPath}/assets/fonts/fontawesome-pro-5.15.4-web/css/all.min.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/fonts/fontawesome-pro-5.15.4-web/css/all.min.css"
+          rel="stylesheet"/>
     <!-- CUSTOM STYLES-->
-    <link href="${pageContext.request.contextPath}/assets/css/custom.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/css/custom.css" rel="stylesheet"/>
     <!-- GOOGLE FONTS-->
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
     <%---------------------------------------------------------------------------------------------%>
     <style>
         p.exist-id {
@@ -37,7 +38,7 @@
     <jsp:include page="navside.jsp"/>
     <!-- /. NAV SIDE  -->
 
-    <div id="page-wrapper" >
+    <div id="page-wrapper">
         <div id="page-inner">
             <div class="row">
                 <div class="col-md-12">
@@ -46,43 +47,80 @@
                 </div>
             </div>
             <!-- /. ROW  -->
-            <hr />
+            <hr/>
             <div class="row">
                 <div class="col-md-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">Thêm mới sản phẩm</div>
                         <div class="panel-body">
                             <div class="row">
-                                <form action="<c:url value="/admin/product/add"/>" method="post" enctype="multipart/form-data">
+                                <form action="<c:url value="/admin/product/add"/>" method="post"
+                                      enctype="multipart/form-data">
                                     <div class="row ml-2 mr-2">
                                         <div class="col-md-6">
                                             <div class="row mt-2">
-                                                <div class="col-md-6 mb-3"><label for="productId" class="labels">ID</label><input id="productId" type="text" class="form-control" name="productId" maxlength="10" required="required"></div>
-                                                <div class="col-md-6 mb-3"><label class="labels"></label><p class="exist-id">${requestScope.existId}</p></div>
-                                                <div class="col-md-12 mb-3"><label for="productName" class="labels">Tên sản phẩm</label><input id="productName" type="text" class="form-control" name="productName" maxlength="255" required="required"></div>
+                                                <div class="col-md-6 mb-3"><label for="productId"
+                                                                                  class="labels">ID</label><input
+                                                        id="productId" type="text" class="form-control" name="productId"
+                                                        maxlength="10" required="required"></div>
+                                                <div class="col-md-6 mb-3"><label class="labels"></label>
+                                                    <p class="exist-id">${requestScope.existId}</p></div>
+                                                <div class="col-md-12 mb-3"><label for="productName" class="labels">Tên
+                                                    sản phẩm</label><input id="productName" type="text"
+                                                                           class="form-control" name="productName"
+                                                                           maxlength="255" required="required"></div>
                                                 <div class="col-md-12 mb-3">
-                                                    <label for="productDescription" class="labels">Mô tả sản phẩm</label>
+                                                    <label for="productDescription" class="labels">Mô tả sản
+                                                        phẩm</label>
                                                     <br>
-                                                    <textarea name="productDescription" id="productDescription" class="form-control" cols="50" rows="5" maxlength="2000"></textarea>
+                                                    <textarea name="productDescription" id="productDescription"
+                                                              class="form-control" cols="50" rows="5"
+                                                              maxlength="2000"></textarea>
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-md-12 mb-3"><label for="productDimension" class="labels">Kích thước</label><input id="productDimension" type="text" class="form-control" name="productDimension"></div>
-                                                <div class="col-md-12 mb-3"><label for="productWeight" class="labels">Khối lượng</label><input id="productWeight" type="text" class="form-control" name="productWeight"></div>
-                                                <div class="col-md-12 mb-3"><label for="productMaterial" class="labels">Loại gỗ</label><input id="productMaterial" type="text" class="form-control" name="productMaterial"></div>
-                                                <div class="col-md-12 mb-3"><label for="productColor" class="labels">Màu sơn</label><input id="productColor" type="text" class="form-control" name="productColor"></div>
+                                                <div class="col-md-12 mb-3"><label for="productDimension"
+                                                                                   class="labels">Kích
+                                                    thước</label><input id="productDimension" type="text"
+                                                                        class="form-control" name="productDimension">
+                                                </div>
+                                                <div class="col-md-12 mb-3"><label for="productWeight" class="labels">Khối
+                                                    lượng</label><input id="productWeight" type="text"
+                                                                        class="form-control" name="productWeight"></div>
+                                                <div class="col-md-12 mb-3"><label for="productMaterial" class="labels">Loại
+                                                    gỗ</label><input id="productMaterial" type="text"
+                                                                     class="form-control" name="productMaterial"></div>
+                                                <div class="col-md-12 mb-3"><label for="productColor" class="labels">Màu
+                                                    sơn</label><input id="productColor" type="text" class="form-control"
+                                                                      name="productColor"></div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-md-6 mb-3"><label for="productPrice" class="labels">Giá bán (VNĐ)</label><input id="productPrice" type="number" class="form-control" name="productPrice" min="0" max="9999999999" step="0.01" placeholder="0"></div>
-                                                <div class="col-md-6 mb-3"><label for="productCost" class="labels">Giá gốc (VNĐ)</label><input id="productCost" type="number" class="form-control" name="productCost" min="0" max="9999999999" step="0.01" placeholder="0"></div>
+                                                <div class="col-md-6 mb-3"><label for="productPrice" class="labels">Giá
+                                                    bán (VNĐ)</label><input id="productPrice" type="number"
+                                                                            class="form-control" name="productPrice"
+                                                                            min="0" max="9999999999" step="0.01"
+                                                                            placeholder="0"></div>
+                                                <div class="col-md-6 mb-3"><label for="productCost" class="labels">Giá
+                                                    gốc (VNĐ)</label><input id="productCost" type="number"
+                                                                            class="form-control" name="productCost"
+                                                                            min="0" max="9999999999" step="0.01"
+                                                                            placeholder="0"></div>
                                             </div>
-                                            <div class="row"><div class="col-md-6 mb-3"><label for="productQuantity" class="labels">Số lượng tồn kho</label><input id="productQuantity" type="number" class="form-control" name="productQuantity" min="0" max="<% out.print(Integer.MAX_VALUE); %>" step="1" placeholder="0"></div></div>
+                                            <div class="row">
+                                                <div class="col-md-6 mb-3"><label for="productQuantity" class="labels">Số
+                                                    lượng tồn kho</label><input id="productQuantity" type="number"
+                                                                                class="form-control"
+                                                                                name="productQuantity" min="0"
+                                                                                max="<% out.print(Integer.MAX_VALUE); %>"
+                                                                                step="1" placeholder="0"></div>
+                                            </div>
                                             <div class="row">
                                                 <div class="col-md-6 mb-3">
                                                     <label for="category" class="labels">Loại sản phẩm</label>
                                                     <div class="checkbox pl-0">
                                                         <select id="category" name="category" class="w-100">
-                                                            <jsp:useBean id="categories" scope="request" type="java.util.List"/>
+                                                            <jsp:useBean id="categories" scope="request"
+                                                                         type="java.util.List"/>
                                                             <c:forEach items="${categories}" var="category">
                                                                 <option value="${category.categoryId}">${category.categoryName}</option>
                                                             </c:forEach>
@@ -93,7 +131,8 @@
                                                     <label for="brand" class="labels">Thương hiệu</label>
                                                     <div class="checkbox pl-0">
                                                         <select id="brand" name="brand" class="w-100">
-                                                            <jsp:useBean id="brands" scope="request" type="java.util.List"/>
+                                                            <jsp:useBean id="brands" scope="request"
+                                                                         type="java.util.List"/>
                                                             <c:forEach items="${brands}" var="brand">
                                                                 <option value="${brand.brandId}">${brand.brandName}</option>
                                                             </c:forEach>
@@ -105,15 +144,22 @@
                                         <div class="col-md-6">
                                             <div class="row mt-2">
                                                 <div class="row">
-                                                    <div class="col-md-12"><label class="labels">Hình ảnh sản phẩm (Tối đa 6 ảnh)</label></div>
+                                                    <div class="col-md-12"><label class="labels">Hình ảnh sản phẩm (Tối
+                                                        đa 6 ảnh)</label></div>
                                                 </div>
                                                 <div class="row mt-5">
                                                     <c:forEach begin="1" end="6" varStatus="loop">
                                                         <div class="col-md-6 mb-6">
-                                                            <div class="bg-img-empty mb-1" style="width: 150px; height: 150px">
-                                                                <img class="product-images image-<c:out value="${loop.index}"/> mb-1" width="150px" height="150px" style="object-fit: cover; display: none" alt="Trống" src="#">
+                                                            <div class="bg-img-empty mb-1"
+                                                                 style="width: 150px; height: 150px">
+                                                                <img class="product-images image-<c:out value="${loop.index}"/> mb-1"
+                                                                     width="150px" height="150px"
+                                                                     style="object-fit: cover; display: none"
+                                                                     alt="Trống" src="#">
                                                             </div>
-                                                            <input type="file" class="text-center mb-3 file-upload-<c:out value="${loop.index}"/>" name="image_<c:out value="${loop.index}"/>">
+                                                            <input type="file"
+                                                                   class="text-center mb-3 file-upload-<c:out value="${loop.index}"/>"
+                                                                   name="image_<c:out value="${loop.index}"/>">
                                                         </div>
                                                     </c:forEach>
                                                 </div>
@@ -122,11 +168,18 @@
                                         </div>
                                     </div>
                                     <div class="row mt-5 ml-2 mr-2">
-                                        <div class="mt-5 text-center col-md-6"><button class="btn btn-primary ct-button float-right mr-5" type="submit"><i class="fa fa-check"></i>&nbsp;Đồng ý</button></div>
                                         <div class="mt-5 text-center col-md-6">
-                                            <button class="btn btn-primary ct-button float-left ml-5" type="reset"><i class="fa fa-undo-alt"></i>&nbsp;Nhập lại</button>
+                                            <button class="btn btn-primary ct-button float-right mr-5" type="submit"><i
+                                                    class="fa fa-check"></i>&nbsp;Đồng ý
+                                            </button>
+                                        </div>
+                                        <div class="mt-5 text-center col-md-6">
+                                            <button class="btn btn-primary ct-button float-left ml-5" type="reset"><i
+                                                    class="fa fa-undo-alt"></i>&nbsp;Nhập lại
+                                            </button>
                                             <div class="float-right pr-3">
-                                                <a href="${pageContext.request.contextPath}/admin/product" class="btn btn-primary ct-button">
+                                                <a href="${pageContext.request.contextPath}/admin/product"
+                                                   class="btn btn-primary ct-button">
                                                     <i class="fa fa-angle-left"></i>&nbsp;Quay lại
                                                 </a>
                                             </div>
@@ -179,11 +232,11 @@
 <!--===============================================================================================-->
 <script>
     $(function () {
-       $('.product-images').each(function () {
-           $(this).on('load', function () {
-               $(this).show();
-           });
-       });
+        $('.product-images').each(function () {
+            $(this).on('load', function () {
+                $(this).show();
+            });
+        });
     });
 </script>
 

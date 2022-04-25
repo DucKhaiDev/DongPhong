@@ -14,7 +14,8 @@ public class Review implements Serializable {
     private Timestamp reviewDate;
     private boolean isRate;
 
-    public Review() {}
+    public Review() {
+    }
 
     public Review(User user, Product product, double reviewRate, String reviewContent, Timestamp reviewDate, boolean isRate) {
         this.user = user;

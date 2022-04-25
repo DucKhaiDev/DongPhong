@@ -33,7 +33,7 @@ public class ReleaseMemory {
                 }
             }
         }
-        
+
         //Delete unused products images
         File product_images = new File(Constant.Path.PRODUCT_IMAGES);
         if (!product_images.exists()) {

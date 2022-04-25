@@ -1,30 +1,25 @@
 package Controller.Client;
 
-import Entity.WLItem;
-import Services.deploy.WLItemService;
-import jakarta.servlet.*;
-import jakarta.servlet.http.*;
-import jakarta.servlet.annotation.*;
+import Util.Constant;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.util.List;
 
 @WebServlet(name = "RemoveProductFromWishList", value = "/wishlist/remove")
 public class RemoveProductFromWishList extends HttpServlet {
-    private final WLItemService wlItemService = new WLItemService();
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int wlItemId = Integer.parseInt(request.getParameter("id"));
-        String wishListId = wlItemService.getWLItem(wlItemId).getWishList().getWishListId();
-        wlItemService.delete(wlItemId);
+        String wishListId = Constant.Service.WL_ITEM_SERVICE.getWLItem(wlItemId).getWishList().getWishListId();
+        Constant.Service.WL_ITEM_SERVICE.delete(wlItemId);
 
         //Update wishlist items
-        HttpSession session = request.getSession();
-        List<WLItem> wlItems = wlItemService.getItemByWishList(wishListId);
-        session.setAttribute("wlItems", wlItems);
+        request.getSession().setAttribute("wlItems", Constant.Service.WL_ITEM_SERVICE.getItemByWishList(wishListId));
 
-        String forwardTo = request.getParameter("forwardTo");
-        response.sendRedirect(forwardTo);
+        response.sendRedirect(request.getParameter("forwardTo"));
     }
 }

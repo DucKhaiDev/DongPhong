@@ -1,17 +1,16 @@
 package Tools;
 
 import Entity.Province;
-import Services.deploy.ProvinceService;
+import Util.Constant;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 public class CalculateShipping {
-    private final static ProvinceService provinceService = new ProvinceService();
-    private final static Province BacNinh = provinceService.getProvince(27);
+    private final static Province BacNinh = Constant.Service.PROVINCE_SERVICE.getProvince(27);
 
     public static BigDecimal calculateShipping(int id) {
-        Province province = provinceService.getProvince(id);
+        Province province = Constant.Service.PROVINCE_SERVICE.getProvince(id);
         double lat1 = BacNinh.getLatitude();
         double long1 = BacNinh.getLongitude();
         double lat2 = province.getLatitude();

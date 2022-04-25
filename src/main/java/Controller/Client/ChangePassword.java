@@ -1,18 +1,18 @@
 package Controller.Client;
 
 import Entity.User;
-import Services.deploy.UserService;
 import Util.Constant;
-import jakarta.servlet.*;
-import jakarta.servlet.http.*;
-import jakarta.servlet.annotation.*;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
 @WebServlet(name = "ChangePassword", value = "/change-password")
 public class ChangePassword extends HttpServlet {
-    private final UserService userService = new UserService();
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher(Constant.Path.CHANGE_PASSWORD).forward(request, response);
@@ -38,9 +38,9 @@ public class ChangePassword extends HttpServlet {
         if (oldPassword.equals(user.getPassword())) {
             if (newPassword.equals(repeatPassword)) {
                 user.setPassword(newPassword);
-                userService.edit(user);
+                Constant.Service.USER_SERVICE.edit(user);
                 response.sendRedirect("./logout");
-            } else  {
+            } else {
                 String cpw_notmatch = "Không trùng khớp!";
                 request.setAttribute("cpw_notmatch", cpw_notmatch);
                 request.getRequestDispatcher(Constant.Path.CHANGE_PASSWORD).forward(request, response);

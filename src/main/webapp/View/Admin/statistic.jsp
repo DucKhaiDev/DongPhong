@@ -1,13 +1,10 @@
 <%@ page import="java.text.SimpleDateFormat" %>
-<%@ page import="java.time.LocalDate" %>
-<%@ page import="java.util.Date" %>
-<%@ page import="java.time.ZoneId" %>
-<%@ page import="Services.deploy.ProImageService" %>
 <%@ page import="Entity.Product" %>
 <%@ page import="java.math.BigDecimal" %>
 <%@ page import="java.util.Locale" %>
 <%@ page import="java.text.NumberFormat" %>
 <%@ page import="java.sql.Timestamp" %>
+<%@ page import="Util.Constant" %>
 <%--
   User: duckhaidev
   Date: 4/21/2022
@@ -18,21 +15,22 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Dong Phong</title>
     <!-- BOOTSTRAP STYLES-->
-    <link href="${pageContext.request.contextPath}/assets/css/bootstrap.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/css/bootstrap.css" rel="stylesheet"/>
     <!-- FONTAWESOME STYLES-->
-    <link href="${pageContext.request.contextPath}/assets/fonts/fontawesome-pro-5.15.4-web/css/all.min.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/fonts/fontawesome-pro-5.15.4-web/css/all.min.css"
+          rel="stylesheet"/>
     <!-- MORRIS CHART STYLES-->
 
     <!-- CUSTOM STYLES-->
-    <link href="${pageContext.request.contextPath}/assets/css/custom.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/css/custom.css" rel="stylesheet"/>
     <!-- GOOGLE FONTS-->
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
     <!-- TABLE STYLES-->
-    <link href="${pageContext.request.contextPath}/assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet"/>
     <%---------------------------------------------------------------------------------------------%>
     <style>
         .table > tbody > tr > td > p {
@@ -51,18 +49,19 @@
     <jsp:include page="navside.jsp"/>
     <!-- /. NAV SIDE  -->
 
-    <div id="page-wrapper" >
+    <div id="page-wrapper">
         <div id="page-inner">
             <div class="row">
                 <div class="col-md-12">
                     <h2>Báo Cáo & Thống Kê</h2>
                     <div class="row">
-                        <div class="col-md-12"><h5>Chào mừng ${sessionScope.displayName}, rất vui được gặp lại bạn. </h5></div>
+                        <div class="col-md-12"><h5>Chào mừng ${sessionScope.displayName}, rất vui được gặp lại
+                            bạn. </h5></div>
                     </div>
                 </div>
             </div>
             <!-- /. ROW  -->
-            <hr />
+            <hr/>
             <div class="row">
                 <div class="col-md-12">
                     <!-- Advanced Tables -->
@@ -73,14 +72,19 @@
                         <div class="row panel-body ml-0 mr-0">
                             <div class="col-md-12 bor21 mb-3">
                                 <h4 class="text-uppercase mb-3" style="color: orangered">Top sản phẩm bán chạy nhất</h4>
-                                <form action="<c:url value="/admin/statistic"/>" method="get" class="row d-flex justify-content-center mt-3 mb-3">
+                                <form action="<c:url value="/admin/statistic"/>" method="get"
+                                      class="row d-flex justify-content-center mt-3 mb-3">
                                     <div class="col-md-2 mb-3">
                                         <label for="fromDate" class="labels">Từ ngày</label>
-                                        <input id="fromDate" type="date" value="<% out.print(new SimpleDateFormat("yyyy-MM-dd").format((Timestamp) request.getAttribute("fromDate"))); %>" class="form-control text-center" name="fromDate">
+                                        <input id="fromDate" type="date"
+                                               value="<% out.print(new SimpleDateFormat("yyyy-MM-dd").format((Timestamp) request.getAttribute("fromDate"))); %>"
+                                               class="form-control text-center" name="fromDate">
                                     </div>
                                     <div class="col-md-2 mb-3">
                                         <label for="toDate" class="labels">Đến ngày</label>
-                                        <input id="toDate" type="date" value="<% out.print(new SimpleDateFormat("yyyy-MM-dd").format((Timestamp) request.getAttribute("toDate"))); %>" class="form-control text-center" name="toDate">
+                                        <input id="toDate" type="date"
+                                               value="<% out.print(new SimpleDateFormat("yyyy-MM-dd").format((Timestamp) request.getAttribute("toDate"))); %>"
+                                               class="form-control text-center" name="toDate">
                                     </div>
                                     <div class="col-md-2 mb-3 d-flex align-items-end">
                                         <button type="submit" class="btn btn-primary ct-button w-100">
@@ -92,16 +96,16 @@
                                 <div class="table-responsive">
                                     <table class="table table-striped table-bordered table-hover" id="table-1">
                                         <thead>
-                                            <tr>
-                                                <th>STT</th>
-                                                <th>ID</th>
-                                                <th>Hình ảnh</th>
-                                                <th>Tên sản phẩm</th>
-                                                <th>Giá bán</th>
-                                                <th>Loại sản phẩm</th>
-                                                <th>Thương hiệu</th>
-                                                <th>Số lượng đã bán</th>
-                                            </tr>
+                                        <tr>
+                                            <th>STT</th>
+                                            <th>ID</th>
+                                            <th>Hình ảnh</th>
+                                            <th>Tên sản phẩm</th>
+                                            <th>Giá bán</th>
+                                            <th>Loại sản phẩm</th>
+                                            <th>Thương hiệu</th>
+                                            <th>Số lượng đã bán</th>
+                                        </tr>
                                         </thead>
                                         <tbody>
                                         <c:set var="number" value="0"/>
@@ -112,9 +116,8 @@
                                                 <td>${entry.key.productId}</td>
                                                 <c:set var="product" value="${entry.key}"/>
                                                 <%
-                                                    ProImageService imageService = new ProImageService();
                                                     Product product = (Product) pageContext.getAttribute("product");
-                                                    String reImage = imageService.getProReImage(product.getProductId());
+                                                    String reImage = Constant.Service.PRO_IMAGE_SERVICE.getProReImage(product.getProductId());
                                                     request.setAttribute("reImage", reImage);
                                                 %>
                                                 <c:url value="/images/product-images?fname=${reImage}" var="imageUrl"/>
@@ -123,7 +126,8 @@
                                                         <td><i>NULL</i></td>
                                                     </c:when>
                                                     <c:otherwise>
-                                                        <td><img width="50" height="50" src="${imageUrl}" style="object-fit: cover;" alt="Hình ảnh"></td>
+                                                        <td><img width="50" height="50" src="${imageUrl}"
+                                                                 style="object-fit: cover;" alt="Hình ảnh"></td>
                                                     </c:otherwise>
                                                 </c:choose>
                                                 <td>${entry.key.productName}</td>
@@ -143,7 +147,8 @@
                                 </div>
                             </div>
                             <div class="col-md-12 bor21 mb-3">
-                                <h4 class="text-uppercase mb-3" style="color: orangered">Top sản phẩm được yêu thích nhất</h4>
+                                <h4 class="text-uppercase mb-3" style="color: orangered">Top sản phẩm được yêu thích
+                                    nhất</h4>
                                 <div class="table-responsive">
                                     <table class="table table-striped table-bordered table-hover" id="table-2">
                                         <thead>
@@ -167,9 +172,8 @@
                                                 <td>${entry.key.productId}</td>
                                                 <c:set var="product" value="${entry.key}"/>
                                                 <%
-                                                    ProImageService imageService = new ProImageService();
                                                     Product product = (Product) pageContext.getAttribute("product");
-                                                    String reImage = imageService.getProReImage(product.getProductId());
+                                                    String reImage = Constant.Service.PRO_IMAGE_SERVICE.getProReImage(product.getProductId());
                                                     request.setAttribute("reImage", reImage);
                                                 %>
                                                 <c:url value="/images/product-images?fname=${reImage}" var="imageUrl"/>
@@ -178,7 +182,8 @@
                                                         <td><i>NULL</i></td>
                                                     </c:when>
                                                     <c:otherwise>
-                                                        <td><img width="50" height="50" src="${imageUrl}" style="object-fit: cover;" alt="Hình ảnh"></td>
+                                                        <td><img width="50" height="50" src="${imageUrl}"
+                                                                 style="object-fit: cover;" alt="Hình ảnh"></td>
                                                     </c:otherwise>
                                                 </c:choose>
                                                 <td>${entry.key.productName}</td>
@@ -198,7 +203,8 @@
                                 </div>
                             </div>
                             <div class="col-md-12 bor21">
-                                <h4 class="text-uppercase mb-3" style="color: orangered">Mức độ đánh giá các sản phẩm</h4>
+                                <h4 class="text-uppercase mb-3" style="color: orangered">Mức độ đánh giá các sản
+                                    phẩm</h4>
                                 <div class="table-responsive">
                                     <table class="table table-striped table-bordered table-hover" id="table-3">
                                         <thead>
@@ -222,9 +228,8 @@
                                                 <td>${entry.key.productId}</td>
                                                 <c:set var="product" value="${entry.key}"/>
                                                 <%
-                                                    ProImageService imageService = new ProImageService();
                                                     Product product = (Product) pageContext.getAttribute("product");
-                                                    String reImage = imageService.getProReImage(product.getProductId());
+                                                    String reImage = Constant.Service.PRO_IMAGE_SERVICE.getProReImage(product.getProductId());
                                                     request.setAttribute("reImage", reImage);
                                                 %>
                                                 <c:url value="/images/product-images?fname=${reImage}" var="imageUrl"/>
@@ -233,7 +238,8 @@
                                                         <td><i>NULL</i></td>
                                                     </c:when>
                                                     <c:otherwise>
-                                                        <td><img width="50" height="50" src="${imageUrl}" style="object-fit: cover;" alt="Hình ảnh"></td>
+                                                        <td><img width="50" height="50" src="${imageUrl}"
+                                                                 style="object-fit: cover;" alt="Hình ảnh"></td>
                                                     </c:otherwise>
                                                 </c:choose>
                                                 <td>${entry.key.productName}</td>

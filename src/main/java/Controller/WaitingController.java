@@ -1,22 +1,19 @@
 package Controller;
 
 import Entity.*;
-import Services.deploy.*;
-import jakarta.servlet.*;
-import jakarta.servlet.http.*;
-import jakarta.servlet.annotation.*;
+import Util.Constant;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.util.List;
 
 @WebServlet(name = "WaitingController", value = "/waiting")
 public class WaitingController extends HttpServlet {
-    private final UserService userService = new UserService();
-    private final WishListService wishListService = new WishListService();
-    private final WLItemService wlItemService = new WLItemService();
-    private final CartService cartService = new CartService();
-    private final CartItemService cartItemService = new CartItemService();
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
@@ -25,7 +22,7 @@ public class WaitingController extends HttpServlet {
         String username = (String) session.getAttribute("username");
         String password = (String) session.getAttribute("password");
         if (username != null && password != null) {
-            User user = userService.login(username, password);
+            User user = Constant.Service.USER_SERVICE.login(username, password);
             session.setAttribute("account", user);
         }
 
@@ -34,33 +31,21 @@ public class WaitingController extends HttpServlet {
             request.setAttribute("username", user.getUsername());
 
             //displayName
-            String displayName = user.getUsername();
-            String firstName = user.getFirstName();
-            String lastName = user.getLastName();
-
-            if (lastName != null && !lastName.trim().equals("")) {
-                displayName = lastName;
-
-                if (firstName != null && !firstName.trim().equals("")) {
-                    displayName += " " + firstName;
-                }
-            }
-            session.setAttribute("displayName", displayName);
+            session.setAttribute("displayName", WaitingController.displayName(user));
 
             //wishlist
-            WishList wishList = wishListService.getWishListByUser(user.getUserId());
+            WishList wishList = Constant.Service.WISH_LIST_SERVICE.getWishListByUser(user.getUserId());
             session.setAttribute("wishList", wishList);
 
             //wishlist items
-            List<WLItem> wlItems = wlItemService.getItemByWishList(wishList.getWishListId());
-            session.setAttribute("wlItems", wlItems);
+            session.setAttribute("wlItems", Constant.Service.WL_ITEM_SERVICE.getItemByWishList(wishList.getWishListId()));
 
             //cart
-            Cart cart = cartService.getLastCart(user.getUserId());
+            Cart cart = Constant.Service.CART_SERVICE.getLastCart(user.getUserId());
             session.setAttribute("cart", cart);
 
             //cart items
-            List<CartItem> cartItems = cartItemService.getItemByCart(cart.getCartId());
+            List<CartItem> cartItems = Constant.Service.CART_ITEM_SERVICE.getItemByCart(cart.getCartId());
             session.setAttribute("cartItems", cartItems);
 
             if (session.getAttribute("forwardTo") != null) {
@@ -73,5 +58,21 @@ public class WaitingController extends HttpServlet {
         } else {
             response.sendRedirect(request.getContextPath() + "/login");
         }
+    }
+
+    public static String displayName(User user) {
+        String displayName = user.getUsername();
+        String firstName = user.getFirstName();
+        String lastName = user.getLastName();
+
+        if (lastName != null && !lastName.trim().equals("")) {
+            displayName = lastName;
+
+            if (firstName != null && !firstName.trim().equals("")) {
+                displayName += " " + firstName;
+            }
+        }
+
+        return displayName;
     }
 }

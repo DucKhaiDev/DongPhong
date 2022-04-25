@@ -4,20 +4,18 @@ import Entity.Product;
 import Entity.User;
 import Entity.WLItem;
 import Entity.WishList;
-import Services.deploy.ProductService;
-import Services.deploy.WLItemService;
-import jakarta.servlet.*;
-import jakarta.servlet.http.*;
-import jakarta.servlet.annotation.*;
+import Util.Constant;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
-import java.util.List;
 
 @WebServlet(name = "AddToWishList", value = "/wishlist/add")
 public class AddToWishList extends HttpServlet {
-    private final ProductService productService = new ProductService();
-    private final WLItemService wlItemService = new WLItemService();
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String forwardTo = request.getParameter("forwardTo");
@@ -32,17 +30,16 @@ public class AddToWishList extends HttpServlet {
         }
 
         String productId = request.getParameter("id");
-        Product product = productService.getProduct(productId);
+        Product product = Constant.Service.PRODUCT_SERVICE.getProduct(productId);
         WishList wishList = (WishList) session.getAttribute("wishList");
 
         //Add the product if it doesn't exist in the wishList
-        if (!wlItemService.checkExistItem(productId, wishList.getWishListId())) {
+        if (!Constant.Service.WL_ITEM_SERVICE.checkExistItem(productId, wishList.getWishListId())) {
             //Add product to wishList
-            wlItemService.insert(new WLItem(product, wishList));
+            Constant.Service.WL_ITEM_SERVICE.insert(new WLItem(product, wishList));
 
             //Update wishlist items
-            List<WLItem> wlItems = wlItemService.getItemByWishList(wishList.getWishListId());
-            session.setAttribute("wlItems", wlItems);
+            session.setAttribute("wlItems", Constant.Service.WL_ITEM_SERVICE.getItemByWishList(wishList.getWishListId()));
         }
 
         response.sendRedirect(forwardTo);

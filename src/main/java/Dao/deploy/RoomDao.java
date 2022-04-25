@@ -12,14 +12,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RoomDao implements IRoomDao {
-    private Connection conn = null;
-    private PreparedStatement ps = null;
-    private ResultSet rs = null;
-
     @Override
     public Room getRoom(String roomId) {
         Room room = new Room();
-        conn = DBConnect.getConnection();
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
 
         try {
             ps = conn.prepareStatement("SELECT * FROM [ROOM] WHERE ROOM_ID = ?");
@@ -41,7 +39,9 @@ public class RoomDao implements IRoomDao {
     @Override
     public List<Room> getAll() {
         List<Room> rooms = new ArrayList<>();
-        conn = DBConnect.getConnection();
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
 
         try {
             ps = conn.prepareStatement("SELECT * FROM [ROOM] ORDER BY ROOM_ID ASC");

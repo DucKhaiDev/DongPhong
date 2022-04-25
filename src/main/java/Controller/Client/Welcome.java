@@ -1,7 +1,6 @@
 package Controller.Client;
 
 import Entity.*;
-import Services.deploy.*;
 import Tools.ReleaseMemory;
 import Util.Constant;
 import jakarta.servlet.ServletContext;
@@ -16,12 +15,6 @@ import java.util.List;
 
 @WebServlet(name = "Welcome", value = "/welcome")
 public class Welcome extends HttpServlet {
-    private final CategoryService categoryService = new CategoryService();
-    private final BrandService brandService = new BrandService();
-    private final UserService userService = new UserService();
-    private final ProImageService imageService = new ProImageService();
-    private final ProductService productService = new ProductService();
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //Synchronized
@@ -36,39 +29,29 @@ public class Welcome extends HttpServlet {
         deleteUnusedImg.start();
 
         ServletContext context = request.getServletContext();
+        context.setAttribute("lvrCategories", Constant.Service.CATEGORY_SERVICE.getCategoryByRoom("LVR"));
+        context.setAttribute("kitCategories", Constant.Service.CATEGORY_SERVICE.getCategoryByRoom("KIT"));
+        context.setAttribute("bedCategories", Constant.Service.CATEGORY_SERVICE.getCategoryByRoom("BED"));
+        context.setAttribute("offCategories", Constant.Service.CATEGORY_SERVICE.getCategoryByRoom("OFF"));
+        context.setAttribute("altCategories", Constant.Service.CATEGORY_SERVICE.getCategoryByRoom("ALT"));
+        context.setAttribute("rooms", Constant.Service.ROOM_SERVICE.getAll());
+        context.setAttribute("brands", Constant.Service.BRAND_SERVICE.getAll());
 
-        List<Category> lvrCategories = categoryService.getCategoryByRoom("LVR");
-        context.setAttribute("lvrCategories", lvrCategories);
-        List<Category> kitCategories = categoryService.getCategoryByRoom("KIT");
-        context.setAttribute("kitCategories", kitCategories);
-        List<Category> bedCategories = categoryService.getCategoryByRoom("BED");
-        context.setAttribute("bedCategories", bedCategories);
-        List<Category> offCategories = categoryService.getCategoryByRoom("OFF");
-        context.setAttribute("offCategories", offCategories);
-        List<Category> altCategories = categoryService.getCategoryByRoom("ALT");
-        context.setAttribute("altCategories", altCategories);
+        request.setAttribute("products", Constant.Service.PRODUCT_SERVICE.getAll());
+        request.setAttribute("productLvr", Constant.Service.PRODUCT_SERVICE.countProduct("LVR"));
+        request.setAttribute("productKit", Constant.Service.PRODUCT_SERVICE.countProduct("KIT"));
+        request.setAttribute("productBed", Constant.Service.PRODUCT_SERVICE.countProduct("BED"));
+        request.setAttribute("productOff", Constant.Service.PRODUCT_SERVICE.countProduct("OFF"));
+        request.setAttribute("productAlt", Constant.Service.PRODUCT_SERVICE.countProduct("ALT"));
 
-        List<Room> rooms = new RoomService().getAll();
-        context.setAttribute("rooms", rooms);
-
-        List<Brand> brands = brandService.getAll();
-        context.setAttribute("brands", brands);
-
-        List<Product> products = productService.getAll();
-        request.setAttribute("products", products);
-        request.setAttribute("productLvr", productService.countProduct("LVR"));
-        request.setAttribute("productKit", productService.countProduct("KIT"));
-        request.setAttribute("productBed", productService.countProduct("BED"));
-        request.setAttribute("productOff", productService.countProduct("OFF"));
-        request.setAttribute("productAlt", productService.countProduct("ALT"));
         request.getRequestDispatcher(Constant.Path.HOME).forward(request, response);
     }
 
     private synchronized List<User> getUsers() {
-        return userService.getAll();
+        return Constant.Service.USER_SERVICE.getAll();
     }
 
     private synchronized List<ProImage> getImages() {
-        return imageService.getAll();
+        return Constant.Service.PRO_IMAGE_SERVICE.getAll();
     }
 }

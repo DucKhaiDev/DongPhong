@@ -14,7 +14,8 @@ public class Voucher implements Serializable {
     private Timestamp fromDate;
     private Timestamp toDate;
 
-    public Voucher() {}
+    public Voucher() {
+    }
 
     public Voucher(String voucherId, int minProduct, BigDecimal minValue, double discount, Timestamp fromDate, Timestamp toDate) {
         this.voucherId = voucherId;

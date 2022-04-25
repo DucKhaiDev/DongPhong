@@ -9,6 +9,7 @@
 <%@ page import="Entity.Review" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="Services.deploy.*" %>
+<%@ page import="Util.Constant" %>
 <%--
   Author: duckhaidev
   Date: 1/11/2022
@@ -26,29 +27,39 @@
     <!--===============================================================================================-->
     <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/assets/images/icons/icon-logo.png"/>
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/assets/vendor/bootstrap/css/bootstrap.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/fonts/fontawesome-pro-5.15.4-web/css/all.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/assets/fonts/fontawesome-pro-5.15.4-web/css/all.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/fonts/iconic/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/assets/fonts/iconic/css/material-design-iconic-font.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/fonts/linearicons-v1.0.0/icon-font.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/assets/fonts/linearicons-v1.0.0/icon-font.min.css">
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/animate/animate.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/css-hamburgers/hamburgers.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/assets/vendor/css-hamburgers/hamburgers.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/animsition/css/animsition.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/assets/vendor/animsition/css/animsition.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/select2/select2.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/assets/vendor/select2/select2.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/daterangepicker/daterangepicker.css">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/assets/vendor/daterangepicker/daterangepicker.css">
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/slick/slick.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/MagnificPopup/magnific-popup.css">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/assets/vendor/MagnificPopup/magnific-popup.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/assets/vendor/perfect-scrollbar/perfect-scrollbar.css">
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/util.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/main.css">
@@ -76,13 +87,14 @@
             <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
         </a>
 
-        <a href="${pageContext.request.contextPath}/products/category?id=${product.category.categoryId}" class="stext-109 cl8 hov-cl1 trans-04 font-size-15">
+        <a href="${pageContext.request.contextPath}/products/category?id=${product.category.categoryId}"
+           class="stext-109 cl8 hov-cl1 trans-04 font-size-15">
             ${product.category.categoryName}
             <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
         </a>
 
         <span class="stext-109 cl4 font-size-15">
-				${product.productName}
+            ${product.productName}
         </span>
     </div>
 </div>
@@ -99,8 +111,7 @@
 
                         <div class="slick3 gallery-lb">
                             <%
-                                ProImageService imageService = new ProImageService();
-                                List<ProImage> images = imageService.getProImage(((Product) request.getAttribute("product")).getProductId());
+                                List<ProImage> images = Constant.Service.PRO_IMAGE_SERVICE.getProImage(((Product) request.getAttribute("product")).getProductId());
                                 request.setAttribute("images", images);
                             %>
                             <c:forEach items="${images}" var="image">
@@ -109,7 +120,8 @@
                                     <div class="wrap-pic-w pos-relative">
                                         <img class="product-detail-img" src="${imageUrl}" alt="Hình ảnh sản phẩm">
 
-                                        <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="${imageUrl}">
+                                        <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
+                                           href="${imageUrl}">
                                             <i class="fa fa-expand"></i>
                                         </a>
                                     </div>
@@ -133,7 +145,7 @@
                     <span class="fs-20 cl11">
                         <%
                             double productRate = product.getProductRate();
-                            productRate = Math.round(productRate*2)/2.0;
+                            productRate = Math.round(productRate * 2) / 2.0;
                         %>
 						<i class="<% if (Double.compare(productRate, 0.5) == 0) out.print("zmdi zmdi-star-half"); else if (Double.compare(productRate, 1.0) > -1) out.print("zmdi zmdi-star"); else out.print("zmdi zmdi-star-outline"); %>"></i>
                         <i class="<% if (Double.compare(productRate, 1.5) == 0) out.print("zmdi zmdi-star-half"); else if (Double.compare(productRate, 2.0) > -1) out.print("zmdi zmdi-star"); else out.print("zmdi zmdi-star-outline"); %>"></i>
@@ -164,7 +176,8 @@
                         </div>
                     </c:if>
                     <span class="stext-102 cl3">
-                        (Tiết kiệm:<span class="product-price m-l-8"><% out.print(dongFormat.format(productCost.subtract(productPrice))); %></span>)
+                        (Tiết kiệm:<span
+                            class="product-price m-l-8"><% out.print(dongFormat.format(productCost.subtract(productPrice))); %></span>)
                     </span>
                     <hr>
 
@@ -181,7 +194,8 @@
 
                     <span class="stext-102 cl3 d-block">
                         <!--Lấy số điện thoại của user consultant-->
-                        Gọi để được tư vấn mua hàng ngay:<span class="product-price m-l-8"><% out.print((new UserService()).getUser("CONSULTANT").getPhone()); %></span>
+                        Gọi để được tư vấn mua hàng ngay:<span
+                            class="product-price m-l-8"><% out.print(Constant.Service.USER_SERVICE.getUser("CONSULTANT").getPhone()); %></span>
                     </span>
                     <span class="stext-102 cl3 d-block">
                         (Từ 7:30 - 20:30 hằng ngày)
@@ -190,7 +204,8 @@
                     <!--  -->
                     <div class="p-t-33">
                         <div class="flex-w flex-r-m p-b-10">
-                            <form action="<c:url value="/cart/add"/>" method="get" class="size-204 flex-w flex-m respon6-next">
+                            <form action="<c:url value="/cart/add"/>" method="get"
+                                  class="size-204 flex-w flex-m respon6-next">
                                 <!--Sign url-->
                                 <input type="hidden" class="input-add-item" name="forwardTo">
                                 <!--Sign product-->
@@ -200,7 +215,8 @@
                                     <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
                                         <i class="fs-16 zmdi zmdi-minus"></i>
                                     </div>
-                                    <input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product" value="<%
+                                    <input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product"
+                                           value="<%
                                         if (product.getProductQuantity() > 0) {
                                             out.print(1);
                                         } else {
@@ -223,7 +239,9 @@
                                     </c:choose>
                                 </span>
 
-                                <button type="button" class=" btn-add-item flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail" <c:if test="${product.productQuantity == 0}">disabled</c:if>>
+                                <button type="button"
+                                        class=" btn-add-item flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail"
+                                        <c:if test="${product.productQuantity == 0}">disabled</c:if>>
                                     Thêm vào giỏ hàng
                                 </button>
                             </form>
@@ -233,20 +251,25 @@
                     <!--  -->
                     <div class="flex-w flex-m p-l-100 p-t-40 respon7">
                         <div class="flex-m bor9 p-r-10 m-r-11">
-                            <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100" data-tooltip="Add to Wishlist">
+                            <a href="#"
+                               class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100"
+                               data-tooltip="Add to Wishlist">
                                 <i class="zmdi zmdi-favorite"></i>
                             </a>
                         </div>
 
-                        <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Facebook">
+                        <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100"
+                           data-tooltip="Facebook">
                             <i class="fab fa-facebook"></i>
                         </a>
 
-                        <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Twitter">
+                        <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100"
+                           data-tooltip="Twitter">
                             <i class="fab fa-twitter"></i>
                         </a>
 
-                        <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Google Plus">
+                        <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100"
+                           data-tooltip="Google Plus">
                             <i class="fab fa-google-plus"></i>
                         </a>
                     </div>
@@ -268,7 +291,9 @@
                     </li>
 
                     <li class="nav-item p-b-10">
-                        <a class="nav-link" data-toggle="tab" href="#reviews" role="tab">Bình luận (<% out.print(new ReviewService().countReview(((Product) request.getAttribute("product")).getProductId())); %>)</a>
+                        <a class="nav-link" data-toggle="tab" href="#reviews" role="tab">Bình luận
+                            (<% out.print(Constant.Service.REVIEW_SERVICE.countReview(((Product) request.getAttribute("product")).getProductId())); %>
+                            )</a>
                     </li>
                 </ul>
 
@@ -342,8 +367,11 @@
                                     <c:forEach items="${reviews}" var="review">
                                         <div class="flex-w flex-t p-b-68">
                                             <div class="wrap-pic-s size-109 bor0 of-hidden m-r-18 m-t-6">
-                                                <c:url value="/images/avatar?fname=${review.user.avatar}" var="avatarUrl"/>
-                                                <img class="user-img-empty" <c:if test="${not empty review.user.avatar}">src="${avatarUrl}"</c:if> alt="">
+                                                <c:url value="/images/avatar?fname=${review.user.avatar}"
+                                                       var="avatarUrl"/>
+                                                <img class="user-img-empty"
+                                                     <c:if test="${not empty review.user.avatar}">src="${avatarUrl}"</c:if>
+                                                     alt="">
                                             </div>
 
                                             <div class="size-207">
@@ -379,7 +407,7 @@
                                                 </p>
 
                                                 <p class="stext-102 cl6">
-                                                    ${review.reviewContent}
+                                                        ${review.reviewContent}
                                                 </p>
                                             </div>
                                         </div>
@@ -418,11 +446,13 @@
                                                 <div class="row p-b-25">
                                                     <div class="col-12 p-b-5">
                                                         <label class="stext-102 cl3" for="review">Bình luận</label>
-                                                        <textarea class="size-110 bor8 stext-102 cl2 p-lr-20 p-tb-10" id="review" name="review"></textarea>
+                                                        <textarea class="size-110 bor8 stext-102 cl2 p-lr-20 p-tb-10"
+                                                                  id="review" name="review"></textarea>
                                                     </div>
                                                 </div>
 
-                                                <button type="submit" class="flex-c-m stext-101 cl0 size-112 bg7 bor11 hov-btn3 p-lr-15 trans-04 m-b-10">
+                                                <button type="submit"
+                                                        class="flex-c-m stext-101 cl0 size-112 bg7 bor11 hov-btn3 p-lr-15 trans-04 m-b-10">
                                                     Đồng ý
                                                 </button>
                                             </form>
@@ -431,9 +461,11 @@
                                             <h5 class="mtext-110 cl2">
                                                 Vui lòng đăng nhập/đăng ký để tham gia bình luận.
                                             </h5>
-                                            <a href="${pageContext.request.contextPath}/login" class="text-center"><i>Đăng nhập</i></a>
+                                            <a href="${pageContext.request.contextPath}/login" class="text-center"><i>Đăng
+                                                nhập</i></a>
                                             hoặc
-                                            <a href="${pageContext.request.contextPath}/register" class="text-center"><i>Đăng ký</i></a>
+                                            <a href="${pageContext.request.contextPath}/register"
+                                               class="text-center"><i>Đăng ký</i></a>
                                         </c:otherwise>
                                     </c:choose>
                                 </div>
@@ -470,39 +502,46 @@
                         <div class="block2">
                             <div class="block2-pic hov-img0">
                                 <%
-                                    String reImage = imageService.getProReImage(((Product) pageContext.getAttribute("relatedProduct")).getProductId());
+                                    String reImage = Constant.Service.PRO_IMAGE_SERVICE.getProReImage(((Product) pageContext.getAttribute("relatedProduct")).getProductId());
                                     request.setAttribute("reImage", reImage);
                                 %>
                                 <c:url value="/images/product-images?fname=${reImage}" var="productImg"/>
                                 <img class="product-img" src="${productImg}" alt="Hình ảnh">
 
-                                <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal${loop.index}">
+                                <a href="#"
+                                   class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal${loop.index}">
                                     Xem Qua
                                 </a>
                             </div>
 
                             <div class="block2-txt flex-w flex-t p-t-14">
                                 <div class="block2-txt-child1 flex-col-l ">
-                                    <a href="${pageContext.request.contextPath}/products/product-detail?id=${relatedProduct.productId}" class="product-name stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                                        ${relatedProduct.productName}
+                                    <a href="${pageContext.request.contextPath}/products/product-detail?id=${relatedProduct.productId}"
+                                       class="product-name stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+                                            ${relatedProduct.productName}
                                     </a>
                                 </div>
-                                <form action="<c:url value="/wishlist/add"/>" method="get" class="block2-txt-child2 flex-r p-t-3">
+                                <form action="<c:url value="/wishlist/add"/>" method="get"
+                                      class="block2-txt-child2 flex-r p-t-3">
                                     <!--Sign url-->
                                     <input type="hidden" class="input-add-item" name="forwardTo">
                                     <!--Sign product-->
                                     <input type="hidden" name="id" value="${product.productId}">
 
                                     <%
-                                        WLItemService wlItemService = new WLItemService();
                                         Product relatedProduct = (Product) pageContext.getAttribute("relatedProduct");
                                         WishList wishList = (WishList) session.getAttribute("wishList");
-                                        boolean existItem = wishList != null && wlItemService.checkExistItem(relatedProduct.getProductId(), wishList.getWishListId());
+                                        boolean existItem = wishList != null && Constant.Service.WL_ITEM_SERVICE.checkExistItem(relatedProduct.getProductId(), wishList.getWishListId());
                                         request.setAttribute("existItem", existItem);
                                     %>
-                                    <button type="button" class="btn-add-item btn-addwish-b2 dis-block pos-relative <c:if test="${!existItem}">js-addwish-b2</c:if>">
-                                        <img class="icon-heart1 dis-block trans-04" src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-01.png" <c:if test="${existItem}">style="opacity: 0;" </c:if>alt="ICON">
-                                        <img class="icon-heart2 dis-block trans-04 ab-t-l" src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-02.png" <c:if test="${existItem}">style="opacity: 1;" </c:if>alt="ICON">
+                                    <button type="button"
+                                            class="btn-add-item btn-addwish-b2 dis-block pos-relative <c:if test="${!existItem}">js-addwish-b2</c:if>">
+                                        <img class="icon-heart1 dis-block trans-04"
+                                             src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-01.png"
+                                             <c:if test="${existItem}">style="opacity: 0;" </c:if>alt="ICON">
+                                        <img class="icon-heart2 dis-block trans-04 ab-t-l"
+                                             src="${pageContext.request.contextPath}/assets/images/icons/icon-heart-02.png"
+                                             <c:if test="${existItem}">style="opacity: 1;" </c:if>alt="ICON">
                                     </button>
                                 </form>
                             </div>
@@ -558,7 +597,8 @@
                 <div class="container">
                     <div class="bg0 p-t-60 p-b-30 p-lr-15-lg how-pos3-parent">
                         <button class="how-pos3 hov3 trans-04 js-hide-modal${loop.index}">
-                            <img src="${pageContext.request.contextPath}/assets/images/icons/icon-close.png" alt="CLOSE">
+                            <img src="${pageContext.request.contextPath}/assets/images/icons/icon-close.png"
+                                 alt="CLOSE">
                         </button>
 
                         <div class="row">
@@ -570,15 +610,18 @@
 
                                         <div class="slick3 gallery-lb">
                                             <%
-                                                List<ProImage> relatedProductImages = imageService.getProImage(((Product) pageContext.getAttribute("relatedProduct")).getProductId());
+                                                List<ProImage> relatedProductImages = Constant.Service.PRO_IMAGE_SERVICE.getProImage(((Product) pageContext.getAttribute("relatedProduct")).getProductId());
                                                 request.setAttribute("relatedProductImages", relatedProductImages);
                                             %>
                                             <c:forEach items="${relatedProductImages}" var="image">
-                                                <c:url var="imageUrl" value="/images/product-images?fname=${image.imageName}"/>
+                                                <c:url var="imageUrl"
+                                                       value="/images/product-images?fname=${image.imageName}"/>
                                                 <div class="item-slick3" data-thumb="${imageUrl}">
                                                     <div class="wrap-pic-w pos-relative">
-                                                        <img class="modal-product-image" src="${imageUrl}" alt="Hình ảnh sản phẩm">
-                                                        <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="${imageUrl}">
+                                                        <img class="modal-product-image" src="${imageUrl}"
+                                                             alt="Hình ảnh sản phẩm">
+                                                        <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
+                                                           href="${imageUrl}">
                                                             <i class="fa fa-expand"></i>
                                                         </a>
                                                     </div>
@@ -605,14 +648,15 @@
                                         <span class="fs-24 cl11">
                                             <%
                                                 double relatedProductRate = relatedProduct.getProductRate();
-                                                relatedProductRate = Math.round(relatedProductRate*2)/2.0;
-                                                %>
+                                                relatedProductRate = Math.round(relatedProductRate * 2) / 2.0;
+                                            %>
                                             <i class="<% if (Double.compare(relatedProductRate, 0.5) == 0) out.print("zmdi zmdi-star-half"); else if (Double.compare(relatedProductRate, 1.0) > -1) out.print("zmdi zmdi-star"); else out.print("zmdi zmdi-star-outline"); %>"></i>
                                             <i class="<% if (Double.compare(relatedProductRate, 1.5) == 0) out.print("zmdi zmdi-star-half"); else if (Double.compare(relatedProductRate, 2.0) > -1) out.print("zmdi zmdi-star"); else out.print("zmdi zmdi-star-outline"); %>"></i>
                                             <i class="<% if (Double.compare(relatedProductRate, 2.5) == 0) out.print("zmdi zmdi-star-half"); else if (Double.compare(relatedProductRate, 3.0) > -1) out.print("zmdi zmdi-star"); else out.print("zmdi zmdi-star-outline"); %>"></i>
                                             <i class="<% if (Double.compare(relatedProductRate, 3.5) == 0) out.print("zmdi zmdi-star-half"); else if (Double.compare(relatedProductRate, 4.0) > -1) out.print("zmdi zmdi-star"); else out.print("zmdi zmdi-star-outline"); %>"></i>
                                             <i class="<% if (Double.compare(relatedProductRate, 4.5) == 0) out.print("zmdi zmdi-star-half"); else if (Double.compare(relatedProductRate, 5.0) == 0) out.print("zmdi zmdi-star"); else out.print("zmdi zmdi-star-outline"); %>"></i>
-                                            <span class="fs-18" style="color: #333;">&nbsp;|&nbsp;<% out.print(new ReviewService().countRate(relatedProduct.getProductId())); %> đánh giá&nbsp;|&nbsp;<% out.print(new ProductService().countSale(relatedProduct.getProductId())); %> đã bán</span>
+                                            <span class="fs-18"
+                                                  style="color: #333;">&nbsp;|&nbsp;<% out.print(Constant.Service.REVIEW_SERVICE.countRate(relatedProduct.getProductId())); %> đánh giá&nbsp;|&nbsp;<% out.print(Constant.Service.PRODUCT_SERVICE.countSale(relatedProduct.getProductId())); %> đã bán</span>
                                         </span>
                                         <br>
                                         <span class="product-price mtext-106 cl2 m-r-16"><% out.print(showPrice); %></span>
@@ -623,7 +667,8 @@
                                     <!--  -->
                                     <div class="p-t-33">
                                         <div class="flex-w flex-r-m p-b-10">
-                                            <form action="<c:url value="/cart/add"/>" method="get" class="size-204 flex-w flex-m respon6-next">
+                                            <form action="<c:url value="/cart/add"/>" method="get"
+                                                  class="size-204 flex-w flex-m respon6-next">
                                                 <!--Sign url-->
                                                 <input type="hidden" class="input-add-item" name="forwardTo">
                                                 <!--Sign product-->
@@ -633,7 +678,8 @@
                                                     <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
                                                         <i class="fs-16 zmdi zmdi-minus"></i>
                                                     </div>
-                                                    <input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product" value="<%
+                                                    <input class="mtext-104 cl3 txt-center num-product" type="number"
+                                                           name="num-product" value="<%
                                                         if (relatedProduct.getProductQuantity() > 0) {
                                                             out.print(1);
                                                         } else {
@@ -656,7 +702,9 @@
                                                     </c:choose>
                                                 </span>
 
-                                                <button type="button" class="btn-add-item flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail" <c:if test="${relatedProduct.productQuantity == 0}">disabled</c:if>>
+                                                <button type="button"
+                                                        class="btn-add-item flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail"
+                                                        <c:if test="${relatedProduct.productQuantity == 0}">disabled</c:if>>
                                                     Thêm vào giỏ hàng
                                                 </button>
                                             </form>
@@ -665,26 +713,35 @@
 
                                     <!--  -->
                                     <div class="flex-w flex-m p-l-100 p-t-40 respon7">
-                                        <form action="<c:url value="/wishlist/add"/>" method="get" class="flex-m bor9 p-r-10 m-r-11">
+                                        <form action="<c:url value="/wishlist/add"/>" method="get"
+                                              class="flex-m bor9 p-r-10 m-r-11">
                                             <!--Sign url-->
                                             <input type="hidden" class="input-add-item" name="forwardTo">
                                             <!--Sign product-->
                                             <input type="hidden" name="id" value="${relatedProduct.productId}">
 
-                                            <button type="button" class="btn-add-item fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100" data-tooltip="Thêm vào Danh sách yêu thích">
+                                            <button type="button"
+                                                    class="btn-add-item fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100"
+                                                    data-tooltip="Thêm vào Danh sách yêu thích">
                                                 <i class="zmdi zmdi-favorite"></i>
                                             </button>
                                         </form>
 
-                                        <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Facebook">
+                                        <a href="#"
+                                           class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100"
+                                           data-tooltip="Facebook">
                                             <i class="fab fa-facebook"></i>
                                         </a>
 
-                                        <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Twitter">
+                                        <a href="#"
+                                           class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100"
+                                           data-tooltip="Twitter">
                                             <i class="fab fa-twitter"></i>
                                         </a>
 
-                                        <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Google Plus">
+                                        <a href="#"
+                                           class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100"
+                                           data-tooltip="Google Plus">
                                             <i class="fab fa-google-plus"></i>
                                         </a>
                                     </div>
@@ -716,7 +773,7 @@
 <!--===============================================================================================-->
 <script src="${pageContext.request.contextPath}/assets/vendor/select2/select2.min.js"></script>
 <script>
-    $(".js-select2").each(function(){
+    $(".js-select2").each(function () {
         $(this).select2({
             minimumResultsForSearch: 20,
             dropdownParent: $(this).next('.dropDownSelect2')
@@ -737,12 +794,12 @@
 <!--===============================================================================================-->
 <script src="${pageContext.request.contextPath}/assets/vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
 <script>
-    $('.gallery-lb').each(function() { // the containers for all your galleries
+    $('.gallery-lb').each(function () { // the containers for all your galleries
         $(this).magnificPopup({
             delegate: 'a', // the selector for gallery item
             type: 'image',
             gallery: {
-                enabled:true
+                enabled: true
             },
             mainClass: 'mfp-fade'
         });
@@ -755,16 +812,16 @@
 <!--===============================================================================================-->
 <script src="${pageContext.request.contextPath}/assets/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 <script>
-    $('.js-pscroll').each(function(){
-        $(this).css('position','relative');
-        $(this).css('overflow','hidden');
+    $('.js-pscroll').each(function () {
+        $(this).css('position', 'relative');
+        $(this).css('overflow', 'hidden');
         const ps = new PerfectScrollbar(this, {
             wheelSpeed: 1,
             scrollingThreshold: 1000,
             wheelPropagation: false,
         });
 
-        $(window).on('resize', function(){
+        $(window).on('resize', function () {
             ps.update();
         })
     });
@@ -777,14 +834,14 @@
 <script>
     $(function () {
         <c:forEach items="${relatedProducts}" varStatus="loop">
-            $('.js-show-modal${loop.index}').on('click', function (e) {
-               e.preventDefault();
-               $('.js-modal${loop.index}').addClass('show-modal');
-            });
+        $('.js-show-modal${loop.index}').on('click', function (e) {
+            e.preventDefault();
+            $('.js-modal${loop.index}').addClass('show-modal');
+        });
 
-            $('.js-hide-modal${loop.index}').on('click', function () {
-               $('.js-modal${loop.index}').removeClass('show-modal')
-            });
+        $('.js-hide-modal${loop.index}').on('click', function () {
+            $('.js-modal${loop.index}').removeClass('show-modal')
+        });
         </c:forEach>
     });
 </script>

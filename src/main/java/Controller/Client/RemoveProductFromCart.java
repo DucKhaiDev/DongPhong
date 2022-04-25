@@ -1,30 +1,25 @@
 package Controller.Client;
 
-import Entity.CartItem;
-import Services.deploy.CartItemService;
-import jakarta.servlet.*;
-import jakarta.servlet.http.*;
-import jakarta.servlet.annotation.*;
+import Util.Constant;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.util.List;
 
 @WebServlet(name = "RemoveProductFromCart", value = "/cart/remove")
 public class RemoveProductFromCart extends HttpServlet {
-    private final static CartItemService cartItemService = new CartItemService();
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int cartItemId = Integer.parseInt(request.getParameter("id"));
-        String cartId = cartItemService.getCartItem(cartItemId).getCart().getCartId();
-        cartItemService.delete(cartItemId);
+        String cartId = Constant.Service.CART_ITEM_SERVICE.getCartItem(cartItemId).getCart().getCartId();
+        Constant.Service.CART_ITEM_SERVICE.delete(cartItemId);
 
         //Update cart items
-        HttpSession session = request.getSession();
-        List<CartItem> cartItems = cartItemService.getItemByCart(cartId);
-        session.setAttribute("cartItems", cartItems);
+        request.getSession().setAttribute("cartItems", Constant.Service.CART_ITEM_SERVICE.getItemByCart(cartId));
 
-        String forwardTo = request.getParameter("forwardTo");
-        response.sendRedirect(forwardTo);
+        response.sendRedirect(request.getParameter("forwardTo"));
     }
 }

@@ -9,7 +9,8 @@ public class ProImage implements Serializable {
     private String imageName;
     private Product product;
 
-    public ProImage() {}
+    public ProImage() {
+    }
 
     public ProImage(String imageName, Product product) {
         this.imageName = imageName;

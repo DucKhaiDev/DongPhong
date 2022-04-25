@@ -3,8 +3,7 @@ package Dao.deploy;
 import Connect.DBConnect;
 import Dao.IWLItemDao;
 import Entity.WLItem;
-import Services.deploy.ProductService;
-import Services.deploy.WishListService;
+import Util.Constant;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,16 +13,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WLItemDao implements IWLItemDao {
-    private Connection conn = null;
-    private PreparedStatement ps = null;
-    private ResultSet rs = null;
-
-    private final ProductService productService = new ProductService();
-    private final WishListService wishlistService = new WishListService();
-
     @Override
     public void insert(WLItem item) {
-        conn = DBConnect.getConnection();
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
 
         try {
             ps = conn.prepareStatement("INSERT INTO [WLITEM](PRO_ID, WL_ID) VALUES(?, ?)");
@@ -34,13 +27,14 @@ public class WLItemDao implements IWLItemDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBConnect.closeAll(rs, ps, conn);
+            DBConnect.closeAll(null, ps, conn);
         }
     }
 
     @Override
     public void edit(WLItem item) {
-        conn = DBConnect.getConnection();
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
 
         try {
             ps = conn.prepareStatement("UPDATE [WLITEM] SET PRO_ID = ?, WL_ID = ? WHERE WLITEM_ID = ?");
@@ -52,13 +46,14 @@ public class WLItemDao implements IWLItemDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBConnect.closeAll(rs, ps, conn);
+            DBConnect.closeAll(null, ps, conn);
         }
     }
 
     @Override
     public void delete(int wlItemId) {
-        conn = DBConnect.getConnection();
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
 
         try {
             ps = conn.prepareStatement("DELETE FROM [WLITEM] WHERE WLITEM_ID = ?");
@@ -67,13 +62,15 @@ public class WLItemDao implements IWLItemDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBConnect.closeAll(rs, ps, conn);
+            DBConnect.closeAll(null, ps, conn);
         }
     }
 
     @Override
     public WLItem getWLItem(int wlItemId) {
-        conn = DBConnect.getConnection();
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         WLItem item = new WLItem();
 
         try {
@@ -82,8 +79,8 @@ public class WLItemDao implements IWLItemDao {
             rs = ps.executeQuery();
             if (rs.next()) {
                 item.setWlItemId(wlItemId);
-                item.setProduct(productService.getProduct(rs.getString("PRO_ID").trim()));
-                item.setWishList(wishlistService.getWishlist(rs.getString("WL_ID").trim()));
+                item.setProduct(Constant.Service.PRODUCT_SERVICE.getProduct(rs.getString("PRO_ID").trim()));
+                item.setWishList(Constant.Service.WISH_LIST_SERVICE.getWishlist(rs.getString("WL_ID").trim()));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -96,7 +93,9 @@ public class WLItemDao implements IWLItemDao {
 
     @Override
     public List<WLItem> getAll() {
-        conn = DBConnect.getConnection();
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         List<WLItem> items = new ArrayList<>();
 
         try {
@@ -105,8 +104,8 @@ public class WLItemDao implements IWLItemDao {
             while (rs.next()) {
                 WLItem item = new WLItem();
                 item.setWlItemId(rs.getInt("WLITEM_ID"));
-                item.setProduct(productService.getProduct(rs.getString("PRO_ID").trim()));
-                item.setWishList(wishlistService.getWishlist(rs.getString("WL_ID")));
+                item.setProduct(Constant.Service.PRODUCT_SERVICE.getProduct(rs.getString("PRO_ID").trim()));
+                item.setWishList(Constant.Service.WISH_LIST_SERVICE.getWishlist(rs.getString("WL_ID")));
 
                 items.add(item);
             }
@@ -121,7 +120,9 @@ public class WLItemDao implements IWLItemDao {
 
     @Override
     public List<WLItem> getItemByWishList(String wishListId) {
-        conn = DBConnect.getConnection();
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         List<WLItem> items = new ArrayList<>();
 
         try {
@@ -131,8 +132,8 @@ public class WLItemDao implements IWLItemDao {
             while (rs.next()) {
                 WLItem item = new WLItem();
                 item.setWlItemId(rs.getInt("WLITEM_ID"));
-                item.setProduct(productService.getProduct(rs.getString("PRO_ID").trim()));
-                item.setWishList(wishlistService.getWishlist(wishListId));
+                item.setProduct(Constant.Service.PRODUCT_SERVICE.getProduct(rs.getString("PRO_ID").trim()));
+                item.setWishList(Constant.Service.WISH_LIST_SERVICE.getWishlist(wishListId));
 
                 items.add(item);
             }
@@ -147,7 +148,9 @@ public class WLItemDao implements IWLItemDao {
 
     @Override
     public boolean checkExistItem(String productId, String wishListId) {
-        conn = DBConnect.getConnection();
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
 
         try {
             ps = conn.prepareStatement("SELECT * FROM [WLITEM] WHERE PRO_ID = ? AND WL_ID = ?");

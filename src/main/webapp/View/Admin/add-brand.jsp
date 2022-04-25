@@ -8,17 +8,18 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Dong Phong</title>
     <!-- BOOTSTRAP STYLES-->
     <link href="${pageContext.request.contextPath}/assets/css/bootstrap.css" rel="stylesheet"/>
     <!-- FONTAWESOME STYLES-->
-    <link href="${pageContext.request.contextPath}/assets/fonts/fontawesome-pro-5.15.4-web/css/all.min.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/fonts/fontawesome-pro-5.15.4-web/css/all.min.css"
+          rel="stylesheet"/>
     <!-- CUSTOM STYLES-->
-    <link href="${pageContext.request.contextPath}/assets/css/custom.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/css/custom.css" rel="stylesheet"/>
     <!-- GOOGLE FONTS-->
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
     <%---------------------------------------------------------------------------------------------%>
     <style>
         p.exist-id {
@@ -37,7 +38,7 @@
     <jsp:include page="navside.jsp"/>
     <!-- /. NAV SIDE  -->
 
-    <div id="page-wrapper" >
+    <div id="page-wrapper">
         <div id="page-inner">
             <div class="row">
                 <div class="col-md-12">
@@ -46,7 +47,7 @@
                 </div>
             </div>
             <!-- /. ROW  -->
-            <hr />
+            <hr/>
             <div class="row d-flex justify-content-center">
                 <div class="col-md-6">
                     <div class="panel panel-default">
@@ -55,20 +56,33 @@
                             <div class="row">
                                 <form action="<c:url value="/admin/brand/add"/>" method="post">
                                     <div class="row ml-1 mr-1">
-                                        <div class="col-md-6 mb-3"><label for="brandId" class="labels">ID</label><input id="brandId" type="text" class="form-control" name="brandId" maxlength="10" required="required"></div>
-                                        <div class="col-md-6 mb-3"><label class="labels"></label><p class="exist-id">${requestScope.existId}</p></div>
-                                        <div class="col-md-12 mb-3"><label for="brandName" class="labels">Thương hiệu</label><input id="brandName" type="text" class="form-control" name="brandName" maxlength="255" required="required"></div>
+                                        <div class="col-md-6 mb-3"><label for="brandId" class="labels">ID</label><input
+                                                id="brandId" type="text" class="form-control" name="brandId"
+                                                maxlength="10" required="required"></div>
+                                        <div class="col-md-6 mb-3"><label class="labels"></label>
+                                            <p class="exist-id">${requestScope.existId}</p></div>
+                                        <div class="col-md-12 mb-3"><label for="brandName" class="labels">Thương
+                                            hiệu</label><input id="brandName" type="text" class="form-control"
+                                                               name="brandName" maxlength="255" required="required">
+                                        </div>
                                         <div class="col-md-12">
                                             <label for="brandDescription" class="labels">Mô tả</label>
                                             <br>
-                                            <textarea name="brandDescription" id="brandDescription" class="form-control" cols="50" rows="5" maxlength="2000"></textarea>
+                                            <textarea name="brandDescription" id="brandDescription" class="form-control"
+                                                      cols="50" rows="5" maxlength="2000"></textarea>
                                         </div>
                                     </div>
                                     <div class="row ml-1 mr-1">
                                         <div class="mt-5 text-center col-md-12 d-flex justify-content-end">
-                                            <button class="btn btn-primary ct-button" type="submit"><i class="fa fa-check"></i>&nbsp;Đồng ý</button>
-                                            <button class="btn btn-primary ct-button ml-3" type="reset"><i class="fa fa-undo-alt"></i>&nbsp;Nhập lại</button>
-                                            <a href="${pageContext.request.contextPath}/admin/brand" class="btn btn-primary ct-button ml-3"><i class="fa fa-angle-left"></i>&nbsp;Quay lại</a>
+                                            <button class="btn btn-primary ct-button" type="submit"><i
+                                                    class="fa fa-check"></i>&nbsp;Đồng ý
+                                            </button>
+                                            <button class="btn btn-primary ct-button ml-3" type="reset"><i
+                                                    class="fa fa-undo-alt"></i>&nbsp;Nhập lại
+                                            </button>
+                                            <a href="${pageContext.request.contextPath}/admin/brand"
+                                               class="btn btn-primary ct-button ml-3"><i class="fa fa-angle-left"></i>&nbsp;Quay
+                                                lại</a>
                                         </div>
                                     </div>
                                 </form>

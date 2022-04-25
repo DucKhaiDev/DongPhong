@@ -1,18 +1,17 @@
 package Controller.Admin;
 
 import Entity.Brand;
-import Services.deploy.BrandService;
 import Util.Constant;
-import jakarta.servlet.*;
-import jakarta.servlet.http.*;
-import jakarta.servlet.annotation.*;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
 @WebServlet(name = "AddBrand", value = "/admin/brand/add")
 public class AddBrand extends HttpServlet {
-    private final BrandService brandService = new BrandService();
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher(Constant.Path.ADMIN_ADD_BRAND).forward(request, response);
@@ -21,7 +20,7 @@ public class AddBrand extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String brandId = request.getParameter("brandId");
-        if (brandService.checkExistId(brandId)) {
+        if (Constant.Service.BRAND_SERVICE.checkExistId(brandId)) {
             String existId = "Mã thương hiệu đã tồn tại!";
             request.setAttribute("existId", existId);
             request.getRequestDispatcher(Constant.Path.ADMIN_ADD_BRAND).forward(request, response);
@@ -30,8 +29,9 @@ public class AddBrand extends HttpServlet {
 
         String brandName = request.getParameter("brandName");
         String brandDes = request.getParameter("brandDescription");
-        Brand brand = new Brand(brandId, brandName, brandDes);
-        brandService.insert(brand);
+
+        Constant.Service.BRAND_SERVICE.insert(new Brand(brandId, brandName, brandDes));
+
         response.sendRedirect(request.getContextPath() + "/admin/brand");
     }
 }

@@ -12,13 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class VoucherDao implements IVoucherDao {
-    private Connection conn = null;
-    private PreparedStatement ps = null;
-    private ResultSet rs = null;
-
     @Override
     public void insert(Voucher voucher) {
-        conn = DBConnect.getConnection();
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
 
         try {
             ps = conn.prepareStatement("INSERT INTO [VOUCHER](VCR_ID, MIN_PRO, MIN_VAL, DISCOUNT, FROM_DATE, TO_DATE) VALUES(?, ?, ?, ?, ?, ?)");
@@ -33,13 +30,14 @@ public class VoucherDao implements IVoucherDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBConnect.closeAll(rs, ps, conn);
+            DBConnect.closeAll(null, ps, conn);
         }
     }
 
     @Override
     public void edit(Voucher voucher) {
-        conn = DBConnect.getConnection();
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
 
         try {
             ps = conn.prepareStatement("UPDATE [VOUCHER] SET MIN_PRO = ?, MIN_VAL = ?, DISCOUNT = ?, FROM_DATE = ?, TO_DATE = ? WHERE VCR_ID = ?");
@@ -54,13 +52,14 @@ public class VoucherDao implements IVoucherDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBConnect.closeAll(rs, ps, conn);
+            DBConnect.closeAll(null, ps, conn);
         }
     }
 
     @Override
     public void delete(String voucherId) {
-        conn = DBConnect.getConnection();
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
 
         try {
             ps = conn.prepareStatement("DELETE FROM [VOUCHER] WHERE VCR_ID = ?");
@@ -69,13 +68,15 @@ public class VoucherDao implements IVoucherDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBConnect.closeAll(rs, ps, conn);
+            DBConnect.closeAll(null, ps, conn);
         }
     }
 
     @Override
     public Voucher getVoucher(String voucherId) {
-        conn = DBConnect.getConnection();
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         Voucher voucher = new Voucher();
 
         try {
@@ -101,7 +102,9 @@ public class VoucherDao implements IVoucherDao {
 
     @Override
     public List<Voucher> getAll() {
-        conn = DBConnect.getConnection();
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         List<Voucher> vouchers = new ArrayList<>();
 
         try {
@@ -129,7 +132,9 @@ public class VoucherDao implements IVoucherDao {
 
     @Override
     public List<String> getAllVoucher() {
-        conn = DBConnect.getConnection();
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         List<String> vouchers = new ArrayList<>();
 
         try {
@@ -149,7 +154,9 @@ public class VoucherDao implements IVoucherDao {
 
     @Override
     public boolean checkExistId(String voucherId) {
-        conn = DBConnect.getConnection();
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
 
         try {
             ps = conn.prepareStatement("SELECT * FROM [VOUCHER] WHERE VCR_ID = ?");
