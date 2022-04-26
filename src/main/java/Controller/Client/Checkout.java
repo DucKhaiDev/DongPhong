@@ -47,7 +47,7 @@ public class Checkout extends HttpServlet {
 
         String recName = request.getParameter("fullName");
         String recPhone = request.getParameter("phone");
-        String recAddress = request.getParameter("recaddress") + ", "
+        String recipientAddress = request.getParameter("recaddress") + ", "
                 + request.getParameter("selectedWard") + ", "
                 + request.getParameter("selectedDistrict") + ", "
                 + request.getParameter("selectedProvince") + ".";
@@ -56,9 +56,10 @@ public class Checkout extends HttpServlet {
 
         order.setUser(user);
         order.setRecipientName(recName);
-        order.setRecipientAddress(recAddress);
+        order.setRecipientAddress(recipientAddress);
         order.setRecipientPhone(recPhone);
         order.setOrderDate(new Timestamp(System.currentTimeMillis()));
+        order.setOrderStatus(false);
         order.setOrderSumProduct(((List<?>) session.getAttribute("cartItems")).size());
         order.setCart((Cart) session.getAttribute("cart"));
         order.setPayment(payment);

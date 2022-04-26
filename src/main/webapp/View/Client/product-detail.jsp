@@ -1,15 +1,13 @@
 <%@ page import="java.util.List" %>
 <%@ page import="Entity.ProImage" %>
 <%@ page import="Entity.Product" %>
-<%@ page import="java.util.Locale" %>
-<%@ page import="java.text.NumberFormat" %>
 <%@ page import="java.math.BigDecimal" %>
 <%@ page import="Entity.WishList" %>
 <%@ page import="java.math.RoundingMode" %>
 <%@ page import="Entity.Review" %>
 <%@ page import="java.text.SimpleDateFormat" %>
-<%@ page import="Services.deploy.*" %>
 <%@ page import="Util.Constant" %>
+<%@ page import="Controller.WaitingController" %>
 <%--
   Author: duckhaidev
   Date: 1/11/2022
@@ -73,6 +71,9 @@
 
 <!-- Cart -->
 <jsp:include page="cart.jsp"/>
+
+<!-- WishList -->
+<jsp:include page="wishList.jsp"/>
 
 <!-- breadcrumb -->
 <div class="container">
@@ -156,28 +157,26 @@
                     <hr>
 
                     <%
-                        Locale vie = new Locale("vi", "VN");
-                        NumberFormat dongFormat = NumberFormat.getCurrencyInstance(vie);
                         BigDecimal productPrice = ((Product) request.getAttribute("product")).getProductPrice();
                         BigDecimal productCost = ((Product) request.getAttribute("product")).getProductCost();
                     %>
                     <div class="d-block">
                         <label class="font-size-18 m-r-8 d-inline-block">Giá bán:</label>
                         <span class="mtext-106 cl2 product-price">
-                            <% out.print(dongFormat.format(productPrice)); %>
+                            <% out.print(Constant.NF_DONG.format(productPrice)); %>
                         </span>
                     </div>
                     <c:if test="${product.productCost != '0' && product.productCost != product.productPrice}">
                         <div class="d-block">
                             <label class="font-size-15 m-r-8 d-inline-block">Giá gốc:</label>
                             <span class="mtext-106 cl2 product-cost font-size-15 m-r-12">
-                                <% out.print(dongFormat.format(productCost)); %>
+                                <% out.print(Constant.NF_DONG.format(productCost)); %>
                             </span>
                         </div>
                     </c:if>
                     <span class="stext-102 cl3">
                         (Tiết kiệm:<span
-                            class="product-price m-l-8"><% out.print(dongFormat.format(productCost.subtract(productPrice))); %></span>)
+                            class="product-price m-l-8"><% out.print(Constant.NF_DONG.format(productCost.subtract(productPrice))); %></span>)
                     </span>
                     <hr>
 
@@ -202,7 +201,7 @@
                     </span>
                     <hr>
                     <!--  -->
-                    <div class="p-t-33">
+                    <div class="p-t-18">
                         <div class="flex-w flex-r-m p-b-10">
                             <form action="<c:url value="/cart/add"/>" method="get"
                                   class="size-204 flex-w flex-m respon6-next">
@@ -239,8 +238,8 @@
                                     </c:choose>
                                 </span>
 
-                                <button type="button"
-                                        class=" btn-add-item flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail"
+                                <button id="btn-addcart-detail" type="button"
+                                        class="btn-add-item flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail"
                                         <c:if test="${product.productQuantity == 0}">disabled</c:if>>
                                     Thêm vào giỏ hàng
                                 </button>
@@ -249,14 +248,20 @@
                     </div>
 
                     <!--  -->
-                    <div class="flex-w flex-m p-l-100 p-t-40 respon7">
-                        <div class="flex-m bor9 p-r-10 m-r-11">
-                            <a href="#"
-                               class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100"
-                               data-tooltip="Add to Wishlist">
+                    <div class="flex-w flex-m p-l-100 p-t-25 respon7">
+                        <form action="<c:url value="/wishlist/add"/>" method="get"
+                              class="flex-m bor9 p-r-10 m-r-11">
+                            <!--Sign url-->
+                            <input type="hidden" class="input-add-item" name="forwardTo">
+                            <!--Sign product-->
+                            <input type="hidden" name="id" value="${product.productId}">
+
+                            <button id="btn-addwishlist-detail" type="button"
+                                    class="btn-add-item fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100"
+                                    data-tooltip="Thêm vào Danh sách yêu thích">
                                 <i class="zmdi zmdi-favorite"></i>
-                            </a>
-                        </div>
+                            </button>
+                        </form>
 
                         <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100"
                            data-tooltip="Facebook">
@@ -379,16 +384,7 @@
 													<span class="mtext-107 cl2 p-r-20">
 														<%
                                                             Review review = (Review) pageContext.getAttribute("review");
-                                                            String displayName = review.getUser().getUsername();
-                                                            String firstName = review.getUser().getFirstName();
-                                                            String lastName = review.getUser().getLastName();
-                                                            if (lastName != null && !lastName.trim().equals("")) {
-                                                                displayName = lastName;
-
-                                                                if (firstName != null && !firstName.trim().equals("")) {
-                                                                    displayName += " " + firstName;
-                                                                }
-                                                            }
+                                                            String displayName = WaitingController.displayName(review.getUser());
                                                             out.print(displayName + " (" + review.getUser().getUsername() + ")");
                                                         %>
 													</span>
@@ -551,13 +547,13 @@
                                             <span class="stext-105 cl3 product-price m-r-12">
                                                 <%
                                                     BigDecimal relatedProductPrice = relatedProduct.getProductPrice();
-                                                    String showPrice = dongFormat.format(relatedProductPrice);
+                                                    String showPrice = Constant.NF_DONG.format(relatedProductPrice);
                                                     out.print("<td>" + showPrice + "</td>");
                                                 %>
                                             </span>
                                         <%
                                             BigDecimal relatedProductCost = relatedProduct.getProductCost();
-                                            String showCost = dongFormat.format(relatedProductCost);
+                                            String showCost = Constant.NF_DONG.format(relatedProductCost);
                                         %>
                                         <c:if test="${relatedProduct.productCost != '0' && relatedProduct.productCost != relatedProduct.productPrice}">
                                                 <span class="stext-105 cl3 product-cost">
@@ -634,15 +630,15 @@
 
                             <div class="col-md-6 col-lg-5 p-b-30">
                                 <div class="p-r-50 p-t-5 p-lr-0-lg">
-                                    <h4 class="mtext-105 cl2 js-name-detail">${relatedProduct.productName}</h4>
+                                    <a href="${pageContext.request.contextPath}/products/product-detail?id=${relatedProduct.productId}" class="mtext-105 cl2 js-name-detail"><h4>${relatedProduct.productName}</h4></a>
                                     <span class="fs-14">Mã sản phẩm: ${relatedProduct.productId}</span>
                                     <div class="m-t-14" style="height: 42%;">
                                         <%
                                             Product relatedProduct = (Product) pageContext.getAttribute("relatedProduct");
                                             BigDecimal relatedProductPrice = relatedProduct.getProductPrice();
-                                            String showPrice = dongFormat.format(relatedProductPrice);
+                                            String showPrice = Constant.NF_DONG.format(relatedProductPrice);
                                             BigDecimal relatedProductCost = relatedProduct.getProductCost();
-                                            String showCost = dongFormat.format(relatedProductCost);
+                                            String showCost = Constant.NF_DONG.format(relatedProductCost);
                                             BigDecimal percentage = ((relatedProductCost.subtract(relatedProductPrice)).divide(relatedProductCost, 2, RoundingMode.HALF_UP)).multiply(new BigDecimal("100")).setScale(0, RoundingMode.UP);
                                         %>
                                         <span class="fs-24 cl11">

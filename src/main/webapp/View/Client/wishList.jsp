@@ -1,8 +1,6 @@
 <%@ page import="Entity.WLItem" %>
 <%@ page import="Entity.Product" %>
 <%@ page import="java.math.BigDecimal" %>
-<%@ page import="java.util.Locale" %>
-<%@ page import="java.text.NumberFormat" %>
 <%@ page import="java.math.RoundingMode" %>
 <%@ page import="Util.Constant" %>
 <%--
@@ -64,20 +62,18 @@
                             </a>
 
                             <%
-                                Locale vie = new Locale("vi", "VN");
-                                NumberFormat dongFormat = NumberFormat.getCurrencyInstance(vie);
                                 BigDecimal price = product.getProductPrice();
                                 BigDecimal cost = product.getProductCost();
                             %>
 
                             <span class="header-cart-item-info product-price">
-								<% out.print(dongFormat.format(price)); %>
+								<% out.print(Constant.NF_DONG.format(price)); %>
 							</span>
 
                             <div class="d-flex">
                                 <c:if test="${wl_product.productCost != '0' && wl_product.productCost != wl_product.productPrice}">
                                     <span class="header-cart-item-info product-cost">
-                                        <% out.print(dongFormat.format(cost)); %>
+                                        <% out.print(Constant.NF_DONG.format(cost)); %>
                                     </span>
                                 </c:if>
 

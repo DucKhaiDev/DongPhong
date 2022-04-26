@@ -1,4 +1,5 @@
 <%@ page import="Entity.User" %>
+<%@ page import="Controller.WaitingController" %>
 <%--
   User: is2vi
   Date: 1/23/2022
@@ -39,18 +40,7 @@
             </c:when>
             <c:otherwise>
                 <%
-                    User account = (User) session.getAttribute("account");
-                    String displayName = account.getUsername();
-                    String firstName = account.getFirstName();
-                    String lastName = account.getLastName();
-
-                    if (lastName != null && !lastName.trim().equals("")) {
-                        displayName = lastName;
-
-                        if (firstName != null && !firstName.trim().equals("")) {
-                            displayName += " " + firstName;
-                        }
-                    }
+                    String displayName = WaitingController.displayName((User) session.getAttribute("account"));
                 %>
 
                 <div class="right-top-bar flex-w h-full">

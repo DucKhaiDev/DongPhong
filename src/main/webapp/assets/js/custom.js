@@ -206,7 +206,8 @@
 
 <!--===============================================================================================-->
 $(function () {
-    $('.num-product').each(function () {
+    const numProduct = $('.num-product');
+    numProduct.each(function () {
         if ($(this).prop('value') === '0' || $(this).next().next().prop('value') === '1') {
             $(this).addClass('pointer-events-none');
             $(this).prev().addClass('pointer-events-none');
@@ -234,7 +235,7 @@ $(function () {
         });
     });
 
-    $('.num-product').each(function () {
+    numProduct.each(function () {
         $(this).on('change', function () {
             const btnDown = $(this).prev();
             const btnUp = $(this).next();
@@ -259,8 +260,8 @@ $(function () {
     });
 
     $('.js-addwish-b2').each(function(){
-        const nameProduct = $(this).parent().parent().find('.js-name-b2').html();
         const addwishB2 = $(this);
+        const nameProduct = addwishB2.parent().parent().find('.js-name-b2').html();
         addwishB2.on('click', function(){
             if ($('#checkAccount').prop('value') !== 'null') {
                 swal(nameProduct, "đã được thêm vào danh sách yêu thích!", "success").then(function () {
@@ -271,18 +272,26 @@ $(function () {
                     text: 'Vui lòng đăng nhập để tiếp tục!',
                     icon: 'warning'
                 }).then(function () {
-                    addwishB2.parent().submit();
+                    const base_url = window.location.origin;
+                    const pathArray = window.location.pathname.split('/');
+                    location.href = base_url + '/' + pathArray[1] + '/login';
                 });
             }
 
-            $(this).addClass('js-addedwish-b2');
-            $(this).off('click');
+            addwishB2.addClass('js-addedwish-b2');
+            addwishB2.off('click');
         });
     });
 
     $('.js-addwish-detail').each(function(){
-        const nameProduct = $(this).parent().parent().parent().find('.js-name-detail').html();
         const addwishDetail = $(this);
+        let nameProduct = '';
+        if (addwishDetail.prop('id') !== 'btn-addwishlist-detail') {
+            nameProduct = addwishDetail.parent().parent().parent().find('.js-name-detail').children().html();
+        } else {
+            nameProduct = addwishDetail.parent().parent().parent().find('.js-name-detail').html();
+        }
+
         addwishDetail.on('click', function(){
             if ($('#checkAccount').prop('value') !== 'null') {
                 swal(nameProduct, "đã được thêm vào danh sách yêu thích!", "success").then(function () {
@@ -293,31 +302,42 @@ $(function () {
                     text: 'Vui lòng đăng nhập để tiếp tục!',
                     icon: 'warning'
                 }).then(function () {
-                    addwishDetail.parent().submit();
+                    const base_url = window.location.origin;
+                    const pathArray = window.location.pathname.split('/');
+                    location.href = base_url + '/' + pathArray[1] + '/login';
                 });
             }
 
-            $(this).addClass('js-addedwish-detail');
-            $(this).off('click');
+            addwishDetail.addClass('js-addedwish-detail');
+            addwishDetail.off('click');
         });
     });
 
     /*---------------------------------------------*/
 
     $('.js-addcart-detail').each(function(){
-        const nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();
-        const addcartDetail = $(this);
-        $(this).on('click', function(){
+        const addCartDetail = $(this);
+
+        let nameProduct = '';
+        if (addCartDetail.prop('id') !== 'btn-addcart-detail') {
+            nameProduct = addCartDetail.parent().parent().parent().parent().find('.js-name-detail').children().html();
+        } else {
+            nameProduct = addCartDetail.parent().parent().parent().parent().find('.js-name-detail').html();
+        }
+
+        addCartDetail.on('click', function(){
             if ($('#checkAccount').prop('value') !== 'null') {
                 swal(nameProduct, "đã được thêm vào giỏ hàng!", "success").then(function () {
-                    addcartDetail.parent().submit();
+                    addCartDetail.parent().submit();
                 });
             } else {
                 swal({
                     text: 'Vui lòng đăng nhập để tiếp tục!',
                     icon: 'warning'
                 }).then(function () {
-                    addcartDetail.parent().submit();
+                    const base_url = window.location.origin;
+                    const pathArray = window.location.pathname.split('/');
+                    location.href = base_url + '/' + pathArray[1] + '/login';
                 });
             }
         });

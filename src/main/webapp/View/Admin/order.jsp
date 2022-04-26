@@ -2,6 +2,7 @@
 <%@ page import="Entity.Order" %>
 <%@ page import="java.util.Locale" %>
 <%@ page import="java.text.NumberFormat" %>
+<%@ page import="Util.Constant" %>
 <%--
   User: duckhaidev
   Date: 4/8/2022
@@ -105,9 +106,7 @@
                                             <td>
                                                 <%
                                                     BigDecimal total = ((Order) pageContext.getAttribute("order")).getOrderTotal();
-                                                    Locale vie = new Locale("vi", "VN");
-                                                    NumberFormat dongFormat = NumberFormat.getCurrencyInstance(vie);
-                                                    out.print(dongFormat.format(total));
+                                                    out.print(Constant.NF_DONG.format(total));
                                                 %>
                                             </td>
                                             <td>${order.orderStatus == null ? "Chưa hoàn thành" : (order.orderStatus ? "Hoàn thành" : "Hủy bỏ")}</td>

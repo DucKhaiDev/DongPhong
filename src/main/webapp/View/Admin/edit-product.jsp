@@ -2,6 +2,7 @@
 <%@ page import="Entity.Product" %>
 <%@ page import="java.util.Locale" %>
 <%@ page import="java.text.NumberFormat" %>
+<%@ page import="Util.Constant" %>
 <%--
   User: duckhaidev
   Date: 2/19/2022
@@ -97,11 +98,9 @@
                                                 <%
                                                     BigDecimal price = ((Product) request.getAttribute("product")).getProductPrice();
                                                     BigDecimal cost = ((Product) request.getAttribute("product")).getProductCost();
-                                                    Locale vie = new Locale("vi", "VN");
-                                                    NumberFormat dongFormat = NumberFormat.getCurrencyInstance(vie);
-                                                    String showPrice = dongFormat.format(price);
+                                                    String showPrice = Constant.NF_DONG.format(price);
                                                     request.setAttribute("showPrice", showPrice);
-                                                    String showCost = dongFormat.format(cost);
+                                                    String showCost = Constant.NF_DONG.format(cost);
                                                     request.setAttribute("showCost", showCost);
                                                 %>
                                                 <div class="col-md-6 mb-3">

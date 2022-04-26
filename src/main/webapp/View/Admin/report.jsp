@@ -5,8 +5,7 @@
 <%@ page import="java.sql.Timestamp" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="Entity.Report" %>
-<%@ page import="java.util.Locale" %>
-<%@ page import="java.text.NumberFormat" %>
+<%@ page import="Util.Constant" %>
 <%--
   User: duckhaidev
   Date: 4/20/2022
@@ -125,30 +124,26 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <%
-                                                Locale vie = new Locale("vi", "VN");
-                                                NumberFormat dongFormat = NumberFormat.getCurrencyInstance(vie);
-                                            %>
                                             <c:forEach items="${reportDone}" var="item">
                                                 <tr>
                                                     <% Report item = (Report) pageContext.getAttribute("item"); %>
                                                     <td>${item.monthDate}/${item.yearDate}</td>
                                                     <td>${item.countId}</td>
-                                                    <td><% out.print(dongFormat.format(item.getSumSubTotal())); %></td>
-                                                    <td><% out.print(dongFormat.format(item.getSumDiscount())); %></td>
-                                                    <td><% out.print(dongFormat.format(item.getSumTax())); %></td>
-                                                    <td><% out.print(dongFormat.format(item.getSumShipping())); %></td>
-                                                    <td><% out.print(dongFormat.format(item.getSumTotal())); %></td>
+                                                    <td><% out.print(Constant.NF_DONG.format(item.getSumSubTotal())); %></td>
+                                                    <td><% out.print(Constant.NF_DONG.format(item.getSumDiscount())); %></td>
+                                                    <td><% out.print(Constant.NF_DONG.format(item.getSumTax())); %></td>
+                                                    <td><% out.print(Constant.NF_DONG.format(item.getSumShipping())); %></td>
+                                                    <td><% out.print(Constant.NF_DONG.format(item.getSumTotal())); %></td>
                                                 </tr>
                                             </c:forEach>
                                             <tr>
                                                 <th>Tổng:</th>
                                                 <th>${done.countId}</th>
-                                                <th><% out.print(dongFormat.format(done.getSumSubTotal())); %></th>
-                                                <th><% out.print(dongFormat.format(done.getSumDiscount())); %></th>
-                                                <th><% out.print(dongFormat.format(done.getSumTax())); %></th>
-                                                <th><% out.print(dongFormat.format(done.getSumShipping())); %></th>
-                                                <th><% out.print(dongFormat.format(done.getSumTotal())); %></th>
+                                                <th><% out.print(Constant.NF_DONG.format(done.getSumSubTotal())); %></th>
+                                                <th><% out.print(Constant.NF_DONG.format(done.getSumDiscount())); %></th>
+                                                <th><% out.print(Constant.NF_DONG.format(done.getSumTax())); %></th>
+                                                <th><% out.print(Constant.NF_DONG.format(done.getSumShipping())); %></th>
+                                                <th><% out.print(Constant.NF_DONG.format(done.getSumTotal())); %></th>
                                             </tr>
                                             </tbody>
                                         </table>
@@ -178,21 +173,21 @@
                                                     <% Report item = (Report) pageContext.getAttribute("item"); %>
                                                     <td>${item.monthDate}/${item.yearDate}</td>
                                                     <td>${item.countId}</td>
-                                                    <td><% out.print(dongFormat.format(item.getSumSubTotal())); %></td>
-                                                    <td><% out.print(dongFormat.format(item.getSumDiscount())); %></td>
-                                                    <td><% out.print(dongFormat.format(item.getSumTax())); %></td>
-                                                    <td><% out.print(dongFormat.format(item.getSumShipping())); %></td>
-                                                    <td><% out.print(dongFormat.format(item.getSumTotal())); %></td>
+                                                    <td><% out.print(Constant.NF_DONG.format(item.getSumSubTotal())); %></td>
+                                                    <td><% out.print(Constant.NF_DONG.format(item.getSumDiscount())); %></td>
+                                                    <td><% out.print(Constant.NF_DONG.format(item.getSumTax())); %></td>
+                                                    <td><% out.print(Constant.NF_DONG.format(item.getSumShipping())); %></td>
+                                                    <td><% out.print(Constant.NF_DONG.format(item.getSumTotal())); %></td>
                                                 </tr>
                                             </c:forEach>
                                             <tr>
                                                 <th>Tổng:</th>
                                                 <th>${undone.countId}</th>
-                                                <th><% out.print(dongFormat.format(undone.getSumSubTotal())); %></th>
-                                                <th><% out.print(dongFormat.format(undone.getSumDiscount())); %></th>
-                                                <th><% out.print(dongFormat.format(undone.getSumTax())); %></th>
-                                                <th><% out.print(dongFormat.format(undone.getSumShipping())); %></th>
-                                                <th><% out.print(dongFormat.format(undone.getSumTotal())); %></th>
+                                                <th><% out.print(Constant.NF_DONG.format(undone.getSumSubTotal())); %></th>
+                                                <th><% out.print(Constant.NF_DONG.format(undone.getSumDiscount())); %></th>
+                                                <th><% out.print(Constant.NF_DONG.format(undone.getSumTax())); %></th>
+                                                <th><% out.print(Constant.NF_DONG.format(undone.getSumShipping())); %></th>
+                                                <th><% out.print(Constant.NF_DONG.format(undone.getSumTotal())); %></th>
                                             </tr>
                                             </tbody>
                                         </table>
@@ -222,21 +217,21 @@
                                                     <% Report item = (Report) pageContext.getAttribute("item"); %>
                                                     <td>${item.monthDate}/${item.yearDate}</td>
                                                     <td>${item.countId}</td>
-                                                    <td><% out.print(dongFormat.format(item.getSumSubTotal())); %></td>
-                                                    <td><% out.print(dongFormat.format(item.getSumDiscount())); %></td>
-                                                    <td><% out.print(dongFormat.format(item.getSumTax())); %></td>
-                                                    <td><% out.print(dongFormat.format(item.getSumShipping())); %></td>
-                                                    <td><% out.print(dongFormat.format(item.getSumTotal())); %></td>
+                                                    <td><% out.print(Constant.NF_DONG.format(item.getSumSubTotal())); %></td>
+                                                    <td><% out.print(Constant.NF_DONG.format(item.getSumDiscount())); %></td>
+                                                    <td><% out.print(Constant.NF_DONG.format(item.getSumTax())); %></td>
+                                                    <td><% out.print(Constant.NF_DONG.format(item.getSumShipping())); %></td>
+                                                    <td><% out.print(Constant.NF_DONG.format(item.getSumTotal())); %></td>
                                                 </tr>
                                             </c:forEach>
                                             <tr>
                                                 <th>Tổng:</th>
                                                 <th>${cancel.countId}</th>
-                                                <th><% out.print(dongFormat.format(cancel.getSumSubTotal())); %></th>
-                                                <th><% out.print(dongFormat.format(cancel.getSumDiscount())); %></th>
-                                                <th><% out.print(dongFormat.format(cancel.getSumTax())); %></th>
-                                                <th><% out.print(dongFormat.format(cancel.getSumShipping())); %></th>
-                                                <th><% out.print(dongFormat.format(cancel.getSumTotal())); %></th>
+                                                <th><% out.print(Constant.NF_DONG.format(cancel.getSumSubTotal())); %></th>
+                                                <th><% out.print(Constant.NF_DONG.format(cancel.getSumDiscount())); %></th>
+                                                <th><% out.print(Constant.NF_DONG.format(cancel.getSumTax())); %></th>
+                                                <th><% out.print(Constant.NF_DONG.format(cancel.getSumShipping())); %></th>
+                                                <th><% out.print(Constant.NF_DONG.format(cancel.getSumTotal())); %></th>
                                             </tr>
                                             </tbody>
                                         </table>

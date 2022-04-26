@@ -298,7 +298,7 @@ public class RegisterController extends HttpServlet {
                     "                                            <td style=\"vertical-align: top; text-align: center; padding: 10px 20px 15px 20px; font-family: sans-serif; font-size: 15px; line-height: 20px; color: #fff;\">\n" +
                     "                                                <p style=\"margin: 0; text-align: start\">\n" +
                     "                                                    Tài khoản của bạn tại DongPhong.store đã được tạo thành công! <br>\n" +
-                    "                                                    Mật khẩu: " + password + " <br>\n" +
+                    "                                                    Mật khẩu của bạn là: " + password + " <br>\n" +
                     "                                                    Nếu bạn không thực hiện yêu cầu này, vui lòng bỏ qua nó.\n" +
                     "                                                </p>\n" +
                     "                                            </td>\n" +

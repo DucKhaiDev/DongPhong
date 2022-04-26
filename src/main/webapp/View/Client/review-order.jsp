@@ -1,7 +1,5 @@
 <%@ page import="java.math.BigDecimal" %>
 <%@ page import="Entity.CartItem" %>
-<%@ page import="java.util.Locale" %>
-<%@ page import="java.text.NumberFormat" %>
 <%@ page import="Entity.Order" %>
 <%@ page import="java.sql.Timestamp" %>
 <%@ page import="java.util.Date" %>
@@ -55,23 +53,19 @@
         <div class="mb-3 text-center text-uppercase">Phương thức vận chuyển</div>
         <div class="row d-flex mb-2 align-items-center">
             <div class="col-md-2"><label for="ip1" class="labels text-nowrap">Đơn vị vận chuyển:&nbsp;</label></div>
-            <div class="col-md-2"><input id="ip1" type="text" class="form-control w-fit-content text-center"
+            <div class="col-md-4"><input id="ip1" type="text" class="form-control text-center"
                                          value="Đông Phong" readonly></div>
         </div>
         <div class="row d-flex mb-3 align-items-center">
             <div class="col-md-2"><label for="ip2" class="labels text-nowrap">Thời gian giao hàng dự kiến:&nbsp;</label>
             </div>
-            <div class="col-md-2"><input id="ip2" type="text" class="form-control w-fit-content text-center"
-                                         value="${sessionScope.order_rv.recipientDate} <c:if test="${sessionScope.order_rv.recipientDate == null}">Chưa xác định</c:if>"
+            <div class="col-md-4"><input id="ip2" type="text" class="form-control text-center"
+                                         value="${sessionScope.order_rv.recipientDate} <c:if test="${sessionScope.order_rv.recipientDate == null}">5 - 7 ngày làm việc (Trừ ngày nghỉ và lễ tết)</c:if>"
                                          readonly></div>
         </div>
     </div>
     <div class="bor20 p-3 mb-3">
         <div class="mb-3 text-center text-uppercase">Chi tiết đơn hàng</div>
-        <%
-            Locale vie = new Locale("vi", "VN");
-            NumberFormat dongFormat = NumberFormat.getCurrencyInstance(vie);
-        %>
         <div class="row">
             <div class="col-md-12 mb-5">
                 <div class="table-responsive">
@@ -111,14 +105,14 @@
                                 <td>
                                     <%
                                         BigDecimal price = ((CartItem) pageContext.getAttribute("item")).getProduct().getProductPrice();
-                                        out.print(dongFormat.format(price));
+                                        out.print(Constant.NF_DONG.format(price));
                                     %>
                                 </td>
                                 <td>${item.quantity}</td>
                                 <td>
                                     <%
                                         BigDecimal value = ((CartItem) pageContext.getAttribute("item")).getValue();
-                                        out.print(dongFormat.format(value));
+                                        out.print(Constant.NF_DONG.format(value));
                                     %>
                                 </td>
                             </tr>
@@ -145,27 +139,27 @@
             <div class="col-md-12 mb-2">
                 <label class="labels d-flex text-nowrap align-items-center float-right">Tổng tiền:&nbsp;<input
                         type="text" class="form-control w-fit-content text-center"
-                        value="<% out.print(dongFormat.format(subTotal)); %>" readonly></label>
+                        value="<% out.print(Constant.NF_DONG.format(subTotal)); %>" readonly></label>
             </div>
             <div class="col-md-12 mb-2">
                 <label class="labels d-flex text-nowrap align-items-center float-right">Giảm giá:&nbsp;<input
                         type="text" class="form-control w-fit-content text-center"
-                        value="<% out.print(dongFormat.format(discount)); %>" readonly></label>
+                        value="<% out.print(Constant.NF_DONG.format(discount)); %>" readonly></label>
             </div>
             <div class="col-md-12 mb-2">
                 <label class="labels d-flex text-nowrap align-items-center float-right">Thuế (8%):&nbsp;<input
                         type="text" class="form-control w-fit-content text-center"
-                        value="<% out.print(dongFormat.format(tax)); %>" readonly></label>
+                        value="<% out.print(Constant.NF_DONG.format(tax)); %>" readonly></label>
             </div>
             <div class="col-md-12 mb-2">
                 <label class="labels d-flex text-nowrap align-items-center float-right">Phí vận chuyển:&nbsp;<input
                         type="text" class="form-control w-fit-content text-center"
-                        value="<% out.print(dongFormat.format(shipping)); %>" readonly></label>
+                        value="<% out.print(Constant.NF_DONG.format(shipping)); %>" readonly></label>
             </div>
             <div class="col-md-12 mb-2">
                 <label class="labels d-flex text-nowrap align-items-center float-right"><strong>Thành tiền:</strong>&nbsp;<input
                         type="text" class="form-control w-fit-content text-center product-price"
-                        value="<% out.print(dongFormat.format(total)); %>" readonly></label>
+                        value="<% out.print(Constant.NF_DONG.format(total)); %>" readonly></label>
             </div>
         </div>
     </div>

@@ -23,7 +23,7 @@ public class ShippingCost extends HttpServlet {
         String orderAccount = request.getParameter("signOrderAccount");
         String ord_recipientName = request.getParameter("signRecipientName");
         String ord_recipientPhone = request.getParameter("signRecipientPhone");
-        String recAddress = request.getParameter("recaddress") + ", "
+        String recipientAddress = request.getParameter("recaddress") + ", "
                 + request.getParameter("selectedWard") + ", "
                 + request.getParameter("selectedDistrict") + ", "
                 + request.getParameter("selectedProvince") + ".";
@@ -37,7 +37,7 @@ public class ShippingCost extends HttpServlet {
         session.setAttribute("orderAccount", orderAccount);
         session.setAttribute("ord_recipientName", ord_recipientName);
         session.setAttribute("ord_recipientPhone", ord_recipientPhone);
-        session.setAttribute("recipientAddress", recAddress);
+        session.setAttribute("recipientAddress", recipientAddress);
 
         response.sendRedirect(request.getContextPath() + request.getParameter("forwardTo"));
     }

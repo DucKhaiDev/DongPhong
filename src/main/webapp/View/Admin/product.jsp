@@ -1,7 +1,5 @@
 <%@ page import="Entity.Product" %>
 <%@ page import="java.math.BigDecimal" %>
-<%@ page import="java.util.Locale" %>
-<%@ page import="java.text.NumberFormat" %>
 <%@ page import="Util.Constant" %>
 <%--
   User: duckhaidev
@@ -106,9 +104,7 @@
                                             <td>${product.productName}</td>
                                             <%
                                                 BigDecimal price = ((Product) pageContext.getAttribute("product")).getProductPrice();
-                                                Locale vie = new Locale("vi", "VN");
-                                                NumberFormat dongFormat = NumberFormat.getCurrencyInstance(vie);
-                                                String showPrice = dongFormat.format(price);
+                                                String showPrice = Constant.NF_DONG.format(price);
                                                 out.print("<td>" + showPrice + "</td>");
                                             %>
                                             <td>${product.category.categoryName}</td>

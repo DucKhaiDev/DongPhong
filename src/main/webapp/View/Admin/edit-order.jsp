@@ -5,6 +5,7 @@
 <%@ page import="java.text.NumberFormat" %>
 <%@ page import="java.math.RoundingMode" %>
 <%@ page import="Entity.Product" %>
+<%@ page import="Util.Constant" %>
 <%--
   User: duckhaidev
   Date: 4/14/2022
@@ -61,10 +62,6 @@
                         <div class="panel-heading">Chỉnh sửa đơn hàng</div>
                         <div class="panel-body">
                             <div class="row">
-                                <%
-                                    Locale vie = new Locale("vi", "VN");
-                                    NumberFormat dongFormat = NumberFormat.getCurrencyInstance(vie);
-                                %>
                                 <div class="row ml-1 mr-1">
                                     <div class="col-md-6 mb-3"><label for="orderId" class="labels">Mã đơn
                                         hàng</label><input id="orderId" type="text" class="form-control" name="orderId"
@@ -113,11 +110,11 @@
                                                                 <%
                                                                     CartItem item = (CartItem) pageContext.getAttribute("item");
                                                                     Product product = item.getProduct();
-                                                                    out.print(dongFormat.format(product.getProductPrice()));
+                                                                    out.print(Constant.NF_DONG.format(product.getProductPrice()));
                                                                 %>
                                                             </td>
                                                             <td>${item.quantity}</td>
-                                                            <td><% out.print(dongFormat.format(item.getValue())); %></td>
+                                                            <td><% out.print(Constant.NF_DONG.format(item.getValue())); %></td>
                                                             <td>
                                                                 <a href="<c:url value="/admin/order/edit/removeItem?id=${item.cartItemId}&forwardTo=${pageContext.request.contextPath}/admin/order/edit?id=${order.orderId}"/>"
                                                                    class="text-center">Xóa</a>
@@ -206,20 +203,20 @@
                                             for (Object item : cartItems) {
                                                 subTotal = subTotal.add(((CartItem) item).getValue());
                                             }
-                                            out.print(dongFormat.format(subTotal));
+                                            out.print(Constant.NF_DONG.format(subTotal));
                                         %>"></label>
                                     </div>
                                     <div class="col-md-12 mb-2">
                                         <label class="labels d-flex text-nowrap align-items-center float-right">Giảm
                                             giá:&nbsp;<input type="text" class="form-control w-fit-content text-center"
-                                                             value="<% out.print(dongFormat.format(0)); %>"></label>
+                                                             value="<% out.print(Constant.NF_DONG.format(0)); %>"></label>
                                     </div>
                                     <div class="col-md-12 mb-2">
                                         <label class="labels d-flex text-nowrap align-items-center float-right">Thuế
                                             (8%):&nbsp;<input type="text" class="form-control w-fit-content text-center"
                                                               value="<%
                                             BigDecimal vat = subTotal.multiply(new BigDecimal(8)).divide(new BigDecimal(100), 2, RoundingMode.HALF_UP);
-                                            out.print(dongFormat.format(vat));
+                                            out.print(Constant.NF_DONG.format(vat));
                                         %>"></label>
                                     </div>
                                     <div class="col-md-12 mb-2">
@@ -230,7 +227,7 @@
                                             if (session.getAttribute("shippingCost") != null) {
                                                 shippingCost = (BigDecimal) session.getAttribute("shippingCost");
                                             }
-                                            out.print(dongFormat.format(shippingCost));
+                                            out.print(Constant.NF_DONG.format(shippingCost));
                                         %>"></label>
                                     </div>
                                     <div class="col-md-12 mb-2">
@@ -239,7 +236,7 @@
                                                                        class="form-control w-fit-content text-center product-price"
                                                                        value="<%
                                             BigDecimal total = (subTotal.add(shippingCost)).add(vat);
-                                            out.print(dongFormat.format(total));
+                                            out.print(Constant.NF_DONG.format(total));
                                         %>"></label>
                                     </div>
                                 </div>

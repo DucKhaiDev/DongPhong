@@ -5,10 +5,7 @@ import Dao.IOrderDao;
 import Entity.Order;
 import Util.Constant;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +24,11 @@ public class OrderDao implements IOrderDao {
             ps.setString(4, order.getRecipientPhone());
             ps.setTimestamp(5, order.getOrderDate());
             ps.setDate(6, order.getRecipientDate());
-            ps.setBoolean(7, order.getOrderStatus());
+            if (order.getOrderStatus() != null) {
+                ps.setBoolean(7, order.getOrderStatus());
+            } else {
+                ps.setNull(7, Types.BIT);
+            }
             ps.setInt(8, order.getOrderSumProduct());
             ps.setBigDecimal(9, order.getOrderShipping());
             ps.setBigDecimal(10, order.getOrderTax());
@@ -58,7 +59,11 @@ public class OrderDao implements IOrderDao {
             ps.setString(4, order.getRecipientPhone());
             ps.setTimestamp(5, order.getOrderDate());
             ps.setDate(6, order.getRecipientDate());
-            ps.setBoolean(7, order.getOrderStatus());
+            if (order.getOrderStatus() != null) {
+                ps.setBoolean(7, order.getOrderStatus());
+            } else {
+                ps.setNull(7, Types.BIT);
+            }
             ps.setInt(8, order.getOrderSumProduct());
             ps.setBigDecimal(9, order.getOrderShipping());
             ps.setBigDecimal(10, order.getOrderTax());

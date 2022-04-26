@@ -1,6 +1,7 @@
 <%@ page import="java.util.Locale" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.util.Date" %>
+<%@ page import="Util.Constant" %>
 <%--
   User: duckhaidev
   Date: 2/14/2022
@@ -22,9 +23,8 @@
 padding: 15px 50px 5px 50px;
 float: right;
 font-size: 16px;"> Truy cập lần cuối : <%
-        Locale vie = new Locale("vi", "VN");
-        SimpleDateFormat formatDow = new SimpleDateFormat("EEEE", vie);
-        SimpleDateFormat formatDam = new SimpleDateFormat("dd MMMM", vie);
+        SimpleDateFormat formatDow = new SimpleDateFormat("EEEE", Constant.LC_VIETNAM);
+        SimpleDateFormat formatDam = new SimpleDateFormat("dd MMMM", Constant.LC_VIETNAM);
         SimpleDateFormat formatYear = new SimpleDateFormat("yyyy");
         Date date = new Date();
         out.print(formatDow.format(date) + ", ngày " + formatDam.format(date) + " năm " + formatYear.format(date));

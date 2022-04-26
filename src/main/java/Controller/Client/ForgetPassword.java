@@ -1,5 +1,6 @@
 package Controller.Client;
 
+import Controller.WaitingController;
 import Entity.User;
 import Tools.SendEmail;
 import Util.Constant;
@@ -32,19 +33,6 @@ public class ForgetPassword extends HttpServlet {
 
         User user = Constant.Service.USER_SERVICE.getUser(username);
         String newPassword = Integer.toString(10000000 + new Random().nextInt(90000000));
-
-        //displayName
-        String displayName = user.getUsername();
-        String firstName = user.getFirstName();
-        String lastName = user.getLastName();
-
-        if (lastName != null && !lastName.trim().equals("")) {
-            displayName = lastName;
-
-            if (firstName != null && !firstName.trim().equals("")) {
-                displayName += " " + firstName;
-            }
-        }
 
         String content = "<!DOCTYPE html>\n" +
                 "<html lang=\"en\" xmlns=\"http://www.w3.org/1999/xhtml\">\n" +
@@ -218,7 +206,7 @@ public class ForgetPassword extends HttpServlet {
                 "                                        <tr style=\"background-color: rgba(0, 0, 0, 0.5)\">\n" +
                 "                                            <td style=\"vertical-align: top; text-align: center; padding: 20px 0 10px 20px;\">\n" +
                 "                                                <h1 style=\"margin: 0; font-family: 'Montserrat', sans-serif; font-size: 30px; line-height: 36px; color: #fff; font-weight: bold;\">\n" +
-                "                                                    XIN CHÀO " + displayName + ",\n" +
+                "                                                    XIN CHÀO " + WaitingController.displayName(user) + ",\n" +
                 "                                                </h1>\n" +
                 "                                            </td>\n" +
                 "                                        </tr>\n" +

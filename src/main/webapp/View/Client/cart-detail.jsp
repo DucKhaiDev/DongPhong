@@ -1,12 +1,9 @@
 <%@ page import="Entity.Product" %>
 <%@ page import="Entity.CartItem" %>
 <%@ page import="java.math.BigDecimal" %>
-<%@ page import="java.util.Locale" %>
-<%@ page import="java.text.NumberFormat" %>
 <%@ page import="java.math.RoundingMode" %>
 <%@ page import="Entity.Voucher" %>
 <%@ page import="java.sql.Timestamp" %>
-<%@ page import="Entity.Cart" %>
 <%@ page import="java.util.List" %>
 <%@ page import="Util.Constant" %>
 <%--
@@ -100,8 +97,6 @@
                             </tr>
 
                             <%
-                                Locale vie = new Locale("vi", "VN");
-                                NumberFormat dongFormat = NumberFormat.getCurrencyInstance(vie);
                                 BigDecimal subTotal = new BigDecimal(0);
                             %>
                             <c:forEach items="${sessionScope.cartItems}" var="item" varStatus="loop">
@@ -141,7 +136,7 @@
                                             BigDecimal price = product.getProductPrice();
                                             int productQuantity = ((CartItem) pageContext.getAttribute("item")).getQuantity();
                                             subTotal = subTotal.add(price.multiply(new BigDecimal(productQuantity)));
-                                            out.print(dongFormat.format(price));
+                                            out.print(Constant.NF_DONG.format(price));
                                         %>
                                     </td>
 
@@ -163,7 +158,7 @@
                                     </td>
 
                                     <td class="column-5">
-                                        <% out.print(dongFormat.format(((CartItem) pageContext.getAttribute("item")).getValue())); %>
+                                        <% out.print(Constant.NF_DONG.format(((CartItem) pageContext.getAttribute("item")).getValue())); %>
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -200,7 +195,7 @@
 
                         <div class="size-209">
                             <span id="subTotal" class="mtext-110 cl2">
-                                <% out.print(dongFormat.format(subTotal)); %>
+                                <% out.print(Constant.NF_DONG.format(subTotal)); %>
                             </span>
                         </div>
                     </div>
@@ -257,7 +252,7 @@
                                             if (session.getAttribute("shippingCost") != null) {
                                                 shippingCost = (BigDecimal) session.getAttribute("shippingCost");
                                             }
-                                            out.print(dongFormat.format(shippingCost));
+                                            out.print(Constant.NF_DONG.format(shippingCost));
                                         %>
                                     </span>
                                     <button type="button" id="btnUpdateTotal"
@@ -291,7 +286,7 @@
                                             discount = subTotal.multiply(discount);
                                         }
                                     }
-                                    out.print(dongFormat.format(discount));
+                                    out.print(Constant.NF_DONG.format(discount));
                                 %>
                             </span>
                         </div>
@@ -308,7 +303,7 @@
                             <span class="mtext-110 cl2">
                                 <%
                                     BigDecimal vat = subTotal.multiply(new BigDecimal(8)).divide(new BigDecimal(100), 2, RoundingMode.HALF_UP);
-                                    out.print(dongFormat.format(vat));
+                                    out.print(Constant.NF_DONG.format(vat));
                                 %>
                             </span>
                         </div>
@@ -325,7 +320,7 @@
                             <span class="mtext-110 cl2 product-price">
                                 <%
                                     BigDecimal total = ((subTotal.subtract(discount)).add(shippingCost)).add(vat);
-                                    out.print(dongFormat.format(total));
+                                    out.print(Constant.NF_DONG.format(total));
                                 %>
                             </span>
                         </div>

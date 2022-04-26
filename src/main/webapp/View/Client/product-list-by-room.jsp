@@ -1,7 +1,5 @@
 <jsp:useBean id="room" scope="request" type="Entity.Room"/>
-<%@ page import="java.util.Locale" %>
 <%@ page import="java.math.BigDecimal" %>
-<%@ page import="java.text.NumberFormat" %>
 <%@ page import="java.math.RoundingMode" %>
 <%@ page import="java.util.List" %>
 <%@ page import="Entity.*" %>
@@ -320,15 +318,13 @@
                                             <span class="stext-105 cl3 product-price m-r-12">
                                                 <%
                                                     BigDecimal price = ((Product) pageContext.getAttribute("product")).getProductPrice();
-                                                    Locale vie = new Locale("vi", "VN");
-                                                    NumberFormat dongFormat = NumberFormat.getCurrencyInstance(vie);
-                                                    String showPrice = dongFormat.format(price);
+                                                    String showPrice = Constant.NF_DONG.format(price);
                                                     out.print("<td>" + showPrice + "</td>");
                                                 %>
                                             </span>
                                             <%
                                                 BigDecimal cost = ((Product) pageContext.getAttribute("product")).getProductCost();
-                                                String showCost = dongFormat.format(cost);
+                                                String showCost = Constant.NF_DONG.format(cost);
                                             %>
                                             <c:if test="${product.productCost != '0' && product.productCost != product.productPrice}">
                                                 <span class="stext-105 cl3 product-cost">

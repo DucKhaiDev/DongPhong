@@ -1,8 +1,6 @@
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="Entity.Product" %>
 <%@ page import="java.math.BigDecimal" %>
-<%@ page import="java.util.Locale" %>
-<%@ page import="java.text.NumberFormat" %>
 <%@ page import="java.sql.Timestamp" %>
 <%@ page import="Util.Constant" %>
 <%--
@@ -133,10 +131,8 @@
                                                 <td>${entry.key.productName}</td>
                                                 <%
                                                     BigDecimal price = product.getProductPrice();
-                                                    Locale vie = new Locale("vi", "VN");
-                                                    NumberFormat dongFormat = NumberFormat.getCurrencyInstance(vie);
                                                 %>
-                                                <td><% out.print(dongFormat.format(price)); %></td>
+                                                <td><% out.print(Constant.NF_DONG.format(price)); %></td>
                                                 <td>${entry.key.category.categoryName}</td>
                                                 <td>${entry.key.brand.brandName}</td>
                                                 <td>${entry.value}</td>
@@ -189,10 +185,8 @@
                                                 <td>${entry.key.productName}</td>
                                                 <%
                                                     BigDecimal price = product.getProductPrice();
-                                                    Locale vie = new Locale("vi", "VN");
-                                                    NumberFormat dongFormat = NumberFormat.getCurrencyInstance(vie);
                                                 %>
-                                                <td><% out.print(dongFormat.format(price)); %></td>
+                                                <td><% out.print(Constant.NF_DONG.format(price)); %></td>
                                                 <td>${entry.key.category.categoryName}</td>
                                                 <td>${entry.key.brand.brandName}</td>
                                                 <td>${entry.value}</td>
@@ -245,10 +239,8 @@
                                                 <td>${entry.key.productName}</td>
                                                 <%
                                                     BigDecimal price = product.getProductPrice();
-                                                    Locale vie = new Locale("vi", "VN");
-                                                    NumberFormat dongFormat = NumberFormat.getCurrencyInstance(vie);
                                                 %>
-                                                <td><% out.print(dongFormat.format(price)); %></td>
+                                                <td><% out.print(Constant.NF_DONG.format(price)); %></td>
                                                 <td>${entry.key.category.categoryName}</td>
                                                 <td>${entry.key.brand.brandName}</td>
                                                 <td>${entry.value}/5.0</td>

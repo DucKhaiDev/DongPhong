@@ -167,7 +167,8 @@
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="recaddress" class="labels">Số nhà</label>
-                                <input id="recaddress" name="recaddress" class="w-full form-control" type="text"
+                                <input type="hidden" name="recaddress">
+                                <input id="recaddress" class="w-full form-control" type="text"
                                        value="${sessionScope.recaddress}" placeholder="Số nhà" disabled>
                             </div>
                         </div>
@@ -333,6 +334,7 @@
             $('input[name="selectedProvince"]').val($('#province option:selected').text());
             $('input[name="selectedDistrict"]').val($('#district option:selected').text());
             $('input[name="selectedWard"]').val($('#ward option:selected').text());
+            $('input[name="recaddress"]').val($('#recaddress').prop('value'));
         });
         if (<% out.print(session.getAttribute("message") != null); %>) {
             stepper.to(3);

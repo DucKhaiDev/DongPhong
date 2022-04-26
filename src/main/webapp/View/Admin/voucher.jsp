@@ -1,8 +1,7 @@
-<%@ page import="java.util.Locale" %>
-<%@ page import="java.text.NumberFormat" %>
 <%@ page import="Entity.Voucher" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.util.Date" %>
+<%@ page import="Util.Constant" %>
 <%--
   User: duckhaidev
   Date: 4/15/2022
@@ -100,11 +99,9 @@
                                             <td>${voucher.voucherId}</td>
                                             <td>${voucher.minProduct}</td>
                                             <%
-                                                Locale vie = new Locale("vi", "VN");
-                                                NumberFormat dongFormat = NumberFormat.getCurrencyInstance(vie);
                                                 Voucher voucher = (Voucher) pageContext.getAttribute("voucher");
                                             %>
-                                            <td><% out.print(dongFormat.format(voucher.getMinValue())); %></td>
+                                            <td><% out.print(Constant.NF_DONG.format(voucher.getMinValue())); %></td>
                                             <td><% out.print(String.format("%.0f", voucher.getDiscount() * 100) + " %"); %></td>
                                             <%
                                                 SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");

@@ -48,7 +48,11 @@ public class AddToCart extends HttpServlet {
                 Update item
             */
             //Update cartItem quantity
-            cartItem.setQuantity(cartItem.getQuantity() + productQuantity);
+            int newQuantity = cartItem.getQuantity() + productQuantity;
+            if (newQuantity > product.getProductQuantity()) {
+                newQuantity = product.getProductQuantity();
+            }
+            cartItem.setQuantity(newQuantity);
 
             //Update cartItem value
             BigDecimal productPrice = product.getProductPrice();

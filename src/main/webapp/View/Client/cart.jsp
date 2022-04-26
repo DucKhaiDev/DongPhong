@@ -1,7 +1,5 @@
 <%@ page import="Entity.Product" %>
 <%@ page import="Entity.CartItem" %>
-<%@ page import="java.util.Locale" %>
-<%@ page import="java.text.NumberFormat" %>
 <%@ page import="java.math.BigDecimal" %>
 <%@ page import="java.math.RoundingMode" %>
 <%@ page import="Util.Constant" %>
@@ -28,8 +26,6 @@
 
         <div class="header-cart-content flex-w js-pscroll">
             <%
-                Locale vie = new Locale("vi", "VN");
-                NumberFormat dongFormat = NumberFormat.getCurrencyInstance(vie);
                 BigDecimal total = new BigDecimal(0);
             %>
             <ul class="header-cart-wrapitem w-full">
@@ -77,7 +73,7 @@
 
                             <div class="d-flex">
                                 <span class="header-cart-item-info product-price">
-								    <% out.print(dongFormat.format(price)); %>
+								    <% out.print(Constant.NF_DONG.format(price)); %>
 							    </span>
 
                                 <span class="header-cart-item-info product-quantity">
@@ -89,7 +85,7 @@
                             <div class="d-flex">
                                 <c:if test="${cart_product.productCost != '0' && cart_product.productCost != cart_product.productPrice}">
                                     <span class="header-cart-item-info product-cost">
-                                        <% out.print(dongFormat.format(cost)); %>
+                                        <% out.print(Constant.NF_DONG.format(cost)); %>
                                     </span>
                                 </c:if>
 
@@ -115,7 +111,7 @@
 
             <div class="w-full">
                 <div class="header-cart-total w-full p-tb-40">
-                    Tổng: <% out.print(dongFormat.format(total)); %>
+                    Tổng: <% out.print(Constant.NF_DONG.format(total)); %>
                 </div>
 
                 <div class="header-cart-buttons flex-w w-full">
