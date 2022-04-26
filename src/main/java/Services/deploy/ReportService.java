@@ -3,7 +3,9 @@ package Services.deploy;
 import Dao.deploy.ReportDao;
 import Entity.Report;
 import Services.IReportService;
+import Tools.Pair;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -28,5 +30,10 @@ public class ReportService implements IReportService {
     @Override
     public Report getSumUndone(Timestamp from, Timestamp to) {
         return reportDao.getSumUndone(from, to);
+    }
+
+    @Override
+    public List<Pair<Integer, BigDecimal>> getReportYears(int from, int to) {
+        return reportDao.getReportYears(from, to);
     }
 }

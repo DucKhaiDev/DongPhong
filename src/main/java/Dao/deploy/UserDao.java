@@ -270,4 +270,26 @@ public class UserDao implements IUserDao {
 
         return count;
     }
+
+    @Override
+    public int countMember() {
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        int count = 0;
+
+        try {
+            ps = conn.prepareStatement("SELECT COUNT(*) FROM [USER] WHERE [ROLE] = 'True'");
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                count = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnect.closeAll(rs, ps, conn);
+        }
+
+        return count;
+    }
 }

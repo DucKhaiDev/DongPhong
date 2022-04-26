@@ -16,4 +16,6 @@ public interface IOrderDao {
     Order getNewestOrder();
 
     List<Order> getAll();
+
+    int countPendingOrder();
 }

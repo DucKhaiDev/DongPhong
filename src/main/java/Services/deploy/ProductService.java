@@ -228,4 +228,9 @@ public class ProductService implements IProductService {
     public int countSale(String productId) {
         return productDao.countSale(productId);
     }
+
+    @Override
+    public int countOutOfStock() {
+        return productDao.countOutOfStock();
+    }
 }

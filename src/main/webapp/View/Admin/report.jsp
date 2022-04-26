@@ -273,8 +273,6 @@
         let maxMonth = to.getMonth() + 1;
         let maxYear = to.getFullYear();
         while (minMonth <= maxMonth || minYear < maxYear) {
-            console.log(minMonth);
-            console.log(minYear);
             xValues.push(minMonth + '/' + minYear);
             let exist = false;
             <c:forEach items="${reportDone}" var="item">

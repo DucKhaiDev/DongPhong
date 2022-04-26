@@ -218,4 +218,27 @@ public class OrderDao implements IOrderDao {
 
         return orders;
     }
+
+    @Override
+    public int countPendingOrder() {
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            ps = conn.prepareStatement("SELECT COUNT(*) " +
+                    "FROM dbo.[ORDER] " +
+                    "WHERE ORD_STATUS IS NULL");
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnect.closeAll(rs, ps, conn);
+        }
+
+        return 0;
+    }
 }

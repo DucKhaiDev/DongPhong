@@ -626,4 +626,27 @@ public class ProductDao implements IProductDao {
 
         return 0;
     }
+
+    @Override
+    public int countOutOfStock() {
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            ps = conn.prepareStatement("SELECT COUNT(*) " +
+                    "FROM dbo.PRODUCT " +
+                    "WHERE PRO_QUANT = 0");
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnect.closeAll(rs, ps, conn);
+        }
+
+        return 0;
+    }
 }

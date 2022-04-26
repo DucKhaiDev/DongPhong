@@ -56,4 +56,6 @@ public interface IProductService {
     Map<Product, Double> highestRated();
 
     int countSale(String productId);
+
+    int countOutOfStock();
 }

@@ -24,4 +24,6 @@ public interface IUserDao {
     boolean checkExistEmail(String email);
 
     int countAdmin();
+
+    int countMember();
 }

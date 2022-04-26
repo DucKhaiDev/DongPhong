@@ -38,4 +38,9 @@ public class OrderService implements IOrderService {
     public List<Order> getAll() {
         return orderDao.getAll();
     }
+
+    @Override
+    public int countPendingOrder() {
+        return orderDao.countPendingOrder();
+    }
 }

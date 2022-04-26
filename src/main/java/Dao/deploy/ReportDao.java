@@ -3,7 +3,9 @@ package Dao.deploy;
 import Connect.DBConnect;
 import Dao.IReportDao;
 import Entity.Report;
+import Tools.Pair;
 
+import java.math.BigDecimal;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -145,5 +147,37 @@ public class ReportDao implements IReportDao {
         }
 
         return report;
+    }
+
+    @Override
+    public List<Pair<Integer, BigDecimal>> getReportYears(int from, int to) {
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        List<Pair<Integer, BigDecimal>> reports = new ArrayList<>();
+
+        try {
+            ps = conn.prepareStatement("SELECT YEAR(ORD_DATE), SUM(ORD_TOTAL) " +
+                    "FROM dbo.[ORDER] " +
+                    "WHERE ? <= YEAR(ORD_DATE) AND YEAR(ORD_DATE) <= ? AND  ORD_STATUS = 'TRUE' " +
+                    "GROUP BY YEAR(ORD_DATE) " +
+                    "ORDER BY YEAR(ORD_DATE) ASC");
+            ps.setInt(1, from);
+            ps.setInt(2, to);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Pair<Integer, BigDecimal> pair = new Pair<>();
+                pair.setKey(rs.getInt(1));
+                pair.setValue(rs.getBigDecimal(2));
+
+                reports.add(pair);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnect.closeAll(rs, ps, conn);
+        }
+
+        return reports;
     }
 }

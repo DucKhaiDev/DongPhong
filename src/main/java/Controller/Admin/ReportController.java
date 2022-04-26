@@ -1,6 +1,5 @@
 package Controller.Admin;
 
-import Entity.Report;
 import Util.Constant;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -15,7 +14,6 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
-import java.util.List;
 
 @WebServlet(name = "ReportController", value = "/admin/report")
 public class ReportController extends HttpServlet {
@@ -30,7 +28,6 @@ public class ReportController extends HttpServlet {
                 e.printStackTrace();
             }
         }
-        request.setAttribute("from", from);
 
         Timestamp to = new Timestamp(new Date().getTime());
         String toParam = request.getParameter("to");
@@ -41,22 +38,15 @@ public class ReportController extends HttpServlet {
                 e.printStackTrace();
             }
         }
+
+        request.setAttribute("from", from);
         request.setAttribute("to", to);
-
-        List<Report> reportDone = Constant.Service.REPORT_SERVICE.getReports(from, to, true);
-        request.setAttribute("reportDone", reportDone);
-        Report done = Constant.Service.REPORT_SERVICE.getSum(from, to, true);
-        request.setAttribute("done", done);
-
-        List<Report> reportUndone = Constant.Service.REPORT_SERVICE.getReportsUndone(from, to);
-        request.setAttribute("reportUndone", reportUndone);
-        Report undone = Constant.Service.REPORT_SERVICE.getSumUndone(from, to);
-        request.setAttribute("undone", undone);
-
-        List<Report> reportCancel = Constant.Service.REPORT_SERVICE.getReports(from, to, false);
-        request.setAttribute("reportCancel", reportCancel);
-        Report cancel = Constant.Service.REPORT_SERVICE.getSum(from, to, false);
-        request.setAttribute("cancel", cancel);
+        request.setAttribute("reportDone", Constant.Service.REPORT_SERVICE.getReports(from, to, true));
+        request.setAttribute("done", Constant.Service.REPORT_SERVICE.getSum(from, to, true));
+        request.setAttribute("reportUndone", Constant.Service.REPORT_SERVICE.getReportsUndone(from, to));
+        request.setAttribute("undone", Constant.Service.REPORT_SERVICE.getSumUndone(from, to));
+        request.setAttribute("reportCancel", Constant.Service.REPORT_SERVICE.getReports(from, to, false));
+        request.setAttribute("cancel", Constant.Service.REPORT_SERVICE.getSum(from, to, false));
 
         request.getRequestDispatcher(Constant.Path.ADMIN_REPORT).forward(request, response);
     }

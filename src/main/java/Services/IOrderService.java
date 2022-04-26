@@ -16,4 +16,6 @@ public interface IOrderService {
     Order getNewestOrder();
 
     List<Order> getAll();
+
+    int countPendingOrder();
 }

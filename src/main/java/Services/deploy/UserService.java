@@ -78,4 +78,9 @@ public class UserService implements IUserService {
     public int countAdmin() {
         return userDao.countAdmin();
     }
+
+    @Override
+    public int countMember() {
+        return userDao.countMember();
+    }
 }
