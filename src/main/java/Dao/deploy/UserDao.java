@@ -3,6 +3,7 @@ package Dao.deploy;
 import Connect.DBConnect;
 import Dao.IUserDao;
 import Entity.User;
+import Util.Constant;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -40,7 +41,8 @@ public class UserDao implements IUserDao {
         PreparedStatement ps = null;
 
         try {
-            ps = conn.prepareStatement("INSERT INTO [USER](USER_ID, FIRSTNAME, LASTNAME, USERNAME, PASSWORD, EMAIL, ADDRESS, PHONE, AVATAR, [ROLE]) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            ps = conn.prepareStatement("INSERT INTO [USER](USER_ID, FIRSTNAME, LASTNAME, USERNAME, PASSWORD, EMAIL, ADDRESS, PHONE, AVATAR, [ROLE], VC_CHAOMUNG) " +
+                    "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
             ps.setString(1, user.getUserId());
             ps.setString(2, user.getFirstName());
             ps.setString(3, user.getLastName());
@@ -51,6 +53,7 @@ public class UserDao implements IUserDao {
             ps.setString(8, user.getPhone());
             ps.setString(9, user.getAvatar());
             ps.setBoolean(10, user.getRole());
+            ps.setBoolean(11, user.getVc_chaomung());
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -65,7 +68,9 @@ public class UserDao implements IUserDao {
         PreparedStatement ps = null;
 
         try {
-            ps = conn.prepareStatement("UPDATE [USER] SET FIRSTNAME = ?, LASTNAME = ?, USERNAME = ?, PASSWORD = ?, EMAIL = ?, ADDRESS = ?, PHONE = ?, AVATAR = ?, [ROLE] = ? WHERE USER_ID = ?");
+            ps = conn.prepareStatement("UPDATE [USER] " +
+                    "SET FIRSTNAME = ?, LASTNAME = ?, USERNAME = ?, PASSWORD = ?, EMAIL = ?, ADDRESS = ?, PHONE = ?, AVATAR = ?, [ROLE] = ?, VC_CHAOMUNG = ? " +
+                    "WHERE USER_ID = ?");
             ps.setString(1, user.getFirstName());
             ps.setString(2, user.getLastName());
             ps.setString(3, user.getUsername());
@@ -75,7 +80,8 @@ public class UserDao implements IUserDao {
             ps.setString(7, user.getPhone());
             ps.setString(8, user.getAvatar());
             ps.setBoolean(9, user.getRole());
-            ps.setString(10, user.getUserId());
+            ps.setBoolean(10, user.getVc_chaomung());
+            ps.setString(11, user.getUserId());
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -126,6 +132,7 @@ public class UserDao implements IUserDao {
                 user.setPhone(rs.getString("PHONE"));
                 user.setAvatar(rs.getString("AVATAR"));
                 user.setRole(rs.getBoolean("ROLE"));
+                user.setVc_chaomung(rs.getBoolean("VC_CHAOMUNG"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -158,6 +165,7 @@ public class UserDao implements IUserDao {
                 user.setPhone(rs.getString("PHONE"));
                 user.setAvatar(rs.getString("AVATAR"));
                 user.setRole(rs.getBoolean("ROLE"));
+                user.setVc_chaomung(rs.getBoolean("VC_CHAOMUNG"));
 
                 users.add(user);
             }
@@ -193,6 +201,7 @@ public class UserDao implements IUserDao {
                 user.setPhone(rs.getString("PHONE"));
                 user.setAvatar(rs.getString("AVATAR"));
                 user.setRole(rs.getBoolean("ROLE"));
+                user.setVc_chaomung(rs.getBoolean("VC_CHAOMUNG"));
 
                 users.add(user);
             }
@@ -291,5 +300,31 @@ public class UserDao implements IUserDao {
         }
 
         return count;
+    }
+
+    @Override
+    public List<User> getTopMember() {
+        List<User> users = new ArrayList<>();
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            ps = conn.prepareStatement("SELECT TOP(10) [USER].USER_ID, COUNT(ORD_ID) " +
+                    "FROM dbo.[USER] " +
+                    "JOIN dbo.[ORDER] ON [ORDER].USER_ID = [USER].USER_ID " +
+                    "GROUP BY [USER].USER_ID " +
+                    "ORDER BY COUNT(ORD_ID) DESC");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                users.add(Constant.Service.USER_SERVICE.getUser(rs.getString(1)));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnect.closeAll(rs, ps, conn);
+        }
+
+        return users;
     }
 }

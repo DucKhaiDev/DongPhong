@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.UUID;
 
 @WebServlet(name = "RegisterController", value = "/register")
 public class RegisterController extends HttpServlet {
@@ -24,10 +25,10 @@ public class RegisterController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String username = request.getParameter("username");
+        String username = request.getParameter("username").toLowerCase();
         String password = request.getParameter("password");
         String repeatPassword = request.getParameter("repeatPassword");
-        String email = request.getParameter("email");
+        String email = request.getParameter("email").toLowerCase();
 
         String rgtMsg;
         String usnMsg;
@@ -270,7 +271,7 @@ public class RegisterController extends HttpServlet {
                     "                    <table role=\"presentation\" style=\"border-spacing: 0; padding: 0; border: 0; width: 100%\">\n" +
                     "                        <tr>\n" +
                     "                            <td style=\"padding: 30px 40px 30px 40px; text-align: center;\">\n" +
-                    "                                <span style=\"color:#fff; font-size: 30px\">DongPhong.store</span>\n" +
+                    "                                <span style=\"color:#fff; font-size: 30px; font-weight: bold;\">DongPhong.store</span>\n" +
                     "                            </td>\n" +
                     "                        </tr>\n" +
                     "                    </table>\n" +
@@ -358,7 +359,7 @@ public class RegisterController extends HttpServlet {
                     "                                    <li>Thông báo về các ưu đãi độc quyền</li>\n" +
                     "                                    <li>\n" +
                     "                                        <b>\n" +
-                    "                                            Đặc biệt, bạn được giảm giá trực tiếp 10% trong lần mua hàng đầu tiên,\n" +
+                    "                                            Đặc biệt, bạn được giảm giá trực tiếp 5% trong lần mua hàng đầu tiên,\n" +
                     "                                            chỉ cần sử dụng mã giảm giá này khi thanh toán: CHAOMUNG.\n" +
                     "                                        </b>\n" +
                     "                                    </li>\n" +
@@ -452,7 +453,8 @@ public class RegisterController extends HttpServlet {
                 }
             }
 
-            response.sendRedirect("./login");
+            request.setAttribute("registerSuccess", "Đăng ký thành công!");
+            request.getRequestDispatcher(Constant.Path.LOGIN).forward(request, response);
         } else {
             rgtMsg = "Lỗi hệ thống!";
             request.setAttribute("rgtMsg", rgtMsg);

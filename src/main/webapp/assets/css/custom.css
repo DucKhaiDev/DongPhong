@@ -1143,3 +1143,173 @@ button[disabled]:hover{
 .fs-20 {
     font-size: 20px !important;
 }
+
+.voucher-modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.voucher-modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%; /* Could be more or less, depending on screen size */
+}
+
+.voucher-modal-close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.voucher-modal-close:hover,
+.voucher-modal-close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.text-underline {
+    text-decoration: underline !important;
+}
+
+.copy-tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.copy-tooltip .copy-tooltiptext {
+    visibility: hidden;
+    width: fit-content;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 150%;
+    left: 50%;
+    margin-left: -75px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.copy-tooltip .copy-tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+.copy-tooltip:hover .copy-tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+.btn-group .dropdown-menu {
+    border: none;
+    background: rgba(255, 255, 255, 1);
+    -webkit-box-shadow: 0 10px 34px -20px rgba(0, 0, 0, 0.41);
+    -moz-box-shadow: 0 10px 34px -20px rgba(0, 0, 0, 0.41);
+    box-shadow: 0 10px 34px -20px rgba(0, 0, 0, 0.41);
+    padding: 0;
+    min-width: 12rem;
+}
+
+.btn-group .dropdown-menu:before,
+.btn-group .dropdown-menu:after {
+    content: ' ';
+    display: block;
+    border-style: solid;
+    border-width: 0 .7em .6em .7em;
+    border-color: transparent;
+    position: absolute;
+    left: 35px;
+    margin-right: 16px;
+    z-index: -1;
+}
+
+.btn-group .dropdown-menu:before {
+    top: -.6em;
+    border-bottom-color: rgba(0, 0, 0, 0.03);
+}
+
+.btn-group .dropdown-menu:after {
+    top: -.5em;
+    border-bottom-color: #fff;
+}
+
+.btn-group .dropdown-menu .dropdown-item {
+    font-size: 14px;
+    color: #333;
+    font-weight: 400;
+    padding: 12px 30px;
+    position: relative;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    no-wrap: normal;
+}
+
+.btn-group .dropdown-menu .dropdown-item:last-child {
+    border: none;
+}
+
+.btn-group .dropdown-menu .dropdown-item:after {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    content: '';
+    width: 4px;
+    -webkit-transition: 0.3s;
+    -o-transition: 0.3s;
+    transition: 0.3s;
+    opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .btn-group .dropdown-menu .dropdown-item:after {
+        -webkit-transition: none;
+        -o-transition: none;
+        transition: none;
+    }
+}
+
+.cl92 {
+    color: #6c7ae0;
+}
+
+.btn-group .dropdown-menu .dropdown-item span {
+    font-size: 20px;
+}
+
+.btn-group .dropdown-menu .dropdown-item.cl92 span {
+    color: #6c7ae0;
+}
+
+.btn-group .dropdown-menu .dropdown-item.cl92:hover:after {
+    opacity: 1;
+    background: #6c7ae0;
+}
+
+.cl93 {
+    color: #333 !important;
+}
+
+.cursor-pointer {
+    cursor: pointer !important;
+}

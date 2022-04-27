@@ -5,6 +5,7 @@ import Dao.ICartItemDao;
 import Entity.CartItem;
 import Util.Constant;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -221,5 +222,55 @@ public class CartItemDao implements ICartItemDao {
         }
 
         return false;
+    }
+
+    @Override
+    public int countSumQuantity(String cartId) {
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            ps = conn.prepareStatement("SELECT COUNT(*) " +
+                    "FROM dbo.CARTITEM " +
+                    "WHERE CART_ID = ? " +
+                    "GROUP BY CART_ID");
+            ps.setString(1, cartId);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnect.closeAll(rs, ps, conn);
+        }
+
+        return 0;
+    }
+
+    @Override
+    public BigDecimal getSubTotal(String cartId) {
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            ps = conn.prepareStatement("SELECT SUM(VALUE) " +
+                    "FROM dbo.CARTITEM " +
+                    "WHERE CART_ID = ? " +
+                    "GROUP BY CART_ID");
+            ps.setString(1, cartId);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getBigDecimal(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnect.closeAll(rs, ps, conn);
+        }
+
+        return BigDecimal.valueOf(0);
     }
 }

@@ -15,20 +15,20 @@ public class User implements Serializable {
     private String phone;
     private String avatar;
     private boolean role;
+    private boolean vc_chaomung;
 
     public User() {
     }
 
-    //Constructor đăng ký
+    //Constructor for register
     public User(String userId, String username, String password, String email) {
         this.userId = userId;
         this.username = username;
         this.password = password;
         this.email = email;
-        this.role = true;
     }
 
-    public User(String userId, String firstName, String lastName, String username, String password, String email, String address, String phone, String avatar, boolean role) {
+    public User(String userId, String firstName, String lastName, String username, String password, String email, String address, String phone, String avatar, boolean role, boolean vc_chaomung) {
         this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -39,6 +39,7 @@ public class User implements Serializable {
         this.phone = phone;
         this.avatar = avatar;
         this.role = role;
+        this.vc_chaomung = vc_chaomung;
     }
 
     public String getUserId() {
@@ -119,5 +120,13 @@ public class User implements Serializable {
 
     public void setRole(boolean role) {
         this.role = role;
+    }
+
+    public boolean getVc_chaomung() {
+        return vc_chaomung;
+    }
+
+    public void setVc_chaomung(boolean vc_chaomung) {
+        this.vc_chaomung = vc_chaomung;
     }
 }

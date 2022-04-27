@@ -2,6 +2,7 @@ package Dao;
 
 import Entity.CartItem;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface ICartItemDao {
@@ -22,4 +23,8 @@ public interface ICartItemDao {
     List<CartItem> getItemByCart(String cartId);
 
     boolean checkExistItem(String productId, String cartId);
+
+    int countSumQuantity(String cartId);
+
+    BigDecimal getSubTotal(String cartId);
 }

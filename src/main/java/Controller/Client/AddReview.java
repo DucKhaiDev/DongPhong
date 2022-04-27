@@ -38,7 +38,13 @@ public class AddReview extends HttpServlet {
             isRate = true;
             Constant.Service.REVIEW_SERVICE.syncRate(productId, user.getUsername(), reviewRate);
             if (isFirst) {
-                product.setProductRate((product.getProductRate() + reviewRate) / 2);
+                double rate = product.getProductRate();
+                if (Double.compare(rate, 0) == 0) {
+                    product.setProductRate(reviewRate);
+                } else {
+                    product.setProductRate((product.getProductRate() + reviewRate) / 2);
+                }
+
                 Constant.Service.PRODUCT_SERVICE.edit(product);
             }
         }

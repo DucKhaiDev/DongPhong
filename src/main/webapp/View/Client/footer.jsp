@@ -114,7 +114,7 @@
                 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                 Bản quyền Nội dung &copy;<script>document.write(new Date().getFullYear().toString());</script>
                 : Công ty TNHH MTV <i class="fa fa-heart-o" aria-hidden="true"></i><a
-                    href="${pageContext.request.contextPath}" target="_blank">Đông Phong</a>.
+                    href="${pageContext.request.contextPath}/welcome" target="_blank">Đông Phong</a>.
                 <br>
                 Địa chỉ: Thôn Phong Nẫm, xã Đông Phong, huyện Yên Phong, tỉnh Bắc Ninh. SĐT: (+84) 98 252 3005
                 <br>

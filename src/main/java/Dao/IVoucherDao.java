@@ -1,5 +1,6 @@
 package Dao;
 
+import Entity.Cart;
 import Entity.Voucher;
 
 import java.util.List;
@@ -18,4 +19,6 @@ public interface IVoucherDao {
     List<String> getAllVoucher();
 
     boolean checkExistId(String voucherId);
+
+    List<Voucher> getAvailableVoucher(String cartId);
 }

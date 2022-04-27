@@ -1,6 +1,7 @@
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.util.Date" %>
-<%@ page import="Util.Constant" %><%--
+<%@ page import="Util.Constant" %>
+<%--
   User: duckhaidev
   Date: 2/14/2022
   Time: 10:34 AM
@@ -120,13 +121,12 @@
                     <div style="width:100%;border:1px solid #2D6AB4; margin-top: 20px;"><div style="text-align:center;background-color:#2D6AB4;width:100%;font-size:13px;font-weight:bold;height:18px;padding-top:2px;"><a href="https://www.exchangeratewidget.com/" style="color:#FFFFFF;text-decoration:none;" rel="nofollow">Quy Đổi Tiền Tệ</a></div><script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/converter-vnd-to-usd.js"></script></div>
                     <!-- End of Currency Converter Script -->
                 </div>
-
             </div>
             <hr/>
             <div class="row">
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="panel panel-back noti-box">
-                        <span class="text-uppercase" style="color: mediumblue; font-size: 15px; font-weight: bold;">Thị Trường Chứng Khoán</span>
+                        <span class="text-uppercase" style="color: mediumblue; font-size: 15px; font-weight: bold;">Tin Tức Thị Trường Chứng Khoán</span>
                         <!-- TradingView Widget BEGIN -->
                         <div class="tradingview-widget-container" style="padding-top: 16px;">
                             <div id="tradingview_79c7d"></div>
@@ -161,22 +161,23 @@
                     <div class="panel panel-primary text-center no-boder bg-color-green">
                         <div class="panel-body">
                             <i class="fa fa-comments-o fa-5x"></i>
-                            <h4>200 New Comments </h4>
-                            <h4>See All Comments </h4>
+                            <h4>${requestScope.countNewComment} Bình luận mới </h4>
+                            <h4>Xem tất cả bình luận </h4>
                         </div>
                         <div class="panel-footer back-footer-green">
                             <i class="fa fa-rocket fa-5x"></i>
-                            Lorem ipsum dolor sit amet sit sit, consectetur adipiscing elitsit sit gthn ipsum dolor sit
-                            amet ipsum dolor sit amet
-
+                            Đánh giá hoạt động tương tác dựa trên hoạt động bình luận gần đây của Website: <c:choose>
+                            <c:when test="${requestScope.countNewComment < 10}">Thấp</c:when>
+                            <c:when test="${10 <= requestScope.countNewComment && requestScope.countNewComment < 20}">Trung bình</c:when>
+                            <c:otherwise>Cao</c:otherwise>
+                        </c:choose>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-9 col-sm-12 col-xs-12">
-
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Responsive Table Example
+                            TOP 10 Khách Hàng Thân Thiết
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
@@ -184,254 +185,29 @@
                                     <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>First Name</th>
-                                        <th>Last Name</th>
                                         <th>Username</th>
-                                        <th>User No.</th>
+                                        <th>Họ</th>
+                                        <th>Tên</th>
+                                        <th>Email</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
-                                        <td>100090</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td>@fat</td>
-                                        <td>100090</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Larry</td>
-                                        <td>the Bird</td>
-                                        <td>@twitter</td>
-                                        <td>100090</td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
-                                        <td>100090</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td>@fat</td>
-                                        <td>100090</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Larry</td>
-                                        <td>the Bird</td>
-                                        <td>@twitter</td>
-                                        <td>100090</td>
-                                    </tr>
-
+                                    <c:set var="number" value="0"/>
+                                    <jsp:useBean id="topMembers" scope="request" type="java.util.List"/>
+                                    <c:forEach items="${topMembers}" var="member">
+                                        <tr>
+                                            <td>${number = number + 1}</td>
+                                            <td>${member.username}</td>
+                                            <td>${member.lastName}</td>
+                                            <td>${member.firstName}</td>
+                                            <td>${member.email}</td>
+                                        </tr>
+                                    </c:forEach>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
-
-                </div>
-            </div>
-            <!-- /. ROW  -->
-            <div class="row">
-                <div class="col-md-6 col-sm-12 col-xs-12">
-
-                    <div class="chat-panel panel panel-default chat-boder chat-panel-head">
-                        <div class="panel-heading">
-                            <i class="fa fa-comments fa-fw"></i>
-                            Chat Box
-                            <div class="btn-group pull-right">
-                                <button type="button" class="btn btn-default btn-xs dropdown-toggle"
-                                        data-toggle="dropdown">
-                                    <i class="fa fa-chevron-down"></i>
-                                </button>
-                                <ul class="dropdown-menu slidedown">
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-refresh fa-fw"></i>Refresh
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-check-circle fa-fw"></i>Available
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-times fa-fw"></i>Busy
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-clock-o fa-fw"></i>Away
-                                        </a>
-                                    </li>
-                                    <li class="divider"></li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-sign-out fa-fw"></i>Sign Out
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="panel-body">
-                            <ul class="chat-box">
-                                <li class="left clearfix">
-                                    <span class="chat-img pull-left">
-                                        <img src="${pageContext.request.contextPath}/assets/images/1.png" alt="User"
-                                             class="img-circle"/>
-                                    </span>
-                                    <div class="chat-body">
-                                        <strong>Jack Sparrow</strong>
-                                        <small class="pull-right text-muted">
-                                            <i class="fa fa-clock-o fa-fw"></i>12 mins ago
-                                        </small>
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum
-                                            ornare dolor, quis ullamcorper ligula sodales.
-                                        </p>
-                                    </div>
-                                </li>
-                                <li class="right clearfix">
-                                    <span class="chat-img pull-right">
-
-                                        <img src="${pageContext.request.contextPath}/assets/images/2.png" alt="User"
-                                             class="img-circle"/>
-                                    </span>
-                                    <div class="chat-body clearfix">
-
-                                        <small class=" text-muted">
-                                            <i class="fa fa-clock-o fa-fw"></i>13 mins ago</small>
-                                        <strong class="pull-right">Jhonson Deed</strong>
-
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum
-                                            ornare dolor, quis ullamcorper ligula sodales.
-                                        </p>
-                                    </div>
-                                </li>
-                                <li class="left clearfix">
-                                    <span class="chat-img pull-left">
-                                         <img src="${pageContext.request.contextPath}/assets/images/3.png" alt="User"
-                                              class="img-circle"/>
-                                    </span>
-                                    <div class="chat-body clearfix">
-
-                                        <strong>Jack Sparrow</strong>
-                                        <small class="pull-right text-muted">
-                                            <i class="fa fa-clock-o fa-fw"></i>14 mins ago</small>
-
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum
-                                            ornare dolor, quis ullamcorper ligula sodales.
-                                        </p>
-                                    </div>
-                                </li>
-                                <li class="right clearfix">
-                                    <span class="chat-img pull-right">
-                                         <img src="${pageContext.request.contextPath}/assets/images/4.png" alt="User"
-                                              class="img-circle"/>
-                                    </span>
-                                    <div class="chat-body clearfix">
-
-                                        <small class=" text-muted">
-                                            <i class="fa fa-clock-o fa-fw"></i>15 mins ago</small>
-                                        <strong class="pull-right">Jhonson Deed</strong>
-
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum
-                                            ornare dolor, quis ullamcorper ligula sodales.
-                                        </p>
-                                    </div>
-                                </li>
-                                <li class="left clearfix">
-                                    <span class="chat-img pull-left">
-                                        <img src="${pageContext.request.contextPath}/assets/images/1.png" alt="User"
-                                             class="img-circle"/>
-                                    </span>
-                                    <div class="chat-body">
-                                        <strong>Jack Sparrow</strong>
-                                        <small class="pull-right text-muted">
-                                            <i class="fa fa-clock-o fa-fw"></i>12 mins ago
-                                        </small>
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum
-                                            ornare dolor, quis ullamcorper ligula sodales.
-                                        </p>
-                                    </div>
-                                </li>
-                                <li class="right clearfix">
-                                    <span class="chat-img pull-right">
-                                       <img src="${pageContext.request.contextPath}/assets/images/2.png" alt="User"
-                                            class="img-circle"/>
-                                    </span>
-                                    <div class="chat-body clearfix">
-
-                                        <small class=" text-muted">
-                                            <i class="fa fa-clock-o fa-fw"></i>13 mins ago</small>
-                                        <strong class="pull-right">Jhonson Deed</strong>
-
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum
-                                            ornare dolor, quis ullamcorper ligula sodales.
-                                        </p>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div class="panel-footer">
-                            <div class="input-group">
-                                <label for="btn-input"></label><input id="btn-input" type="text"
-                                                                      class="form-control input-sm"
-                                                                      placeholder="Type your message to send..."/>
-                                <span class="input-group-btn">
-                                    <button class="btn btn-warning btn-sm" id="btn-chat">
-                                        Send
-                                    </button>
-                                </span>
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-                <div class="col-md-6 col-sm-12 col-xs-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            Label Examples
-                        </div>
-                        <div class="panel-body">
-                            <span class="label label-default">Default</span>
-                            <span class="label label-primary">Primary</span>
-                            <span class="label label-success">Success</span>
-                            <span class="label label-info">Info</span>
-                            <span class="label label-warning">Warning</span>
-                            <span class="label label-danger">Danger</span>
-                        </div>
-                    </div>
-
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            Donut Chart Example
-                        </div>
-                        <div class="panel-body">
-                            <div id="morris-donut-chart"></div>
-                        </div>
-                    </div>
-
                 </div>
             </div>
             <!-- /. ROW  -->

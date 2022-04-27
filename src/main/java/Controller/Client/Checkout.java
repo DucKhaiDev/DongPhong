@@ -384,6 +384,16 @@ public class Checkout extends HttpServlet {
         //Create new cart
         Checkout.createNewCart(request, user);
 
+        //Minus voucher's quantity
+        Voucher usingVoucher = (Voucher) session.getAttribute("usingVoucher");
+        if (usingVoucher.getVoucherId().equals("CHAOMUNG")) {
+            user.setVc_chaomung(true);
+            Constant.Service.USER_SERVICE.edit(user);
+        } else {
+            usingVoucher.setQuantity(usingVoucher.getQuantity() - 1);
+            Constant.Service.VOUCHER_SERVICE.edit(usingVoucher);
+        }
+
         String[] attributes = {"recaddress", "selectedWard", "selectedDistrict", "selectedProvince", "shippingCost", "voucher"};
         for (String attribute : attributes) {
             session.removeAttribute(attribute);

@@ -1,6 +1,7 @@
 package Services;
 
 import Entity.User;
+import Tools.Pair;
 
 import java.util.List;
 
@@ -28,4 +29,6 @@ public interface IUserService {
     int countAdmin();
 
     int countMember();
+
+    List<User> getTopMember();
 }

@@ -106,7 +106,6 @@
 <script src="${pageContext.request.contextPath}/assets/js/jquery.metisMenu.js"></script>
 <!-- CUSTOM SCRIPTS -->
 <script src="${pageContext.request.contextPath}/assets/js/custom.js"></script>
-<!--===============================================================================================-->
 <!-- CK EDITOR -->
 <script src="${pageContext.request.contextPath}/assets/js/ckeditor/ckeditor.js"></script>
 <script type="text/javascript">

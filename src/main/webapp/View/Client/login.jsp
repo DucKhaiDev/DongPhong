@@ -167,6 +167,19 @@
 <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
 <!--===============================================================================================-->
 <script src="${pageContext.request.contextPath}/assets/js/custom.js"></script>
+<!--===============================================================================================-->
+<script src="${pageContext.request.contextPath}/assets/vendor/sweetalert/sweetalert.min.js"></script>
+<script>
+    $(function () {
+        const message = '${requestScope.registerSuccess}';
+        if (message !== '') {
+            swal({
+                text: '${requestScope.registerSuccess}',
+                icon: 'success'
+            });
+        }
+    });
+</script>
 
 </body>
 </html>

@@ -15,7 +15,7 @@
             <nav class="limiter-menu-desktop container">
 
                 <!-- Logo desktop -->
-                <a href="${pageContext.request.contextPath}" class="logo">
+                <a href="${pageContext.request.contextPath}/welcome" class="logo">
                     <img src="${pageContext.request.contextPath}/assets/images/icons/logo.png" alt="IMG-LOGO">
                 </a>
 
@@ -23,67 +23,82 @@
                 <div class="menu-desktop">
                     <ul class="main-menu">
                         <li>
-                            <a href="${pageContext.request.contextPath}">Trang Chủ</a>
+                            <a href="${pageContext.request.contextPath}/welcome">Trang Chủ</a>
                         </li>
 
-                        <li class="dropdown show">
-                            <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                        <li class="nav-item dropdown btn-group">
+                            <a class="nav-link dropdown-toggle cl93 cursor-pointer" id="navbarDropdownPK" role="button"
+                               data-toggle="dropdown" aria-haspopup="true"
                                aria-expanded="false">Phòng Khách</a>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <div class="dropdown-menu m-t-25" aria-labelledby="navbarDropdownPK">
                                 <c:forEach items="${applicationScope.lvrCategories}" var="lvrCategory">
-                                    <li class="dropdown-item"><a
-                                            href="${pageContext.request.contextPath}/products/category?id=${lvrCategory.categoryId}">${lvrCategory.categoryName}</a>
-                                    </li>
+                                    <a class="dropdown-item cl92"
+                                       href="${pageContext.request.contextPath}/products/category?id=${lvrCategory.categoryId}">
+                                        <span class="m-r-4"></span>
+                                            ${lvrCategory.categoryName}
+                                    </a>
                                 </c:forEach>
-                            </ul>
+                            </div>
                         </li>
 
-                        <li class="dropdown show">
-                            <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                        <li class="nav-item dropdown btn-group">
+                            <a class="nav-link dropdown-toggle cl93 cursor-pointer" id="navbarDropdownPB" role="button"
+                               data-toggle="dropdown" aria-haspopup="true"
                                aria-expanded="false">Phòng Bếp</a>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <div class="dropdown-menu m-t-25" aria-labelledby="navbarDropdownPB">
                                 <c:forEach items="${applicationScope.kitCategories}" var="kitCategory">
-                                    <li class="dropdown-item"><a
-                                            href="${pageContext.request.contextPath}/products/category?id=${kitCategory.categoryId}">${kitCategory.categoryName}</a>
-                                    </li>
+                                    <a class="dropdown-item cl92"
+                                       href="${pageContext.request.contextPath}/products/category?id=${kitCategory.categoryId}">
+                                        <span class="m-r-4"></span>
+                                            ${kitCategory.categoryName}
+                                    </a>
                                 </c:forEach>
-                            </ul>
+                            </div>
                         </li>
 
-                        <li class="dropdown show">
-                            <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                        <li class="nav-item dropdown btn-group">
+                            <a class="nav-link dropdown-toggle cl93 cursor-pointer" id="navbarDropdownPN" role="button"
+                               data-toggle="dropdown" aria-haspopup="true"
                                aria-expanded="false">Phòng Ngủ</a>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <div class="dropdown-menu m-t-25" aria-labelledby="navbarDropdownPN">
                                 <c:forEach items="${applicationScope.bedCategories}" var="bedCategory">
-                                    <li class="dropdown-item"><a
-                                            href="${pageContext.request.contextPath}/products/category?id=${bedCategory.categoryId}">${bedCategory.categoryName}</a>
-                                    </li>
+                                    <a class="dropdown-item cl92"
+                                       href="${pageContext.request.contextPath}/products/category?id=${bedCategory.categoryId}">
+                                        <span class="m-r-4"></span>
+                                            ${bedCategory.categoryName}
+                                    </a>
                                 </c:forEach>
-                            </ul>
+                            </div>
                         </li>
 
-                        <li class="dropdown show">
-                            <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                        <li class="nav-item dropdown btn-group">
+                            <a class="nav-link dropdown-toggle cl93 cursor-pointer" id="navbarDropdownVP" role="button"
+                               data-toggle="dropdown" aria-haspopup="true"
                                aria-expanded="false">Văn Phòng</a>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <div class="dropdown-menu m-t-25" aria-labelledby="navbarDropdownVP">
                                 <c:forEach items="${applicationScope.offCategories}" var="offCategory">
-                                    <li class="dropdown-item"><a
-                                            href="${pageContext.request.contextPath}/products/category?id=${offCategory.categoryId}">${offCategory.categoryName}</a>
-                                    </li>
+                                    <a class="dropdown-item cl92"
+                                       href="${pageContext.request.contextPath}/products/category?id=${offCategory.categoryId}">
+                                        <span class="m-r-4"></span>
+                                            ${offCategory.categoryName}
+                                    </a>
                                 </c:forEach>
-                            </ul>
+                            </div>
                         </li>
 
-                        <li class="dropdown show">
-                            <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                               aria-expanded="false">Phòng Thờ</a>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <li class="nav-item dropdown btn-group">
+                            <a class="nav-link dropdown-toggle cl93 cursor-pointer" id="navbarDropdownPT" role="button"
+                               data-toggle="dropdown" aria-haspopup="true"
+                               aria-expanded="false">Văn Phòng</a>
+                            <div class="dropdown-menu m-t-25" aria-labelledby="navbarDropdownPT">
                                 <c:forEach items="${applicationScope.altCategories}" var="altCategory">
-                                    <li class="dropdown-item"><a
-                                            href="${pageContext.request.contextPath}/products/category?id=${altCategory.categoryId}">${altCategory.categoryName}</a>
-                                    </li>
+                                    <a class="dropdown-item cl92"
+                                       href="${pageContext.request.contextPath}/products/category?id=${altCategory.categoryId}">
+                                        <span class="m-r-4"></span>
+                                            ${altCategory.categoryName}
+                                    </a>
                                 </c:forEach>
-                            </ul>
+                            </div>
                         </li>
                     </ul>
                 </div>
@@ -224,6 +239,7 @@
     </div>
 </header>
 
+<!--===============================================================================================-->
 <script>
     $(function () {
         $('input[name="keyword-search-header"]').keypress(function (e) {
@@ -231,6 +247,17 @@
             if (keycode === '13') {
                 $('#search-header').submit();
             }
+        });
+    });
+</script>
+<!--===============================================================================================-->
+<script>
+    $(function () {
+        $('.dropdown-toggle').each(function () {
+            $(this).on('click', function () {
+                $(this).next().offset({top: $(this).parent().offset().top + 80});
+                console.log('jeje');
+            });
         });
     });
 </script>

@@ -81,12 +81,14 @@
                                     <thead>
                                     <tr>
                                         <th>STT</th>
-                                        <th>Mã giảm giá</th>
-                                        <th>Số Sản phẩm MIN</th>
-                                        <th>Giá trị giỏ hàng MIN</th>
+                                        <th>Mã</th>
+                                        <th>Số SP MIN</th>
+                                        <th>Giá trị MIN</th>
                                         <th>Giảm</th>
-                                        <th>HSD từ ngày</th>
-                                        <th>HSD đến ngày</th>
+                                        <th>Giảm tối đa</th>
+                                        <th>Còn lại</th>
+                                        <th>Từ ngày</th>
+                                        <th>Đến ngày</th>
                                         <th>Tác vụ</th>
                                     </tr>
                                     </thead>
@@ -103,6 +105,8 @@
                                             %>
                                             <td><% out.print(Constant.NF_DONG.format(voucher.getMinValue())); %></td>
                                             <td><% out.print(String.format("%.0f", voucher.getDiscount() * 100) + " %"); %></td>
+                                            <td><% out.print(Constant.NF_DONG.format(voucher.getDiscountMax())); %></td>
+                                            <td><% out.print(voucher.getQuantity() > -1 ? voucher.getQuantity() : "Không giới hạn"); %></td>
                                             <%
                                                 SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
                                                 Date fromDate = new Date();

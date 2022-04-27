@@ -3,6 +3,7 @@ package Dao;
 import Entity.Product;
 import Entity.Review;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 public interface IReviewDao {
@@ -31,4 +32,6 @@ public interface IReviewDao {
     int countGoodRate(String productId);
 
     int countBadRate(String productId);
+
+    int countNewComment(Timestamp from);
 }

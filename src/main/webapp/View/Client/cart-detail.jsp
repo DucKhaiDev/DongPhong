@@ -6,6 +6,7 @@
 <%@ page import="java.sql.Timestamp" %>
 <%@ page import="java.util.List" %>
 <%@ page import="Util.Constant" %>
+<%@ page import="Entity.User" %>
 <%--
   Author: is2vi
   Date: 1/11/2022
@@ -69,7 +70,7 @@
 <!-- breadcrumb -->
 <div class="container">
     <div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
-        <a href="${pageContext.request.contextPath}" class="stext-109 cl8 hov-cl1 trans-04 font-size-15">
+        <a href="${pageContext.request.contextPath}/welcome" class="stext-109 cl8 hov-cl1 trans-04 font-size-15">
             Trang chủ
             <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
         </a>
@@ -175,7 +176,46 @@
                                     class="flex-c-m stext-101 cl2 size-118 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5">
                                 Áp dụng
                             </button>
+                            <button type="button" id="show-voucher" class="m-t-12 text-underline" style="color: rgba(0, 0, 255, 0.69);">Xem các mã giảm giá khả dụng với bạn</button>
                         </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Voucher modal -->
+            <div id="voucher-modal" class="voucher-modal">
+                <div class="voucher-modal-content">
+                    <div class="row" style="padding-right: 15px;"><span class="voucher-modal-close w-100 text-end">&times;</span></div>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered table-hover">
+                            <thead>
+                            <tr>
+                                <th class="text-center">Mã giảm giá</th>
+                                <th class="text-center">Giá trị</th>
+                                <th class="text-center">Giảm tối đa</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <jsp:useBean id="availableVoucher" scope="request" type="java.util.List"/>
+                            <c:forEach items="${availableVoucher}" var="voucher">
+                                <tr>
+                                    <% Voucher voucher = (Voucher) pageContext.getAttribute("voucher"); %>
+                                    <td class="col-md-3 text-center">${voucher.voucherId}</td>
+                                    <td class="col-md-3 text-center"><% out.print(String.format("%.0f", voucher.getDiscount() * 100) + " %"); %></td>
+                                    <td class="col-md-3 text-center"><% out.print(Constant.NF_DONG.format(voucher.getDiscountMax())); %></td>
+                                    <td class="col-md-3 text-center">
+                                        <div class="copy-tooltip">
+                                            <button class="btn btn-primary ct-button btn-copy">
+                                                <span class="copy-tooltiptext w-fit-content">Sao chép vào Clipboard</span>
+                                                COPY
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -278,12 +318,17 @@
                                     Voucher voucher = (Voucher) session.getAttribute("voucher");
                                     Timestamp currentTime = new Timestamp(System.currentTimeMillis());
                                     if (voucher != null) {
-                                        if (voucher.getFromDate().compareTo(currentTime) < 1
-                                                && currentTime.compareTo(voucher.getToDate()) < 1
-                                                && voucher.getMinProduct() < ((List<?>) session.getAttribute("cartItems")).size()
-                                                && voucher.getMinValue().compareTo(subTotal) < 1) {
-                                            discount = BigDecimal.valueOf(voucher.getDiscount());
-                                            discount = subTotal.multiply(discount);
+                                        User user = (User) session.getAttribute("account");
+                                        if ((voucher.getVoucherId().equals("CHAOMUNG") && !user.getVc_chaomung())
+                                                || (voucher.getFromDate().compareTo(currentTime) < 1
+                                                        && currentTime.compareTo(voucher.getToDate()) < 1
+                                                        && voucher.getMinProduct() < ((List<?>) session.getAttribute("cartItems")).size()
+                                                        && voucher.getMinValue().compareTo(subTotal) < 1
+                                                        && voucher.getQuantity() > 0)) {
+                                                discount = BigDecimal.valueOf(voucher.getDiscount());
+                                                discount = subTotal.multiply(discount);
+                                                discount = discount.compareTo(voucher.getDiscountMax()) > 0 ? voucher.getDiscountMax() : discount;
+                                                session.setAttribute("usingVoucher", voucher);
                                         }
                                     }
                                     out.print(Constant.NF_DONG.format(discount));
@@ -511,6 +556,42 @@
             } else {
                 $('#checkout').submit();
             }
+        });
+    });
+</script>
+<!--===============================================================================================-->
+<script>
+    $(function () {
+        const voucherModal = $('#voucher-modal');
+
+        $('#show-voucher').on('click', function () {
+            voucherModal.css("display", "block");
+        });
+
+        $('.voucher-modal-close').on('click', function () {
+            voucherModal.css("display", "none");
+        });
+
+        $(window).on('click', function (e) {
+            if (e.target.id === 'voucher-modal') {
+                voucherModal.css("display", "none");
+            }
+        });
+    });
+</script>
+<!--===============================================================================================-->
+<script>
+    $(function () {
+        $('.btn-copy').each(function () {
+            $(this).on('click', function () {
+                const copyText = $(this).parent().parent().prev().prev().prev().html();
+                navigator.clipboard.writeText(copyText);
+                $(this).children().html('Đã sao chép ' + copyText + '!');
+            });
+
+            $(this).mouseout(function () {
+                $(this).children().html('Sao chép vào Clipboard');
+            })
         });
     });
 </script>

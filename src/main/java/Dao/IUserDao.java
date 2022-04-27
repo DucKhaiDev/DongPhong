@@ -1,6 +1,7 @@
 package Dao;
 
 import Entity.User;
+import Tools.Pair;
 
 import java.util.List;
 
@@ -26,4 +27,6 @@ public interface IUserDao {
     int countAdmin();
 
     int countMember();
+
+    List<User> getTopMember();
 }

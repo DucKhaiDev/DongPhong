@@ -2,6 +2,8 @@ package Controller.Client;
 
 import Entity.Cart;
 import Entity.CartItem;
+import Entity.User;
+import Entity.Voucher;
 import Util.Constant;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -16,8 +18,18 @@ import java.util.List;
 
 @WebServlet(name = "CartDetail", value = "/cart")
 public class CartDetail extends HttpServlet {
+    private HttpSession session;
+    private String cartId;
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        session = request.getSession();
+        cartId = ((Cart) session.getAttribute("cart")).getCartId();
+        List<Voucher> availableVoucher = Constant.Service.VOUCHER_SERVICE.getAvailableVoucher(cartId);
+        if (!((User) session.getAttribute("account")).getVc_chaomung()) {
+            availableVoucher.add(Constant.Service.VOUCHER_SERVICE.getVoucher("CHAOMUNG"));
+        }
+        request.setAttribute("availableVoucher", availableVoucher);
         request.setAttribute("selected", 26);
         request.getRequestDispatcher(Constant.Path.CART).forward(request, response);
     }
@@ -37,8 +49,6 @@ public class CartDetail extends HttpServlet {
         Constant.Service.CART_ITEM_SERVICE.edit(item);
 
         //Update cart
-        HttpSession session = request.getSession();
-        String cartId = ((Cart) session.getAttribute("cart")).getCartId();
         List<CartItem> cartItems = Constant.Service.CART_ITEM_SERVICE.getItemByCart(cartId);
         session.setAttribute("cartItems", cartItems);
 

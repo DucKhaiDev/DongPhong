@@ -6,10 +6,7 @@ import Entity.Product;
 import Entity.Review;
 import Util.Constant;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -306,6 +303,30 @@ public class ReviewDao implements IReviewDao {
         try {
             ps = conn.prepareStatement("SELECT COUNT(*) FROM (SELECT USER_ID FROM [REVIEW] WHERE PRO_ID = ? AND REV_RATE < 4 GROUP BY USER_ID) AS COUNT_GOOD_RATE");
             ps.setString(1, productId);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnect.closeAll(rs, ps, conn);
+        }
+
+        return 0;
+    }
+
+    @Override
+    public int countNewComment(Timestamp from) {
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            ps = conn.prepareStatement("SELECT COUNT(*) " +
+                    "FROM dbo.REVIEW " +
+                    "WHERE ? <= REV_DATE");
+            ps.setTimestamp(1, from);
             rs = ps.executeQuery();
             if (rs.next()) {
                 return rs.getInt(1);

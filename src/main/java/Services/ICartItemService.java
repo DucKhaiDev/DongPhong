@@ -2,6 +2,7 @@ package Services;
 
 import Entity.CartItem;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface ICartItemService {
@@ -22,4 +23,8 @@ public interface ICartItemService {
     List<CartItem> getItemByCart(String cartId);
 
     boolean checkExistItem(String productId, String cartId);
+
+    int countSumQuantity(String cartId);
+
+    BigDecimal getSubTotal(String cartId);
 }

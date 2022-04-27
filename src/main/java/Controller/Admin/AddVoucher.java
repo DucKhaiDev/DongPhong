@@ -33,10 +33,12 @@ public class AddVoucher extends HttpServlet {
         int minProduct = Integer.parseInt(request.getParameter("minProduct"));
         BigDecimal minValue = new BigDecimal(request.getParameter("minValue"));
         double discount = Double.parseDouble(request.getParameter("discount")) / 100;
+        BigDecimal discountMax = new BigDecimal(request.getParameter("discountMax"));
+        int quantity = Integer.parseInt(request.getParameter("quantity"));
         Timestamp fromDate = AddVoucher.setFromDate(request);
         Timestamp toDate = AddVoucher.setToDate(request);
 
-        Constant.Service.VOUCHER_SERVICE.insert(new Voucher(voucherId, minProduct, minValue, discount, fromDate, toDate));
+        Constant.Service.VOUCHER_SERVICE.insert(new Voucher(voucherId, minProduct, minValue, discount, discountMax, quantity, fromDate, toDate));
 
         response.sendRedirect(request.getContextPath() + "/admin/voucher");
     }

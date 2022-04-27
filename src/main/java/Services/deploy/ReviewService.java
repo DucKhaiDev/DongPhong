@@ -5,6 +5,7 @@ import Entity.Product;
 import Entity.Review;
 import Services.IReviewService;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 public class ReviewService implements IReviewService {
@@ -72,5 +73,10 @@ public class ReviewService implements IReviewService {
     @Override
     public int countBadRate(String productId) {
         return reviewDao.countBadRate(productId);
+    }
+
+    @Override
+    public int countNewComment(Timestamp from) {
+        return reviewDao.countNewComment(from);
     }
 }

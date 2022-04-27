@@ -18,4 +18,6 @@ public interface IVoucherService {
     List<String> getAllVoucher();
 
     boolean checkExistId(String voucherId);
+
+    List<Voucher> getAvailableVoucher(String cartId);
 }

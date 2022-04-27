@@ -3,6 +3,7 @@ package Services;
 import Entity.Product;
 import Entity.Review;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 public interface IReviewService {
@@ -31,4 +32,6 @@ public interface IReviewService {
     int countGoodRate(String productId);
 
     int countBadRate(String productId);
+
+    int countNewComment(Timestamp from);
 }

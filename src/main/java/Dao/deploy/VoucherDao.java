@@ -3,6 +3,7 @@ package Dao.deploy;
 import Connect.DBConnect;
 import Dao.IVoucherDao;
 import Entity.Voucher;
+import Util.Constant;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,13 +19,16 @@ public class VoucherDao implements IVoucherDao {
         PreparedStatement ps = null;
 
         try {
-            ps = conn.prepareStatement("INSERT INTO [VOUCHER](VCR_ID, MIN_PRO, MIN_VAL, DISCOUNT, FROM_DATE, TO_DATE) VALUES(?, ?, ?, ?, ?, ?)");
+            ps = conn.prepareStatement("INSERT INTO [VOUCHER](VCR_ID, MIN_PRO, MIN_VAL, DISCOUNT, DISC_MAX, QUANTITY, FROM_DATE, TO_DATE) " +
+                    "VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
             ps.setString(1, voucher.getVoucherId());
             ps.setInt(2, voucher.getMinProduct());
             ps.setBigDecimal(3, voucher.getMinValue());
             ps.setDouble(4, voucher.getDiscount());
-            ps.setTimestamp(5, voucher.getFromDate());
-            ps.setTimestamp(6, voucher.getToDate());
+            ps.setBigDecimal(5, voucher.getDiscountMax());
+            ps.setInt(6, voucher.getQuantity());
+            ps.setTimestamp(7, voucher.getFromDate());
+            ps.setTimestamp(8, voucher.getToDate());
 
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -40,13 +44,17 @@ public class VoucherDao implements IVoucherDao {
         PreparedStatement ps = null;
 
         try {
-            ps = conn.prepareStatement("UPDATE [VOUCHER] SET MIN_PRO = ?, MIN_VAL = ?, DISCOUNT = ?, FROM_DATE = ?, TO_DATE = ? WHERE VCR_ID = ?");
+            ps = conn.prepareStatement("UPDATE [VOUCHER] " +
+                    "SET MIN_PRO = ?, MIN_VAL = ?, DISCOUNT = ?, DISC_MAX = ?, QUANTITY = ?, FROM_DATE = ?, TO_DATE = ? " +
+                    "WHERE VCR_ID = ?");
             ps.setInt(1, voucher.getMinProduct());
             ps.setBigDecimal(2, voucher.getMinValue());
             ps.setDouble(3, voucher.getDiscount());
-            ps.setTimestamp(4, voucher.getFromDate());
-            ps.setTimestamp(5, voucher.getToDate());
-            ps.setString(6, voucher.getVoucherId());
+            ps.setBigDecimal(4, voucher.getDiscountMax());
+            ps.setInt(5, voucher.getQuantity());
+            ps.setTimestamp(6, voucher.getFromDate());
+            ps.setTimestamp(7, voucher.getToDate());
+            ps.setString(8, voucher.getVoucherId());
 
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -88,6 +96,8 @@ public class VoucherDao implements IVoucherDao {
                 voucher.setMinProduct(rs.getInt("MIN_PRO"));
                 voucher.setMinValue(rs.getBigDecimal("MIN_VAL"));
                 voucher.setDiscount(rs.getDouble("DISCOUNT"));
+                voucher.setDiscountMax(rs.getBigDecimal("DISC_MAX"));
+                voucher.setQuantity(rs.getInt("QUANTITY"));
                 voucher.setFromDate(rs.getTimestamp("FROM_DATE"));
                 voucher.setToDate(rs.getTimestamp("TO_DATE"));
             }
@@ -116,6 +126,8 @@ public class VoucherDao implements IVoucherDao {
                 voucher.setMinProduct(rs.getInt("MIN_PRO"));
                 voucher.setMinValue(rs.getBigDecimal("MIN_VAL"));
                 voucher.setDiscount(rs.getDouble("DISCOUNT"));
+                voucher.setDiscountMax(rs.getBigDecimal("DISC_MAX"));
+                voucher.setQuantity(rs.getInt("QUANTITY"));
                 voucher.setFromDate(rs.getTimestamp("FROM_DATE"));
                 voucher.setToDate(rs.getTimestamp("TO_DATE"));
 
@@ -172,5 +184,41 @@ public class VoucherDao implements IVoucherDao {
         }
 
         return false;
+    }
+
+    @Override
+    public List<Voucher> getAvailableVoucher(String cartId) {
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        List<Voucher> vouchers = new ArrayList<>();
+
+        try {
+            ps = conn.prepareStatement("SELECT * " +
+                    "FROM dbo.VOUCHER " +
+                    "WHERE ? >= MIN_PRO AND ? >= MIN_VAL AND QUANTITY > 0 AND FROM_DATE <= GETDATE() AND GETDATE() <= TO_DATE");
+            ps.setInt(1, Constant.Service.CART_ITEM_SERVICE.countSumQuantity(cartId));
+            ps.setBigDecimal(2, Constant.Service.CART_ITEM_SERVICE.getSubTotal(cartId));
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Voucher voucher = new Voucher();
+                voucher.setVoucherId(rs.getString("VCR_ID"));
+                voucher.setMinProduct(rs.getInt("MIN_PRO"));
+                voucher.setMinValue(rs.getBigDecimal("MIN_VAL"));
+                voucher.setDiscount(rs.getDouble("DISCOUNT"));
+                voucher.setDiscountMax(rs.getBigDecimal("DISC_MAX"));
+                voucher.setQuantity(rs.getInt("QUANTITY"));
+                voucher.setFromDate(rs.getTimestamp("FROM_DATE"));
+                voucher.setToDate(rs.getTimestamp("TO_DATE"));
+
+                vouchers.add(voucher);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnect.closeAll(rs, ps, conn);
+        }
+
+        return vouchers;
     }
 }

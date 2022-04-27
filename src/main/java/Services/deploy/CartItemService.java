@@ -4,6 +4,7 @@ import Dao.deploy.CartItemDao;
 import Entity.CartItem;
 import Services.ICartItemService;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class CartItemService implements ICartItemService {
@@ -52,5 +53,15 @@ public class CartItemService implements ICartItemService {
     @Override
     public boolean checkExistItem(String productId, String cartId) {
         return itemDao.checkExistItem(productId, cartId);
+    }
+
+    @Override
+    public int countSumQuantity(String cartId) {
+        return itemDao.countSumQuantity(cartId);
+    }
+
+    @Override
+    public BigDecimal getSubTotal(String cartId) {
+        return itemDao.getSubTotal(cartId);
     }
 }

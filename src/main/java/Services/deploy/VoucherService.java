@@ -43,4 +43,9 @@ public class VoucherService implements IVoucherService {
     public boolean checkExistId(String voucherId) {
         return voucherDao.checkExistId(voucherId);
     }
+
+    @Override
+    public List<Voucher> getAvailableVoucher(String cartId) {
+        return voucherDao.getAvailableVoucher(cartId);
+    }
 }

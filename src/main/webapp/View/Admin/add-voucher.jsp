@@ -74,6 +74,12 @@
                                         <div class="col-md-6 mb-3"><label for="discount" class="labels">Giảm (%)</label><input
                                                 id="discount" type="number" min="0" value="0" class="form-control"
                                                 name="discount" required="required"></div>
+                                        <div class="col-md-6 mb-3"><label for="discountMax" class="labels">Giảm tối
+                                            đa</label><input id="discountMax" value="0" class="form-control"
+                                                             name="discountMax"></div>
+                                        <div class="col-md-6 mb-3"><label for="quantity" class="labels">Số lượng
+                                            mã</label><input id="quantity" value="0" class="form-control"
+                                                             name="quantity"></div>
                                         <div class="copy-height-prev col-md-6 mb-3"></div>
                                         <div class="col-md-6 mb-3"><label for="fromDate" class="labels">HSD từ
                                             ngày</label><input id="fromDate" type="date"

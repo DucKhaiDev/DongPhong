@@ -15,7 +15,7 @@
             <nav class="limiter-menu-desktop container">
 
                 <!-- Logo desktop -->
-                <a href="${pageContext.request.contextPath}" class="logo">
+                <a href="${pageContext.request.contextPath}/welcome" class="logo">
                     <img src="${pageContext.request.contextPath}/assets/images/icons/logo.png" alt="IMG-LOGO">
                 </a>
 
@@ -23,7 +23,7 @@
                 <div class="menu-desktop">
                     <ul class="main-menu">
                         <li>
-                            <a href="${pageContext.request.contextPath}">Trang Chủ</a>
+                            <a href="${pageContext.request.contextPath}/welcome">Trang Chủ</a>
                         </li>
 
                         <li class="dropdown show">

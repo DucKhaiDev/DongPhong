@@ -11,17 +11,21 @@ public class Voucher implements Serializable {
     private int minProduct;
     private BigDecimal minValue;
     private double discount;
+    private BigDecimal discountMax;
+    private int quantity;
     private Timestamp fromDate;
     private Timestamp toDate;
 
     public Voucher() {
     }
 
-    public Voucher(String voucherId, int minProduct, BigDecimal minValue, double discount, Timestamp fromDate, Timestamp toDate) {
+    public Voucher(String voucherId, int minProduct, BigDecimal minValue, double discount, BigDecimal discountMax, int quantity, Timestamp fromDate, Timestamp toDate) {
         this.voucherId = voucherId;
         this.minProduct = minProduct;
         this.minValue = minValue;
         this.discount = discount;
+        this.discountMax = discountMax;
+        this.quantity = quantity;
         this.fromDate = fromDate;
         this.toDate = toDate;
     }
@@ -56,6 +60,22 @@ public class Voucher implements Serializable {
 
     public void setDiscount(double discount) {
         this.discount = discount;
+    }
+
+    public BigDecimal getDiscountMax() {
+        return discountMax;
+    }
+
+    public void setDiscountMax(BigDecimal discountMax) {
+        this.discountMax = discountMax;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public Timestamp getFromDate() {
