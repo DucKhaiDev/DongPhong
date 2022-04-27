@@ -96,7 +96,7 @@
                         </li>
 
                         <li>
-                            <a href="../Client/product.jsp">Shop</a>
+                            <a href="product.jsp">Shop</a>
                         </li>
 
                         <li class="label1" data-label1="hot">
@@ -213,7 +213,7 @@
             </li>
 
             <li>
-                <a href="../Client/product.jsp">Shop</a>
+                <a href="product.jsp">Shop</a>
             </li>
 
             <li>

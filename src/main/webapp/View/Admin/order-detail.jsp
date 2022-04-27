@@ -2,8 +2,6 @@
 <%@ page import="java.sql.Timestamp" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.util.Date" %>
-<%@ page import="java.util.Locale" %>
-<%@ page import="java.text.NumberFormat" %>
 <%@ page import="Entity.CartItem" %>
 <%@ page import="java.math.BigDecimal" %>
 <%@ page import="Util.Constant" %>
@@ -20,7 +18,9 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Dong Phong</title>
+    <title>Chi Tiết Đơn Hàng ${order.orderId} - Đồ gỗ Cao cấp Đông Phong</title>
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/assets/images/icons/icon-logo.png"/>
     <!-- BOOTSTRAP STYLES-->
     <link href="${pageContext.request.contextPath}/assets/css/bootstrap.css" rel="stylesheet"/>
     <!-- FONTAWESOME STYLES-->

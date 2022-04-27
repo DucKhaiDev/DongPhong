@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Thông tin cá nhân</title>
+    <title>Thông Tin Cá Nhân - Đồ gỗ Cao cấp Đông Phong</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--===============================================================================================-->

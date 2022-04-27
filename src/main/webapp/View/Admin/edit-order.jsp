@@ -1,8 +1,6 @@
 <jsp:useBean id="order" scope="request" type="Entity.Order"/>
 <%@ page import="Entity.CartItem" %>
 <%@ page import="java.math.BigDecimal" %>
-<%@ page import="java.util.Locale" %>
-<%@ page import="java.text.NumberFormat" %>
 <%@ page import="java.math.RoundingMode" %>
 <%@ page import="Entity.Product" %>
 <%@ page import="Util.Constant" %>
@@ -18,7 +16,9 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Dong Phong</title>
+    <title>Chỉnh Sửa Đơn Đặt Hàng ${order.orderId} - Đồ gỗ Cao cấp Đông Phong</title>
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/assets/images/icons/icon-logo.png"/>
     <!-- BOOTSTRAP STYLES-->
     <link href="${pageContext.request.contextPath}/assets/css/bootstrap.css" rel="stylesheet"/>
     <!-- FONTAWESOME STYLES-->
@@ -131,6 +131,18 @@
                                                 type="button"><i class="fa fa-plus"></i>&nbsp;Thêm sản phẩm
                                         </button>
                                     </div>
+                                    <hr class="w-100 mt-3 mb-3">
+                                    <form action="<c:url value="/apply-voucher"/>" method="get" class="col-md-12 mb-3">
+                                        <label for="voucher" class="labels">Mã giảm giá</label>
+                                        <div class="d-flex justify-content-center mb-3">
+                                            <input id="voucher" name="voucher" class="w-50 form-control"
+                                                   placeholder="Mã giảm giá">
+                                            <button class="btn btn-primary ct-button ml-5 w-20"
+                                                    type="submit"><i class="fa fa-check"></i>&nbsp;Áp dụng
+                                            </button>
+                                        </div>
+                                        <a type="button" id="show-voucher" class="m-t-12 text-underline cursor-pointer" style="color: rgba(0, 0, 255, 0.69);">Xem các mã giảm giá khả dụng với người đặt trên</a>
+                                    </form>
                                     <hr class="w-100 mt-3 mb-3">
                                     <form action="<c:url value="/shipping-cost"/>" method="get" class="col-md-12 mb-3">
                                         <label class="labels">Địa chỉ giao hàng</label>

@@ -1,8 +1,6 @@
 <jsp:useBean id="voucher" scope="request" type="Entity.Voucher"/>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.util.Date" %>
-<%@ page import="java.sql.Timestamp" %>
-<%@ page import="Entity.Voucher" %>
 <%--
   User: duckhaidev
   Date: 4/15/2022
@@ -15,7 +13,9 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Dong Phong</title>
+    <title>Chỉnh Sửa Mã Giảm Giá ${voucher.voucherId} - Đồ gỗ Cao cấp Đông Phong</title>
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/assets/images/icons/icon-logo.png"/>
     <!-- BOOTSTRAP STYLES-->
     <link href="${pageContext.request.contextPath}/assets/css/bootstrap.css" rel="stylesheet"/>
     <!-- FONTAWESOME STYLES-->

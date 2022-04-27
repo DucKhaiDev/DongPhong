@@ -16,7 +16,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>${category.categoryName}</title>
+    <title>Sản Phẩm ${category.categoryName} - Đồ gỗ Cao cấp Đông Phong</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--===============================================================================================-->

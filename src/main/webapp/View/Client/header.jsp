@@ -199,7 +199,7 @@
             </li>
 
             <li>
-                <a href="product.jsp">Shop</a>
+                <a href="../Unused/product.jsp">Shop</a>
             </li>
 
             <li>

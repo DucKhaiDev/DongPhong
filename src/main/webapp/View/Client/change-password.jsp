@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Thay đổi mật khẩu</title>
+    <title>Thay Đổi Mật Khẩu - Đồ gỗ Cao cấp Đông Phong</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--===============================================================================================-->

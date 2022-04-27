@@ -19,7 +19,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>${product.productName}</title>
+    <title>Chi Tiết Sản Phẩm ${product.productId} - Đồ gỗ Cao cấp Đông Phong</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--===============================================================================================-->

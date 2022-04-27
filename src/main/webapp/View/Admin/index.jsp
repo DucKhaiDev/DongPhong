@@ -13,7 +13,9 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Dong Phong</title>
+    <title>Đồ gỗ Cao cấp Đông Phong</title>
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/assets/images/icons/icon-logo.png"/>
     <!-- BOOTSTRAP STYLES-->
     <link href="${pageContext.request.contextPath}/assets/css/bootstrap.css" rel="stylesheet"/>
     <!-- FONTAWESOME STYLES-->
@@ -82,7 +84,7 @@
                 </span>
                         <div class="text-box">
                             <p class="main-text fs-20"><% out.print(Constant.Service.PRODUCT_SERVICE.countOutOfStock()); %> Sản phẩm</p>
-                            <p class="text-muted">Cháy hàng</p>
+                            <p class="text-muted">Đang hết hàng</p>
                         </div>
                     </div>
                 </div>

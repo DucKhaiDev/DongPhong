@@ -1,4 +1,3 @@
-<%@ page import="Entity.User" %>
 <%--
   User: duckhaidev
   Date: 2/14/2022
@@ -27,7 +26,7 @@
             <li>
                 <a href="${pageContext.request.contextPath}/admin/user">
                     <i class="fa fa-users fa-3x w-25 text-center"></i>
-                    QL Tài khoản
+                    QL Người Dùng
                 </a>
             </li>
             <li>

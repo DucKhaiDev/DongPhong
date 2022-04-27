@@ -1,16 +1,20 @@
-<%@ page import="Util.Constant" %><%--
+<%@ page import="Util.Constant" %>
+<%--
   User: duckhaidev
   Date: 2/16/2022
   Time: 10:54 AM
 --%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<jsp:useBean id="user" scope="request" type="Entity.User"/>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Dong Phong</title>
+    <title>Chỉnh Sửa Người Dùng ${user.userId} - Đồ gỗ Cao cấp Đông Phong</title>
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/assets/images/icons/icon-logo.png"/>
     <!-- BOOTSTRAP STYLES-->
     <link href="${pageContext.request.contextPath}/assets/css/bootstrap.css" rel="stylesheet"/>
     <!-- FONTAWESOME STYLES-->
@@ -50,7 +54,6 @@
                                     <div class="row">
                                         <div class="col-md-5 border-right">
                                             <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                                                <jsp:useBean id="user" scope="request" type="Entity.User"/>
                                                 <c:url value="/images/avatar?fname=${user.avatar}" var="avatarUrl"/>
                                                 <img class="avatar user-img-empty rounded-circle mt-5 mb-1"
                                                      width="150px" height="150px" style="object-fit: cover;"
