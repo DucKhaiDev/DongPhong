@@ -2,6 +2,7 @@ package Services.deploy;
 
 import Dao.deploy.TempLinkDao;
 import Entity.TempLink;
+import Entity.User;
 import Services.ITempLinkService;
 
 public class TempLinkService implements ITempLinkService {
@@ -15,6 +16,11 @@ public class TempLinkService implements ITempLinkService {
     @Override
     public void delete(String token) {
         tempLinkDao.delete(token);
+    }
+
+    @Override
+    public void delete(User user) {
+        tempLinkDao.delete(user);
     }
 
     @Override

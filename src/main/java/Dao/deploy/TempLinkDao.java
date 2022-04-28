@@ -3,6 +3,7 @@ package Dao.deploy;
 import Connect.DBConnect;
 import Dao.ITempLinkDao;
 import Entity.TempLink;
+import Entity.User;
 import Util.Constant;
 
 import java.sql.Connection;
@@ -37,6 +38,22 @@ public class TempLinkDao implements ITempLinkDao {
         try {
             ps = conn.prepareStatement("DELETE FROM dbo.[TEMPLINK] WHERE UUID = ?");
             ps.setString(1, token);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnect.closeAll(null, ps, conn);
+        }
+    }
+
+    @Override
+    public void delete(User user) {
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
+
+        try {
+            ps = conn.prepareStatement("DELETE FROM dbo.[TEMPLINK] WHERE USERNAME = ?");
+            ps.setString(1, user.getUsername());
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

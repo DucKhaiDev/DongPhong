@@ -45,7 +45,7 @@ public class FGP_ChangePassword extends HttpServlet {
         if (newPassword.equals(repeatPassword)) {
             user.setPassword(newPassword);
             Constant.Service.USER_SERVICE.edit(user);
-            Constant.Service.TEMP_LINK_SERVICE.delete(tempLink.getUUID());
+            Constant.Service.TEMP_LINK_SERVICE.delete(user);
             request.setAttribute("changeSuccess", "Thay đổi mật khẩu thành công!");
             request.getRequestDispatcher(Constant.Path.FGP_CHANGE_PASSWORD).forward(request, response);
         } else {
