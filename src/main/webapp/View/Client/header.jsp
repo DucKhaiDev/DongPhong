@@ -215,7 +215,7 @@
             </li>
 
             <li>
-                <a href="../Unused/contact.jsp">Contact</a>
+                <a href="contact.jsp">Contact</a>
             </li>
         </ul>
     </div>

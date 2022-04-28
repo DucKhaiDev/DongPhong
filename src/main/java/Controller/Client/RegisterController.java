@@ -119,6 +119,7 @@ public class RegisterController extends HttpServlet {
             //Create cart
             String cartId = username + "-0";
             Constant.Service.CART_SERVICE.insert(new Cart(cartId, Constant.Service.USER_SERVICE.getUser(username)));
+            String loginUrl = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + "/login";
             String content = "<!DOCTYPE html>\n" +
                     "<html lang=\"en\" xmlns=\"http://www.w3.org/1999/xhtml\">\n" +
                     "<head>\n" +
@@ -288,19 +289,19 @@ public class RegisterController extends HttpServlet {
                     "                            <tr>\n" +
                     "                                <td style=\"text-align: center; vertical-align: middle\">\n" +
                     "                                    <table>\n" +
-                    "                                        <tr style=\"background-color: rgba(0, 0, 0, 0.5)\">\n" +
+                    "                                        <tr style=\"background-color: rgba(0, 0, 0, 0.69)\">\n" +
                     "                                            <td style=\"vertical-align: top; text-align: center; padding: 20px 0 10px 20px;\">\n" +
                     "                                                <h1 style=\"margin: 0; font-family: 'Montserrat', sans-serif; font-size: 30px; line-height: 36px; color: #fff; font-weight: bold;\">\n" +
                     "                                                    XIN CHÀO " + username + ",\n" +
                     "                                                </h1>\n" +
                     "                                            </td>\n" +
                     "                                        </tr>\n" +
-                    "                                        <tr style=\"background-color: rgba(0, 0, 0, 0.5)\">\n" +
+                    "                                        <tr style=\"background-color: rgba(0, 0, 0, 0.69)\">\n" +
                     "                                            <td style=\"vertical-align: top; text-align: center; padding: 10px 20px 15px 20px; font-family: sans-serif; font-size: 15px; line-height: 20px; color: #fff;\">\n" +
-                    "                                                <p style=\"margin: 0; text-align: start\">\n" +
+                    "                                                <p style=\"margin: 0; text-align: start; color: #fff;\">\n" +
                     "                                                    Tài khoản của bạn tại DongPhong.store đã được tạo thành công! <br>\n" +
                     "                                                    Mật khẩu của bạn là: " + password + " <br>\n" +
-                    "                                                    Nếu bạn không thực hiện yêu cầu này, vui lòng bỏ qua nó.\n" +
+                    "                                                    Nếu bạn không thực hiện yêu cầu này, vui lòng bỏ qua email này.\n" +
                     "                                                </p>\n" +
                     "                                            </td>\n" +
                     "                                        </tr>\n" +
@@ -313,7 +314,7 @@ public class RegisterController extends HttpServlet {
                     "                                                            <td class=\"button-td\"\n" +
                     "                                                                style=\"border-radius: 50px; background: burlywood; text-align: center;\">\n" +
                     "                                                                <a class=\"button-a\"\n" +
-                    "                                                                   href=\"https://dongphong.store/login\"\n" +
+                    "                                                                   href=\"" + loginUrl + "\"\n" +
                     "                                                                   style=\"background: burlywood; border: 15px solid burlywood; font-family: 'Montserrat', sans-serif; font-size: 14px; line-height: 1.1; text-align: center; text-decoration: none; display: block; border-radius: 50px; font-weight: bold;\">\n" +
                     "                                                                    <span class=\"button-link\" style=\"color:#ffffff;\">&nbsp;&nbsp;&nbsp;&nbsp;ĐĂNG NHẬP NGAY&nbsp;&nbsp;&nbsp;&nbsp;</span>\n" +
                     "                                                                </a>\n" +
@@ -365,7 +366,7 @@ public class RegisterController extends HttpServlet {
                     "                                    </li>\n" +
                     "                                </ul>\n" +
                     "                                Muốn nhận thêm nhiều thông tin hơn? Theo dõi chúng tôi trên Fanpage: <a\n" +
-                    "                                    href=\"https://www.facebook.com/DucKhaiDev/\">Đồ gỗ Cao cấp Đông Phong</a>\n" +
+                    "                                    href=\"https://www.facebook.com/DoGoCaoCapDongPhong/\">Đồ gỗ Cao cấp Đông Phong</a>\n" +
                     "                                </p>\n" +
                     "                            </td>\n" +
                     "                        </tr>\n" +

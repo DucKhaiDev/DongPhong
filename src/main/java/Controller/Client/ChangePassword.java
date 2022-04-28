@@ -28,7 +28,7 @@ public class ChangePassword extends HttpServlet {
         User user = (User) session.getAttribute("account");
         String cpwMsg;
 
-        if (oldPassword.isEmpty() || newPassword.isEmpty() || repeatPassword.isEmpty()) {
+        if (oldPassword.trim().isEmpty() || newPassword.trim().isEmpty() || repeatPassword.trim().isEmpty()) {
             cpwMsg = "Vui lòng nhập đầy đủ các mục!";
             request.setAttribute("cpwMsg", cpwMsg);
             request.getRequestDispatcher(Constant.Path.CHANGE_PASSWORD).forward(request, response);

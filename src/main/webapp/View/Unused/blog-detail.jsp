@@ -112,7 +112,7 @@
                         </li>
 
                         <li>
-                            <a href="contact.jsp">Contact</a>
+                            <a href="../Client/contact.jsp">Contact</a>
                         </li>
                     </ul>
                 </div>
@@ -229,7 +229,7 @@
             </li>
 
             <li>
-                <a href="contact.jsp">Contact</a>
+                <a href="../Client/contact.jsp">Contact</a>
             </li>
         </ul>
     </div>

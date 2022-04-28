@@ -1,6 +1,7 @@
 package Controller.Client;
 
 import Controller.WaitingController;
+import Entity.TempLink;
 import Entity.User;
 import Tools.SendEmail;
 import Util.Constant;
@@ -11,9 +12,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Random;
+import java.util.UUID;
 
 @WebServlet(name = "ForgetPassword", value = "/forget-password")
 public class ForgetPassword extends HttpServlet {
@@ -32,7 +34,9 @@ public class ForgetPassword extends HttpServlet {
         }
 
         User user = Constant.Service.USER_SERVICE.getUser(username);
-        String newPassword = Integer.toString(10000000 + new Random().nextInt(90000000));
+        String randomUUID = UUID.randomUUID().toString();
+        Constant.Service.TEMP_LINK_SERVICE.insert(new TempLink(randomUUID, user, new Timestamp(new Date().getTime())));
+        String sendLink = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + "/change-password/access?token=" + randomUUID;
 
         String content = "<!DOCTYPE html>\n" +
                 "<html lang=\"en\" xmlns=\"http://www.w3.org/1999/xhtml\">\n" +
@@ -175,7 +179,7 @@ public class ForgetPassword extends HttpServlet {
                 "<body style=\"width: 100%; background-color: #f1f1f1; margin: 0; mso-line-height-rule: exactly;\">\n" +
                 "<div style=\"width: 100%; background: #F1F1F1; text-align: left;\">\n" +
                 "    <div style=\"display:none;font-size:1px;line-height:1px;max-height:0;max-width:0;opacity:0;overflow:hidden;mso-hide:all;font-family: sans-serif;\">\n" +
-                "        Chúng tôi đã thực hiện yêu cầu quên mật khẩu của bạn.\n" +
+                "        Chúng tôi đã nhận được yêu cầu cấp lại mật khẩu của bạn!\n" +
                 "    </div>\n" +
                 "    <div class=\"email-container\" style=\"max-width: 680px; margin: auto;\">\n" +
                 "        <table class=\"email-container\"\n" +
@@ -198,44 +202,25 @@ public class ForgetPassword extends HttpServlet {
                 "                        <table role=\"presentation\"\n" +
                 "                               style=\"border: 0; padding: 0; border-spacing: 0; text-align: center; width: 100%; max-width:500px; margin: auto;\">\n" +
                 "                            <tr>\n" +
-                "                                <td height=\"60px\" style=\"font-size:20px; line-height:20px;\">&nbsp;</td>\n" +
+                "                                <td height=\"20px\" style=\"font-size:20px; line-height:20px;\">&nbsp;</td>\n" +
                 "                            </tr>\n" +
                 "                            <tr>\n" +
                 "                                <td style=\"text-align: center; vertical-align: middle\">\n" +
                 "                                    <table>\n" +
-                "                                        <tr style=\"background-color: rgba(0, 0, 0, 0.5)\">\n" +
+                "                                        <tr style=\"background-color: rgba(0, 0, 0, 0.69)\">\n" +
                 "                                            <td style=\"vertical-align: top; text-align: center; padding: 20px 0 10px 20px;\">\n" +
                 "                                                <h1 style=\"margin: 0; font-family: 'Montserrat', sans-serif; font-size: 30px; line-height: 36px; color: #fff; font-weight: bold;\">\n" +
                 "                                                    XIN CHÀO " + WaitingController.displayName(user) + ",\n" +
                 "                                                </h1>\n" +
                 "                                            </td>\n" +
                 "                                        </tr>\n" +
-                "                                        <tr style=\"background-color: rgba(0, 0, 0, 0.5)\">\n" +
+                "                                        <tr style=\"background-color: rgba(0, 0, 0, 0.69)\">\n" +
                 "                                            <td style=\"vertical-align: top; text-align: center; padding: 10px 20px 15px 20px; font-family: sans-serif; font-size: 15px; line-height: 20px; color: #fff;\">\n" +
                 "                                                <p style=\"margin: 0; text-align: start; color: #fff;\">\n" +
                 "                                                    Chúng tôi đã nhận được yêu cầu cấp lại mật khẩu của bạn! <br>\n" +
-                "                                                    Mật khẩu mới của bạn là: <b>" + newPassword + "</b> <br>\n" +
-                "                                                    Nếu bạn không thực hiện yêu cầu này, vui lòng thông báo cho chúng tôi biết.\n" +
+                "                                                    Truy cập đường dẫn sau (có hiệu lực trong vòng 30 phút) để thay đổi mật khẩu: <a href=\"" + sendLink + "\">" + sendLink + "</a> <br>\n" +
+                "                                                    Nếu bạn không thực hiện yêu cầu này, vui lòng bỏ qua email này.\n" +
                 "                                                </p>\n" +
-                "                                            </td>\n" +
-                "                                        </tr>\n" +
-                "                                        <tr>\n" +
-                "                                            <td style=\"vertical-align: top; text-align: center; padding: 15px 0 60px 0;\">\n" +
-                "                                                <div>\n" +
-                "                                                    <table class=\"center-on-narrow\" role=\"presentation\"\n" +
-                "                                                           style=\"text-align: center; border-spacing: 0; padding: 0;\">\n" +
-                "                                                        <tr>\n" +
-                "                                                            <td class=\"button-td\"\n" +
-                "                                                                style=\"border-radius: 50px; background: burlywood; text-align: center;\">\n" +
-                "                                                                <a class=\"button-a\"\n" +
-                "                                                                   href=\"https://dongphong.store/login\"\n" +
-                "                                                                   style=\"background: burlywood; border: 15px solid burlywood; font-family: 'Montserrat', sans-serif; font-size: 14px; line-height: 1.1; text-align: center; text-decoration: none; display: block; border-radius: 50px; font-weight: bold;\">\n" +
-                "                                                                    <span class=\"button-link\" style=\"color:#ffffff;\">&nbsp;&nbsp;&nbsp;&nbsp;ĐĂNG NHẬP NGAY&nbsp;&nbsp;&nbsp;&nbsp;</span>\n" +
-                "                                                                </a>\n" +
-                "                                                            </td>\n" +
-                "                                                        </tr>\n" +
-                "                                                    </table>\n" +
-                "                                                </div>\n" +
                 "                                            </td>\n" +
                 "                                        </tr>\n" +
                 "                                    </table>\n" +
@@ -282,9 +267,7 @@ public class ForgetPassword extends HttpServlet {
                 "</body>\n" +
                 "</html>";
         if (SendEmail.sendEmail(user.getEmail(), "DongPhong.store", content)) {
-            user.setPassword(newPassword);
-            Constant.Service.USER_SERVICE.edit(user);
-            request.setAttribute("message", "Chúng tôi đã gửi mật khẩu mới tới email đã đăng ký của bạn. Vui lòng kiểm tra email.");
+            request.setAttribute("message", "Chúng tôi đã gửi một email tới địa chỉ email của bạn. Vui lòng kiểm tra email và làm theo hướng dẫn.");
         } else {
             request.setAttribute("message", "Có lỗi xảy ra, chúng tôi sẽ liên hệ lại với bạn sau!");
         }

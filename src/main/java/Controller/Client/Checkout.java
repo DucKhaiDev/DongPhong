@@ -91,6 +91,8 @@ public class Checkout extends HttpServlet {
             Constant.Service.PRODUCT_SERVICE.edit(product);
         }
 
+        String homeLink = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + "/welcome";
+
         //Send email
         String content = "<!DOCTYPE html>\n" +
                 "<html>\n" +
@@ -334,7 +336,7 @@ public class Checkout extends HttpServlet {
                 "                                    <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\">\n" +
                 "                                        <tr>\n" +
                 "                                            <td align=\"center\" bgcolor=\"#66b3b7\" style=\"border-radius: 50px;\"><a\n" +
-                "                                                    href=\"https://dongphong.store\" style=\"font-size: 18px; font-family: 'Montserrat', sans-serif; color: burlywood; text-decoration: none; border-radius: 50px; background-color: #fff; padding: 15px 30px; border: 1px solid burlywood; display: block; font-weight: bold\"\n" +
+                "                                                    href=\"" + homeLink + "\" style=\"font-size: 18px; font-family: 'Montserrat', sans-serif; color: burlywood; text-decoration: none; border-radius: 50px; background-color: #fff; padding: 15px 30px; border: 1px solid burlywood; display: block; font-weight: bold\"\n" +
                 "                                                    target=\"_blank\">Mua\n" +
                 "                                                Tiếp</a></td>\n" +
                 "                                        </tr>\n" +
