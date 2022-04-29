@@ -79,5 +79,7 @@ public class Constant {
         public static final String PRODUCT_SEARCH = "/View/Client/search-product.jsp";
         public static final String FORGET_PASSWORD = "/View/Client/forget-password.jsp";
         public static final String FGP_CHANGE_PASSWORD = "/View/Client/fgp-change-password.jsp";
+        public static final String MY_ORDER = "/View/Client/my-order.jsp";
+        public static final String MY_ORDER_DETAIL = "/View/Client/my-order-detail.jsp";
     }
 }

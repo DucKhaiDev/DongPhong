@@ -43,6 +43,8 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/util.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/main.css">
     <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/custom.css">
+    <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css"
           href="${pageContext.request.contextPath}/assets/css/my-account-stylesheet.css">
 </head>

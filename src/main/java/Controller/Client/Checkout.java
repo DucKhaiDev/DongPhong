@@ -1,7 +1,6 @@
 package Controller.Client;
 
 import Entity.*;
-import Services.deploy.*;
 import Tools.SendEmail;
 import Util.Constant;
 import jakarta.servlet.ServletException;
@@ -59,10 +58,10 @@ public class Checkout extends HttpServlet {
         order.setRecipientAddress(recipientAddress);
         order.setRecipientPhone(recPhone);
         order.setOrderDate(new Timestamp(System.currentTimeMillis()));
-        order.setOrderStatus(false);
         order.setOrderSumProduct(((List<?>) session.getAttribute("cartItems")).size());
         order.setCart((Cart) session.getAttribute("cart"));
         order.setPayment(payment);
+        order.setOrderStatus((byte) 1);
 
         int paymentMethod = Integer.parseInt(request.getParameter("paymentMethod"));
         if (paymentMethod == 1) {
@@ -388,12 +387,14 @@ public class Checkout extends HttpServlet {
 
         //Minus voucher's quantity
         Voucher usingVoucher = (Voucher) session.getAttribute("usingVoucher");
-        if (usingVoucher.getVoucherId().equals("CHAOMUNG")) {
-            user.setVc_chaomung(true);
-            Constant.Service.USER_SERVICE.edit(user);
-        } else {
-            usingVoucher.setQuantity(usingVoucher.getQuantity() - 1);
-            Constant.Service.VOUCHER_SERVICE.edit(usingVoucher);
+        if (usingVoucher != null) {
+            if (usingVoucher.getVoucherId().equals("CHAOMUNG")) {
+                user.setVc_chaomung(true);
+                Constant.Service.USER_SERVICE.edit(user);
+            } else {
+                usingVoucher.setQuantity(usingVoucher.getQuantity() - 1);
+                Constant.Service.VOUCHER_SERVICE.edit(usingVoucher);
+            }
         }
 
         String[] attributes = {"recaddress", "selectedWard", "selectedDistrict", "selectedProvince", "shippingCost", "voucher"};
@@ -413,6 +414,7 @@ public class Checkout extends HttpServlet {
         String newCartId = user.getUsername() + "-" + (curr + 1);
         Cart cart = new Cart(newCartId, user);
         Constant.Service.CART_SERVICE.insert(cart);
+        session.setAttribute("cart", cart);
 
         List<CartItem> cartItems = Constant.Service.CART_ITEM_SERVICE.getItemByCart(cart.getCartId());
         session.setAttribute("cartItems", cartItems);

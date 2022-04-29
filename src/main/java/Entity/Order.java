@@ -15,7 +15,7 @@ public class Order implements Serializable {
     private String recipientPhone;
     private Timestamp orderDate;
     private Date recipientDate;
-    private Boolean orderStatus;
+    private byte orderStatus;
     private int orderSumProduct;
     private BigDecimal orderShipping;
     private BigDecimal orderTax;
@@ -28,7 +28,7 @@ public class Order implements Serializable {
     public Order() {
     }
 
-    public Order(User user, String recipientName, String recipientAddress, String recipientPhone, Timestamp orderDate, Date recipientDate, Boolean orderStatus, int orderSumProduct, BigDecimal orderShipping, BigDecimal orderTax, BigDecimal orderSubTotal, BigDecimal orderDiscount, BigDecimal orderTotal, Cart cart, Payment payment) {
+    public Order(User user, String recipientName, String recipientAddress, String recipientPhone, Timestamp orderDate, Date recipientDate, byte orderStatus, int orderSumProduct, BigDecimal orderShipping, BigDecimal orderTax, BigDecimal orderSubTotal, BigDecimal orderDiscount, BigDecimal orderTotal, Cart cart, Payment payment) {
         this.user = user;
         this.recipientName = recipientName;
         this.recipientAddress = recipientAddress;
@@ -102,11 +102,11 @@ public class Order implements Serializable {
         this.recipientDate = recipientDate;
     }
 
-    public Boolean getOrderStatus() {
+    public byte getOrderStatus() {
         return orderStatus;
     }
 
-    public void setOrderStatus(Boolean orderStatus) {
+    public void setOrderStatus(byte orderStatus) {
         this.orderStatus = orderStatus;
     }
 

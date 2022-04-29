@@ -251,6 +251,16 @@
                                             out.print(Constant.NF_DONG.format(total));
                                         %>"></label>
                                     </div>
+                                    <hr class="w-100 mt-3 mb-3">
+                                    <div class="col-md-12 mb-2 d-flex flex-column">
+                                        <label class="labels mb-2">Trạng thái đơn hàng</label>
+                                        <label class="ml-5"><input type="radio" name="orderStatus" value="1" class="mr-3" checked>Chưa xử lý</label>
+                                        <label class="ml-5"><input type="radio" name="orderStatus" value="2" class="mr-3">Đang vận chuyển</label>
+                                        <label class="ml-5"><input type="radio" name="orderStatus" value="3" class="mr-3">Đã giao hàng</label>
+                                        <label class="ml-5"><input type="radio" name="orderStatus" value="4" class="mr-3">Đã hủy</label>
+                                        <label for="recipient-date" class="labels mt-2 ml-5">Ngày giao hàng</label>
+                                        <input id="recipient-date" type="date" name="recipientDate" class="form-control w-25 ml-5" disabled>
+                                    </div>
                                 </div>
                                 <div class="row ml-1 mr-1">
                                     <div class="mt-5 text-center col-md-12 d-flex justify-content-end">
@@ -438,6 +448,27 @@
             $('input[name="signOrderAccount"]').val($('#username'));
             $('input[name="signRecipientName"]').val($('#recipientName'));
             $('input[name="signRecipientPhone"]').val($('#recipientPhone'));
+        });
+    });
+</script>
+<!--===============================================================================================-->
+<script>
+    $(function () {
+        const orderStatus = $('input[name="orderStatus"]');
+        const recipientDate = $('#recipient-date');
+
+        orderStatus.each(function () {
+            if ($(this).val() === '${order.orderStatus}') {
+                $(this).prop('checked', true);
+            }
+        });
+
+        orderStatus.on('change', function () {
+            if ($(this).val() === '3') {
+                recipientDate.prop('disabled', false);
+            } else {
+                recipientDate.prop('disabled', true);
+            }
         });
     });
 </script>

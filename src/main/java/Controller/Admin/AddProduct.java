@@ -50,8 +50,8 @@ public class AddProduct extends HttpServlet {
         String productMaterial = request.getParameter("productMaterial");
         String productColor = request.getParameter("productColor");
         int productQuantity = request.getParameter("productQuantity").isEmpty() ? 0 : Integer.parseInt(request.getParameter("productQuantity"));
-        String productPrice = request.getParameter("productPrice");
-        String productCost = request.getParameter("productCost");
+        String productPrice = request.getParameter("productPrice").isEmpty() ? "0" : request.getParameter("productPrice");
+        String productCost = request.getParameter("productCost").isEmpty() ? "0" : request.getParameter("productCost");
         Category category = Constant.Service.CATEGORY_SERVICE.getCategory(request.getParameter("category"));
         Brand brand = Constant.Service.BRAND_SERVICE.getBrand(request.getParameter("brand"));
         Product product = new Product(productId, productName, productDescription, productDimension, productWeight, productMaterial, productColor, new BigDecimal(productPrice), new BigDecimal(productCost), productQuantity, category, brand);
@@ -83,7 +83,10 @@ public class AddProduct extends HttpServlet {
             }
         }
 
-        response.sendRedirect(request.getContextPath() + "/admin/product");
+        request.setAttribute("categories", Constant.Service.CATEGORY_SERVICE.getAll());
+        request.setAttribute("brands", Constant.Service.BRAND_SERVICE.getAll());
+        request.setAttribute("addSuccess", "Thêm sản phẩm thành công!");
+        request.getRequestDispatcher(Constant.Path.ADMIN_ADD_PRODUCT).forward(request, response);
     }
 
     private String extractFileName(Part part) {

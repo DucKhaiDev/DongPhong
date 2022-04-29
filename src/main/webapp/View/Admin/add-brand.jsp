@@ -113,6 +113,19 @@
 <script type="text/javascript">
     CKEDITOR.replace('brandDescription');
 </script>
+<!--===============================================================================================-->
+<script src="${pageContext.request.contextPath}/assets/vendor/sweetalert/sweetalert.min.js"></script>
+<script>
+    $(function () {
+        const message = '${requestScope.addSuccess}';
+        if (message !== '') {
+            swal({
+                text: '${requestScope.addSuccess}',
+                icon: 'success'
+            });
+        }
+    });
+</script>
 
 </body>
 </html>

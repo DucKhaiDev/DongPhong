@@ -54,7 +54,7 @@ public class EditOrder extends HttpServlet {
 
         Payment payment = Constant.Service.PAYMENT_SERVICE.getPayment(request.getParameter("paymentMethod"));
         order.setPayment(payment);
-        order.setOrderStatus(false);
+        order.setOrderStatus(Byte.parseByte(request.getParameter("orderStatus")));
 
         Constant.Service.ORDER_SERVICE.edit(order);
 

@@ -105,11 +105,25 @@
                                             <td>${order.recipientPhone}</td>
                                             <td>
                                                 <%
-                                                    BigDecimal total = ((Order) pageContext.getAttribute("order")).getOrderTotal();
+                                                    Order order = (Order) pageContext.getAttribute("order");
+                                                    BigDecimal total = (order).getOrderTotal();
                                                     out.print(Constant.NF_DONG.format(total));
                                                 %>
                                             </td>
-                                            <td>${order.orderStatus == null ? "Chưa hoàn thành" : (order.orderStatus ? "Hoàn thành" : "Hủy bỏ")}</td>
+                                            <td>
+                                                <%
+                                                    byte status = order.getOrderStatus();
+                                                    if (status == 1) {
+                                                        out.print("Chưa xử lý");
+                                                    } else if (status == 2) {
+                                                        out.print("Đang vận chuyển");
+                                                    } else if (status == 3) {
+                                                        out.print("Đã giao");
+                                                    } else {
+                                                        out.print("Đã hủy");
+                                                    }
+                                                %>
+                                            </td>
                                             <td>
                                                 <a href="<c:url value="/admin/order/detail?id=${order.orderId}"/>"
                                                    class="text-center">Chi tiết</a>&nbsp;|&nbsp;

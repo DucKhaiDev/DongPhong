@@ -34,6 +34,8 @@ public class AddCategory extends HttpServlet {
 
         Constant.Service.CATEGORY_SERVICE.insert(new Category(categoryId, categoryName, room, categoryDescription));
 
-        response.sendRedirect(request.getContextPath() + "/admin/category");
+        request.setAttribute("rooms", Constant.Service.ROOM_SERVICE.getAll());
+        request.setAttribute("addSuccess", "Thêm loại sản phẩm thành công!");
+        request.getRequestDispatcher(Constant.Path.ADMIN_ADD_CATEGORY).forward(request, response);
     }
 }

@@ -2,6 +2,7 @@ package Services.deploy;
 
 import Dao.deploy.OrderDao;
 import Entity.Order;
+import Entity.User;
 import Services.IOrderService;
 
 import java.util.List;
@@ -37,6 +38,11 @@ public class OrderService implements IOrderService {
     @Override
     public List<Order> getAll() {
         return orderDao.getAll();
+    }
+
+    @Override
+    public List<Order> getAll(User user) {
+        return orderDao.getAll(user);
     }
 
     @Override

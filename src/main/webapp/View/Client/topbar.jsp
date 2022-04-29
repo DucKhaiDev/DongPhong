@@ -49,18 +49,25 @@
                             <a href="${pageContext.request.contextPath }/admin" class="flex-c-m trans-04 p-lr-25"
                                style="border-left: none">
                         <span>
-                            <% out.print(displayName); %>
                             <i class="fa fa-user"></i>
+                            <% out.print(displayName); %>
                         </span>
                             </a>
                         </c:when>
                         <c:otherwise>
                             <a href="${pageContext.request.contextPath }/member/my-account"
                                class="flex-c-m trans-04 p-lr-25" style="border-left: none">
-                        <span>
-                            <% out.print(displayName); %>
-                            <i class="fa fa-user"></i>
-                        </span>
+                                <span>
+                                    <i class="fa fa-user"></i>
+                                    <% out.print(displayName); %>
+                                </span>
+                            </a>
+                            <a href="${pageContext.request.contextPath }/member/my-order"
+                               class="flex-c-m trans-04 p-lr-25" style="border-left: none">
+                                <span>
+                                    <i class="fa fa-file-alt"></i>
+                                    Đơn Hàng
+                                </span>
                             </a>
                         </c:otherwise>
                     </c:choose>
@@ -68,8 +75,8 @@
                     <a href="${pageContext.request.contextPath }/logout" class="flex-c-m trans-04 p-lr-25"
                        style="border-right: none">
                         <span>
-                            Đăng Xuất
                             <i class="fa fa-sign-out-alt"></i>
+                            Đăng Xuất
                         </span>
                     </a>
                 </div>

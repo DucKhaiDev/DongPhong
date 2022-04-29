@@ -1,6 +1,7 @@
 package Services;
 
 import Entity.Order;
+import Entity.User;
 
 import java.util.List;
 
@@ -16,6 +17,8 @@ public interface IOrderService {
     Order getNewestOrder();
 
     List<Order> getAll();
+
+    List<Order> getAll(User user);
 
     int countPendingOrder();
 }

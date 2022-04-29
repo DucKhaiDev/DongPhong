@@ -3,6 +3,7 @@ package Dao.deploy;
 import Connect.DBConnect;
 import Dao.IOrderDao;
 import Entity.Order;
+import Entity.User;
 import Util.Constant;
 
 import java.sql.*;
@@ -24,11 +25,7 @@ public class OrderDao implements IOrderDao {
             ps.setString(4, order.getRecipientPhone());
             ps.setTimestamp(5, order.getOrderDate());
             ps.setDate(6, order.getRecipientDate());
-            if (order.getOrderStatus() != null) {
-                ps.setBoolean(7, order.getOrderStatus());
-            } else {
-                ps.setNull(7, Types.BIT);
-            }
+            ps.setByte(7, order.getOrderStatus());
             ps.setInt(8, order.getOrderSumProduct());
             ps.setBigDecimal(9, order.getOrderShipping());
             ps.setBigDecimal(10, order.getOrderTax());
@@ -59,11 +56,7 @@ public class OrderDao implements IOrderDao {
             ps.setString(4, order.getRecipientPhone());
             ps.setTimestamp(5, order.getOrderDate());
             ps.setDate(6, order.getRecipientDate());
-            if (order.getOrderStatus() != null) {
-                ps.setBoolean(7, order.getOrderStatus());
-            } else {
-                ps.setNull(7, Types.BIT);
-            }
+            ps.setByte(7, order.getOrderStatus());
             ps.setInt(8, order.getOrderSumProduct());
             ps.setBigDecimal(9, order.getOrderShipping());
             ps.setBigDecimal(10, order.getOrderTax());
@@ -117,9 +110,7 @@ public class OrderDao implements IOrderDao {
                 order.setRecipientPhone(rs.getString("REC_PHONE"));
                 order.setOrderDate(rs.getTimestamp("ORD_DATE"));
                 order.setRecipientDate(rs.getDate("REC_DATE"));
-                Boolean status = rs.getBoolean("ORD_STATUS");
-                if (rs.wasNull()) status = null;
-                order.setOrderStatus(status);
+                order.setOrderStatus(rs.getByte("ORD_STATUS"));
                 order.setOrderSumProduct(rs.getInt("ORD_SUMPRO"));
                 order.setOrderShipping(rs.getBigDecimal("ORD_SHIPPING"));
                 order.setOrderTax(rs.getBigDecimal("ORD_TAX"));
@@ -156,9 +147,7 @@ public class OrderDao implements IOrderDao {
                 order.setRecipientPhone(rs.getString("REC_PHONE"));
                 order.setOrderDate(rs.getTimestamp("ORD_DATE"));
                 order.setRecipientDate(rs.getDate("REC_DATE"));
-                Boolean status = rs.getBoolean("ORD_STATUS");
-                if (rs.wasNull()) status = null;
-                order.setOrderStatus(status);
+                order.setOrderStatus(rs.getByte("ORD_STATUS"));
                 order.setOrderSumProduct(rs.getInt("ORD_SUMPRO"));
                 order.setOrderShipping(rs.getBigDecimal("ORD_SHIPPING"));
                 order.setOrderTax(rs.getBigDecimal("ORD_TAX"));
@@ -196,9 +185,48 @@ public class OrderDao implements IOrderDao {
                 order.setRecipientPhone(rs.getString("REC_PHONE"));
                 order.setOrderDate(rs.getTimestamp("ORD_DATE"));
                 order.setRecipientDate(rs.getDate("REC_DATE"));
-                Boolean status = rs.getBoolean("ORD_STATUS");
-                if (rs.wasNull()) status = null;
-                order.setOrderStatus(status);
+                order.setOrderStatus(rs.getByte("ORD_STATUS"));
+                order.setOrderSumProduct(rs.getInt("ORD_SUMPRO"));
+                order.setOrderShipping(rs.getBigDecimal("ORD_SHIPPING"));
+                order.setOrderTax(rs.getBigDecimal("ORD_TAX"));
+                order.setOrderSubTotal(rs.getBigDecimal("ORD_SUBTOTAL"));
+                order.setOrderDiscount(rs.getBigDecimal("ORD_DISCOUNT"));
+                order.setOrderTotal(rs.getBigDecimal("ORD_TOTAL"));
+                order.setCart(Constant.Service.CART_SERVICE.getCart(rs.getString("CART_ID").trim()));
+                order.setPayment(Constant.Service.PAYMENT_SERVICE.getPayment(rs.getString("PAY_ID").trim()));
+
+                orders.add(order);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnect.closeAll(rs, ps, conn);
+        }
+
+        return orders;
+    }
+
+    @Override
+    public List<Order> getAll(User user) {
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        List<Order> orders = new ArrayList<>();
+
+        try {
+            ps = conn.prepareStatement("SELECT * FROM [ORDER] WHERE USER_ID = ?");
+            ps.setString(1, user.getUserId());
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Order order = new Order();
+                order.setOrderId(rs.getInt("ORD_ID"));
+                order.setUser(Constant.Service.USER_SERVICE.getUser(rs.getString("USER_ID").trim()));
+                order.setRecipientName(rs.getString("REC_NAME"));
+                order.setRecipientAddress(rs.getString("REC_ADDRESS"));
+                order.setRecipientPhone(rs.getString("REC_PHONE"));
+                order.setOrderDate(rs.getTimestamp("ORD_DATE"));
+                order.setRecipientDate(rs.getDate("REC_DATE"));
+                order.setOrderStatus(rs.getByte("ORD_STATUS"));
                 order.setOrderSumProduct(rs.getInt("ORD_SUMPRO"));
                 order.setOrderShipping(rs.getBigDecimal("ORD_SHIPPING"));
                 order.setOrderTax(rs.getBigDecimal("ORD_TAX"));
@@ -228,7 +256,7 @@ public class OrderDao implements IOrderDao {
         try {
             ps = conn.prepareStatement("SELECT COUNT(*) " +
                     "FROM dbo.[ORDER] " +
-                    "WHERE ORD_STATUS IS NULL");
+                    "WHERE ORD_STATUS = 1");
             rs = ps.executeQuery();
             if (rs.next()) {
                 return rs.getInt(1);

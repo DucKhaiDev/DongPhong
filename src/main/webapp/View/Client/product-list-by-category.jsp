@@ -643,7 +643,4 @@
 </script>
 
 </body>
-
-<jsp:include page="fb-messenger.jsp"/>
-
 </html>

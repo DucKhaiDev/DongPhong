@@ -38,11 +38,15 @@ public class Product implements Serializable {
         this.brand = brand;
     }
 
-    public Product(String productId, String productName, double productRate, String productDescription, BigDecimal productPrice, BigDecimal productCost, int productQuantity, Category category, Brand brand) {
+    public Product(String productId, String productName, double productRate, String productDescription, String productDimension, String productWeight, String productMaterial, String productColor, BigDecimal productPrice, BigDecimal productCost, int productQuantity, Category category, Brand brand) {
         this.productId = productId;
         this.productName = productName;
         this.productRate = productRate;
         this.productDescription = productDescription;
+        this.productDimension = productDimension;
+        this.productWeight = productWeight;
+        this.productMaterial = productMaterial;
+        this.productColor = productColor;
         this.productPrice = productPrice;
         this.productCost = productCost;
         this.productQuantity = productQuantity;

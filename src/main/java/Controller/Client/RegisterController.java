@@ -14,7 +14,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.UUID;
 
 @WebServlet(name = "RegisterController", value = "/register")
 public class RegisterController extends HttpServlet {

@@ -32,6 +32,7 @@ public class AddBrand extends HttpServlet {
 
         Constant.Service.BRAND_SERVICE.insert(new Brand(brandId, brandName, brandDes));
 
-        response.sendRedirect(request.getContextPath() + "/admin/brand");
+        request.setAttribute("addSuccess", "Thêm thương hiệu thành công!");
+        request.getRequestDispatcher(Constant.Path.ADMIN_ADD_BRAND).forward(request, response);
     }
 }

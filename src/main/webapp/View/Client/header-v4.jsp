@@ -89,7 +89,7 @@
                         <li class="nav-item dropdown btn-group">
                             <a class="nav-link dropdown-toggle cl93 cursor-pointer" id="navbarDropdownPT" role="button"
                                data-toggle="dropdown" aria-haspopup="true"
-                               aria-expanded="false">Văn Phòng</a>
+                               aria-expanded="false">Phòng Thờ</a>
                             <div class="dropdown-menu m-t-25" aria-labelledby="navbarDropdownPT">
                                 <c:forEach items="${applicationScope.altCategories}" var="altCategory">
                                     <a class="dropdown-item cl92"
@@ -239,6 +239,7 @@
     </div>
 </header>
 
+<!--===============================================================================================-->
 <script>
     $(function () {
         $('input[name="keyword-search-header"]').keypress(function (e) {

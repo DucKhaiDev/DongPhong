@@ -441,7 +441,7 @@
                                                 </c:choose>
                                                 <div class="row p-b-25">
                                                     <div class="col-12 p-b-5">
-                                                        <label class="stext-102 cl3" for="review">Bình luận</label>
+                                                        <label class="stext-102 cl3" for="review">Bình luận của bạn</label>
                                                         <textarea class="size-110 bor8 stext-102 cl2 p-lr-20 p-tb-10"
                                                                   id="review" name="review"></textarea>
                                                     </div>

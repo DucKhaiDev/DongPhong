@@ -208,7 +208,7 @@
 $(function () {
     const numProduct = $('.num-product');
     numProduct.each(function () {
-        if ($(this).prop('value') === '0' || $(this).next().next().prop('value') === '1') {
+        if (parseInt($(this).prop('value')) === 0 || parseInt($(this).next().next().prop('value')) === 1) {
             $(this).addClass('pointer-events-none');
             $(this).prev().addClass('pointer-events-none');
             $(this).next().addClass('pointer-events-none');
@@ -217,7 +217,7 @@ $(function () {
 
     $('.btn-num-product-down').each(function () {
         $(this).on('click', function () {
-            if ($(this).next().prop('value') < 2) {
+            if (parseInt($(this).next().prop('value')) < 2) {
                 $(this).next().prop('value', '1');
                 $(this).addClass('pointer-events-none');
             }
@@ -227,7 +227,7 @@ $(function () {
 
     $('.btn-num-product-up').each(function () {
         $(this).on('click', function () {
-            if ($(this).prev().prop('value') >= $(this).next().prop('value')) {
+            if (parseInt($(this).prev().prop('value')) >= parseInt($(this).next().prop('value'))) {
                 $(this).prev().prop('value', $(this).next().prop('value'));
                 $(this).addClass('pointer-events-none');
             }
@@ -239,7 +239,7 @@ $(function () {
         $(this).on('change', function () {
             const btnDown = $(this).prev();
             const btnUp = $(this).next();
-            if ($(this).prop('value') < 2) {
+            if (parseInt($(this).prop('value')) < 2) {
                 $(this).prop('value', '1');
                 btnDown.addClass('pointer-events-none');
             } else if ($(this).prop('value') >= $(this).next().next().prop('value')) {
