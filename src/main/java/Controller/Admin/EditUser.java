@@ -1,5 +1,6 @@
 package Controller.Admin;
 
+import Controller.Client.LoginController;
 import Entity.User;
 import Util.Constant;
 import jakarta.servlet.ServletException;
@@ -23,6 +24,10 @@ public class EditUser extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if (LoginController.checkLogin(request, response)) {
+            return;
+        }
+
         userId = request.getParameter("id");
 
         user = Constant.Service.USER_SERVICE.getUser(userId);

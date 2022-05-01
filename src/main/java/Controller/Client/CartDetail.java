@@ -23,6 +23,10 @@ public class CartDetail extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if (LoginController.checkLogin(request, response)) {
+            return;
+        }
+
         session = request.getSession();
         cartId = ((Cart) session.getAttribute("cart")).getCartId();
         List<Voucher> availableVoucher = Constant.Service.VOUCHER_SERVICE.getAvailableVoucher(cartId);

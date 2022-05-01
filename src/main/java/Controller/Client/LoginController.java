@@ -10,6 +10,15 @@ import java.io.IOException;
 
 @WebServlet(name = "LoginController", value = "/login")
 public class LoginController extends HttpServlet {
+    public static boolean checkLogin(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        if (request.getSession().getAttribute("account") == null) {
+            response.sendRedirect(request.getContextPath() + "/logout");
+            return true;
+        }
+
+        return false;
+    }
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(false);

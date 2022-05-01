@@ -83,5 +83,6 @@ public class Constant {
         public static final String MY_ORDER = "/View/Client/my-order.jsp";
         public static final String MY_ORDER_DETAIL = "/View/Client/my-order-detail.jsp";
         public static final String CONTACT = "/View/Client/contact.jsp";
+        public static final String ABOUT = "/View/Client/about.jsp";
     }
 }

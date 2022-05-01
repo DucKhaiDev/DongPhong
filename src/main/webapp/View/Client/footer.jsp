@@ -45,13 +45,27 @@
                     </li>
 
                     <li class="p-b-10">
-                        <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+                        <a href="<c:choose>
+                            <c:when test="${sessionScope.account != null}">
+                                ${pageContext.request.contextPath}/member/my-order
+                            </c:when>
+                            <c:otherwise>
+                                #
+                            </c:otherwise>
+                        </c:choose>" class="stext-107 cl7 hov-cl1 trans-04">
                             Đổi trả
                         </a>
                     </li>
 
                     <li class="p-b-10">
-                        <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+                        <a href="<c:choose>
+                            <c:when test="${sessionScope.account != null}">
+                                ${pageContext.request.contextPath}/member/my-order
+                            </c:when>
+                            <c:otherwise>
+                                #
+                            </c:otherwise>
+                        </c:choose>" class="stext-107 cl7 hov-cl1 trans-04">
                             Giao nhận
                         </a>
                     </li>

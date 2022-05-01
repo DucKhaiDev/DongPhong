@@ -15,6 +15,10 @@ import java.io.IOException;
 public class ChangePassword extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if (LoginController.checkLogin(request, response)) {
+            return;
+        }
+
         request.getRequestDispatcher(Constant.Path.CHANGE_PASSWORD).forward(request, response);
     }
 

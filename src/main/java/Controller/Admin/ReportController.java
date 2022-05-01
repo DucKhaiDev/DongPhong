@@ -1,5 +1,6 @@
 package Controller.Admin;
 
+import Controller.Client.LoginController;
 import Entity.Report;
 import Util.Constant;
 import jakarta.servlet.ServletException;
@@ -21,6 +22,10 @@ import java.util.List;
 public class ReportController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if (LoginController.checkLogin(request, response)) {
+            return;
+        }
+
         Timestamp from = new Timestamp(Date.from(LocalDate.now().minusMonths(12).atStartOfDay(ZoneId.systemDefault()).toInstant()).getTime());
         String fromParam = request.getParameter("from");
         if (fromParam != null && !fromParam.trim().isEmpty()) {

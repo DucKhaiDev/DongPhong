@@ -11,7 +11,7 @@
 <div class="top-bar">
     <div class="content-topbar flex-sb-m h-full container">
         <div class="left-top-bar flex-w h-full">
-            <a href="#" class="flex-c-m trans-04 p-lr-25">Giới Thiệu</a>
+            <a href="${pageContext.request.contextPath}/about" class="flex-c-m trans-04 p-lr-25">Giới Thiệu</a>
             <a href="#" class="flex-c-m trans-04 p-lr-25">Hướng Dẫn</a>
             <a href="#" class="flex-c-m trans-04 p-lr-25">Chính Sách Bảo Hành</a>
             <a href="#" class="flex-c-m trans-04 p-lr-25">Tin Tức</a>

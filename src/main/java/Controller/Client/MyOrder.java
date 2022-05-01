@@ -14,6 +14,10 @@ import java.io.IOException;
 public class MyOrder extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if (LoginController.checkLogin(request, response)) {
+            return;
+        }
+
         request.setAttribute("myOrders", Constant.Service.ORDER_SERVICE.getAll((User) request.getSession().getAttribute("account")));
         request.getRequestDispatcher(Constant.Path.MY_ORDER).forward(request, response);
     }

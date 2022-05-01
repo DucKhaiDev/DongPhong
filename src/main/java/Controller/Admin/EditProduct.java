@@ -1,5 +1,6 @@
 package Controller.Admin;
 
+import Controller.Client.LoginController;
 import Entity.ProImage;
 import Entity.Product;
 import Util.Constant;
@@ -29,6 +30,10 @@ public class EditProduct extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if (LoginController.checkLogin(request, response)) {
+            return;
+        }
+
         productId = request.getParameter("id");
         product = Constant.Service.PRODUCT_SERVICE.getProduct(productId);
 

@@ -1,5 +1,6 @@
 package Controller.Admin;
 
+import Controller.Client.LoginController;
 import Entity.Brand;
 import Util.Constant;
 import jakarta.servlet.ServletException;
@@ -17,6 +18,10 @@ public class EditBrand extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if (LoginController.checkLogin(request, response)) {
+            return;
+        }
+
         brandId = request.getParameter("id");
 
         brand = Constant.Service.BRAND_SERVICE.getBrand(brandId);

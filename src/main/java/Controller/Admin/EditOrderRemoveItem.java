@@ -1,5 +1,6 @@
 package Controller.Admin;
 
+import Controller.Client.LoginController;
 import Entity.CartItem;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -14,6 +15,10 @@ import java.util.ListIterator;
 public class EditOrderRemoveItem extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if (LoginController.checkLogin(request, response)) {
+            return;
+        }
+
         int cartItemId = Integer.parseInt(request.getParameter("id"));
         ListIterator<CartItem> litr = EditOrder.ord_items.listIterator();
         while (litr.hasNext()) {

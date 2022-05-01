@@ -1,5 +1,6 @@
 package Controller.Admin;
 
+import Controller.Client.LoginController;
 import Entity.Voucher;
 import Util.Constant;
 import jakarta.servlet.ServletException;
@@ -42,6 +43,10 @@ public class AddVoucher extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if (LoginController.checkLogin(request, response)) {
+            return;
+        }
+
         request.getRequestDispatcher(Constant.Path.ADMIN_ADD_VOUCHER).forward(request, response);
     }
 

@@ -1,5 +1,6 @@
 package Controller.Admin;
 
+import Controller.Client.LoginController;
 import Entity.Voucher;
 import Util.Constant;
 import jakarta.servlet.ServletException;
@@ -19,6 +20,10 @@ public class EditVoucher extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if (LoginController.checkLogin(request, response)) {
+            return;
+        }
+
         voucherId = request.getParameter("id");
 
         voucher = Constant.Service.VOUCHER_SERVICE.getVoucher(voucherId);

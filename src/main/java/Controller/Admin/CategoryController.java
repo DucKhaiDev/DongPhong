@@ -1,5 +1,6 @@
 package Controller.Admin;
 
+import Controller.Client.LoginController;
 import Util.Constant;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -13,6 +14,10 @@ import java.io.IOException;
 public class CategoryController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if (LoginController.checkLogin(request, response)) {
+            return;
+        }
+
         request.setAttribute("categories", Constant.Service.CATEGORY_SERVICE.getAll());
         request.getRequestDispatcher(Constant.Path.ADMIN_CATEGORY).forward(request, response);
     }

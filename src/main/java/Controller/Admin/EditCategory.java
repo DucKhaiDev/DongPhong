@@ -1,5 +1,6 @@
 package Controller.Admin;
 
+import Controller.Client.LoginController;
 import Entity.Category;
 import Entity.Room;
 import Util.Constant;
@@ -19,6 +20,10 @@ public class EditCategory extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if (LoginController.checkLogin(request, response)) {
+            return;
+        }
+
         categoryId = request.getParameter("id");
 
         category = Constant.Service.CATEGORY_SERVICE.getCategory(categoryId);

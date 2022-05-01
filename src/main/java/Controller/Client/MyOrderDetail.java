@@ -16,6 +16,10 @@ import java.util.List;
 public class MyOrderDetail extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if (LoginController.checkLogin(request, response)) {
+            return;
+        }
+
         Order myOrder = Constant.Service.ORDER_SERVICE.getOrder(Integer.parseInt(request.getParameter("id")));
         List<CartItem> cartItems = Constant.Service.CART_ITEM_SERVICE.getItemByCart(myOrder.getCart().getCartId());
         request.setAttribute("myOrder", myOrder);

@@ -1,6 +1,7 @@
 package Controller.Admin;
 
 import Controller.Client.Checkout;
+import Controller.Client.LoginController;
 import Controller.WaitingController;
 import Entity.*;
 import Tools.SendEmail;
@@ -21,6 +22,10 @@ import java.util.List;
 public class AddOrder extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if (LoginController.checkLogin(request, response)) {
+            return;
+        }
+
         List<Voucher> availableVoucher = Constant.Service.VOUCHER_SERVICE.getAvailableVoucher(((Cart) request.getSession().getAttribute("cart")).getCartId());
         availableVoucher.add(Constant.Service.VOUCHER_SERVICE.getVoucher("CHAOMUNG"));
         request.setAttribute("availableVoucher", availableVoucher);

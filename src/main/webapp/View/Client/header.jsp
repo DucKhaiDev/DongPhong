@@ -127,7 +127,7 @@
     <div class="wrap-header-mobile">
         <!-- Logo moblie -->
         <div class="logo-mobile">
-            <a href="index.jsp"><img src="${pageContext.request.contextPath}/assets/images/icons/logo.png"
+            <a href="${pageContext.request.contextPath}/welcome"><img src="${pageContext.request.contextPath}/assets/images/icons/logo.png"
                                      alt="IMG-LOGO"></a>
         </div>
 
@@ -189,9 +189,9 @@
 
         <ul class="main-menu-m">
             <li>
-                <a href="index.jsp">Home</a>
+                <a href="${pageContext.request.contextPath}/welcome">Home</a>
                 <ul class="sub-menu-m">
-                    <li><a href="index.jsp">Homepage 1</a></li>
+                    <li><a href="${pageContext.request.contextPath}/welcome">Homepage 1</a></li>
                 </ul>
                 <span class="arrow-main-menu-m">
 						<i class="fa fa-angle-right" aria-hidden="true"></i>
@@ -199,23 +199,23 @@
             </li>
 
             <li>
-                <a href="../Unused/product.jsp">Shop</a>
+                <a href="#">Shop</a>
             </li>
 
             <li>
-                <a href="cart-detail.jsp" class="label1 rs1" data-label1="hot">Features</a>
+                <a href="${pageContext.request.contextPath}/cart" class="label1 rs1" data-label1="hot">Features</a>
             </li>
 
             <li>
-                <a href="../Unused/blog.jsp">Blog</a>
+                <a href="#">Blog</a>
             </li>
 
             <li>
-                <a href="about.jsp">About</a>
+                <a href="${pageContext.request.contextPath}/about">About</a>
             </li>
 
             <li>
-                <a href="contact.jsp">Contact</a>
+                <a href="${pageContext.request.contextPath}/contact">Contact</a>
             </li>
         </ul>
     </div>

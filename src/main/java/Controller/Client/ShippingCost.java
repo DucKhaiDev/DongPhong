@@ -15,6 +15,10 @@ import java.math.BigDecimal;
 public class ShippingCost extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if (LoginController.checkLogin(request, response)) {
+            return;
+        }
+
         String province = request.getParameter("province");
         BigDecimal shippingCost = CalculateShipping.calculateShipping(Integer.parseInt(province));
         String district = request.getParameter("district");

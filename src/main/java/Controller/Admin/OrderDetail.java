@@ -1,5 +1,6 @@
 package Controller.Admin;
 
+import Controller.Client.LoginController;
 import Entity.Cart;
 import Entity.CartItem;
 import Entity.Order;
@@ -17,6 +18,10 @@ import java.util.List;
 public class OrderDetail extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if (LoginController.checkLogin(request, response)) {
+            return;
+        }
+
         int orderId = Integer.parseInt(request.getParameter("id"));
 
         Order order = Constant.Service.ORDER_SERVICE.getOrder(orderId);

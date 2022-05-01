@@ -1,5 +1,6 @@
 package Controller.Admin;
 
+import Controller.Client.LoginController;
 import Entity.Brand;
 import Util.Constant;
 import jakarta.servlet.ServletException;
@@ -14,6 +15,10 @@ import java.io.IOException;
 public class AddBrand extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if (LoginController.checkLogin(request, response)) {
+            return;
+        }
+
         request.getRequestDispatcher(Constant.Path.ADMIN_ADD_BRAND).forward(request, response);
     }
 

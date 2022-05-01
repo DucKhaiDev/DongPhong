@@ -1,5 +1,6 @@
 package Controller.Admin;
 
+import Controller.Client.LoginController;
 import Controller.WaitingController;
 import Entity.*;
 import Util.Constant;
@@ -25,6 +26,10 @@ public class EditOrder extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if (LoginController.checkLogin(request, response)) {
+            return;
+        }
+
         int orderId = Integer.parseInt(request.getParameter("id"));
 
         order = Constant.Service.ORDER_SERVICE.getOrder(orderId);

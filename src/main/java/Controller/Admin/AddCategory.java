@@ -1,5 +1,6 @@
 package Controller.Admin;
 
+import Controller.Client.LoginController;
 import Entity.Category;
 import Entity.Room;
 import Util.Constant;
@@ -15,6 +16,10 @@ import java.io.IOException;
 public class AddCategory extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if (LoginController.checkLogin(request, response)) {
+            return;
+        }
+
         request.setAttribute("rooms", Constant.Service.ROOM_SERVICE.getAll());
         request.getRequestDispatcher(Constant.Path.ADMIN_ADD_CATEGORY).forward(request, response);
     }

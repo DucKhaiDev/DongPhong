@@ -1,5 +1,6 @@
 package Controller.Admin;
 
+import Controller.Client.LoginController;
 import Entity.Brand;
 import Entity.Category;
 import Entity.ProImage;
@@ -27,6 +28,10 @@ import java.util.UUID;
 public class AddProduct extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if (LoginController.checkLogin(request, response)) {
+            return;
+        }
+
         request.setAttribute("categories", Constant.Service.CATEGORY_SERVICE.getAll());
         request.setAttribute("brands", Constant.Service.BRAND_SERVICE.getAll());
         request.getRequestDispatcher(Constant.Path.ADMIN_ADD_PRODUCT).forward(request, response);

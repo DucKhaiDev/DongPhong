@@ -1,5 +1,6 @@
 package Controller.Admin;
 
+import Controller.Client.LoginController;
 import Util.Constant;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -13,6 +14,10 @@ import java.io.IOException;
 public class DeleteReview extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if (LoginController.checkLogin(request, response)) {
+            return;
+        }
+
         Constant.Service.REVIEW_SERVICE.delete(Integer.parseInt(request.getParameter("id")));
         response.sendRedirect(request.getContextPath() + "/admin/review/review-detail?id=" + request.getParameter("productId"));
     }

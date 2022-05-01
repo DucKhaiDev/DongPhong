@@ -1,5 +1,6 @@
 package Controller.Admin;
 
+import Controller.Client.LoginController;
 import Entity.CartItem;
 import Entity.Product;
 import Util.Constant;
@@ -19,6 +20,10 @@ import java.util.ListIterator;
 public class EditOrderAddItem extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if (LoginController.checkLogin(request, response)) {
+            return;
+        }
+
         String forwardTo = request.getParameter("forwardTo");
 
         HttpSession session = request.getSession();

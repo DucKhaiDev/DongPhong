@@ -1,5 +1,6 @@
 package Controller.Admin;
 
+import Controller.Client.LoginController;
 import Util.Constant;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -18,6 +19,10 @@ import java.util.Date;
 public class Dashboard extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if (LoginController.checkLogin(request, response)) {
+            return;
+        }
+
         //Get report from year to year
         int fromYear = Integer.parseInt(new SimpleDateFormat("yyyy").format(new Timestamp(Date.from(LocalDate.now().minusYears(10).atStartOfDay(ZoneId.systemDefault()).toInstant()).getTime())));
         int toYear = Integer.parseInt(new SimpleDateFormat("yyyy").format(new Date()));

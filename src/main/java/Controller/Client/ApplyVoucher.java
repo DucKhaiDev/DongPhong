@@ -14,6 +14,10 @@ import java.io.IOException;
 public class ApplyVoucher extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if (LoginController.checkLogin(request, response)) {
+            return;
+        }
+
         HttpSession session = request.getSession();
 
         String voucherId = request.getParameter("voucher");
