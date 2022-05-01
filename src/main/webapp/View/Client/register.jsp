@@ -75,7 +75,7 @@
                                     <form id="form-login" action="register" method="post">
                                         <div class="form-group">
                                             <label for="username">Tên đăng nhập</label>
-                                            <input type="text" class="form-control" id="username" name="username"
+                                            <input type="text" class="form-control text-lowercase" id="username" name="username"
                                                    required="required">
                                             <p class="text-muted"
                                                style="color: #FF0000 !important;">${requestScope.usnMsg}</p>
@@ -96,7 +96,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="email">Email</label>
-                                            <input type="email" class="form-control" id="email" name="email"
+                                            <input type="email" class="form-control text-lowercase" id="email" name="email"
                                                    required="required">
                                             <p class="text-muted"
                                                style="color: #FF0000 !important;">${requestScope.emailMsg}</p>

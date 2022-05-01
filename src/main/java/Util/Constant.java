@@ -11,6 +11,8 @@ public class Constant {
     public static final String COOKIE_PASSWORD = "password";
     public static final Locale LC_VIETNAM = new Locale("vi", "VN");
     public static final NumberFormat NF_DONG = NumberFormat.getCurrencyInstance(LC_VIETNAM);
+    public static final String ERROR_PAGE = "/View/error.jsp";
+    public static final String ERROR_PAGE_404 = "/View/error-404.jsp";
 
     public static class Service {
         public static final BrandService BRAND_SERVICE = new BrandService();
