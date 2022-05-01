@@ -218,7 +218,7 @@
                 text: '${sessionScope.overtime}',
                 icon: 'warning'
             }).then(function () {
-                <% session.removeAttribute("overtime"); %>
+                <c:remove var="overtime" scope="session"/>
             });
         }
     });

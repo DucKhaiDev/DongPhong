@@ -1,5 +1,6 @@
 package Controller.Client;
 
+import Controller.WaitingController;
 import Entity.*;
 import Tools.SendEmail;
 import Util.Constant;
@@ -389,18 +390,19 @@ public class Checkout extends HttpServlet {
         Voucher usingVoucher = (Voucher) session.getAttribute("usingVoucher");
         if (usingVoucher != null) {
             if (usingVoucher.getVoucherId().equals("CHAOMUNG")) {
-                user.setVc_chaomung(true);
-                Constant.Service.USER_SERVICE.edit(user);
+                //If member
+                if (user.getRole()) {
+                    user.setVc_chaomung(true);
+                    Constant.Service.USER_SERVICE.edit(user);
+                }
             } else {
                 usingVoucher.setQuantity(usingVoucher.getQuantity() - 1);
                 Constant.Service.VOUCHER_SERVICE.edit(usingVoucher);
             }
         }
 
-        String[] attributes = {"recaddress", "selectedWard", "selectedDistrict", "selectedProvince", "shippingCost", "voucher"};
-        for (String attribute : attributes) {
-            session.removeAttribute(attribute);
-        }
+        //Remove all attributes
+        WaitingController.removeAllAttr(session);
 
         response.sendRedirect(request.getContextPath() + "/checkout");
     }

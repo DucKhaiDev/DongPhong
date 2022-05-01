@@ -1,9 +1,7 @@
-package Controller.Client;
+package Controller.Admin;
 
-import Entity.Cart;
 import Entity.CartItem;
 import Entity.Product;
-import Entity.User;
 import Util.Constant;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -15,21 +13,15 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.ListIterator;
 
-@WebServlet(name = "AddToCart", value = "/cart/add")
-public class AddToCart extends HttpServlet {
+@WebServlet(name = "EditOrderAddItem", value = "/admin/order/edit/add-product")
+public class EditOrderAddItem extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String forwardTo = request.getParameter("forwardTo");
 
-        //Check login
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("account");
-        if (user == null) {
-            session.setAttribute("forwardTo", forwardTo);
-            response.sendRedirect(request.getContextPath() + "/login");
-            return;
-        }
 
         //Order info
         String ord_recipientName = request.getParameter("recipientName");
@@ -46,16 +38,13 @@ public class AddToCart extends HttpServlet {
             response.sendRedirect(forwardTo);
             return;
         }
-        Cart cart = (Cart) session.getAttribute("cart");
-        String cartId = cart.getCartId();
 
         /*
             If the product is already in the cart, add the quantity of the new product, otherwise add the product to the cart
         */
-        if (Constant.Service.CART_ITEM_SERVICE.checkExistItem(productId, cartId)) {
-            //Get item
-            CartItem cartItem = Constant.Service.CART_ITEM_SERVICE.getCartItem(productId, cartId);
-
+        //Get item
+        CartItem cartItem = checkExistItem(productId, EditOrder.ord_items);
+        if (cartItem != null) {
             /*
                 Update item
             */
@@ -71,7 +60,7 @@ public class AddToCart extends HttpServlet {
             BigDecimal value = productPrice.multiply(new BigDecimal(cartItem.getQuantity()));
             cartItem.setValue(value);
 
-            Constant.Service.CART_ITEM_SERVICE.edit(cartItem);
+            updateCart(EditOrder.ord_items, cartItem);
         } else {
             //Add product to cart
             CartItem item = new CartItem();
@@ -81,15 +70,36 @@ public class AddToCart extends HttpServlet {
             item.setQuantity(productQuantity);
             item.setValue(value);
             item.setProduct(product);
-            item.setCart(cart);
+            item.setCart(EditOrder.ord_items.get(0).getCart());
 
-            Constant.Service.CART_ITEM_SERVICE.insert(item);
+            EditOrder.ord_items.add(item);
         }
 
-        //Update cart items
-        List<CartItem> cartItems = Constant.Service.CART_ITEM_SERVICE.getItemByCart(cartId);
-        session.setAttribute("cartItems", cartItems);
-
         response.sendRedirect(forwardTo);
+    }
+
+    private CartItem checkExistItem(String productId, List<CartItem> ord_items) {
+        for (CartItem item : ord_items) {
+            if (item.getProduct().getProductId().equals(productId)) {
+                return item;
+            }
+        }
+
+        return null;
+    }
+
+    private void updateCart(List<CartItem> ord_items, CartItem cartItem) {
+        ListIterator<CartItem> litr = ord_items.listIterator();
+        while (litr.hasNext()) {
+            CartItem item = litr.next();
+            if (item.getCartItemId() == cartItem.getCartItemId()) {
+                item.setCart(cartItem.getCart());
+                item.setQuantity(cartItem.getQuantity());
+                item.setValue(cartItem.getValue());
+                item.setProduct(cartItem.getProduct());
+                litr.set(item);
+                return;
+            }
+        }
     }
 }

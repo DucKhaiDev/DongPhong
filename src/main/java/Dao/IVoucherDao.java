@@ -1,6 +1,5 @@
 package Dao;
 
-import Entity.Cart;
 import Entity.Voucher;
 
 import java.util.List;

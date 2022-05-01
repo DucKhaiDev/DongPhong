@@ -1,8 +1,8 @@
 package Controller.Admin;
 
 import Controller.Client.Checkout;
+import Controller.WaitingController;
 import Entity.*;
-import Services.deploy.*;
 import Tools.SendEmail;
 import Util.Constant;
 import jakarta.servlet.ServletException;
@@ -10,6 +10,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -20,6 +21,9 @@ import java.util.List;
 public class AddOrder extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<Voucher> availableVoucher = Constant.Service.VOUCHER_SERVICE.getAvailableVoucher(((Cart) request.getSession().getAttribute("cart")).getCartId());
+        availableVoucher.add(Constant.Service.VOUCHER_SERVICE.getVoucher("CHAOMUNG"));
+        request.setAttribute("availableVoucher", availableVoucher);
         request.getRequestDispatcher(Constant.Path.ADMIN_ADD_ORDER).forward(request, response);
     }
 
@@ -31,7 +35,7 @@ public class AddOrder extends HttpServlet {
         order.setOrderShipping(new BigDecimal(request.getParameter("shipping")));
         order.setOrderTax(new BigDecimal(request.getParameter("vat")));
         order.setOrderTotal(new BigDecimal(request.getParameter("total")));
-        User user = Constant.Service.USER_SERVICE.getUser(request.getParameter("orderAccount"));
+        User user = (User) request.getSession().getAttribute("account");
         order.setUser(user);
         order.setRecipientName(request.getParameter("fullName"));
         String recAddress = request.getParameter("recaddress") + ", "
@@ -346,11 +350,24 @@ public class AddOrder extends HttpServlet {
         //Create new cart
         Checkout.createNewCart(request, user);
 
-        //Remove attributes
-        String[] attributes = {"orderAccount", "ord_recipientName", "ord_recipientPhone", "selectedProvince", "selectedDistrict", "selectedWard", "recaddress", "shippingCost", "voucher"};
-        for (String attribute : attributes) {
-            request.getSession().removeAttribute(attribute);
+        HttpSession session = request.getSession();
+        //Minus voucher's quantity
+        Voucher usingVoucher = (Voucher) session.getAttribute("usingVoucher");
+        if (usingVoucher != null) {
+            if (usingVoucher.getVoucherId().equals("CHAOMUNG")) {
+                //If member
+                if (user.getRole()) {
+                    user.setVc_chaomung(true);
+                    Constant.Service.USER_SERVICE.edit(user);
+                }
+            } else {
+                usingVoucher.setQuantity(usingVoucher.getQuantity() - 1);
+                Constant.Service.VOUCHER_SERVICE.edit(usingVoucher);
+            }
         }
+
+        //Remove attributes
+        WaitingController.removeAllAttr(session);
 
         response.sendRedirect(request.getContextPath() + "/admin/order/detail?id=" + (Constant.Service.ORDER_SERVICE.getNewestOrder()).getOrderId());
     }

@@ -338,7 +338,7 @@
         });
         if (<% out.print(session.getAttribute("message") != null); %>) {
             stepper.to(3);
-            <% session.removeAttribute("message"); %>
+            <c:remove var="message" scope="session"/>
         }
     });
 </script>

@@ -10,7 +10,9 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.util.Enumeration;
 import java.util.List;
+import java.util.TreeSet;
 
 @WebServlet(name = "WaitingController", value = "/waiting")
 public class WaitingController extends HttpServlet {
@@ -74,5 +76,28 @@ public class WaitingController extends HttpServlet {
         }
 
         return displayName;
+    }
+
+    public static void removeAllAttr(HttpSession session) {
+        TreeSet<String> attributes = new TreeSet<>();
+        Enumeration<String> enumeration = session.getAttributeNames();
+
+        while (enumeration.hasMoreElements()) {
+            attributes.add(enumeration.nextElement());
+        }
+
+        for (String attribute : attributes) {
+            switch (attribute) {
+                case "account":
+                case "displayName":
+                case "wishList":
+                case "wlItems":
+                case "cart":
+                case "cartItems":
+                    continue;
+            }
+
+            session.removeAttribute(attribute);
+        }
     }
 }

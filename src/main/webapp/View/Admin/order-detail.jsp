@@ -30,15 +30,6 @@
     <link href="${pageContext.request.contextPath}/assets/css/custom.css" rel="stylesheet"/>
     <!-- GOOGLE FONTS-->
     <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
-    <%---------------------------------------------------------------------------------------------%>
-    <style>
-        p.exist-id {
-            font-size: 14px;
-            line-height: 20px;
-            padding-top: 14px;
-            color: #FF0000;
-        }
-    </style>
 </head>
 <body>
 <div id="wrapper">
@@ -97,19 +88,34 @@
                         <div class="bor20 p-3 mb-3">
                             <div class="mb-3 text-center text-uppercase">Phương thức vận chuyển</div>
                             <div class="row d-flex mb-2 align-items-center">
-                                <div class="col-md-2"><label for="ip1" class="labels text-nowrap">Đơn vị vận chuyển:&nbsp;</label>
-                                </div>
-                                <div class="col-md-2"><input id="ip1" type="text"
-                                                             class="form-control w-fit-content text-center"
+                                <div class="col-md-2"><label for="ip1" class="labels text-nowrap">Đơn vị vận chuyển:&nbsp;</label></div>
+                                <div class="col-md-6"><input id="ip1" type="text" class="form-control text-center"
                                                              value="Đông Phong" readonly></div>
                             </div>
                             <div class="row d-flex mb-3 align-items-center">
-                                <div class="col-md-2"><label for="ip2" class="labels text-nowrap">Thời gian giao hàng dự
-                                    kiến:&nbsp;</label></div>
-                                <div class="col-md-2"><input id="ip2" type="text"
-                                                             class="form-control w-fit-content text-center"
-                                                             value="${order.recipientDate} <c:if test="${order.recipientDate == null}">Chưa xác định</c:if>"
-                                                             readonly></div>
+                                <c:choose>
+                                    <c:when test="${order.recipientDate == null}">
+                                        <div class="col-md-2"><label for="ip2" class="labels text-nowrap">Thời gian giao hàng dự kiến:&nbsp;</label>
+                                        </div>
+                                        <div class="col-md-6"><input id="ip2" type="text" class="form-control text-center"
+                                                                     value="5 - 7 ngày làm việc (Trừ ngày nghỉ và lễ tết)"
+                                                                     readonly></div>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <div class="col-md-2"><label for="ip3" class="labels text-nowrap">Giao hàng thành công:&nbsp;</label>
+                                        </div>
+                                        <div class="col-md-6"><input id="ip3" type="text" class="form-control text-center"
+                                                                     value="<%
+                                                                        SimpleDateFormat formatDow = new SimpleDateFormat("EEEE", Constant.LC_VIETNAM);
+                                                                        SimpleDateFormat formatDam = new SimpleDateFormat("dd MMMM", Constant.LC_VIETNAM);
+                                                                        SimpleDateFormat formatYear = new SimpleDateFormat("yyyy");
+                                                                        assert order != null;
+                                                                        java.sql.Date recDate = order.getRecipientDate();
+                                                                        out.print(formatDow.format(recDate) + ", ngày " + formatDam.format(recDate) + " năm " + formatYear.format(recDate));
+                                                                     %>"
+                                                                     readonly></div>
+                                    </c:otherwise>
+                                </c:choose>
                             </div>
                         </div>
                         <div class="bor20 p-3 mb-3">
@@ -234,147 +240,6 @@
 <script src="${pageContext.request.contextPath}/assets/js/jquery.metisMenu.js"></script>
 <!-- CUSTOM SCRIPTS -->
 <script src="${pageContext.request.contextPath}/assets/js/custom.js"></script>
-<!--===============================================================================================-->
-<!-- CK EDITOR -->
-<script src="${pageContext.request.contextPath}/assets/js/ckeditor/ckeditor.js"></script>
-<script type="text/javascript">
-    CKEDITOR.replace('brandDescription');
-</script>
-<!--===============================================================================================-->
-<script src="${pageContext.request.contextPath}/assets/js/axios.min.js"></script>
-<!--===============================================================================================-->
-<script>
-    $(function () {
-        const provinces = document.getElementById("province");
-        const districts = document.getElementById("district");
-        const wards = document.getElementById("ward");
-
-        const Parameter = {
-            url: '${pageContext.request.contextPath}/assets/js/vietnam.json',
-            method: 'GET',
-            responseType: 'application/json'
-        };
-
-        const promise = axios(Parameter);
-        promise.then(function (result) {
-            renderProvince(result.data);
-        });
-
-        function renderProvince(data) {
-            for (const x of data) {
-                provinces.options[provinces.options.length] = new Option(x.Name, x.Id);
-            }
-
-            provinces.onchange = function () {
-                districts.length = 1;
-                wards.length = 1;
-                if (this.value !== "") {
-                    const result = data.filter(n => n.Id === this.value);
-
-                    for (const k of result[0].Districts) {
-                        districts.options[districts.options.length] = new Option(k.Name, k.Id);
-                    }
-                }
-            };
-
-            districts.onchange = function () {
-                wards.length = 1;
-                const dataProvince = data.filter((n) => n.Id === provinces.value);
-                if (this.value !== "") {
-                    const dataWards = dataProvince[0].Districts.filter(n => n.Id === this.value)[0].Wards;
-
-                    for (const w of dataWards) {
-                        wards.options[wards.options.length] = new Option(w.Name, w.Id);
-                    }
-                }
-            };
-
-            const selectedProvince = $('#selectedProvince').prop('value');
-            const selectedDistrict = $('#selectedDistrict').prop('value');
-            const selectedWard = $('#selectedWard').prop('value');
-            if (selectedProvince !== '') {
-                $('#province').val(selectedProvince).trigger('change');
-            }
-            if (selectedDistrict !== '') {
-                $('#district').val(selectedDistrict).trigger('change');
-            }
-            if (selectedWard !== '') {
-                $('#ward').val(selectedWard);
-            }
-        }
-    });
-</script>
-<!--===============================================================================================-->
-<script>
-    $(function () {
-        $('#btn-add-product').on('click', function () {
-            const component =
-                "<form action=\"<c:url value="/cart/add"/>\" method=\"get\">"
-                + "\n" +
-                "<input type=\"hidden\" name=\"forwardTo\" value=\"${pageContext.request.contextPath}/admin/order/add\">"
-                + "\n" +
-                "<input class=\"ip-username\" type=\"hidden\" name=\"username\">"
-                + "\n" +
-                "<input class=\"ip-recipientName\" type=\"hidden\" name=\"recipientName\">"
-                + "\n" +
-                "<input class=\"ip-recipientPhone\" type=\"hidden\" name=\"recipientPhone\">"
-                + "\n\n" +
-                "<div class=\"d-flex mb-3\">"
-                + "\n" +
-                "<label class=\"labels d-flex align-items-center mb-0 wsp-nowrap\">Mã sản phẩm:</label>&nbsp;<input type=\"text\" class=\"form-control w-20 mr-4\" name=\"id\">"
-                + "\n" +
-                "<label class=\"labels d-flex align-items-center mb-0 wsp-nowrap\">Số lượng:</label>&nbsp;<input type=\"number\" class=\"form-control w-20 mr-5\" min=\"1\" value=\"1\" name=\"num-product\">"
-                + "\n" +
-                "<button class=\"w-10 btn btn-primary ct-button mr-3 btn-add\" type=\"button\">Thêm</button>"
-                + "\n" +
-                "</div>"
-                + "\n" +
-                "</form>"
-            $('.outer').append(component);
-            $('.btn-add').each(function () {
-                $(this).on('click', function () {
-                    //username
-                    $(this).parent().prev().prev().prev().val($('#username').prop('value'));
-                    //recipientName
-                    $(this).parent().prev().prev().val($('#recipientName').prop('value'));
-                    //recipientPhone
-                    $(this).parent().prev().val($('#recipientPhone').prop('value'));
-                    //form
-                    $(this).parent().parent().submit();
-                });
-            });
-        });
-    });
-</script>
-<!--===============================================================================================-->
-<script>
-    $(function () {
-        $('#btn-add-order').on('click', function () {
-            $('input[name="fullName"]').val($('#recipientName').prop('value'));
-            $('input[name="phone"]').val($('#recipientPhone').prop('value'));
-            //recaddress
-            $(this).prev().prev().prev().prev().prev().prev().val($('#recaddress').prop('value'));
-            //selectedWard
-            $(this).prev().prev().prev().prev().prev().val($('#ward option:selected').text());
-            //selectedDistrict
-            $(this).prev().prev().prev().prev().val($('#district option:selected').text());
-            //selectedProvince
-            $(this).prev().prev().prev().val($('#province option:selected').text());
-            //orderAccount
-            $(this).prev().prev().val($('#username').prop('value'));
-        });
-    });
-</script>
-<!--===============================================================================================-->
-<script>
-    $(function () {
-        $('#btn-calculate-shipping').on('click', function () {
-            $('input[name="signOrderAccount"]').val($('#username'));
-            $('input[name="signRecipientName"]').val($('#recipientName'));
-            $('input[name="signRecipientPhone"]').val($('#recipientPhone'));
-        });
-    });
-</script>
 
 </body>
 </html>

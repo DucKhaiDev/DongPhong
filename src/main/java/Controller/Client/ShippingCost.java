@@ -20,7 +20,6 @@ public class ShippingCost extends HttpServlet {
         String district = request.getParameter("district");
         String ward = request.getParameter("ward");
         String recaddress = request.getParameter("recaddress");
-        String orderAccount = request.getParameter("signOrderAccount");
         String ord_recipientName = request.getParameter("signRecipientName");
         String ord_recipientPhone = request.getParameter("signRecipientPhone");
         String recipientAddress = request.getParameter("recaddress") + ", "
@@ -34,7 +33,6 @@ public class ShippingCost extends HttpServlet {
         session.setAttribute("selectedDistrict", district);
         session.setAttribute("selectedWard", ward);
         session.setAttribute("recaddress", recaddress);
-        session.setAttribute("orderAccount", orderAccount);
         session.setAttribute("ord_recipientName", ord_recipientName);
         session.setAttribute("ord_recipientPhone", ord_recipientPhone);
         session.setAttribute("recipientAddress", recipientAddress);

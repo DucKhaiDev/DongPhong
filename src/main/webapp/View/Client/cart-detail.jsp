@@ -314,7 +314,7 @@
                         <div class="size-209 p-t-1">
                             <span class="mtext-110 cl2">
                                 <%
-                                    BigDecimal discount = new BigDecimal(0);
+                                    BigDecimal discount = BigDecimal.valueOf(0);
                                     Voucher voucher = (Voucher) session.getAttribute("voucher");
                                     Timestamp currentTime = new Timestamp(System.currentTimeMillis());
                                     if (voucher != null) {

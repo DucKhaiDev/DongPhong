@@ -4,6 +4,9 @@
 <%@ page import="java.math.RoundingMode" %>
 <%@ page import="Entity.Product" %>
 <%@ page import="Util.Constant" %>
+<%@ page import="Entity.Voucher" %>
+<%@ page import="java.sql.Timestamp" %>
+<%@ page import="java.util.List" %>
 <%--
   User: duckhaidev
   Date: 4/14/2022
@@ -28,15 +31,6 @@
     <link href="${pageContext.request.contextPath}/assets/css/custom.css" rel="stylesheet"/>
     <!-- GOOGLE FONTS-->
     <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
-    <%---------------------------------------------------------------------------------------------%>
-    <style>
-        p.exist-id {
-            font-size: 14px;
-            line-height: 20px;
-            padding-top: 14px;
-            color: #FF0000;
-        }
-    </style>
 </head>
 <body>
 <div id="wrapper">
@@ -68,8 +62,7 @@
                                                            value="${order.orderId}" readonly></div>
                                     <div class="col-md-6 mb-3"><label for="username" class="labels">Người
                                         đặt</label><input id="username" type="text" class="form-control" name="username"
-                                                          value="${sessionScope.orderAccount == null ? order.user.username : sessionScope.orderAccount}"
-                                                          required></div>
+                                                          value="${order.user.username}" disabled></div>
                                     <div class="col-md-6 mb-3"><label for="recipientName" class="labels">Người
                                         nhận</label><input id="recipientName" type="text" class="form-control"
                                                            name="recipientName"
@@ -100,8 +93,8 @@
                                                     </thead>
                                                     <tbody>
                                                     <c:set var="number" value="0"/>
-                                                    <jsp:useBean id="cartItems" scope="request" type="java.util.List"/>
-                                                    <c:forEach items="${cartItems}" var="item">
+                                                    <jsp:useBean id="ord_items" scope="request" type="java.util.List"/>
+                                                    <c:forEach items="${ord_items}" var="item">
                                                         <tr class="odd">
                                                             <td>${number = number + 1}</td>
                                                             <td>${item.product.productId}</td>
@@ -116,7 +109,7 @@
                                                             <td>${item.quantity}</td>
                                                             <td><% out.print(Constant.NF_DONG.format(item.getValue())); %></td>
                                                             <td>
-                                                                <a href="<c:url value="/admin/order/edit/removeItem?id=${item.cartItemId}&forwardTo=${pageContext.request.contextPath}/admin/order/edit?id=${order.orderId}"/>"
+                                                                <a href="<c:url value="/admin/order/edit/remove-product?id=${item.cartItemId}&orderId=${order.orderId}"/>"
                                                                    class="text-center">Xóa</a>
                                                             </td>
                                                         </tr>
@@ -135,28 +128,70 @@
                                     <form action="<c:url value="/apply-voucher"/>" method="get" class="col-md-12 mb-3">
                                         <label for="voucher" class="labels">Mã giảm giá</label>
                                         <div class="d-flex justify-content-center mb-3">
-                                            <input id="voucher" name="voucher" class="w-50 form-control"
+                                            <!--Sign url-->
+                                            <input type="hidden" name="forwardTo" value="/admin/order/edit?id=${order.orderId}">
+                                            <input type="hidden" name="signRecipientName">
+                                            <input type="hidden" name="signRecipientPhone">
+
+                                            <input id="voucher" name="voucher" class="w-50 form-control" value="${sessionScope.voucher.voucherId}"
                                                    placeholder="Mã giảm giá">
-                                            <button class="btn btn-primary ct-button ml-5 w-20"
+                                            <button id="btn-apply-voucher" class="btn btn-primary ct-button ml-5 w-20"
                                                     type="submit"><i class="fa fa-check"></i>&nbsp;Áp dụng
                                             </button>
                                         </div>
-                                        <a type="button" id="show-voucher" class="m-t-12 text-underline cursor-pointer" style="color: rgba(0, 0, 255, 0.69);">Xem các mã giảm giá khả dụng với người đặt trên</a>
+                                        <a type="button" id="show-voucher" class="m-t-12 text-underline cursor-pointer" style="color: rgba(0, 0, 255, 0.69);">Xem các mã giảm giá khả dụng</a>
                                     </form>
+                                    <!-- Voucher modal -->
+                                    <div id="voucher-modal" class="voucher-modal" style="width: 101%;">
+                                        <div class="voucher-modal-content" style="margin-left: 33%;">
+                                            <div class="row" style="padding-right: 15px;"><span class="voucher-modal-close w-100 text-end">&times;</span></div>
+                                            <div class="table-responsive">
+                                                <table class="table table-striped table-bordered table-hover">
+                                                    <thead>
+                                                    <tr>
+                                                        <th class="text-center">Mã giảm giá</th>
+                                                        <th class="text-center">Giá trị</th>
+                                                        <th class="text-center">Giảm tối đa</th>
+                                                        <th></th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <jsp:useBean id="availableVoucher" scope="request" type="java.util.List"/>
+                                                    <c:forEach items="${availableVoucher}" var="voucher">
+                                                        <tr>
+                                                            <% Voucher voucher = (Voucher) pageContext.getAttribute("voucher"); %>
+                                                            <td class="col-md-3 text-center">${voucher.voucherId}</td>
+                                                            <td class="col-md-3 text-center"><% out.print(String.format("%.0f", voucher.getDiscount() * 100) + " %"); %></td>
+                                                            <td class="col-md-3 text-center"><% out.print(Constant.NF_DONG.format(voucher.getDiscountMax())); %></td>
+                                                            <td class="col-md-3 text-center">
+                                                                <div class="copy-tooltip">
+                                                                    <button class="btn btn-primary ct-button btn-copy">
+                                                                        <span class="copy-tooltiptext w-fit-content">Sao chép vào Clipboard</span>
+                                                                        COPY
+                                                                    </button>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </c:forEach>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <hr class="w-100 mt-3 mb-3">
                                     <form action="<c:url value="/shipping-cost"/>" method="get" class="col-md-12 mb-3">
                                         <label class="labels">Địa chỉ giao hàng</label>
                                         <div class="row mb-4">
                                             <div class="col-md-12">
-                                                <input type="text" class="form-control"
-                                                       value="${sessionScope.recipientAddress}"
-                                                       placeholder="Địa chỉ giao hàng">
+                                                <input id="rec-address-main" type="text" class="form-control"
+                                                       value="${sessionScope.recipientAddress == null ? requestScope.recipientAddress : sessionScope.recipientAddress}"
+                                                       placeholder="Địa chỉ giao hàng" disabled>
                                             </div>
                                         </div>
-                                        <label class="labels">Cập nhật địa chỉ giao hàng</label>
+                                        <label class="labels mt-3">Cập nhật địa chỉ giao hàng</label>
                                         <div class="row">
                                             <!--Sign url-->
-                                            <input type="hidden" name="forwardTo" value="/admin/order/add">
+                                            <input type="hidden" name="forwardTo" value="/admin/order/edit?id=${order.orderId}">
                                             <input type="hidden" name="signOrderAccount">
                                             <input type="hidden" name="signRecipientName">
                                             <input type="hidden" name="signRecipientPhone">
@@ -212,16 +247,33 @@
                                             tiền:&nbsp;<input type="text" class="form-control w-fit-content text-center"
                                                               value="<%
                                             BigDecimal subTotal = new BigDecimal(0);
-                                            for (Object item : cartItems) {
+                                            for (Object item : ord_items) {
                                                 subTotal = subTotal.add(((CartItem) item).getValue());
                                             }
                                             out.print(Constant.NF_DONG.format(subTotal));
+
+                                            BigDecimal discount = order.getOrderDiscount();
+                                            Voucher voucher = (Voucher) session.getAttribute("voucher");
+                                            Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+                                            if (voucher != null) {
+                                                if ((voucher.getVoucherId().equals("CHAOMUNG"))
+                                                        || (voucher.getFromDate().compareTo(currentTime) < 1
+                                                                && currentTime.compareTo(voucher.getToDate()) < 1
+                                                                && voucher.getMinProduct() < ((List<?>) session.getAttribute("cartItems")).size()
+                                                                && voucher.getMinValue().compareTo(subTotal) < 1
+                                                                && voucher.getQuantity() > 0)) {
+                                                        discount = BigDecimal.valueOf(voucher.getDiscount());
+                                                        discount = subTotal.multiply(discount);
+                                                        discount = discount.compareTo(voucher.getDiscountMax()) > 0 ? voucher.getDiscountMax() : discount;
+                                                        session.setAttribute("usingVoucher", voucher);
+                                                }
+                                            }
                                         %>"></label>
                                     </div>
                                     <div class="col-md-12 mb-2">
                                         <label class="labels d-flex text-nowrap align-items-center float-right">Giảm
                                             giá:&nbsp;<input type="text" class="form-control w-fit-content text-center"
-                                                             value="<% out.print(Constant.NF_DONG.format(0)); %>"></label>
+                                                             value="<% out.print(Constant.NF_DONG.format(discount)); %>"></label>
                                     </div>
                                     <div class="col-md-12 mb-2">
                                         <label class="labels d-flex text-nowrap align-items-center float-right">Thuế
@@ -235,7 +287,7 @@
                                         <label class="labels d-flex text-nowrap align-items-center float-right">Phí vận
                                             chuyển:&nbsp;<input type="text"
                                                                 class="form-control w-fit-content text-center" value="<%
-                                            BigDecimal shippingCost = new BigDecimal(0);
+                                            BigDecimal shippingCost = order.getOrderShipping();
                                             if (session.getAttribute("shippingCost") != null) {
                                                 shippingCost = (BigDecimal) session.getAttribute("shippingCost");
                                             }
@@ -247,7 +299,7 @@
                                             tiền:</strong>&nbsp;<input type="text"
                                                                        class="form-control w-fit-content text-center product-price"
                                                                        value="<%
-                                            BigDecimal total = (subTotal.add(shippingCost)).add(vat);
+                                            BigDecimal total = ((subTotal.subtract(discount)).add(shippingCost)).add(vat);
                                             out.print(Constant.NF_DONG.format(total));
                                         %>"></label>
                                     </div>
@@ -259,7 +311,7 @@
                                         <label class="ml-5"><input type="radio" name="orderStatus" value="3" class="mr-3">Đã giao hàng</label>
                                         <label class="ml-5"><input type="radio" name="orderStatus" value="4" class="mr-3">Đã hủy</label>
                                         <label for="recipient-date" class="labels mt-2 ml-5">Ngày giao hàng</label>
-                                        <input id="recipient-date" type="date" name="recipientDate" class="form-control w-25 ml-5" disabled>
+                                        <input id="recipient-date" type="date" name="recipientDate" value="${order.recipientDate}" class="form-control w-25 ml-5" disabled>
                                     </div>
                                 </div>
                                 <div class="row ml-1 mr-1">
@@ -267,18 +319,18 @@
                                         <form action="<c:url value="/admin/order/edit"/>" method="post">
                                             <input type="hidden" value="${order.orderId}" name="orderId">
                                             <input type="hidden" value="<% out.print(subTotal); %>" name="subTotal">
-                                            <input type="hidden" value="0" name="discount">
+                                            <input type="hidden" value="<% out.print(discount); %>" name="discount">
                                             <input type="hidden" value="<% out.print(shippingCost); %>" name="shipping">
                                             <input type="hidden" value="<% out.print(vat); %>" name="vat">
                                             <input type="hidden" value="<% out.print(total); %>" name="total">
+                                            <input type="hidden" name="status">
+                                            <input type="hidden" name="recipientDate">
                                             <input type="hidden" name="fullName">
                                             <input type="hidden" name="phone">
-                                            <input type="hidden" value="${sessionScope.recipientAddress}"
-                                                   name="recipientAddress">
-                                            <input type="hidden" name="orderAccount">
-                                            <input type="hidden" value="4" name="paymentMethod">
+                                            <input type="hidden" name="recipientAddress">
+                                            <input type="hidden" value="${order.payment.paymentId}" name="paymentMethod">
 
-                                            <button id="btn-add-order" class="btn btn-primary ct-button" type="submit">
+                                            <button id="btn-add-order" class="btn btn-primary ct-button" type="button">
                                                 <i class="fa fa-check"></i>&nbsp;Đồng ý
                                             </button>
                                         </form>
@@ -385,11 +437,11 @@
     $(function () {
         $('#btn-add-product').on('click', function () {
             const component =
-                "<form action=\"<c:url value="/cart/add"/>\" method=\"get\">"
+                "<form action=\"<c:url value="/admin/order/edit/add-product"/>\" method=\"get\">"
                 + "\n" +
-                "<input type=\"hidden\" name=\"forwardTo\" value=\"${pageContext.request.contextPath}/admin/order/add\">"
+                "<input type=\"hidden\" name=\"forwardTo\" value=\"${pageContext.request.contextPath}/admin/order/edit?id=${order.orderId}\">"
                 + "\n" +
-                "<input class=\"ip-username\" type=\"hidden\" name=\"username\">"
+                "<input type=\"hidden\" name=\"cartId\" value=\"${order.cart.cartId}\">"
                 + "\n" +
                 "<input class=\"ip-recipientName\" type=\"hidden\" name=\"recipientName\">"
                 + "\n" +
@@ -409,8 +461,6 @@
             $('.outer').append(component);
             $('.btn-add').each(function () {
                 $(this).on('click', function () {
-                    //username
-                    $(this).parent().prev().prev().prev().val($('#username').prop('value'));
                     //recipientName
                     $(this).parent().prev().prev().val($('#recipientName').prop('value'));
                     //recipientPhone
@@ -425,29 +475,9 @@
 <!--===============================================================================================-->
 <script>
     $(function () {
-        $('#btn-add-order').on('click', function () {
-            $('input[name="fullName"]').val($('#recipientName').prop('value'));
-            $('input[name="phone"]').val($('#recipientPhone').prop('value'));
-            //recaddress
-            $(this).prev().prev().prev().prev().prev().prev().val($('#recaddress').prop('value'));
-            //selectedWard
-            $(this).prev().prev().prev().prev().prev().val($('#ward option:selected').text());
-            //selectedDistrict
-            $(this).prev().prev().prev().prev().val($('#district option:selected').text());
-            //selectedProvince
-            $(this).prev().prev().prev().val($('#province option:selected').text());
-            //orderAccount
-            $(this).prev().prev().val($('#username').prop('value'));
-        });
-    });
-</script>
-<!--===============================================================================================-->
-<script>
-    $(function () {
-        $('#btn-calculate-shipping').on('click', function () {
-            $('input[name="signOrderAccount"]').val($('#username'));
-            $('input[name="signRecipientName"]').val($('#recipientName'));
-            $('input[name="signRecipientPhone"]').val($('#recipientPhone'));
+        $('#btn-apply-voucher').on('click', function () {
+            $(this).prev().prev().prev().val($('#recipientName').prop('value'));
+            $(this).prev().prev().val($('#recipientPhone').prop('value'));
         });
     });
 </script>
@@ -468,6 +498,141 @@
                 recipientDate.prop('disabled', false);
             } else {
                 recipientDate.prop('disabled', true);
+            }
+        });
+    });
+</script>
+<!--===============================================================================================-->
+<script>
+    $(function () {
+        const voucherModal = $('#voucher-modal');
+
+        $('#show-voucher').on('click', function () {
+            voucherModal.css("display", "block");
+        });
+
+        $('.voucher-modal-close').on('click', function () {
+            voucherModal.css("display", "none");
+        });
+
+        $(window).on('click', function (e) {
+            if (e.target.id === 'voucher-modal') {
+                voucherModal.css("display", "none");
+            }
+        });
+    });
+</script>
+<!--===============================================================================================-->
+<script>
+    $(function () {
+        $('.btn-copy').each(function () {
+            $(this).on('click', function () {
+                const copyText = $(this).parent().parent().prev().prev().prev().html();
+                navigator.clipboard.writeText(copyText);
+                $(this).children().html('Đã sao chép ' + copyText + '!');
+            });
+
+            $(this).mouseout(function () {
+                $(this).children().html('Sao chép vào Clipboard');
+            })
+        });
+    });
+</script>
+<!--===============================================================================================-->
+<script src="${pageContext.request.contextPath}/assets/vendor/sweetalert/sweetalert.min.js"></script>
+<script>
+    $(function () {
+        const message = '${sessionScope.invalid}';
+        if (message !== '') {
+            swal({
+                text: '${sessionScope.invalid}',
+                icon: 'warning'
+            }).then(function () {
+                <c:remove var="invalid" scope="session"/>
+            });
+        }
+    });
+</script>
+<!--===============================================================================================-->
+<script>
+    $(function () {
+        let pv = '0', dt = '0', wd = '0', rd = 0;
+
+        $('#btn-calculate-shipping').on('click', function () {
+            $('input[name="signRecipientName"]').val($('#recipientName').prop('value'));
+            $('input[name="signRecipientPhone"]').val($('#recipientPhone').prop('value'));
+
+            pv = $('#province option:selected');
+            dt = $('#district option:selected');
+            wd = $('#ward option:selected');
+            rd = $('#recaddress').val().trim().length;
+
+            $('input[name="selectedProvince"]').val(pv.text());
+            $('input[name="selectedDistrict"]').val(dt.text());
+            $('input[name="selectedWard"]').val(wd.text());
+
+            if (pv.prop('value') === '0' || dt.prop('value') === '0' || wd.prop('value') === '0' || rd === 0) {
+                swal({
+                    text: 'Vui lòng chọn địa chỉ giao hàng!',
+                    icon: 'warning'
+                });
+            } else {
+                $('#shipping-cost').submit();
+            }
+        });
+
+        $('#btn-add-order').on('click', function () {
+            const prv = $('#province option:selected');
+            const dst = $('#district option:selected');
+            const wrd = $('#ward option:selected');
+            const radd = $('#recaddress');
+
+            pv = prv.prop('value');
+            dt = dst.prop('value');
+            wd = wrd.prop('value');
+            rd = radd.val().trim().length;
+
+            const recipientName = $('#recipientName').prop('value');
+            const recipientPhone = $('#recipientPhone').prop('value');
+            const status = $('input[name="orderStatus"]:checked').prop('value');
+            const recDate = $('#recipient-date').prop('value');
+
+            $('input[name="fullName"]').val(recipientName);
+            $('input[name="phone"]').val(recipientPhone);
+            //status
+            $(this).prev().prev().prev().prev().prev().prev().val(status);
+            //recipientDate
+            $(this).prev().prev().prev().prev().prev().val(recDate);
+            //recipientAddress
+            $(this).prev().prev().val($('#rec-address-main').prop('value'));
+
+            let allowSubmit = true;
+
+            if (recipientName === '' || recipientPhone === '') {
+                swal({
+                    text: 'Vui lòng điền tên và số điện thoại người nhận!',
+                    icon: 'warning'
+                });
+
+                allowSubmit = false;
+            } else if ($('#dataTables-example tr').length < 2) {
+                swal({
+                    text: 'Lỗi: Không có sản phẩm.',
+                    icon: 'warning'
+                });
+
+                allowSubmit = false;
+            } else if (status === '3' && recDate === '') {
+                swal({
+                    text: 'Vui lòng chọn ngày giao hàng đối với đơn hàng đã hoàn thành.',
+                    icon: 'warning'
+                });
+
+                allowSubmit = false;
+            }
+
+            if (allowSubmit) {
+                $(this).parent().submit();
             }
         });
     });

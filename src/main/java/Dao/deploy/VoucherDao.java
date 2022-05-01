@@ -19,7 +19,9 @@ public class VoucherDao implements IVoucherDao {
         PreparedStatement ps = null;
 
         try {
-            ps = conn.prepareStatement("INSERT INTO [VOUCHER](VCR_ID, MIN_PRO, MIN_VAL, DISCOUNT, DISC_MAX, QUANTITY, FROM_DATE, TO_DATE) " +
+            ps = conn.prepareStatement("INSERT INTO [VOUCHER](" +
+                    "VCR_ID, MIN_PRO, MIN_VAL, DISCOUNT, DISC_MAX, QUANTITY, FROM_DATE, TO_DATE" +
+                    ") " +
                     "VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
             ps.setString(1, voucher.getVoucherId());
             ps.setInt(2, voucher.getMinProduct());

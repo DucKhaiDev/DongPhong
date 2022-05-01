@@ -4,6 +4,7 @@
     <option name="state">
       <map>
         <entry key="file://$PROJECT_DIR$/src/main/webapp/View/Admin/add-brand.jsp" value="file://$PROJECT_DIR$/src/main/webapp/View/Admin" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/View/Admin/add-order.jsp" value="file://$PROJECT_DIR$/src/main/webapp/View/Admin" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/View/Admin/add-product.jsp" value="file://$PROJECT_DIR$/src/main/webapp/View/Admin" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/View/Admin/edit-product.jsp" value="file://$PROJECT_DIR$/src/main/webapp/View/Admin" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/View/Admin/edit-user.jsp" value="file://$PROJECT_DIR$/src/main/webapp/View/Admin" />
