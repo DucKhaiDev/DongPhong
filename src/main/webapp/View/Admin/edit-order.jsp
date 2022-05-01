@@ -129,22 +129,26 @@
                                         <label for="voucher" class="labels">Mã giảm giá</label>
                                         <div class="d-flex justify-content-center mb-3">
                                             <!--Sign url-->
-                                            <input type="hidden" name="forwardTo" value="/admin/order/edit?id=${order.orderId}">
+                                            <input type="hidden" name="forwardTo"
+                                                   value="/admin/order/edit?id=${order.orderId}">
                                             <input type="hidden" name="signRecipientName">
                                             <input type="hidden" name="signRecipientPhone">
 
-                                            <input id="voucher" name="voucher" class="w-50 form-control" value="${sessionScope.voucher.voucherId}"
+                                            <input id="voucher" name="voucher" class="w-50 form-control"
+                                                   value="${sessionScope.voucher.voucherId}"
                                                    placeholder="Mã giảm giá">
                                             <button id="btn-apply-voucher" class="btn btn-primary ct-button ml-5 w-20"
                                                     type="submit"><i class="fa fa-check"></i>&nbsp;Áp dụng
                                             </button>
                                         </div>
-                                        <a type="button" id="show-voucher" class="m-t-12 text-underline cursor-pointer" style="color: rgba(0, 0, 255, 0.69);">Xem các mã giảm giá khả dụng</a>
+                                        <a type="button" id="show-voucher" class="m-t-12 text-underline cursor-pointer"
+                                           style="color: rgba(0, 0, 255, 0.69);">Xem các mã giảm giá khả dụng</a>
                                     </form>
                                     <!-- Voucher modal -->
                                     <div id="voucher-modal" class="voucher-modal" style="width: 101%;">
                                         <div class="voucher-modal-content" style="margin-left: 33%;">
-                                            <div class="row" style="padding-right: 15px;"><span class="voucher-modal-close w-100 text-end">&times;</span></div>
+                                            <div class="row" style="padding-right: 15px;"><span
+                                                    class="voucher-modal-close w-100 text-end">&times;</span></div>
                                             <div class="table-responsive">
                                                 <table class="table table-striped table-bordered table-hover">
                                                     <thead>
@@ -156,7 +160,8 @@
                                                     </tr>
                                                     </thead>
                                                     <tbody>
-                                                    <jsp:useBean id="availableVoucher" scope="request" type="java.util.List"/>
+                                                    <jsp:useBean id="availableVoucher" scope="request"
+                                                                 type="java.util.List"/>
                                                     <c:forEach items="${availableVoucher}" var="voucher">
                                                         <tr>
                                                             <% Voucher voucher = (Voucher) pageContext.getAttribute("voucher"); %>
@@ -191,7 +196,8 @@
                                         <label class="labels mt-3">Cập nhật địa chỉ giao hàng</label>
                                         <div class="row">
                                             <!--Sign url-->
-                                            <input type="hidden" name="forwardTo" value="/admin/order/edit?id=${order.orderId}">
+                                            <input type="hidden" name="forwardTo"
+                                                   value="/admin/order/edit?id=${order.orderId}">
                                             <input type="hidden" name="signOrderAccount">
                                             <input type="hidden" name="signRecipientName">
                                             <input type="hidden" name="signRecipientPhone">
@@ -306,12 +312,17 @@
                                     <hr class="w-100 mt-3 mb-3">
                                     <div class="col-md-12 mb-2 d-flex flex-column">
                                         <label class="labels mb-2">Trạng thái đơn hàng</label>
-                                        <label class="ml-5"><input type="radio" name="orderStatus" value="1" class="mr-3" checked>Chưa xử lý</label>
-                                        <label class="ml-5"><input type="radio" name="orderStatus" value="2" class="mr-3">Đang vận chuyển</label>
-                                        <label class="ml-5"><input type="radio" name="orderStatus" value="3" class="mr-3">Đã giao hàng</label>
-                                        <label class="ml-5"><input type="radio" name="orderStatus" value="4" class="mr-3">Đã hủy</label>
+                                        <label class="ml-5"><input type="radio" name="orderStatus" value="1"
+                                                                   class="mr-3" checked>Chưa xử lý</label>
+                                        <label class="ml-5"><input type="radio" name="orderStatus" value="2"
+                                                                   class="mr-3">Đang vận chuyển</label>
+                                        <label class="ml-5"><input type="radio" name="orderStatus" value="3"
+                                                                   class="mr-3">Đã giao hàng</label>
+                                        <label class="ml-5"><input type="radio" name="orderStatus" value="4"
+                                                                   class="mr-3">Đã hủy</label>
                                         <label for="recipient-date" class="labels mt-2 ml-5">Ngày giao hàng</label>
-                                        <input id="recipient-date" type="date" name="recipientDate" value="${order.recipientDate}" class="form-control w-25 ml-5" disabled>
+                                        <input id="recipient-date" type="date" name="recipientDate"
+                                               value="${order.recipientDate}" class="form-control w-25 ml-5" disabled>
                                     </div>
                                 </div>
                                 <div class="row ml-1 mr-1">
@@ -328,7 +339,8 @@
                                             <input type="hidden" name="fullName">
                                             <input type="hidden" name="phone">
                                             <input type="hidden" name="recipientAddress">
-                                            <input type="hidden" value="${order.payment.paymentId}" name="paymentMethod">
+                                            <input type="hidden" value="${order.payment.paymentId}"
+                                                   name="paymentMethod">
 
                                             <button id="btn-add-order" class="btn btn-primary ct-button" type="button">
                                                 <i class="fa fa-check"></i>&nbsp;Đồng ý

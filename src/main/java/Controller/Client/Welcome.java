@@ -1,6 +1,7 @@
 package Controller.Client;
 
-import Entity.*;
+import Entity.ProImage;
+import Entity.User;
 import Tools.ReleaseMemory;
 import Util.Constant;
 import jakarta.servlet.ServletContext;

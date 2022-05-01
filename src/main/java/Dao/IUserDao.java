@@ -1,7 +1,6 @@
 package Dao;
 
 import Entity.User;
-import Tools.Pair;
 
 import java.util.List;
 

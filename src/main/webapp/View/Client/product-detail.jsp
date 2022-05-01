@@ -441,7 +441,8 @@
                                                 </c:choose>
                                                 <div class="row p-b-25">
                                                     <div class="col-12 p-b-5">
-                                                        <label class="stext-102 cl3" for="review">Bình luận của bạn</label>
+                                                        <label class="stext-102 cl3" for="review">Bình luận của
+                                                            bạn</label>
                                                         <textarea class="size-110 bor8 stext-102 cl2 p-lr-20 p-tb-10"
                                                                   id="review" name="review"></textarea>
                                                     </div>
@@ -630,7 +631,8 @@
 
                             <div class="col-md-6 col-lg-5 p-b-30">
                                 <div class="p-r-50 p-t-5 p-lr-0-lg">
-                                    <a href="${pageContext.request.contextPath}/products/product-detail?id=${relatedProduct.productId}" class="mtext-105 cl2 js-name-detail"><h4>${relatedProduct.productName}</h4></a>
+                                    <a href="${pageContext.request.contextPath}/products/product-detail?id=${relatedProduct.productId}"
+                                       class="mtext-105 cl2 js-name-detail"><h4>${relatedProduct.productName}</h4></a>
                                     <span class="fs-14">Mã sản phẩm: ${relatedProduct.productId}</span>
                                     <div class="m-t-14" style="height: 42%;">
                                         <%

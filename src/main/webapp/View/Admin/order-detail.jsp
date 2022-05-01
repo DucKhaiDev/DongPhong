@@ -88,23 +88,28 @@
                         <div class="bor20 p-3 mb-3">
                             <div class="mb-3 text-center text-uppercase">Phương thức vận chuyển</div>
                             <div class="row d-flex mb-2 align-items-center">
-                                <div class="col-md-2"><label for="ip1" class="labels text-nowrap">Đơn vị vận chuyển:&nbsp;</label></div>
+                                <div class="col-md-2"><label for="ip1" class="labels text-nowrap">Đơn vị vận chuyển:&nbsp;</label>
+                                </div>
                                 <div class="col-md-6"><input id="ip1" type="text" class="form-control text-center"
                                                              value="Đông Phong" readonly></div>
                             </div>
                             <div class="row d-flex mb-3 align-items-center">
                                 <c:choose>
                                     <c:when test="${order.recipientDate == null}">
-                                        <div class="col-md-2"><label for="ip2" class="labels text-nowrap">Thời gian giao hàng dự kiến:&nbsp;</label>
+                                        <div class="col-md-2"><label for="ip2" class="labels text-nowrap">Thời gian giao
+                                            hàng dự kiến:&nbsp;</label>
                                         </div>
-                                        <div class="col-md-6"><input id="ip2" type="text" class="form-control text-center"
+                                        <div class="col-md-6"><input id="ip2" type="text"
+                                                                     class="form-control text-center"
                                                                      value="5 - 7 ngày làm việc (Trừ ngày nghỉ và lễ tết)"
                                                                      readonly></div>
                                     </c:when>
                                     <c:otherwise>
-                                        <div class="col-md-2"><label for="ip3" class="labels text-nowrap">Giao hàng thành công:&nbsp;</label>
+                                        <div class="col-md-2"><label for="ip3" class="labels text-nowrap">Giao hàng
+                                            thành công:&nbsp;</label>
                                         </div>
-                                        <div class="col-md-6"><input id="ip3" type="text" class="form-control text-center"
+                                        <div class="col-md-6"><input id="ip3" type="text"
+                                                                     class="form-control text-center"
                                                                      value="<%
                                                                         SimpleDateFormat formatDow = new SimpleDateFormat("EEEE", Constant.LC_VIETNAM);
                                                                         SimpleDateFormat formatDam = new SimpleDateFormat("dd MMMM", Constant.LC_VIETNAM);
@@ -195,12 +200,14 @@
                                 <div class="col-md-12 mb-2">
                                     <label class="labels d-flex text-nowrap align-items-center float-right">Tổng tiền:&nbsp;<input
                                             type="text" class="form-control w-fit-content text-center"
-                                            value="<% out.print(Constant.NF_DONG.format(subTotal)); %>" readonly></label>
+                                            value="<% out.print(Constant.NF_DONG.format(subTotal)); %>"
+                                            readonly></label>
                                 </div>
                                 <div class="col-md-12 mb-2">
                                     <label class="labels d-flex text-nowrap align-items-center float-right">Giảm giá:&nbsp;<input
                                             type="text" class="form-control w-fit-content text-center"
-                                            value="<% out.print(Constant.NF_DONG.format(discount)); %>" readonly></label>
+                                            value="<% out.print(Constant.NF_DONG.format(discount)); %>"
+                                            readonly></label>
                                 </div>
                                 <div class="col-md-12 mb-2">
                                     <label class="labels d-flex text-nowrap align-items-center float-right">Thuế (8%):&nbsp;<input

@@ -16,6 +16,30 @@ import java.text.SimpleDateFormat;
 
 @WebServlet(name = "AddVoucher", value = "/admin/voucher/add")
 public class AddVoucher extends HttpServlet {
+    public static Timestamp setFromDate(HttpServletRequest request) throws ServletException, IOException {
+        Timestamp fromDate = new Timestamp(System.currentTimeMillis());
+
+        try {
+            fromDate = new Timestamp(new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("fromDate")).getTime());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return fromDate;
+    }
+
+    public static Timestamp setToDate(HttpServletRequest request) throws ServletException, IOException {
+        Timestamp toDate = new Timestamp(System.currentTimeMillis());
+
+        try {
+            toDate = new Timestamp(new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("toDate")).getTime());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return toDate;
+    }
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher(Constant.Path.ADMIN_ADD_VOUCHER).forward(request, response);
@@ -41,29 +65,5 @@ public class AddVoucher extends HttpServlet {
         Constant.Service.VOUCHER_SERVICE.insert(new Voucher(voucherId, minProduct, minValue, discount, discountMax, quantity, fromDate, toDate));
 
         response.sendRedirect(request.getContextPath() + "/admin/voucher");
-    }
-
-    public static Timestamp setFromDate(HttpServletRequest request) throws ServletException, IOException {
-        Timestamp fromDate = new Timestamp(System.currentTimeMillis());
-
-        try {
-            fromDate = new Timestamp(new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("fromDate")).getTime());
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        return fromDate;
-    }
-
-    public static Timestamp setToDate(HttpServletRequest request) throws ServletException, IOException {
-        Timestamp toDate = new Timestamp(System.currentTimeMillis());
-
-        try {
-            toDate = new Timestamp(new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("toDate")).getTime());
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        return toDate;
     }
 }

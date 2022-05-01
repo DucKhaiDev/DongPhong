@@ -21,6 +21,21 @@ import java.util.List;
 public class Checkout extends HttpServlet {
     private Order order;
 
+    public static void createNewCart(HttpServletRequest request, User user) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+
+        String CurrCartId = ((Cart) session.getAttribute("cart")).getCartId();
+        int curr = Integer.parseInt(CurrCartId.split("-")[1]);
+
+        String newCartId = user.getUsername() + "-" + (curr + 1);
+        Cart cart = new Cart(newCartId, user);
+        Constant.Service.CART_SERVICE.insert(cart);
+        session.setAttribute("cart", cart);
+
+        List<CartItem> cartItems = Constant.Service.CART_ITEM_SERVICE.getItemByCart(cart.getCartId());
+        session.setAttribute("cartItems", cartItems);
+    }
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String subTotal = request.getParameter("subTotal");
@@ -77,10 +92,10 @@ public class Checkout extends HttpServlet {
         }
 
         Constant.Service.ORDER_SERVICE.insert(order);
-        
+
         Order order_rv = Constant.Service.ORDER_SERVICE.getNewestOrder();
         session.setAttribute("order_rv", order_rv);
-        
+
         List<CartItem> cartItems_rv = Constant.Service.CART_ITEM_SERVICE.getItemByCart(order.getCart().getCartId());
         session.setAttribute("cartItems_rv", cartItems_rv);
 
@@ -405,21 +420,6 @@ public class Checkout extends HttpServlet {
         WaitingController.removeAllAttr(session);
 
         response.sendRedirect(request.getContextPath() + "/checkout");
-    }
-
-    public static void createNewCart(HttpServletRequest request, User user) throws ServletException, IOException {
-        HttpSession session = request.getSession();
-
-        String CurrCartId = ((Cart) session.getAttribute("cart")).getCartId();
-        int curr = Integer.parseInt(CurrCartId.split("-")[1]);
-
-        String newCartId = user.getUsername() + "-" + (curr + 1);
-        Cart cart = new Cart(newCartId, user);
-        Constant.Service.CART_SERVICE.insert(cart);
-        session.setAttribute("cart", cart);
-
-        List<CartItem> cartItems = Constant.Service.CART_ITEM_SERVICE.getItemByCart(cart.getCartId());
-        session.setAttribute("cartItems", cartItems);
     }
 
     public String listProducts(List<CartItem> cartItems) {

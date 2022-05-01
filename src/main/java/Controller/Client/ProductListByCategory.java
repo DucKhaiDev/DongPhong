@@ -14,25 +14,6 @@ import java.util.List;
 
 @WebServlet(name = "ProductListByCategory", value = "/products/category")
 public class ProductListByCategory extends HttpServlet {
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String categoryId = request.getParameter("id");
-        Category category = Constant.Service.CATEGORY_SERVICE.getCategory(categoryId);
-        request.setAttribute("category", category);
-        List<Product> products = Constant.Service.PRODUCT_SERVICE.getProductByCategory(categoryId);
-
-        //Search products
-        String keyword = request.getParameter("search");
-        if (keyword != null && !keyword.trim().isEmpty()) {
-            products = Constant.Service.PRODUCT_SERVICE.searchByNameInCategory(categoryId, keyword);
-        }
-
-        //Product page tools
-        ProductListByCategory.productPageTools(request, products);
-
-        request.getRequestDispatcher(Constant.Path.PRODUCT_LIST_BY_CATEGORY).forward(request, response);
-    }
-
     public static void productPageTools(HttpServletRequest request, List<Product> products) throws ServletException, IOException {
         String sortBy = request.getParameter("sortBy");
         if (sortBy != null) {
@@ -82,5 +63,24 @@ public class ProductListByCategory extends HttpServlet {
         }
 
         request.setAttribute("products", products);
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String categoryId = request.getParameter("id");
+        Category category = Constant.Service.CATEGORY_SERVICE.getCategory(categoryId);
+        request.setAttribute("category", category);
+        List<Product> products = Constant.Service.PRODUCT_SERVICE.getProductByCategory(categoryId);
+
+        //Search products
+        String keyword = request.getParameter("search");
+        if (keyword != null && !keyword.trim().isEmpty()) {
+            products = Constant.Service.PRODUCT_SERVICE.searchByNameInCategory(categoryId, keyword);
+        }
+
+        //Product page tools
+        ProductListByCategory.productPageTools(request, products);
+
+        request.getRequestDispatcher(Constant.Path.PRODUCT_LIST_BY_CATEGORY).forward(request, response);
     }
 }

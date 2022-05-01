@@ -80,7 +80,8 @@
         <div class="flex-w flex-sb-m p-b-36">
             <div class="flex-w flex-l-m filter-tope-group m-tb-10">
                 <div class="bread-crumb flex-w p-r-15 p-t-30 p-lr-0-lg">
-                    <a href="${pageContext.request.contextPath}/welcome" class="stext-109 cl8 hov-cl1 trans-04 font-size-15">
+                    <a href="${pageContext.request.contextPath}/welcome"
+                       class="stext-109 cl8 hov-cl1 trans-04 font-size-15">
                         Trang chủ
                         <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
                     </a>
@@ -404,7 +405,9 @@
 
                                         <div class="col-md-6 col-lg-5 p-b-30">
                                             <div class="p-r-50 p-t-5 p-lr-0-lg" style="height: 100%;">
-                                                <a href="${pageContext.request.contextPath}/products/product-detail?id=${product.productId}" class="mtext-105 cl2 js-name-detail"><h4>${product.productName}</h4></a>
+                                                <a href="${pageContext.request.contextPath}/products/product-detail?id=${product.productId}"
+                                                   class="mtext-105 cl2 js-name-detail"><h4>${product.productName}</h4>
+                                                </a>
                                                 <span class="fs-14">Mã sản phẩm: ${product.productId}</span>
                                                 <div class="m-t-14" style="height: 42%;">
                                                     <span class="fs-24 cl11">

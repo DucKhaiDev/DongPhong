@@ -1,6 +1,9 @@
 package Controller;
 
-import Entity.*;
+import Entity.Cart;
+import Entity.CartItem;
+import Entity.User;
+import Entity.WishList;
 import Util.Constant;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -16,6 +19,45 @@ import java.util.TreeSet;
 
 @WebServlet(name = "WaitingController", value = "/waiting")
 public class WaitingController extends HttpServlet {
+    public static String displayName(User user) {
+        String displayName = user.getUsername();
+        String firstName = user.getFirstName();
+        String lastName = user.getLastName();
+
+        if (lastName != null && !lastName.trim().equals("")) {
+            displayName = lastName;
+
+            if (firstName != null && !firstName.trim().equals("")) {
+                displayName += " " + firstName;
+            }
+        }
+
+        return displayName;
+    }
+
+    public static void removeAllAttr(HttpSession session) {
+        TreeSet<String> attributes = new TreeSet<>();
+        Enumeration<String> enumeration = session.getAttributeNames();
+
+        while (enumeration.hasMoreElements()) {
+            attributes.add(enumeration.nextElement());
+        }
+
+        for (String attribute : attributes) {
+            switch (attribute) {
+                case "account":
+                case "displayName":
+                case "wishList":
+                case "wlItems":
+                case "cart":
+                case "cartItems":
+                    continue;
+            }
+
+            session.removeAttribute(attribute);
+        }
+    }
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
@@ -59,45 +101,6 @@ public class WaitingController extends HttpServlet {
             }
         } else {
             response.sendRedirect(request.getContextPath() + "/login");
-        }
-    }
-
-    public static String displayName(User user) {
-        String displayName = user.getUsername();
-        String firstName = user.getFirstName();
-        String lastName = user.getLastName();
-
-        if (lastName != null && !lastName.trim().equals("")) {
-            displayName = lastName;
-
-            if (firstName != null && !firstName.trim().equals("")) {
-                displayName += " " + firstName;
-            }
-        }
-
-        return displayName;
-    }
-
-    public static void removeAllAttr(HttpSession session) {
-        TreeSet<String> attributes = new TreeSet<>();
-        Enumeration<String> enumeration = session.getAttributeNames();
-
-        while (enumeration.hasMoreElements()) {
-            attributes.add(enumeration.nextElement());
-        }
-
-        for (String attribute : attributes) {
-            switch (attribute) {
-                case "account":
-                case "displayName":
-                case "wishList":
-                case "wlItems":
-                case "cart":
-                case "cartItems":
-                    continue;
-            }
-
-            session.removeAttribute(attribute);
         }
     }
 }

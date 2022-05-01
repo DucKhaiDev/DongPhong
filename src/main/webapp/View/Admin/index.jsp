@@ -46,12 +46,20 @@
             </div>
             <!-- /. ROW  -->
             <hr/>
-            <a class="weatherwidget-io" href="https://forecast7.com/en/21d03105d83/hanoi/" data-label_1="HÀ NỘI" data-label_2="<%
+            <a class="weatherwidget-io" href="https://forecast7.com/en/21d03105d83/hanoi/" data-label_1="HÀ NỘI"
+               data-label_2="<%
                 out.print(new SimpleDateFormat("dd/MM/yyyy").format(new Date()));
-            %>" data-theme="blue-mountains" >HÀ NỘI VIETNAM</a>
+            %>" data-theme="blue-mountains">HÀ NỘI VIETNAM</a>
             <script>
-                !function(d,s,id){
-                    let js, fjs = d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
+                !function (d, s, id) {
+                    let js, fjs = d.getElementsByTagName(s)[0];
+                    if (!d.getElementById(id)) {
+                        js = d.createElement(s);
+                        js.id = id;
+                        js.src = 'https://weatherwidget.io/js/widget.min.js';
+                        fjs.parentNode.insertBefore(js, fjs);
+                    }
+                }(document, 'script', 'weatherwidget-io-js');
             </script>
             <hr>
             <div class="row">
@@ -72,7 +80,8 @@
                     <i class="fa fa-user"></i>
                 </span>
                         <div class="text-box">
-                            <p class="main-text fs-20"><% out.print(Constant.Service.USER_SERVICE.countMember()); %> Người dùng</p>
+                            <p class="main-text fs-20"><% out.print(Constant.Service.USER_SERVICE.countMember()); %>
+                                Người dùng</p>
                             <p class="text-muted">Mới</p>
                         </div>
                     </div>
@@ -83,7 +92,8 @@
                     <i class="fa fa-box-open"></i>
                 </span>
                         <div class="text-box">
-                            <p class="main-text fs-20"><% out.print(Constant.Service.PRODUCT_SERVICE.countOutOfStock()); %> Sản phẩm</p>
+                            <p class="main-text fs-20"><% out.print(Constant.Service.PRODUCT_SERVICE.countOutOfStock()); %>
+                                Sản phẩm</p>
                             <p class="text-muted">Đang hết hàng</p>
                         </div>
                     </div>
@@ -94,7 +104,8 @@
                     <i class="fa fa-file-spreadsheet"></i>
                 </span>
                         <div class="text-box">
-                            <p class="main-text fs-20"><% out.print(Constant.Service.ORDER_SERVICE.countPendingOrder()); %> Đơn hàng</p>
+                            <p class="main-text fs-20"><% out.print(Constant.Service.ORDER_SERVICE.countPendingOrder()); %>
+                                Đơn hàng</p>
                             <p class="text-muted">Đang chờ xử lý</p>
                         </div>
                     </div>
@@ -117,10 +128,22 @@
                 <div class="col-md-3 col-sm-12 col-xs-12">
                     <span>Quy Đổi (VNĐ &#8644; USD)</span>
                     <!-- Currency Converter Script - EXCHANGERATEWIDGET.COM -->
-                    <div style="width:100%;border:1px solid #2D6AB4; margin-top: 20px;"><div style="text-align:center;background-color:#2D6AB4;width:100%;font-size:13px;font-weight:bold;height:18px;padding-top:2px;"><a href="https://www.exchangeratewidget.com/" style="color:#FFFFFF;text-decoration:none;" rel="nofollow">Quy Đổi Tiền Tệ</a></div><script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/converter-usd-to-vnd.js"></script></div>
+                    <div style="width:100%;border:1px solid #2D6AB4; margin-top: 20px;">
+                        <div style="text-align:center;background-color:#2D6AB4;width:100%;font-size:13px;font-weight:bold;height:18px;padding-top:2px;">
+                            <a href="https://www.exchangeratewidget.com/" style="color:#FFFFFF;text-decoration:none;"
+                               rel="nofollow">Quy Đổi Tiền Tệ</a></div>
+                        <script type="text/javascript"
+                                src="${pageContext.request.contextPath}/assets/js/converter-usd-to-vnd.js"></script>
+                    </div>
                     <!-- End of Currency Converter Script -->
                     <!-- Currency Converter Script - EXCHANGERATEWIDGET.COM -->
-                    <div style="width:100%;border:1px solid #2D6AB4; margin-top: 20px;"><div style="text-align:center;background-color:#2D6AB4;width:100%;font-size:13px;font-weight:bold;height:18px;padding-top:2px;"><a href="https://www.exchangeratewidget.com/" style="color:#FFFFFF;text-decoration:none;" rel="nofollow">Quy Đổi Tiền Tệ</a></div><script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/converter-vnd-to-usd.js"></script></div>
+                    <div style="width:100%;border:1px solid #2D6AB4; margin-top: 20px;">
+                        <div style="text-align:center;background-color:#2D6AB4;width:100%;font-size:13px;font-weight:bold;height:18px;padding-top:2px;">
+                            <a href="https://www.exchangeratewidget.com/" style="color:#FFFFFF;text-decoration:none;"
+                               rel="nofollow">Quy Đổi Tiền Tệ</a></div>
+                        <script type="text/javascript"
+                                src="${pageContext.request.contextPath}/assets/js/converter-vnd-to-usd.js"></script>
+                    </div>
                     <!-- End of Currency Converter Script -->
                 </div>
             </div>
@@ -132,8 +155,12 @@
                         <!-- TradingView Widget BEGIN -->
                         <div class="tradingview-widget-container" style="padding-top: 16px;">
                             <div id="tradingview_79c7d"></div>
-                            <div class="tradingview-widget-copyright"><a href="https://vn.tradingview.com/symbols/NASDAQ-AAPL/" rel="noopener" target="_blank"><span class="blue-text">AAPL Biểu đồ</span> </a> bởi TradingView</div>
-                            <script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/trading-view.js"></script>
+                            <div class="tradingview-widget-copyright"><a
+                                    href="https://vn.tradingview.com/symbols/NASDAQ-AAPL/" rel="noopener"
+                                    target="_blank"><span class="blue-text">AAPL Biểu đồ</span> </a> bởi TradingView
+                            </div>
+                            <script type="text/javascript"
+                                    src="${pageContext.request.contextPath}/assets/js/trading-view.js"></script>
                             <script type="text/javascript">
                                 new TradingView.widget(
                                     {

@@ -16,7 +16,8 @@
                 <ul>
                     <c:forEach items="${applicationScope.rooms}" var="room">
                         <li class="p-b-10">
-                            <a href="${pageContext.request.contextPath}/products/room?id=${room.roomId}" class="stext-107 cl7 hov-cl1 trans-04">
+                            <a href="${pageContext.request.contextPath}/products/room?id=${room.roomId}"
+                               class="stext-107 cl7 hov-cl1 trans-04">
                                     ${room.roomName}
                             </a>
                         </li>

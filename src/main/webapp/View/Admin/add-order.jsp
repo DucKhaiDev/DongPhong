@@ -54,10 +54,11 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="row ml-1 mr-1">
-                                    <div class="col-md-6 mb-3"><label for="orderId" class="labels">Mã đơn hàng</label><input id="orderId" type="text" class="form-control"
-                                                             name="orderId"
-                                                             value="<% out.print(Constant.Service.ORDER_SERVICE.getNewestOrder().getOrderId() + 1); %>"
-                                                             readonly></div>
+                                    <div class="col-md-6 mb-3"><label for="orderId" class="labels">Mã đơn
+                                        hàng</label><input id="orderId" type="text" class="form-control"
+                                                           name="orderId"
+                                                           value="<% out.print(Constant.Service.ORDER_SERVICE.getNewestOrder().getOrderId() + 1); %>"
+                                                           readonly></div>
                                     <div class="col-md-6 mb-3"><label for="username" class="labels">Người
                                         đặt</label><input id="username" type="text" class="form-control" name="username"
                                                           value="${sessionScope.account.username}" disabled></div>
@@ -130,18 +131,21 @@
                                             <input type="hidden" name="signRecipientName">
                                             <input type="hidden" name="signRecipientPhone">
 
-                                            <input id="voucher" name="voucher" class="w-50 form-control" value="${sessionScope.voucher.voucherId}"
+                                            <input id="voucher" name="voucher" class="w-50 form-control"
+                                                   value="${sessionScope.voucher.voucherId}"
                                                    placeholder="Mã giảm giá">
                                             <button id="btn-apply-voucher" class="btn btn-primary ct-button ml-5 w-20"
                                                     type="submit"><i class="fa fa-check"></i>&nbsp;Áp dụng
                                             </button>
                                         </div>
-                                        <a type="button" id="show-voucher" class="m-t-12 text-underline cursor-pointer" style="color: rgba(0, 0, 255, 0.69);">Xem các mã giảm giá khả dụng</a>
+                                        <a type="button" id="show-voucher" class="m-t-12 text-underline cursor-pointer"
+                                           style="color: rgba(0, 0, 255, 0.69);">Xem các mã giảm giá khả dụng</a>
                                     </form>
                                     <!-- Voucher modal -->
                                     <div id="voucher-modal" class="voucher-modal" style="width: 101%;">
                                         <div class="voucher-modal-content" style="margin-left: 33%;">
-                                            <div class="row" style="padding-right: 15px;"><span class="voucher-modal-close w-100 text-end">&times;</span></div>
+                                            <div class="row" style="padding-right: 15px;"><span
+                                                    class="voucher-modal-close w-100 text-end">&times;</span></div>
                                             <div class="table-responsive">
                                                 <table class="table table-striped table-bordered table-hover">
                                                     <thead>
@@ -153,7 +157,8 @@
                                                     </tr>
                                                     </thead>
                                                     <tbody>
-                                                    <jsp:useBean id="availableVoucher" scope="request" type="java.util.List"/>
+                                                    <jsp:useBean id="availableVoucher" scope="request"
+                                                                 type="java.util.List"/>
                                                     <c:forEach items="${availableVoucher}" var="voucher">
                                                         <tr>
                                                             <% Voucher voucher = (Voucher) pageContext.getAttribute("voucher"); %>
@@ -176,7 +181,8 @@
                                         </div>
                                     </div>
                                     <hr class="w-100 mt-3 mb-3">
-                                    <form id="shipping-cost" action="<c:url value="/shipping-cost"/>" method="get" class="col-md-12 mb-3">
+                                    <form id="shipping-cost" action="<c:url value="/shipping-cost"/>" method="get"
+                                          class="col-md-12 mb-3">
                                         <label class="labels">Địa chỉ giao hàng</label>
                                         <div class="row">
                                             <!--Sign url-->

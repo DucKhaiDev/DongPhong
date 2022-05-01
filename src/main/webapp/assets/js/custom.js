@@ -255,14 +255,14 @@ $(function () {
 
 <!--===============================================================================================-->
 $(function () {
-    $('.js-addwish-b2, .js-addwish-detail').on('click', function(e){
+    $('.js-addwish-b2, .js-addwish-detail').on('click', function (e) {
         e.preventDefault();
     });
 
-    $('.js-addwish-b2').each(function(){
+    $('.js-addwish-b2').each(function () {
         const addwishB2 = $(this);
         const nameProduct = addwishB2.parent().parent().find('.js-name-b2').html();
-        addwishB2.on('click', function(){
+        addwishB2.on('click', function () {
             if ($('#checkAccount').prop('value') !== 'null') {
                 swal(nameProduct, "đã được thêm vào danh sách yêu thích!", "success").then(function () {
                     addwishB2.parent().submit();
@@ -283,7 +283,7 @@ $(function () {
         });
     });
 
-    $('.js-addwish-detail').each(function(){
+    $('.js-addwish-detail').each(function () {
         const addwishDetail = $(this);
         let nameProduct = '';
         if (addwishDetail.prop('id') !== 'btn-addwishlist-detail') {
@@ -292,7 +292,7 @@ $(function () {
             nameProduct = addwishDetail.parent().parent().parent().find('.js-name-detail').html();
         }
 
-        addwishDetail.on('click', function(){
+        addwishDetail.on('click', function () {
             if ($('#checkAccount').prop('value') !== 'null') {
                 swal(nameProduct, "đã được thêm vào danh sách yêu thích!", "success").then(function () {
                     addwishDetail.parent().submit();
@@ -315,7 +315,7 @@ $(function () {
 
     /*---------------------------------------------*/
 
-    $('.js-addcart-detail').each(function(){
+    $('.js-addcart-detail').each(function () {
         const addCartDetail = $(this);
 
         let nameProduct = '';
@@ -325,7 +325,7 @@ $(function () {
             nameProduct = addCartDetail.parent().parent().parent().parent().find('.js-name-detail').html();
         }
 
-        addCartDetail.on('click', function(){
+        addCartDetail.on('click', function () {
             if ($('#checkAccount').prop('value') !== 'null') {
                 swal(nameProduct, "đã được thêm vào giỏ hàng!", "success").then(function () {
                     addCartDetail.parent().submit();
@@ -529,9 +529,9 @@ $(function () {
 
 <!--===============================================================================================-->
 $(function () {
-   $('.btn-add-item').on('click', function () {
-      $('.input-add-item').attr('value', location.href);
-   });
+    $('.btn-add-item').on('click', function () {
+        $('.input-add-item').attr('value', location.href);
+    });
 });
 
 <!--===============================================================================================-->
@@ -561,7 +561,7 @@ $(function () {
 
 <!--===============================================================================================-->
 $(function () {
-   $('.btn-remove-item').on('click', function () {
-      $('.input-remove-item').attr('value', location.href);
-   });
+    $('.btn-remove-item').on('click', function () {
+        $('.input-remove-item').attr('value', location.href);
+    });
 });

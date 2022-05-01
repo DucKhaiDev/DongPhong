@@ -388,7 +388,9 @@
 
                                         <div class="col-md-6 col-lg-5 p-b-30">
                                             <div class="p-r-50 p-t-5 p-lr-0-lg" style="height: 100%;">
-                                                <a href="${pageContext.request.contextPath}/products/product-detail?id=${product.productId}" class="mtext-105 cl2 js-name-detail"><h4>${product.productName}</h4></a>
+                                                <a href="${pageContext.request.contextPath}/products/product-detail?id=${product.productId}"
+                                                   class="mtext-105 cl2 js-name-detail"><h4>${product.productName}</h4>
+                                                </a>
                                                 <span class="fs-14">Mã sản phẩm: ${product.productId}</span>
                                                 <div class="m-t-14" style="height: 42%;">
                                                     <span class="fs-24 cl11">

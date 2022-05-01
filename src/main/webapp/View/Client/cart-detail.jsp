@@ -176,7 +176,9 @@
                                     class="flex-c-m stext-101 cl2 size-118 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5">
                                 Áp dụng
                             </button>
-                            <button type="button" id="show-voucher" class="m-t-12 text-underline" style="color: rgba(0, 0, 255, 0.69);">Xem các mã giảm giá khả dụng với bạn</button>
+                            <button type="button" id="show-voucher" class="m-t-12 text-underline"
+                                    style="color: rgba(0, 0, 255, 0.69);">Xem các mã giảm giá khả dụng với bạn
+                            </button>
                         </form>
                     </div>
                 </div>
@@ -185,7 +187,8 @@
             <!-- Voucher modal -->
             <div id="voucher-modal" class="voucher-modal">
                 <div class="voucher-modal-content">
-                    <div class="row" style="padding-right: 15px;"><span class="voucher-modal-close w-100 text-end">&times;</span></div>
+                    <div class="row" style="padding-right: 15px;"><span class="voucher-modal-close w-100 text-end">&times;</span>
+                    </div>
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered table-hover">
                             <thead>
@@ -321,14 +324,14 @@
                                         User user = (User) session.getAttribute("account");
                                         if ((voucher.getVoucherId().equals("CHAOMUNG") && !user.getVc_chaomung())
                                                 || (voucher.getFromDate().compareTo(currentTime) < 1
-                                                        && currentTime.compareTo(voucher.getToDate()) < 1
-                                                        && voucher.getMinProduct() < ((List<?>) session.getAttribute("cartItems")).size()
-                                                        && voucher.getMinValue().compareTo(subTotal) < 1
-                                                        && voucher.getQuantity() > 0)) {
-                                                discount = BigDecimal.valueOf(voucher.getDiscount());
-                                                discount = subTotal.multiply(discount);
-                                                discount = discount.compareTo(voucher.getDiscountMax()) > 0 ? voucher.getDiscountMax() : discount;
-                                                session.setAttribute("usingVoucher", voucher);
+                                                && currentTime.compareTo(voucher.getToDate()) < 1
+                                                && voucher.getMinProduct() < ((List<?>) session.getAttribute("cartItems")).size()
+                                                && voucher.getMinValue().compareTo(subTotal) < 1
+                                                && voucher.getQuantity() > 0)) {
+                                            discount = BigDecimal.valueOf(voucher.getDiscount());
+                                            discount = subTotal.multiply(discount);
+                                            discount = discount.compareTo(voucher.getDiscountMax()) > 0 ? voucher.getDiscountMax() : discount;
+                                            session.setAttribute("usingVoucher", voucher);
                                         }
                                     }
                                     out.print(Constant.NF_DONG.format(discount));

@@ -20,8 +20,8 @@ import java.util.List;
 
 @WebServlet(name = "EditOrder", value = "/admin/order/edit")
 public class EditOrder extends HttpServlet {
-    private Order order;
     public static List<CartItem> ord_items = new ArrayList<>();
+    private Order order;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
