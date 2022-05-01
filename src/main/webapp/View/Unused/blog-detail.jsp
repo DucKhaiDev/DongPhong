@@ -108,7 +108,7 @@
                         </li>
 
                         <li>
-                            <a href="about.jsp">About</a>
+                            <a href="../Client/about.jsp">About</a>
                         </li>
 
                         <li>
@@ -225,7 +225,7 @@
             </li>
 
             <li>
-                <a href="about.jsp">About</a>
+                <a href="../Client/about.jsp">About</a>
             </li>
 
             <li>

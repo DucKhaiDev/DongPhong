@@ -69,7 +69,7 @@
                     <i class="fa fa-envelope"></i>
                 </span>
                         <div class="text-box">
-                            <p class="main-text fs-20">120 Tin nhắn</p>
+                            <p class="main-text fs-20">${requestScope.countNewMessage} Tin nhắn</p>
                             <p class="text-muted">Mới</p>
                         </div>
                     </div>

@@ -15,7 +15,7 @@
             <a href="#" class="flex-c-m trans-04 p-lr-25">Hướng Dẫn</a>
             <a href="#" class="flex-c-m trans-04 p-lr-25">Chính Sách Bảo Hành</a>
             <a href="#" class="flex-c-m trans-04 p-lr-25">Tin Tức</a>
-            <a href="#" class="flex-c-m trans-04 p-lr-25">Liên Hệ</a>
+            <a href="${pageContext.request.contextPath}/contact" class="flex-c-m trans-04 p-lr-25">Liên Hệ</a>
         </div>
 
         <c:choose>

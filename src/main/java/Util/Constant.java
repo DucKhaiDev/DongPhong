@@ -30,6 +30,7 @@ public class Constant {
         public static final WishListService WISH_LIST_SERVICE = new WishListService();
         public static final WLItemService WL_ITEM_SERVICE = new WLItemService();
         public static final TempLinkService TEMP_LINK_SERVICE = new TempLinkService();
+        public static final MessageService MESSAGE_SERVICE = new MessageService();
     }
 
     public static class Path {
@@ -81,5 +82,6 @@ public class Constant {
         public static final String FGP_CHANGE_PASSWORD = "/View/Client/fgp-change-password.jsp";
         public static final String MY_ORDER = "/View/Client/my-order.jsp";
         public static final String MY_ORDER_DETAIL = "/View/Client/my-order-detail.jsp";
+        public static final String CONTACT = "/View/Client/contact.jsp";
     }
 }

@@ -211,7 +211,7 @@
             </li>
 
             <li>
-                <a href="../Unused/about.jsp">About</a>
+                <a href="about.jsp">About</a>
             </li>
 
             <li>

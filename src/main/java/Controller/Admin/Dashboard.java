@@ -25,6 +25,7 @@ public class Dashboard extends HttpServlet {
         request.setAttribute("fromYear", fromYear);
         request.setAttribute("toYear", toYear);
         request.setAttribute("reports", Constant.Service.REPORT_SERVICE.getReportYears(fromYear, toYear));
+        request.setAttribute("countNewMessage", Constant.Service.MESSAGE_SERVICE.countNewMessage(from));
         request.setAttribute("countNewComment", Constant.Service.REVIEW_SERVICE.countNewComment(from));
         request.setAttribute("topMembers", Constant.Service.USER_SERVICE.getTopMember());
         request.getRequestDispatcher(Constant.Path.DASHBOARD).forward(request, response);
