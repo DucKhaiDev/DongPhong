@@ -370,6 +370,18 @@ $(function () {
         });
     }
 
+    if (!params.has('category')) {
+        $('input[name="category"]').prop('checked', false).each(function () {
+            sessionStorage.removeItem(this.id);
+        });
+    }
+
+    if (!params.has('room')) {
+        $('input[name="room"]').prop('checked', false).each(function () {
+            sessionStorage.removeItem(this.id);
+        });
+    }
+
     if (!params.has('price')) {
         $('input[name="price"]').prop('checked', false).each(function () {
             sessionStorage.removeItem(this.id);
@@ -391,6 +403,8 @@ $(function () {
         $('.filter-input').prop('checked', false);
         sessionStorage.clear();
         params.delete('brand');
+        params.delete('category');
+        params.delete('room');
         params.delete('price');
         params.delete('rating');
         window.location = url.href;
@@ -407,6 +421,22 @@ $(function () {
         });
         if (tempArray.length !== 0) {
             seasoning += '&brand=' + tempArray.toString();
+            tempArray = [];
+        }
+
+        $('input[name="category"]:checked').each(function () {
+            tempArray.push($(this).val());
+        });
+        if (tempArray.length !== 0) {
+            seasoning += '&category=' + tempArray.toString();
+            tempArray = [];
+        }
+
+        $('input[name="room"]:checked').each(function () {
+            tempArray.push($(this).val());
+        });
+        if (tempArray.length !== 0) {
+            seasoning += '&room=' + tempArray.toString();
             tempArray = [];
         }
 
@@ -430,6 +460,8 @@ $(function () {
         const url = new URL(location.href);
         const params = url.searchParams;
         params.delete('brand');
+        params.delete('category');
+        params.delete('room');
         params.delete('price');
         params.delete('rating');
         window.location = url.href + seasoning;

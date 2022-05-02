@@ -52,4 +52,10 @@ public interface IProductDao {
     List<Product> getSortSaleAsc();
 
     List<Product> getSortSaleDesc();
+
+    int countPrd_RoomCategory(String roomId, String categoryId);
+
+    int countPrd_KeywordRoom(String keyword, String roomId);
+
+    int countPrd_KeywordCategory(String keyword, String categoryId);
 }

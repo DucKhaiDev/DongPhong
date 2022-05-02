@@ -300,4 +300,43 @@ public class ProductService implements IProductService {
     public int countOutOfStock() {
         return productDao.countOutOfStock();
     }
+
+    @Override
+    public int countPrd_RoomCategory(String roomId, String categoryId) {
+        return productDao.countPrd_RoomCategory(roomId, categoryId);
+    }
+
+    @Override
+    public List<Product> filterProductByCategory(List<Product> products, String categories) {
+        String[] category = categories.split(",");
+        Iterator<Product> iterator = products.iterator();
+
+        while (iterator.hasNext()) {
+            Product product = iterator.next();
+            boolean exist = false;
+
+            for (String c : category) {
+                if (product.getCategory().getCategoryId().equals(c)) {
+                    exist = true;
+                    break;
+                }
+            }
+
+            if (!exist) {
+                iterator.remove();
+            }
+        }
+
+        return products;
+    }
+
+    @Override
+    public int countPrd_KeywordRoom(String keyword, String roomId) {
+        return productDao.countPrd_KeywordRoom(keyword, roomId);
+    }
+
+    @Override
+    public int countPrd_KeywordCategory(String keyword, String categoryId) {
+        return productDao.countPrd_KeywordCategory(keyword, categoryId);
+    }
 }

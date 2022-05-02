@@ -64,6 +64,12 @@ public class ProductListByCategory extends HttpServlet {
             products = Constant.Service.PRODUCT_SERVICE.filterProductByBrand(products, brands);
         }
 
+        //Filter category
+        String categories = request.getParameter("category");
+        if (categories != null) {
+            products = Constant.Service.PRODUCT_SERVICE.filterProductByCategory(products, categories);
+        }
+
         //Filter prices
         String price = request.getParameter("price");
         if (price != null) {

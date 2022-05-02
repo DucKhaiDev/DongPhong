@@ -19,6 +19,9 @@ public class SearchProduct extends HttpServlet {
         request.setAttribute("keyword", keyword);
         List<Product> products = Constant.Service.PRODUCT_SERVICE.searchByName(keyword);
 
+        request.setAttribute("rooms", Constant.Service.ROOM_SERVICE.getAll());
+        request.setAttribute("categories", Constant.Service.CATEGORY_SERVICE.getAll());
+
         //Search products
         String key = request.getParameter("search");
         if (key != null && !key.trim().isEmpty()) {

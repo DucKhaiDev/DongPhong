@@ -164,8 +164,9 @@ public class ProductDao implements IProductDao {
         ResultSet rs = null;
 
         try {
-            ps = conn.prepareStatement("SELECT * FROM [PRODUCT] WHERE PRO_NAME LIKE ? ORDER BY PRO_ID ASC");
-            ps.setString(1, "%" + productName + "%");
+            ps = conn.prepareStatement("SELECT * FROM [PRODUCT] WHERE (PRO_ID LIKE ? OR PRO_NAME LIKE ?) ORDER BY PRO_ID ASC");
+            ps.setString(1, productName);
+            ps.setString(2, "%" + productName + "%");
             rs = ps.executeQuery();
             while (rs.next()) {
                 Product product = new Product();
@@ -202,9 +203,10 @@ public class ProductDao implements IProductDao {
         ResultSet rs = null;
 
         try {
-            ps = conn.prepareStatement("SELECT * FROM [PRODUCT] WHERE CAT_ID = ? AND PRO_NAME LIKE ? ORDER BY PRO_ID ASC");
+            ps = conn.prepareStatement("SELECT * FROM [PRODUCT] WHERE CAT_ID = ? AND (PRO_ID LIKE ? OR PRO_NAME LIKE ?) ORDER BY PRO_ID ASC");
             ps.setString(1, categoryId);
-            ps.setString(2, "%" + productName + "%");
+            ps.setString(2, productName);
+            ps.setString(3, "%" + productName + "%");
             rs = ps.executeQuery();
             while (rs.next()) {
                 Product product = new Product();
@@ -461,9 +463,10 @@ public class ProductDao implements IProductDao {
                     "FROM dbo.PRODUCT " +
                     "JOIN dbo.CATEGORY ON CATEGORY.CAT_ID = PRODUCT.CAT_ID " +
                     "JOIN dbo.ROOM ON ROOM.ROOM_ID = CATEGORY.ROOM_ID " +
-                    "WHERE ROOM.ROOM_ID = ? AND PRO_NAME LIKE ? ORDER BY PRO_ID ASC");
+                    "WHERE ROOM.ROOM_ID = ? AND (PRO_ID LIKE ? OR PRO_NAME LIKE ?) ORDER BY PRO_ID ASC");
             ps.setString(1, roomId);
             ps.setString(2, name);
+            ps.setString(3, name);
             rs = ps.executeQuery();
             while (rs.next()) {
                 Product product = new Product();
@@ -499,9 +502,11 @@ public class ProductDao implements IProductDao {
         ResultSet rs = null;
 
         try {
-            ps = conn.prepareStatement("SELECT COUNT(*) FROM dbo.PRODUCT WHERE PRO_NAME LIKE ? AND BRA_ID = ?");
+            ps = conn.prepareStatement("SELECT COUNT(*) FROM dbo.PRODUCT " +
+                    "WHERE (PRO_ID LIKE ? OR PRO_NAME LIKE ?) AND BRA_ID = ?");
             ps.setString(1, keyword);
-            ps.setString(2, brandId);
+            ps.setString(2, "%" + keyword + "%");
+            ps.setString(3, brandId);
             rs = ps.executeQuery();
             if (rs.next()) {
                 return rs.getInt(1);
@@ -704,5 +709,86 @@ public class ProductDao implements IProductDao {
         }
 
         return products;
+    }
+
+    @Override
+    public int countPrd_RoomCategory(String roomId, String categoryId) {
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            ps = conn.prepareStatement("SELECT COUNT(*) " +
+                    "FROM dbo.PRODUCT " +
+                    "JOIN dbo.CATEGORY ON CATEGORY.CAT_ID = PRODUCT.CAT_ID " +
+                    "JOIN dbo.ROOM ON ROOM.ROOM_ID = CATEGORY.ROOM_ID " +
+                    "JOIN dbo.BRAND ON BRAND.BRA_ID = PRODUCT.BRA_ID " +
+                    "WHERE dbo.ROOM.ROOM_ID = ? AND dbo.CATEGORY.CAT_ID = ?");
+            ps.setString(1, roomId);
+            ps.setString(2, categoryId);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnect.closeAll(rs, ps, conn);
+        }
+
+        return 0;
+    }
+
+    @Override
+    public int countPrd_KeywordRoom(String keyword, String roomId) {
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            ps = conn.prepareStatement("SELECT COUNT(*) " +
+                    "FROM dbo.PRODUCT " +
+                    "JOIN dbo.CATEGORY ON CATEGORY.CAT_ID = PRODUCT.CAT_ID " +
+                    "JOIN dbo.ROOM ON ROOM.ROOM_ID = CATEGORY.ROOM_ID " +
+                    "WHERE (PRO_ID LIKE ? OR PRO_NAME LIKE ?) AND ROOM.ROOM_ID = ?");
+            ps.setString(1, keyword);
+            ps.setString(2, "%" + keyword + "%");
+            ps.setString(3, roomId);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnect.closeAll(rs, ps, conn);
+        }
+
+        return 0;
+    }
+
+    @Override
+    public int countPrd_KeywordCategory(String keyword, String categoryId) {
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            ps = conn.prepareStatement("SELECT COUNT(*) FROM dbo.PRODUCT " +
+                    "WHERE (PRO_ID LIKE ? OR PRO_NAME LIKE ?) AND CAT_ID = ?");
+            ps.setString(1, keyword);
+            ps.setString(2, "%" + keyword + "%");
+            ps.setString(3, categoryId);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnect.closeAll(rs, ps, conn);
+        }
+
+        return 0;
     }
 }

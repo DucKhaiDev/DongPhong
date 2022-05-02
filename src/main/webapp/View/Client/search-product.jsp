@@ -109,14 +109,38 @@
                         </li>
 
                         <li class="p-b-6">
-                            <a id="filter-link-priceAsc" href="#" class="filter-link stext-106 trans-04">
-                                Giá: Thấp đến Cao
+                            <a id="filter-link-priceDesc" href="#" class="filter-link stext-106 trans-04">
+                                Giá: Giảm dần
                             </a>
                         </li>
 
                         <li class="p-b-6">
-                            <a id="filter-link-priceDesc" href="#" class="filter-link stext-106 trans-04">
-                                Giá: Cao đến Thấp
+                            <a id="filter-link-priceAsc" href="#" class="filter-link stext-106 trans-04">
+                                Giá: Tăng dần
+                            </a>
+                        </li>
+
+                        <li class="p-b-6">
+                            <a id="filter-link-rateDesc" href="#" class="filter-link stext-106 trans-04">
+                                Đánh giá: Giảm dần
+                            </a>
+                        </li>
+
+                        <li class="p-b-6">
+                            <a id="filter-link-rateAsc" href="#" class="filter-link stext-106 trans-04">
+                                Đánh giá: Tăng dần
+                            </a>
+                        </li>
+
+                        <li class="p-b-6">
+                            <a id="filter-link-saleDesc" href="#" class="filter-link stext-106 trans-04">
+                                Bán chạy: Giảm dần
+                            </a>
+                        </li>
+
+                        <li class="p-b-6">
+                            <a id="filter-link-saleAsc" href="#" class="filter-link stext-106 trans-04">
+                                Bán chạy: Tăng dần
                             </a>
                         </li>
                     </ul>
@@ -178,12 +202,76 @@
                         <div class="panel-heading">
                             <h2 class="panel-title">
                                 <a href="#collapse-2" data-toggle="collapse" data-parent="#accordion-2">
-                                    Khoảng Giá
+                                    Loại Phòng
                                     <i class="fa fa-angle-down float-right"></i>
                                 </a>
                             </h2>
                         </div>
                         <div id="collapse-2" class="panel-collapse collapse in show">
+                            <div class="panel-body">
+                                <ul class="list-unstyled checkbox-list">
+                                    <c:forEach items="${requestScope.rooms}" var="room">
+                                        <li><label class="checkbox">
+                                            <input id="${room.roomId}" class="filter-input" type="checkbox"
+                                                   name="room" value="${room.roomId}"><i></i>${room.roomName}
+                                            <small>
+                                                <a>(<%
+                                                    String keyword = request.getAttribute("keyword").toString();
+                                                    String roomId = ((Room) pageContext.getAttribute("room")).getRoomId();
+                                                    out.print(Constant.Service.PRODUCT_SERVICE.countPrd_KeywordRoom(keyword, roomId));
+                                                %>)</a>
+                                            </small>
+                                        </label></li>
+                                    </c:forEach>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="accordion-3" class="panel-group">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h2 class="panel-title">
+                                <a href="#collapse-3" data-toggle="collapse" data-parent="#accordion-3">
+                                    Loại Sản Phẩm
+                                    <i class="fa fa-angle-down float-right"></i>
+                                </a>
+                            </h2>
+                        </div>
+                        <div id="collapse-3" class="panel-collapse collapse in show">
+                            <div class="panel-body">
+                                <ul class="list-unstyled checkbox-list">
+                                    <c:forEach items="${requestScope.categories}" var="category">
+                                        <li><label class="checkbox">
+                                            <input id="${category.categoryId}" class="filter-input" type="checkbox"
+                                                   name="category" value="${category.categoryId}"><i></i>${category.categoryName}
+                                            <small>
+                                                <a>(<%
+                                                    String keyword = request.getAttribute("keyword").toString();
+                                                    String categoryId = ((Category) pageContext.getAttribute("category")).getCategoryId();
+                                                    out.print(Constant.Service.PRODUCT_SERVICE.countPrd_KeywordCategory(keyword, categoryId));
+                                                %>)</a>
+                                            </small>
+                                        </label></li>
+                                    </c:forEach>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="accordion-4" class="panel-group">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h2 class="panel-title">
+                                <a href="#collapse-4" data-toggle="collapse" data-parent="#accordion-4">
+                                    Khoảng Giá
+                                    <i class="fa fa-angle-down float-right"></i>
+                                </a>
+                            </h2>
+                        </div>
+                        <div id="collapse-4" class="panel-collapse collapse in show">
                             <div class="panel-body">
                                 <ul class="list-unstyled checkbox-list">
                                     <li><label class="checkbox">
@@ -216,17 +304,17 @@
                     </div>
                 </div>
 
-                <div id="accordion-3" class="panel-group">
+                <div id="accordion-5" class="panel-group">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h2 class="panel-title">
-                                <a href="#collapse-3" data-toggle="collapse" data-parent="#accordion-3">
+                                <a href="#collapse-5" data-toggle="collapse" data-parent="#accordion-5">
                                     Đánh Giá
                                     <i class="fa fa-angle-down float-right"></i>
                                 </a>
                             </h2>
                         </div>
-                        <div id="collapse-3" class="panel-collapse collapse in show">
+                        <div id="collapse-5" class="panel-collapse collapse in show">
                             <div class="panel-body d-flex justify-content-center">
                                 <div class="stars-ratings stars-ratings-label">
                                     <input class="filter-input" type="radio" name="rating" id="stars-rating-5"

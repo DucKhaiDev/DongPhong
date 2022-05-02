@@ -66,4 +66,12 @@ public interface IProductService {
     int countSale(String productId);
 
     int countOutOfStock();
+
+    int countPrd_RoomCategory(String roomId, String categoryId);
+
+    List<Product> filterProductByCategory(List<Product> products, String categories);
+
+    int countPrd_KeywordRoom(String keyword, String roomId);
+
+    int countPrd_KeywordCategory(String keyword, String categoryId);
 }
