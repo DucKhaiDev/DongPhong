@@ -461,6 +461,11 @@
 <!-- Footer -->
 <jsp:include page="footer.jsp"/>
 
+<label>
+    <!--Kiểm tra đăng nhập-->
+    <input id="checkAccount" type="hidden" value="<c:if test="${sessionScope.account == null}">null</c:if>"/>
+</label>
+
 <!--===============================================================================================-->
 <script src="${pageContext.request.contextPath}/assets/vendor/jquery/jquery-3.2.1.min.js"></script>
 <!--===============================================================================================-->

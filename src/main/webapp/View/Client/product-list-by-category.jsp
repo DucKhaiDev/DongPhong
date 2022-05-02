@@ -123,15 +123,40 @@
                             </a>
                         </li>
 
+
                         <li class="p-b-6">
-                            <a id="filter-link-priceAsc" href="#" class="filter-link stext-106 trans-04">
-                                Giá: Thấp đến Cao
+                            <a id="filter-link-priceDesc" href="#" class="filter-link stext-106 trans-04">
+                                Giá: Giảm dần
                             </a>
                         </li>
 
                         <li class="p-b-6">
-                            <a id="filter-link-priceDesc" href="#" class="filter-link stext-106 trans-04">
-                                Giá: Cao đến Thấp
+                            <a id="filter-link-priceAsc" href="#" class="filter-link stext-106 trans-04">
+                                Giá: Tăng dần
+                            </a>
+                        </li>
+
+                        <li class="p-b-6">
+                            <a id="filter-link-rateDesc" href="#" class="filter-link stext-106 trans-04">
+                                Đánh giá: Giảm dần
+                            </a>
+                        </li>
+
+                        <li class="p-b-6">
+                            <a id="filter-link-rateAsc" href="#" class="filter-link stext-106 trans-04">
+                                Đánh giá: Tăng dần
+                            </a>
+                        </li>
+
+                        <li class="p-b-6">
+                            <a id="filter-link-saleDesc" href="#" class="filter-link stext-106 trans-04">
+                                Bán chạy: Giảm dần
+                            </a>
+                        </li>
+
+                        <li class="p-b-6">
+                            <a id="filter-link-saleAsc" href="#" class="filter-link stext-106 trans-04">
+                                Bán chạy: Tăng dần
                             </a>
                         </li>
                     </ul>

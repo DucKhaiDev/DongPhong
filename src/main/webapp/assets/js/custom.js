@@ -273,8 +273,7 @@ $(function () {
                     icon: 'warning'
                 }).then(function () {
                     const base_url = window.location.origin;
-                    const pathArray = window.location.pathname.split('/');
-                    location.href = base_url + '/' + pathArray[1] + '/login';
+                    location.href = base_url + '/login';
                 });
             }
 
@@ -303,8 +302,7 @@ $(function () {
                     icon: 'warning'
                 }).then(function () {
                     const base_url = window.location.origin;
-                    const pathArray = window.location.pathname.split('/');
-                    location.href = base_url + '/' + pathArray[1] + '/login';
+                    location.href = base_url + '/login';
                 });
             }
 
@@ -336,8 +334,7 @@ $(function () {
                     icon: 'warning'
                 }).then(function () {
                     const base_url = window.location.origin;
-                    const pathArray = window.location.pathname.split('/');
-                    location.href = base_url + '/' + pathArray[1] + '/login';
+                    location.href = base_url + '/login';
                 });
             }
         });
@@ -496,6 +493,10 @@ $(function () {
     const filter_link_default = $('#filter-link-default');
     const filter_link_priceAsc = $('#filter-link-priceAsc');
     const filter_link_priceDesc = $('#filter-link-priceDesc');
+    const filter_link_rateAsc = $('#filter-link-rateAsc');
+    const filter_link_rateDesc = $('#filter-link-rateDesc');
+    const filter_link_saleAsc = $('#filter-link-saleAsc');
+    const filter_link_saleDesc = $('#filter-link-saleDesc');
 
     if (pVal === null) {
         filter_link_default.addClass('filter-link-active');
@@ -503,6 +504,14 @@ $(function () {
         filter_link_priceAsc.addClass('filter-link-active');
     } else if (pVal === 'priceDesc') {
         filter_link_priceDesc.addClass('filter-link-active');
+    } else if (pVal === 'rateAsc') {
+        filter_link_rateAsc.addClass('filter-link-active');
+    } else if (pVal === 'rateDesc') {
+        filter_link_rateDesc.addClass('filter-link-active');
+    } else if (pVal === 'saleAsc') {
+        filter_link_saleAsc.addClass('filter-link-active');
+    } else if (pVal === 'saleDesc') {
+        filter_link_saleDesc.addClass('filter-link-active');
     }
 
     filter_link_default.on('click', function () {
@@ -515,6 +524,22 @@ $(function () {
 
     filter_link_priceDesc.on('click', function () {
         appendParameterSort('priceDesc');
+    });
+
+    filter_link_rateAsc.on('click', function () {
+        appendParameterSort('rateAsc');
+    });
+
+    filter_link_rateDesc.on('click', function () {
+        appendParameterSort('rateDesc');
+    });
+
+    filter_link_saleAsc.on('click', function () {
+        appendParameterSort('saleAsc');
+    });
+
+    filter_link_saleDesc.on('click', function () {
+        appendParameterSort('saleDesc');
     });
 
     function appendParameterSort(parameter) {

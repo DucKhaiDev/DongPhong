@@ -650,5 +650,59 @@ public class ProductDao implements IProductDao {
         return 0;
     }
 
+    @Override
+    public List<Product> getSortSaleAsc() {
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        List<Product> products = new ArrayList<>();
 
+        try {
+            ps = conn.prepareStatement("SELECT PRODUCT.PRO_ID " +
+                    "FROM dbo.PRODUCT " +
+                    "LEFT JOIN dbo.CARTITEM ON CARTITEM.PRO_ID = PRODUCT.PRO_ID " +
+                    "LEFT JOIN dbo.CART ON CART.CART_ID = CARTITEM.CART_ID " +
+                    "LEFT JOIN dbo.[ORDER] ON [ORDER].CART_ID = CART.CART_ID " +
+                    "GROUP BY PRODUCT.PRO_ID " +
+                    "ORDER BY SUM(QUANT) ASC, PRODUCT.PRO_ID ASC");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                products.add(Constant.Service.PRODUCT_SERVICE.getProduct(rs.getString("PRO_ID").trim()));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnect.closeAll(rs, ps, conn);
+        }
+
+        return products;
+    }
+
+    @Override
+    public List<Product> getSortSaleDesc() {
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        List<Product> products = new ArrayList<>();
+
+        try {
+            ps = conn.prepareStatement("SELECT PRODUCT.PRO_ID " +
+                    "FROM dbo.PRODUCT " +
+                    "LEFT JOIN dbo.CARTITEM ON CARTITEM.PRO_ID = PRODUCT.PRO_ID " +
+                    "LEFT JOIN dbo.CART ON CART.CART_ID = CARTITEM.CART_ID " +
+                    "LEFT JOIN dbo.[ORDER] ON [ORDER].CART_ID = CART.CART_ID " +
+                    "GROUP BY PRODUCT.PRO_ID " +
+                    "ORDER BY SUM(QUANT) DESC, PRODUCT.PRO_ID ASC");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                products.add(Constant.Service.PRODUCT_SERVICE.getProduct(rs.getString("PRO_ID").trim()));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnect.closeAll(rs, ps, conn);
+        }
+
+        return products;
+    }
 }

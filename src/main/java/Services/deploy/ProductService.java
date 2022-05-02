@@ -6,10 +6,7 @@ import Services.IProductService;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ProductService implements IProductService {
     private final ProductDao productDao = new ProductDao();
@@ -85,6 +82,76 @@ public class ProductService implements IProductService {
             BigDecimal o2price = o2.getProductPrice();
             return o1price.compareTo(o2price);
         }));
+    }
+
+    @Override
+    public void sortByRateAsc(List<Product> products) {
+        products.sort((o1, o2) -> {
+            double o1Rate = o1.getProductRate();
+            double o2Rate = o2.getProductRate();
+            return Double.compare(o1Rate, o2Rate);
+        });
+    }
+
+    @Override
+    public void sortByRateDesc(List<Product> products) {
+        products.sort(Collections.reverseOrder((o1, o2) -> {
+            double o1Rate = o1.getProductRate();
+            double o2Rate = o2.getProductRate();
+            return Double.compare(o1Rate, o2Rate);
+        }));
+    }
+
+    @Override
+    public void sortBySaleAsc(List<Product> products) {
+        List<Product> sortedProducts = productDao.getSortSaleAsc();
+
+        //remove if not exist in products
+        ListIterator<Product> litr = sortedProducts.listIterator();
+        while (litr.hasNext()) {
+            Product outer = litr.next();
+            boolean exist = false;
+
+            for (Product inner : products) {
+                if (inner.getProductId().equals(outer.getProductId())) {
+                    exist = true;
+                    break;
+                }
+            }
+
+            if (!exist) {
+                litr.remove();
+            }
+        }
+
+        products.clear();
+        products.addAll(sortedProducts);
+    }
+
+    @Override
+    public void sortBySaleDesc(List<Product> products) {
+        List<Product> sortedProducts = productDao.getSortSaleDesc();
+
+        //remove if not exist in products
+        ListIterator<Product> litr = sortedProducts.listIterator();
+        while (litr.hasNext()) {
+            Product outer = litr.next();
+            boolean exist = false;
+
+            for (Product inner : products) {
+                if (inner.getProductId().equals(outer.getProductId())) {
+                    exist = true;
+                    break;
+                }
+            }
+
+            if (!exist) {
+                litr.remove();
+            }
+        }
+
+        products.clear();
+        products.addAll(sortedProducts);
     }
 
     @Override

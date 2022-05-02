@@ -48,4 +48,8 @@ public interface IProductDao {
     int countSale(String productId);
 
     int countOutOfStock();
+
+    List<Product> getSortSaleAsc();
+
+    List<Product> getSortSaleDesc();
 }

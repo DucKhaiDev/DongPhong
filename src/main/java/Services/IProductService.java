@@ -33,6 +33,14 @@ public interface IProductService {
 
     void sortByPriceDesc(List<Product> products);
 
+    void sortByRateAsc(List<Product> products);
+
+    void sortByRateDesc(List<Product> products);
+
+    void sortBySaleAsc(List<Product> products);
+
+    void sortBySaleDesc(List<Product> products);
+
     List<Product> filterProductByBrand(List<Product> products, String brands);
 
     List<Product> filterProductByPrice(List<Product> products, String price);

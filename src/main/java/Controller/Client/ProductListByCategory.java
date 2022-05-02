@@ -17,13 +17,27 @@ public class ProductListByCategory extends HttpServlet {
     public static void productPageTools(HttpServletRequest request, List<Product> products) throws ServletException, IOException {
         String sortBy = request.getParameter("sortBy");
         if (sortBy != null) {
-            if (sortBy.equals("priceAsc")) {
-                Constant.Service.PRODUCT_SERVICE.sortByPriceAsc(products);
+            switch (sortBy) {
+                case "priceAsc":
+                    Constant.Service.PRODUCT_SERVICE.sortByPriceAsc(products);
+                    break;
+                case "priceDesc":
+                    Constant.Service.PRODUCT_SERVICE.sortByPriceDesc(products);
+                    break;
+                case "rateAsc":
+                    Constant.Service.PRODUCT_SERVICE.sortByRateAsc(products);
+                    break;
+                case "rateDesc":
+                    Constant.Service.PRODUCT_SERVICE.sortByRateDesc(products);
+                    break;
+                case "saleAsc":
+                    Constant.Service.PRODUCT_SERVICE.sortBySaleAsc(products);
+                    break;
+                case "saleDesc":
+                    Constant.Service.PRODUCT_SERVICE.sortBySaleDesc(products);
+                    break;
             }
 
-            if (sortBy.equals("priceDesc")) {
-                Constant.Service.PRODUCT_SERVICE.sortByPriceDesc(products);
-            }
         }
 
         //Pagination
@@ -57,7 +71,7 @@ public class ProductListByCategory extends HttpServlet {
         }
 
         //Filter star rating
-        String stars = request.getParameter("stars-rating");
+        String stars = request.getParameter("rating");
         if (stars != null) {
             products = Constant.Service.PRODUCT_SERVICE.filterProductByStars(products, stars);
         }
