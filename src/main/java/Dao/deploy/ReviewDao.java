@@ -109,7 +109,7 @@ public class ReviewDao implements IReviewDao {
         List<Review> reviews = new ArrayList<>();
 
         try {
-            ps = conn.prepareStatement("SELECT * FROM [REVIEW]");
+            ps = conn.prepareStatement("SELECT * FROM [REVIEW] ORDER BY REV_DATE DESC");
             rs = ps.executeQuery();
             while (rs.next()) {
                 Review review = new Review();

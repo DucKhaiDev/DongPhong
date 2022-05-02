@@ -51,7 +51,7 @@ public class MessageDao implements IMessageDao {
         ResultSet rs = null;
 
         try {
-            ps = conn.prepareStatement("SELECT * FROM dbo.[MESSAGE]");
+            ps = conn.prepareStatement("SELECT * FROM dbo.[MESSAGE] ORDER BY MSG_DATE DESC");
             rs = ps.executeQuery();
             while (rs.next()) {
                 Message message = new Message();

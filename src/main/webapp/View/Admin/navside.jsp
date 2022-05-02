@@ -63,6 +63,12 @@
                 </a>
             </li>
             <li>
+                <a href="${pageContext.request.contextPath}/admin/message">
+                    <i class="fa fa-envelope fa-3x w-25 text-center"></i>
+                    Tin Nhắn
+                </a>
+            </li>
+            <li>
                 <a href="#"><i class="fa fa-file-chart-line fa-3x w-25 text-center"></i>Báo cáo & Thống kê<span
                         class="fa arrow fa-2x"></span></a>
                 <ul class="nav nav-second-level">

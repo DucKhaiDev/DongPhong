@@ -177,7 +177,7 @@ public class OrderDao implements IOrderDao {
         List<Order> orders = new ArrayList<>();
 
         try {
-            ps = conn.prepareStatement("SELECT * FROM [ORDER]");
+            ps = conn.prepareStatement("SELECT * FROM [ORDER] ORDER BY ORD_STATUS ASC, ORD_DATE DESC");
             rs = ps.executeQuery();
             while (rs.next()) {
                 Order order = new Order();

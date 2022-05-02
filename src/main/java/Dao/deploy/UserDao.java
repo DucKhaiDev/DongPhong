@@ -151,7 +151,7 @@ public class UserDao implements IUserDao {
         ResultSet rs = null;
 
         try {
-            ps = conn.prepareStatement("SELECT * FROM [USER] ORDER BY [ROLE] ASC");
+            ps = conn.prepareStatement("SELECT * FROM [USER] ORDER BY [ROLE] ASC, USERNAME ASC");
             rs = ps.executeQuery();
             while (rs.next()) {
                 User user = new User();

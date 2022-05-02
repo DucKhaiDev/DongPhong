@@ -63,7 +63,7 @@
             </script>
             <hr>
             <div class="row">
-                <div class="col-md-3 col-sm-6 col-xs-6">
+                <a href="${pageContext.request.contextPath}/admin/message" class="col-md-3 col-sm-6 col-xs-6">
                     <div class="panel panel-back noti-box">
                 <span class="icon-box bg-color-red set-icon">
                     <i class="fa fa-envelope"></i>
@@ -73,8 +73,8 @@
                             <p class="text-muted">Mới</p>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-3 col-sm-6 col-xs-6">
+                </a>
+                <a href="${pageContext.request.contextPath}/admin/user" class="col-md-3 col-sm-6 col-xs-6">
                     <div class="panel panel-back noti-box">
                 <span class="icon-box bg-color-green set-icon">
                     <i class="fa fa-user"></i>
@@ -85,8 +85,8 @@
                             <p class="text-muted">Mới</p>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-3 col-sm-6 col-xs-6">
+                </a>
+                <a href="${pageContext.request.contextPath}/admin/product" class="col-md-3 col-sm-6 col-xs-6">
                     <div class="panel panel-back noti-box">
                 <span class="icon-box bg-color-blue set-icon">
                     <i class="fa fa-box-open"></i>
@@ -97,8 +97,8 @@
                             <p class="text-muted">Đang hết hàng</p>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-3 col-sm-6 col-xs-6">
+                </a>
+                <a href="${pageContext.request.contextPath}/admin/order" class="col-md-3 col-sm-6 col-xs-6">
                     <div class="panel panel-back noti-box">
                 <span class="icon-box bg-color-brown set-icon">
                     <i class="fa fa-file-spreadsheet"></i>
@@ -109,7 +109,7 @@
                             <p class="text-muted">Đang chờ xử lý</p>
                         </div>
                     </div>
-                </div>
+                </a>
             </div>
             <!-- /. ROW  -->
             <hr>
@@ -191,7 +191,7 @@
                         <div class="panel-body">
                             <i class="fa fa-comments-o fa-5x"></i>
                             <h4>${requestScope.countNewComment} Bình luận mới </h4>
-                            <h4>Xem tất cả bình luận </h4>
+                            <h4><a href="${pageContext.request.contextPath}/admin/review" style="color: #fff;">Xem tất cả bình luận</a></h4>
                         </div>
                         <div class="panel-footer back-footer-green">
                             <i class="fa fa-rocket fa-5x"></i>

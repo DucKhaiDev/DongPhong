@@ -120,7 +120,7 @@ public class VoucherDao implements IVoucherDao {
         List<Voucher> vouchers = new ArrayList<>();
 
         try {
-            ps = conn.prepareStatement("SELECT * FROM [VOUCHER]");
+            ps = conn.prepareStatement("SELECT * FROM [VOUCHER] ORDER BY VCR_ID ASC");
             rs = ps.executeQuery();
             while (rs.next()) {
                 Voucher voucher = new Voucher();

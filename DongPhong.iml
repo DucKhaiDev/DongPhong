@@ -28,7 +28,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" scope="PROVIDED" name="Tomcat 10.0.13" level="application_server_libraries" />
+    <orderEntry type="library" scope="PROVIDED" name="Tomcat 10.0.20" level="application_server_libraries" />
     <orderEntry type="library" name="commons.fileupload" level="project" />
     <orderEntry type="module-library">
       <library>
