@@ -83,25 +83,10 @@ public class Checkout extends HttpServlet {
         order.setPayment(payment);
         order.setOrderStatus((byte) 1);
 
-        int paymentMethod = Integer.parseInt(request.getParameter("paymentMethod"));
-        if (paymentMethod == 1) {
-            return;
-        } else if (paymentMethod == 2) {
-            return;
-        } else if (paymentMethod == 3) {
-            return;
-        } else if (paymentMethod == 4) {
-            String message = "Cảm ơn bạn đã đặt hàng. Đơn hàng của bạn đã được ghi nhận. Vui lòng thanh toán khi nhận được hàng.";
-            session.setAttribute("message", message);
-        }
-
         Constant.Service.ORDER_SERVICE.insert(order);
 
         Order order_rv = Constant.Service.ORDER_SERVICE.getNewestOrder();
-        session.setAttribute("order_rv", order_rv);
-
         List<CartItem> cartItems_rv = Constant.Service.CART_ITEM_SERVICE.getItemByCart(order.getCart().getCartId());
-        session.setAttribute("cartItems_rv", cartItems_rv);
 
         //Update product quantity
         for (CartItem item : cartItems_rv) {
@@ -422,6 +407,10 @@ public class Checkout extends HttpServlet {
 
         //Remove all attributes
         WaitingController.removeAllAttr(session);
+
+        session.setAttribute("order_rv", order_rv);
+        session.setAttribute("cartItems_rv", cartItems_rv);
+        session.setAttribute("message", "Cảm ơn bạn đã đặt hàng. Đơn hàng của bạn đã được ghi nhận. Vui lòng thanh toán khi nhận được hàng.");
 
         response.sendRedirect(request.getContextPath() + "/checkout");
     }
