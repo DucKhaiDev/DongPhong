@@ -40,24 +40,6 @@ public class ProductListByCategory extends HttpServlet {
 
         }
 
-        //Pagination
-        int totalNumber = products.size();
-        request.setAttribute("totalNumber", totalNumber);
-
-        int pageSize = 12;
-        request.setAttribute("pageSize", pageSize);
-
-        String page = request.getParameter("page");
-        int pageNumber = 1;
-
-        if (page != null) {
-            pageNumber = Integer.parseInt(page);
-        }
-
-        int fromIndex = (pageNumber - 1) * pageSize;
-        int toIndex = fromIndex + pageSize;
-        products = products.subList(fromIndex, Math.min(toIndex, totalNumber));
-
         //Filter brand
         String brands = request.getParameter("brand");
         if (brands != null) {
@@ -81,6 +63,24 @@ public class ProductListByCategory extends HttpServlet {
         if (stars != null) {
             products = Constant.Service.PRODUCT_SERVICE.filterProductByStars(products, stars);
         }
+
+        //Pagination
+        int totalNumber = products.size();
+        request.setAttribute("totalNumber", totalNumber);
+
+        int pageSize = 12;
+        request.setAttribute("pageSize", pageSize);
+
+        String page = request.getParameter("page");
+        int pageNumber = 1;
+
+        if (page != null) {
+            pageNumber = Integer.parseInt(page);
+        }
+
+        int fromIndex = (pageNumber - 1) * pageSize;
+        int toIndex = fromIndex + pageSize;
+        products = products.subList(fromIndex, Math.min(toIndex, totalNumber));
 
         request.setAttribute("products", products);
     }
