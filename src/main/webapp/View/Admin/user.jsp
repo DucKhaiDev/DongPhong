@@ -1,4 +1,4 @@
-<%@ page import="Entity.User" %><%--
+<%--
   User: duckhaidev
   Date: 2/15/2022
   Time: 5:22 PM
@@ -97,8 +97,11 @@
                                                         <a class="text-center isDisabled">Xóa</a>
                                                     </c:when>
                                                     <c:otherwise>
-                                                        <a href="<c:url value="/admin/user/delete?id=${user.userId}"/>"
-                                                           class="text-center">Xóa</a>
+                                                        <form action="<c:url value="/admin/user/delete"/>"
+                                                              method="get">
+                                                            <input type="hidden" name="id" value="${user.userId}">
+                                                            <a class="btn-delete-user text-center cursor-pointer">Xóa</a>
+                                                        </form>
                                                     </c:otherwise>
                                                 </c:choose>
                                             </td>
@@ -120,6 +123,8 @@
 <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
 <!-- JQUERY SCRIPTS -->
 <script src="${pageContext.request.contextPath}/assets/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+<script src="${pageContext.request.contextPath}/assets/vendor/bootstrap/js/popper.js"></script>
 <!-- BOOTSTRAP SCRIPTS -->
 <script src="${pageContext.request.contextPath}/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
 <!-- METISMENU SCRIPTS -->
@@ -127,6 +132,8 @@
 <!-- DATA TABLE SCRIPTS -->
 <script src="${pageContext.request.contextPath}/assets/js/dataTables/jquery.dataTables.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/dataTables/dataTables.bootstrap.js"></script>
+<!--===============================================================================================-->
+<script src="${pageContext.request.contextPath}/assets/vendor/sweetalert/sweetalert.min.js"></script>
 <script>
     $(document).ready(function () {
         $('#dataTable').dataTable({
@@ -136,6 +143,26 @@
 </script>
 <!-- CUSTOM SCRIPTS -->
 <script src="${pageContext.request.contextPath}/assets/js/custom.js"></script>
+<!--===============================================================================================-->
+<script src="${pageContext.request.contextPath}/assets/vendor/sweetalert/sweetalert.min.js"></script>
+<script>
+    $('.btn-delete-user').each(function () {
+        $(this).on('click', function () {
+            swal({
+                text: 'Xóa người dùng sẽ xóa tất cả các dữ liệu liên quan. Bạn có muốn tiếp tục?',
+                icon: 'warning',
+                buttons: {
+                    confirm: 'Có',
+                    cancel: 'Không'
+                }
+            }).then((willDelete) => {
+                if (willDelete) {
+                    $(this).parent().submit();
+                }
+            });
+        });
+    });
+</script>
 
 </body>
 </html>

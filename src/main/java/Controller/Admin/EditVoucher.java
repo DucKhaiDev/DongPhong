@@ -36,7 +36,7 @@ public class EditVoucher extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int minProduct = Integer.parseInt(request.getParameter("minProduct"));
         BigDecimal minValue = new BigDecimal(request.getParameter("minValue"));
-        double discount = Double.parseDouble(request.getParameter("discount"));
+        double discount = Double.parseDouble(request.getParameter("discount"))/100;
         BigDecimal discountMax = new BigDecimal(request.getParameter("discountMax"));
         int quantity = Integer.parseInt(request.getParameter("quantity"));
         Timestamp fromDate = AddVoucher.setFromDate(request);

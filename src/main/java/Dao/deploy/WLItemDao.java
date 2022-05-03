@@ -67,6 +67,22 @@ public class WLItemDao implements IWLItemDao {
     }
 
     @Override
+    public void deleteAll(String wishListId) {
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
+
+        try {
+            ps = conn.prepareStatement("DELETE FROM [WLITEM] WHERE WL_ID = ?");
+            ps.setString(1, wishListId);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnect.closeAll(null, ps, conn);
+        }
+    }
+
+    @Override
     public WLItem getWLItem(int wlItemId) {
         Connection conn = DBConnect.getConnection();
         PreparedStatement ps = null;

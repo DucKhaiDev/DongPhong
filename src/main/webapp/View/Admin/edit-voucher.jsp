@@ -76,8 +76,8 @@
                                             MIN</label><input id="minValue" type="number" min="0" value="${voucher.minValue}"
                                                               class="form-control" name="minValue" required="required">
                                         </div>
-                                        <div class="col-md-6 mb-3"><label for="discount" class="labels">Giảm (0 ≤ x ≤ 1)</label><input
-                                                id="discount" type="number" min="0" value="${voucher.discount}" class="form-control"
+                                        <div class="col-md-6 mb-3"><label for="discount" class="labels">Giảm (%)</label><input
+                                                id="discount" type="number" min="0" value="${voucher.discount * 100}" class="form-control"
                                                 name="discount" required="required"></div>
                                         <div class="col-md-6 mb-3"><label for="discountMax" class="labels">Giảm tối
                                             đa</label><input id="discountMax" type="number" min="0" value="${voucher.discountMax}" class="form-control"

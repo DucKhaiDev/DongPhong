@@ -13,6 +13,8 @@ public interface IReviewService {
 
     void delete(int reviewId);
 
+    void deleteAll(String userId);
+
     Review getReview(int reviewId);
 
     List<Review> getAll();

@@ -11,6 +11,8 @@ public interface IWLItemDao {
 
     void delete(int wlItemId);
 
+    void deleteAll(String wishListId);
+
     WLItem getWLItem(int wlItemId);
 
     List<WLItem> getAll();

@@ -30,7 +30,7 @@ public class CartService implements ICartService {
     }
 
     @Override
-    public Cart getCartByUser(String userId) {
+    public List<Cart> getCartByUser(String userId) {
         return cartDao.getCartByUser(userId);
     }
 

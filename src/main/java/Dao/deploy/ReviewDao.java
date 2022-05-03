@@ -73,6 +73,22 @@ public class ReviewDao implements IReviewDao {
     }
 
     @Override
+    public void deleteAll(String userId) {
+        Connection conn = DBConnect.getConnection();
+        PreparedStatement ps = null;
+
+        try {
+            ps = conn.prepareStatement("DELETE FROM [REVIEW] WHERE USER_ID = ?");
+            ps.setString(1, userId);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnect.closeAll(null, ps, conn);
+        }
+    }
+
+    @Override
     public Review getReview(int reviewId) {
         Connection conn = DBConnect.getConnection();
         PreparedStatement ps = null;

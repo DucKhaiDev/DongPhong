@@ -86,7 +86,7 @@
                                         <div class="col-md-6 mb-3"><label for="fromDate" class="labels">HSD từ
                                             ngày</label><input id="fromDate" type="date"
                                                                value="<% out.print(new SimpleDateFormat("yyyy-MM-dd").format(new Date())); %>"
-                                                               class="form-control" name="fromDate"></div>
+                                                               class="form-control" name="fromDate" readonly></div>
                                         <div class="col-md-6 mb-3"><label for="toDate" class="labels">HSD đến
                                             ngày</label><input id="toDate" type="date"
                                                                value="<% out.print(new SimpleDateFormat("yyyy-MM-dd").format(new Date())); %>"

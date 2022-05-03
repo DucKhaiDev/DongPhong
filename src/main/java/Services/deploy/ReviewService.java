@@ -27,6 +27,11 @@ public class ReviewService implements IReviewService {
     }
 
     @Override
+    public void deleteAll(String userId) {
+        reviewDao.deleteAll(userId);
+    }
+
+    @Override
     public Review getReview(int reviewId) {
         return reviewDao.getReview(reviewId);
     }

@@ -19,7 +19,7 @@ import java.text.SimpleDateFormat;
 public class AddVoucher extends HttpServlet {
     public static Timestamp setFromDate(HttpServletRequest request) throws ServletException, IOException {
         Timestamp fromDate = new Timestamp(System.currentTimeMillis());
-
+        System.out.println(request.getParameter("fromDate"));
         try {
             fromDate = new Timestamp(new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("fromDate")).getTime());
         } catch (ParseException e) {
@@ -61,7 +61,7 @@ public class AddVoucher extends HttpServlet {
 
         int minProduct = Integer.parseInt(request.getParameter("minProduct"));
         BigDecimal minValue = new BigDecimal(request.getParameter("minValue"));
-        double discount = Double.parseDouble(request.getParameter("discount")) / 100;
+        double discount = Double.parseDouble(request.getParameter("discount"))/100;
         BigDecimal discountMax = new BigDecimal(request.getParameter("discountMax"));
         int quantity = Integer.parseInt(request.getParameter("quantity"));
         Timestamp fromDate = AddVoucher.setFromDate(request);

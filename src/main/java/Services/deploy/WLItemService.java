@@ -25,6 +25,11 @@ public class WLItemService implements IWLItemService {
     }
 
     @Override
+    public void deleteAll(String wishListId) {
+        itemDao.deleteAll(wishListId);
+    }
+
+    @Override
     public WLItem getWLItem(int wlItemId) {
         return itemDao.getWLItem(wlItemId);
     }

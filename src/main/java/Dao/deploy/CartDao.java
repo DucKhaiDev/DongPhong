@@ -89,19 +89,22 @@ public class CartDao implements ICartDao {
     }
 
     @Override
-    public Cart getCartByUser(String userId) {
+    public List<Cart> getCartByUser(String userId) {
         Connection conn = DBConnect.getConnection();
         PreparedStatement ps = null;
         ResultSet rs = null;
-        Cart cart = new Cart();
+        List<Cart> carts = new ArrayList<>();
 
         try {
             ps = conn.prepareStatement("SELECT * FROM [CART] WHERE USER_ID = ?");
             ps.setString(1, userId);
             rs = ps.executeQuery();
-            if (rs.next()) {
+            while (rs.next()) {
+                Cart cart = new Cart();
                 cart.setCartId(rs.getString("CART_ID"));
                 cart.setUser(Constant.Service.USER_SERVICE.getUser(userId));
+
+                carts.add(cart);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -109,7 +112,7 @@ public class CartDao implements ICartDao {
             DBConnect.closeAll(rs, ps, conn);
         }
 
-        return cart;
+        return carts;
     }
 
     @Override

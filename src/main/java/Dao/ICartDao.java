@@ -13,7 +13,7 @@ public interface ICartDao {
 
     Cart getCart(String cartId);
 
-    Cart getCartByUser(String userId);
+    List<Cart> getCartByUser(String userId);
 
     List<Cart> getAll();
 
