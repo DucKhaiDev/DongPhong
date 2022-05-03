@@ -13,7 +13,20 @@ public class LoginController extends HttpServlet {
     public static boolean checkLogin(HttpServletRequest request, HttpServletResponse response) throws IOException {
         if (request.getSession().getAttribute("account") == null) {
             response.sendRedirect(request.getContextPath() + "/logout");
+            return false;
+        }
+
+        return true;
+    }
+
+    public static boolean checkLoginAdmin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        User user = (User) request.getSession().getAttribute("account");
+        if (user != null && !user.getRole()) {    //if admin login
             return true;
+        } else if (user == null) {    //if not login
+            response.sendRedirect(request.getContextPath() + "/logout");
+        } else if (user.getRole()) {    //if not admin
+            request.getRequestDispatcher(Constant.ERROR_PAGE_404).forward(request, response);
         }
 
         return false;

@@ -26,7 +26,7 @@ public class EditOrder extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if (LoginController.checkLogin(request, response)) {
+        if (LoginController.checkLoginAdmin(request, response)) {
             return;
         }
 

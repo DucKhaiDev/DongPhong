@@ -20,7 +20,7 @@ import java.util.Date;
 public class CustomerCancelOrder extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if (LoginController.checkLogin(request, response)) {
+        if (!LoginController.checkLogin(request, response)) {
             return;
         }
 

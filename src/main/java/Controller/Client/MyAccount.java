@@ -20,7 +20,7 @@ import java.util.UUID;
 public class MyAccount extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if (LoginController.checkLogin(request, response)) {
+        if (!LoginController.checkLogin(request, response)) {
             return;
         }
 
