@@ -1,6 +1,7 @@
 <jsp:useBean id="voucher" scope="request" type="Entity.Voucher"/>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.util.Date" %>
+<%@ page import="Util.Constant" %>
 <%--
   User: duckhaidev
   Date: 4/15/2022
@@ -68,16 +69,22 @@
                                         <div class="copy-height-prev col-md-6 mb-3"><label class="labels"></label>
                                             <p class="exist-id">${requestScope.existId}</p></div>
                                         <div class="col-md-6 mb-3"><label for="minProduct" class="labels">Số sản phẩm
-                                            MIN</label><input id="minProduct" type="number" min="0"
-                                                              value="${voucher.minProduct}" class="form-control"
-                                                              name="minProduct" required="required"></div>
+                                            MIN</label><input id="minProduct" type="number" min="0" value="${voucher.minProduct}"
+                                                              class="form-control" name="minProduct"
+                                                              required="required"></div>
                                         <div class="col-md-6 mb-3"><label for="minValue" class="labels">Giá trị giỏ hàng
-                                            MIN</label><input id="minValue" type="number" min="0"
-                                                              value="${voucher.minValue}" class="form-control"
-                                                              name="minValue" required="required"></div>
-                                        <div class="col-md-6 mb-3"><label for="discount" class="labels">Giảm (%)</label><input
-                                                id="discount" type="number" min="0" value="${voucher.discount * 100}"
-                                                class="form-control" name="discount" required="required"></div>
+                                            MIN</label><input id="minValue" type="number" min="0" value="${voucher.minValue}"
+                                                              class="form-control" name="minValue" required="required">
+                                        </div>
+                                        <div class="col-md-6 mb-3"><label for="discount" class="labels">Giảm (0 ≤ x ≤ 1)</label><input
+                                                id="discount" type="number" min="0" value="${voucher.discount}" class="form-control"
+                                                name="discount" required="required"></div>
+                                        <div class="col-md-6 mb-3"><label for="discountMax" class="labels">Giảm tối
+                                            đa</label><input id="discountMax" type="number" min="0" value="${voucher.discountMax}" class="form-control"
+                                                             name="discountMax"></div>
+                                        <div class="col-md-6 mb-3"><label for="quantity" class="labels">Số lượng
+                                            mã</label><input id="quantity" type="number" min="-1" value="${voucher.quantity}" class="form-control"
+                                                             name="quantity"></div>
                                         <div class="copy-height-prev col-md-6 mb-3"></div>
                                         <div class="col-md-6 mb-3"><label for="fromDate" class="labels">HSD từ
                                             ngày</label><input id="fromDate" type="date"

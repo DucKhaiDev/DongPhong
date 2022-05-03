@@ -132,7 +132,7 @@
                                                 <div class="col-md-6 mb-3">
                                                     <label for="category" class="labels">Loại sản phẩm</label>
                                                     <div class="checkbox pl-0">
-                                                        <select id="category" name="category" class="w-100">
+                                                        <select id="category" name="category" class="w-100 form-control">
                                                             <jsp:useBean id="categories" scope="request"
                                                                          type="java.util.List"/>
                                                             <c:forEach items="${categories}" var="category">
@@ -152,7 +152,7 @@
                                                 <div class="col-md-6 mb-3">
                                                     <label for="brand" class="labels">Thương hiệu</label>
                                                     <div class="checkbox pl-0">
-                                                        <select id="brand" name="brand" class="w-100">
+                                                        <select id="brand" name="brand" class="w-100 form-control">
                                                             <jsp:useBean id="brands" scope="request"
                                                                          type="java.util.List"/>
                                                             <c:forEach items="${brands}" var="brand">
