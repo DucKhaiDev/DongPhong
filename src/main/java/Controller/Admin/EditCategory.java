@@ -20,7 +20,7 @@ public class EditCategory extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if (LoginController.checkLoginAdmin(request, response)) {
+        if (!LoginController.checkLoginAdmin(request, response)) {
             return;
         }
 
