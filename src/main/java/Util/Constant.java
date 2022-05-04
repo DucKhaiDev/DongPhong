@@ -52,11 +52,11 @@ public class Constant {
         public static final String ADMIN_BRAND = "/View/Admin/brand.jsp";
         public static final String ADMIN_ADD_BRAND = "/View/Admin/add-brand.jsp";
         public static final String ADMIN_EDIT_BRAND = "/View/Admin/edit-brand.jsp";
-        public static final String USER_HOME = System.getProperty("user.home");
-        public static final String IMAGES = USER_HOME + File.separator + "Images";
+        public static final String DIR = "D:\\DongPhong - Resources";
+        public static final String IMAGES = DIR + File.separator + "Images";
         public static final String AVATARS = IMAGES + File.separator + "Avatars";
         public static final String PRODUCT_IMAGES = IMAGES + File.separator + "Product images";
-        public static final String DP_RESOURCES = USER_HOME + File.separator + "resources";
+        public static final String DP_RESOURCES = DIR + File.separator + "resources";
         public static final String ADMIN_ORDER = "/View/Admin/order.jsp";
         public static final String ADMIN_ADD_ORDER = "/View/Admin/add-order.jsp";
         public static final String ADMIN_ORDER_DETAIL = "/View/Admin/order-detail.jsp";
