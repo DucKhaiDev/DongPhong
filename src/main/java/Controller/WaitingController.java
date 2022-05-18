@@ -94,7 +94,7 @@ public class WaitingController extends HttpServlet {
 
             if (session.getAttribute("forwardTo") != null) {
                 response.sendRedirect(session.getAttribute("forwardTo").toString());
-            } else if (user.getRole()) {
+            } else if (user.isRole()) {
                 response.sendRedirect(request.getContextPath() + "/welcome");
             } else {
                 response.sendRedirect(request.getContextPath() + "/admin");

@@ -106,7 +106,7 @@ public class ReviewDao implements IReviewDao {
                 review.setReviewRate(rs.getDouble("REV_RATE"));
                 review.setReviewContent(rs.getString("REV_CONTENT"));
                 review.setReviewDate(rs.getTimestamp("REV_DATE"));
-                review.setRateStatus(rs.getBoolean("IS_RATE"));
+                review.setRate(rs.getBoolean("IS_RATE"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -135,7 +135,7 @@ public class ReviewDao implements IReviewDao {
                 review.setReviewRate(rs.getDouble("REV_RATE"));
                 review.setReviewContent(rs.getString("REV_CONTENT"));
                 review.setReviewDate(rs.getTimestamp("REV_DATE"));
-                review.setRateStatus(rs.getBoolean("IS_RATE"));
+                review.setRate(rs.getBoolean("IS_RATE"));
 
                 reviews.add(review);
             }
@@ -167,7 +167,7 @@ public class ReviewDao implements IReviewDao {
                 review.setReviewRate(rs.getDouble("REV_RATE"));
                 review.setReviewContent(rs.getString("REV_CONTENT"));
                 review.setReviewDate(rs.getTimestamp("REV_DATE"));
-                review.setRateStatus(rs.getBoolean("IS_RATE"));
+                review.setRate(rs.getBoolean("IS_RATE"));
 
                 reviews.add(review);
             }

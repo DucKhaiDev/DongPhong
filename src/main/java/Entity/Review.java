@@ -1,8 +1,15 @@
 package Entity;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.io.Serializable;
 import java.sql.Timestamp;
 
+@NoArgsConstructor
+@Getter
+@Setter
 public class Review implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -14,9 +21,6 @@ public class Review implements Serializable {
     private Timestamp reviewDate;
     private boolean isRate;
 
-    public Review() {
-    }
-
     public Review(User user, Product product, double reviewRate, String reviewContent, Timestamp reviewDate, boolean isRate) {
         this.user = user;
         this.product = product;
@@ -24,61 +28,5 @@ public class Review implements Serializable {
         this.reviewContent = reviewContent;
         this.reviewDate = reviewDate;
         this.isRate = isRate;
-    }
-
-    public int getReviewId() {
-        return reviewId;
-    }
-
-    public void setReviewId(int reviewId) {
-        this.reviewId = reviewId;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
-
-    public double getReviewRate() {
-        return reviewRate;
-    }
-
-    public void setReviewRate(double reviewRate) {
-        this.reviewRate = reviewRate;
-    }
-
-    public String getReviewContent() {
-        return reviewContent;
-    }
-
-    public void setReviewContent(String reviewContent) {
-        this.reviewContent = reviewContent;
-    }
-
-    public Timestamp getReviewDate() {
-        return reviewDate;
-    }
-
-    public void setReviewDate(Timestamp reviewDate) {
-        this.reviewDate = reviewDate;
-    }
-
-    public boolean isRate() {
-        return isRate;
-    }
-
-    public void setRateStatus(boolean status) {
-        isRate = status;
     }
 }

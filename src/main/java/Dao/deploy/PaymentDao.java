@@ -21,7 +21,7 @@ public class PaymentDao implements IPaymentDao {
             ps = conn.prepareStatement("INSERT INTO [PAYMENT](PAY_ID, PAY_METHOD, PAY_STATUS) VALUES(?, ?, ?)");
             ps.setString(1, payment.getPaymentId());
             ps.setString(2, payment.getPaymentMethod());
-            ps.setBoolean(3, payment.getPaymentStatus());
+            ps.setBoolean(3, payment.isPaymentStatus());
 
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -39,7 +39,7 @@ public class PaymentDao implements IPaymentDao {
         try {
             ps = conn.prepareStatement("UPDATE [PAYMENT] SET PAY_METHOD = ?, PAY_STATUS = ? WHERE PAY_ID = ?");
             ps.setString(1, payment.getPaymentMethod());
-            ps.setBoolean(2, payment.getPaymentStatus());
+            ps.setBoolean(2, payment.isPaymentStatus());
             ps.setString(3, payment.getPaymentId());
 
             ps.executeUpdate();

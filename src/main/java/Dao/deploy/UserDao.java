@@ -52,8 +52,8 @@ public class UserDao implements IUserDao {
             ps.setString(7, user.getAddress());
             ps.setString(8, user.getPhone());
             ps.setString(9, user.getAvatar());
-            ps.setBoolean(10, user.getRole());
-            ps.setBoolean(11, user.getVc_chaomung());
+            ps.setBoolean(10, user.isRole());
+            ps.setBoolean(11, user.isVc_chaomung());
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -79,8 +79,8 @@ public class UserDao implements IUserDao {
             ps.setString(6, user.getAddress());
             ps.setString(7, user.getPhone());
             ps.setString(8, user.getAvatar());
-            ps.setBoolean(9, user.getRole());
-            ps.setBoolean(10, user.getVc_chaomung());
+            ps.setBoolean(9, user.isRole());
+            ps.setBoolean(10, user.isVc_chaomung());
             ps.setString(11, user.getUserId());
             ps.executeUpdate();
         } catch (SQLException e) {

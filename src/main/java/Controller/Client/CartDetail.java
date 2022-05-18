@@ -30,7 +30,7 @@ public class CartDetail extends HttpServlet {
         session = request.getSession();
         cartId = ((Cart) session.getAttribute("cart")).getCartId();
         List<Voucher> availableVoucher = Constant.Service.VOUCHER_SERVICE.getAvailableVoucher(cartId);
-        if (!((User) session.getAttribute("account")).getVc_chaomung()) {
+        if (!((User) session.getAttribute("account")).isVc_chaomung()) {
             availableVoucher.add(Constant.Service.VOUCHER_SERVICE.getVoucher("CHAOMUNG"));
         }
         request.setAttribute("availableVoucher", availableVoucher);

@@ -361,7 +361,7 @@ public class AddOrder extends HttpServlet {
         if (usingVoucher != null) {
             if (usingVoucher.getVoucherId().equals("CHAOMUNG")) {
                 //If member
-                if (user.getRole()) {
+                if (user.isRole()) {
                     user.setVc_chaomung(true);
                     Constant.Service.USER_SERVICE.edit(user);
                 }
